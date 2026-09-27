@@ -1,39 +1,94 @@
 # Sky: Children of the Light — Wardrobe & Community Hub
 
-Scaffold lập kế hoạch; chưa có ứng dụng chạy được, dependency, dữ liệu đã import hay asset đã tải. Ngôn ngữ tài liệu: tiếng Việt. Mốc tài liệu: 2026-09-27; đây không phải ngày gửi ticket hoặc ngày xác nhận nguồn.
+Web-app cộng đồng dành cho *Sky: Children of the Light*, được định hướng quanh hai phần chính:
 
-## Đọc theo thứ tự
+- **Wardrobe / Dress-up Tool:** phối trang phục theo lớp, chọn size, áp dụng rule resize, thử màu và chia sẻ outfit bằng link.
+- **Community Hub:** tra cứu cosmetic, spirit, season, Traveling Spirit, patch notes, map, route và giá IAP.
 
-1. [Brief gốc](docs/PROJECT_BRIEF.md) — nguồn sự thật duy nhất về sản phẩm và tình trạng pháp lý.
-2. [Knowledge Base](knowledge/README.md) — nguồn, cách lấy dữ liệu, điều chưa biết và giới hạn.
-3. [PRD](docs/PRD.md), [kiến trúc](docs/ARCHITECTURE.md), [schema](docs/DATA_SCHEMA.md), [UX](docs/UX_GUIDELINES.md), [pháp lý](docs/LEGAL_STATUS.md).
-4. [Implementation Plan](docs/plan/IMPLEMENTATION_PLAN.md) — task có ID, đầu ra, tiêu chí nghiệm thu và phụ thuộc.
+Dự án miễn phí, không yêu cầu đăng nhập và không có tính năng trả phí. Hướng triển khai là web-app/PWA trên Vercel; native app chưa nằm trong giai đoạn đầu.
 
-## Cấu trúc
+> [!IMPORTANT]
+> Repo hiện ở giai đoạn **planning và scaffold**. Chưa có ứng dụng chạy được, dependency, dữ liệu đã import hoặc asset game được phân phối trong repo.
+
+## Trạng thái dự án
+
+| Hạng mục | Trạng thái |
+|---|---|
+| Product brief, PRD và architecture | Hoàn thành bản khởi tạo |
+| Knowledge Base | 14 hồ sơ nguồn, chờ xác minh endpoint và dữ liệu mẫu |
+| Data schema | Có contract đề xuất v1, chưa có importer |
+| Implementation plan | 9 phase, 134 task |
+| Source code | Chỉ có khung thư mục |
+| Wardrobe 2D | Chưa triển khai; sẽ dùng hình học placeholder trước |
+| Asset 3D/wardrobe đầy đủ | **Pending legal confirmation** từ TGC |
+| Deploy Vercel | Chưa cấu hình |
+
+## Tài liệu chính
+
+1. [Project Brief](docs/PROJECT_BRIEF.md) — nguồn sự thật duy nhất về phạm vi sản phẩm và tình trạng pháp lý.
+2. [Knowledge Base](knowledge/README.md) — danh mục nguồn, cách truy xuất dự kiến và những điều chưa xác minh.
+3. [PRD](docs/PRD.md) — yêu cầu sản phẩm theo từng module.
+4. [Architecture](docs/ARCHITECTURE.md) — kiến trúc React + TypeScript + Vite được đề xuất.
+5. [Data Schema](docs/DATA_SCHEMA.md) — contract cho item, spirit, season, map, route, IAP và wardrobe.
+6. [UX Guidelines](docs/UX_GUIDELINES.md) — bố cục và nguyên tắc giao diện.
+7. [Legal Status](docs/LEGAL_STATUS.md) — trạng thái liên hệ TGC và các asset cần placeholder.
+8. [Implementation Plan](docs/plan/IMPLEMENTATION_PLAN.md) — task breakdown có dependency, độ phức tạp và gate.
+
+## Cấu trúc repo
 
 ```text
-knowledge/                 Hồ sơ từng nguồn; không chứa bản sao nội dung bên ngoài
-docs/                      Brief gốc và tài liệu dự án
-docs/plan/                 Kế hoạch triển khai
-.agents/                   Định nghĩa vai trò agent (tài liệu, chưa tự kích hoạt)
-.agents/skills/            Skill theo cấu trúc repo của Codex
-.commands/                 Script PowerShell và quy trình tiện ích
-src/app/                   Điểm ghép app/router/state
-src/features/wardrobe/     Khung module thử đồ
-src/features/hub/          Khung hub
-src/features/profile/      Khung đọc QR profile
-src/shared/                Khung UI, kiểu và tiện ích dùng chung
-src/data/                  Khung adapter và schema dữ liệu
-src/pwa/                   Khung PWA
+.
+├── .agents/                 Định nghĩa vai trò và skill dùng trong dự án
+├── .commands/               Script kiểm tra scaffold và đọc task list
+├── docs/                    PRD, architecture, schema, UX và legal status
+│   └── plan/                Implementation plan
+├── knowledge/               Một hồ sơ Markdown cho mỗi nguồn dữ liệu
+└── src/                     Khung mã nguồn theo feature
+    ├── app/                 App shell, routes và providers
+    ├── data/                Schema, adapter và normalized data
+    ├── features/
+    │   ├── hub/             Community Hub
+    │   ├── profile/         QR profile
+    │   └── wardrobe/        Dress-up tool
+    ├── pwa/                 Manifest, service worker và notification
+    └── shared/              UI, storage, types và utilities dùng chung
 ```
 
-Không có `.skills/` song song: skill nằm trong `.agents/skills/<tên>/SKILL.md`. Agent definitions chỉ là hướng dẫn phân công, không khẳng định runtime đã đăng ký agent; command là script/quy trình, không giả định slash command tự có sẵn.
+## Bắt đầu làm việc
 
-## Quy ước sử dụng
+Hiện repo chưa có `package.json`, vì việc khóa framework version và package manager thuộc Phase 0. Trước khi viết application code, đọc các quyết định mở ở cuối Implementation Plan.
 
-- **Đã nêu trong brief**: yêu cầu hoặc mô tả hiện trạng; không tương đương đã kiểm chứng nguồn trực tuyến.
-- **Đề xuất**: quyết định kỹ thuật để có kế hoạch cụ thể; cần chốt theo open questions trước code phần liên quan.
-- **Chưa xác minh**: brief thiếu endpoint, URL, format hoặc quyền sử dụng; không tự điền bằng suy đoán.
-- **pending legal confirmation**: asset 3D/wardrobe đầy đủ đang chờ TGC; skeleton và placeholder vẫn triển khai độc lập.
+Kiểm tra cấu trúc tài liệu và liên kết nội bộ:
 
-Kiểm tra scaffold bằng `powershell -NoProfile -ExecutionPolicy Bypass -File .commands/Check-Scaffold.ps1`. Script chỉ đọc file trong repo, không truy cập mạng hoặc deploy.
+```powershell
+powershell -NoProfile -ExecutionPolicy Bypass -File .commands/Check-Scaffold.ps1
+```
+
+Đọc task plan thành PowerShell objects:
+
+```powershell
+& ./.commands/Get-PlanTasks.ps1 | Format-Table Id, Module, Complexity, Gate
+```
+
+Xem [CONTRIBUTING.md](CONTRIBUTING.md) trước khi thay đổi schema, dữ liệu hoặc asset.
+
+## Nguyên tắc dữ liệu và pháp lý
+
+- Chỉ sử dụng nguồn đã đăng ký trong `knowledge/`; nguồn mới cần được bổ sung hồ sơ trước khi đi vào pipeline.
+- Không rip file game, can thiệp game client hoặc tích hợp mod.
+- Text, ảnh, map và model có trạng thái quyền sử dụng riêng; giấy phép text không tự áp dụng cho asset.
+- Icon Wiki chỉ là placeholder và vẫn là IP của TGC theo brief.
+- Asset 3D và wardrobe đầy đủ luôn giữ nhãn **pending legal confirmation** cho đến khi có phản hồi phù hợp từ TGC.
+- Tin leak phải qua duyệt thủ công; draft và nội dung bị từ chối không được đưa vào public bundle.
+- Trạng thái người dùng được lưu trên thiết bị; không có tài khoản server-side.
+
+## Quy ước trạng thái tài liệu
+
+- **Đã nêu trong brief:** yêu cầu hoặc hiện trạng có trong tài liệu đầu vào, chưa đồng nghĩa đã kiểm chứng trực tuyến.
+- **Đề xuất:** quyết định kỹ thuật cần được chốt trước khi triển khai phần liên quan.
+- **Chưa xác minh:** thiếu endpoint, URL, response mẫu, quyền sử dụng hoặc dữ liệu thực.
+- **Pending legal confirmation:** chưa được phép coi asset là sẵn sàng phát hành.
+
+## Giấy phép
+
+Repo chưa chọn giấy phép mã nguồn. Nội dung và asset từ bên thứ ba vẫn thuộc các chủ sở hữu tương ứng; xem [Legal Status](docs/LEGAL_STATUS.md) trước khi tái sử dụng hoặc phân phối.

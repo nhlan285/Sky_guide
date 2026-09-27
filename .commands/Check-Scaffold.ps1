@@ -5,7 +5,8 @@ $ErrorActionPreference = 'Stop'
 $repoRoot = Split-Path -Parent $PSScriptRoot
 $issues = New-Object 'System.Collections.Generic.List[string]'
 $requiredFiles = @(
-    'README.md', 'knowledge/README.md', 'docs/PROJECT_BRIEF.md',
+    'README.md', 'CONTRIBUTING.md', '.gitignore', '.gitattributes', '.editorconfig',
+    'knowledge/README.md', 'docs/PROJECT_BRIEF.md',
     'docs/PRD.md', 'docs/ARCHITECTURE.md', 'docs/DATA_SCHEMA.md',
     'docs/UX_GUIDELINES.md', 'docs/LEGAL_STATUS.md',
     'docs/plan/IMPLEMENTATION_PLAN.md', '.agents/README.md',
