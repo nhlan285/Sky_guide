@@ -1,0 +1,152 @@
+# Data schema chi tiết — đề xuất v1
+
+Đây là **contract nội bộ dự kiến**, không phải cấu trúc trả về đã xác minh của các nguồn. Nguồn duy nhất về phạm vi: [brief](PROJECT_BRIEF.md), truy xuất qua [Knowledge Base](../knowledge/README.md). Chưa có database/import thật. Đề xuất JSON public versioned; các thực thể dưới đây là bảng logic, không yêu cầu SQL hoặc server account.
+
+## Quy ước kiểu và nguồn
+
+`ID` = chuỗi ổn định do dự án cấp, không dùng tên hiển thị làm khóa. `T?` = `T | null`, key vẫn hiện diện khi export để thể hiện unknown. `T[]` = mảng; rỗng chỉ nghĩa không có phần tử đã biết, không tự chứng minh nguồn không có dữ liệu. `DateTime` = ISO 8601 có timezone/UTC; ngày nguồn thiếu giờ phải dùng `PartialTime`, không bịa giờ. Decimal tiền thật lưu chuỗi thập phân để tránh sai số float. Enum slot là ánh xạ UI theo brief, chưa khẳng định enum upstream.
+
+Mỗi dataset: `schemaVersion: integer`, `dataVersion: string`, `generatedAt: DateTime`, `sourceIds: ID[]`, `records: T[]`, `fixture: boolean`. Public production export loại mọi dataset/bản ghi fixture. ID không tái sử dụng cho item khác; alias/tombstone dùng khi đổi nguồn hoặc xóa.
+
+### SourceRecord / Provenance
+
+| Field | Kiểu | Quy tắc |
+|---|---|---|
+| id | ID | Khóa provenance |
+| sourceId | enum K01…K14 | Trỏ hồ sơ nguồn có thật |
+| sourceUrl | string? | URL cụ thể đã xác minh; null nếu chưa có, chặn xuất bản dữ liệu thật chưa truy nguồn được |
+| sourceRecordKey | string? | Page/revision/row/SKU/message identifier khi có |
+| sourceRevision | string? | Không bịa revision cho nguồn không có |
+| retrievedAt | DateTime | Thời điểm lấy/biên tập |
+| observedAt | DateTime? | Thời điểm quan sát giá/trạng thái, khác retrievedAt |
+| attribution | string | Tác giả/nguồn và cách credit đã biết |
+| licenseNote | string | Giữ lưu ý rủi ro của Kxx; không tự suy ra quyền |
+| transformNote | string | Mapping, diễn giải hoặc sửa đổi đã thực hiện |
+| verificationStatus | pending / verified / conflict / stale | “verified” chỉ về chứng cứ bản ghi, không tự cấp quyền asset |
+
+Thực thể domain dùng `provenanceIds: ID[]` không rỗng cho dữ liệu thật; `fieldProvenance: Record<field, ID[]>` khi nhiều nguồn khác nhau trong một thực thể; `updatedAt`, `recordStatus: draft|reviewed|published|retired`, `fixture: boolean`. Chỉ published được xuất public. Draft ở kho vận hành riêng như [Architecture](ARCHITECTURE.md).
+
+### Giá trị dùng chung
+
+- `CurrencyAmount {currency: candle|heart|other, sourceCurrencyLabel: string, amount: integer?}`: amount ≥ 0 nếu đã biết; `other` bắt buộc tên gốc; không tự đồng nhất các loại candle chưa xác minh. Giá unknown không thành 0.
+- `PartialTime {value: string, precision: date|instant|unknown, timezone: string?, rawLabel: string?}`: instant bắt buộc offset; date có thể chưa xác định timezone và không được dùng để đếm ngược chính xác.
+- `Availability {status: known|unknown|unavailable, note: string?}` dùng để phân biệt thiếu thông tin và không áp dụng.
+- `LocalizedText {default: string, translations: Record<string,string>}` là đề xuất chứa tên hiển thị; ngôn ngữ release đầu cần chốt, không tự dịch tên riêng làm ID.
+
+## Item / Cosmetic — K01, K02, K13
+
+| Field | Kiểu | Nội dung/constraint |
+|---|---|---|
+| id | ID | Khóa item nội bộ |
+| sourceKeys | Record<string,string> | ID trang/module khi đã biết, không phụ thuộc duy nhất tên |
+| name | LocalizedText | Tên có nguồn |
+| slot | mask / hair / cape / top / bottom / accessory / unknown | Sáu slot theo brief; unknown giữ raw slot để review |
+| rawSlot | string? | Giá trị nguồn trước mapping |
+| accessoryAnchor | string? | Điểm gắn phụ kiện, chưa biết thì null |
+| seasonIds | ID[] | FK Season; không tự gán season khi thiếu |
+| spiritIds | ID[] | FK Spirit; cho phép item không gắn spirit đã biết |
+| acquisitionOptions | AcquisitionOption[] | Nhiều đường sở hữu/giá, không ép chỉ một giá |
+| assetIds | ID[] | FK Asset; có thể chỉ placeholder |
+| dyeRegions | DyeRegion[] | Region biết được; nếu chưa biết giữ `dyeStatus=unknown` |
+| dyeStatus | known / unknown / unsupported | Phân biệt chưa biết với không hỗ trợ |
+| ruleIds | ID[] | FK WardrobeRule |
+| compatibility | object? | Slot conflicts/item constraints chỉ khi có bằng chứng hoặc cấu hình demo gắn fixture |
+| provenanceIds | ID[] | Text K01, tree K02, asset K13 độc lập |
+
+`AcquisitionOption {id, kind: spirit_tree|iap|other|unknown, costs: CurrencyAmount[], costStatus: known|unknown|free, friendshipNodeId: ID?, iapProductId: ID?, validFrom: PartialTime?, validTo: PartialTime?, provenanceIds}`. `free` chỉ khi có bằng chứng miễn phí; thiếu costs không suy ra free. `kind=iap` chỉ tới SKU/gói đã xác minh, không nhân tiền game với một tỷ giá chung.
+
+## Spirit và Friendship Tree — K02, K03, K04
+
+| Thực thể | Field và kiểu | Constraint |
+|---|---|---|
+| Spirit | `id`, `name: LocalizedText`, `category: regular|seasonal|unknown`, `realmId: ID?`, `seasonIds: ID[]`, `treeIds: ID[]`, `provenanceIds` | Phân loại chỉ khi nguồn xác nhận; Traveling là lần ghé, không thay category spirit |
+| FriendshipTree | `id`, `spiritId: ID`, `variant: regular|traveling|unknown`, `visitId: ID?`, `nodeIds: ID[]`, `provenanceIds` | Giá khác từng lần ghé được giữ thành variant/version riêng |
+| FriendshipNode | `id`, `treeId: ID`, `itemId: ID?`, `label: string`, `parentNodeIds: ID[]`, `costs: CurrencyAmount[]`, `costStatus: known|unknown|free`, `optional: boolean?`, `provenanceIds` | Cạnh nằm cùng tree; graph không chu trình; null item cho node không phải cosmetic |
+
+Tính tổng đường mở khóa bằng tập node duy nhất của đường đã chọn, không cộng hai lần node chung. Tổng chưa đủ chi phí phải có `complete=false`, không trình bày như giá đầy đủ.
+
+## Season và Event — nội dung K01/K06 khi có chứng cứ, thời gian K05
+
+| Field | Kiểu | Quy tắc |
+|---|---|---|
+| id / kind | ID / season hoặc event | Hai tập dữ liệu chung base fields |
+| name | LocalizedText | Tên có nguồn |
+| startsAt / endsAt | PartialTime? | Chưa có mốc thì null |
+| timeStatus | confirmed / tentative / unknown | Chỉ confirmed + instant đủ để countdown chính xác |
+| summary | string? | Tóm tắt riêng |
+| spiritIds / itemIds | ID[] | FK đã validate |
+| realmIds / mapIds | ID[] | Không tự suy luận mapping từ tên |
+| officialArticleIds | ID[] | FK bài K06 nếu có |
+| provenanceIds / fieldProvenance | ID[] / map | Mốc thời gian có nguồn riêng |
+
+“Hiện tại” là giá trị dẫn xuất từ mốc confirmed và TimeReference; không cập nhật cứng enum active trong nhiều dataset dễ lệch nhau. Nếu chưa có nguồn season/event đủ dùng, giữ unavailable; K05 chưa được xác minh là nguồn nội dung season.
+
+`TimeReference {sourceId: K05, sourceInstantUtc: DateTime, receivedAtDevice: DateTime, sourceTimezone: string?, validityUntil: DateTime?, originalUnit: string, verificationStatus}`. Runtime có mốc monotonic của phiên để tính elapsed; không persist mốc monotonic sang phiên mới. TTL là policy cần chốt sau xác minh nguồn, null không đồng nghĩa còn hạn mãi.
+
+## Traveling Spirit — K03/K04
+
+| Thực thể | Fields | Constraint |
+|---|---|---|
+| TravelingSpiritVisit | `id`, `spiritId: ID`, `startsAt: PartialTime`, `endsAt: PartialTime?`, `status: confirmed|disputed`, `treeId: ID?`, `provenanceIds`, `fieldProvenance` | Dedupe bằng spirit + khoảng ngày đã đối chiếu; không xóa các lần ghé khác nhau |
+| TravelingSpiritPrediction | `id`, `candidateSpiritIds: ID[]`, `targetWindow: {start: PartialTime?, end: PartialTime?}`, `methodDescription: string`, `generatedAt`, `inputDataVersion: string`, `confidenceLabel: string?`, `provenanceIds` | Tập riêng, nhãn dự đoán bắt buộc; không tự đặt xác suất số hoặc viết ngược vào history |
+
+Prediction không có method được duyệt thì không xuất bản. Sửa ngày lịch sử tạo diff và ghi nguồn, không đổi ID một cách tùy tiện.
+
+## Map / Route — K07, K08, K09
+
+| Thực thể | Fields | Constraint |
+|---|---|---|
+| Realm | `id`, `name`, `provenanceIds` | Chỉ tạo realm có nguồn, không bịa danh sách game |
+| Map | `id`, `name`, `realmId: ID?`, `seasonIds: ID[]`, `assetId: ID?`, `revision: string`, `coordinateSystem: normalized_top_left|none`, `width: number?`, `height: number?`, `provenanceIds` | Không có ảnh/hệ tọa độ thì markers hiển thị text; width/height > 0 nếu có |
+| MapMarker | `id`, `mapId: ID`, `mapRevision: string`, `kind: shrine|child_of_light|route_point`, `label`, `x: number?`, `y: number?`, `description: string?`, `provenanceIds` | x/y cùng null hoặc cùng [0,1]; ảnh đổi revision phải recalibrate, không giữ điểm cũ ngầm |
+| Route | `id`, `title`, `realmIds: ID[]`, `seasonIds: ID[]`, `mapIds: ID[]`, `scope: eden|season|other`, `stepIds: ID[]`, `contentVersion: string`, `verifiedForVersion: string?`, `spoilerLevel: none|spoiler`, `provenanceIds` | Scope theo nội dung, không khẳng định verifiedForVersion nếu chưa kiểm tra |
+| RouteStep | `id`, `routeId: ID`, `order: integer`, `body: string`, `mapMarkerId: ID?`, `sourceTimestamp: string?`, `caution: string?`, `provenanceIds` | order duy nhất trong route; body diễn giải riêng; timestamp tham khảo không cần tải video |
+| RouteProgress (local) | `routeId`, `contentVersion`, `completedStepIds: ID[]`, `updatedAt` | Route version đổi thì reconcile ID, không tự đánh dấu bước mới hoàn thành |
+
+## IAP price mapping — K10/K11/K12
+
+Không coi giá tiền thật và giá candle/heart là một bảng tỷ giá có sẵn. Mỗi layer dưới đây phải có chứng cứ độc lập.
+
+| Thực thể | Fields | Constraint |
+|---|---|---|
+| IapProduct | `id`, `platform: ios|android`, `storeProductId: string?`, `name`, `contents: IapContent[]`, `contentStatus: known|partial|unknown`, `provenanceIds` | Store ID chưa rõ không tự dựng; bundle mixed không coi toàn bộ tiền chỉ mua currency |
+| IapContent | `kind: currency|item|unknown`, `currency: string?`, `quantity: integer?`, `itemId: ID?` | Quantity ≥ 0; unknown khác 0; currency dùng đúng loại nguồn |
+| PriceObservation | `id`, `productId: ID`, `market: string`, `currencyCode: string`, `amountDecimal: string`, `observedAt: DateTime`, `validFrom: PartialTime?`, `validTo: PartialTime?`, `taxStatus: included|excluded|unknown`, `promotionStatus: regular|promotion|unknown`, `sourceId: K10|K11|K12`, `provenanceIds` | Giá ≥ 0, số thập phân hợp lệ; cùng SKU khác market/time là bản ghi khác |
+| ItemPriceMapping | `id`, `itemId: ID`, `acquisitionOptionId: ID`, `mode: direct_iap|currency_bundle_estimate|unavailable`, `productIds: ID[]`, `conversionEvidenceIds: ID[]`, `assumptions: string[]`, `provenanceIds` | direct_iap cần chứng cứ SKU chứa item; ước lượng cần đúng currency và package contents |
+| CostEstimate (dẫn xuất) | `itemId`, `market`, `currencyCode`, `platform`, `priceObservationIds: ID[]`, `methodVersion`, `requiredCurrency: CurrencyAmount[]`, `proportionalAmount: string?`, `checkoutAmount: string?`, `bundleCounts: Record<ID,integer>`, `leftoverCurrency: CurrencyAmount[]`, `coverage: complete|partial|unavailable`, `assumptions: string[]`, `computedAt` | Không persist như giá chính thức; không trộn tiền tệ/market/platform; thiếu heart mapping → partial hoặc unavailable |
+
+Ví dụ **công thức trừu tượng, không phải số liệu game**: một gói đã xác minh chứa đúng `Q` đơn vị currency với giá `P`, item cần `C`, cùng market/platform/currency. `proportional = C/Q × P` chỉ là ước lượng tỷ lệ. Nếu chọn mua nguyên gói này và không có số dư, `checkout = ceil(C/Q) × P`, `leftover = ceil(C/Q) × Q − C`. Gói mixed, khuyến mãi, số dư, nhiều loại tiền hoặc giới hạn mua làm công thức này không áp dụng tự động. Thuật toán chọn nhiều gói là quyết định mở, không hứa “rẻ nhất” trước khi có dữ liệu/kiểm tra. Không bổ sung nguồn tỷ giá ngoại tệ ngoài brief. Heart không có quy tắc chuyển đổi đã xác nhận thì không tính bằng candle.
+
+## Asset, Anchor và Scale — K13; icon K01/map K07
+
+| Thực thể | Fields | Constraint |
+|---|---|---|
+| Asset | `id`, `kind: geometric_placeholder|wiki_icon|map_image|paper_doll_layer|model_3d`, `path: string?`, `revision`, `sourceId: ID?`, `provenanceIds: ID[]`, `placeholder: boolean`, `legalStatus: self_created_placeholder|pending_legal_confirmation|permission_confirmed|not_permitted`, `rightsEvidenceRef: string?`, `credit: string`, `renderer: svg|image_2d|future_3d`, `capabilities: string[]` | Tự tạo hình học có thể không có Kxx nhưng không được gọi là asset game mới; full asset mặc định pending; evidence quyền không để lộ ticket riêng tư |
+| SizeEntry | `code: string`, `modelRevision: string`, `scaleX: number`, `scaleY: number`, `fixture: boolean`, `provenanceIds` | Scale > 0; danh sách mã và tỷ lệ thật chưa có; demo phải fixture |
+| AnchorEntry | `id`, `modelRevision`, `sizeCode`, `slot`, `anchorName`, `x: number`, `y: number`, `fixture`, `provenanceIds` | x/y [0,1], key tổ hợp duy nhất |
+| LayerBinding | `id`, `itemId`, `assetId`, `anchorEntryId`, `pivotX`, `pivotY`, `scale: number`, `rotationDeg: number`, `zIndex: integer`, `calibrationRevision` | Pivot chuẩn hóa asset, scale > 0; revision asset/anchor tương thích; item có thể nhiều binding trước/sau |
+| WardrobeRule | `id`, `triggerItemIds: ID[]`, `effect: set_effective_size`, `targetSizeCode: string`, `priority: integer`, `reason: string`, `fixture`, `provenanceIds` | Chỉ thực thi rule đã validate; ví dụ chibi không tự bịa targetSizeCode |
+| DyeRegion | `id`, `label`, `maskAssetId: ID?`, `allowedColors: string[]?`, `support: known|demo|unknown` | Color validate theo codec; null allowedColors không khẳng định game cho mọi màu |
+
+Full 3D/wardrobe: **pending legal confirmation**. Asset không đủ rights không được lọt public export; có thể dùng `geometric_placeholder` thay thế. Placeholder Wiki vẫn giữ pending và credit, không tự chuyển thành permission_confirmed.
+
+## Outfit và profile — state local
+
+`OutfitSnapshot {schemaVersion: integer, catalogVersion: string, id: ID?, name: string?, baseSizeCode: string, equippedBySlot: Record<slot, ID[]>, dyeByItemRegion: Record<ID, Record<regionId, color>>, savedAt: DateTime?}`. Cardinality mỗi slot được cấu hình/validate; mặc định một item cho slot đơn, số phụ kiện còn mở. Share projection loại `id/name/savedAt` nếu không cần, tuyệt đối không kèm QR/profile. Migration dùng alias/tombstone, không tự thay bằng item khác mà không báo.
+
+`LocalPreferences {version, locale?, selectedMarket?, selectedPlatform?, filters, spoilerVisible, notificationsOptIn, theme?}`: đều local; field tùy chọn là đề xuất UX chứ không tự mở thêm scope tính năng. `QrProfileView` chưa khóa schema vì protocol chưa biết; chỉ quy định wrapper `{parseStatus: valid|unsupported|invalid, protocolVersion: string?, validatedDisplayData: object?}`. Không lưu payload thô theo mặc định, không dùng object chưa validate để render HTML hoặc mở link.
+
+## News và moderation — K06/K14
+
+`Article {id, category: official|leak, title, summary, sourceProvenanceIds, officialEvidenceIds: ID[], factualStatus: official|unconfirmed|disputed|corrected, spoiler: boolean, publishedAt: DateTime?, updatedAt}` là projection public.
+
+`EditorialRecord {id, articleId, state: draft|in_review|approved|rejected|withdrawn, reviewerRef: string?, reviewedAt: DateTime?, decisionNote: string?, sourceEvidenceRefs: string[], revision: string}` chỉ vận hành. Transition approved bắt buộc người duyệt + timestamp + revision nội dung; sửa nội dung làm mất approval cũ và quay review. Review leak không biến leak thành official. Chỉ projection có approval khớp revision và không withdrawn xuất public; không bundle EditorialRecord hoặc message raw.
+
+## Validation và migration
+
+- Kiểm tra ID duy nhất, FK tồn tại, không dangling season/spirit/item, tree acyclic và order route duy nhất.
+- Giá/time/scale/coordinate kiểm tra miền giá trị; thời gian end không trước start nếu đủ precision; mixed currency không cộng thành một số.
+- Chặn dữ liệu thật không provenance/source URL đã xác minh; giữ quarantine để sửa, không tự xóa record lỗi từ bản public trước.
+- Chặn full asset pending, draft leak, fixture và private evidence trong production manifest.
+- Migration có `fromVersion`, `toVersion`, alias mapping và báo cáo field mất; luôn giữ bản export cũ để rollback.
+- Dataset public có thể thiếu module; app hiển thị unavailable thay vì lỗi toàn trang. Kiểm thử hành vi cụ thể nằm trong [Plan](plan/IMPLEMENTATION_PLAN.md).
