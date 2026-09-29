@@ -21,7 +21,7 @@ Phụ thuộc phase là điều kiện nền; cột phụ thuộc bổ sung quan
 
 **Phụ thuộc:** bộ tài liệu scaffold hiện tại; không phụ thuộc TGC.
 
-**DoD:** stack và phạm vi release được ghi; các câu hỏi ảnh hưởng Phase 1–2 có owner/trạng thái; app rỗng build được trên preview; chưa cần dữ liệu/asset game thật. Những câu hỏi thuộc nhánh sau có task/gate cụ thể, không giả là đã quyết định.
+**DoD:** stack và phạm vi release được ghi; các câu hỏi ảnh hưởng Phase 1–2 có owner/trạng thái; app rỗng build được trên preview; chưa cần dữ liệu/asset game thật. Những câu hỏi thuộc nhánh sau có task/gate cụ thể, không giả là đã quyết định. Nhánh xin quyền TGC có owner, phạm vi cần xin và gói yêu cầu sẵn sàng để gửi mà không chặn Hub/Wardrobe placeholder.
 
 ### Infra
 
@@ -39,6 +39,14 @@ Phụ thuộc phase là điều kiện nền; cột phụ thuộc bổ sung quan
 | P0-D01 | Chốt kho JSON versioned và ranh giới public/raw/draft | Schema phản ánh quyết định; draft không ở đường import client/public repo nếu riêng tư | Q01 | Trung bình | Q01 |
 | P0-D02 | Lập bảng owner kiểm tra từng K01–K14 và thông tin đang thiếu | Mỗi nguồn có owner/việc tiếp theo; không điền URL phỏng đoán | P0-D01 | Thấp | — |
 | P0-D03 | Chỉ định người theo dõi TGC và vị trí lưu evidence riêng tư | Legal ledger ghi người phụ trách nếu đã chốt; chưa có phản hồi vẫn pending | Q16 | Thấp | Q16 |
+
+### Legal / TGC permission track
+
+| ID | Việc / đầu ra cụ thể | Nghiệm thu | Phụ thuộc | Độ phức tạp | Gate |
+|---|---|---|---|---|---|
+| P0-L01 | Chốt **phạm vi xin quyền** cho full wardrobe/3D assets | Danh sách tách rõ model, rig, texture, dye mask/layer data, calibration/metadata; ghi mục đích hiển thị tương tác, cách phân phối và fallback placeholder | P0-D03, P1-W02 có thể cập nhật sau | Thấp | — |
+| P0-L02 | Soạn **permission request package** gửi TGC | Có mô tả Sky Guide, free/non-commercial, không mod/rip client, loại asset cần dùng, cách asset được lưu/hiển thị/chia sẻ, attribution dự kiến và câu hỏi về quyền use/display/redistribute/modify | P0-L01 | Trung bình | — |
+| P0-L03 | Chốt nơi lưu bằng chứng riêng tư và template legal ledger | Có trường channel/contact, ticket/email ID, ngày gửi, nội dung gửi, file đính kèm, phản hồi, phạm vi quyền, follow-up và trạng thái; không commit raw private evidence vào public repo | P0-D03 | Thấp | — |
 
 ### Wardrobe
 
@@ -69,7 +77,7 @@ Phụ thuộc phase là điều kiện nền; cột phụ thuộc bổ sung quan
 
 **Phụ thuộc:** P0-D01/D02; các task nguồn độc lập có thể chạy trước khi xong wireframe.
 
-**DoD:** mỗi nguồn có URL/contract và fixture hợp lệ hoặc báo cáo thiếu với fallback cụ thể. Module được bật với dữ liệu thật chỉ khi nguồn của nó đã kiểm chứng; nguồn chưa truy cập được vẫn DATA-blocked, không tính integration hoàn thành. Risk text gốc không bị nới lỏng.
+**DoD:** mỗi nguồn có URL/contract và fixture hợp lệ hoặc báo cáo thiếu với fallback cụ thể. Module được bật với dữ liệu thật chỉ khi nguồn của nó đã kiểm chứng; nguồn chưa truy cập được vẫn DATA-blocked, không tính integration hoàn thành. Risk text gốc không bị nới lỏng. Track TGC phải có bằng chứng đã gửi qua kênh chính thức hoặc trạng thái chưa gửi có lý do/owner; mọi phản hồi chỉ mở gate theo đúng phạm vi được ghi nhận, không suy diễn từ support referral.
 
 ### Data pipeline
 
@@ -95,6 +103,16 @@ Phụ thuộc phase là điều kiện nền; cột phụ thuộc bổ sung quan
 |---|---|---|---|---|---|
 | P1-W01 | Lập asset manifest demo hình học và metadata quyền | Mỗi asset có placeholder/self-created; không khẳng định giống asset game | P0-W01 | Thấp | — |
 | P1-W02 | Liệt kê riêng dữ liệu cần TGC: model/layer/rig/dye/calibration | K13 và Legal có danh sách thiếu; toàn bộ full asset giữ pending legal confirmation | P0-D03 | Thấp | — |
+
+### Legal / TGC permission execution
+
+| ID | Việc / đầu ra cụ thể | Nghiệm thu | Phụ thuộc | Độ phức tạp | Gate |
+|---|---|---|---|---|---|
+| P1-L01 | Gửi permission request qua **kênh TGC chính thức đã xác minh** | Legal ledger có channel/contact thật, ngày gửi, ticket/email ID nếu có và bản nội dung đã gửi; nếu Support chuyển team thì ghi referral, chưa coi là permission | P0-L02, P0-L03, P1-W02 | Trung bình | TGC |
+| P1-L02 | Lưu và đối chiếu toàn bộ phản hồi/evidence riêng tư | Có bản phản hồi nguyên gốc ở kho riêng tư, checksum/file reference nếu cần, ngày nhận và người review; public repo chỉ ghi trạng thái/phạm vi không nhạy cảm | P1-L01 | Thấp | TGC |
+| P1-L03 | Phân tích **phạm vi quyền thực tế** và cập nhật K13/Legal | Ma trận tách access/use/display/redistribute/modify/derivative/attribution; trạng thái mỗi loại asset là approved/restricted/denied/pending; không dùng từ “approved” nếu câu trả lời mơ hồ | P1-L02 | Trung bình | TGC |
+| P1-L04 | Follow-up khi phản hồi chỉ là referral, thiếu phạm vi hoặc chưa rõ | Gửi câu hỏi bổ sung đúng điểm còn thiếu; ledger lưu mốc follow-up và trạng thái; không spam cadence, owner tự quyết theo kênh hỗ trợ | P1-L03 khi cần | Thấp | TGC |
+| P1-L05 | Quyết định mở/giữ gate AssetRegistry theo kết quả legal | Chỉ capability/asset type có evidence phù hợp mới được đánh dấu allowed; phần còn lại giữ placeholder/self-created và TGC pending | P1-L03 | Trung bình | TGC |
 
 ### Hub
 
@@ -330,13 +348,13 @@ Phụ thuộc phase là điều kiện nền; cột phụ thuộc bổ sung quan
 
 **Mục tiêu:** thay placeholder bằng asset hợp lệ; đánh giá 3D riêng nếu thực sự được cấp quyền và có nhu cầu đã chốt.
 
-**Phụ thuộc:** Phase 4 hoàn thành; phản hồi TGC có phạm vi phù hợp và dữ liệu asset đã nhận hợp lệ. **Toàn bộ nhánh full asset pending legal confirmation** cho đến khi gate có chứng cứ.
+**Phụ thuộc:** Phase 4 hoàn thành; P1-L03/P1-L05 xác nhận phạm vi quyền phù hợp và dữ liệu asset đã nhận qua kênh hợp lệ. **Toàn bộ nhánh full asset pending legal confirmation** cho đến khi gate có chứng cứ. Support referral, ticket acknowledgement hoặc quyền truy cập asset không tự động đồng nghĩa quyền hiển thị/phân phối/sửa đổi.
 
 **DoD:** từng asset được xác nhận quyền, calibration/dye/renderer được kiểm chứng, credits đúng và có rollback về placeholder. Phản hồi từ chối hoặc chưa đủ rõ thì phase vẫn blocked; release Hub/placeholder tiếp tục vận hành.
 
 | ID | Module | Việc / đầu ra cụ thể | Nghiệm thu | Phụ thuộc | Độ phức tạp | Gate / phương án tạm |
 |---|---|---|---|---|---|---|
-| P8-I01 | Infra | Ghi phản hồi TGC và ma trận quyền cụ thể vào Legal/K13 | Phân biệt quyền truy cập với quyền phân phối/tương tác/sửa đổi; chưa rõ giữ pending | P0-D03, phản hồi thật | Trung bình | TGC; tiếp tục hình học |
+| P8-I01 | Infra | Xác nhận lại phản hồi TGC và ma trận quyền trước khi tích hợp full asset | Đối chiếu P1-L03 với asset/revision thực nhận; phân biệt quyền truy cập với use/display/redistribute/modify; phạm vi lệch hoặc hết hiệu lực thì giữ pending | P1-L03, P1-L05, phản hồi/evidence thật | Trung bình | TGC; tiếp tục hình học |
 | P8-D01 | Data pipeline | Nhận và kiểm kê asset từ kênh được TGC cho phép | Có provenance/quyền/format/revision; không rip hoặc lấy từ game client | P8-I01 | Cao | TGC; registry placeholder |
 | P8-D02 | Data pipeline | Mapping asset hợp lệ → item IDs và manifest | Không làm đổi ID outfit; thiếu asset từng item vẫn fallback | P8-D01, P2-D12 | Trung bình | TGC; layer demo |
 | P8-W01 | Wardrobe | Calibrate anchor/scale theo model/size thực được cung cấp | Có mẫu đối chiếu, revision, sai số nghiệm thu đã chốt; không coi bảng demo là thật | P8-D02, P4-W04 | Cao | TGC; scale demo có nhãn |
@@ -348,6 +366,8 @@ Phụ thuộc phase là điều kiện nền; cột phụ thuộc bổ sung quan
 | P8-W04 | Wardrobe | Viết đánh giá 3D từ format/quyền thực, rồi lập scope riêng | Chưa tự triển khai 3D nếu không có quyền/dữ liệu/quyết định; không thêm nguồn ngoài brief | P8-I01, P8-D01, Q19 | Cao | TGC, Q19; duy trì 2D |
 
 ## Đường phụ thuộc và xử lý blocker
+
+- **TGC permission track:** P0-L01–P0-L03 chuẩn bị scope/request/evidence; P1-L01–P1-L05 gửi, lưu bằng chứng, review phạm vi và quyết định gate. Track này chạy song song, **không chặn** Hub hoặc Wardrobe placeholder. Chỉ Phase 8 full asset phụ thuộc kết quả approved/restricted tương ứng.
 
 - Nền: P0 → P1 theo từng nguồn → P2 → P3/4/5 theo module → P6 → P7.
 - P4 không chờ dataset giá/route hoặc full asset. P5 map ảnh có thể chờ quyền trong khi route text/price tiếp tục. P8 tách nhánh, không nằm trên đường găng release placeholder.
