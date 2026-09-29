@@ -8,7 +8,7 @@ Mỗi hàng là một task độc lập để copy: **ID + module + việc/đầ
 
 - **Thấp / Trung bình / Cao:** mức phức tạp tương đối, không phải thời lượng.
 - **Gate `—`:** có thể thực hiện sau phụ thuộc thông thường.
-- **Gate `Qnn`:** cần quyết định nêu trong Open questions; quyết định chỉ chặn nhánh liên quan.
+- **Gate `Qnn`:** cần quyết định nêu trong Decisions & open questions; chỉ các Q còn mở mới được giữ làm gate. Q đã chốt phải được gỡ khỏi cột Gate/phụ thuộc.
 - **Gate `DATA Kxx`:** thiếu URL/contract/dữ liệu thật; có thể dùng fixture tự tạo gắn nhãn để phát triển, nhưng không gọi integration là hoàn thành.
 - **Gate `TGC`:** **pending legal confirmation**, phụ thuộc phản hồi TGC đúng phạm vi; phương án tạm nêu riêng. Không tự bỏ gate.
 - **Gate `RIGHTS`:** cần xác minh quyền asset bên thứ ba (ví dụ map), không mặc định TGC có thể cho phép thay tác giả.
@@ -27,10 +27,10 @@ Phụ thuộc phase là điều kiện nền; cột phụ thuộc bổ sung quan
 
 | ID | Việc / đầu ra cụ thể | Nghiệm thu | Phụ thuộc | Độ phức tạp | Gate |
 |---|---|---|---|---|---|
-| P0-I01 | Ghi quyết định React/TypeScript/Vite, router, package manager và phiên bản hỗ trợ vào Architecture | Có lựa chọn/phiên bản được kiểm tra lúc code, lý do và build command; không cài framework thứ hai không cần thiết | Q06 | Thấp | Q06 |
+| P0-I01 | Ghi quyết định React/TypeScript/Vite, router, package manager và phiên bản hỗ trợ vào Architecture | Có lựa chọn/phiên bản được kiểm tra lúc code, lý do và build command; không cài framework thứ hai không cần thiết | — | Thấp | — |
 | P0-I02 | Khởi tạo manifest dependency, TypeScript và entry app rỗng trong khung `src` | Install/build chạy tái lập với lockfile; không chứa demo dữ liệu thật giả | P0-I01 | Thấp | — |
 | P0-I03 | Tạo quy tắc lint/typecheck và script build | Lệnh được mô tả, lỗi type thực sự làm build gate fail | P0-I02 | Thấp | — |
-| P0-I04 | Thiết lập Vercel project/preview, output và routing fallback | Root và deep link mở đúng bản preview; ghi cách rollback; chưa bật tài nguyên trả phí | P0-I03, Q15 | Trung bình | Q15 |
+| P0-I04 | Thiết lập Vercel project/preview, output và routing fallback | Root và deep link mở đúng bản preview; ghi cách rollback; chưa bật tài nguyên trả phí | P0-I03 | Trung bình | — |
 
 ### Data pipeline
 
@@ -44,7 +44,7 @@ Phụ thuộc phase là điều kiện nền; cột phụ thuộc bổ sung quan
 
 | ID | Việc / đầu ra cụ thể | Nghiệm thu | Phụ thuộc | Độ phức tạp | Gate |
 |---|---|---|---|---|---|
-| P0-W01 | Chốt renderer 2D và bộ silhouette/layer tự tạo để thử | Demo phân biệt khỏi full asset; không cần file game/Wiki download để bắt đầu | Q03 | Trung bình | Q03 |
+| P0-W01 | Chốt renderer 2D và bộ silhouette/layer tự tạo để thử | Demo phân biệt khỏi full asset; không cần file game/Wiki download để bắt đầu | — | Trung bình | — |
 | P0-W02 | Viết quyết định cardinality slot, anchor và quy tắc xung đột override | Có ví dụ logic dùng ID giả; chưa khẳng định mã size/chibi thật | P0-W01, Q08 | Trung bình | Q08 |
 
 ### Hub
@@ -59,9 +59,9 @@ Phụ thuộc phase là điều kiện nền; cột phụ thuộc bổ sung quan
 
 | ID | Việc / đầu ra cụ thể | Nghiệm thu | Phụ thuộc | Độ phức tạp | Gate |
 |---|---|---|---|---|---|
-| P0-U01 | Vẽ wireframe Hub desktop/mobile theo bảng widget | Season, TS, news, wardrobe, lookup, maps/routes, leak và footer đều có vị trí | Q05 | Trung bình | Q05 |
-| P0-U02 | Chốt mức thông báo hoạt động khi app mở và wording giới hạn | Không hứa báo khi app đóng; Web Push nền ghi research nếu chưa thay yêu cầu local | Q07 | Thấp | Q07 |
-| P0-U03 | Chốt ngôn ngữ release đầu và nhãn chính thức/leak/dự đoán | Có glossary nhỏ và ví dụ empty/stale/placeholder, không tự dịch tên làm ID | Q17 | Thấp | Q17 |
+| P0-U01 | Vẽ wireframe Hub desktop/mobile theo bảng widget | Season, TS, news, wardrobe, lookup, maps/routes, leak và footer đều có vị trí | — | Trung bình | — |
+| P0-U02 | Chốt mức thông báo hoạt động khi app mở và wording giới hạn | Không hứa báo khi app đóng; Web Push nền ghi research nếu chưa thay yêu cầu local | — | Thấp | — |
+| P0-U03 | Chốt ngôn ngữ release đầu và nhãn chính thức/leak/dự đoán | Có glossary nhỏ và ví dụ empty/stale/placeholder, không tự dịch tên làm ID | — | Thấp | — |
 
 ## Phase 1 — xác minh nguồn và contract truy xuất
 
@@ -147,7 +147,7 @@ Phụ thuộc phase là điều kiện nền; cột phụ thuộc bổ sung quan
 
 | ID | Module | Việc / đầu ra cụ thể | Nghiệm thu | Phụ thuộc | Độ phức tạp | Gate |
 |---|---|---|---|---|---|---|
-| P2-U01 | UX | Tạo storage wrapper có parse/version/migration/memory fallback | Reload round-trip; corrupted/quota-denied vẫn mở app; thông báo không lưu được rõ | P0-I02, Q13 | Trung bình | Q13 |
+| P2-U01 | UX | Tạo storage wrapper có parse/version/migration/memory fallback | Reload round-trip; corrupted/quota-denied vẫn mở app; thông báo không lưu được rõ | P0-I02 | Trung bình | — |
 | P2-W01 | Wardrobe | Tạo reducer selection và schema state dẫn xuất | baseSize không đổi khi rule active; reducer thuần, ID sai bị reject | P2-D04 | Trung bình | — |
 | P2-H01 | Hub | Tạo data access đọc manifest/normalized JSON | Module thiếu dataset hiển thị unavailable; không fetch raw/draft từ client | P2-D12 | Trung bình | — |
 
@@ -211,7 +211,7 @@ Phụ thuộc phase là điều kiện nền; cột phụ thuộc bổ sung quan
 | P4-W07 | Tạo dye region demo và bộ điều khiển màu/reset | Chỉ vùng hỗ trợ đổi màu; mask thiếu không tô toàn item sai; nhãn demo rõ | P4-W02, P4-W03 | Cao | — |
 | P4-W08 | Nối AssetRegistry với fallback theo từng layer | Thiếu file/quyền thì hình học placeholder có nhãn; không fetch URL tùy ý từ outfit link | P2-D11, P4-W02 | Trung bình | — |
 | P4-W09 | Tạo lưu/đổi tên/xóa outfit local và restore khi reload | Selection/dye/base size round-trip; quota lỗi vẫn giữ phiên hiện tại; xóa không ảnh hưởng outfit khác | P2-U01, P4-W07 | Trung bình | — |
-| P4-W10 | Viết codec outfit share versioned và copy/open link | Mở ở phiên trống khôi phục đúng; payload quá lớn/sai version/ID bị xử lý an toàn | P4-W09, Q13 | Cao | Q13 |
+| P4-W10 | Viết codec outfit share versioned và copy/open link | Mở ở phiên trống khôi phục đúng; payload quá lớn/sai version/ID bị xử lý an toàn | P4-W09 | Cao | — |
 | P4-W11 | Thêm migration item alias/tombstone khi mở outfit cũ | Báo item thiếu, không thay bằng món khác âm thầm; phần hợp lệ vẫn mở | P2-D12, P4-W10 | Trung bình | — |
 | P4-W12 | Kiểm thử reducer/transform/rule/codec với chuỗi thao tác | Equip → đổi base size → override → tháo → dye → share → reload giữ đúng state; test không chỉ snapshot cấu trúc code | P4-W05–P4-W11 | Cao | — |
 
@@ -275,7 +275,7 @@ Phụ thuộc phase là điều kiện nền; cột phụ thuộc bổ sung quan
 
 | ID | Việc / đầu ra cụ thể | Nghiệm thu | Phụ thuộc | Độ phức tạp | Gate |
 |---|---|---|---|---|---|
-| P6-I01 | Tạo manifest/name/icons tự tạo/start URL và capability install | Không dùng icon TGC chưa rõ quyền; kiểm tra khả năng cài trên browser mục tiêu thực tế | P3-U02, Q18 | Trung bình | Q18 |
+| P6-I01 | Tạo manifest/name/icons tự tạo/start URL và capability install | Không dùng icon TGC chưa rõ quyền; kiểm tra khả năng cài trên browser mục tiêu thực tế | P3-U02 | Trung bình | — |
 | P6-I02 | Tạo service worker cache shell và catalog public versioned | Offline mở shell + bản catalog đã có; request draft/QR không có trong cache | P2-D12, P6-I01 | Cao | — |
 | P6-I03 | Viết lifecycle update/cache cleanup có version tương thích | Không trộn code mới với data cũ không tương thích; cache hỏng có fallback rõ | P6-I02 | Cao | — |
 | P6-I04 | Kiểm tra quota/storage eviction và restore online | Cache bị xóa không crash; online tải lại; không hứa local data sống vĩnh viễn | P6-I03, P2-U01 | Trung bình | — |
@@ -285,15 +285,15 @@ Phụ thuộc phase là điều kiện nền; cột phụ thuộc bổ sung quan
 | ID | Việc / đầu ra cụ thể | Nghiệm thu | Phụ thuộc | Độ phức tạp | Gate |
 |---|---|---|---|---|---|
 | P6-U01 | Tạo banner offline/last-sync và update prompt | Không ép reload làm mất outfit đang chỉnh; user chọn apply update | P6-I03, P4-W09 | Trung bình | — |
-| P6-U02 | Tạo notification settings/capability/permission flow | Prompt chỉ sau click, denied/unsupported có hướng dẫn; opt-in lưu local | P0-U02, P2-U01 | Trung bình | Q07 |
-| P6-U03 | Tạo export/import/reset local data theo phạm vi | Import validate trước áp; reset cần xác nhận; không xuất QR raw hay bí mật | P2-U01, P4-W09 | Trung bình | Q13 |
+| P6-U02 | Tạo notification settings/capability/permission flow | Prompt chỉ sau click, denied/unsupported có hướng dẫn; opt-in lưu local | P0-U02, P2-U01 | Trung bình | — |
+| P6-U03 | Tạo export/import/reset local data theo phạm vi | Import validate trước áp; reset cần xác nhận; không xuất QR raw hay bí mật | P2-U01, P4-W09 | Trung bình | — |
 
 ### Hub / Data pipeline / Wardrobe
 
 | ID | Module | Việc / đầu ra cụ thể | Nghiệm thu | Phụ thuộc | Độ phức tạp | Gate |
 |---|---|---|---|---|---|---|
 | P6-H01 | Hub | Tạo reminder in-app từ mốc verified và lựa chọn local | Không tự tạo lịch, không nhắc trùng trong phiên/khung sự kiện đã đánh dấu | P3-D02, P6-U02 | Trung bình | DATA K05 |
-| P6-H02 | Hub | Thêm notification khi app đang hoạt động nếu browser hỗ trợ | Denied/unsupported quay về in-app; thông báo không claim delivery khi app đóng | P6-H01 | Trung bình | Q07 |
+| P6-H02 | Hub | Thêm notification khi app đang hoạt động nếu browser hỗ trợ | Denied/unsupported quay về in-app; thông báo không claim delivery khi app đóng | P6-H01 | Trung bình | — |
 | P6-D01 | Data pipeline | Thêm policy fresh/stale cho time/content/cache theo contract | Offline countdown không gắn nhãn live; expired time dừng khẳng định chính xác | P1-I01, P3-D01, P6-I02 | Trung bình | DATA K05 |
 | P6-W01 | Wardrobe | Kiểm tra editor/offline/share với catalog đang cache | Item mới chưa cache báo thiếu, outfit đang sửa không mất khi service worker cập nhật | P4-W11, P6-I03 | Trung bình | — |
 
@@ -301,7 +301,7 @@ Phụ thuộc phase là điều kiện nền; cột phụ thuộc bổ sung quan
 
 | ID | Module | Việc / đầu ra cụ thể | Nghiệm thu | Phụ thuộc | Độ phức tạp | Gate |
 |---|---|---|---|---|---|---|
-| P6-R01 | Infra | Viết đánh giá Web Push nền: subscription, sender, chi phí, retention, quyền | Chỉ tài liệu; chỉ rõ lưu server subscription khác yêu cầu local; chưa triển khai nếu chưa thay scope | Q07 | Trung bình | Q07 |
+| P6-R01 | Infra | Viết đánh giá Web Push nền: subscription, sender, chi phí, retention, quyền | Chỉ tài liệu; chỉ rõ lưu server subscription khác yêu cầu local; chưa triển khai nếu chưa thay scope | P0-U02 | Trung bình | — |
 | P6-R02 | UX | Ghi tiêu chí nghiên cứu native về sau | Không tạo native project hoặc đưa vào đường găng; chỉ ghi nhu cầu chưa đáp ứng bằng web | P6-R01 | Thấp | — |
 
 ## Phase 7 — kiểm chứng, public release và bàn giao vận hành
@@ -318,11 +318,11 @@ Phụ thuộc phase là điều kiện nền; cột phụ thuộc bổ sung quan
 | P7-W01 | Wardrobe | Chạy flow mặc đồ → override → dye → save → link ở phiên trống | Kết quả đúng, missing ID và payload lỗi có fallback; nhãn placeholder hiện | P4-I01, P6-W01 | Trung bình | — |
 | P7-H01 | Hub | Chạy flow catalog → spirit → TS → season → news → map/route → IAP | Link/FK/nguồn đúng; unknown/stale và heart mapping thiếu không tạo số giả | Phase 3, nhánh Phase 5 phát hành | Cao | DATA theo module |
 | P7-H02 | Hub | Kiểm chứng moderation bằng approved/rejected/withdrawn/mutated fixtures | Chỉ approval đúng revision xuất; gỡ tin có cache invalidation; không trộn official | P5-D01, P5-I01, P6-I03 | Trung bình | — |
-| P7-U01 | UX | Kiểm tra responsive, keyboard/focus, contrast, text dài và reduced motion | Luồng chính dùng được trên browser/màn hình đã chọn, ghi lỗi và sửa trước release | P3-U01, P4-U01, Q18 | Cao | Q18 |
+| P7-U01 | UX | Kiểm tra responsive, keyboard/focus, contrast, text dài và reduced motion | Luồng chính dùng được trên browser/màn hình đã chọn, ghi lỗi và sửa trước release | P3-U01, P4-U01 | Cao | — |
 | P7-U02 | UX | Kiểm tra QR/camera/notifications theo capability thực tế | Không upload ngoài ý muốn; denied/unsupported rõ; không hứa background delivery | P5-U03 nếu bật, P6-U02 | Trung bình | Q11 nếu bật QR |
 | P7-D01 | Data pipeline | Audit source/attribution/revision/rights của release manifest | Mọi record thật truy nguồn; risk không tự nới; icon/map pending được thay hình học | P2-D11, P1-U01 | Trung bình | Q12, RIGHTS nếu dùng |
-| P7-I02 | Infra | Đo bundle/load/render trên tập thiết bị đã chốt và sửa bottleneck | Ghi số đo thật và tiêu chí budget đã chốt; không tải toàn ảnh/map ngay trên Hub | P7-I01, Q18 | Trung bình | Q18 |
-| P7-I03 | Infra | Chuẩn bị production deployment Vercel và runbook rollback | Preview tương ứng commit/data manifest, deep links/cache/assets đạt smoke; không phát sinh dịch vụ trả phí ngoài phạm vi | P7-I01–P7-I02, P7-W01, P7-H01, P7-U01, P7-D01 | Trung bình | Q15 |
+| P7-I02 | Infra | Đo bundle/load/render trên tập thiết bị đã chốt và sửa bottleneck | Ghi số đo thật và tiêu chí budget đã chốt; không tải toàn ảnh/map ngay trên Hub | P7-I01 | Trung bình | — |
+| P7-I03 | Infra | Chuẩn bị production deployment Vercel và runbook rollback | Preview tương ứng commit/data manifest, deep links/cache/assets đạt smoke; không phát sinh dịch vụ trả phí ngoài phạm vi | P7-I01–P7-I02, P7-W01, P7-H01, P7-U01, P7-D01 | Trung bình | — |
 | P7-I04 | Infra | Thực hiện release khi đến bước triển khai và xác minh URL production | Các route chính phục vụ đúng version; rollback bundle đã thử ở môi trường phù hợp; ghi URL/version thực | P7-I03 và các gate module bật | Trung bình | — |
 | P7-D02 | Data pipeline | Bàn giao lịch cập nhật thủ công, xử lý nguồn lỗi và quyền bị thu hồi | Có người phụ trách, dry-run, diff/review, rollback và danh sách task còn blocked | P2-I02, P7-I04 | Thấp | Q16 |
 
@@ -379,28 +379,41 @@ Phụ thuộc phase là điều kiện nền; cột phụ thuộc bổ sung quan
 | U03 compact UX | P0-U01, P3-U01/U02, P4-U01 | P7-U01 |
 | U04 PWA/notification | P6-I01–P6-I04, P6-U02, P6-H01/H02 | P7-U02 |
 
-## Open questions — cần chốt trước khi code nhánh liên quan
+## Decisions & open questions — trạng thái quyết định
 
-Q01–Q05 xuất phát trực tiếp từ mục 8 của brief. Q06 trở đi là câu hỏi **suy ra từ thiết kế**, không phải thông tin bổ sung về game hoặc quyết định đã được người dùng chấp thuận. Owner dưới đây là vai trò đề xuất, chưa có người được chỉ định. Không cần đợi toàn bộ câu hỏi mới làm task độc lập.
+Nhóm A đã được **chốt ngày 2026-09-29** để mở khóa Phase 0. Đây là quyết định kỹ thuật của dự án, không phải thông tin game mới. Dữ liệu game thật, endpoint, quyền asset và thông tin nguồn vẫn phải qua gate DATA/TGC/RIGHTS tương ứng.
 
-| ID | Câu hỏi / quyết định cần ghi | Đề xuất để thảo luận, chưa chốt | Chốt trước / vai trò |
+### A. Đã chốt — bắt đầu Phase 0
+
+| ID | Quyết định đã duyệt | Mở khóa |
+|---|---|---|
+| Q03 | Renderer đầu là **SVG paper-doll 2D**; hệ tọa độ chuẩn hóa [0,1], gốc trên-trái; silhouette/layer tự vẽ. Bảng size demo 0–3 chỉ là fixture và phải gắn `fixture=true`; anchor/scale nằm trong JSON versioned. Giá trị size/rule/asset thật vẫn cần chứng cứ hợp lệ. | P0-W01, P4-W01–P4-W02 |
+| Q05 | Trang chủ theo thứ tự: season/event → Traveling Spirit → tin chính thức → lookup/Wardrobe → maps/routes → leak thu gọn → footer. **MVP** chỉ dựng season/TS, tin chính thức, tìm item và lối vào Wardrobe; phần còn lại dùng trạng thái compact “sắp có/chưa triển khai”, không tạo khoảng trống lớn. | P0-U01, P3-U02 |
+| Q06 | Stack chốt: **React + TypeScript + Vite**, **React Router**, **pnpm**, **Node LTS**, client-side và không SSR. Phiên bản cụ thể được kiểm tra/pin khi thực hiện P0-I01. | P0-I01 → P0-I02 → P0-I03 |
+| Q07 | Mức đầu chỉ có **in-app reminder + notification khi app đang mở**; chỉ xin quyền sau thao tác bật của người dùng. Web Push nền chỉ là research vì cần lưu subscription phía server; không hứa delivery khi app đóng. | P0-U02, P6-U02, P6-H02, P6-R01 |
+| Q13 | State local dùng `localStorage` qua wrapper versioned + parse/validate + memory fallback; IndexedDB chỉ thêm khi đo thực tế cho thấy cần. Outfit share dùng URL fragment, payload JSON gọn → nén → base64url, có `schemaVersion` + `catalogVersion`; mục tiêu ban đầu dưới khoảng 2 KB nhưng ngưỡng cuối chốt sau round-trip test. Migration dùng alias/tombstone; không chứa QR/profile/dữ liệu cá nhân. | P2-U01, P4-W10, P6-U03 |
+| Q15 | Repo triển khai là **`nhlan285/Sky_guide`**. Dùng Vercel giai đoạn đầu với preview từ repo, domain `*.vercel.app`; maintainer chính là chủ repo; không tạo cron/DB/KV/tài nguyên trả phí mặc định. Trước production phải kiểm tra lại điều khoản/gói Vercel hiện hành. | P0-I04, P7-I03 |
+| Q17 | UI mặc định **tiếng Việt**; tên item/spirit/season giữ tên gốc tiếng Anh từ nguồn, không tự dịch tên riêng; giữ `LocalizedText` để mở rộng ngôn ngữ sau; ID nội bộ không phụ thuộc tên hiển thị. | P0-U03, P3-U01 |
+| Q18 | Browser mục tiêu: Chrome/Edge desktop bản mới, Chrome Android và Safari iOS bản gần đây. Mục tiêu đo ban đầu: thiết bị tầm trung, LCP ≤ 2,5 s trên mạng di động điển hình; budget JS cụ thể chốt sau build đầu. Accessibility hướng tới WCAG 2.2 AA; không hứa PWA/notification đồng nhất giữa nền tảng. | P6-I01, P7-U01, P7-I02 |
+
+### B. Còn mở — chốt trước Phase 1–2
+
+| ID | Câu hỏi / quyết định cần ghi | Đề xuất hiện tại, chưa chốt | Chốt trước / vai trò |
 |---|---|---|---|
 | Q01 | Schema và cấu trúc database import Wiki là gì? | JSON normalized versioned + provenance/FK/alias, không DB server ở bản đầu; chốt schema trong DATA_SCHEMA | P0-D01/P2; lead + data |
-| Q02 | Ai duyệt leak, quy trình nào, dùng tool nào, nguồn Discord nào được phép? | Intake riêng tư + review theo revision + export public approved; không auto-publish/bot ingest mặc định | P0-H02/P1-H02; maintainer/editor |
-| Q03 | Anchor-point/scale table, model canonical và renderer 2D cụ thể ra sao? | Tọa độ normalized, layer bindings riêng, hình học fixture; giá trị thật chờ dữ liệu hợp lệ | P0-W01/P4; lead Wardrobe |
 | Q04 | ThatSkyAPI/apppricinglab truy xuất kiểu nào, có endpoint/export/CORS/giới hạn gì? | Verify trước; ThatSkyAPI direct khi khả thi, proxy hẹp nếu cần; AppPricingLab manual nếu không có contract | P1-D05/D12/P3-I01; data + infra |
-| Q05 | Widget homepage ưu tiên và layout cụ thể là gì? | Theo UX_GUIDELINES: season → TS → official → lookup/wardrobe → maps/routes → leak thu gọn | P0-U01/P3-U02; product + UX |
-| Q06 | Có chốt React/TS/Vite, router/package manager/version không? | React/TS/Vite phù hợp scaffold hiện tại; xác minh phiên bản lúc triển khai | P0-I01; lead |
-| Q07 | “Có thông báo” có cần hoạt động khi app đóng? Có cho lưu push subscription server-side không? | Mặc định app đang mở + local; Web Push nền chỉ nghiên cứu cho tới khi điều chỉnh yêu cầu local rõ ràng | P0-U02/P6; product + infra |
+| Q12 | Phiên bản CC-BY-SA và credit cụ thể cho text/Wiki/sheet/map là gì? | Ghi theo nguồn đã kiểm chứng; tách attribution text và quyền media, không gán license dự án thay source | P1-U01/P7-D01; maintainer |
+| Q14 | Nguồn nào trong danh sách có đủ season/event dates và cập nhật thường xuyên? | K01/K06 nếu có bằng chứng; thiếu thì inactive/unavailable; không tự thêm feed | P1-H01/P3-H06; data/editor |
+| Q16 | Ai theo dõi ticket TGC và cập nhật dữ liệu, evidence nằm đâu? | Người duy trì giữ evidence riêng, repo chỉ có trạng thái/range quyền phù hợp | P0-D03/P7-D02; maintainer |
+
+### C. Còn mở — chốt khi tới nhánh Phase 5–8
+
+| ID | Câu hỏi / quyết định cần ghi | Đề xuất hiện tại, chưa chốt | Chốt trước / vai trò |
+|---|---|---|---|
+| Q02 | Ai duyệt leak, quy trình nào, dùng tool nào, nguồn Discord nào được phép? | Intake riêng tư + review theo revision + export public approved; không auto-publish/bot ingest mặc định | P0-H02/P1-H02; maintainer/editor |
 | Q08 | Slot phụ kiện cho nhiều item không? Thứ tự layer và rule conflict/size thật là gì? | Cấu hình cardinality, rule priority; code demo không tự gán số size/chibi thật | P0-W02/P4; Wardrobe + data |
 | Q09 | Dự đoán TS bằng phương pháp nào, trình bày mức chắc chắn ra sao? | Nhãn dự đoán + method/input version; chưa có phương pháp được chốt thì để unavailable | P0-H03/P3-H05; product + data |
 | Q10 | Market/currency/platform nào trước? Quy đổi candle/heart và gói mixed theo chứng cứ nào? | Chọn thị trường sau xác nhận; tách proportional/checkout, heart thiếu mapping không tính; không tự thêm FX source | P0-H01/P5-H07; product + data |
 | Q11 | QR Sky encode gì, protocol nào, dữ liệu public nào có thể đọc không tài khoản? | Xác minh với nguồn tham khảo trong brief/mẫu được phép; decode local và fail closed với payload lạ | P1-H03/P5-U01; lead + UX |
-| Q12 | Phiên bản CC-BY-SA và credit cụ thể cho text/Wiki/sheet/map là gì? | Ghi theo nguồn đã kiểm chứng; tách attribution text và quyền media, không gán license dự án thay source | P1-U01/P7-D01; maintainer |
-| Q13 | Giới hạn local state/outfit link, codec và chính sách migration là gì? | Storage wrapper versioned, fragment payload nhỏ, alias/tombstone; định giới hạn qua đo thật | P2-U01/P4-W10; frontend |
-| Q14 | Nguồn nào trong danh sách có đủ season/event dates và cập nhật thường xuyên? | K01/K06 nếu có bằng chứng; thiếu thì inactive/unavailable; không tự thêm feed | P1-H01/P3-H06; data/editor |
-| Q15 | Repo/Vercel project/production domain nào, ai quản lý release và chi phí? | Static preview trước, cập nhật tay ban đầu; không tạo paid resources mặc định | P0-I04/P7; maintainer + infra |
-| Q16 | Ai theo dõi ticket TGC và cập nhật dữ liệu, evidence nằm đâu? | Người duy trì giữ evidence riêng, repo public chỉ có trạng thái/range quyền phù hợp | P0-D03/P7-D02; maintainer |
-| Q17 | Ngôn ngữ UI đầu tiên và quy tắc giữ tên game là gì? | Tài liệu tiếng Việt; UI/localization cần chốt riêng, ID không phụ thuộc tên dịch | P0-U03; product |
-| Q18 | Browser/thiết bị mục tiêu và budget hiệu năng/accessibility nào? | Chọn tập browser thực tế, đo load/render với dữ liệu đại diện; không hứa capability PWA đồng nhất | P6-I01/P7-U01; UX + frontend |
 | Q19 | Sau khi đủ quyền, 2D đầy đủ có đủ không hay cần 3D/native ở scope mới? | Giữ 2D; 3D/native nghiên cứu sau, không tự mở rộng phase đầu | P8-W04; product + lead |
+
