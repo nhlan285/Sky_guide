@@ -1,5 +1,13 @@
 # UX guidelines
 
+## Baseline UX đã chốt cho Phase 0
+
+- UI mặc định **tiếng Việt**; tên item, spirit và season giữ tên gốc tiếng Anh từ nguồn. ID nội bộ không phụ thuộc bản dịch hay label hiển thị.
+- Browser mục tiêu: Chrome/Edge desktop bản mới, Chrome Android và Safari iOS bản gần đây. Accessibility hướng tới **WCAG 2.2 AA**, gồm focus nhìn thấy, không chỉ dựa vào màu và hỗ trợ reduced motion.
+- Trang chủ giữ thứ tự: **season/event → Traveling Spirit → tin chính thức → lookup/Wardrobe → maps/routes → leak thu gọn → footer**. Trong MVP chỉ triển khai season/TS, official news, tìm item và lối vào Wardrobe; module chưa làm dùng trạng thái compact “sắp có/chưa triển khai”, không chiếm card rỗng lớn.
+- Notification giai đoạn đầu chỉ hoạt động khi app đang mở và người dùng chủ động bật; không hứa background delivery.
+
+
 Cơ sở: [brief mục 5](PROJECT_BRIEF.md). Nhận xét về vithai/thatskyapplication là nhận xét **của brief**, chưa phải kết quả audit UI hiện tại. Học mật độ thông tin và độ gọn, không sao chép giao diện hoặc phát sinh tích hợp ngoài phạm vi.
 
 ## Nguyên tắc
