@@ -37,7 +37,7 @@ Phụ thuộc phase là điều kiện nền; cột phụ thuộc bổ sung quan
 | ID | Việc / đầu ra cụ thể | Nghiệm thu | Phụ thuộc | Độ phức tạp | Gate |
 |---|---|---|---|---|---|
 | P0-D01 | **DONE 2026-10-01** — Chốt kho JSON versioned và ranh giới public/raw/draft (Q01) | Contract trong Architecture/DATA_SCHEMA: `data/public/<catalogVersion>/`, manifest/version/provenance/FK/alias; raw/draft/reviewed/evidence ở workspace private ngoài repo; ignore/upload boundaries được kiểm tra; chưa implement nguồn thật/export pipeline | — | Trung bình | — |
-| P0-D02 | Lập bảng owner kiểm tra từng K01–K14 và thông tin đang thiếu | Mỗi nguồn có owner/việc tiếp theo; không điền URL phỏng đoán | P0-D01 | Thấp | — |
+| P0-D02 | **DONE 2026-10-01** — Lập bảng owner kiểm tra từng K01–K14 và thông tin đang thiếu | Ma trận 14/14 nguồn trong Knowledge Base có role owner, trạng thái hiện tại, thông tin thiếu cần xác minh, việc tiếp theo bám roadmap Phase 1 và gate/phụ thuộc; không điền URL/endpoint phỏng đoán | P0-D01 | Thấp | — |
 | P0-D03 | Chỉ định người theo dõi TGC và vị trí lưu evidence riêng tư | Legal ledger ghi người phụ trách nếu đã chốt; chưa có phản hồi vẫn pending | Q16 | Thấp | Q16 |
 
 ### Legal / TGC permission track
