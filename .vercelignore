@@ -8,5 +8,10 @@ dist
 .env*
 private
 data/raw
+data/draft
+data/reviewed
 data/quarantine
 data/private
+data/evidence
+tests/fixtures
+*.private.json

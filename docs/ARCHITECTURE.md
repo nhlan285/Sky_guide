@@ -44,7 +44,27 @@ flowchart LR
   Registry --> Build
 ```
 
-`Raw`, draft và review evidence là tài liệu vận hành, không tự đưa vào `public` hoặc import từ mã client. Đề xuất repo riêng tư cho intake leak; chỉ export bản được duyệt vào tập dữ liệu phát hành. Nếu repo triển khai là public, draft không được commit vào repo đó. Người vận hành dùng công cụ Git hiện có; không xây auth/admin account cho người dùng sản phẩm.
+### Kho dữ liệu đã chốt — P0-D01 / Q01 (2026-10-01)
+
+Release 1 dùng **JSON normalized versioned trong Git**, không database server. Quyết định này cụ thể hóa public catalog/provenance/review gates của Architecture v1 approved; không thay baseline hoặc xác nhận nguồn thật.
+
+| Vùng | Vị trí quy định | Ai sử dụng / ranh giới |
+|---|---|---|
+| Public release | `data/public/<catalogVersion>/` trong repo này | Chỉ manifest, datasets, provenance public và alias/tombstone đã duyệt; có thể công khai cả lịch sử Git |
+| Raw | `<private-workspace>/raw/` ngoài checkout public | Snapshot nguồn được phép lưu; giữ nguyên input/revision, không là input trực tiếp của client/build |
+| Draft / reviewed | `<private-workspace>/draft/`, `<private-workspace>/reviewed/` | Normalized candidate, EditorialRecord và approval theo revision; reviewed chưa phải published |
+| Quarantine / evidence | `<private-workspace>/quarantine/`, `<private-workspace>/evidence/` | Input lỗi, diff/review report và bằng chứng riêng tư; không vào Git public, Vercel hoặc cache client |
+| Fixture kỹ thuật | `tests/fixtures/` khi task kiểm thử cần | Tự tạo và gắn `fixture=true`; không phải nguồn game, không nhập vào catalog phát hành |
+
+`<private-workspace>` là thư mục vận hành ngoài repo hoặc checkout của repo riêng tư, do maintainer quản lý; phiên này chưa tạo workspace/repo riêng tư hay chọn nơi lưu ticket TGC (Q16/P0-D03 còn mở). Không đặt workspace này bên trong `public/`, `src/` hoặc checkout triển khai. Ignore các đường `data/raw/`, `data/draft/`, `data/reviewed/`, `data/quarantine/`, `data/private/`, `private/` chỉ là phòng ngừa local, **không biến chúng thành kho được phép commit** và không bảo vệ file đã tracked.
+
+Luồng duy nhất: raw → normalized draft → validate/diff → review đúng revision → **public projection theo allowlist field** → `data/public/<catalogVersion>/` → review Git/build Preview → phát hành. Không copy nguyên candidate/raw rồi xóa vài field. Nội dung sửa sau approval phải review lại; lỗi parse/validate/export giữ nguyên release tốt trước đó, không xuất catalog rỗng thay thế. Owner/reviewer/tool/source Discord vẫn cần chốt riêng ở Q02; Q01 không cấp quyền publish leak.
+
+Client chỉ đọc release public được code chọn rõ; `src/data/` dành cho types/validators/read adapters, không là kho raw/draft. Build không đọc private workspace, không dùng glob toàn `data/**`, không fetch raw/draft ở runtime. `public/` của Vite được copy nguyên vào output nên chỉ chứa tài nguyên đã được phép công khai; không dùng làm vùng staging. `.vercelignore` loại vùng vận hành/fixture khỏi upload CLI; Git deployment chỉ nhận file tracked, vì vậy review Git và export gate vẫn bắt buộc.
+
+Contract manifest/dataset, version và whitelist provenance nằm tại [DATA_SCHEMA](DATA_SCHEMA.md#public-catalog-contract--q01). Catalog build cùng code; rollback chọn deployment hoặc commit có cùng catalog/asset manifest tương thích. Raw/evidence không cần và không được mang theo deployment rollback. Không tạo manifest/catalog giả để biểu thị nguồn đã sẵn sàng: module chưa có dataset được coi là unavailable.
+
+P0-D01 chốt **contract và ranh giới**. Types/validators (P2-D01–D04), importer (P2-D05–D10), export/rights gates (P2-D11), manifest/rollback implementation (P2-D12), build gate (P2-I01) và client data access (P2-H01) chưa triển khai. Người vận hành dùng Git hiện có; không xây auth/admin account cho sản phẩm.
 
 ## Tổ chức thư mục mã (chỉ khung)
 
@@ -58,7 +78,7 @@ flowchart LR
 | `src/data` | Normalized types, validation, data read adapters; không chứa draft |
 | `src/pwa` | Manifest integration, service worker lifecycle, notification capability |
 
-Scripts import/build và JSON public sẽ được thêm ở task tương ứng; lần này không viết application code theo yêu cầu.
+Scripts import và JSON public sẽ được thêm ở task dữ liệu tương ứng; shell/build hiện có không tích hợp nguồn thật.
 
 ## State Wardrobe và phép biến đổi
 
@@ -124,4 +144,4 @@ Build gate: type/lint theo tool đã chọn, schema/reference checks, cấm draf
 
 ## Các quyết định còn mở
 
-React + TypeScript + Vite, React Router, pnpm, Node LTS, URL fragment cho outfit, renderer SVG 2D, notification foreground, ngôn ngữ UI đầu và browser/accessibility target đã được chốt trong nhóm A. Schema/import Wiki, moderation leak, prediction TS, QR protocol, price mapping, attribution và các nguồn dữ liệu vẫn theo trạng thái mở/gate tương ứng trong [Decisions & open questions](plan/IMPLEMENTATION_PLAN.md). Không có endpoint, dữ liệu game hoặc license mới nào được xác nhận chỉ bằng tài liệu kiến trúc này.
+React + TypeScript + Vite, React Router, pnpm, Node LTS, URL fragment cho outfit, renderer SVG 2D, notification foreground, ngôn ngữ UI đầu và browser/accessibility target đã được chốt trong nhóm A. Q01/P0-D01 đã chốt JSON normalized versioned và ranh giới public/raw/draft; schema domain sẽ được kiểm chứng khi triển khai Phase 2, mapping upstream vẫn chờ Phase 1. Moderation leak, prediction TS, QR protocol, price mapping, attribution và các nguồn dữ liệu vẫn theo trạng thái mở/gate tương ứng trong [Decisions & open questions](plan/IMPLEMENTATION_PLAN.md). Không có endpoint, dữ liệu game hoặc license mới nào được xác nhận chỉ bằng tài liệu kiến trúc này.

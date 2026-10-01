@@ -1,6 +1,38 @@
 # Data schema chi tiết — đề xuất v1
 
-Đây là **contract nội bộ dự kiến**, không phải cấu trúc trả về đã xác minh của các nguồn. Nguồn duy nhất về phạm vi: [brief](PROJECT_BRIEF.md), truy xuất qua [Knowledge Base](../knowledge/README.md). Chưa có database/import thật. Đề xuất JSON public versioned; các thực thể dưới đây là bảng logic, không yêu cầu SQL hoặc server account.
+Đây là **contract nội bộ**, không phải cấu trúc trả về đã xác minh của các nguồn. Nguồn duy nhất về phạm vi: [brief](PROJECT_BRIEF.md), truy xuất qua [Knowledge Base](../knowledge/README.md). **Q01/P0-D01 đã chốt ngày 2026-10-01:** JSON normalized versioned, provenance/FK/alias và tách public/raw/draft theo [Architecture](ARCHITECTURE.md#kho-dữ-liệu-đã-chốt--p0-d01--q01-2026-10-01). Chưa có database/import thật. Các thực thể domain dưới đây vẫn là contract cần kiểm chứng bằng nguồn hợp lệ ở Phase 1–2; không yêu cầu SQL hoặc server account.
+
+## Public catalog contract — Q01
+
+Kho phát hành là `data/public/<catalogVersion>/`, chỉ chứa public projection. Raw/draft/reviewed/quarantine/evidence nằm ngoài repo public; runtime và build không truy cập các vùng này. Fixture kỹ thuật nằm riêng ở `tests/fixtures/`, không được liệt kê trong manifest Preview hoặc Production. Chưa tạo file catalog/manifest trong task chốt contract này.
+
+### Manifest và version
+
+`manifest.json` có contract nội bộ sau (không phải response upstream):
+
+| Field | Kiểu / ý nghĩa |
+|---|---|
+| `schemaVersion` | integer > 0, version contract catalog; chỉ đọc version code hỗ trợ, version lạ phải fail closed |
+| `catalogVersion` | string định danh release bất biến, khớp tên thư mục; mọi thay đổi nội dung tạo version mới, không ghi đè release cũ |
+| `generatedAt` | DateTime tạo public release, không phải thời gian quan sát game hoặc đồng hồ live |
+| `datasets` | Map dataset ID → `{path, dataVersion, sha256}`; path JSON tương đối bên trong release, không URL tuyệt đối/`..`; checksum SHA-256 của byte file export |
+| `provenance` | `{path, dataVersion, sha256}` tới dataset provenance public, dùng cùng envelope như datasets |
+| `aliases` / `tombstones` | Mỗi field là `{path, dataVersion, sha256} \| null`; null nghĩa chưa có migration, không sinh dữ liệu giả |
+| `assetManifestVersion` | string hoặc null; null khi chưa phát hành asset, nếu có phải trỏ version asset tương thích và đã qua rights gate |
+
+Mỗi dataset giữ envelope `schemaVersion`, `dataVersion`, `generatedAt`, `sourceIds`, `records`, `fixture` như quy ước dưới đây; manifest và dataset phải cùng `schemaVersion`, entry `dataVersion` phải khớp file, `fixture=false`. `dataVersion` thay khi nội dung dataset đổi; `catalogVersion` ghim toàn bộ tập dataset/provenance/migration của một release. `catalogVersion` trong outfit share trỏ release này; không dùng version dataset đơn lẻ thay version catalog.
+
+Dataset chưa xác minh/không có không có entry trong manifest; consumer coi là unavailable. `records=[]` chỉ dùng khi đã xác nhận tập dữ liệu thực sự rỗng, không dùng để che lỗi importer hoặc nguồn chưa tích hợp. Không merge dataset từ nhiều release lúc runtime. Build/deploy giữ code + catalog + asset manifest tương thích cùng nhau; rollback dùng nguyên bundle tốt trước đó. Thu hồi nội dung không được hồi sinh qua rollback: chọn bundle an toàn hoặc export release mới đã loại nội dung bị thu hồi; cập nhật cache ở P5-I01/P6-I03.
+
+### Publication và public projection
+
+- Candidate domain theo state `draft → reviewed → published`; `retired` không xuất. `published` là đủ điều kiện xét export, không tự bỏ qua validation/rights/moderation. Bản approved theo revision chỉ ở kho reviewed riêng tư; export đã review mới tạo public projection. Thay đổi nội dung/provenance/asset làm mất approval cũ.
+- Export chọn field có định nghĩa trong schema public từng entity và nguồn public được phép công khai; field mới phải bổ sung contract/review trước. Không spread toàn bộ object vận hành vào output.
+- Dữ liệu thật phải có provenance truy nguồn được. Export `SourceRecord` theo allowlist ở bảng bên dưới; `sourceRecordKey`, `sourceUrl`, attribution/notes chỉ được chứa thông tin công khai đã review, vẫn giữ cảnh báo quyền/attribution của nguồn. `pending`/`conflict` không cho xuất candidate mới; `stale` chỉ giữ bản đã được xác minh trước đó với nhãn stale, không biến dữ liệu mới thành verified. Không xuất Discord message/channel riêng tư, ticket, reviewer/contact, đường dẫn local hoặc `sourceEvidenceRefs`. Nếu chỉ có evidence riêng tư và chưa có provenance public phù hợp thì giữ candidate private/unavailable, không tự tạo URL thay thế; cách phát hành K14 vẫn gated Q02.
+- Public domain có `recordStatus=published`, `fixture=false`; Article cũng áp dụng metadata chung và thêm `revision: string` để đối chiếu approval nội bộ. Leak chỉ xuất khi EditorialRecord có `state=approved`, `articleId` và `revision` khớp chính xác, reviewer/time đầy đủ, không withdrawn. `EditorialRecord` luôn private, không có dataset public cho nó; review không biến leak thành official.
+- FK/provenance phải giải được trong **cùng public release**, không chỉ tồn tại trong raw/draft; không xuất record kéo theo tham chiếu private hoặc asset bị chặn. Prediction vẫn tách history và cần phương pháp được duyệt. Full asset pending/không được phép, fixture và evidence private bị chặn ở cả Preview lẫn Production. Hình học tự tạo không fixture có thể làm fallback với `self_created_placeholder`; không đổi nhãn fixture để lách gate.
+- Alias contract: `{entityType, fromId, toId}`; ID nguồn không được tái sử dụng, đích phải tồn tại trong public release, không chu trình/ánh xạ mơ hồ. Tombstone: `{entityType, id, retiredAt, replacementId: ID?}`; replacement nếu có phải là ID public hợp lệ. Chỉ chứa metadata công khai, không bản sao nội dung đã gỡ hoặc evidence riêng tư.
+- Parser/validation/export lỗi giữ last-known-good, trả report/quarantine riêng tư; không ghi đè public release, không gán `published` chỉ để pass. Triển khai kiểm tra các quy tắc này thuộc P2-D01–D12/P2-I01; P0-D01 không tuyên bố pipeline đã chạy.
 
 ## Quy ước kiểu và nguồn
 
@@ -138,7 +170,7 @@ Full 3D/wardrobe: **pending legal confirmation**. Asset không đủ rights khô
 
 ## News và moderation — K06/K14
 
-`Article {id, category: official|leak, title, summary, sourceProvenanceIds, officialEvidenceIds: ID[], factualStatus: official|unconfirmed|disputed|corrected, spoiler: boolean, publishedAt: DateTime?, updatedAt}` là projection public.
+`Article {id, revision: string, category: official|leak, title, summary, sourceProvenanceIds, officialEvidenceIds: ID[], factualStatus: official|unconfirmed|disputed|corrected, spoiler: boolean, publishedAt: DateTime?, updatedAt, recordStatus, fixture}` là projection public theo metadata/publication contract chung; `sourceProvenanceIds` là tham chiếu provenance của Article.
 
 `EditorialRecord {id, articleId, state: draft|in_review|approved|rejected|withdrawn, reviewerRef: string?, reviewedAt: DateTime?, decisionNote: string?, sourceEvidenceRefs: string[], revision: string}` chỉ vận hành. Transition approved bắt buộc người duyệt + timestamp + revision nội dung; sửa nội dung làm mất approval cũ và quay review. Review leak không biến leak thành official. Chỉ projection có approval khớp revision và không withdrawn xuất public; không bundle EditorialRecord hoặc message raw.
 

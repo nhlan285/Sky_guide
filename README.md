@@ -16,7 +16,7 @@ Dự án miễn phí, không yêu cầu đăng nhập và không có tính năng
 |---|---|
 | Product brief, PRD và architecture | Hoàn thành bản khởi tạo |
 | Knowledge Base | 14 hồ sơ nguồn, chờ xác minh endpoint và dữ liệu mẫu |
-| Data schema | Có contract đề xuất v1, chưa có importer |
+| Data schema | P0-D01/Q01 đã chốt public/raw/draft và JSON versioned; chưa có importer/validator/export pipeline |
 | Implementation plan | 9 phase, 134 task |
 | Source code | React + TypeScript + Vite SPA, React Router (`/`, `/about`, not-found) |
 | Wardrobe 2D | Chưa triển khai; sẽ dùng hình học placeholder trước |

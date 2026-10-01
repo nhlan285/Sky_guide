@@ -4,7 +4,7 @@ Nguồn sự thật: [PROJECT_BRIEF](../PROJECT_BRIEF.md). Các quyết định 
 
 ## Cách dùng task list
 
-Mỗi hàng là một task độc lập để copy: **ID + module + việc/đầu ra + nghiệm thu + phụ thuộc + độ phức tạp + gate**. Không có ước lượng thời gian. Trạng thái ban đầu của các task là **chưa làm**; chỉ bộ tài liệu/scaffold đã hoàn thành ở lần khởi tạo này. Không đánh dấu API, calibration, asset, UI hoặc deploy đã sẵn sàng chỉ vì có tài liệu.
+Mỗi hàng là một task độc lập để copy: **ID + module + việc/đầu ra + nghiệm thu + phụ thuộc + độ phức tạp + gate**. Không có ước lượng thời gian. Task chưa có trạng thái nghiệm thu cụ thể vẫn là **chưa làm**; các hàng DONE ghi ngày và phạm vi bằng chứng. Không đánh dấu API, calibration, asset, UI hoặc deploy đã sẵn sàng chỉ vì có tài liệu.
 
 - **Thấp / Trung bình / Cao:** mức phức tạp tương đối, không phải thời lượng.
 - **Gate `—`:** có thể thực hiện sau phụ thuộc thông thường.
@@ -36,7 +36,7 @@ Phụ thuộc phase là điều kiện nền; cột phụ thuộc bổ sung quan
 
 | ID | Việc / đầu ra cụ thể | Nghiệm thu | Phụ thuộc | Độ phức tạp | Gate |
 |---|---|---|---|---|---|
-| P0-D01 | Chốt kho JSON versioned và ranh giới public/raw/draft | Schema phản ánh quyết định; draft không ở đường import client/public repo nếu riêng tư | Q01 | Trung bình | Q01 |
+| P0-D01 | **DONE 2026-10-01** — Chốt kho JSON versioned và ranh giới public/raw/draft (Q01) | Contract trong Architecture/DATA_SCHEMA: `data/public/<catalogVersion>/`, manifest/version/provenance/FK/alias; raw/draft/reviewed/evidence ở workspace private ngoài repo; ignore/upload boundaries được kiểm tra; chưa implement nguồn thật/export pipeline | — | Trung bình | — |
 | P0-D02 | Lập bảng owner kiểm tra từng K01–K14 và thông tin đang thiếu | Mỗi nguồn có owner/việc tiếp theo; không điền URL phỏng đoán | P0-D01 | Thấp | — |
 | P0-D03 | Chỉ định người theo dõi TGC và vị trí lưu evidence riêng tư | Legal ledger ghi người phụ trách nếu đã chốt; chưa có phản hồi vẫn pending | Q16 | Thấp | Q16 |
 
@@ -420,7 +420,6 @@ Nhóm A đã được **chốt ngày 2026-09-29** để mở khóa Phase 0. Đâ
 
 | ID | Câu hỏi / quyết định cần ghi | Đề xuất hiện tại, chưa chốt | Chốt trước / vai trò |
 |---|---|---|---|
-| Q01 | Schema và cấu trúc database import Wiki là gì? | JSON normalized versioned + provenance/FK/alias, không DB server ở bản đầu; chốt schema trong DATA_SCHEMA | P0-D01/P2; lead + data |
 | Q04 | ThatSkyAPI/apppricinglab truy xuất kiểu nào, có endpoint/export/CORS/giới hạn gì? | Verify trước; ThatSkyAPI direct khi khả thi, proxy hẹp nếu cần; AppPricingLab manual nếu không có contract | P1-D05/D12/P3-I01; data + infra |
 | Q12 | Phiên bản CC-BY-SA và credit cụ thể cho text/Wiki/sheet/map là gì? | Ghi theo nguồn đã kiểm chứng; tách attribution text và quyền media, không gán license dự án thay source | P1-U01/P7-D01; maintainer |
 | Q14 | Nguồn nào trong danh sách có đủ season/event dates và cập nhật thường xuyên? | K01/K06 nếu có bằng chứng; thiếu thì inactive/unavailable; không tự thêm feed | P1-H01/P3-H06; data/editor |
@@ -437,3 +436,8 @@ Nhóm A đã được **chốt ngày 2026-09-29** để mở khóa Phase 0. Đâ
 | Q11 | QR Sky encode gì, protocol nào, dữ liệu public nào có thể đọc không tài khoản? | Xác minh với nguồn tham khảo trong brief/mẫu được phép; decode local và fail closed với payload lạ | P1-H03/P5-U01; lead + UX |
 | Q19 | Sau khi đủ quyền, 2D đầy đủ có đủ không hay cần 3D/native ở scope mới? | Giữ 2D; 3D/native nghiên cứu sau, không tự mở rộng phase đầu | P8-W04; product + lead |
 
+### D. Đã chốt bổ sung — 2026-10-01
+
+| ID | Quyết định đã chốt | Nghiệm thu / phần còn lại |
+|---|---|---|
+| Q01 | **CLOSED** — Release 1 dùng JSON normalized versioned trong Git, không DB server. Public projection tại `data/public/<catalogVersion>/`; manifest ghim schema/dataset/provenance/alias/tombstone/asset version. Raw, draft, reviewed, quarantine và evidence chỉ ở workspace riêng tư ngoài repo/client/build. Export allowlist, published + non-fixture + FK public + approval đúng revision + rights gates. Contract chi tiết trong [Architecture](../ARCHITECTURE.md#kho-dữ-liệu-đã-chốt--p0-d01--q01-2026-10-01) và [DATA_SCHEMA](../DATA_SCHEMA.md#public-catalog-contract--q01). | P0-D01 DONE; P2-D01–D12/P2-I01/P2-H01 vẫn chưa triển khai. Nguồn/mapping thật vẫn DATA-gated; Q02/Q12/Q16/TGC/RIGHTS không được gỡ bởi quyết định này. |

@@ -57,7 +57,10 @@ docs/plan/tasks.csv
 
 # Local data, private review material and legal evidence
 data/raw/
+data/draft/
+data/reviewed/
 data/quarantine/
 data/private/
+data/evidence/
 private/
 *.private.json
