@@ -1,0 +1,12 @@
+.git
+.agents
+.commands
+docs
+knowledge
+node_modules
+dist
+.env*
+private
+data/raw
+data/quarantine
+data/private

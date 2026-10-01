@@ -118,7 +118,7 @@ Service worker đề xuất cache shell và public catalog versioned; không cac
 
 ## Vercel và vận hành
 
-Phase đầu dùng deploy preview từ repo đã chọn, rồi production sau checklist. Chốt phiên bản công cụ, build command, output directory và routing fallback theo stack thực tế khi tạo app; hiện chưa có `package.json` hoặc `vercel.json`. Khi chọn Vite thông thường, dự kiến build ra `dist`, nhưng phải xác minh với cấu hình thực tế. Deep link phải tải app được và route không hợp lệ có trang rõ.
+Phase đầu dùng deploy preview từ repo đã chọn, rồi production sau checklist. P0-I01–I04 khóa toolchain trong `package.json`/lockfile; `vercel.json` dùng `pnpm install --frozen-lockfile`, `pnpm lint && pnpm build`, output `dist` được xác minh bằng production build. Rewrite `/(.*)` về `/index.html` để mở trực tiếp deep link; React Router có `/`, `/about` và trang not-found. Quy trình Preview/rollback và bằng chứng nghiệm thu ở README; không bật resource trả phí.
 
 Build gate: type/lint theo tool đã chọn, schema/reference checks, cấm draft trong bundle, asset rights manifest, behavioral tests reducer/codec/IAP, rồi smoke UI. Chưa bật cron hoặc dịch vụ trả phí: lịch cập nhật ban đầu do maintainer chạy thủ công, tự động hóa chỉ sau khi biết giới hạn và chi phí. Nếu proxy cần secret, chỉ server environment; không để secret trong bundle. Rollback gồm cả code + data + asset manifest tương thích, không chỉ HTML.
 
