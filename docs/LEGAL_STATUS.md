@@ -4,7 +4,7 @@ Nguồn: [brief mục 3, 4, 7](PROJECT_BRIEF.md), [sổ nguồn](../knowledge/RE
 
 ## Tình trạng liên hệ TGC
 
-**Đã gửi câu hỏi qua Support trong game (Helpshift ticket); đang chờ phản hồi.** Brief không cho ticket ID, ngày gửi, người nhận hoặc transcript. Không ghi là đã được cấp quyền.
+**Sky Player Support / Ray đã phản hồi qua Support trong game (Helpshift).** Tuy nhiên, phản hồi hiện tại chưa xác nhận rõ phạm vi quyền đối với việc truy cập, sử dụng, hiển thị, phân phối hoặc chỉnh sửa full 3D/game assets. Phản hồi này không được coi là explicit permission; full assets tiếp tục ở trạng thái **pending legal confirmation** và cần follow-up clarification. Repo không lưu ticket ID, ngày nhận hay transcript nhạy cảm trong public bundle.
 
 Các nội dung đã hỏi theo brief:
 
@@ -55,9 +55,9 @@ Không có đường triển khai rip game, can thiệp client hoặc tích hợ
 |---|---|
 | Ticket ID / ngày gửi / người theo dõi | Chưa được cung cấp trong brief |
 | Kênh | Support trong game / Helpshift |
-| Trạng thái | Đã gửi, đang chờ phản hồi theo brief |
-| Phản hồi và ngày nhận | Chưa được cung cấp |
-| Quyền/phạm vi được xác nhận | Chưa có xác nhận |
+| Trạng thái | Đã nhận phản hồi Support (Ray); permission scope chưa được giải quyết rõ; full assets pending legal confirmation, cần follow-up |
+| Phản hồi và ngày nhận | Đã nhận phản hồi từ Sky Player Support / Ray (chưa xác nhận phạm vi quyền; không lưu transcript riêng tư trong public repo) |
+| Quyền/phạm vi được xác nhận | Chưa có xác nhận explicit permission (các quyền access, use, display, redistribute, modify đều cần làm rõ) |
 | Hạn chế, credit, thời hạn | Chưa biết |
 | Bằng chứng nội bộ | Chưa được cung cấp; không yêu cầu đưa transcript nhạy cảm vào repo public |
 | Asset IDs được bao phủ | Chưa có |

@@ -38,7 +38,7 @@ Phụ thuộc phase là điều kiện nền; cột phụ thuộc bổ sung quan
 |---|---|---|---|---|---|
 | P0-D01 | **DONE 2026-10-01** — Chốt kho JSON versioned và ranh giới public/raw/draft (Q01) | Contract trong Architecture/DATA_SCHEMA: `data/public/<catalogVersion>/`, manifest/version/provenance/FK/alias; raw/draft/reviewed/evidence ở workspace private ngoài repo; ignore/upload boundaries được kiểm tra; chưa implement nguồn thật/export pipeline | — | Trung bình | — |
 | P0-D02 | **DONE 2026-10-01** — Lập bảng owner kiểm tra từng K01–K14 và thông tin đang thiếu | Ma trận 14/14 nguồn trong Knowledge Base có role owner, trạng thái hiện tại, thông tin thiếu cần xác minh, việc tiếp theo bám roadmap Phase 1 và gate/phụ thuộc; không điền URL/endpoint phỏng đoán | P0-D01 | Thấp | — |
-| P0-D03 | Chỉ định người theo dõi TGC và vị trí lưu evidence riêng tư | Legal ledger ghi người phụ trách nếu đã chốt; chưa có phản hồi vẫn pending | Q16 | Thấp | Q16 |
+| P0-D03 | Chỉ định người theo dõi TGC và vị trí lưu evidence riêng tư | Legal ledger ghi người phụ trách nếu đã chốt; đã nhận phản hồi Support (Ray) nhưng permission scope chưa rõ, full asset gate vẫn pending | Q16 | Thấp | Q16 |
 
 ### Legal / TGC permission track
 
@@ -375,7 +375,7 @@ Phụ thuộc phase là điều kiện nền; cột phụ thuộc bổ sung quan
 - AppPricingLab không có integration: giữ liên kết/thao tác nhập tay khi hợp lệ; K10/K11 vẫn dùng độc lập. Thiếu giá/SKU thì unavailable.
 - Sheet thiếu link: Wiki history tiếp tục với attribution, đối chiếu sheet giữ task mở.
 - QR protocol chưa rõ: chuẩn bị UI trạng thái unsupported, giữ decode/display thật chưa hoàn thành; không tạo profile giả.
-- TGC chưa trả lời: chỉ hình học/placeholder; icon Wiki theo brief vẫn pending IP, public release có thể thay hình học. Map cộng đồng thiếu quyền: text guide/sơ đồ riêng.
+- TGC Support phản hồi nhưng chưa rõ quyền (pending legal confirmation): chỉ hình học/placeholder; icon Wiki theo brief vẫn pending IP, public release có thể thay hình học. Map cộng đồng thiếu quyền: text guide/sơ đồ riêng.
 
 ## Ma trận bao phủ feature
 
