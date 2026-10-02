@@ -67,9 +67,9 @@ Phụ thuộc phase là điều kiện nền; cột phụ thuộc bổ sung quan
 
 | ID | Việc / đầu ra cụ thể | Nghiệm thu | Phụ thuộc | Độ phức tạp | Gate |
 |---|---|---|---|---|---|
-| P0-U01 | Vẽ wireframe Hub desktop/mobile theo bảng widget | Season, TS, news, wardrobe, lookup, maps/routes, leak và footer đều có vị trí | — | Trung bình | — |
-| P0-U02 | Chốt mức thông báo hoạt động khi app mở và wording giới hạn | Không hứa báo khi app đóng; Web Push nền ghi research nếu chưa thay yêu cầu local | — | Thấp | — |
-| P0-U03 | Chốt ngôn ngữ release đầu và nhãn chính thức/leak/dự đoán | Có glossary nhỏ và ví dụ empty/stale/placeholder, không tự dịch tên làm ID | — | Thấp | — |
+| P0-U01 | **DONE 2026-10-02** — Chốt wireframe Hub desktop/mobile theo Q05 | [UX contract](../UX_GUIDELINES.md#trang-chủ-hub--wireframe-contract-p0-u01-2026-10-02): sơ đồ hai layout, thứ tự mobile, nav/search/Wardrobe/footer, MVP vs secondary compact và normal/loading/empty/unavailable/stale/placeholder/error; chưa triển khai UI | — | Trung bình | — |
+| P0-U02 | **DONE 2026-10-02** — Chốt notification UX theo Q07 | [Notification contract](../UX_GUIDELINES.md#notification-contract-p0-u02--q07-2026-10-02): copy Việt bật nhắc/quyền/active/unsupported/denied/unavailable; permission qua thao tác rõ, chỉ app mở, không bảo đảm delivery; Web Push research, chưa implement | — | Thấp | — |
+| P0-U03 | **DONE 2026-10-02** — Chốt ngôn ngữ/status vocabulary theo Q17 | [Glossary](../UX_GUIDELINES.md#ngôn-ngữ-và-glossary-p0-u03--q17-2026-10-02): UI Việt, tên riêng English từ nguồn, ID độc lập label, LocalizedText mở rộng; official/leak/prediction và fixture/unavailable/stale/source-not-verified phân biệt bằng chữ, có copy trạng thái | — | Thấp | — |
 
 ## Phase 1 — xác minh nguồn và contract truy xuất
 
