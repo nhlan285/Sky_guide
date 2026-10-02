@@ -4,6 +4,7 @@ export type ValidationCode =
   | 'missing_field' | 'invalid_type' | 'invalid_value'
   | 'invalid_date' | 'invalid_instant'
   | 'duplicate_id' | 'unknown_source' | 'unknown_provenance'
+  | 'unknown_reference' | 'invalid_relationship' | 'cyclic_graph'
 
 export interface ValidationError {
   path: ValidationPath

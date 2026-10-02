@@ -142,7 +142,7 @@ Phụ thuộc phase là điều kiện nền; cột phụ thuộc bổ sung quan
 | ID | Việc / đầu ra cụ thể | Nghiệm thu | Phụ thuộc | Độ phức tạp | Gate |
 |---|---|---|---|---|---|
 | P2-D01 | **DONE 2026-10-02** — Core types/validators provenance, money và PartialTime | [src/data/core](../../src/data/core/README.md): nullable unknown giữ nguyên, amount thiếu không thành 0, source enum + supplied registry/reference/duplicate checks, instant bắt buộc offset và calendar validation; errors có path/code, 17 behavioral tests qua node:test (`pnpm test`), lint/typecheck/build PASS; chưa adapter/export gate | P0-D01 | Trung bình | — |
-| P2-D02 | Viết schema Item/Spirit/FriendshipTree/Season/Event/TS | Validate ID/FK, tree acyclic, date precision; prediction tách dataset | P2-D01 | Trung bình | — |
+| P2-D02 | **DONE 2026-10-02** — Item/Spirit, FriendshipTree/Node, Season/Event và TS schemas | [src/data/catalog](../../src/data/catalog/README.md): explicit FK context, membership + acyclic graph validation, unknown/free và date precision giữ nguyên, TS Visit/Prediction tách type/collection; 21 behavioral tests mới (38 tổng) qua node:test, lint/typecheck/test/build PASS; chưa adapter, Dye/Wardrobe schema hoặc export gate | P2-D01 | Trung bình | — |
 | P2-D03 | Viết schema Map/Marker/Route và price mapping | Chặn coordinate ngoài [0,1], map revision lệch, giá âm/mixed market | P2-D01 | Trung bình | — |
 | P2-D04 | Viết schema Asset/Anchor/Size/Rule/Dye/Outfit | Chặn scale ≤ 0, màu/payload sai, anchor thiếu và rule conflict; full asset default pending | P2-D01, P0-W02 | Trung bình | — |
 | P2-D05 | Tạo adapter item Wiki đúng module thực tế | Mapping đối chiếu mẫu; parser lỗi không xuất catalog rỗng ghi đè bản tốt | P1-D01, P1-D13, P2-D02 | Cao | DATA K01 |

@@ -1,4 +1,5 @@
 export type { ValidationCode, ValidationError, ValidationPath, ValidationResult, Validator } from './validation.ts'
+export { enumeration, failure, nullable, object, success, validateString } from './validation.ts'
 export { SOURCE_IDS, validateId, validateSourceId } from './primitives.ts'
 export type { DateTime, ID, SourceId, SourceRegistry } from './primitives.ts'
 export { validateDateTime, validatePartialTime } from './time.ts'
