@@ -1,18 +1,15 @@
-# Visible Hub foundation
+# Living sky rendering — V2
 
-P3-U01/U02/U03 use the existing React Router and native CSS setup, with no added dependencies. The home route contains Season/Event, Traveling Spirit, official news, Item Lookup, Wardrobe, compact Maps/Routes and a collapsed community disclosure in that DOM order. Desktop uses a wider main column; below 768px the grid becomes one column. Cards size to content, controls and labels wrap, and all grid columns have zero minimum widths.
+Canvas owns the seeded ambient field, cached galactic dust/haze and rare meteors. SVG owns four sparse constellation edges in three clusters and three original cloud silhouettes. HTML links have persistent localized labels, 44px minimum light hitboxes and destination anchors in `/hub`. `/` remains the landing, with `/hub`, `/about` and not-found routes preserved.
 
-`../shared/ui/primitives.tsx` provides Button, StatusBadge, labeled TextInput and SectionCard. CSS custom properties in `styles.css` define surfaces, typography, spacing, borders, radii, focus and status colors. `../shared/ui/ContentState.tsx` provides loading, empty, error, unavailable, stale and offline labels/messages. Actions require an explicit callback; callers must only supply implemented operations and truthful cache/update metadata. `../features/hub/Hub.tsx` uses unavailable, never loading/error/stale/offline as invented app state.
+`skyTime.ts` blends sunrise/daylight/sunset/night weights from local device hours, minutes and seconds. Auto samples every 15 seconds while visible; Canvas eases changes and atmosphere layers crossfade without remounting. Manual modes use representative moments. This is visual art direction, not an astronomical calculation or a game clock. Text/surface tokens choose a contrast-safe scheme independently of atmospheric interpolation.
 
-Item Lookup is a visible surface with a focusable read-only search input and disabled search/filter controls. Header search links focus that input. Wardrobe navigation points to its honest unavailable Hub section, not a fake editor. `/about` contains source/credits, current legal status and an explanation of unimplemented device settings. Footer links target those sections. `/` and `/about` plus not-found remain the only routes.
+`starGeneration.ts` scales density by CSS viewport area and capped DPR, with 250–1400 points (1000 cap in large-area low quality), three depths, clustered regions and two faint bands. Seed prefixes stay stable within a viewport class. Canvas caps effective DPR at 2 and backing pixels near 3 million; caches static far stars/haze, draws at most 30fps and pauses when hidden or offscreen. React never updates per ambient frame. ResizeObserver/resize handle size, orientation and DPR changes.
 
-Keyboard access includes a skip link, labeled navigation, visible focus, native community disclosure, and a mobile menu toggle with expanded state and Escape/close focus restoration. Route/hash navigation moves focus to the destination. There are no fake records, dates, countdowns, search results, game assets, Phase 0 SVG fixtures, adapters, notifications or settings persistence.
+Three compositions are explicit: compact below 640px, tablet below 1100px and wide. Mobile uses a vertical trail with a title pocket. Hub keeps a practical ordered layout, opaque readable surfaces, a larger hero and a top atmosphere that fades before paragraphs. Every new visible string exists in Vietnamese and English; theme/locale persist when storage is available.
 
-Automated checks: `pnpm lint`, `pnpm typecheck`, existing `pnpm test`, and `pnpm build`. No browser, dev server or browser automation is used for this task. Static layout does not introduce a component-testing framework.
+Cloud groups drift by transform with different blur/scale/speed; no looping jump or downloaded texture. Landing navigation uses a 550ms native View Transition when available and immediate routing plus a CSS entrance otherwise. Reduced motion disables cloud movement, twinkle, meteors, parallax and route motion; the rich static sky remains. No new dependencies, game assets, live/fake content or adapters are added.
 
-MANUAL VISUAL CHECK REQUIRED after deployment:
+Automated checks: lint, typecheck, production build and 52 Node behavioral tests, including all requested clock boundaries, continuity, deterministic distribution and caps. No browser or automated screenshots used.
 
-- Check wide desktop, 320px/390px mobile, 200% zoom and long labels for wrapping, readable contrast and absence of horizontal overflow.
-- Confirm the mobile sequence matches the DOM, the menu opens/closes and Escape restores toggle focus; Tab reaches the skip link, navigation and disclosure.
-- Use search navigation from home and About; confirm focus reaches the read-only input, search/filter remain disabled and no results are implied.
-- Check Wardrobe and footer anchor destinations, About and an unknown URL; confirm community content starts collapsed and remains separate from official news.
+MANUAL VISUAL CHECK REQUIRED: judge Daylight/Sunset/Night at mobile/tablet/wide widths, long labels, keyboard focus, menu/radios, stored selections, reduced motion, constellation-to-Hub transitions and smoothness on a mid-range phone. Confirm honest unavailable modules remain readable.
