@@ -1,4 +1,5 @@
 import { ContentState } from '../../shared/ui/ContentState'
+import { Link } from 'react-router-dom'
 import { Button, SectionCard, StatusBadge, TextInput } from '../../shared/ui/primitives'
 import { useLocale } from '../../shared/i18n/useLocale'
 
@@ -55,7 +56,7 @@ export function Hub() {
         <SectionCard id="wardrobe" title={t('hub.wardrobe')} className="section-card--wardrobe" badge={<StatusBadge>{t('status.demo')}</StatusBadge>}>
           <p className="wardrobe-heading">{t('hub.wardrobe.title')}</p>
           <p className="section-description">{t('hub.wardrobe.desc')}</p>
-          <ContentState kind="unavailable" message={t('hub.wardrobe.reason')} />
+          <Link to="/wardrobe" className="button">{t('hub.wardrobe.open')}</Link>
         </SectionCard>
 
         <SectionCard id="maps-routes" title={t('hub.maps')} className="hub-grid__wide section-card--compact" badge={<StatusBadge>{t('status.comingSoon')}</StatusBadge>}>

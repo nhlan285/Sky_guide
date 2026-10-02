@@ -8,7 +8,7 @@ Web-app cộng đồng dành cho *Sky: Children of the Light*, được định 
 Dự án miễn phí, không yêu cầu đăng nhập và không có tính năng trả phí. Hướng triển khai là web-app/PWA trên Vercel; native app chưa nằm trong giai đoạn đầu.
 
 > [!IMPORTANT]
-> Repo có shell SPA chạy được cho Phase 0 Infra. Chưa có tính năng Hub/Wardrobe, dữ liệu đã import hoặc asset game được phân phối trong repo.
+> Repo có landing living sky, Hub trạng thái nguồn và Wardrobe demo tương tác bằng hình học tự tạo. Chưa có catalog thật hoặc asset game được phân phối trong repo.
 
 ## Trạng thái dự án
 
@@ -16,10 +16,10 @@ Dự án miễn phí, không yêu cầu đăng nhập và không có tính năng
 |---|---|
 | Product brief, PRD và architecture | Hoàn thành bản khởi tạo |
 | Knowledge Base | 14 hồ sơ nguồn, chờ xác minh endpoint và dữ liệu mẫu |
-| Data schema | P0-D01/Q01 đã chốt public/raw/draft và JSON versioned; chưa có importer/validator/export pipeline |
+| Data schema | Core/catalog/Wardrobe validators đã có; chưa importer/export pipeline hoặc dữ liệu thật |
 | Implementation plan | 9 phase, 134 task |
-| Source code | React + TypeScript + Vite SPA, React Router (`/`, `/about`, not-found) |
-| Wardrobe 2D | Chưa triển khai; sẽ dùng hình học placeholder trước |
+| Source code | React + TypeScript + Vite SPA, React Router (`/`, `/hub`, `/wardrobe`, `/about`, not-found) |
+| Wardrobe 2D | Demo tự tạo: 6 slot / 12 item, equip/replace/remove/reset/random, 4 tỷ lệ demo và palette vùng màu; chưa lưu/share outfit |
 | Asset 3D/wardrobe đầy đủ | **Pending legal confirmation** từ TGC |
 | Deploy Vercel | Cấu hình Vite SPA trong `vercel.json`; Preview theo quy trình bên dưới |
 
@@ -68,11 +68,13 @@ Quality gates trước khi push/deploy:
 ```sh
 pnpm lint
 pnpm typecheck
+pnpm test
 pnpm build
-pnpm preview
 ```
 
 Lint dùng ESLint + typescript-eslint, không chấp nhận warning. `typecheck` chạy TypeScript strict độc lập; `build` chạy typecheck trước Vite production build và dừng khi lỗi type. Output là `dist`; `preview` phục vụ build local. Vite xử lý TSX qua `react-jsx`, chưa cần plugin React/Fast Refresh cho shell này.
+
+Wardrobe V1: mở `/wardrobe` trực tiếp hoặc từ constellation/Hub. [Manifest demo](src/features/wardrobe/demo/README.md) tách khỏi fixture Phase 0 và public catalog; bản phối giữ trong phiên editor, đổi theme/ngôn ngữ không reset. Landing `/` dùng đúng viewport và bố cục riêng cho chiều cao thấp/landscape. **MANUAL VISUAL CHECK REQUIRED**; task này chỉ kiểm tra code/unit tests/lint/typecheck/build, không mở browser.
 
 ### Vercel Preview và rollback
 

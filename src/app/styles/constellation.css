@@ -1,9 +1,10 @@
-.landing-main { flex: 1; }
-.constellation-landing { position: relative; }
-.landing-toolbar { position: absolute; z-index: 4; inset: 1.5rem 2rem auto; display: flex; align-items: center; justify-content: space-between; gap: 1rem; }
+.app-shell--landing { height: 100svh; height: 100dvh; min-height: 0; overflow: clip; }
+.landing-main { flex: 1; min-height: 0; }
+.constellation-landing { position: relative; height: 100%; display: grid; grid-template-rows: auto minmax(0, 1fr) auto; gap: .5rem; padding: max(.75rem, env(safe-area-inset-top)) max(1rem, env(safe-area-inset-right)) max(.75rem, env(safe-area-inset-bottom)) max(1rem, env(safe-area-inset-left)); }
+.landing-toolbar { position: relative; z-index: 4; display: flex; align-items: center; justify-content: space-between; gap: 1rem; }
 .landing-signature { font-size: .875rem; font-weight: 550; letter-spacing: .06em; background: var(--scene-label); padding: .3rem .6rem; border-radius: .35rem; }
-.constellation-scene { height: max(100svh, 48rem); position: relative; }
-.constellation-paths { position: absolute; inset: 0; width: 100%; height: 100%; overflow: visible; pointer-events: none; }
+.constellation-scene { height: 100%; min-height: 0; min-width: 0; position: relative; }
+.constellation-paths { position: absolute; inset: 0; width: 100%; height: 100%; overflow: hidden; pointer-events: none; }
 .constellation-edge { opacity: var(--constellation-visibility); transition: opacity .3s; }
 .constellation-edge path { fill: none; stroke: var(--accent); vector-effect: non-scaling-stroke; stroke-linecap: round; }
 .constellation-edge__glow { stroke-width: 4px; opacity: .06; }
@@ -17,7 +18,7 @@
 .constellation-node--1 .constellation-node__light > span { width: 5px; height: 5px; box-shadow: 0 0 8px 2px rgba(230,242,255,.5), 0 0 22px 3px rgba(160,202,234,.17); }
 .constellation-node--2 .constellation-node__light > span { width: 9px; height: 9px; }
 .constellation-node--2 .constellation-node__light::after { content: ''; position: absolute; width: 2px; height: 2px; margin: -20px 0 0 27px; background: #eaf5ff; border-radius: 50%; opacity: .7; }
-.constellation-node__label { text-align: center; font-size: .925rem; font-weight: 500; padding: .15rem .55rem; border-radius: .35rem; background: var(--scene-label); overflow-wrap: anywhere; }
+.constellation-node__label { text-align: center; font-size: .925rem; line-height: 1.35; font-weight: 500; padding: .15rem .55rem; border-radius: .35rem; background: var(--scene-label); overflow-wrap: anywhere; }
 .constellation-node.is-active .constellation-node__light > span { transform: scale(1.22); box-shadow: 0 0 9px 3px #d4e9fa, 0 0 32px 10px rgba(158,205,243,.32); }
 .constellation-node:focus-visible, .landing-enter:focus-visible, .sky-controls > summary:focus-visible { outline: 3px solid #173244; outline-offset: 4px; box-shadow: 0 0 0 4px #f4faff; }
 .sky-ui--light .constellation-node__light > span { background: #fafcff; box-shadow: 0 0 6px 1px rgba(255,255,255,.9); }
@@ -27,7 +28,7 @@
 .landing-identity p { font-size: 1rem; margin-top: .8rem; color: var(--text); }
 .landing-enter { display: inline-flex; align-items: center; gap: 1.5rem; padding: .7rem 1.2rem; min-height: 44px; margin-top: .8rem; color: var(--text); background: var(--scene-label); border-radius: 99px; text-decoration: none; font-size: .9rem; border: 1px solid var(--control-border); }
 .landing-enter:hover { background: var(--surface-soft); }
-.landing-disclosure { position: absolute; bottom: 1.4rem; left: 50%; transform: translateX(-50%); font-size: .75rem; text-align: center; width: min(90%, 42rem); color: var(--text); background: var(--scene-label); border-radius: .35rem; padding: .3rem .6rem; }
+.landing-disclosure { font-size: .75rem; line-height: 1.4; text-align: center; width: min(100%, 42rem); justify-self: center; margin: 0; color: var(--text); background: var(--scene-label); border-radius: .35rem; padding: .3rem .6rem; }
 .sky-controls { position: relative; font-size: .875rem; z-index: 6; }
 .sky-controls > summary { cursor: pointer; list-style: none; display: flex; align-items: center; gap: .8rem; min-height: 44px; padding: .5rem .85rem; border-radius: 99px; background: var(--scene-label); color: var(--text); }
 .sky-controls > summary::-webkit-details-marker { display: none; }
@@ -48,19 +49,47 @@
 @keyframes scene-in { from { opacity: 0; transform: translateY(6px); } to { opacity: 1; transform: translateY(0); } }
 .app-shell--hub main { animation: scene-in 550ms ease both; }
 @media (min-width: 640px) and (max-width: 1099px) {
-  .constellation-scene { height: max(100svh, 56.25rem); }
-  .landing-identity { width: 22rem; }
-  .landing-identity h1 { font-size: 4.5rem; }
+  .landing-identity { width: min(40%, 22rem); }
+  .landing-identity h1 { font-size: clamp(2.5rem, 6vw, 4.5rem); }
 }
+.constellation-scene--compact .landing-identity h1 { font-size: clamp(2.6rem, 11vw, 3.5rem); }
+.constellation-scene--compact .landing-identity p { font-size: .85rem; line-height: 1.4; margin-block: .5rem 0; }
+.constellation-scene--compact .landing-enter { margin-top: .5rem; }
 @media (max-width: 639px) {
-  .landing-toolbar { inset: 1rem 1rem auto; }
-  .constellation-scene { height: max(100svh, 58.125rem); }
-  .constellation-node { width: 7rem; }
+  .constellation-node { width: 6.5rem; }
   .constellation-node__label { font-size: .825rem; }
   .landing-identity { width: calc(100% - 3rem); max-width: 20rem; }
   .landing-identity h1 { font-size: clamp(3rem, 14vw, 3.7rem); }
   .landing-identity p { font-size: .9rem; }
-  .landing-disclosure { bottom: .75rem; font-size: .7rem; }
+  .landing-disclosure { font-size: .7rem; }
+}
+.constellation-scene--landscape .constellation-node, .constellation-scene--portrait-short .constellation-node, .constellation-scene--micro .constellation-node { flex-direction: row; justify-content: center; width: 7rem; min-height: 44px; transform: translate(-50%, -50%); }
+.constellation-scene--landscape .constellation-node__light, .constellation-scene--portrait-short .constellation-node__light, .constellation-scene--micro .constellation-node__light { width: 14px; flex: 0 0 14px; }
+.constellation-scene--landscape .constellation-node__label, .constellation-scene--portrait-short .constellation-node__label, .constellation-scene--micro .constellation-node__label { font-size: .75rem; line-height: 1.3; padding: .2rem .3rem; }
+.constellation-scene--landscape .landing-identity { width: min(27vw, 22rem); }
+.constellation-scene--landscape .landing-identity h1, .constellation-scene--portrait-short .landing-identity h1 { font-size: clamp(2rem, 4vw, 3rem); }
+.constellation-scene--landscape .landing-identity p, .constellation-scene--portrait-short .landing-identity p, .constellation-scene--micro .landing-identity p { display: none; }
+.constellation-scene--portrait-short .landing-identity { width: min(70%, 18rem); }
+.constellation-scene--micro .constellation-node { width: 5.75rem; }
+.constellation-scene--micro .constellation-node__label { font-size: .7rem; }
+.constellation-scene--micro .landing-identity { width: 100%; display: flex; justify-content: center; align-items: center; gap: .8rem; }
+.constellation-scene--micro .landing-identity h1 { font-size: 1.7rem; }
+.constellation-scene--micro .landing-enter { margin: 0; gap: .5rem; padding: .5rem .75rem; font-size: .8rem; }
+@media (max-height: 480px) {
+  .constellation-landing { padding-block: max(.35rem, env(safe-area-inset-top)) max(.35rem, env(safe-area-inset-bottom)); gap: .2rem; }
+  .landing-disclosure { font-size: .65rem; padding-block: .15rem; }
+  .sky-controls__panel { padding: .65rem; top: calc(100% + .2rem); }
+  .sky-controls__note { margin-block: .25rem .5rem; font-size: .7rem; }
+}
+@media (max-height: 480px) and (min-width: 640px) {
+  .sky-controls__panel { width: min(30rem, calc(100vw - 2rem)); display: grid; grid-template-columns: 1.3fr 1fr; gap: .25rem 1rem; }
+  .sky-controls__panel > p:first-child { grid-column: 1 / -1; margin-bottom: .25rem; }
+  .sky-controls__panel > fieldset:last-child { grid-column: 2; grid-row: 2; }
+  .sky-controls__note { grid-column: 1 / -1; }
+}
+@media (max-height: 400px) {
+  .app-shell--landing .sky-controls__panel > p:first-child { margin-bottom: .25rem; }
+  .app-shell--landing .sky-controls__note { display: none; }
 }
 @media (prefers-reduced-motion: reduce) {
   .constellation-edge, .constellation-node__light > span { transition: none; }

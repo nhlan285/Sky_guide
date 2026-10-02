@@ -1,0 +1,2412 @@
+{
+  "packageKind": "self_created_demo",
+  "id": "demo-wardrobe-v1",
+  "revision": "demo-wardrobe-v1-r1",
+  "disclosure": "Original self-created placeholders. Not Sky assets; not calibrated against the game.",
+  "model": {
+    "id": "demo-model-wayfarer",
+    "revision": "demo-model-r1",
+    "coordinateSystem": "normalized_top_left",
+    "fixture": true
+  },
+  "config": {
+    "id": "demo-config-v1",
+    "revision": "demo-config-r1",
+    "modelId": "demo-model-wayfarer",
+    "modelRevision": "demo-model-r1",
+    "slotPolicies": [
+      {
+        "slot": "mask",
+        "maxItems": 1,
+        "overflow": "reject"
+      },
+      {
+        "slot": "hair",
+        "maxItems": 1,
+        "overflow": "reject"
+      },
+      {
+        "slot": "cape",
+        "maxItems": 1,
+        "overflow": "reject"
+      },
+      {
+        "slot": "top",
+        "maxItems": 1,
+        "overflow": "reject"
+      },
+      {
+        "slot": "bottom",
+        "maxItems": 1,
+        "overflow": "reject"
+      },
+      {
+        "slot": "accessory",
+        "maxItems": 1,
+        "overflow": "reject"
+      }
+    ],
+    "silhouetteBindingIds": [
+      "demo-binding-body"
+    ],
+    "fixture": true
+  },
+  "assets": [
+    {
+      "id": "demo-asset-body",
+      "kind": "geometric_placeholder",
+      "path": null,
+      "revision": "demo-r1",
+      "sourceId": null,
+      "provenanceIds": [],
+      "placeholder": true,
+      "fixture": true,
+      "legalStatus": "self_created_placeholder",
+      "rightsEvidenceRef": null,
+      "credit": "Sky Guide — original geometric demo, 2026",
+      "renderer": "svg",
+      "capabilities": [
+        "layer"
+      ]
+    },
+    {
+      "id": "demo-asset-mask-arc",
+      "kind": "geometric_placeholder",
+      "path": null,
+      "revision": "demo-r1",
+      "sourceId": null,
+      "provenanceIds": [],
+      "placeholder": true,
+      "fixture": true,
+      "legalStatus": "self_created_placeholder",
+      "rightsEvidenceRef": null,
+      "credit": "Sky Guide — original geometric demo, 2026",
+      "renderer": "svg",
+      "capabilities": [
+        "layer"
+      ]
+    },
+    {
+      "id": "demo-asset-mask-tile",
+      "kind": "geometric_placeholder",
+      "path": null,
+      "revision": "demo-r1",
+      "sourceId": null,
+      "provenanceIds": [],
+      "placeholder": true,
+      "fixture": true,
+      "legalStatus": "self_created_placeholder",
+      "rightsEvidenceRef": null,
+      "credit": "Sky Guide — original geometric demo, 2026",
+      "renderer": "svg",
+      "capabilities": [
+        "layer"
+      ]
+    },
+    {
+      "id": "demo-asset-hair-round",
+      "kind": "geometric_placeholder",
+      "path": null,
+      "revision": "demo-r1",
+      "sourceId": null,
+      "provenanceIds": [],
+      "placeholder": true,
+      "fixture": true,
+      "legalStatus": "self_created_placeholder",
+      "rightsEvidenceRef": null,
+      "credit": "Sky Guide — original geometric demo, 2026",
+      "renderer": "svg",
+      "capabilities": [
+        "layer"
+      ]
+    },
+    {
+      "id": "demo-asset-hair-loop",
+      "kind": "geometric_placeholder",
+      "path": null,
+      "revision": "demo-r1",
+      "sourceId": null,
+      "provenanceIds": [],
+      "placeholder": true,
+      "fixture": true,
+      "legalStatus": "self_created_placeholder",
+      "rightsEvidenceRef": null,
+      "credit": "Sky Guide — original geometric demo, 2026",
+      "renderer": "svg",
+      "capabilities": [
+        "layer"
+      ]
+    },
+    {
+      "id": "demo-asset-cape-split-rear",
+      "kind": "geometric_placeholder",
+      "path": null,
+      "revision": "demo-r1",
+      "sourceId": null,
+      "provenanceIds": [],
+      "placeholder": true,
+      "fixture": true,
+      "legalStatus": "self_created_placeholder",
+      "rightsEvidenceRef": null,
+      "credit": "Sky Guide — original geometric demo, 2026",
+      "renderer": "svg",
+      "capabilities": [
+        "layer"
+      ]
+    },
+    {
+      "id": "demo-asset-cape-split-rear-mask",
+      "kind": "geometric_placeholder",
+      "path": null,
+      "revision": "demo-r1",
+      "sourceId": null,
+      "provenanceIds": [],
+      "placeholder": true,
+      "fixture": true,
+      "legalStatus": "self_created_placeholder",
+      "rightsEvidenceRef": null,
+      "credit": "Sky Guide — original geometric demo, 2026",
+      "renderer": "svg",
+      "capabilities": [
+        "dye_mask"
+      ]
+    },
+    {
+      "id": "demo-asset-cape-split-front",
+      "kind": "geometric_placeholder",
+      "path": null,
+      "revision": "demo-r1",
+      "sourceId": null,
+      "provenanceIds": [],
+      "placeholder": true,
+      "fixture": true,
+      "legalStatus": "self_created_placeholder",
+      "rightsEvidenceRef": null,
+      "credit": "Sky Guide — original geometric demo, 2026",
+      "renderer": "svg",
+      "capabilities": [
+        "layer"
+      ]
+    },
+    {
+      "id": "demo-asset-cape-round-rear",
+      "kind": "geometric_placeholder",
+      "path": null,
+      "revision": "demo-r1",
+      "sourceId": null,
+      "provenanceIds": [],
+      "placeholder": true,
+      "fixture": true,
+      "legalStatus": "self_created_placeholder",
+      "rightsEvidenceRef": null,
+      "credit": "Sky Guide — original geometric demo, 2026",
+      "renderer": "svg",
+      "capabilities": [
+        "layer"
+      ]
+    },
+    {
+      "id": "demo-asset-cape-round-rear-mask",
+      "kind": "geometric_placeholder",
+      "path": null,
+      "revision": "demo-r1",
+      "sourceId": null,
+      "provenanceIds": [],
+      "placeholder": true,
+      "fixture": true,
+      "legalStatus": "self_created_placeholder",
+      "rightsEvidenceRef": null,
+      "credit": "Sky Guide — original geometric demo, 2026",
+      "renderer": "svg",
+      "capabilities": [
+        "dye_mask"
+      ]
+    },
+    {
+      "id": "demo-asset-cape-round-front",
+      "kind": "geometric_placeholder",
+      "path": null,
+      "revision": "demo-r1",
+      "sourceId": null,
+      "provenanceIds": [],
+      "placeholder": true,
+      "fixture": true,
+      "legalStatus": "self_created_placeholder",
+      "rightsEvidenceRef": null,
+      "credit": "Sky Guide — original geometric demo, 2026",
+      "renderer": "svg",
+      "capabilities": [
+        "layer"
+      ]
+    },
+    {
+      "id": "demo-asset-top-tunic",
+      "kind": "geometric_placeholder",
+      "path": null,
+      "revision": "demo-r1",
+      "sourceId": null,
+      "provenanceIds": [],
+      "placeholder": true,
+      "fixture": true,
+      "legalStatus": "self_created_placeholder",
+      "rightsEvidenceRef": null,
+      "credit": "Sky Guide — original geometric demo, 2026",
+      "renderer": "svg",
+      "capabilities": [
+        "layer"
+      ]
+    },
+    {
+      "id": "demo-asset-top-tunic-mask",
+      "kind": "geometric_placeholder",
+      "path": null,
+      "revision": "demo-r1",
+      "sourceId": null,
+      "provenanceIds": [],
+      "placeholder": true,
+      "fixture": true,
+      "legalStatus": "self_created_placeholder",
+      "rightsEvidenceRef": null,
+      "credit": "Sky Guide — original geometric demo, 2026",
+      "renderer": "svg",
+      "capabilities": [
+        "dye_mask"
+      ]
+    },
+    {
+      "id": "demo-asset-top-panel",
+      "kind": "geometric_placeholder",
+      "path": null,
+      "revision": "demo-r1",
+      "sourceId": null,
+      "provenanceIds": [],
+      "placeholder": true,
+      "fixture": true,
+      "legalStatus": "self_created_placeholder",
+      "rightsEvidenceRef": null,
+      "credit": "Sky Guide — original geometric demo, 2026",
+      "renderer": "svg",
+      "capabilities": [
+        "layer"
+      ]
+    },
+    {
+      "id": "demo-asset-top-panel-mask",
+      "kind": "geometric_placeholder",
+      "path": null,
+      "revision": "demo-r1",
+      "sourceId": null,
+      "provenanceIds": [],
+      "placeholder": true,
+      "fixture": true,
+      "legalStatus": "self_created_placeholder",
+      "rightsEvidenceRef": null,
+      "credit": "Sky Guide — original geometric demo, 2026",
+      "renderer": "svg",
+      "capabilities": [
+        "dye_mask"
+      ]
+    },
+    {
+      "id": "demo-asset-bottom-wide",
+      "kind": "geometric_placeholder",
+      "path": null,
+      "revision": "demo-r1",
+      "sourceId": null,
+      "provenanceIds": [],
+      "placeholder": true,
+      "fixture": true,
+      "legalStatus": "self_created_placeholder",
+      "rightsEvidenceRef": null,
+      "credit": "Sky Guide — original geometric demo, 2026",
+      "renderer": "svg",
+      "capabilities": [
+        "layer"
+      ]
+    },
+    {
+      "id": "demo-asset-bottom-taper",
+      "kind": "geometric_placeholder",
+      "path": null,
+      "revision": "demo-r1",
+      "sourceId": null,
+      "provenanceIds": [],
+      "placeholder": true,
+      "fixture": true,
+      "legalStatus": "self_created_placeholder",
+      "rightsEvidenceRef": null,
+      "credit": "Sky Guide — original geometric demo, 2026",
+      "renderer": "svg",
+      "capabilities": [
+        "layer"
+      ]
+    },
+    {
+      "id": "demo-asset-accessory-orbit",
+      "kind": "geometric_placeholder",
+      "path": null,
+      "revision": "demo-r1",
+      "sourceId": null,
+      "provenanceIds": [],
+      "placeholder": true,
+      "fixture": true,
+      "legalStatus": "self_created_placeholder",
+      "rightsEvidenceRef": null,
+      "credit": "Sky Guide — original geometric demo, 2026",
+      "renderer": "svg",
+      "capabilities": [
+        "layer"
+      ]
+    },
+    {
+      "id": "demo-asset-accessory-block",
+      "kind": "geometric_placeholder",
+      "path": null,
+      "revision": "demo-r1",
+      "sourceId": null,
+      "provenanceIds": [],
+      "placeholder": true,
+      "fixture": true,
+      "legalStatus": "self_created_placeholder",
+      "rightsEvidenceRef": null,
+      "credit": "Sky Guide — original geometric demo, 2026",
+      "renderer": "svg",
+      "capabilities": [
+        "layer"
+      ]
+    }
+  ],
+  "items": [
+    {
+      "id": "demo-item-mask-arc",
+      "name": {
+        "default": "Arc Band",
+        "translations": {
+          "vi": "Vành cong",
+          "en": "Arc Band"
+        }
+      },
+      "slot": "mask",
+      "assetIds": [
+        "demo-asset-mask-arc"
+      ],
+      "dyeRegions": [],
+      "fixture": true
+    },
+    {
+      "id": "demo-item-mask-tile",
+      "name": {
+        "default": "Porcelain Tile",
+        "translations": {
+          "vi": "Mảnh sứ",
+          "en": "Porcelain Tile"
+        }
+      },
+      "slot": "mask",
+      "assetIds": [
+        "demo-asset-mask-tile"
+      ],
+      "dyeRegions": [],
+      "fixture": true
+    },
+    {
+      "id": "demo-item-hair-round",
+      "name": {
+        "default": "Round Fringe",
+        "translations": {
+          "vi": "Tóc tròn",
+          "en": "Round Fringe"
+        }
+      },
+      "slot": "hair",
+      "assetIds": [
+        "demo-asset-hair-round"
+      ],
+      "dyeRegions": [],
+      "fixture": true
+    },
+    {
+      "id": "demo-item-hair-loop",
+      "name": {
+        "default": "Loop Crest",
+        "translations": {
+          "vi": "Chỏm vòng",
+          "en": "Loop Crest"
+        }
+      },
+      "slot": "hair",
+      "assetIds": [
+        "demo-asset-hair-loop"
+      ],
+      "dyeRegions": [],
+      "fixture": true
+    },
+    {
+      "id": "demo-item-cape-split",
+      "name": {
+        "default": "Split Drape",
+        "translations": {
+          "vi": "Áo choàng xẻ",
+          "en": "Split Drape"
+        }
+      },
+      "slot": "cape",
+      "assetIds": [
+        "demo-asset-cape-split-rear",
+        "demo-asset-cape-split-front"
+      ],
+      "dyeRegions": [
+        {
+          "id": "demo-region-fabric",
+          "label": {
+            "default": "Fabric",
+            "translations": {
+              "vi": "Vải áo",
+              "en": "Fabric"
+            }
+          },
+          "maskAssetId": "demo-asset-cape-split-rear-mask",
+          "allowedColors": [
+            "#6599a2",
+            "#d5ab78",
+            "#b28691",
+            "#7f8fba",
+            "#a7b99a",
+            "#e5ded2"
+          ],
+          "support": "demo"
+        }
+      ],
+      "fixture": true
+    },
+    {
+      "id": "demo-item-cape-round",
+      "name": {
+        "default": "Rounded Mantle",
+        "translations": {
+          "vi": "Áo choàng tròn",
+          "en": "Rounded Mantle"
+        }
+      },
+      "slot": "cape",
+      "assetIds": [
+        "demo-asset-cape-round-rear",
+        "demo-asset-cape-round-front"
+      ],
+      "dyeRegions": [
+        {
+          "id": "demo-region-fabric",
+          "label": {
+            "default": "Fabric",
+            "translations": {
+              "vi": "Vải áo",
+              "en": "Fabric"
+            }
+          },
+          "maskAssetId": "demo-asset-cape-round-rear-mask",
+          "allowedColors": [
+            "#6599a2",
+            "#d5ab78",
+            "#b28691",
+            "#7f8fba",
+            "#a7b99a",
+            "#e5ded2"
+          ],
+          "support": "demo"
+        }
+      ],
+      "fixture": true
+    },
+    {
+      "id": "demo-item-top-tunic",
+      "name": {
+        "default": "Travel Tunic",
+        "translations": {
+          "vi": "Áo hành trình",
+          "en": "Travel Tunic"
+        }
+      },
+      "slot": "top",
+      "assetIds": [
+        "demo-asset-top-tunic"
+      ],
+      "dyeRegions": [
+        {
+          "id": "demo-region-panel",
+          "label": {
+            "default": "Panel",
+            "translations": {
+              "vi": "Mảng áo",
+              "en": "Panel"
+            }
+          },
+          "maskAssetId": "demo-asset-top-tunic-mask",
+          "allowedColors": [
+            "#6599a2",
+            "#d5ab78",
+            "#b28691",
+            "#7f8fba",
+            "#a7b99a",
+            "#e5ded2"
+          ],
+          "support": "demo"
+        }
+      ],
+      "fixture": true
+    },
+    {
+      "id": "demo-item-top-panel",
+      "name": {
+        "default": "Panel Vest",
+        "translations": {
+          "vi": "Áo ghép mảng",
+          "en": "Panel Vest"
+        }
+      },
+      "slot": "top",
+      "assetIds": [
+        "demo-asset-top-panel"
+      ],
+      "dyeRegions": [
+        {
+          "id": "demo-region-panel",
+          "label": {
+            "default": "Panel",
+            "translations": {
+              "vi": "Mảng áo",
+              "en": "Panel"
+            }
+          },
+          "maskAssetId": "demo-asset-top-panel-mask",
+          "allowedColors": [
+            "#6599a2",
+            "#d5ab78",
+            "#b28691",
+            "#7f8fba",
+            "#a7b99a",
+            "#e5ded2"
+          ],
+          "support": "demo"
+        }
+      ],
+      "fixture": true
+    },
+    {
+      "id": "demo-item-bottom-wide",
+      "name": {
+        "default": "Wide Trousers",
+        "translations": {
+          "vi": "Quần rộng",
+          "en": "Wide Trousers"
+        }
+      },
+      "slot": "bottom",
+      "assetIds": [
+        "demo-asset-bottom-wide"
+      ],
+      "dyeRegions": [],
+      "fixture": true
+    },
+    {
+      "id": "demo-item-bottom-taper",
+      "name": {
+        "default": "Tapered Trousers",
+        "translations": {
+          "vi": "Quần suông",
+          "en": "Tapered Trousers"
+        }
+      },
+      "slot": "bottom",
+      "assetIds": [
+        "demo-asset-bottom-taper"
+      ],
+      "dyeRegions": [],
+      "fixture": true
+    },
+    {
+      "id": "demo-item-accessory-orbit",
+      "name": {
+        "default": "Orbit Charm",
+        "translations": {
+          "vi": "Bùa tròn",
+          "en": "Orbit Charm"
+        }
+      },
+      "slot": "accessory",
+      "assetIds": [
+        "demo-asset-accessory-orbit"
+      ],
+      "dyeRegions": [],
+      "fixture": true
+    },
+    {
+      "id": "demo-item-accessory-block",
+      "name": {
+        "default": "Tiny Block",
+        "translations": {
+          "vi": "Khối nhỏ",
+          "en": "Tiny Block"
+        }
+      },
+      "slot": "accessory",
+      "assetIds": [
+        "demo-asset-accessory-block"
+      ],
+      "dyeRegions": [],
+      "fixture": true
+    }
+  ],
+  "sizes": [
+    {
+      "code": "fixture-demo-size-0",
+      "modelId": "demo-model-wayfarer",
+      "modelRevision": "demo-model-r1",
+      "scaleX": 0.78,
+      "scaleY": 0.78,
+      "fixture": true,
+      "provenanceIds": []
+    },
+    {
+      "code": "fixture-demo-size-1",
+      "modelId": "demo-model-wayfarer",
+      "modelRevision": "demo-model-r1",
+      "scaleX": 0.9,
+      "scaleY": 0.9,
+      "fixture": true,
+      "provenanceIds": []
+    },
+    {
+      "code": "fixture-demo-size-2",
+      "modelId": "demo-model-wayfarer",
+      "modelRevision": "demo-model-r1",
+      "scaleX": 1,
+      "scaleY": 1,
+      "fixture": true,
+      "provenanceIds": []
+    },
+    {
+      "code": "fixture-demo-size-3",
+      "modelId": "demo-model-wayfarer",
+      "modelRevision": "demo-model-r1",
+      "scaleX": 1.1,
+      "scaleY": 1.1,
+      "fixture": true,
+      "provenanceIds": []
+    }
+  ],
+  "anchors": [
+    {
+      "id": "demo-anchor-fixture-demo-size-0-demo-binding-body",
+      "modelId": "demo-model-wayfarer",
+      "modelRevision": "demo-model-r1",
+      "sizeCode": "fixture-demo-size-0",
+      "slot": "top",
+      "anchorName": "demo-center",
+      "assetId": "demo-asset-body",
+      "assetRevision": "demo-r1",
+      "bindingId": "demo-binding-body",
+      "bindingRevision": "demo-r1",
+      "calibrationRevision": "demo-calibration-r1",
+      "x": 0.5,
+      "y": 0.5,
+      "fixture": true,
+      "provenanceIds": []
+    },
+    {
+      "id": "demo-anchor-fixture-demo-size-0-demo-binding-mask-arc",
+      "modelId": "demo-model-wayfarer",
+      "modelRevision": "demo-model-r1",
+      "sizeCode": "fixture-demo-size-0",
+      "slot": "mask",
+      "anchorName": "demo-center",
+      "assetId": "demo-asset-mask-arc",
+      "assetRevision": "demo-r1",
+      "bindingId": "demo-binding-mask-arc",
+      "bindingRevision": "demo-r1",
+      "calibrationRevision": "demo-calibration-r1",
+      "x": 0.5,
+      "y": 0.5,
+      "fixture": true,
+      "provenanceIds": []
+    },
+    {
+      "id": "demo-anchor-fixture-demo-size-0-demo-binding-mask-tile",
+      "modelId": "demo-model-wayfarer",
+      "modelRevision": "demo-model-r1",
+      "sizeCode": "fixture-demo-size-0",
+      "slot": "mask",
+      "anchorName": "demo-center",
+      "assetId": "demo-asset-mask-tile",
+      "assetRevision": "demo-r1",
+      "bindingId": "demo-binding-mask-tile",
+      "bindingRevision": "demo-r1",
+      "calibrationRevision": "demo-calibration-r1",
+      "x": 0.5,
+      "y": 0.5,
+      "fixture": true,
+      "provenanceIds": []
+    },
+    {
+      "id": "demo-anchor-fixture-demo-size-0-demo-binding-hair-round",
+      "modelId": "demo-model-wayfarer",
+      "modelRevision": "demo-model-r1",
+      "sizeCode": "fixture-demo-size-0",
+      "slot": "hair",
+      "anchorName": "demo-center",
+      "assetId": "demo-asset-hair-round",
+      "assetRevision": "demo-r1",
+      "bindingId": "demo-binding-hair-round",
+      "bindingRevision": "demo-r1",
+      "calibrationRevision": "demo-calibration-r1",
+      "x": 0.5,
+      "y": 0.5,
+      "fixture": true,
+      "provenanceIds": []
+    },
+    {
+      "id": "demo-anchor-fixture-demo-size-0-demo-binding-hair-loop",
+      "modelId": "demo-model-wayfarer",
+      "modelRevision": "demo-model-r1",
+      "sizeCode": "fixture-demo-size-0",
+      "slot": "hair",
+      "anchorName": "demo-center",
+      "assetId": "demo-asset-hair-loop",
+      "assetRevision": "demo-r1",
+      "bindingId": "demo-binding-hair-loop",
+      "bindingRevision": "demo-r1",
+      "calibrationRevision": "demo-calibration-r1",
+      "x": 0.5,
+      "y": 0.5,
+      "fixture": true,
+      "provenanceIds": []
+    },
+    {
+      "id": "demo-anchor-fixture-demo-size-0-demo-binding-cape-split-rear",
+      "modelId": "demo-model-wayfarer",
+      "modelRevision": "demo-model-r1",
+      "sizeCode": "fixture-demo-size-0",
+      "slot": "cape",
+      "anchorName": "demo-center",
+      "assetId": "demo-asset-cape-split-rear",
+      "assetRevision": "demo-r1",
+      "bindingId": "demo-binding-cape-split-rear",
+      "bindingRevision": "demo-r1",
+      "calibrationRevision": "demo-calibration-r1",
+      "x": 0.5,
+      "y": 0.5,
+      "fixture": true,
+      "provenanceIds": []
+    },
+    {
+      "id": "demo-anchor-fixture-demo-size-0-demo-binding-cape-split-front",
+      "modelId": "demo-model-wayfarer",
+      "modelRevision": "demo-model-r1",
+      "sizeCode": "fixture-demo-size-0",
+      "slot": "cape",
+      "anchorName": "demo-center",
+      "assetId": "demo-asset-cape-split-front",
+      "assetRevision": "demo-r1",
+      "bindingId": "demo-binding-cape-split-front",
+      "bindingRevision": "demo-r1",
+      "calibrationRevision": "demo-calibration-r1",
+      "x": 0.5,
+      "y": 0.5,
+      "fixture": true,
+      "provenanceIds": []
+    },
+    {
+      "id": "demo-anchor-fixture-demo-size-0-demo-binding-cape-round-rear",
+      "modelId": "demo-model-wayfarer",
+      "modelRevision": "demo-model-r1",
+      "sizeCode": "fixture-demo-size-0",
+      "slot": "cape",
+      "anchorName": "demo-center",
+      "assetId": "demo-asset-cape-round-rear",
+      "assetRevision": "demo-r1",
+      "bindingId": "demo-binding-cape-round-rear",
+      "bindingRevision": "demo-r1",
+      "calibrationRevision": "demo-calibration-r1",
+      "x": 0.5,
+      "y": 0.5,
+      "fixture": true,
+      "provenanceIds": []
+    },
+    {
+      "id": "demo-anchor-fixture-demo-size-0-demo-binding-cape-round-front",
+      "modelId": "demo-model-wayfarer",
+      "modelRevision": "demo-model-r1",
+      "sizeCode": "fixture-demo-size-0",
+      "slot": "cape",
+      "anchorName": "demo-center",
+      "assetId": "demo-asset-cape-round-front",
+      "assetRevision": "demo-r1",
+      "bindingId": "demo-binding-cape-round-front",
+      "bindingRevision": "demo-r1",
+      "calibrationRevision": "demo-calibration-r1",
+      "x": 0.5,
+      "y": 0.5,
+      "fixture": true,
+      "provenanceIds": []
+    },
+    {
+      "id": "demo-anchor-fixture-demo-size-0-demo-binding-top-tunic",
+      "modelId": "demo-model-wayfarer",
+      "modelRevision": "demo-model-r1",
+      "sizeCode": "fixture-demo-size-0",
+      "slot": "top",
+      "anchorName": "demo-center",
+      "assetId": "demo-asset-top-tunic",
+      "assetRevision": "demo-r1",
+      "bindingId": "demo-binding-top-tunic",
+      "bindingRevision": "demo-r1",
+      "calibrationRevision": "demo-calibration-r1",
+      "x": 0.5,
+      "y": 0.5,
+      "fixture": true,
+      "provenanceIds": []
+    },
+    {
+      "id": "demo-anchor-fixture-demo-size-0-demo-binding-top-panel",
+      "modelId": "demo-model-wayfarer",
+      "modelRevision": "demo-model-r1",
+      "sizeCode": "fixture-demo-size-0",
+      "slot": "top",
+      "anchorName": "demo-center",
+      "assetId": "demo-asset-top-panel",
+      "assetRevision": "demo-r1",
+      "bindingId": "demo-binding-top-panel",
+      "bindingRevision": "demo-r1",
+      "calibrationRevision": "demo-calibration-r1",
+      "x": 0.5,
+      "y": 0.5,
+      "fixture": true,
+      "provenanceIds": []
+    },
+    {
+      "id": "demo-anchor-fixture-demo-size-0-demo-binding-bottom-wide",
+      "modelId": "demo-model-wayfarer",
+      "modelRevision": "demo-model-r1",
+      "sizeCode": "fixture-demo-size-0",
+      "slot": "bottom",
+      "anchorName": "demo-center",
+      "assetId": "demo-asset-bottom-wide",
+      "assetRevision": "demo-r1",
+      "bindingId": "demo-binding-bottom-wide",
+      "bindingRevision": "demo-r1",
+      "calibrationRevision": "demo-calibration-r1",
+      "x": 0.5,
+      "y": 0.5,
+      "fixture": true,
+      "provenanceIds": []
+    },
+    {
+      "id": "demo-anchor-fixture-demo-size-0-demo-binding-bottom-taper",
+      "modelId": "demo-model-wayfarer",
+      "modelRevision": "demo-model-r1",
+      "sizeCode": "fixture-demo-size-0",
+      "slot": "bottom",
+      "anchorName": "demo-center",
+      "assetId": "demo-asset-bottom-taper",
+      "assetRevision": "demo-r1",
+      "bindingId": "demo-binding-bottom-taper",
+      "bindingRevision": "demo-r1",
+      "calibrationRevision": "demo-calibration-r1",
+      "x": 0.5,
+      "y": 0.5,
+      "fixture": true,
+      "provenanceIds": []
+    },
+    {
+      "id": "demo-anchor-fixture-demo-size-0-demo-binding-accessory-orbit",
+      "modelId": "demo-model-wayfarer",
+      "modelRevision": "demo-model-r1",
+      "sizeCode": "fixture-demo-size-0",
+      "slot": "accessory",
+      "anchorName": "demo-center",
+      "assetId": "demo-asset-accessory-orbit",
+      "assetRevision": "demo-r1",
+      "bindingId": "demo-binding-accessory-orbit",
+      "bindingRevision": "demo-r1",
+      "calibrationRevision": "demo-calibration-r1",
+      "x": 0.59,
+      "y": 0.45,
+      "fixture": true,
+      "provenanceIds": []
+    },
+    {
+      "id": "demo-anchor-fixture-demo-size-0-demo-binding-accessory-block",
+      "modelId": "demo-model-wayfarer",
+      "modelRevision": "demo-model-r1",
+      "sizeCode": "fixture-demo-size-0",
+      "slot": "accessory",
+      "anchorName": "demo-center",
+      "assetId": "demo-asset-accessory-block",
+      "assetRevision": "demo-r1",
+      "bindingId": "demo-binding-accessory-block",
+      "bindingRevision": "demo-r1",
+      "calibrationRevision": "demo-calibration-r1",
+      "x": 0.59,
+      "y": 0.45,
+      "fixture": true,
+      "provenanceIds": []
+    },
+    {
+      "id": "demo-anchor-fixture-demo-size-1-demo-binding-body",
+      "modelId": "demo-model-wayfarer",
+      "modelRevision": "demo-model-r1",
+      "sizeCode": "fixture-demo-size-1",
+      "slot": "top",
+      "anchorName": "demo-center",
+      "assetId": "demo-asset-body",
+      "assetRevision": "demo-r1",
+      "bindingId": "demo-binding-body",
+      "bindingRevision": "demo-r1",
+      "calibrationRevision": "demo-calibration-r1",
+      "x": 0.5,
+      "y": 0.5,
+      "fixture": true,
+      "provenanceIds": []
+    },
+    {
+      "id": "demo-anchor-fixture-demo-size-1-demo-binding-mask-arc",
+      "modelId": "demo-model-wayfarer",
+      "modelRevision": "demo-model-r1",
+      "sizeCode": "fixture-demo-size-1",
+      "slot": "mask",
+      "anchorName": "demo-center",
+      "assetId": "demo-asset-mask-arc",
+      "assetRevision": "demo-r1",
+      "bindingId": "demo-binding-mask-arc",
+      "bindingRevision": "demo-r1",
+      "calibrationRevision": "demo-calibration-r1",
+      "x": 0.5,
+      "y": 0.5,
+      "fixture": true,
+      "provenanceIds": []
+    },
+    {
+      "id": "demo-anchor-fixture-demo-size-1-demo-binding-mask-tile",
+      "modelId": "demo-model-wayfarer",
+      "modelRevision": "demo-model-r1",
+      "sizeCode": "fixture-demo-size-1",
+      "slot": "mask",
+      "anchorName": "demo-center",
+      "assetId": "demo-asset-mask-tile",
+      "assetRevision": "demo-r1",
+      "bindingId": "demo-binding-mask-tile",
+      "bindingRevision": "demo-r1",
+      "calibrationRevision": "demo-calibration-r1",
+      "x": 0.5,
+      "y": 0.5,
+      "fixture": true,
+      "provenanceIds": []
+    },
+    {
+      "id": "demo-anchor-fixture-demo-size-1-demo-binding-hair-round",
+      "modelId": "demo-model-wayfarer",
+      "modelRevision": "demo-model-r1",
+      "sizeCode": "fixture-demo-size-1",
+      "slot": "hair",
+      "anchorName": "demo-center",
+      "assetId": "demo-asset-hair-round",
+      "assetRevision": "demo-r1",
+      "bindingId": "demo-binding-hair-round",
+      "bindingRevision": "demo-r1",
+      "calibrationRevision": "demo-calibration-r1",
+      "x": 0.5,
+      "y": 0.5,
+      "fixture": true,
+      "provenanceIds": []
+    },
+    {
+      "id": "demo-anchor-fixture-demo-size-1-demo-binding-hair-loop",
+      "modelId": "demo-model-wayfarer",
+      "modelRevision": "demo-model-r1",
+      "sizeCode": "fixture-demo-size-1",
+      "slot": "hair",
+      "anchorName": "demo-center",
+      "assetId": "demo-asset-hair-loop",
+      "assetRevision": "demo-r1",
+      "bindingId": "demo-binding-hair-loop",
+      "bindingRevision": "demo-r1",
+      "calibrationRevision": "demo-calibration-r1",
+      "x": 0.5,
+      "y": 0.5,
+      "fixture": true,
+      "provenanceIds": []
+    },
+    {
+      "id": "demo-anchor-fixture-demo-size-1-demo-binding-cape-split-rear",
+      "modelId": "demo-model-wayfarer",
+      "modelRevision": "demo-model-r1",
+      "sizeCode": "fixture-demo-size-1",
+      "slot": "cape",
+      "anchorName": "demo-center",
+      "assetId": "demo-asset-cape-split-rear",
+      "assetRevision": "demo-r1",
+      "bindingId": "demo-binding-cape-split-rear",
+      "bindingRevision": "demo-r1",
+      "calibrationRevision": "demo-calibration-r1",
+      "x": 0.5,
+      "y": 0.5,
+      "fixture": true,
+      "provenanceIds": []
+    },
+    {
+      "id": "demo-anchor-fixture-demo-size-1-demo-binding-cape-split-front",
+      "modelId": "demo-model-wayfarer",
+      "modelRevision": "demo-model-r1",
+      "sizeCode": "fixture-demo-size-1",
+      "slot": "cape",
+      "anchorName": "demo-center",
+      "assetId": "demo-asset-cape-split-front",
+      "assetRevision": "demo-r1",
+      "bindingId": "demo-binding-cape-split-front",
+      "bindingRevision": "demo-r1",
+      "calibrationRevision": "demo-calibration-r1",
+      "x": 0.5,
+      "y": 0.5,
+      "fixture": true,
+      "provenanceIds": []
+    },
+    {
+      "id": "demo-anchor-fixture-demo-size-1-demo-binding-cape-round-rear",
+      "modelId": "demo-model-wayfarer",
+      "modelRevision": "demo-model-r1",
+      "sizeCode": "fixture-demo-size-1",
+      "slot": "cape",
+      "anchorName": "demo-center",
+      "assetId": "demo-asset-cape-round-rear",
+      "assetRevision": "demo-r1",
+      "bindingId": "demo-binding-cape-round-rear",
+      "bindingRevision": "demo-r1",
+      "calibrationRevision": "demo-calibration-r1",
+      "x": 0.5,
+      "y": 0.5,
+      "fixture": true,
+      "provenanceIds": []
+    },
+    {
+      "id": "demo-anchor-fixture-demo-size-1-demo-binding-cape-round-front",
+      "modelId": "demo-model-wayfarer",
+      "modelRevision": "demo-model-r1",
+      "sizeCode": "fixture-demo-size-1",
+      "slot": "cape",
+      "anchorName": "demo-center",
+      "assetId": "demo-asset-cape-round-front",
+      "assetRevision": "demo-r1",
+      "bindingId": "demo-binding-cape-round-front",
+      "bindingRevision": "demo-r1",
+      "calibrationRevision": "demo-calibration-r1",
+      "x": 0.5,
+      "y": 0.5,
+      "fixture": true,
+      "provenanceIds": []
+    },
+    {
+      "id": "demo-anchor-fixture-demo-size-1-demo-binding-top-tunic",
+      "modelId": "demo-model-wayfarer",
+      "modelRevision": "demo-model-r1",
+      "sizeCode": "fixture-demo-size-1",
+      "slot": "top",
+      "anchorName": "demo-center",
+      "assetId": "demo-asset-top-tunic",
+      "assetRevision": "demo-r1",
+      "bindingId": "demo-binding-top-tunic",
+      "bindingRevision": "demo-r1",
+      "calibrationRevision": "demo-calibration-r1",
+      "x": 0.5,
+      "y": 0.5,
+      "fixture": true,
+      "provenanceIds": []
+    },
+    {
+      "id": "demo-anchor-fixture-demo-size-1-demo-binding-top-panel",
+      "modelId": "demo-model-wayfarer",
+      "modelRevision": "demo-model-r1",
+      "sizeCode": "fixture-demo-size-1",
+      "slot": "top",
+      "anchorName": "demo-center",
+      "assetId": "demo-asset-top-panel",
+      "assetRevision": "demo-r1",
+      "bindingId": "demo-binding-top-panel",
+      "bindingRevision": "demo-r1",
+      "calibrationRevision": "demo-calibration-r1",
+      "x": 0.5,
+      "y": 0.5,
+      "fixture": true,
+      "provenanceIds": []
+    },
+    {
+      "id": "demo-anchor-fixture-demo-size-1-demo-binding-bottom-wide",
+      "modelId": "demo-model-wayfarer",
+      "modelRevision": "demo-model-r1",
+      "sizeCode": "fixture-demo-size-1",
+      "slot": "bottom",
+      "anchorName": "demo-center",
+      "assetId": "demo-asset-bottom-wide",
+      "assetRevision": "demo-r1",
+      "bindingId": "demo-binding-bottom-wide",
+      "bindingRevision": "demo-r1",
+      "calibrationRevision": "demo-calibration-r1",
+      "x": 0.5,
+      "y": 0.5,
+      "fixture": true,
+      "provenanceIds": []
+    },
+    {
+      "id": "demo-anchor-fixture-demo-size-1-demo-binding-bottom-taper",
+      "modelId": "demo-model-wayfarer",
+      "modelRevision": "demo-model-r1",
+      "sizeCode": "fixture-demo-size-1",
+      "slot": "bottom",
+      "anchorName": "demo-center",
+      "assetId": "demo-asset-bottom-taper",
+      "assetRevision": "demo-r1",
+      "bindingId": "demo-binding-bottom-taper",
+      "bindingRevision": "demo-r1",
+      "calibrationRevision": "demo-calibration-r1",
+      "x": 0.5,
+      "y": 0.5,
+      "fixture": true,
+      "provenanceIds": []
+    },
+    {
+      "id": "demo-anchor-fixture-demo-size-1-demo-binding-accessory-orbit",
+      "modelId": "demo-model-wayfarer",
+      "modelRevision": "demo-model-r1",
+      "sizeCode": "fixture-demo-size-1",
+      "slot": "accessory",
+      "anchorName": "demo-center",
+      "assetId": "demo-asset-accessory-orbit",
+      "assetRevision": "demo-r1",
+      "bindingId": "demo-binding-accessory-orbit",
+      "bindingRevision": "demo-r1",
+      "calibrationRevision": "demo-calibration-r1",
+      "x": 0.59,
+      "y": 0.45,
+      "fixture": true,
+      "provenanceIds": []
+    },
+    {
+      "id": "demo-anchor-fixture-demo-size-1-demo-binding-accessory-block",
+      "modelId": "demo-model-wayfarer",
+      "modelRevision": "demo-model-r1",
+      "sizeCode": "fixture-demo-size-1",
+      "slot": "accessory",
+      "anchorName": "demo-center",
+      "assetId": "demo-asset-accessory-block",
+      "assetRevision": "demo-r1",
+      "bindingId": "demo-binding-accessory-block",
+      "bindingRevision": "demo-r1",
+      "calibrationRevision": "demo-calibration-r1",
+      "x": 0.59,
+      "y": 0.45,
+      "fixture": true,
+      "provenanceIds": []
+    },
+    {
+      "id": "demo-anchor-fixture-demo-size-2-demo-binding-body",
+      "modelId": "demo-model-wayfarer",
+      "modelRevision": "demo-model-r1",
+      "sizeCode": "fixture-demo-size-2",
+      "slot": "top",
+      "anchorName": "demo-center",
+      "assetId": "demo-asset-body",
+      "assetRevision": "demo-r1",
+      "bindingId": "demo-binding-body",
+      "bindingRevision": "demo-r1",
+      "calibrationRevision": "demo-calibration-r1",
+      "x": 0.5,
+      "y": 0.5,
+      "fixture": true,
+      "provenanceIds": []
+    },
+    {
+      "id": "demo-anchor-fixture-demo-size-2-demo-binding-mask-arc",
+      "modelId": "demo-model-wayfarer",
+      "modelRevision": "demo-model-r1",
+      "sizeCode": "fixture-demo-size-2",
+      "slot": "mask",
+      "anchorName": "demo-center",
+      "assetId": "demo-asset-mask-arc",
+      "assetRevision": "demo-r1",
+      "bindingId": "demo-binding-mask-arc",
+      "bindingRevision": "demo-r1",
+      "calibrationRevision": "demo-calibration-r1",
+      "x": 0.5,
+      "y": 0.5,
+      "fixture": true,
+      "provenanceIds": []
+    },
+    {
+      "id": "demo-anchor-fixture-demo-size-2-demo-binding-mask-tile",
+      "modelId": "demo-model-wayfarer",
+      "modelRevision": "demo-model-r1",
+      "sizeCode": "fixture-demo-size-2",
+      "slot": "mask",
+      "anchorName": "demo-center",
+      "assetId": "demo-asset-mask-tile",
+      "assetRevision": "demo-r1",
+      "bindingId": "demo-binding-mask-tile",
+      "bindingRevision": "demo-r1",
+      "calibrationRevision": "demo-calibration-r1",
+      "x": 0.5,
+      "y": 0.5,
+      "fixture": true,
+      "provenanceIds": []
+    },
+    {
+      "id": "demo-anchor-fixture-demo-size-2-demo-binding-hair-round",
+      "modelId": "demo-model-wayfarer",
+      "modelRevision": "demo-model-r1",
+      "sizeCode": "fixture-demo-size-2",
+      "slot": "hair",
+      "anchorName": "demo-center",
+      "assetId": "demo-asset-hair-round",
+      "assetRevision": "demo-r1",
+      "bindingId": "demo-binding-hair-round",
+      "bindingRevision": "demo-r1",
+      "calibrationRevision": "demo-calibration-r1",
+      "x": 0.5,
+      "y": 0.5,
+      "fixture": true,
+      "provenanceIds": []
+    },
+    {
+      "id": "demo-anchor-fixture-demo-size-2-demo-binding-hair-loop",
+      "modelId": "demo-model-wayfarer",
+      "modelRevision": "demo-model-r1",
+      "sizeCode": "fixture-demo-size-2",
+      "slot": "hair",
+      "anchorName": "demo-center",
+      "assetId": "demo-asset-hair-loop",
+      "assetRevision": "demo-r1",
+      "bindingId": "demo-binding-hair-loop",
+      "bindingRevision": "demo-r1",
+      "calibrationRevision": "demo-calibration-r1",
+      "x": 0.5,
+      "y": 0.5,
+      "fixture": true,
+      "provenanceIds": []
+    },
+    {
+      "id": "demo-anchor-fixture-demo-size-2-demo-binding-cape-split-rear",
+      "modelId": "demo-model-wayfarer",
+      "modelRevision": "demo-model-r1",
+      "sizeCode": "fixture-demo-size-2",
+      "slot": "cape",
+      "anchorName": "demo-center",
+      "assetId": "demo-asset-cape-split-rear",
+      "assetRevision": "demo-r1",
+      "bindingId": "demo-binding-cape-split-rear",
+      "bindingRevision": "demo-r1",
+      "calibrationRevision": "demo-calibration-r1",
+      "x": 0.5,
+      "y": 0.5,
+      "fixture": true,
+      "provenanceIds": []
+    },
+    {
+      "id": "demo-anchor-fixture-demo-size-2-demo-binding-cape-split-front",
+      "modelId": "demo-model-wayfarer",
+      "modelRevision": "demo-model-r1",
+      "sizeCode": "fixture-demo-size-2",
+      "slot": "cape",
+      "anchorName": "demo-center",
+      "assetId": "demo-asset-cape-split-front",
+      "assetRevision": "demo-r1",
+      "bindingId": "demo-binding-cape-split-front",
+      "bindingRevision": "demo-r1",
+      "calibrationRevision": "demo-calibration-r1",
+      "x": 0.5,
+      "y": 0.5,
+      "fixture": true,
+      "provenanceIds": []
+    },
+    {
+      "id": "demo-anchor-fixture-demo-size-2-demo-binding-cape-round-rear",
+      "modelId": "demo-model-wayfarer",
+      "modelRevision": "demo-model-r1",
+      "sizeCode": "fixture-demo-size-2",
+      "slot": "cape",
+      "anchorName": "demo-center",
+      "assetId": "demo-asset-cape-round-rear",
+      "assetRevision": "demo-r1",
+      "bindingId": "demo-binding-cape-round-rear",
+      "bindingRevision": "demo-r1",
+      "calibrationRevision": "demo-calibration-r1",
+      "x": 0.5,
+      "y": 0.5,
+      "fixture": true,
+      "provenanceIds": []
+    },
+    {
+      "id": "demo-anchor-fixture-demo-size-2-demo-binding-cape-round-front",
+      "modelId": "demo-model-wayfarer",
+      "modelRevision": "demo-model-r1",
+      "sizeCode": "fixture-demo-size-2",
+      "slot": "cape",
+      "anchorName": "demo-center",
+      "assetId": "demo-asset-cape-round-front",
+      "assetRevision": "demo-r1",
+      "bindingId": "demo-binding-cape-round-front",
+      "bindingRevision": "demo-r1",
+      "calibrationRevision": "demo-calibration-r1",
+      "x": 0.5,
+      "y": 0.5,
+      "fixture": true,
+      "provenanceIds": []
+    },
+    {
+      "id": "demo-anchor-fixture-demo-size-2-demo-binding-top-tunic",
+      "modelId": "demo-model-wayfarer",
+      "modelRevision": "demo-model-r1",
+      "sizeCode": "fixture-demo-size-2",
+      "slot": "top",
+      "anchorName": "demo-center",
+      "assetId": "demo-asset-top-tunic",
+      "assetRevision": "demo-r1",
+      "bindingId": "demo-binding-top-tunic",
+      "bindingRevision": "demo-r1",
+      "calibrationRevision": "demo-calibration-r1",
+      "x": 0.5,
+      "y": 0.5,
+      "fixture": true,
+      "provenanceIds": []
+    },
+    {
+      "id": "demo-anchor-fixture-demo-size-2-demo-binding-top-panel",
+      "modelId": "demo-model-wayfarer",
+      "modelRevision": "demo-model-r1",
+      "sizeCode": "fixture-demo-size-2",
+      "slot": "top",
+      "anchorName": "demo-center",
+      "assetId": "demo-asset-top-panel",
+      "assetRevision": "demo-r1",
+      "bindingId": "demo-binding-top-panel",
+      "bindingRevision": "demo-r1",
+      "calibrationRevision": "demo-calibration-r1",
+      "x": 0.5,
+      "y": 0.5,
+      "fixture": true,
+      "provenanceIds": []
+    },
+    {
+      "id": "demo-anchor-fixture-demo-size-2-demo-binding-bottom-wide",
+      "modelId": "demo-model-wayfarer",
+      "modelRevision": "demo-model-r1",
+      "sizeCode": "fixture-demo-size-2",
+      "slot": "bottom",
+      "anchorName": "demo-center",
+      "assetId": "demo-asset-bottom-wide",
+      "assetRevision": "demo-r1",
+      "bindingId": "demo-binding-bottom-wide",
+      "bindingRevision": "demo-r1",
+      "calibrationRevision": "demo-calibration-r1",
+      "x": 0.5,
+      "y": 0.5,
+      "fixture": true,
+      "provenanceIds": []
+    },
+    {
+      "id": "demo-anchor-fixture-demo-size-2-demo-binding-bottom-taper",
+      "modelId": "demo-model-wayfarer",
+      "modelRevision": "demo-model-r1",
+      "sizeCode": "fixture-demo-size-2",
+      "slot": "bottom",
+      "anchorName": "demo-center",
+      "assetId": "demo-asset-bottom-taper",
+      "assetRevision": "demo-r1",
+      "bindingId": "demo-binding-bottom-taper",
+      "bindingRevision": "demo-r1",
+      "calibrationRevision": "demo-calibration-r1",
+      "x": 0.5,
+      "y": 0.5,
+      "fixture": true,
+      "provenanceIds": []
+    },
+    {
+      "id": "demo-anchor-fixture-demo-size-2-demo-binding-accessory-orbit",
+      "modelId": "demo-model-wayfarer",
+      "modelRevision": "demo-model-r1",
+      "sizeCode": "fixture-demo-size-2",
+      "slot": "accessory",
+      "anchorName": "demo-center",
+      "assetId": "demo-asset-accessory-orbit",
+      "assetRevision": "demo-r1",
+      "bindingId": "demo-binding-accessory-orbit",
+      "bindingRevision": "demo-r1",
+      "calibrationRevision": "demo-calibration-r1",
+      "x": 0.59,
+      "y": 0.45,
+      "fixture": true,
+      "provenanceIds": []
+    },
+    {
+      "id": "demo-anchor-fixture-demo-size-2-demo-binding-accessory-block",
+      "modelId": "demo-model-wayfarer",
+      "modelRevision": "demo-model-r1",
+      "sizeCode": "fixture-demo-size-2",
+      "slot": "accessory",
+      "anchorName": "demo-center",
+      "assetId": "demo-asset-accessory-block",
+      "assetRevision": "demo-r1",
+      "bindingId": "demo-binding-accessory-block",
+      "bindingRevision": "demo-r1",
+      "calibrationRevision": "demo-calibration-r1",
+      "x": 0.59,
+      "y": 0.45,
+      "fixture": true,
+      "provenanceIds": []
+    },
+    {
+      "id": "demo-anchor-fixture-demo-size-3-demo-binding-body",
+      "modelId": "demo-model-wayfarer",
+      "modelRevision": "demo-model-r1",
+      "sizeCode": "fixture-demo-size-3",
+      "slot": "top",
+      "anchorName": "demo-center",
+      "assetId": "demo-asset-body",
+      "assetRevision": "demo-r1",
+      "bindingId": "demo-binding-body",
+      "bindingRevision": "demo-r1",
+      "calibrationRevision": "demo-calibration-r1",
+      "x": 0.5,
+      "y": 0.5,
+      "fixture": true,
+      "provenanceIds": []
+    },
+    {
+      "id": "demo-anchor-fixture-demo-size-3-demo-binding-mask-arc",
+      "modelId": "demo-model-wayfarer",
+      "modelRevision": "demo-model-r1",
+      "sizeCode": "fixture-demo-size-3",
+      "slot": "mask",
+      "anchorName": "demo-center",
+      "assetId": "demo-asset-mask-arc",
+      "assetRevision": "demo-r1",
+      "bindingId": "demo-binding-mask-arc",
+      "bindingRevision": "demo-r1",
+      "calibrationRevision": "demo-calibration-r1",
+      "x": 0.5,
+      "y": 0.5,
+      "fixture": true,
+      "provenanceIds": []
+    },
+    {
+      "id": "demo-anchor-fixture-demo-size-3-demo-binding-mask-tile",
+      "modelId": "demo-model-wayfarer",
+      "modelRevision": "demo-model-r1",
+      "sizeCode": "fixture-demo-size-3",
+      "slot": "mask",
+      "anchorName": "demo-center",
+      "assetId": "demo-asset-mask-tile",
+      "assetRevision": "demo-r1",
+      "bindingId": "demo-binding-mask-tile",
+      "bindingRevision": "demo-r1",
+      "calibrationRevision": "demo-calibration-r1",
+      "x": 0.5,
+      "y": 0.5,
+      "fixture": true,
+      "provenanceIds": []
+    },
+    {
+      "id": "demo-anchor-fixture-demo-size-3-demo-binding-hair-round",
+      "modelId": "demo-model-wayfarer",
+      "modelRevision": "demo-model-r1",
+      "sizeCode": "fixture-demo-size-3",
+      "slot": "hair",
+      "anchorName": "demo-center",
+      "assetId": "demo-asset-hair-round",
+      "assetRevision": "demo-r1",
+      "bindingId": "demo-binding-hair-round",
+      "bindingRevision": "demo-r1",
+      "calibrationRevision": "demo-calibration-r1",
+      "x": 0.5,
+      "y": 0.5,
+      "fixture": true,
+      "provenanceIds": []
+    },
+    {
+      "id": "demo-anchor-fixture-demo-size-3-demo-binding-hair-loop",
+      "modelId": "demo-model-wayfarer",
+      "modelRevision": "demo-model-r1",
+      "sizeCode": "fixture-demo-size-3",
+      "slot": "hair",
+      "anchorName": "demo-center",
+      "assetId": "demo-asset-hair-loop",
+      "assetRevision": "demo-r1",
+      "bindingId": "demo-binding-hair-loop",
+      "bindingRevision": "demo-r1",
+      "calibrationRevision": "demo-calibration-r1",
+      "x": 0.5,
+      "y": 0.5,
+      "fixture": true,
+      "provenanceIds": []
+    },
+    {
+      "id": "demo-anchor-fixture-demo-size-3-demo-binding-cape-split-rear",
+      "modelId": "demo-model-wayfarer",
+      "modelRevision": "demo-model-r1",
+      "sizeCode": "fixture-demo-size-3",
+      "slot": "cape",
+      "anchorName": "demo-center",
+      "assetId": "demo-asset-cape-split-rear",
+      "assetRevision": "demo-r1",
+      "bindingId": "demo-binding-cape-split-rear",
+      "bindingRevision": "demo-r1",
+      "calibrationRevision": "demo-calibration-r1",
+      "x": 0.5,
+      "y": 0.5,
+      "fixture": true,
+      "provenanceIds": []
+    },
+    {
+      "id": "demo-anchor-fixture-demo-size-3-demo-binding-cape-split-front",
+      "modelId": "demo-model-wayfarer",
+      "modelRevision": "demo-model-r1",
+      "sizeCode": "fixture-demo-size-3",
+      "slot": "cape",
+      "anchorName": "demo-center",
+      "assetId": "demo-asset-cape-split-front",
+      "assetRevision": "demo-r1",
+      "bindingId": "demo-binding-cape-split-front",
+      "bindingRevision": "demo-r1",
+      "calibrationRevision": "demo-calibration-r1",
+      "x": 0.5,
+      "y": 0.5,
+      "fixture": true,
+      "provenanceIds": []
+    },
+    {
+      "id": "demo-anchor-fixture-demo-size-3-demo-binding-cape-round-rear",
+      "modelId": "demo-model-wayfarer",
+      "modelRevision": "demo-model-r1",
+      "sizeCode": "fixture-demo-size-3",
+      "slot": "cape",
+      "anchorName": "demo-center",
+      "assetId": "demo-asset-cape-round-rear",
+      "assetRevision": "demo-r1",
+      "bindingId": "demo-binding-cape-round-rear",
+      "bindingRevision": "demo-r1",
+      "calibrationRevision": "demo-calibration-r1",
+      "x": 0.5,
+      "y": 0.5,
+      "fixture": true,
+      "provenanceIds": []
+    },
+    {
+      "id": "demo-anchor-fixture-demo-size-3-demo-binding-cape-round-front",
+      "modelId": "demo-model-wayfarer",
+      "modelRevision": "demo-model-r1",
+      "sizeCode": "fixture-demo-size-3",
+      "slot": "cape",
+      "anchorName": "demo-center",
+      "assetId": "demo-asset-cape-round-front",
+      "assetRevision": "demo-r1",
+      "bindingId": "demo-binding-cape-round-front",
+      "bindingRevision": "demo-r1",
+      "calibrationRevision": "demo-calibration-r1",
+      "x": 0.5,
+      "y": 0.5,
+      "fixture": true,
+      "provenanceIds": []
+    },
+    {
+      "id": "demo-anchor-fixture-demo-size-3-demo-binding-top-tunic",
+      "modelId": "demo-model-wayfarer",
+      "modelRevision": "demo-model-r1",
+      "sizeCode": "fixture-demo-size-3",
+      "slot": "top",
+      "anchorName": "demo-center",
+      "assetId": "demo-asset-top-tunic",
+      "assetRevision": "demo-r1",
+      "bindingId": "demo-binding-top-tunic",
+      "bindingRevision": "demo-r1",
+      "calibrationRevision": "demo-calibration-r1",
+      "x": 0.5,
+      "y": 0.5,
+      "fixture": true,
+      "provenanceIds": []
+    },
+    {
+      "id": "demo-anchor-fixture-demo-size-3-demo-binding-top-panel",
+      "modelId": "demo-model-wayfarer",
+      "modelRevision": "demo-model-r1",
+      "sizeCode": "fixture-demo-size-3",
+      "slot": "top",
+      "anchorName": "demo-center",
+      "assetId": "demo-asset-top-panel",
+      "assetRevision": "demo-r1",
+      "bindingId": "demo-binding-top-panel",
+      "bindingRevision": "demo-r1",
+      "calibrationRevision": "demo-calibration-r1",
+      "x": 0.5,
+      "y": 0.5,
+      "fixture": true,
+      "provenanceIds": []
+    },
+    {
+      "id": "demo-anchor-fixture-demo-size-3-demo-binding-bottom-wide",
+      "modelId": "demo-model-wayfarer",
+      "modelRevision": "demo-model-r1",
+      "sizeCode": "fixture-demo-size-3",
+      "slot": "bottom",
+      "anchorName": "demo-center",
+      "assetId": "demo-asset-bottom-wide",
+      "assetRevision": "demo-r1",
+      "bindingId": "demo-binding-bottom-wide",
+      "bindingRevision": "demo-r1",
+      "calibrationRevision": "demo-calibration-r1",
+      "x": 0.5,
+      "y": 0.5,
+      "fixture": true,
+      "provenanceIds": []
+    },
+    {
+      "id": "demo-anchor-fixture-demo-size-3-demo-binding-bottom-taper",
+      "modelId": "demo-model-wayfarer",
+      "modelRevision": "demo-model-r1",
+      "sizeCode": "fixture-demo-size-3",
+      "slot": "bottom",
+      "anchorName": "demo-center",
+      "assetId": "demo-asset-bottom-taper",
+      "assetRevision": "demo-r1",
+      "bindingId": "demo-binding-bottom-taper",
+      "bindingRevision": "demo-r1",
+      "calibrationRevision": "demo-calibration-r1",
+      "x": 0.5,
+      "y": 0.5,
+      "fixture": true,
+      "provenanceIds": []
+    },
+    {
+      "id": "demo-anchor-fixture-demo-size-3-demo-binding-accessory-orbit",
+      "modelId": "demo-model-wayfarer",
+      "modelRevision": "demo-model-r1",
+      "sizeCode": "fixture-demo-size-3",
+      "slot": "accessory",
+      "anchorName": "demo-center",
+      "assetId": "demo-asset-accessory-orbit",
+      "assetRevision": "demo-r1",
+      "bindingId": "demo-binding-accessory-orbit",
+      "bindingRevision": "demo-r1",
+      "calibrationRevision": "demo-calibration-r1",
+      "x": 0.59,
+      "y": 0.45,
+      "fixture": true,
+      "provenanceIds": []
+    },
+    {
+      "id": "demo-anchor-fixture-demo-size-3-demo-binding-accessory-block",
+      "modelId": "demo-model-wayfarer",
+      "modelRevision": "demo-model-r1",
+      "sizeCode": "fixture-demo-size-3",
+      "slot": "accessory",
+      "anchorName": "demo-center",
+      "assetId": "demo-asset-accessory-block",
+      "assetRevision": "demo-r1",
+      "bindingId": "demo-binding-accessory-block",
+      "bindingRevision": "demo-r1",
+      "calibrationRevision": "demo-calibration-r1",
+      "x": 0.59,
+      "y": 0.45,
+      "fixture": true,
+      "provenanceIds": []
+    }
+  ],
+  "bindings": [
+    {
+      "id": "demo-binding-body",
+      "revision": "demo-r1",
+      "itemId": null,
+      "modelId": "demo-model-wayfarer",
+      "modelRevision": "demo-model-r1",
+      "slot": "top",
+      "anchorName": "demo-center",
+      "assetId": "demo-asset-body",
+      "assetRevision": "demo-r1",
+      "pivotX": 0.5,
+      "pivotY": 0.5,
+      "scale": 1,
+      "rotationDeg": 0,
+      "zIndex": 0,
+      "calibrationRevision": "demo-calibration-r1",
+      "fixture": true,
+      "provenanceIds": []
+    },
+    {
+      "id": "demo-binding-mask-arc",
+      "revision": "demo-r1",
+      "itemId": "demo-item-mask-arc",
+      "modelId": "demo-model-wayfarer",
+      "modelRevision": "demo-model-r1",
+      "slot": "mask",
+      "anchorName": "demo-center",
+      "assetId": "demo-asset-mask-arc",
+      "assetRevision": "demo-r1",
+      "pivotX": 0.5,
+      "pivotY": 0.5,
+      "scale": 1,
+      "rotationDeg": 0,
+      "zIndex": 50,
+      "calibrationRevision": "demo-calibration-r1",
+      "fixture": true,
+      "provenanceIds": []
+    },
+    {
+      "id": "demo-binding-mask-tile",
+      "revision": "demo-r1",
+      "itemId": "demo-item-mask-tile",
+      "modelId": "demo-model-wayfarer",
+      "modelRevision": "demo-model-r1",
+      "slot": "mask",
+      "anchorName": "demo-center",
+      "assetId": "demo-asset-mask-tile",
+      "assetRevision": "demo-r1",
+      "pivotX": 0.5,
+      "pivotY": 0.5,
+      "scale": 1,
+      "rotationDeg": 0,
+      "zIndex": 50,
+      "calibrationRevision": "demo-calibration-r1",
+      "fixture": true,
+      "provenanceIds": []
+    },
+    {
+      "id": "demo-binding-hair-round",
+      "revision": "demo-r1",
+      "itemId": "demo-item-hair-round",
+      "modelId": "demo-model-wayfarer",
+      "modelRevision": "demo-model-r1",
+      "slot": "hair",
+      "anchorName": "demo-center",
+      "assetId": "demo-asset-hair-round",
+      "assetRevision": "demo-r1",
+      "pivotX": 0.5,
+      "pivotY": 0.5,
+      "scale": 1,
+      "rotationDeg": 0,
+      "zIndex": 40,
+      "calibrationRevision": "demo-calibration-r1",
+      "fixture": true,
+      "provenanceIds": []
+    },
+    {
+      "id": "demo-binding-hair-loop",
+      "revision": "demo-r1",
+      "itemId": "demo-item-hair-loop",
+      "modelId": "demo-model-wayfarer",
+      "modelRevision": "demo-model-r1",
+      "slot": "hair",
+      "anchorName": "demo-center",
+      "assetId": "demo-asset-hair-loop",
+      "assetRevision": "demo-r1",
+      "pivotX": 0.5,
+      "pivotY": 0.5,
+      "scale": 1,
+      "rotationDeg": 0,
+      "zIndex": 40,
+      "calibrationRevision": "demo-calibration-r1",
+      "fixture": true,
+      "provenanceIds": []
+    },
+    {
+      "id": "demo-binding-cape-split-rear",
+      "revision": "demo-r1",
+      "itemId": "demo-item-cape-split",
+      "modelId": "demo-model-wayfarer",
+      "modelRevision": "demo-model-r1",
+      "slot": "cape",
+      "anchorName": "demo-center",
+      "assetId": "demo-asset-cape-split-rear",
+      "assetRevision": "demo-r1",
+      "pivotX": 0.5,
+      "pivotY": 0.5,
+      "scale": 1,
+      "rotationDeg": 0,
+      "zIndex": -10,
+      "calibrationRevision": "demo-calibration-r1",
+      "fixture": true,
+      "provenanceIds": []
+    },
+    {
+      "id": "demo-binding-cape-split-front",
+      "revision": "demo-r1",
+      "itemId": "demo-item-cape-split",
+      "modelId": "demo-model-wayfarer",
+      "modelRevision": "demo-model-r1",
+      "slot": "cape",
+      "anchorName": "demo-center",
+      "assetId": "demo-asset-cape-split-front",
+      "assetRevision": "demo-r1",
+      "pivotX": 0.5,
+      "pivotY": 0.5,
+      "scale": 1,
+      "rotationDeg": 0,
+      "zIndex": 30,
+      "calibrationRevision": "demo-calibration-r1",
+      "fixture": true,
+      "provenanceIds": []
+    },
+    {
+      "id": "demo-binding-cape-round-rear",
+      "revision": "demo-r1",
+      "itemId": "demo-item-cape-round",
+      "modelId": "demo-model-wayfarer",
+      "modelRevision": "demo-model-r1",
+      "slot": "cape",
+      "anchorName": "demo-center",
+      "assetId": "demo-asset-cape-round-rear",
+      "assetRevision": "demo-r1",
+      "pivotX": 0.5,
+      "pivotY": 0.5,
+      "scale": 1,
+      "rotationDeg": 0,
+      "zIndex": -10,
+      "calibrationRevision": "demo-calibration-r1",
+      "fixture": true,
+      "provenanceIds": []
+    },
+    {
+      "id": "demo-binding-cape-round-front",
+      "revision": "demo-r1",
+      "itemId": "demo-item-cape-round",
+      "modelId": "demo-model-wayfarer",
+      "modelRevision": "demo-model-r1",
+      "slot": "cape",
+      "anchorName": "demo-center",
+      "assetId": "demo-asset-cape-round-front",
+      "assetRevision": "demo-r1",
+      "pivotX": 0.5,
+      "pivotY": 0.5,
+      "scale": 1,
+      "rotationDeg": 0,
+      "zIndex": 30,
+      "calibrationRevision": "demo-calibration-r1",
+      "fixture": true,
+      "provenanceIds": []
+    },
+    {
+      "id": "demo-binding-top-tunic",
+      "revision": "demo-r1",
+      "itemId": "demo-item-top-tunic",
+      "modelId": "demo-model-wayfarer",
+      "modelRevision": "demo-model-r1",
+      "slot": "top",
+      "anchorName": "demo-center",
+      "assetId": "demo-asset-top-tunic",
+      "assetRevision": "demo-r1",
+      "pivotX": 0.5,
+      "pivotY": 0.5,
+      "scale": 1,
+      "rotationDeg": 0,
+      "zIndex": 20,
+      "calibrationRevision": "demo-calibration-r1",
+      "fixture": true,
+      "provenanceIds": []
+    },
+    {
+      "id": "demo-binding-top-panel",
+      "revision": "demo-r1",
+      "itemId": "demo-item-top-panel",
+      "modelId": "demo-model-wayfarer",
+      "modelRevision": "demo-model-r1",
+      "slot": "top",
+      "anchorName": "demo-center",
+      "assetId": "demo-asset-top-panel",
+      "assetRevision": "demo-r1",
+      "pivotX": 0.5,
+      "pivotY": 0.5,
+      "scale": 1,
+      "rotationDeg": 0,
+      "zIndex": 20,
+      "calibrationRevision": "demo-calibration-r1",
+      "fixture": true,
+      "provenanceIds": []
+    },
+    {
+      "id": "demo-binding-bottom-wide",
+      "revision": "demo-r1",
+      "itemId": "demo-item-bottom-wide",
+      "modelId": "demo-model-wayfarer",
+      "modelRevision": "demo-model-r1",
+      "slot": "bottom",
+      "anchorName": "demo-center",
+      "assetId": "demo-asset-bottom-wide",
+      "assetRevision": "demo-r1",
+      "pivotX": 0.5,
+      "pivotY": 0.5,
+      "scale": 1,
+      "rotationDeg": 0,
+      "zIndex": 10,
+      "calibrationRevision": "demo-calibration-r1",
+      "fixture": true,
+      "provenanceIds": []
+    },
+    {
+      "id": "demo-binding-bottom-taper",
+      "revision": "demo-r1",
+      "itemId": "demo-item-bottom-taper",
+      "modelId": "demo-model-wayfarer",
+      "modelRevision": "demo-model-r1",
+      "slot": "bottom",
+      "anchorName": "demo-center",
+      "assetId": "demo-asset-bottom-taper",
+      "assetRevision": "demo-r1",
+      "pivotX": 0.5,
+      "pivotY": 0.5,
+      "scale": 1,
+      "rotationDeg": 0,
+      "zIndex": 10,
+      "calibrationRevision": "demo-calibration-r1",
+      "fixture": true,
+      "provenanceIds": []
+    },
+    {
+      "id": "demo-binding-accessory-orbit",
+      "revision": "demo-r1",
+      "itemId": "demo-item-accessory-orbit",
+      "modelId": "demo-model-wayfarer",
+      "modelRevision": "demo-model-r1",
+      "slot": "accessory",
+      "anchorName": "demo-center",
+      "assetId": "demo-asset-accessory-orbit",
+      "assetRevision": "demo-r1",
+      "pivotX": 0.5,
+      "pivotY": 0.5,
+      "scale": 1,
+      "rotationDeg": 0,
+      "zIndex": 60,
+      "calibrationRevision": "demo-calibration-r1",
+      "fixture": true,
+      "provenanceIds": []
+    },
+    {
+      "id": "demo-binding-accessory-block",
+      "revision": "demo-r1",
+      "itemId": "demo-item-accessory-block",
+      "modelId": "demo-model-wayfarer",
+      "modelRevision": "demo-model-r1",
+      "slot": "accessory",
+      "anchorName": "demo-center",
+      "assetId": "demo-asset-accessory-block",
+      "assetRevision": "demo-r1",
+      "pivotX": 0.5,
+      "pivotY": 0.5,
+      "scale": 1,
+      "rotationDeg": 0,
+      "zIndex": 60,
+      "calibrationRevision": "demo-calibration-r1",
+      "fixture": true,
+      "provenanceIds": []
+    }
+  ],
+  "rules": [],
+  "geometry": [
+    {
+      "assetId": "demo-asset-body",
+      "paths": [
+        {
+          "d": "M .445 .355 Q .5 .335 .555 .355 Q .59 .4 .587 .52 L .563 .655 Q .5 .686 .437 .655 L .413 .52 Q .41 .4 .445 .355 Z",
+          "fill": "#dad6cb",
+          "stroke": "#344a5b",
+          "strokeWidth": 0.003,
+          "regionId": null
+        },
+        {
+          "d": "M .419 .377 Q .38 .386 .355 .45 L .327 .57 Q .32 .609 .345 .615 Q .372 .615 .381 .578 L .418 .484 Z",
+          "fill": "#c9c9c3",
+          "stroke": "#344a5b",
+          "strokeWidth": 0.003,
+          "regionId": null
+        },
+        {
+          "d": "M .581 .377 Q .62 .386 .645 .45 L .673 .57 Q .68 .609 .655 .615 Q .628 .615 .619 .578 L .582 .484 Z",
+          "fill": "#c9c9c3",
+          "stroke": "#344a5b",
+          "strokeWidth": 0.003,
+          "regionId": null
+        },
+        {
+          "d": "M .44 .634 L .496 .65 L .486 .865 Q .476 .906 .422 .891 L .437 .835 Z",
+          "fill": "#c9c9c3",
+          "stroke": "#344a5b",
+          "strokeWidth": 0.003,
+          "regionId": null
+        },
+        {
+          "d": "M .504 .65 L .56 .634 L .563 .835 L .578 .891 Q .524 .906 .514 .865 Z",
+          "fill": "#c9c9c3",
+          "stroke": "#344a5b",
+          "strokeWidth": 0.003,
+          "regionId": null
+        },
+        {
+          "d": "M .422 .868 Q .452 .878 .486 .863 L .487 .897 Q .47 .918 .415 .905 Z",
+          "fill": "#536473",
+          "stroke": "#344a5b",
+          "strokeWidth": 0.003,
+          "regionId": null
+        },
+        {
+          "d": "M .514 .863 Q .548 .878 .578 .868 L .585 .905 Q .53 .918 .513 .897 Z",
+          "fill": "#536473",
+          "stroke": "#344a5b",
+          "strokeWidth": 0.003,
+          "regionId": null
+        },
+        {
+          "d": "M .472 .32 L .528 .32 L .536 .369 Q .5 .385 .464 .369 Z",
+          "fill": "#d0cec4",
+          "stroke": "#344a5b",
+          "strokeWidth": 0.003,
+          "regionId": null
+        },
+        {
+          "d": "M .407 .236 C .407 .177 .44 .14 .5 .14 C .56 .14 .593 .177 .593 .236 C .593 .297 .559 .334 .5 .334 C .441 .334 .407 .297 .407 .236 Z",
+          "fill": "#e8e1d3",
+          "stroke": "#344a5b",
+          "strokeWidth": 0.003,
+          "regionId": null
+        }
+      ]
+    },
+    {
+      "assetId": "demo-asset-mask-arc",
+      "paths": [
+        {
+          "d": "M .417 .229 Q .5 .252 .583 .229 L .577 .262 Q .5 .291 .423 .262 Z",
+          "fill": "#c6dbde",
+          "stroke": "#344a5b",
+          "strokeWidth": 0.003,
+          "regionId": null
+        },
+        {
+          "d": "M .431 .243 Q .5 .26 .569 .243",
+          "fill": "#c6dbde",
+          "stroke": "#344a5b",
+          "strokeWidth": 0.003,
+          "regionId": null
+        }
+      ]
+    },
+    {
+      "assetId": "demo-asset-mask-tile",
+      "paths": [
+        {
+          "d": "M .439 .21 Q .5 .2 .561 .21 L .57 .273 Q .5 .3 .43 .273 Z",
+          "fill": "#ddc8a4",
+          "stroke": "#344a5b",
+          "strokeWidth": 0.003,
+          "regionId": null
+        },
+        {
+          "d": "M .493 .216 L .507 .216 L .507 .274 L .493 .274 Z",
+          "fill": "#f5ede0",
+          "stroke": "#344a5b",
+          "strokeWidth": 0.003,
+          "regionId": null
+        }
+      ]
+    },
+    {
+      "assetId": "demo-asset-hair-round",
+      "paths": [
+        {
+          "d": "M .402 .227 C .393 .167 .422 .13 .468 .139 Q .499 .115 .54 .141 C .591 .14 .608 .188 .595 .238 Q .561 .224 .554 .191 Q .538 .222 .506 .223 Q .481 .202 .48 .184 Q .451 .232 .402 .227 Z",
+          "fill": "#52677a",
+          "stroke": "#344a5b",
+          "strokeWidth": 0.003,
+          "regionId": null
+        }
+      ]
+    },
+    {
+      "assetId": "demo-asset-hair-loop",
+      "paths": [
+        {
+          "d": "M .408 .216 C .39 .165 .43 .121 .475 .139 C .453 .095 .506 .077 .531 .107 Q .555 .128 .544 .146 C .582 .148 .606 .185 .587 .23 L .568 .204 Q .554 .166 .52 .172 Q .48 .204 .434 .186 L .428 .225 Z",
+          "fill": "#897884",
+          "stroke": "#344a5b",
+          "strokeWidth": 0.003,
+          "regionId": null
+        }
+      ]
+    },
+    {
+      "assetId": "demo-asset-cape-split-rear",
+      "paths": [
+        {
+          "d": "M .451 .352 Q .373 .355 .352 .449 L .265 .722 Q .282 .755 .418 .753 L .489 .63 L .511 .63 L .582 .753 Q .718 .755 .735 .722 L .648 .449 Q .627 .355 .549 .352 Z",
+          "fill": "#6599a2",
+          "stroke": "#344a5b",
+          "strokeWidth": 0.003,
+          "regionId": "demo-region-fabric"
+        },
+        {
+          "d": "M .355 .457 Q .326 .602 .288 .719 L .407 .729 L .482 .596 L .485 .403 Z",
+          "fill": "#476c79",
+          "stroke": "#344a5b",
+          "strokeWidth": 0.003,
+          "regionId": null
+        },
+        {
+          "d": "M .645 .457 Q .674 .602 .712 .719 L .593 .729 L .518 .596 L .515 .403 Z",
+          "fill": "#476c79",
+          "stroke": "#344a5b",
+          "strokeWidth": 0.003,
+          "regionId": null
+        }
+      ]
+    },
+    {
+      "assetId": "demo-asset-cape-split-rear-mask",
+      "paths": [
+        {
+          "d": "M .451 .352 Q .373 .355 .352 .449 L .265 .722 Q .282 .755 .418 .753 L .489 .63 L .511 .63 L .582 .753 Q .718 .755 .735 .722 L .648 .449 Q .627 .355 .549 .352 Z",
+          "fill": "#ffffff",
+          "stroke": "#344a5b",
+          "strokeWidth": 0.003,
+          "regionId": null
+        }
+      ]
+    },
+    {
+      "assetId": "demo-asset-cape-split-front",
+      "paths": [
+        {
+          "d": "M .449 .354 Q .406 .36 .392 .414 Q .453 .438 .487 .389 L .5 .4 L .513 .389 Q .547 .438 .608 .414 Q .594 .36 .551 .354 Q .5 .383 .449 .354 Z",
+          "fill": "#e2cb9f",
+          "stroke": "#344a5b",
+          "strokeWidth": 0.003,
+          "regionId": null
+        },
+        {
+          "d": "M .491 .395 L .509 .395 L .509 .417 L .491 .417 Z",
+          "fill": "#c49e67",
+          "stroke": "#344a5b",
+          "strokeWidth": 0.003,
+          "regionId": null
+        }
+      ]
+    },
+    {
+      "assetId": "demo-asset-cape-round-rear",
+      "paths": [
+        {
+          "d": "M .449 .353 Q .336 .401 .319 .622 Q .5 .808 .681 .622 Q .664 .401 .551 .353 Z",
+          "fill": "#7f8fba",
+          "stroke": "#344a5b",
+          "strokeWidth": 0.003,
+          "regionId": "demo-region-fabric"
+        },
+        {
+          "d": "M .324 .606 Q .5 .746 .676 .606 L .681 .622 Q .5 .808 .319 .622 Z",
+          "fill": "#d1c7b3",
+          "stroke": "#344a5b",
+          "strokeWidth": 0.003,
+          "regionId": null
+        }
+      ]
+    },
+    {
+      "assetId": "demo-asset-cape-round-rear-mask",
+      "paths": [
+        {
+          "d": "M .449 .353 Q .336 .401 .319 .622 Q .5 .808 .681 .622 Q .664 .401 .551 .353 Z",
+          "fill": "#ffffff",
+          "stroke": "#344a5b",
+          "strokeWidth": 0.003,
+          "regionId": null
+        }
+      ]
+    },
+    {
+      "assetId": "demo-asset-cape-round-front",
+      "paths": [
+        {
+          "d": "M .448 .354 Q .407 .365 .399 .409 Q .5 .457 .601 .409 Q .593 .365 .552 .354 L .5 .388 Z",
+          "fill": "#c8c2d2",
+          "stroke": "#344a5b",
+          "strokeWidth": 0.003,
+          "regionId": null
+        }
+      ]
+    },
+    {
+      "assetId": "demo-asset-top-tunic",
+      "paths": [
+        {
+          "d": "M .448 .373 Q .5 .398 .552 .373 L .597 .427 L .563 .465 L .558 .529 L .579 .651 Q .5 .681 .421 .651 L .442 .529 L .437 .465 L .403 .427 Z",
+          "fill": "#d5ab78",
+          "stroke": "#344a5b",
+          "strokeWidth": 0.003,
+          "regionId": "demo-region-panel"
+        },
+        {
+          "d": "M .447 .514 Q .5 .533 .553 .514 L .556 .537 Q .5 .557 .444 .537 Z",
+          "fill": "#5c6971",
+          "stroke": "#344a5b",
+          "strokeWidth": 0.003,
+          "regionId": null
+        },
+        {
+          "d": "M .494 .397 L .506 .397 L .506 .509 L .494 .509 Z",
+          "fill": "#eedcc0",
+          "stroke": "#344a5b",
+          "strokeWidth": 0.003,
+          "regionId": null
+        }
+      ]
+    },
+    {
+      "assetId": "demo-asset-top-tunic-mask",
+      "paths": [
+        {
+          "d": "M .448 .373 Q .5 .398 .552 .373 L .597 .427 L .563 .465 L .558 .529 L .579 .651 Q .5 .681 .421 .651 L .442 .529 L .437 .465 L .403 .427 Z",
+          "fill": "#ffffff",
+          "stroke": "#344a5b",
+          "strokeWidth": 0.003,
+          "regionId": null
+        }
+      ]
+    },
+    {
+      "assetId": "demo-asset-top-panel",
+      "paths": [
+        {
+          "d": "M .446 .374 L .5 .405 L .554 .374 L .588 .425 L .557 .471 L .57 .626 Q .5 .658 .43 .626 L .443 .471 L .412 .425 Z",
+          "fill": "#e5ded2",
+          "stroke": "#344a5b",
+          "strokeWidth": 0.003,
+          "regionId": null
+        },
+        {
+          "d": "M .47 .411 L .5 .427 L .53 .411 L .545 .592 Q .5 .616 .455 .592 Z",
+          "fill": "#b28691",
+          "stroke": "#344a5b",
+          "strokeWidth": 0.003,
+          "regionId": "demo-region-panel"
+        },
+        {
+          "d": "M .496 .447 L .504 .447 L .504 .574 L .496 .574 Z",
+          "fill": "#d5ab78",
+          "stroke": "#344a5b",
+          "strokeWidth": 0.003,
+          "regionId": null
+        }
+      ]
+    },
+    {
+      "assetId": "demo-asset-top-panel-mask",
+      "paths": [
+        {
+          "d": "M .47 .411 L .5 .427 L .53 .411 L .545 .592 Q .5 .616 .455 .592 Z",
+          "fill": "#ffffff",
+          "stroke": "#344a5b",
+          "strokeWidth": 0.003,
+          "regionId": null
+        }
+      ]
+    },
+    {
+      "assetId": "demo-asset-bottom-wide",
+      "paths": [
+        {
+          "d": "M .437 .594 Q .5 .622 .563 .594 L .603 .856 Q .559 .884 .515 .858 L .5 .698 L .485 .858 Q .441 .884 .397 .856 Z",
+          "fill": "#596e82",
+          "stroke": "#344a5b",
+          "strokeWidth": 0.003,
+          "regionId": null
+        },
+        {
+          "d": "M .437 .602 Q .5 .625 .563 .602 L .567 .631 Q .5 .655 .433 .631 Z",
+          "fill": "#d4c9b4",
+          "stroke": "#344a5b",
+          "strokeWidth": 0.003,
+          "regionId": null
+        }
+      ]
+    },
+    {
+      "assetId": "demo-asset-bottom-taper",
+      "paths": [
+        {
+          "d": "M .439 .602 Q .5 .625 .561 .602 L .557 .85 L .519 .85 L .5 .708 L .481 .85 L .443 .85 Z",
+          "fill": "#83908a",
+          "stroke": "#344a5b",
+          "strokeWidth": 0.003,
+          "regionId": null
+        },
+        {
+          "d": "M .441 .813 L .483 .813 L .482 .853 L .443 .853 Z",
+          "fill": "#d3ccbb",
+          "stroke": "#344a5b",
+          "strokeWidth": 0.003,
+          "regionId": null
+        },
+        {
+          "d": "M .517 .813 L .559 .813 L .557 .853 L .519 .853 Z",
+          "fill": "#d3ccbb",
+          "stroke": "#344a5b",
+          "strokeWidth": 0.003,
+          "regionId": null
+        }
+      ]
+    },
+    {
+      "assetId": "demo-asset-accessory-orbit",
+      "paths": [
+        {
+          "d": "M .482 .468 Q .5 .463 .518 .468 L .516 .492 L .484 .492 Z",
+          "fill": "#52677a",
+          "stroke": "#344a5b",
+          "strokeWidth": 0.003,
+          "regionId": null
+        },
+        {
+          "d": "M .48 .509 A .02 .02 0 1 0 .52 .509 A .02 .02 0 1 0 .48 .509 Z",
+          "fill": "#d5ab78",
+          "stroke": "#344a5b",
+          "strokeWidth": 0.003,
+          "regionId": null
+        },
+        {
+          "d": "M .493 .509 A .007 .007 0 1 0 .507 .509 A .007 .007 0 1 0 .493 .509 Z",
+          "fill": "#e5ded2",
+          "stroke": "#344a5b",
+          "strokeWidth": 0.003,
+          "regionId": null
+        }
+      ]
+    },
+    {
+      "assetId": "demo-asset-accessory-block",
+      "paths": [
+        {
+          "d": "M .497 .472 L .503 .472 L .503 .49 L .497 .49 Z",
+          "fill": "#ddc8a4",
+          "stroke": "#344a5b",
+          "strokeWidth": 0.003,
+          "regionId": null
+        },
+        {
+          "d": "M .477 .499 L .5 .487 L .523 .499 L .523 .525 L .5 .537 L .477 .525 Z",
+          "fill": "#c1a3a9",
+          "stroke": "#344a5b",
+          "strokeWidth": 0.003,
+          "regionId": null
+        },
+        {
+          "d": "M .5 .487 L .5 .537 L .477 .525 L .477 .499 Z",
+          "fill": "#8f7e91",
+          "stroke": "#344a5b",
+          "strokeWidth": 0.003,
+          "regionId": null
+        }
+      ]
+    }
+  ]
+}

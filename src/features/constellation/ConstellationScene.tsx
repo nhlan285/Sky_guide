@@ -2,23 +2,25 @@ import { useEffect, useRef, useState } from 'react'
 import type { CSSProperties, MouseEvent } from 'react'
 import { Link } from 'react-router-dom'
 import { useLocale } from '../../shared/i18n/useLocale'
-import { compositions, connectionPath, destinations, edges, features } from './constellationLayout'
+import { compositionForViewport, connectionPath, destinations, edges, features } from './constellationLayout'
 import type { FeatureId } from './constellationLayout'
-import { viewportClass } from './starGeneration'
 import { useTheme } from './useTheme'
 import { useSkyNavigation } from './useSkyNavigation'
 
 export function ConstellationScene() {
   const container = useRef<HTMLDivElement>(null)
-  const [size, setSize] = useState(() => viewportClass(window.innerWidth))
+  const [size, setSize] = useState({ width: window.innerWidth, height: window.innerHeight })
   const [active, setActive] = useState<FeatureId | null>(null)
   const { visual } = useTheme()
   const { t } = useLocale()
   const travel = useSkyNavigation()
-  const layout = compositions[size]
+  const layout = compositionForViewport(size.width, size.height)
   useEffect(() => {
     if (!container.current) return
-    const observer = new ResizeObserver(entries => setSize(viewportClass(entries[0].contentRect.width)))
+    const observer = new ResizeObserver(entries => {
+      const { width, height } = entries[0].contentRect
+      if (width > 0 && height > 0) setSize(previous => previous.width === width && previous.height === height ? previous : { width, height })
+    })
     observer.observe(container.current)
     return () => observer.disconnect()
   }, [])
@@ -30,7 +32,7 @@ export function ConstellationScene() {
   }
   const style = { '--constellation-visibility': visual.constellationVisibility } as CSSProperties
   return (
-    <div ref={container} className={`constellation-scene constellation-scene--${size}`} style={style}>
+    <div ref={container} className={`constellation-scene constellation-scene--${layout.name}`} style={style}>
       <svg className="constellation-paths" viewBox={`0 0 ${layout.width} ${layout.height}`} preserveAspectRatio="none" aria-hidden="true">
         {edges.map(([from, to]) => {
           const connected = active === from || active === to
@@ -43,7 +45,7 @@ export function ConstellationScene() {
       <nav className="constellation-navigation" aria-label={t('landing.navigation')}>
         {features.map((feature, index) => {
           const [x, y] = layout.nodes[feature]
-          const to = `/hub#${destinations[feature]}`
+          const to = destinations[feature]
           return <Link key={feature} to={to} className={`constellation-node constellation-node--${index % 3}${active === feature ? ' is-active' : ''}`}
             style={{ left: `${x / layout.width * 100}%`, top: `${y / layout.height * 100}%` }}
             onPointerEnter={() => setActive(feature)} onPointerLeave={() => setActive(null)}

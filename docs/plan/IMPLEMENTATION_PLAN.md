@@ -101,7 +101,7 @@ Phụ thuộc phase là điều kiện nền; cột phụ thuộc bổ sung quan
 
 | ID | Việc / đầu ra cụ thể | Nghiệm thu | Phụ thuộc | Độ phức tạp | Gate |
 |---|---|---|---|---|---|
-| P1-W01 | Lập asset manifest demo hình học và metadata quyền | Mỗi asset có placeholder/self-created; không khẳng định giống asset game | P0-W01 | Thấp | — |
+| P1-W01 | **DONE 2026-10-03** — Package demo hình học mới và metadata quyền | [Demo riêng](../../src/features/wardrobe/demo/README.md), 12 item / 6 slot, assets self_created_placeholder + fixture; không tái dùng SVG Phase 0 hoặc nhập public catalog thật | P0-W01 | Thấp | — |
 | P1-W02 | Liệt kê riêng dữ liệu cần TGC: model/layer/rig/dye/calibration | K13 và Legal có danh sách thiếu; toàn bộ full asset giữ pending legal confirmation | P0-D03 | Thấp | — |
 
 ### Legal / TGC permission execution
@@ -144,7 +144,7 @@ Phụ thuộc phase là điều kiện nền; cột phụ thuộc bổ sung quan
 | P2-D01 | **DONE 2026-10-02** — Core types/validators provenance, money và PartialTime | [src/data/core](../../src/data/core/README.md): nullable unknown giữ nguyên, amount thiếu không thành 0, source enum + supplied registry/reference/duplicate checks, instant bắt buộc offset và calendar validation; errors có path/code, 17 behavioral tests qua node:test (`pnpm test`), lint/typecheck/build PASS; chưa adapter/export gate | P0-D01 | Trung bình | — |
 | P2-D02 | **DONE 2026-10-02** — Item/Spirit, FriendshipTree/Node, Season/Event và TS schemas | [src/data/catalog](../../src/data/catalog/README.md): explicit FK context, membership + acyclic graph validation, unknown/free và date precision giữ nguyên, TS Visit/Prediction tách type/collection; 21 behavioral tests mới (38 tổng) qua node:test, lint/typecheck/test/build PASS; chưa adapter, Dye/Wardrobe schema hoặc export gate | P2-D01 | Trung bình | — |
 | P2-D03 | Viết schema Map/Marker/Route và price mapping | Chặn coordinate ngoài [0,1], map revision lệch, giá âm/mixed market | P2-D01 | Trung bình | — |
-| P2-D04 | Viết schema Asset/Anchor/Size/Rule/Dye/Outfit | Chặn scale ≤ 0, màu/payload sai, anchor thiếu và rule conflict; full asset default pending | P2-D01, P0-W02 | Trung bình | — |
+| P2-D04 | **DONE 2026-10-03** — Asset/Config/Policy/Anchor/Size/Binding/Rule/Dye/Outfit validators | [src/data/wardrobe](../../src/data/wardrobe/index.ts): FK/revision/duplicates/scale/color/missing-anchor/coactive conflict; full asset default pending, confirmed cần evidence; chưa export gate/persistence/share | P2-D01, P0-W02 | Trung bình | — |
 | P2-D05 | Tạo adapter item Wiki đúng module thực tế | Mapping đối chiếu mẫu; parser lỗi không xuất catalog rỗng ghi đè bản tốt | P1-D01, P1-D13, P2-D02 | Cao | DATA K01 |
 | P2-D06 | Tạo adapter/biểu nhập spirit-tree | Node/cost giữ nguồn; total path không cộng node chung hai lần | P1-D02, P2-D02 | Trung bình | DATA K02 |
 | P2-D07 | Tạo adapter TS Wiki và sheet độc lập, báo cáo đối chiếu | Không gộp hai lần ghé khác nhau; bất đồng ngày đưa vào review | P1-D03, P1-D04, P2-D02 | Trung bình | DATA K03/K04 |
@@ -166,7 +166,7 @@ Phụ thuộc phase là điều kiện nền; cột phụ thuộc bổ sung quan
 | ID | Module | Việc / đầu ra cụ thể | Nghiệm thu | Phụ thuộc | Độ phức tạp | Gate |
 |---|---|---|---|---|---|---|
 | P2-U01 | UX | Tạo storage wrapper có parse/version/migration/memory fallback | Reload round-trip; corrupted/quota-denied vẫn mở app; thông báo không lưu được rõ | P0-I02 | Trung bình | — |
-| P2-W01 | Wardrobe | Tạo reducer selection và schema state dẫn xuất | baseSize không đổi khi rule active; reducer thuần, ID sai bị reject | P2-D04 | Trung bình | — |
+| P2-W01 | Wardrobe | **DONE 2026-10-03** — Reducer thuần và state dẫn xuất | Equip/replace/unequip/reset/size/dye/random được validate; base không đổi do rule, tháo trigger derive về base; ID/revision sai giữ selection; behavioral tests | P2-D04 | Trung bình | — |
 | P2-H01 | Hub | Tạo data access đọc manifest/normalized JSON | Module thiếu dataset hiển thị unavailable; không fetch raw/draft từ client | P2-D12 | Trung bình | — |
 
 ## Phase 3 — Hub nền tảng và UI dùng chung
@@ -220,13 +220,13 @@ Phụ thuộc phase là điều kiện nền; cột phụ thuộc bổ sung quan
 
 | ID | Việc / đầu ra cụ thể | Nghiệm thu | Phụ thuộc | Độ phức tạp | Gate |
 |---|---|---|---|---|---|
-| P4-W01 | Tạo model canonical và bảng anchor/scale demo versioned | Có hệ tọa độ/đơn vị/gốc rõ, size code demo không giả game data | P0-W02, P1-W01, P2-D04 | Trung bình | — |
-| P4-W02 | Tạo layer bindings và renderer xếp lớp cấu hình | Sáu slot thử được; cape nhiều binding khi demo cần; z-order không hardcode trong component item | P4-W01 | Cao | — |
-| P4-W03 | Tạo picker item theo slot, equip/unequip/reset | Cardinality/compatibility được validate; không làm mất dye của item khác | P2-W01, P4-W02 | Trung bình | — |
+| P4-W01 | **DONE 2026-10-03** — Model/anchor/scale demo versioned | normalized_top_left, model/calibration revisions, 4 fixture-demo presets; scale đúng một lần, không claim số liệu game | P0-W02, P1-W01, P2-D04 | Trung bình | — |
+| P4-W02 | **DONE 2026-10-03** — SVG renderer với bindings cấu hình | Sáu slot, cape rear/front; sort zIndex rồi binding ID code-unit; pure model/transform tests, thiếu anchor/revision có warning | P4-W01 | Cao | — |
+| P4-W03 | **DONE 2026-10-03** — Picker/equip/replace/unequip/reset + random demo | Capacity/fixture reject-combination được validate, giữ dye item khác; buttons có label/current state; random seeded qua reducer | P2-W01, P4-W02 | Trung bình | — |
 | P4-W04 | Nối size selector với ScaleTable/AnchorTable | Đổi size áp scale đúng một lần; missing size báo rõ; đổi viewport không làm lệch anchor | P4-W02 | Cao | — |
 | P4-W05 | Viết resolver rule override có priority và reason | Rule demo mô phỏng chibi; baseSize giữ nguyên; tháo item trả về baseSize | P4-W03, P4-W04 | Cao | — |
 | P4-W06 | Xử lý rule xung đột và calibration thiếu | Xung đột cùng priority bị validator báo; runtime ổn định và hiển thị cảnh báo, không chọn ngẫu nhiên | P4-W05 | Trung bình | — |
-| P4-W07 | Tạo dye region demo và bộ điều khiển màu/reset | Chỉ vùng hỗ trợ đổi màu; mask thiếu không tô toàn item sai; nhãn demo rõ | P4-W02, P4-W03 | Cao | — |
+| P4-W07 | **DONE 2026-10-03** — Fabric/panel dye palette và reset | Chỉ path/region + mask khai báo đổi màu; thiếu mask giữ fill gốc, item unsupported có nhãn; reset region/item, behavioral tests | P4-W02, P4-W03 | Cao | — |
 | P4-W08 | Nối AssetRegistry với fallback theo từng layer | Thiếu file/quyền thì hình học placeholder có nhãn; không fetch URL tùy ý từ outfit link | P2-D11, P4-W02 | Trung bình | — |
 | P4-W09 | Tạo lưu/đổi tên/xóa outfit local và restore khi reload | Selection/dye/base size round-trip; quota lỗi vẫn giữ phiên hiện tại; xóa không ảnh hưởng outfit khác | P2-U01, P4-W07 | Trung bình | — |
 | P4-W10 | Viết codec outfit share versioned và copy/open link | Mở ở phiên trống khôi phục đúng; payload quá lớn/sai version/ID bị xử lý an toàn | P4-W09 | Cao | — |
@@ -237,7 +237,7 @@ Phụ thuộc phase là điều kiện nền; cột phụ thuộc bổ sung quan
 
 | ID | Module | Việc / đầu ra cụ thể | Nghiệm thu | Phụ thuộc | Độ phức tạp | Gate |
 |---|---|---|---|---|---|---|
-| P4-U01 | UX | Dựng editor 3 vùng desktop và drawer mobile | Preview không bị controls che; keyboard dùng được picker/size/dye/share; có label override | P4-W03, P4-W07, P3-U01 | Trung bình | — |
+| P4-U01 | UX | **OPEN — V1 đã có editor 3 vùng desktop + segmented panel mobile** | Picker/size/dye dùng native keyboard controls, preview không overlay; theme/locale giữ state. Share và luồng override hiển thị chưa triển khai theo scope V1; MANUAL VISUAL CHECK REQUIRED, chưa đủ toàn bộ nghiệm thu để DONE | P4-W03, P4-W07, P3-U01 | Trung bình | — |
 | P4-D01 | Data pipeline | Kiểm tra liên kết item → asset/binding/dye/rule | Fixture và pending full asset không lọt production; demo package được nhận diện riêng | P4-W08, P2-D11 | Trung bình | — |
 | P4-H01 | Hub | Nối “thử item” từ catalog và mở outfit gần nhất | Item chưa render được mở placeholder có giải thích; nav không reset outfit đang sửa | P3-H02, P3-W01, P4-W09 | Thấp | — |
 | P4-I01 | Infra | Smoke editor trên Vercel preview qua link trực tiếp | Refresh/deep link/share không 404, asset demo tải đúng, không cần login | P0-I04, P4-W10, P4-U01 | Trung bình | — |
@@ -444,5 +444,5 @@ Nhóm A đã được **chốt ngày 2026-09-29** để mở khóa Phase 0. Đâ
 
 | ID | Quyết định đã chốt | Nghiệm thu / phần còn lại |
 |---|---|---|
-| Q08 | **CLOSED** — Configurable project contract / fixture behavior, không phải verified Sky game behavior. SlotPolicy.maxItems hỗ trợ single/multiple, fixture mặc định 1 cho sáu slot; equippedBySlot giữ ID[]. Một item nhiều binding; zIndex tăng dần rồi binding ID ổn định. Anchor key ghim model/revision + effective size + slot/anchor + asset/binding revisions; missing/revision mismatch có trạng thái rõ, scale nhân vật/viewport mỗi tầng đúng một lần. Applicable rules sort priority giảm dần; cùng priority ghi khác target value là validator error, runtime ID tie-break chỉ preview tạm. Override derive từ base không mutate/persist effective state; tháo trigger derive lại. Ví dụ chỉ ID/code fixture. Chi tiết [Architecture](../ARCHITECTURE.md#contract-wardrobe-2d-đã-chốt--p0-w01--p0-w02--q08-2026-10-02) / [Schema](../DATA_SCHEMA.md#contract-q08--configurable-project--fixture-behavior-2026-10-02). | P0-W01/P0-W02 DONE; fixture SVG tĩnh là bằng chứng Phase 0. P1-W01 manifest, P2-D04 validator và toàn bộ Phase 4 vẫn chưa triển khai; size/chibi/calibration/compatibility game thật cần evidence, full assets pending legal confirmation. |
+| Q08 | **CLOSED** — Configurable project contract / fixture behavior, không phải verified Sky game behavior. SlotPolicy.maxItems hỗ trợ single/multiple, fixture mặc định 1 cho sáu slot; equippedBySlot giữ ID[]. Một item nhiều binding; zIndex tăng dần rồi binding ID ổn định. Anchor key ghim model/revision + effective size + slot/anchor + asset/binding revisions; missing/revision mismatch có trạng thái rõ, scale nhân vật/viewport mỗi tầng đúng một lần. Applicable rules sort priority giảm dần; cùng priority ghi khác target value là validator error, runtime ID tie-break chỉ preview tạm. Override derive từ base không mutate/persist effective state; tháo trigger derive lại. Ví dụ chỉ ID/code fixture. Chi tiết [Architecture](../ARCHITECTURE.md#contract-wardrobe-2d-đã-chốt--p0-w01--p0-w02--q08-2026-10-02) / [Schema](../DATA_SCHEMA.md#contract-q08--configurable-project--fixture-behavior-2026-10-02). | P0-W01/P0-W02 DONE; SVG Phase 0 vẫn chỉ là test evidence. Wardrobe V1 có manifest/schema/reducer/renderer/picker/dye mới; chưa visible override, save/share, full asset pipeline. Q08 không thay đổi; behavior/calibration game thật cần evidence, full assets pending legal confirmation. |
 | Q16 | **CLOSED** — Maintainer / repository owner theo dõi TGC; Legal / Rights review theo KB. Evidence ở nơi logic **Sky Guide private workspace → Legal → TGC** ngoài repo; owner lưu/review đúng revision và update public allowlist status/evidenceRef/scope summary/follow-up state. Ledger template và draft chưa gửi tại [TGC follow-up contract](../TGC_FOLLOW_UP.md); chưa tạo storage hoặc lưu raw evidence. **Q16 closure does not imply asset permission.** | P0-D03/P0-L01–L03 DONE về quy trình; K13 pending_clarification / full assets pending legal confirmation, Full AssetRegistry path đóng. Phase 1 cần evidence/gửi follow-up/review thật; TGC/RIGHTS và Phase 8 giữ gate. |

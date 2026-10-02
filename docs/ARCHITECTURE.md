@@ -84,6 +84,8 @@ Scripts import và JSON public sẽ được thêm ở task dữ liệu tương 
 
 Phase 0 và Phase 4 dùng **SVG paper-doll 2D**, silhouette/layer hình học hoàn toàn self-created. Bộ [fixture SVG](../tests/fixtures/wardrobe/README.md) là bằng chứng trực quan P0-W01, mở độc lập để xem; không được import vào app, public catalog hoặc manifest Preview/Production. Đây là **configurable project contract / fixture behavior**, không phải verified Sky game behavior. Phase 0 chốt contract và fixture tĩnh; renderer, picker, resolver, bảng calibration versioned và manifest demo đầy đủ vẫn thuộc các task sau.
 
+Wardrobe V1 (2026-10-03) có route `/wardrobe` tải riêng [package demo mới](../src/features/wardrobe/demo/README.md), được yêu cầu triển khai như nội dung demo hiển thị trên app. Package giữ fixture/self-created và nằm ngoài public real-data catalog; không nới ranh giới test fixture/private/pending full asset. Reducer local trong editor giữ selection qua theme/locale changes, không persist outfit; manifest/geometry tạo một lần, layers derive bằng memo và không cập nhật ambient Canvas khi chọn đồ. Mobile dùng preview trước rồi panel lựa chọn/outfit, không overlay lên nhân vật. Q08 giữ nguyên.
+
 ### Slot, lớp và resolver
 
 - `WardrobeConfig` versioned ghim canonical model/revision và `SlotPolicy` cho từng slot. `maxItems` là số nguyên ≥ 1: 1 cho single-item, > 1 cho multiple items; không có default ngầm khi thiếu policy. Fixture policy chọn 1 cho sáu slot; một ví dụ cấu hình accessory=2 chỉ chứng minh capability. Không suy ra số phụ kiện game cho phép.

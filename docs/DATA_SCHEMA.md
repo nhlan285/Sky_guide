@@ -164,6 +164,8 @@ Ví dụ **công thức trừu tượng, không phải số liệu game**: một
 
 Full 3D/wardrobe: **pending legal confirmation**. Asset không đủ rights không được lọt public export; có thể dùng `geometric_placeholder` thay thế. Placeholder Wiki vẫn giữ pending và credit, không tự chuyển thành permission_confirmed.
 
+Implementation V1 (2026-10-03): [types/validators](../src/data/wardrobe/index.ts) dùng infrastructure P2-D01/P2-D02; màu trong phiên editor là hex RGB `#rrggbb`, label DyeRegion là LocalizedText. Legal status thiếu chỉ mặc định `pending_legal_confirmation`, không confirmed. [Package demo riêng](../src/features/wardrobe/demo/README.md) được task Wardrobe V1 cho phép deploy như nội dung demo tự tạo: giữ `fixture=true`, không nhập public catalog, không tái dùng fixture SVG Phase 0 và không thay gate export dữ liệu thật. State ghim package/config revision; OutfitSnapshot validator có sẵn nhưng chưa có persistence/share.
+
 ### Contract Q08 — configurable project / fixture behavior (2026-10-02)
 
 Các field trên khóa contract để implement ở Phase 2/4; chưa có types/validator/resolver runtime. `slot` dùng enum nội bộ đã có; silhouette dùng slot của binding trong config chỉ để định danh anchor, không là item equip. Ví dụ dưới đây **tất cả fixture=true**, ID/code/revision giả cho logic, không là dataset Sky:
