@@ -45,7 +45,7 @@ Mỗi dataset: `schemaVersion: integer`, `dataVersion: string`, `generatedAt: Da
 | Field | Kiểu | Quy tắc |
 |---|---|---|
 | id | ID | Khóa provenance |
-| sourceId | enum K01…K14 | Trỏ hồ sơ nguồn có thật |
+| sourceId | enum K01…K15 | Trỏ hồ sơ nguồn có thật; K15 là [ThatSkyApplication utility public](../knowledge/15-thatskyapplication.md), được duyệt riêng cho Item Lookup V1 |
 | sourceUrl | string? | URL cụ thể đã xác minh; null nếu chưa có, chặn xuất bản dữ liệu thật chưa truy nguồn được |
 | sourceRecordKey | string? | Page/revision/row/SKU/message identifier khi có |
 | sourceRevision | string? | Không bịa revision cho nguồn không có |

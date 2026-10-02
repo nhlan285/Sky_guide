@@ -3,7 +3,7 @@ import type { ViewportClass } from './starGeneration.ts'
 export type FeatureId = 'items' | 'ts' | 'seasons' | 'wardrobe' | 'maps' | 'news' | 'events'
 export const features: readonly FeatureId[] = ['items', 'ts', 'seasons', 'wardrobe', 'maps', 'news', 'events']
 export const destinations: Record<FeatureId, string> = {
-  items: '/hub#item-lookup', ts: '/hub#traveling-spirit', seasons: '/hub#season-event',
+  items: '/items', ts: '/hub#traveling-spirit', seasons: '/hub#season-event',
   wardrobe: '/wardrobe', maps: '/hub#maps-routes', news: '/hub#official-news', events: '/hub#season-event',
 }
 export const edges: readonly (readonly [FeatureId, FeatureId])[] = [

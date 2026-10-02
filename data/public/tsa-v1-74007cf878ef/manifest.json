@@ -1,0 +1,1055 @@
+{
+  "schemaVersion": 1,
+  "catalogVersion": "tsa-v1-74007cf878ef",
+  "generatedAt": "2026-10-02T17:53:41Z",
+  "datasets": {
+    "items": {
+      "path": "items.json",
+      "dataVersion": "tsa-v1-74007cf878ef",
+      "sha256": "dd9a7873badab6abdf41731b6a98f7fa96d250bb7dc38a3182261d0c76e0a406"
+    },
+    "lookup": {
+      "path": "lookup.json",
+      "dataVersion": "tsa-v1-74007cf878ef",
+      "sha256": "2f5bb3ce52e2947f012c057e97b683f8a866e03cba0371919a4a4f6430f8e7d7"
+    },
+    "spirits": {
+      "path": "spirits.json",
+      "dataVersion": "tsa-v1-74007cf878ef",
+      "sha256": "575f63c6cbdc2a691b9590207490c28abe1ae6d9bb199c9fd0cb9598b3d3c414"
+    },
+    "seasons": {
+      "path": "seasons.json",
+      "dataVersion": "tsa-v1-74007cf878ef",
+      "sha256": "c6381638ccec4882da94021d5a6f2c45333b9f0ef897a3d1d615680c2f10d299"
+    }
+  },
+  "provenance": {
+    "path": "provenance.json",
+    "dataVersion": "tsa-v1-74007cf878ef",
+    "sha256": "ca39bedafd28e421f5438e3f7db3c751195fff53348332716b7f357040375a0d"
+  },
+  "aliases": null,
+  "tombstones": null,
+  "assetManifestVersion": null,
+  "source": {
+    "repository": "thatskyapplication/thatskyapplication",
+    "revision": "74007cf878ef44c764eb5a143ef01d4c80982509",
+    "normalizationVersion": "tsa-v1",
+    "sourcePaths": [
+      {
+        "path": "packages/utility/LICENSE",
+        "gitBlobSha": "b9c64261893623ae3d34936a9af0fa0e4ac1eed0"
+      },
+      {
+        "path": "packages/utility/source/catalogue.ts",
+        "gitBlobSha": "3712f452e2e569ea63b22b1f8cfd7b890f459341"
+      },
+      {
+        "path": "packages/utility/source/cosmetics.ts",
+        "gitBlobSha": "4341667e580dd5ab686b6729c33eb1f569a8ae0b"
+      },
+      {
+        "path": "packages/utility/source/kingdom/realms/daylight-prairie/spirits/applauding-bellmaker.ts",
+        "gitBlobSha": "97b2f316417098bfa6796eb2016f8326fe159f96"
+      },
+      {
+        "path": "packages/utility/source/kingdom/realms/daylight-prairie/spirits/bird-whisperer.ts",
+        "gitBlobSha": "04c81de8711e072d12af157096ae73bd3fd6bb2c"
+      },
+      {
+        "path": "packages/utility/source/kingdom/realms/daylight-prairie/spirits/butterfly-charmer.ts",
+        "gitBlobSha": "d167530b28751b7e6aa63fc0ce645275d5862a0b"
+      },
+      {
+        "path": "packages/utility/source/kingdom/realms/daylight-prairie/spirits/ceremonial-worshiper.ts",
+        "gitBlobSha": "1353eeceee92724ea4e1112d86142020b7a50e19"
+      },
+      {
+        "path": "packages/utility/source/kingdom/realms/daylight-prairie/spirits/elder-of-the-prairie.ts",
+        "gitBlobSha": "f420d97e63abcc3ba25bcbaefc97fc7f89ad904b"
+      },
+      {
+        "path": "packages/utility/source/kingdom/realms/daylight-prairie/spirits/exhausted-dock-worker.ts",
+        "gitBlobSha": "f35c6580c646a697201208df6b363075999ae904"
+      },
+      {
+        "path": "packages/utility/source/kingdom/realms/daylight-prairie/spirits/laughing-light-catcher.ts",
+        "gitBlobSha": "c36ecbbb2ea4cb15ad70962b1fab3f237e1219fc"
+      },
+      {
+        "path": "packages/utility/source/kingdom/realms/daylight-prairie/spirits/slumbering-shipwright.ts",
+        "gitBlobSha": "fed782ee8a95af4b95b2d441cd48f12f4368d6b1"
+      },
+      {
+        "path": "packages/utility/source/kingdom/realms/daylight-prairie/spirits/waving-bellmaker.ts",
+        "gitBlobSha": "b908afab2f71d3bb0ff229d2d217fba86d5e31b7"
+      },
+      {
+        "path": "packages/utility/source/kingdom/realms/golden-wasteland/spirits/courageous-soldier.ts",
+        "gitBlobSha": "233b999f7e93dfd2a4885d01eb39b52f688b49b7"
+      },
+      {
+        "path": "packages/utility/source/kingdom/realms/golden-wasteland/spirits/elder-of-the-wasteland.ts",
+        "gitBlobSha": "3df745b93d8086b2574ae58db35ebb7c6c066522"
+      },
+      {
+        "path": "packages/utility/source/kingdom/realms/golden-wasteland/spirits/fainting-warrior.ts",
+        "gitBlobSha": "dc1f5beb894050fced478034a161ba10e0687a8f"
+      },
+      {
+        "path": "packages/utility/source/kingdom/realms/golden-wasteland/spirits/frightened-refugee.ts",
+        "gitBlobSha": "a0c6909aabd5b204321196b08fa68830abe29b6d"
+      },
+      {
+        "path": "packages/utility/source/kingdom/realms/golden-wasteland/spirits/lookout-scout.ts",
+        "gitBlobSha": "f32c396966e769ed635ac7c73ed3ac147a0f2ed6"
+      },
+      {
+        "path": "packages/utility/source/kingdom/realms/golden-wasteland/spirits/saluting-captain.ts",
+        "gitBlobSha": "4643d968552357f651c62966c54995825f38db9a"
+      },
+      {
+        "path": "packages/utility/source/kingdom/realms/golden-wasteland/spirits/stealthy-survivor.ts",
+        "gitBlobSha": "e351d2a9a73e0cc7dfa817913a050262908831e5"
+      },
+      {
+        "path": "packages/utility/source/kingdom/realms/hidden-forest/spirits/apologetic-lumberjack.ts",
+        "gitBlobSha": "b198abfcaf581148258fa3840f4f50556ad09005"
+      },
+      {
+        "path": "packages/utility/source/kingdom/realms/hidden-forest/spirits/blushing-prospector.ts",
+        "gitBlobSha": "b0d73e5a9db7777b297ffd201406ff5a4e5ed3a8"
+      },
+      {
+        "path": "packages/utility/source/kingdom/realms/hidden-forest/spirits/dismayed-hunter.ts",
+        "gitBlobSha": "e79b138c985d0765bd1c7a3840d6ce8cac37e792"
+      },
+      {
+        "path": "packages/utility/source/kingdom/realms/hidden-forest/spirits/elder-of-the-forest.ts",
+        "gitBlobSha": "ea0e74747e1773b338be561ffb7cfd83edfdad86"
+      },
+      {
+        "path": "packages/utility/source/kingdom/realms/hidden-forest/spirits/hide-n-seek-pioneer.ts",
+        "gitBlobSha": "5b4c2cebe216a904b86cd82dd94ea8eca368b0ee"
+      },
+      {
+        "path": "packages/utility/source/kingdom/realms/hidden-forest/spirits/pouty-porter.ts",
+        "gitBlobSha": "fcec43680d9971f8377aad2abba94db3d79a236e"
+      },
+      {
+        "path": "packages/utility/source/kingdom/realms/hidden-forest/spirits/shivering-trailblazer.ts",
+        "gitBlobSha": "f97926744ca4e442e167e083b68598bb0d9cd761"
+      },
+      {
+        "path": "packages/utility/source/kingdom/realms/hidden-forest/spirits/tearful-light-miner.ts",
+        "gitBlobSha": "81b84fca915249e5a8354d4d2b42dcc867911795"
+      },
+      {
+        "path": "packages/utility/source/kingdom/realms/hidden-forest/spirits/whale-whisperer.ts",
+        "gitBlobSha": "931b94d1af664890115d144be715d978ca4c077a"
+      },
+      {
+        "path": "packages/utility/source/kingdom/realms/isle-of-dawn/spirits/elder-of-the-isle.ts",
+        "gitBlobSha": "a7b008e4404cea8fbb6b6938f5ef812b3bff2678"
+      },
+      {
+        "path": "packages/utility/source/kingdom/realms/isle-of-dawn/spirits/pointing-candlemaker.ts",
+        "gitBlobSha": "78cc2ce8c6a5fcac64e411e8a1270fa85615cea2"
+      },
+      {
+        "path": "packages/utility/source/kingdom/realms/isle-of-dawn/spirits/rejecting-voyager.ts",
+        "gitBlobSha": "ffd1edcbb6bc49ad2e5ccd421264f33e70e17f25"
+      },
+      {
+        "path": "packages/utility/source/kingdom/realms/isle-of-dawn/spirits/ushering-stargazer.ts",
+        "gitBlobSha": "0a4d31f712a78b1663e4838804ce97e4e70851b8"
+      },
+      {
+        "path": "packages/utility/source/kingdom/realms/valley-of-triumph/spirits/backflipping-champion.ts",
+        "gitBlobSha": "f40464fbb6bc833479bc381f042c45b7228707a8"
+      },
+      {
+        "path": "packages/utility/source/kingdom/realms/valley-of-triumph/spirits/bowing-medalist.ts",
+        "gitBlobSha": "03c59362bd7f18fff0168ea6d92b90b01fabbec2"
+      },
+      {
+        "path": "packages/utility/source/kingdom/realms/valley-of-triumph/spirits/cheerful-spectator.ts",
+        "gitBlobSha": "7539818cb211c3301aa4a83414dc8680f3b2635b"
+      },
+      {
+        "path": "packages/utility/source/kingdom/realms/valley-of-triumph/spirits/confident-sightseer.ts",
+        "gitBlobSha": "ad4772e7cfdcdb63aee2cab0d3f4e5158b6ad6b9"
+      },
+      {
+        "path": "packages/utility/source/kingdom/realms/valley-of-triumph/spirits/elder-of-the-valley.ts",
+        "gitBlobSha": "243b54613125b3de26d28c1aceb054c0bdba40cc"
+      },
+      {
+        "path": "packages/utility/source/kingdom/realms/valley-of-triumph/spirits/handstanding-thrillseeker.ts",
+        "gitBlobSha": "3108a7e966ec2dca298f44f19ae0a573747e83f1"
+      },
+      {
+        "path": "packages/utility/source/kingdom/realms/valley-of-triumph/spirits/manta-whisperer.ts",
+        "gitBlobSha": "be52b61a2b1ec0871bc48296cefcfc2e8f19f027"
+      },
+      {
+        "path": "packages/utility/source/kingdom/realms/valley-of-triumph/spirits/proud-victor.ts",
+        "gitBlobSha": "84ea628eaff27578dc84ec3d8974511929f23bf4"
+      },
+      {
+        "path": "packages/utility/source/kingdom/realms/vault-of-knowledge/spirits/elder-of-the-vault.ts",
+        "gitBlobSha": "7c153a90ba1bceb67446571be1ecff42ea0dfab3"
+      },
+      {
+        "path": "packages/utility/source/kingdom/realms/vault-of-knowledge/spirits/levitating-adept.ts",
+        "gitBlobSha": "d9eb23e6ecdf52b800d188a3c9badd650cb8eff4"
+      },
+      {
+        "path": "packages/utility/source/kingdom/realms/vault-of-knowledge/spirits/meditating-monastic.ts",
+        "gitBlobSha": "626cbab94a6e9cb9a081fb38270e28e06ba92ba3"
+      },
+      {
+        "path": "packages/utility/source/kingdom/realms/vault-of-knowledge/spirits/memory-whisperer.ts",
+        "gitBlobSha": "365ac1822cbca23fc3f61e653b94e81da15be501"
+      },
+      {
+        "path": "packages/utility/source/kingdom/realms/vault-of-knowledge/spirits/polite-scholar.ts",
+        "gitBlobSha": "1b6bb77457a22e8c3af4bd40da1b3e8e6948be95"
+      },
+      {
+        "path": "packages/utility/source/kingdom/realms/vault-of-knowledge/spirits/praying-acolyte.ts",
+        "gitBlobSha": "5e54a96e90e902d18a434879c6bbe55fc463fe87"
+      },
+      {
+        "path": "packages/utility/source/kingdom/seasons/abyss/abyss-guide.ts",
+        "gitBlobSha": "046418c7ac9e7bbe743f43a0af476d38396499a3"
+      },
+      {
+        "path": "packages/utility/source/kingdom/seasons/abyss/anxious-angler.ts",
+        "gitBlobSha": "b53cccb5c5719a25fcb6c055dcf1b34a9acfae20"
+      },
+      {
+        "path": "packages/utility/source/kingdom/seasons/abyss/bumbling-boatswain.ts",
+        "gitBlobSha": "b66d6b2d91c8355aa6bf9616b7fcc4d81da3a794"
+      },
+      {
+        "path": "packages/utility/source/kingdom/seasons/abyss/cackling-cannoneer.ts",
+        "gitBlobSha": "f8e163006f0aaa7db1d468c743d38be58569f835"
+      },
+      {
+        "path": "packages/utility/source/kingdom/seasons/abyss/ceasing-commodore.ts",
+        "gitBlobSha": "5d19c71f7077ea14b10126a6a9493e3ac2e8a872"
+      },
+      {
+        "path": "packages/utility/source/kingdom/seasons/abyss/index.ts",
+        "gitBlobSha": "ab929ce43448503fed46776ac62e73d652d270e9"
+      },
+      {
+        "path": "packages/utility/source/kingdom/seasons/assembly/assembly-guide.ts",
+        "gitBlobSha": "3305d55a652901ea91271e4d5e6ae95c9e3f6209"
+      },
+      {
+        "path": "packages/utility/source/kingdom/seasons/assembly/baffled-botanist.ts",
+        "gitBlobSha": "8308d4405d3c38d81609a9d90db8e526d103f4d1"
+      },
+      {
+        "path": "packages/utility/source/kingdom/seasons/assembly/chuckling-scout.ts",
+        "gitBlobSha": "b12b9920a316ea19a33f8bda0dd55111f76af860"
+      },
+      {
+        "path": "packages/utility/source/kingdom/seasons/assembly/daydream-forester.ts",
+        "gitBlobSha": "98448afab9fc8bbed6659b49cbd5ec98b7255aef"
+      },
+      {
+        "path": "packages/utility/source/kingdom/seasons/assembly/index.ts",
+        "gitBlobSha": "c2b43a660f905bc971159d30fb2c1a391e271b9c"
+      },
+      {
+        "path": "packages/utility/source/kingdom/seasons/assembly/marching-adventurer.ts",
+        "gitBlobSha": "03e5b893f0fedcb17e061a914c15c3e5ec473bce"
+      },
+      {
+        "path": "packages/utility/source/kingdom/seasons/assembly/scaredy-cadet.ts",
+        "gitBlobSha": "498fba0798161bfc45cef0c9d9971d872f1285af"
+      },
+      {
+        "path": "packages/utility/source/kingdom/seasons/assembly/scolding-student.ts",
+        "gitBlobSha": "e0c666b06874d14682574a9259cd3b2144bb7697"
+      },
+      {
+        "path": "packages/utility/source/kingdom/seasons/aurora/aurora.ts",
+        "gitBlobSha": "9b0d08bc853eb2cb45360a9e386f4bbdccfbe92f"
+      },
+      {
+        "path": "packages/utility/source/kingdom/seasons/aurora/index.ts",
+        "gitBlobSha": "9f34f12084da1a83c50cbfccee961b6f871851e6"
+      },
+      {
+        "path": "packages/utility/source/kingdom/seasons/aurora/mindful-miner.ts",
+        "gitBlobSha": "a95225bd896cec31d134b22b626a0ee9e83f7acd"
+      },
+      {
+        "path": "packages/utility/source/kingdom/seasons/aurora/running-wayfarer.ts",
+        "gitBlobSha": "c3b12c023abdc62ecf4a20bcb276eaa1ee586a6b"
+      },
+      {
+        "path": "packages/utility/source/kingdom/seasons/aurora/seed-of-hope.ts",
+        "gitBlobSha": "3637ef2a206d95b2a307bb8917240479ae7779ee"
+      },
+      {
+        "path": "packages/utility/source/kingdom/seasons/aurora/warrior-of-love.ts",
+        "gitBlobSha": "0d8f663384763fd90ac036371d46657557336203"
+      },
+      {
+        "path": "packages/utility/source/kingdom/seasons/belonging/belonging-guide.ts",
+        "gitBlobSha": "6659c9ed2af13b486f264f262ca00ea6d2940894"
+      },
+      {
+        "path": "packages/utility/source/kingdom/seasons/belonging/boogie-kid.ts",
+        "gitBlobSha": "e9ffdbbe01862b156812587f7c59f9726bdd8c14"
+      },
+      {
+        "path": "packages/utility/source/kingdom/seasons/belonging/confetti-cousin.ts",
+        "gitBlobSha": "4cee238d0de1a7f091e9128b2b90b99378bcd47a"
+      },
+      {
+        "path": "packages/utility/source/kingdom/seasons/belonging/hairtousle-teen.ts",
+        "gitBlobSha": "df74c0b09404bda85c88ad06d8cb16581ee4a2cf"
+      },
+      {
+        "path": "packages/utility/source/kingdom/seasons/belonging/index.ts",
+        "gitBlobSha": "39b3409de1a2b6123134c5edb6dc0b204cdabd60"
+      },
+      {
+        "path": "packages/utility/source/kingdom/seasons/belonging/pleaful-parent.ts",
+        "gitBlobSha": "042ecb41fea09bf358917e58a91712d76a1e6711"
+      },
+      {
+        "path": "packages/utility/source/kingdom/seasons/belonging/sparkler-parent.ts",
+        "gitBlobSha": "a58274f8650dd2f15407c4d6e9fa726e39a2a2a5"
+      },
+      {
+        "path": "packages/utility/source/kingdom/seasons/belonging/wise-grandparent.ts",
+        "gitBlobSha": "f29b9b2c4251066385ad760dc22c8ad2e1c964ff"
+      },
+      {
+        "path": "packages/utility/source/kingdom/seasons/blue-bird/blue-bird-guide.ts",
+        "gitBlobSha": "14d258d44b2851794db1973c3f5a3b88da62d2b0"
+      },
+      {
+        "path": "packages/utility/source/kingdom/seasons/blue-bird/costumed-confetti-cousin.ts",
+        "gitBlobSha": "a659dbcbd4fff0d96abb7488045365af08aaa067"
+      },
+      {
+        "path": "packages/utility/source/kingdom/seasons/blue-bird/divining-wise-grandparent.ts",
+        "gitBlobSha": "0e9f2f1b360c593da8e8d020ae665d3d2042901f"
+      },
+      {
+        "path": "packages/utility/source/kingdom/seasons/blue-bird/index.ts",
+        "gitBlobSha": "452bed4c0c5dfef59eb32b4a5ddae36ac5de7682"
+      },
+      {
+        "path": "packages/utility/source/kingdom/seasons/blue-bird/nostalgic-sparkler-parent.ts",
+        "gitBlobSha": "6719093beb7effcc614a60e2d70e3a18d34ec31c"
+      },
+      {
+        "path": "packages/utility/source/kingdom/seasons/blue-bird/royal-hairtousle-teen.ts",
+        "gitBlobSha": "d248cedb86bee9aca682d8e381b71c363b12f591"
+      },
+      {
+        "path": "packages/utility/source/kingdom/seasons/blue-bird/woodcutting-pleaful-parent.ts",
+        "gitBlobSha": "846a207a90f243cb5f025ea30efd8c51dcc187fd"
+      },
+      {
+        "path": "packages/utility/source/kingdom/seasons/carnival/carnival-athletic-dancer.ts",
+        "gitBlobSha": "7eaab444cc643eb1f3edd59bf2fd5ed16aa5e582"
+      },
+      {
+        "path": "packages/utility/source/kingdom/seasons/carnival/carnival-guide.ts",
+        "gitBlobSha": "650fc7555e7fde1d49b8e2e1690648e892c74ea1"
+      },
+      {
+        "path": "packages/utility/source/kingdom/seasons/carnival/carnival-juggler.ts",
+        "gitBlobSha": "3121c372d9ec76d52b203b97e9bde8fdb6a56243"
+      },
+      {
+        "path": "packages/utility/source/kingdom/seasons/carnival/carnival-puzzle-director.ts",
+        "gitBlobSha": "e1349dfb3e190bd7a92b4b85bfdb95dda57e9ee4"
+      },
+      {
+        "path": "packages/utility/source/kingdom/seasons/carnival/carnival-stunt-actor.ts",
+        "gitBlobSha": "a245291b2ffbaaaceff0e9865b6f72c31f0287f6"
+      },
+      {
+        "path": "packages/utility/source/kingdom/seasons/carnival/index.ts",
+        "gitBlobSha": "9d5d597d64d3c6404d95acbc2ce6ec9d3dbbc207"
+      },
+      {
+        "path": "packages/utility/source/kingdom/seasons/dear-van-gogh/artistic-memory.ts",
+        "gitBlobSha": "73c87b30c77c29e28c0e362455291eaabe009f41"
+      },
+      {
+        "path": "packages/utility/source/kingdom/seasons/dear-van-gogh/dutch-memory.ts",
+        "gitBlobSha": "0adeb5a04965839ef4130d9737322ddb6986bbad"
+      },
+      {
+        "path": "packages/utility/source/kingdom/seasons/dear-van-gogh/index.ts",
+        "gitBlobSha": "b626f730f5c40dc6f2cde6b455113f3c8133f033"
+      },
+      {
+        "path": "packages/utility/source/kingdom/seasons/dear-van-gogh/joyful-memory.ts",
+        "gitBlobSha": "8f32833a6df2701adc560fa9d783de73a9e384af"
+      },
+      {
+        "path": "packages/utility/source/kingdom/seasons/dear-van-gogh/rustic-memory.ts",
+        "gitBlobSha": "b83b24e16094e49c752b5ff5749d69815e514a21"
+      },
+      {
+        "path": "packages/utility/source/kingdom/seasons/dear-van-gogh/vase-with-fifteen-sunflowers.ts",
+        "gitBlobSha": "be0b6b10ababae61a4ccf3bcd736d231de8051e9"
+      },
+      {
+        "path": "packages/utility/source/kingdom/seasons/dreams/bearhug-hermit.ts",
+        "gitBlobSha": "6d4ac5de54bd06ba17b172703685f01def169bde"
+      },
+      {
+        "path": "packages/utility/source/kingdom/seasons/dreams/dancing-performer.ts",
+        "gitBlobSha": "287b9932c6eee860ca37111dc65a88d0f82e0577"
+      },
+      {
+        "path": "packages/utility/source/kingdom/seasons/dreams/dreams-guide.ts",
+        "gitBlobSha": "46271f7399257f806324ae6bead0dde25b77d336"
+      },
+      {
+        "path": "packages/utility/source/kingdom/seasons/dreams/index.ts",
+        "gitBlobSha": "e3739821cc79902d4144e8681652863035f78869"
+      },
+      {
+        "path": "packages/utility/source/kingdom/seasons/dreams/peeking-postman.ts",
+        "gitBlobSha": "32cd08a9f994e229bafbb1812ff1500bada6b109"
+      },
+      {
+        "path": "packages/utility/source/kingdom/seasons/dreams/spinning-mentor.ts",
+        "gitBlobSha": "726934a0e3e68ddcb5c4c9fbbdcacce53b664168"
+      },
+      {
+        "path": "packages/utility/source/kingdom/seasons/duets/compassionate-cellist.ts",
+        "gitBlobSha": "9d491967e91dfdca599dce70f970502d5d963e19"
+      },
+      {
+        "path": "packages/utility/source/kingdom/seasons/duets/duets-guide.ts",
+        "gitBlobSha": "744363a6a5777b3acdb03ffc6d31c5bdceb368d7"
+      },
+      {
+        "path": "packages/utility/source/kingdom/seasons/duets/index.ts",
+        "gitBlobSha": "d0fd14c845e02a700db0c6128e01da9192508954"
+      },
+      {
+        "path": "packages/utility/source/kingdom/seasons/duets/the-cellists-beginnings.ts",
+        "gitBlobSha": "f463135ed687c4bafb10566df0f2890ba197972a"
+      },
+      {
+        "path": "packages/utility/source/kingdom/seasons/duets/the-cellists-flourishing.ts",
+        "gitBlobSha": "b52f17070643fbdbae89cb5f5ecbdda9ab4dfb3d"
+      },
+      {
+        "path": "packages/utility/source/kingdom/seasons/duets/the-musicians-legacy.ts",
+        "gitBlobSha": "0d004e010d7964bc52ea5710f136bd8d8f09aa39"
+      },
+      {
+        "path": "packages/utility/source/kingdom/seasons/duets/the-pianists-beginnings.ts",
+        "gitBlobSha": "b49ba8cc7d455cf2b45256fd66954529740fd76d"
+      },
+      {
+        "path": "packages/utility/source/kingdom/seasons/duets/the-pianists-flourishing.ts",
+        "gitBlobSha": "f7d9438166bc8cf72dff665d2237346badca7053"
+      },
+      {
+        "path": "packages/utility/source/kingdom/seasons/enchantment/crab-walker.ts",
+        "gitBlobSha": "5003cdc09aa0080c273d291343a3d57c5b8976f2"
+      },
+      {
+        "path": "packages/utility/source/kingdom/seasons/enchantment/enchantment-guide.ts",
+        "gitBlobSha": "abdc7957b024db32eb14137fbef26d6af0720820"
+      },
+      {
+        "path": "packages/utility/source/kingdom/seasons/enchantment/index.ts",
+        "gitBlobSha": "ef94a2ab501eab1c1608b6f4609c4e0bfa407d64"
+      },
+      {
+        "path": "packages/utility/source/kingdom/seasons/enchantment/indifferent-alchemist.ts",
+        "gitBlobSha": "277951ec8a533a63ce68ff49c7f71f0d075acaec"
+      },
+      {
+        "path": "packages/utility/source/kingdom/seasons/enchantment/nodding-muralist.ts",
+        "gitBlobSha": "9bad7fecbe46aabf4a0b58684f97b0b977fca72f"
+      },
+      {
+        "path": "packages/utility/source/kingdom/seasons/enchantment/playfighting-herbalist.ts",
+        "gitBlobSha": "03424e029e0efa5bc228a52ced0474ddec2b158d"
+      },
+      {
+        "path": "packages/utility/source/kingdom/seasons/enchantment/scarecrow-farmer.ts",
+        "gitBlobSha": "186234ce2aced51a389119d7c91624f26ea4aec8"
+      },
+      {
+        "path": "packages/utility/source/kingdom/seasons/enchantment/snoozing-carpenter.ts",
+        "gitBlobSha": "e5987a10b756722c3856aba5971a74630caeae1a"
+      },
+      {
+        "path": "packages/utility/source/kingdom/seasons/flight/flight-guide.ts",
+        "gitBlobSha": "859dbcd41cfddba8e228083776bc321cbae2273e"
+      },
+      {
+        "path": "packages/utility/source/kingdom/seasons/flight/index.ts",
+        "gitBlobSha": "265c57807d830c30cd0a5ece3a18cf88fb3e3cfb"
+      },
+      {
+        "path": "packages/utility/source/kingdom/seasons/flight/light-whisperer.ts",
+        "gitBlobSha": "3ab12e45f637503d7567e5e8537ada4c4bde224c"
+      },
+      {
+        "path": "packages/utility/source/kingdom/seasons/flight/lively-navigator.ts",
+        "gitBlobSha": "fc33c8d0f6054a8fb2a739ad3c7e96c4cc2f5de1"
+      },
+      {
+        "path": "packages/utility/source/kingdom/seasons/flight/talented-builder.ts",
+        "gitBlobSha": "45dd512721196efeb5e947b647590f7807aac993"
+      },
+      {
+        "path": "packages/utility/source/kingdom/seasons/flight/tinkering-chimesmith.ts",
+        "gitBlobSha": "9a90a8806515d989b514fb0952df66f5d3892e3c"
+      },
+      {
+        "path": "packages/utility/source/kingdom/seasons/gratitude/gratitude-guide.ts",
+        "gitBlobSha": "e656ce9cd296498654edf4b0cb4dc84bc058eb63"
+      },
+      {
+        "path": "packages/utility/source/kingdom/seasons/gratitude/greeting-shaman.ts",
+        "gitBlobSha": "21ad168357f494c215745ba276e38339c3c55267"
+      },
+      {
+        "path": "packages/utility/source/kingdom/seasons/gratitude/index.ts",
+        "gitBlobSha": "319da0130243bfcb0903eb01ef5eb26782720333"
+      },
+      {
+        "path": "packages/utility/source/kingdom/seasons/gratitude/leaping-dancer.ts",
+        "gitBlobSha": "c5183e8eb90c3e41359d87f030dfac28871019a6"
+      },
+      {
+        "path": "packages/utility/source/kingdom/seasons/gratitude/provoking-performer.ts",
+        "gitBlobSha": "9e1bd7c37d4488877255636b1c6e5d64d8df1222"
+      },
+      {
+        "path": "packages/utility/source/kingdom/seasons/gratitude/saluting-protector.ts",
+        "gitBlobSha": "562f04a6ad783aed45483924d9ae3ff2aa8dcdc7"
+      },
+      {
+        "path": "packages/utility/source/kingdom/seasons/gratitude/sassy-drifter.ts",
+        "gitBlobSha": "f7adaa7edf9580c9c44bc27c290c2ce9b00302ea"
+      },
+      {
+        "path": "packages/utility/source/kingdom/seasons/gratitude/stretching-guru.ts",
+        "gitBlobSha": "e19d4408fb76d2ade7ca5687420da10264b8ac30"
+      },
+      {
+        "path": "packages/utility/source/kingdom/seasons/index.ts",
+        "gitBlobSha": "21049d12da79afd9b3af31b20aa2be0792daf17f"
+      },
+      {
+        "path": "packages/utility/source/kingdom/seasons/lightmending/index.ts",
+        "gitBlobSha": "a0f59339560e648b31389fea2be8583d92b6d25a"
+      },
+      {
+        "path": "packages/utility/source/kingdom/seasons/lightmending/lightmending-champion.ts",
+        "gitBlobSha": "015f7236dbe01aef12cb9873edd538834e5c5e94"
+      },
+      {
+        "path": "packages/utility/source/kingdom/seasons/lightmending/lightmending-guide.ts",
+        "gitBlobSha": "28951aff4bfb4f858b400f71045b83664d9169dc"
+      },
+      {
+        "path": "packages/utility/source/kingdom/seasons/lightmending/lightmending-light-catcher.ts",
+        "gitBlobSha": "da009f858bb395661c8b83cb5ef0a504dfda47ea"
+      },
+      {
+        "path": "packages/utility/source/kingdom/seasons/lightmending/lightmending-light-pioneer.ts",
+        "gitBlobSha": "e86437b9993fa7293ccea57956a1bf63fbccb160"
+      },
+      {
+        "path": "packages/utility/source/kingdom/seasons/lightmending/lightmending-light-scholar.ts",
+        "gitBlobSha": "d9a934fe70ccb44432642f9ad7c2533f351b0d16"
+      },
+      {
+        "path": "packages/utility/source/kingdom/seasons/lightseekers/crab-whisperer.ts",
+        "gitBlobSha": "57648ada0ddade2c4580c1c69f47eebbe390c03a"
+      },
+      {
+        "path": "packages/utility/source/kingdom/seasons/lightseekers/doublefive-light-catcher.ts",
+        "gitBlobSha": "a07e7547b4c19db1d5a3d3d66627536369517714"
+      },
+      {
+        "path": "packages/utility/source/kingdom/seasons/lightseekers/index.ts",
+        "gitBlobSha": "af7e9f35b9906ce0b7cfe947e5792ebe19ebd9a0"
+      },
+      {
+        "path": "packages/utility/source/kingdom/seasons/lightseekers/laidback-pioneer.ts",
+        "gitBlobSha": "7d4b33c033f068568848d811835112241b7d2219"
+      },
+      {
+        "path": "packages/utility/source/kingdom/seasons/lightseekers/lightseeker-guide.ts",
+        "gitBlobSha": "e30d331ae4c4b11dea7b9645971d4cd8a1f25f94"
+      },
+      {
+        "path": "packages/utility/source/kingdom/seasons/lightseekers/piggyback-lightseeker.ts",
+        "gitBlobSha": "2b123f663c8ef7e5a5e46ffcdac67c23b9ee6d75"
+      },
+      {
+        "path": "packages/utility/source/kingdom/seasons/lightseekers/shushing-light-scholar.ts",
+        "gitBlobSha": "903593c9777211a8095d96ea9b2602d8c5d7682f"
+      },
+      {
+        "path": "packages/utility/source/kingdom/seasons/lightseekers/twirling-champion.ts",
+        "gitBlobSha": "61cf69957bd2fed0f5abcb5095e2469059ae1469"
+      },
+      {
+        "path": "packages/utility/source/kingdom/seasons/little-prince/beckoning-ruler.ts",
+        "gitBlobSha": "fbe784699cf46fa5d6c412a9a97176c84fd70ea9"
+      },
+      {
+        "path": "packages/utility/source/kingdom/seasons/little-prince/gloating-narcissist.ts",
+        "gitBlobSha": "74f8dea72b6effeb901d262f5a343707823fe9c7"
+      },
+      {
+        "path": "packages/utility/source/kingdom/seasons/little-prince/index.ts",
+        "gitBlobSha": "44efe85fe4dee1392f69b2a1a6c7c4549dd9122d"
+      },
+      {
+        "path": "packages/utility/source/kingdom/seasons/little-prince/slouching-soldier.ts",
+        "gitBlobSha": "ffc4ae6fe89ce0fe1ffc310b7611616472c625ca"
+      },
+      {
+        "path": "packages/utility/source/kingdom/seasons/little-prince/sneezing-geographer.ts",
+        "gitBlobSha": "f63c5190a331e3108cb56a5aa93a08616032cf89"
+      },
+      {
+        "path": "packages/utility/source/kingdom/seasons/little-prince/star-collector.ts",
+        "gitBlobSha": "c402dc1fcfd06d234be7eb1ab4d98ab541be6e84"
+      },
+      {
+        "path": "packages/utility/source/kingdom/seasons/little-prince/stretching-lamplighter.ts",
+        "gitBlobSha": "608064dd0b1cacbdd5829acf24ab66532a967487"
+      },
+      {
+        "path": "packages/utility/source/kingdom/seasons/little-prince/the-rose.ts",
+        "gitBlobSha": "b7d04750f3f960ec3ee54c9a148bfd38ac7a693a"
+      },
+      {
+        "path": "packages/utility/source/kingdom/seasons/migration/index.ts",
+        "gitBlobSha": "ce5571a8e8dc032ea4378a524af6a528443759e0"
+      },
+      {
+        "path": "packages/utility/source/kingdom/seasons/migration/migrating-bellmaker.ts",
+        "gitBlobSha": "a1a5960548ef338cc3d927073870baa26d442712"
+      },
+      {
+        "path": "packages/utility/source/kingdom/seasons/migration/migrating-bird-whisperer.ts",
+        "gitBlobSha": "ac0dce9060d00b20d5d0b9c4519e555c4d156ebb"
+      },
+      {
+        "path": "packages/utility/source/kingdom/seasons/migration/migrating-butterfly-charmer.ts",
+        "gitBlobSha": "dce67122e010b92bbe69c429ac9e0b71de551694"
+      },
+      {
+        "path": "packages/utility/source/kingdom/seasons/migration/migrating-jelly-whisperer.ts",
+        "gitBlobSha": "d1cd473db90f6d00727add487c5602d2dc22e05e"
+      },
+      {
+        "path": "packages/utility/source/kingdom/seasons/migration/migrating-manta-whisperer.ts",
+        "gitBlobSha": "d4ba28870fa82def9e307b8a9c9e2d3910b42577"
+      },
+      {
+        "path": "packages/utility/source/kingdom/seasons/migration/migration-guide.ts",
+        "gitBlobSha": "88658ea746062cfb5e3a24a25e5c1caf94a7b04a"
+      },
+      {
+        "path": "packages/utility/source/kingdom/seasons/moments/ascetic-monk.ts",
+        "gitBlobSha": "59bc3d7eaa7b2b27053bac94d8b2e4d6493ff313"
+      },
+      {
+        "path": "packages/utility/source/kingdom/seasons/moments/index.ts",
+        "gitBlobSha": "741b62a10d3c35bed0f6ba3914735499f711d900"
+      },
+      {
+        "path": "packages/utility/source/kingdom/seasons/moments/jolly-geologist.ts",
+        "gitBlobSha": "955591fa22c3e614d0ccbd7534fe24373d7b3e89"
+      },
+      {
+        "path": "packages/utility/source/kingdom/seasons/moments/moments-guide.ts",
+        "gitBlobSha": "302b0c3a65531dbc05c32a8e43f9ab61fcaa2ce2"
+      },
+      {
+        "path": "packages/utility/source/kingdom/seasons/moments/nightbird-whisperer.ts",
+        "gitBlobSha": "8e410ebfb35a9a2db45884e2daad4d5b2e5c5751"
+      },
+      {
+        "path": "packages/utility/source/kingdom/seasons/moments/reassuring-ranger.ts",
+        "gitBlobSha": "02e8ce2138cfa163ec33b7ee522e68d55102db8a"
+      },
+      {
+        "path": "packages/utility/source/kingdom/seasons/moomin/comfort-of-kindness.ts",
+        "gitBlobSha": "8cd25859b3fbe3ff8b03c99e7d440e04a3a5f72c"
+      },
+      {
+        "path": "packages/utility/source/kingdom/seasons/moomin/index.ts",
+        "gitBlobSha": "7fd3ca1f3dc928a2d2dc5e92433460b7c82ff265"
+      },
+      {
+        "path": "packages/utility/source/kingdom/seasons/moomin/inspiration-of-inclusion.ts",
+        "gitBlobSha": "e7d3dbd78173cbc6e894bd072a791aaa930aa1f2"
+      },
+      {
+        "path": "packages/utility/source/kingdom/seasons/moomin/sense-of-self.ts",
+        "gitBlobSha": "ba0042d9a97c953a359079625cfa3e32bfbecd12"
+      },
+      {
+        "path": "packages/utility/source/kingdom/seasons/moomin/spirit-of-adventure.ts",
+        "gitBlobSha": "b3d3761ef5d39f1ab40a2da33d46b69fefd0bd5e"
+      },
+      {
+        "path": "packages/utility/source/kingdom/seasons/moomin/the-moomin-storybook.ts",
+        "gitBlobSha": "5403e53875680a7b5cd6d36bd20d4c52688fa321"
+      },
+      {
+        "path": "packages/utility/source/kingdom/seasons/nesting/index.ts",
+        "gitBlobSha": "28f222a89fa8b1568c88099f5db5ac82031ca727"
+      },
+      {
+        "path": "packages/utility/source/kingdom/seasons/nesting/nesting-atrium.ts",
+        "gitBlobSha": "4b9fd60e06db8a9aa61eab2328e1e6a8bb6b78ab"
+      },
+      {
+        "path": "packages/utility/source/kingdom/seasons/nesting/nesting-guide.ts",
+        "gitBlobSha": "a2dd78fed178f333759575463e96d7753e11d58b"
+      },
+      {
+        "path": "packages/utility/source/kingdom/seasons/nesting/nesting-loft.ts",
+        "gitBlobSha": "117d6f0709d1ccdad0fd84b9b58ee0640d840ff8"
+      },
+      {
+        "path": "packages/utility/source/kingdom/seasons/nesting/nesting-nook.ts",
+        "gitBlobSha": "ba6124bb052ebd7e98acfbb0d0bec3984c40139f"
+      },
+      {
+        "path": "packages/utility/source/kingdom/seasons/nesting/nesting-solarium.ts",
+        "gitBlobSha": "bcc20846cff9ff0af102b531b0c43e716d67d64e"
+      },
+      {
+        "path": "packages/utility/source/kingdom/seasons/nine-coloured-deer/feudal-lord.ts",
+        "gitBlobSha": "e81cdc3fa14b1c1532ec4bcb6626ed2e228425f1"
+      },
+      {
+        "path": "packages/utility/source/kingdom/seasons/nine-coloured-deer/herb-gatherer.ts",
+        "gitBlobSha": "fdca92aebc14100e8061b0192061b0b05a438684"
+      },
+      {
+        "path": "packages/utility/source/kingdom/seasons/nine-coloured-deer/hunter.ts",
+        "gitBlobSha": "57182c859801e943e5536beca7b64294fb719c9d"
+      },
+      {
+        "path": "packages/utility/source/kingdom/seasons/nine-coloured-deer/index.ts",
+        "gitBlobSha": "c93931d200d056385671acee092c4dba60fe6b9a"
+      },
+      {
+        "path": "packages/utility/source/kingdom/seasons/nine-coloured-deer/princess.ts",
+        "gitBlobSha": "e93059da11c988ddb196424ae96eafc1c4379a5d"
+      },
+      {
+        "path": "packages/utility/source/kingdom/seasons/nine-coloured-deer/spirit-of-mural.ts",
+        "gitBlobSha": "130287672380b69a5900f7dfbf7214861d58f5fb"
+      },
+      {
+        "path": "packages/utility/source/kingdom/seasons/passage/index.ts",
+        "gitBlobSha": "2d2b6dce626d0e9f6365870d0e67e9b89fb5e7ff"
+      },
+      {
+        "path": "packages/utility/source/kingdom/seasons/passage/melancholy-mope.ts",
+        "gitBlobSha": "def2ed4662945ab9918b30fee519a267de18af5d"
+      },
+      {
+        "path": "packages/utility/source/kingdom/seasons/passage/oddball-outcast.ts",
+        "gitBlobSha": "f4e3ab8b7ac0ce222fdbaab5fdd53c92a21455cf"
+      },
+      {
+        "path": "packages/utility/source/kingdom/seasons/passage/overactive-overachiever.ts",
+        "gitBlobSha": "62eef5e58593a51124ff0f76d3c3ab960d0beb1d"
+      },
+      {
+        "path": "packages/utility/source/kingdom/seasons/passage/passage-guide.ts",
+        "gitBlobSha": "5019e1a859640b1e41d26929d8e62d108520417e"
+      },
+      {
+        "path": "packages/utility/source/kingdom/seasons/passage/tumbling-troublemaker.ts",
+        "gitBlobSha": "651fb58d09812efd45d765d0e40d151d2f2627ba"
+      },
+      {
+        "path": "packages/utility/source/kingdom/seasons/performance/forgetful-storyteller.ts",
+        "gitBlobSha": "964141159be31555d2b0d639d04bcab5fc532d32"
+      },
+      {
+        "path": "packages/utility/source/kingdom/seasons/performance/frantic-stagehand.ts",
+        "gitBlobSha": "8117e6d62a64221843affa2d85897f14619c0e2b"
+      },
+      {
+        "path": "packages/utility/source/kingdom/seasons/performance/index.ts",
+        "gitBlobSha": "1d4a14f5e8237497feca02f11fd53172954fa8a7"
+      },
+      {
+        "path": "packages/utility/source/kingdom/seasons/performance/mellow-musician.ts",
+        "gitBlobSha": "aa24ff7398de91c7c4ec92e80eb7e6550d5acc5a"
+      },
+      {
+        "path": "packages/utility/source/kingdom/seasons/performance/modest-dancer.ts",
+        "gitBlobSha": "9a1fd7f272eb504d0890688827edc7162d66d1ba"
+      },
+      {
+        "path": "packages/utility/source/kingdom/seasons/performance/performance-guide.ts",
+        "gitBlobSha": "1582566840cd355b000729d570ad618cdbe193e4"
+      },
+      {
+        "path": "packages/utility/source/kingdom/seasons/prophecy/index.ts",
+        "gitBlobSha": "327daaaccd347875a2dde0ec4f16dd6372a276f4"
+      },
+      {
+        "path": "packages/utility/source/kingdom/seasons/prophecy/prophecy-guide.ts",
+        "gitBlobSha": "e359acf17fd8b74435f9c12c6a516b718cc9bcc1"
+      },
+      {
+        "path": "packages/utility/source/kingdom/seasons/prophecy/prophet-of-air.ts",
+        "gitBlobSha": "37bc759db567205d330aa0c49c8bea44b6a09ebe"
+      },
+      {
+        "path": "packages/utility/source/kingdom/seasons/prophecy/prophet-of-earth.ts",
+        "gitBlobSha": "8f1483e06134c30bfb5a3197227638e10ce6f61b"
+      },
+      {
+        "path": "packages/utility/source/kingdom/seasons/prophecy/prophet-of-fire.ts",
+        "gitBlobSha": "d838ddf607eb46ff411feaa3046e00c67dda1026"
+      },
+      {
+        "path": "packages/utility/source/kingdom/seasons/prophecy/prophet-of-water.ts",
+        "gitBlobSha": "0993bdd18688a8eb6dc2d06d4751e59cd459247e"
+      },
+      {
+        "path": "packages/utility/source/kingdom/seasons/radiance/index.ts",
+        "gitBlobSha": "33adf8194854ef560d4e8493d21f930f0b75da97"
+      },
+      {
+        "path": "packages/utility/source/kingdom/seasons/radiance/radiance-greeting-shaman.ts",
+        "gitBlobSha": "5463187753310050fa2bdf46d7bf0f097d8ff543"
+      },
+      {
+        "path": "packages/utility/source/kingdom/seasons/radiance/radiance-guide.ts",
+        "gitBlobSha": "3d87d19c3ca27694b80d4fc1abd6bd6e3ea59e07"
+      },
+      {
+        "path": "packages/utility/source/kingdom/seasons/radiance/radiance-leaping-dancer.ts",
+        "gitBlobSha": "870c46a9d904fd6dcacc58ecf8c2ace89e85de42"
+      },
+      {
+        "path": "packages/utility/source/kingdom/seasons/radiance/radiance-provoking-performer.ts",
+        "gitBlobSha": "4cd566edb3e2b36e445d2ff84ba59e736fb8e5b8"
+      },
+      {
+        "path": "packages/utility/source/kingdom/seasons/remembrance/bereft-veteran.ts",
+        "gitBlobSha": "3f756737118b81b96d3c4db30de492e899c047c8"
+      },
+      {
+        "path": "packages/utility/source/kingdom/seasons/remembrance/index.ts",
+        "gitBlobSha": "e3215fb881d2bda02e058b9024523c95a6252d9e"
+      },
+      {
+        "path": "packages/utility/source/kingdom/seasons/remembrance/pleading-child.ts",
+        "gitBlobSha": "9f32c2299d2ae39d1cb206a053861e645b846e6b"
+      },
+      {
+        "path": "packages/utility/source/kingdom/seasons/remembrance/remembrance-guide.ts",
+        "gitBlobSha": "49146b25761eb105ccc29a1188603257f198bd2e"
+      },
+      {
+        "path": "packages/utility/source/kingdom/seasons/remembrance/tiptoeing-tea-brewer.ts",
+        "gitBlobSha": "cd755df519ce6d4a53e07b067b4d27adbab84242"
+      },
+      {
+        "path": "packages/utility/source/kingdom/seasons/remembrance/wounded-warrior.ts",
+        "gitBlobSha": "288c3f107710cc4bba4c47cb9beb6aff6dd91920"
+      },
+      {
+        "path": "packages/utility/source/kingdom/seasons/revival/echo-of-an-abandoned-refuge.ts",
+        "gitBlobSha": "119bbb0fbf18492403a0911a919bfb6156894e55"
+      },
+      {
+        "path": "packages/utility/source/kingdom/seasons/revival/hopeful-steward.ts",
+        "gitBlobSha": "4a0f15b0d0b8dc6a7d59ec6f3b0a86751cedd1a6"
+      },
+      {
+        "path": "packages/utility/source/kingdom/seasons/revival/index.ts",
+        "gitBlobSha": "aaaa36a3517e68d9f70c373a8ded7539909f8d82"
+      },
+      {
+        "path": "packages/utility/source/kingdom/seasons/revival/memory-of-a-lost-village.ts",
+        "gitBlobSha": "29514d6e3ac64374838db917fcc052f4b13aa471"
+      },
+      {
+        "path": "packages/utility/source/kingdom/seasons/revival/remnant-of-a-forgotten-haven.ts",
+        "gitBlobSha": "c0383b67aa0273e3cd62cc10d19c3e16417dc4c0"
+      },
+      {
+        "path": "packages/utility/source/kingdom/seasons/revival/vestige-of-a-deserted-oasis.ts",
+        "gitBlobSha": "ed7f963491cb871c79895aba1c38521b6fe4d048"
+      },
+      {
+        "path": "packages/utility/source/kingdom/seasons/rhythm/admiring-actor.ts",
+        "gitBlobSha": "4eb05c5773b4a023aafb158c2952c4a780f509c6"
+      },
+      {
+        "path": "packages/utility/source/kingdom/seasons/rhythm/festival-spin-dancer.ts",
+        "gitBlobSha": "aaefee4409e30c137ba8377e52fe10e5337d89b2"
+      },
+      {
+        "path": "packages/utility/source/kingdom/seasons/rhythm/index.ts",
+        "gitBlobSha": "447dfb780383b7ade226ca26183667d962b5ea35"
+      },
+      {
+        "path": "packages/utility/source/kingdom/seasons/rhythm/respectful-pianist.ts",
+        "gitBlobSha": "792225dfc8fc48130a51bcda04c222ab33f955e0"
+      },
+      {
+        "path": "packages/utility/source/kingdom/seasons/rhythm/rhythm-guide.ts",
+        "gitBlobSha": "75aefa6c483223599d709a52ffc79b54fbf0e1a2"
+      },
+      {
+        "path": "packages/utility/source/kingdom/seasons/rhythm/thoughtful-director.ts",
+        "gitBlobSha": "a5d8560f8fa8cb388fc34690fac7c3b2f83a3161"
+      },
+      {
+        "path": "packages/utility/source/kingdom/seasons/rhythm/troupe-greeter.ts",
+        "gitBlobSha": "5bc6e261695ffa427f08310dc140385b4c269421"
+      },
+      {
+        "path": "packages/utility/source/kingdom/seasons/rhythm/troupe-juggler.ts",
+        "gitBlobSha": "1bdb278648483f8ca838f42311601a10697680ad"
+      },
+      {
+        "path": "packages/utility/source/kingdom/seasons/sanctuary/chill-sunbather.ts",
+        "gitBlobSha": "960375dc06127b0428eb8c1c2cd9c09cbd61a491"
+      },
+      {
+        "path": "packages/utility/source/kingdom/seasons/sanctuary/grateful-shell-collector.ts",
+        "gitBlobSha": "dc0e0e3cc2307ed8f32641c2e4d07343ed49ad60"
+      },
+      {
+        "path": "packages/utility/source/kingdom/seasons/sanctuary/hiking-grouch.ts",
+        "gitBlobSha": "dca0fbc576ca0bc1ce39d1c8b5b3135da73bfbc8"
+      },
+      {
+        "path": "packages/utility/source/kingdom/seasons/sanctuary/index.ts",
+        "gitBlobSha": "c50a9f842571ff64eb07b137125eb9e4de70197e"
+      },
+      {
+        "path": "packages/utility/source/kingdom/seasons/sanctuary/jelly-whisperer.ts",
+        "gitBlobSha": "111052a0b5970a02645f548b9c011bcd3f2fe75e"
+      },
+      {
+        "path": "packages/utility/source/kingdom/seasons/sanctuary/rallying-thrillseeker.ts",
+        "gitBlobSha": "e0b8f3efb0e42468dadb3db82fa10c01360b7de4"
+      },
+      {
+        "path": "packages/utility/source/kingdom/seasons/sanctuary/sanctuary-guide.ts",
+        "gitBlobSha": "c055424799b04d6f01c98c7dbcb8e1e066684334"
+      },
+      {
+        "path": "packages/utility/source/kingdom/seasons/sanctuary/timid-bookworm.ts",
+        "gitBlobSha": "613da13b9dd03a9d8d94f76a55a116ac2c50075d"
+      },
+      {
+        "path": "packages/utility/source/kingdom/seasons/shattering/ancient-darkness.ts",
+        "gitBlobSha": "281d42a8d3c7f1ac461b128a7c940a8e7491bf8e"
+      },
+      {
+        "path": "packages/utility/source/kingdom/seasons/shattering/ancient-light.ts",
+        "gitBlobSha": "b3ff773098db41292108f8903828c2d41137822c"
+      },
+      {
+        "path": "packages/utility/source/kingdom/seasons/shattering/index.ts",
+        "gitBlobSha": "ab34d41c4354cc9135176e96e1bdbc10c40aa520"
+      },
+      {
+        "path": "packages/utility/source/kingdom/seasons/shattering/the-void-of-shattering.ts",
+        "gitBlobSha": "1547fd9de190e750182890908f94d909f90cc2bb"
+      },
+      {
+        "path": "packages/utility/source/kingdom/seasons/two-embers-part-1/caring-companion.ts",
+        "gitBlobSha": "20c93d7e5c87da39473ad5514b4a9b1ebdfd99b5"
+      },
+      {
+        "path": "packages/utility/source/kingdom/seasons/two-embers-part-1/index.ts",
+        "gitBlobSha": "4d6130a33141ffebf68b39fc6fa5c16b404c01a8"
+      },
+      {
+        "path": "packages/utility/source/kingdom/seasons/two-embers-part-1/resourceful-recluse.ts",
+        "gitBlobSha": "b9e6ebc8ce0c1adf1166f246aad7bd49d35ff9aa"
+      },
+      {
+        "path": "packages/utility/source/kingdom/seasons/two-embers-part-1/scarred-sentry.ts",
+        "gitBlobSha": "5769fde9fbcad1850536ff1d5ef33f5266d8438d"
+      },
+      {
+        "path": "packages/utility/source/kingdom/seasons/two-embers-part-1/stern-shepherd.ts",
+        "gitBlobSha": "5d658e116cce07e2c91a5c5f6fbc5e465e8c3e4a"
+      },
+      {
+        "path": "packages/utility/source/kingdom/seasons/two-embers-part-1/tender-toymaker.ts",
+        "gitBlobSha": "057ee6573b1798989be8be4ab8ffbf02e9625fba"
+      },
+      {
+        "path": "packages/utility/source/kingdom/seasons/two-embers-part-1/vault-elders-lantern.ts",
+        "gitBlobSha": "0ae3bdca18fb9a138acec36ab5c97dfe970ea87d"
+      },
+      {
+        "path": "packages/utility/source/locales/en-gb.ts",
+        "gitBlobSha": "f1cf1917d2627040d46672140b7e8d597441bd3a"
+      },
+      {
+        "path": "packages/utility/source/models/season.ts",
+        "gitBlobSha": "30a9b87278b30aeff172ad4a511a51ddd028f665"
+      },
+      {
+        "path": "packages/utility/source/models/spirits.ts",
+        "gitBlobSha": "e572b0d1aa9b72136791a63a0b986b2a253b8f71"
+      },
+      {
+        "path": "packages/utility/source/season.ts",
+        "gitBlobSha": "794a4b355d7ba8695f1ccc019cb8e78e36f531a6"
+      },
+      {
+        "path": "packages/utility/source/utility/functions.ts",
+        "gitBlobSha": "184f373e1b8cc2d77115e19415ed722d22acf0b0"
+      },
+      {
+        "path": "packages/utility/source/utility/spirits.ts",
+        "gitBlobSha": "77a32fcc658f064e04ce94e9e4fbcdd2266b94a4"
+      }
+    ],
+    "transport": "public-repository",
+    "status": "pinned-snapshot"
+  },
+  "importReport": {
+    "accepted": 1808,
+    "rejected": [],
+    "excluded": 1155,
+    "unknownCategory": 489,
+    "unknownCost": 815
+  }
+}

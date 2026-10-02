@@ -1,0 +1,18 @@
+# K15 — ThatSkyApplication public utility catalogue
+
+Approved by the user for Real Hub Feature V1 (2026-10-03). Community source, not an official TGC API. Existing K01–K14 gates and K13 pending legal confirmation remain unchanged.
+
+- Repository: https://github.com/thatskyapplication/thatskyapplication
+- Pinned revision: `74007cf878ef44c764eb5a143ef01d4c80982509`.
+- License: [packages/utility/LICENSE](https://github.com/thatskyapplication/thatskyapplication/blob/74007cf878ef44c764eb5a143ef01d4c80982509/packages/utility/LICENSE), MIT, Copyright (c) 2025 Jiralite. Full notice ships at `public/licenses/thatskyapplication-utility.txt`; UI links source and notice.
+- Source paths: `packages/utility/source/cosmetics.ts`, `locales/en-gb.ts`, `season.ts`, `utility/spirits.ts`, `catalogue.ts`, season/realm spirit definitions. Complete path/blob checksums are in the generated manifest; utility model/helper files were inspected for semantics. Website catalogue helpers were read as reference only, not copied.
+- Transport: intentionally public GitHub repository/raw files, no authentication. No live API integrated and no private game endpoint used. No undocumented rate limit is assumed; bounded six-request concurrency, pinned cache and HTTP error fail closed.
+- Normalization: `tsa-v1`; stable numeric enum IDs → `tsa-cosmetic-N`, `tsa-spirit-N`, `tsa-season-N`. Verified English locale names retained; if missing, compose source spirit + source common label, or retain the original enum identifier. No machine translation of proper names.
+- Mapping: explicit `CosmeticCommon` classifications, otherwise unambiguous enum suffix/prefix; conflicts/ambiguous records remain `unknown`. Outfits, shoes, expressions, music sheets and props are not forced into project wearable slots. Currency/progression/consumable reward nodes are excluded from V1.
+- Costs: explicit literal amounts only; preserve source currency labels. Missing costs remain unknown. Explicit zero stays numeric zero; “Unlocked by default” documentation yields default/free acquisition. Seasonal/current variants, pass flags and bundle prices stay separate. `money` has no declared market/currency in the imported field: retain its raw value separately, do not invent USD/VND or convert it into integer CurrencyAmount.
+- Scope/unknowns: event relations, event offers, market-specific IAP observations, availability dates and total unlock paths are not imported. This snapshot does not confirm current sale availability. Original enum records outside imported offers retain unknown cost/origin.
+- Provenance: public SourceRecord per source file, pinned revision/path, import timestamp, MIT attribution; field and acquisition provenance retained. No images, textures, models or assets are imported.
+
+Reproduce with `pnpm import:tsa`. Raw source cache is outside the checkout. Static TypeScript AST parsing never runs upstream code; parser/validation/checksum errors stop publication and leave the existing release intact. Import report includes accepted/rejected reasons, exclusions and unknown counts. `pnpm build` validates the generated release and its checksums. Update the pin, timestamp, normalization/catalogue version and explicit client release imports together for a new release.
+
+Output: `data/public/tsa-v1-74007cf878ef/` (manifest plus normalized items/lookup/spirits/seasons/provenance envelopes). Only published, non-fixture, internally valid records are exported. Catalogue scope is 1,808 entries; 1,155 excluded nodes; 0 rejected records; 489 unclassified and 815 without imported known cost. No claim that all upstream fields or every source gate is complete.

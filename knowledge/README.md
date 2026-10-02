@@ -1,6 +1,6 @@
 # Knowledge Base — sổ nguồn
 
-Cơ sở duy nhất: [mục 3 của brief](../docs/PROJECT_BRIEF.md). Chưa gọi API, scrape, mở trang hay xác minh nguồn bên ngoài trong lần scaffold này. Đây là tham chiếu cứng cho thiết kế, không phải báo cáo thử nghiệm kết nối.
+Cơ sở scaffold: [mục 3 của brief](../docs/PROJECT_BRIEF.md). K01–K14 bên dưới là hồ sơ gốc; trạng thái scaffold không phải bằng chứng kết nối. **K15 bổ sung được user duyệt cho Real Hub Feature V1:** [ThatSkyApplication public utility](15-thatskyapplication.md), đã kiểm tra revision/giấy phép và import catalogue; không thay đổi gate của các nguồn gốc.
 
 “Đã sẵn sàng dùng” bên dưới mô tả hướng triển khai text theo brief; **không** có nghĩa endpoint, schema response, giấy phép hoặc dữ liệu hiện tại đã được kiểm chứng. Mọi adapter phải qua bước xác minh ở Phase 1. Với đường dẫn không có trong brief, giữ `sourceUrl=null` cho tới khi xác minh; không bịa URL. Các link tên miền chỉ được chuẩn hóa từ tên miền ghi trong brief, chưa xác nhận đường dẫn chi tiết.
 

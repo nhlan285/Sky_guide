@@ -10,11 +10,13 @@
   },
   "scripts": {
     "dev": "vite",
-    "build": "pnpm typecheck && vite build",
+    "build": "pnpm validate:catalog && pnpm typecheck && vite build",
     "lint": "eslint . --max-warnings 0",
     "typecheck": "tsc --noEmit",
     "test": "node --test tests/data/*.test.mjs",
-    "preview": "vite preview"
+    "preview": "vite preview",
+    "import:tsa": "node scripts/import-tsa.mjs",
+    "validate:catalog": "node scripts/validate-catalog.mjs"
   },
   "dependencies": {
     "react": "19.3.0",

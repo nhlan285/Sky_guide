@@ -1,10 +1,14 @@
 import { ContentState } from '../../shared/ui/ContentState'
-import { Link } from 'react-router-dom'
+import { Link, useNavigate } from 'react-router-dom'
 import { Button, SectionCard, StatusBadge, TextInput } from '../../shared/ui/primitives'
 import { useLocale } from '../../shared/i18n/useLocale'
+import { catalogueSummary } from '../../data/itemLookup/summary.ts'
+import { itemCopy } from '../items/copy.ts'
 
 export function Hub() {
-  const { t } = useLocale()
+  const { t, locale } = useLocale()
+  const navigate = useNavigate()
+  const copy = itemCopy[locale]
   return (
     <>
       <div className="page-intro hub-hero">
@@ -14,11 +18,31 @@ export function Hub() {
       </div>
 
       <aside className="source-strip" aria-label={t('hub.sourceLabel')}>
-        <StatusBadge tone="info">{t('status.building')}</StatusBadge>
+        <StatusBadge tone="info">{copy.sourceBadge}</StatusBadge>
         <p>{t('hub.source')}</p>
       </aside>
 
       <div className="hub-grid">
+        <SectionCard id="item-lookup" title={t('hub.items')} className="hub-grid__wide hub-lookup" badge={<StatusBadge tone="info">{copy.sourceBadge}</StatusBadge>}>
+          <div className="hub-lookup__layout"><div><p className="section-description">{t('hub.items.desc')}</p>
+            <p className="hub-lookup__count">{catalogueSummary?.accepted.toLocaleString(locale) ?? '—'} <span>{copy.total}</span></p>
+            <p className="section-note">{copy.snapshot}</p><Link to="/items" className="text-link">{copy.browse} ↗</Link>
+          </div>
+          {catalogueSummary ? <form className="lookup-controls" onSubmit={event => {
+            event.preventDefault()
+            const form = new FormData(event.currentTarget)
+            const params = new URLSearchParams()
+            const query = String(form.get('q') ?? '').trim()
+            const slot = String(form.get('slot') ?? '')
+            if (query) params.set('q', query)
+            if (slot) params.set('slot', slot)
+            navigate(`/items${params.size ? `?${params.toString()}` : ''}`)
+          }}>
+            <TextInput id="item-query" name="q" label={t('hub.items.name')} type="search" placeholder={copy.placeholder} />
+            <div className="lookup-controls__row"><div className="input-field"><label htmlFor="item-slot">{t('hub.items.slot')}</label><select id="item-slot" name="slot"><option value="">{t('hub.items.all')}</option>{['hair', 'mask', 'cape', 'accessory'].map(slot => <option value={slot} key={slot}>{copy.slots[slot]}</option>)}</select></div><Button type="submit">{t('hub.items.search')}</Button></div>
+          </form> : <p role="alert">{copy.unavailable}</p>}
+          </div>
+        </SectionCard>
         <SectionCard id="season-event" title={t('hub.season')} className="section-card--featured">
           <p className="section-description">{t('hub.season.desc')}</p>
           <ContentState kind="unavailable" message={t('hub.season.reason')} />
@@ -32,25 +56,6 @@ export function Hub() {
 
         <SectionCard id="official-news" title={t('hub.news')} className="hub-grid__wide section-card--news">
           <ContentState kind="unavailable" message={t('hub.news.reason')} />
-        </SectionCard>
-
-        <SectionCard id="item-lookup" title={t('hub.items')}>
-          <p className="section-description">{t('hub.items.desc')}</p>
-          <div className="lookup-controls" role="group" aria-label={t('hub.items.group')} aria-describedby="lookup-reason">
-            <TextInput id="item-query" label={t('hub.items.name')} type="search" placeholder={t('hub.items.placeholder')} readOnly aria-describedby="lookup-reason" />
-            <div className="lookup-controls__row">
-              <div className="input-field">
-                <label htmlFor="item-slot">{t('hub.items.slot')}</label>
-                <select id="item-slot" disabled aria-describedby="lookup-reason">
-                  <option>{t('hub.items.all')}</option>
-                </select>
-              </div>
-              <Button disabled aria-describedby="lookup-reason">{t('hub.items.search')}</Button>
-            </div>
-          </div>
-          <div id="lookup-reason">
-            <ContentState kind="unavailable" message={t('hub.items.reason')} />
-          </div>
         </SectionCard>
 
         <SectionCard id="wardrobe" title={t('hub.wardrobe')} className="section-card--wardrobe" badge={<StatusBadge>{t('status.demo')}</StatusBadge>}>

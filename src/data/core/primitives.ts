@@ -7,7 +7,7 @@ export type DateTime = string
 // DATA_SCHEMA explicitly defines this source vocabulary; existence is checked separately.
 export const SOURCE_IDS = [
   'K01', 'K02', 'K03', 'K04', 'K05', 'K06', 'K07',
-  'K08', 'K09', 'K10', 'K11', 'K12', 'K13', 'K14',
+  'K08', 'K09', 'K10', 'K11', 'K12', 'K13', 'K14', 'K15',
 ] as const
 export type SourceId = typeof SOURCE_IDS[number]
 export type SourceRegistry = ReadonlySet<SourceId>

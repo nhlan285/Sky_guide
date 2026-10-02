@@ -2,6 +2,8 @@
 
 Nguồn sự thật: [PROJECT_BRIEF](../PROJECT_BRIEF.md). Các quyết định triển khai là **đề xuất** cụ thể để chuyển thành task, không thêm nguồn dữ liệu hoặc thông tin game ngoài brief. Đọc kèm [PRD](../PRD.md), [Architecture](../ARCHITECTURE.md), [Schema](../DATA_SCHEMA.md), [UX](../UX_GUIDELINES.md), [Legal](../LEGAL_STATUS.md) và [Knowledge Base](../../knowledge/README.md).
 
+Real Hub Feature V1 (2026-10-03): user duyệt riêng [K15 ThatSkyApplication](../../knowledge/15-thatskyapplication.md). Source verification + mapping + adapter K15 đã triển khai, ghim revision và MIT notice; không đánh dấu các task nguồn Wiki K01–K12 hoặc P1-D13 toàn bộ DONE. Catalogue Item Lookup có 1.808 records và route `/items`, `/items/:id`. P2-H01 đã có manifest/normalized loader cho Item Lookup; task tổng thể và P2-D12 vẫn OPEN (chưa có loader/pipeline đầy đủ cho các module khác). Wardrobe hiện có giữ nguyên; không triển khai thêm tính năng Wardrobe.
+
 ## Cách dùng task list
 
 Mỗi hàng là một task độc lập để copy: **ID + module + việc/đầu ra + nghiệm thu + phụ thuộc + độ phức tạp + gate**. Không có ước lượng thời gian. Task chưa có trạng thái nghiệm thu cụ thể vẫn là **chưa làm**; các hàng DONE ghi ngày và phạm vi bằng chứng. Không đánh dấu API, calibration, asset, UI hoặc deploy đã sẵn sàng chỉ vì có tài liệu.
@@ -190,8 +192,8 @@ Phụ thuộc phase là điều kiện nền; cột phụ thuộc bổ sung quan
 
 | ID | Việc / đầu ra cụ thể | Nghiệm thu | Phụ thuộc | Độ phức tạp | Gate |
 |---|---|---|---|---|---|
-| P3-H01 | Xây catalog list và filter tên/slot/season/spirit | Filter phối hợp cho kết quả đúng, empty rõ, liên kết item ổn định | P2-H01, P3-U02 | Trung bình | DATA K01/K02 |
-| P3-H02 | Xây item detail và acquisition cost breakdown | Tách loại tiền, unknown/free; hiển thị source, season/spirit và asset placeholder | P3-H01 | Trung bình | — |
+| P3-H01 | **DONE 2026-10-03** — Catalog list/filter tên/slot/season/spirit, category/acquisition, pagination và empty trên `/items` | Filter phối hợp cho kết quả đúng, empty rõ, liên kết item ổn định; nguồn K15 được user duyệt thay cho K01/K02 trong slice này | Item Lookup loader K15, P3-U02 | Trung bình | K15 verified; không đóng DATA K01/K02 |
+| P3-H02 | **DONE 2026-10-03** — `/items/:id` có acquisition breakdown và nguồn ghim | Tách loại tiền, unknown/free/0, seasonal/current/pass/bundle; season/spirit và glyph tự tạo có nhãn; không khẳng định giá live | P3-H01 | Trung bình | — |
 | P3-H03 | Xây spirit/tree view và tổng đường unlock | Node keyboard reachable; tổng incomplete nếu thiếu cost; không cộng trùng node | P2-D06, P3-H02 | Cao | DATA K02 |
 | P3-H04 | Xây TS history table/timeline và filter | Nhiều lần ghé cùng spirit được giữ; disputed được gắn nhãn | P2-D07, P3-U02 | Trung bình | DATA K03/K04 |
 | P3-H05 | Tạo prediction view với methodology và empty state | Không có method/input đáng tin thì không có dự đoán giả; chưa xác nhận không hiện như lịch chắc chắn | P0-H03, P3-H04 | Trung bình | Q09 |
