@@ -39,7 +39,9 @@ Số dòng, độ rộng cột là đề xuất cho wireframe. Không tạo widg
 
 Desktop: cột trái bộ lọc slot/search + item list, giữa preview, cột phải size/dye/outfit controls. Mobile: preview đầu, thanh slot ngay dưới, item drawer/grid cuộn, controls size/dye mở theo nhóm; nút lưu/share luôn dễ tìm nhưng không che item. Preview phải có diện tích ổn định để so sánh thay đồ.
 
-Widgets: size selector (mã gốc), dòng effective size + lý do override; danh sách item đang mặc với nút tháo; dye region picker chỉ khi hỗ trợ; reset dye; lưu local; copy link; trạng thái asset. Tháo chibi trả lại base size, UI không “nhảy mất” lựa chọn. Asset chưa có thì hình học/nhãn mô tả, không khoảng preview trống. Không dùng icon Wiki như bằng chứng đã có model try-on.
+Widgets: size selector (mã có evidence; demo dùng mã `fixture-`), dòng effective size + lý do override; danh sách item đang mặc với nút tháo; dye region picker chỉ khi hỗ trợ; reset dye; lưu local; copy link; trạng thái asset. Theo Q08, tháo override cuối cùng trả lại base size; nếu còn rule khác thì derive lại, UI giữ lựa chọn base. “Chibi override” hiện chỉ là behavioral fixture, chưa có mapping size thật. Asset chưa có thì hình học/nhãn mô tả, không khoảng preview trống. Không dùng icon Wiki như bằng chứng đã có model try-on.
+
+Capacity từng slot theo config dự án; equip vượt giới hạn báo lý do và giữ selection, replace là thao tác rõ. Slot multiple hiển thị từng item với nút tháo riêng. Conflict rule/missing anchor/revision phải có cảnh báo chữ; preview tạm deterministic không được hiện như outfit đã resolve hợp lệ. Demo luôn có nhãn fixture/self-created placeholder, không gọi cardinality hay calibration demo là behavior game đã xác minh.
 
 ## Các trang Hub
 

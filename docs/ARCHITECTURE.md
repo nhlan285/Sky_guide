@@ -80,20 +80,41 @@ P0-D01 chốt **contract và ranh giới**. Types/validators (P2-D01–D04), imp
 
 Scripts import và JSON public sẽ được thêm ở task dữ liệu tương ứng; shell/build hiện có không tích hợp nguồn thật.
 
+## Contract Wardrobe 2D đã chốt — P0-W01 / P0-W02 / Q08 (2026-10-02)
+
+Phase 0 và Phase 4 dùng **SVG paper-doll 2D**, silhouette/layer hình học hoàn toàn self-created. Bộ [fixture SVG](../tests/fixtures/wardrobe/README.md) là bằng chứng trực quan P0-W01, mở độc lập để xem; không được import vào app, public catalog hoặc manifest Preview/Production. Đây là **configurable project contract / fixture behavior**, không phải verified Sky game behavior. Phase 0 chốt contract và fixture tĩnh; renderer, picker, resolver, bảng calibration versioned và manifest demo đầy đủ vẫn thuộc các task sau.
+
+### Slot, lớp và resolver
+
+- `WardrobeConfig` versioned ghim canonical model/revision và `SlotPolicy` cho từng slot. `maxItems` là số nguyên ≥ 1: 1 cho single-item, > 1 cho multiple items; không có default ngầm khi thiếu policy. Fixture policy chọn 1 cho sáu slot; một ví dụ cấu hình accessory=2 chỉ chứng minh capability. Không suy ra số phụ kiện game cho phép.
+- `equippedBySlot: Record<slot, ID[]>` giữ mảng kể cả slot đơn, không lặp ID; mảng rỗng là đã tháo hết. Equip vượt capacity bị reject với lý do, selection trước đó giữ nguyên; thay item slot đơn là thao tác replace tường minh. Import/restore cũng validate theo config đang ghim, không tự cắt mảng. Thứ tự mảng không quyết định z-order.
+- Một item có 0..N `LayerBinding`; mỗi binding trỏ asset qua `AssetRegistry`, có revision, anchor key và `zIndex` riêng. Ví dụ item giả `fixture-item-wrap` có `fixture-binding-rear`/`fixture-binding-front`; đây là capability nhiều lớp, không mô tả asset game hiện có. Render tăng dần `zIndex` (số lớn vẽ sau), bằng nhau sort `binding.id` theo thứ tự chuỗi code-unit ổn định, không theo locale/item ID trong component. Silhouette cũng có z-order trong cấu hình, không là lớp đặc biệt hardcode.
+- Compatibility chỉ dùng evidence hoặc rule `fixture=true`. Thu thập mọi rule có trigger đang active (tất cả `triggerItemIds` phải được equip), sort `priority` giảm dần rồi `rule.id` tăng dần theo code-unit. Với `set_effective_size`, priority lớn nhất thắng; rule thấp hơn không ghi đè winner. `reject_combination` báo selection không tương thích, không tự tháo item hoặc mutate selection.
+- Validator phải báo **error** khi hai rule có thể cùng active, cùng priority và ghi giá trị khác nhau lên cùng target; không chỉ kiểm tra outfit hiện tại. Runtime nếu gặp content này trả `rule_conflict` và cảnh báo với rule IDs; stable ID có thể chọn preview tạm deterministic nhưng không biến content thành hợp lệ hoặc cho persist/share kết quả như đã resolve. Không random winner.
+- Mỗi lần equip/unequip/đổi base size đều derive lại từ selection: `effectiveSizeCode = baseSizeCode` trước khi áp winner. Override không mutate base size, không persist effective state. Tháo item override cuối cùng trả về base size; nếu còn rule active khác thì derive lại theo priority. Mã size thật/chibi mapping vẫn unknown; ví dụ resolver chỉ dùng code có tiền tố `fixture-`.
+
+### Anchor và transform
+
+Canonical model có `modelId` và `modelRevision`; hệ tọa độ normalized `[0,1]`, origin top-left, x tăng sang phải/y tăng xuống dưới. Asset SVG khai báo viewBox hợp lệ; pivot normalized theo asset được đổi về đơn vị canonical trước transform. Tra anchor bằng khóa đầy đủ `(modelId, modelRevision, effectiveSizeCode, slot, anchorName, assetId, assetRevision, bindingId, bindingRevision)`, không dùng anchor size/revision khác làm fallback ngầm. Binding/asset đổi revision làm calibration cũ không còn khớp; `calibrationRevision` nhận diện bộ calibration đã review.
+
+Anchor lưu trong **canonical chưa scale**; `scaleItem` là scale cục bộ của binding, không chứa scale nhân vật. `p_model = anchorModel + scaleItem * rotate(p_asset - pivotAsset)`; sau đó một group nhân vật áp `ScaleTable` đúng một lần, rồi viewBox/viewport map tới pixel đúng một lần. Không nhân scale nhân vật vào cả anchor lẫn layer, không bake scale viewport vào bảng. `ScaleTable` lookup `(modelId, modelRevision, effectiveSizeCode)`.
+
+Thiếu policy/size/asset/anchor hoặc lệch revision trả trạng thái rõ `missing_slot_policy`, `missing_size`, `missing_asset`, `missing_anchor`, `revision_mismatch`; layer liên quan dùng placeholder có nhãn hoặc bị bỏ cùng cảnh báo. Không đoán tọa độ/scale “đúng”; phần selection hợp lệ vẫn giữ để người dùng sửa. Giá trị số trong fixture chỉ minh họa hình học tự tạo, không là calibration thật.
+
 ## State Wardrobe và phép biến đổi
 
 State đầu vào `WardrobeSelection`: `schemaVersion`, `baseSizeCode`, `equippedBySlot`, `dyeByItemRegion`. State dẫn xuất: `effectiveSizeCode`, `appliedRuleIds`, `renderLayers`, cảnh báo asset/anchor thiếu. Không persist state dẫn xuất để tránh lỗi khi đổi bảng/rule.
 
-Trình tự xử lý đề xuất:
+Trình tự xử lý theo contract Q08:
 
 1. Validate ID item/slot, khả năng phối và định dạng màu.
-2. Thu thập rule từ item đang mặc; sắp theo `priority`, rồi ID ổn định. Xung đột ngang ưu tiên phải bị báo trong validate nội dung; tie-break runtime chỉ giúp kết quả ổn định.
-3. Tính effective size mà không đổi `baseSizeCode`; rule mask chibi là ví dụ yêu cầu, mã size thực tế chưa được cung cấp.
+2. Thu thập applicable rules; sắp `priority` giảm dần rồi ID ổn định, xử lý conflict theo contract trên.
+3. Derive effective size từ `baseSizeCode` mà không đổi base; “chibi override” chỉ là behavioral fixture, mã size thực tế chưa được cung cấp.
 4. Tra `ScaleTable` theo effective size + model revision. Thiếu entry thì hiện lỗi/placeholder rõ, không dùng ngầm một tỷ lệ “đúng”.
-5. Tra `AnchorTable` theo model + size + slot/anchor + asset revision; build layer order từ cấu hình đã chốt.
+5. Tra `AnchorTable` theo khóa model/revision + effective size + slot/anchor + asset/binding revision ở trên; build layer order từ cấu hình.
 6. Áp dye chỉ lên region/mask được khai báo; ghép các lớp và render.
 
-Đề xuất hệ tọa độ canonical có gốc góc trên trái, trục x sang phải/y xuống dưới; tọa độ anchor chuẩn hóa [0,1]. Transform asset cục bộ: `p_model = anchorModel + scaleItem * rotate(p_asset - pivotAsset)`, sau đó áp scale nhân vật/viewport đúng một lần. `pivotAsset` chuyển sang cùng đơn vị canonical trước tính. Bảng calibration phải khai báo rõ scale theo size được áp ở tầng nào, tránh nhân scale hai lần. Thứ tự lớp **chưa phải thông tin game**: file cấu hình cho phép cape tách trước/sau và phụ kiện có anchor riêng nếu asset yêu cầu.
+Contract tọa độ/transform và thứ tự lớp được chốt ở mục Q08 trên. Cape tách trước/sau và phụ kiện có anchor riêng là capability cấu hình, **chưa phải thông tin game**.
 
 `AssetRegistry` tách item khỏi file: cùng item có preview placeholder hoặc asset được xác nhận sau này; mỗi entry có revision, renderer kind, source, legal status và capability. 3D về sau có thể cung cấp renderer khác, nhưng không đưa pipeline 3D vào phần sẵn sàng triển khai. Toàn bộ full asset: **pending legal confirmation** ([K13](../knowledge/13-tgc-assets.md)).
 

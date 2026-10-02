@@ -52,8 +52,8 @@ Phụ thuộc phase là điều kiện nền; cột phụ thuộc bổ sung quan
 
 | ID | Việc / đầu ra cụ thể | Nghiệm thu | Phụ thuộc | Độ phức tạp | Gate |
 |---|---|---|---|---|---|
-| P0-W01 | Chốt renderer 2D và bộ silhouette/layer tự tạo để thử | Demo phân biệt khỏi full asset; không cần file game/Wiki download để bắt đầu | — | Trung bình | — |
-| P0-W02 | Viết quyết định cardinality slot, anchor và quy tắc xung đột override | Có ví dụ logic dùng ID giả; chưa khẳng định mã size/chibi thật | P0-W01, Q08 | Trung bình | Q08 |
+| P0-W01 | **DONE 2026-10-02** — Chốt SVG paper-doll 2D và silhouette/layer self-created | Contract tọa độ/transform trong Architecture; [fixture tĩnh](../../tests/fixtures/wardrobe/README.md) có silhouette + rear/front hình học, fixture=true, không game/Wiki download; chưa triển khai renderer Phase 4 | — | Trung bình | — |
+| P0-W02 | **DONE 2026-10-02** — Chốt cardinality, anchor/revision và conflict/override (Q08 CLOSED) | Architecture/DATA_SCHEMA khóa config maxItems, mảng equip, multi-binding/z-order, anchor key, priority/conflict error, base/effective size và ví dụ ID/code fixture; không claim behavior game | P0-W01 | Trung bình | — |
 
 ### Hub
 
@@ -430,7 +430,6 @@ Nhóm A đã được **chốt ngày 2026-09-29** để mở khóa Phase 0. Đâ
 | ID | Câu hỏi / quyết định cần ghi | Đề xuất hiện tại, chưa chốt | Chốt trước / vai trò |
 |---|---|---|---|
 | Q02 | Ai duyệt leak, quy trình nào, dùng tool nào, nguồn Discord nào được phép? | Intake riêng tư + review theo revision + export public approved; không auto-publish/bot ingest mặc định | P0-H02/P1-H02; maintainer/editor |
-| Q08 | Slot phụ kiện cho nhiều item không? Thứ tự layer và rule conflict/size thật là gì? | Cấu hình cardinality, rule priority; code demo không tự gán số size/chibi thật | P0-W02/P4; Wardrobe + data |
 | Q09 | Dự đoán TS bằng phương pháp nào, trình bày mức chắc chắn ra sao? | Nhãn dự đoán + method/input version; chưa có phương pháp được chốt thì để unavailable | P0-H03/P3-H05; product + data |
 | Q10 | Market/currency/platform nào trước? Quy đổi candle/heart và gói mixed theo chứng cứ nào? | Chọn thị trường sau xác nhận; tách proportional/checkout, heart thiếu mapping không tính; không tự thêm FX source | P0-H01/P5-H07; product + data |
 | Q11 | QR Sky encode gì, protocol nào, dữ liệu public nào có thể đọc không tài khoản? | Xác minh với nguồn tham khảo trong brief/mẫu được phép; decode local và fail closed với payload lạ | P1-H03/P5-U01; lead + UX |
@@ -441,3 +440,9 @@ Nhóm A đã được **chốt ngày 2026-09-29** để mở khóa Phase 0. Đâ
 | ID | Quyết định đã chốt | Nghiệm thu / phần còn lại |
 |---|---|---|
 | Q01 | **CLOSED** — Release 1 dùng JSON normalized versioned trong Git, không DB server. Public projection tại `data/public/<catalogVersion>/`; manifest ghim schema/dataset/provenance/alias/tombstone/asset version. Raw, draft, reviewed, quarantine và evidence chỉ ở workspace riêng tư ngoài repo/client/build. Export allowlist, published + non-fixture + FK public + approval đúng revision + rights gates. Contract chi tiết trong [Architecture](../ARCHITECTURE.md#kho-dữ-liệu-đã-chốt--p0-d01--q01-2026-10-01) và [DATA_SCHEMA](../DATA_SCHEMA.md#public-catalog-contract--q01). | P0-D01 DONE; P2-D01–D12/P2-I01/P2-H01 vẫn chưa triển khai. Nguồn/mapping thật vẫn DATA-gated; Q02/Q12/Q16/TGC/RIGHTS không được gỡ bởi quyết định này. |
+
+### E. Đã chốt bổ sung — 2026-10-02
+
+| ID | Quyết định đã chốt | Nghiệm thu / phần còn lại |
+|---|---|---|
+| Q08 | **CLOSED** — Configurable project contract / fixture behavior, không phải verified Sky game behavior. SlotPolicy.maxItems hỗ trợ single/multiple, fixture mặc định 1 cho sáu slot; equippedBySlot giữ ID[]. Một item nhiều binding; zIndex tăng dần rồi binding ID ổn định. Anchor key ghim model/revision + effective size + slot/anchor + asset/binding revisions; missing/revision mismatch có trạng thái rõ, scale nhân vật/viewport mỗi tầng đúng một lần. Applicable rules sort priority giảm dần; cùng priority ghi khác target value là validator error, runtime ID tie-break chỉ preview tạm. Override derive từ base không mutate/persist effective state; tháo trigger derive lại. Ví dụ chỉ ID/code fixture. Chi tiết [Architecture](../ARCHITECTURE.md#contract-wardrobe-2d-đã-chốt--p0-w01--p0-w02--q08-2026-10-02) / [Schema](../DATA_SCHEMA.md#contract-q08--configurable-project--fixture-behavior-2026-10-02). | P0-W01/P0-W02 DONE; fixture SVG tĩnh là bằng chứng Phase 0. P1-W01 manifest, P2-D04 validator và toàn bộ Phase 4 vẫn chưa triển khai; size/chibi/calibration/compatibility game thật cần evidence, full assets pending legal confirmation. |

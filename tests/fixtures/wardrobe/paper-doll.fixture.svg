@@ -1,0 +1,22 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1 1" width="320" height="320" role="img" aria-labelledby="fixture-title fixture-description" data-fixture="true">
+  <title id="fixture-title">Self-created placeholder — fixture=true</title>
+  <desc id="fixture-description">Generic geometric paper-doll with rear layer, silhouette and front layer. Project-internal fixture, not a Sky asset or real calibration.</desc>
+  <metadata>fixture=true; placeholder=true; self-created placeholder; modelId=fixture-model-generic; modelRevision=fixture-r1; sourceId=null; provenanceIds=[]; legalStatus=self_created_placeholder; static illustration only</metadata>
+  <rect width="1" height="1" fill="#f4f4f0" />
+  <g id="fixture-binding-rear" data-z-index="-1" data-fixture="true">
+    <path d="M .28 .36 L .72 .36 L .79 .79 L .21 .79 Z" fill="#9cb8bd" />
+  </g>
+  <g id="fixture-binding-silhouette" data-z-index="0" data-fixture="true" fill="#4a525a">
+    <circle cx=".5" cy=".23" r=".105" />
+    <rect x=".36" y=".35" width=".28" height=".32" rx=".05" />
+    <rect x=".25" y=".37" width=".08" height=".29" rx=".04" />
+    <rect x=".67" y=".37" width=".08" height=".29" rx=".04" />
+    <rect x=".37" y=".65" width=".1" height=".24" rx=".04" />
+    <rect x=".53" y=".65" width=".1" height=".24" rx=".04" />
+  </g>
+  <g id="fixture-binding-front" data-z-index="1" data-fixture="true">
+    <rect x=".33" y=".43" width=".34" height=".08" rx=".02" fill="#d6b277" />
+  </g>
+  <text x=".5" y=".065" text-anchor="middle" font-family="sans-serif" font-size=".04" fill="#303840">SELF-CREATED PLACEHOLDER</text>
+  <text x=".5" y=".97" text-anchor="middle" font-family="sans-serif" font-size=".04" fill="#303840">fixture=true / NOT A SKY ASSET</text>
+</svg>
