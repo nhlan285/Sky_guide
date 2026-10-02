@@ -1,6 +1,6 @@
 # Legal status — theo brief, chưa xác nhận pháp lý mới
 
-Nguồn: [brief mục 3, 4, 7](PROJECT_BRIEF.md), [sổ nguồn](../knowledge/README.md). Không có việc tra cứu pháp lý bên ngoài, gửi ticket hoặc nhận phản hồi mới trong lần scaffold này. Những câu đánh giá rủi ro bên dưới được giữ từ brief, không phải ý kiến pháp lý độc lập.
+Nguồn: [brief mục 3, 4, 7](PROJECT_BRIEF.md), [sổ nguồn](../knowledge/README.md). Trạng thái hiện tại đã ghi nhận phản hồi Sky Player Support / Ray theo thông tin được cung cấp cho dự án; repo không tự truy xuất phản hồi. Task Phase 0 ngày 2026-10-02 chỉ chốt quy trình/tài liệu, không tra cứu pháp lý bên ngoài hoặc gửi follow-up. Những câu đánh giá rủi ro bên dưới được giữ từ brief, không phải ý kiến pháp lý độc lập.
 
 ## Tình trạng liên hệ TGC
 
@@ -12,7 +12,7 @@ Các nội dung đã hỏi theo brief:
 2. Quyền truy cập dữ liệu 3D wardrobe/cosmetics đầy đủ hơn.
 3. Xin chỉ đúng team IP/Creator Community nếu Support không hỗ trợ trực tiếp.
 
-Người theo dõi ticket chưa được chỉ định. Đề xuất maintainer cập nhật sổ bên dưới khi có phản hồi; không tự gửi tin hoặc theo dõi định kỳ trong lần scaffold.
+**Owner theo dõi: Maintainer / repository owner** (vai trò chủ repo đã chốt ở Q15). Maintainer chịu trách nhiệm follow-up, lưu evidence, review và cập nhật public summary; Legal / Rights giữ vai trò review nguồn/quyền đã ghi trong KB, không tạo owner ticket thứ hai. [Contract Q16, scope, draft follow-up và ledger template](TGC_FOLLOW_UP.md) được chốt ngày 2026-10-02. Không tự gửi tin hoặc theo dõi định kỳ trong task này.
 
 ## Rủi ro giữ nguyên từ brief
 
@@ -30,7 +30,7 @@ Người theo dõi ticket chưa được chỉ định. Đề xuất maintainer 
 
 ## Danh sách asset cần placeholder
 
-**Hiện trạng repo:** chưa có asset hình ảnh/model nào được tải hoặc sử dụng. Danh sách sau là kế hoạch thay thế cần thiết, không phải inventory file đang tồn tại.
+**Hiện trạng repo:** chưa tải hoặc sử dụng asset game/Wiki/model thật. P0-W01 đã có [fixture SVG hình học tự tạo](../tests/fixtures/wardrobe/README.md), không là Sky asset/calibration thật. Danh sách sau là kế hoạch thay thế, không phải inventory full assets.
 
 | Asset | Trạng thái | Phương án tạm | Điều kiện thay |
 |---|---|---|---|
@@ -38,6 +38,7 @@ Người theo dõi ticket chưa được chỉ định. Đề xuất maintainer 
 | Mask, hair, cape, top, bottom, accessory layers đầy đủ | pending legal confirmation | Hình layer tự tạo; icon Wiki chỉ placeholder có nhãn/credit khi dùng | Phản hồi TGC có phạm vi phù hợp + asset đủ metadata |
 | Dye masks/region asset đầy đủ | pending legal confirmation | Vùng tô màu demo tự tạo | Quyền sửa đổi/hiển thị + mask/region được xác minh |
 | Model 3D/rig/texture | pending legal confirmation | Không cần 3D ở phase đầu, dùng 2D demo | Cấp quyền cụ thể và asset được cung cấp hợp lệ; lập scope riêng sau |
+| Model 3D lookalike/reference do dự án tự tạo, giống nhân vật Sky | pending clarification / pending legal confirmation | Không tạo/tích hợp trong scope hiện tại; dùng hình học generic | Câu hỏi riêng trong follow-up; self-created không tự đồng nghĩa được phép, không áp quyền placeholder generic sang lookalike |
 | Icon trang phục Wiki | IP của TGC, chưa có xác nhận quyền trong brief | Có thể thay bằng icon hình học; nếu dùng Wiki phải giữ pending/placeholder | Xác nhận căn cứ dùng phù hợp; không đổi nhãn thành approved chỉ vì public |
 | Map độ phân giải cao, map cộng đồng | Cần quyền/credit theo từng tác giả | Text guide và sơ đồ riêng placeholder | Kiểm tra tác giả và quyền tương ứng hoặc bản tự vẽ phù hợp |
 
@@ -53,16 +54,20 @@ Không có đường triển khai rip game, can thiệp client hoặc tích hợ
 
 | Field | Giá trị hiện tại |
 |---|---|
-| Ticket ID / ngày gửi / người theo dõi | Chưa được cung cấp trong brief |
+| Owner theo dõi / cập nhật | Maintainer / repository owner; Legal / Rights review phạm vi theo KB |
+| Ticket ID / ngày gửi / ngày nhận | Chưa được cung cấp; chỉ lưu private khi có, không tự điền |
 | Kênh | Support trong game / Helpshift |
-| Trạng thái | Đã nhận phản hồi Support (Ray); permission scope chưa được giải quyết rõ; full assets pending legal confirmation, cần follow-up |
+| Trạng thái | pending_clarification — đã nhận phản hồi Support (Ray), không phải explicit permission; full assets pending legal confirmation; Full AssetRegistry path vẫn đóng |
 | Phản hồi và ngày nhận | Đã nhận phản hồi từ Sky Player Support / Ray (chưa xác nhận phạm vi quyền; không lưu transcript riêng tư trong public repo) |
 | Quyền/phạm vi được xác nhận | Chưa có xác nhận explicit permission (các quyền access, use, display, redistribute, modify đều cần làm rõ) |
 | Hạn chế, credit, thời hạn | Chưa biết |
-| Bằng chứng nội bộ | Chưa được cung cấp; không yêu cầu đưa transcript nhạy cảm vào repo public |
+| Evidence location / evidenceRef | `Sky Guide private workspace → Legal → TGC` là tên logic ngoài repo; chưa provisioning storage hoặc nhận raw evidence. evidenceRef hiện null; maintainer chỉ cấp reference khi record private thật tồn tại |
+| Follow-up state | Draft clarification package revision `tgc-follow-up-draft-v1` đã chuẩn bị; chưa gửi, không gán sentAt/ticket mới |
 | Asset IDs được bao phủ | Chưa có |
 | Quyết định release | Hub/placeholder có thể tiếp tục; full asset pending legal confirmation |
 
-Khi có phản hồi: maintainer cập nhật hồ sơ K13 + bảng này + rights evidence của Asset, rà map/IP bên thứ ba riêng, chạy gate export và kiểm tra credit. Nếu phạm vi bị thu hồi/không cho phép, đổi asset sang placeholder và cập nhật cache/data version để gỡ bản phát hành liên quan. Không tự tái công bố asset đã bị từ chối.
+Khi có phản hồi hoặc scope/restriction thay đổi: maintainer lưu bản request/response đúng revision trong ledger private, review phạm vi, rồi chỉ cập nhật projection công khai theo allowlist ở [contract](TGC_FOLLOW_UP.md#ownership-và-evidence-boundary--q16). K13 + bảng này + rights evidence của Asset phải nhất quán; không ghi raw evidence vào Git/client/build. Rà map/IP bên thứ ba riêng, chạy gate export và kiểm tra credit. Nếu phạm vi bị thu hồi/không cho phép, đổi asset sang placeholder và cập nhật cache/data version để gỡ bản phát hành liên quan. Không tự tái công bố asset đã bị từ chối.
+
+**Q16 CLOSED** chỉ chốt owner, nơi lưu logic, trách nhiệm cập nhật, public/private boundary và ledger template. Q16 closure does not imply asset permission. Quyền hiện tại vẫn `pending_clarification / pending legal confirmation`; draft chưa gửi, evidence private chưa được cung cấp, Phase 1/8 vẫn phải review chứng cứ thật trước mọi thay đổi gate.
 
 Task theo dõi nằm trong Phase 0 và Phase 8 của [Implementation Plan](plan/IMPLEMENTATION_PLAN.md); Phase 8 là nhánh có điều kiện, không phải điều kiện hoàn thành release placeholder.

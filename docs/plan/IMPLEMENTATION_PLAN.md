@@ -38,15 +38,15 @@ Phụ thuộc phase là điều kiện nền; cột phụ thuộc bổ sung quan
 |---|---|---|---|---|---|
 | P0-D01 | **DONE 2026-10-01** — Chốt kho JSON versioned và ranh giới public/raw/draft (Q01) | Contract trong Architecture/DATA_SCHEMA: `data/public/<catalogVersion>/`, manifest/version/provenance/FK/alias; raw/draft/reviewed/evidence ở workspace private ngoài repo; ignore/upload boundaries được kiểm tra; chưa implement nguồn thật/export pipeline | — | Trung bình | — |
 | P0-D02 | **DONE 2026-10-01** — Lập bảng owner kiểm tra từng K01–K14 và thông tin đang thiếu | Ma trận 14/14 nguồn trong Knowledge Base có role owner, trạng thái hiện tại, thông tin thiếu cần xác minh, việc tiếp theo bám roadmap Phase 1 và gate/phụ thuộc; không điền URL/endpoint phỏng đoán | P0-D01 | Thấp | — |
-| P0-D03 | Chỉ định người theo dõi TGC và vị trí lưu evidence riêng tư | Legal ledger ghi người phụ trách nếu đã chốt; đã nhận phản hồi Support (Ray) nhưng permission scope chưa rõ, full asset gate vẫn pending | Q16 | Thấp | Q16 |
+| P0-D03 | **DONE 2026-10-02** — Chốt owner/evidence handling (Q16 CLOSED) | [Legal contract](../TGC_FOLLOW_UP.md#ownership-và-evidence-boundary--q16): Maintainer / repository owner, nơi logic Sky Guide private workspace → Legal → TGC ngoài repo, trách nhiệm update và public allowlist; chưa provisioning storage/nhận raw evidence; full asset gate pending | — | Thấp | — |
 
 ### Legal / TGC permission track
 
 | ID | Việc / đầu ra cụ thể | Nghiệm thu | Phụ thuộc | Độ phức tạp | Gate |
 |---|---|---|---|---|---|
-| P0-L01 | Chốt **phạm vi xin quyền** cho full wardrobe/3D assets | Danh sách tách rõ model, rig, texture, dye mask/layer data, calibration/metadata; ghi mục đích hiển thị tương tác, cách phân phối và fallback placeholder | P0-D03, P1-W02 có thể cập nhật sau | Thấp | — |
-| P0-L02 | Soạn **permission request package** gửi TGC | Có mô tả Sky Guide, free/non-commercial, không mod/rip client, loại asset cần dùng, cách asset được lưu/hiển thị/chia sẻ, attribution dự kiến và câu hỏi về quyền use/display/redistribute/modify | P0-L01 | Trung bình | — |
-| P0-L03 | Chốt nơi lưu bằng chứng riêng tư và template legal ledger | Có trường channel/contact, ticket/email ID, ngày gửi, nội dung gửi, file đính kèm, phản hồi, phạm vi quyền, follow-up và trạng thái; không commit raw private evidence vào public repo | P0-D03 | Thấp | — |
+| P0-L01 | **DONE 2026-10-02** — Chốt scope cần clarification sau phản hồi Support | [Scope](../TGC_FOLLOW_UP.md#permission-scope--p0-l01): full TGC, Wiki/media, community, generic self-created và 3D lookalike/reference riêng; model/rig/texture/dye/calibration, interactive/repo/distribution/restrictions/revocation/access; chưa có permission | P0-D03, P1-W02 có thể cập nhật sau | Thấp | — |
+| P0-L02 | **DONE 2026-10-02** — Soạn follow-up clarification package | [Draft](../TGC_FOLLOW_UP.md#follow-up-clarification-package--p0-l02) tgc-follow-up-draft-v1 ready-to-send, **chưa gửi**; ghi nhận Ray đã phản hồi, hỏi explicit rights/interactive/open-source/lookalike/credit/revocation/source/contact; không mod/rip, private source nếu restricted, fallback generic | P0-L01 | Trung bình | — |
+| P0-L03 | **DONE 2026-10-02** — Chốt private evidence location và ledger template | [Template](../TGC_FOLLOW_UP.md#private-evidence-ledger-template--p0-l03) có evidenceRef/channel/private ticket/time, request/response revision/scope, finite rights/status, interactive/open-source/lookalike, credit/restrictions/revocation/coverage/follow-up/decision/reviewer/public summary; current pending_clarification, không raw evidence trong repo | P0-D03 | Thấp | — |
 
 ### Wardrobe
 
@@ -342,7 +342,7 @@ Phụ thuộc phase là điều kiện nền; cột phụ thuộc bổ sung quan
 | P7-I02 | Infra | Đo bundle/load/render trên tập thiết bị đã chốt và sửa bottleneck | Ghi số đo thật và tiêu chí budget đã chốt; không tải toàn ảnh/map ngay trên Hub | P7-I01 | Trung bình | — |
 | P7-I03 | Infra | Chuẩn bị production deployment Vercel và runbook rollback | Preview tương ứng commit/data manifest, deep links/cache/assets đạt smoke; không phát sinh dịch vụ trả phí ngoài phạm vi | P7-I01–P7-I02, P7-W01, P7-H01, P7-U01, P7-D01 | Trung bình | — |
 | P7-I04 | Infra | Thực hiện release khi đến bước triển khai và xác minh URL production | Các route chính phục vụ đúng version; rollback bundle đã thử ở môi trường phù hợp; ghi URL/version thực | P7-I03 và các gate module bật | Trung bình | — |
-| P7-D02 | Data pipeline | Bàn giao lịch cập nhật thủ công, xử lý nguồn lỗi và quyền bị thu hồi | Có người phụ trách, dry-run, diff/review, rollback và danh sách task còn blocked | P2-I02, P7-I04 | Thấp | Q16 |
+| P7-D02 | Data pipeline | Bàn giao lịch cập nhật thủ công, xử lý nguồn lỗi và quyền bị thu hồi | Có người phụ trách, dry-run, diff/review, rollback và danh sách task còn blocked | P2-I02, P7-I04, P0-D03 | Thấp | — |
 
 ## Phase 8 — full wardrobe/asset khi đủ điều kiện
 
@@ -423,7 +423,6 @@ Nhóm A đã được **chốt ngày 2026-09-29** để mở khóa Phase 0. Đâ
 | Q04 | ThatSkyAPI/apppricinglab truy xuất kiểu nào, có endpoint/export/CORS/giới hạn gì? | Verify trước; ThatSkyAPI direct khi khả thi, proxy hẹp nếu cần; AppPricingLab manual nếu không có contract | P1-D05/D12/P3-I01; data + infra |
 | Q12 | Phiên bản CC-BY-SA và credit cụ thể cho text/Wiki/sheet/map là gì? | Ghi theo nguồn đã kiểm chứng; tách attribution text và quyền media, không gán license dự án thay source | P1-U01/P7-D01; maintainer |
 | Q14 | Nguồn nào trong danh sách có đủ season/event dates và cập nhật thường xuyên? | K01/K06 nếu có bằng chứng; thiếu thì inactive/unavailable; không tự thêm feed | P1-H01/P3-H06; data/editor |
-| Q16 | Ai theo dõi ticket TGC và cập nhật dữ liệu, evidence nằm đâu? | Người duy trì giữ evidence riêng, repo chỉ có trạng thái/range quyền phù hợp | P0-D03/P7-D02; maintainer |
 
 ### C. Còn mở — chốt khi tới nhánh Phase 5–8
 
@@ -446,3 +445,4 @@ Nhóm A đã được **chốt ngày 2026-09-29** để mở khóa Phase 0. Đâ
 | ID | Quyết định đã chốt | Nghiệm thu / phần còn lại |
 |---|---|---|
 | Q08 | **CLOSED** — Configurable project contract / fixture behavior, không phải verified Sky game behavior. SlotPolicy.maxItems hỗ trợ single/multiple, fixture mặc định 1 cho sáu slot; equippedBySlot giữ ID[]. Một item nhiều binding; zIndex tăng dần rồi binding ID ổn định. Anchor key ghim model/revision + effective size + slot/anchor + asset/binding revisions; missing/revision mismatch có trạng thái rõ, scale nhân vật/viewport mỗi tầng đúng một lần. Applicable rules sort priority giảm dần; cùng priority ghi khác target value là validator error, runtime ID tie-break chỉ preview tạm. Override derive từ base không mutate/persist effective state; tháo trigger derive lại. Ví dụ chỉ ID/code fixture. Chi tiết [Architecture](../ARCHITECTURE.md#contract-wardrobe-2d-đã-chốt--p0-w01--p0-w02--q08-2026-10-02) / [Schema](../DATA_SCHEMA.md#contract-q08--configurable-project--fixture-behavior-2026-10-02). | P0-W01/P0-W02 DONE; fixture SVG tĩnh là bằng chứng Phase 0. P1-W01 manifest, P2-D04 validator và toàn bộ Phase 4 vẫn chưa triển khai; size/chibi/calibration/compatibility game thật cần evidence, full assets pending legal confirmation. |
+| Q16 | **CLOSED** — Maintainer / repository owner theo dõi TGC; Legal / Rights review theo KB. Evidence ở nơi logic **Sky Guide private workspace → Legal → TGC** ngoài repo; owner lưu/review đúng revision và update public allowlist status/evidenceRef/scope summary/follow-up state. Ledger template và draft chưa gửi tại [TGC follow-up contract](../TGC_FOLLOW_UP.md); chưa tạo storage hoặc lưu raw evidence. **Q16 closure does not imply asset permission.** | P0-D03/P0-L01–L03 DONE về quy trình; K13 pending_clarification / full assets pending legal confirmation, Full AssetRegistry path đóng. Phase 1 cần evidence/gửi follow-up/review thật; TGC/RIGHTS và Phase 8 giữ gate. |
