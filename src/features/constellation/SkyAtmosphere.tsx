@@ -1,7 +1,7 @@
 import { useId } from 'react'
 import type { CSSProperties } from 'react'
 import { AmbientCanvas } from './AmbientCanvas'
-import { useTheme } from './useTheme'
+import { useTheme } from './useTheme.tsx'
 
 const cloudShapes = [
   'M-100 270 C60 250 130 200 270 216 C335 172 438 184 508 212 C630 200 648 256 782 258 C913 236 1090 261 1220 278 C1020 290 945 316 802 305 C607 340 477 300 310 318 C148 303 40 302-100 320Z',

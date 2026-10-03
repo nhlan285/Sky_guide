@@ -5,7 +5,7 @@ import { SectionCard } from '../shared/ui/primitives'
 import { ConstellationLanding } from '../features/constellation/ConstellationLanding'
 import { SkyAtmosphere } from '../features/constellation/SkyAtmosphere'
 import { SkyControls } from '../features/constellation/SkyControls'
-import { ThemeProvider, useTheme } from '../features/constellation/useTheme'
+import { ThemeProvider, useTheme } from '../features/constellation/useTheme.tsx'
 import { LocaleProvider, useLocale } from '../shared/i18n/useLocale'
 import { SourceCredits } from '../features/items/SourceCredits.tsx'
 

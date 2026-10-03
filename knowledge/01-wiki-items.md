@@ -1,5 +1,24 @@
 # K01 — Sky Wiki (Fandom): item/cosmetic
 
+## Verified catalogue-media adapter — 2026-10-03
+
+The owner requested live public image URLs for local Item Catalogue testing.
+The public [MediaWiki API](https://sky-children-of-the-light.fandom.com/api.php)
+was queried successfully. Literal Lua module data, paginated category membership,
+page image relationships and `imageinfo` provide source revisions, actual
+thumbnail/original URLs, uploader and extmetadata. The complete scan, module
+revisions, exclusions and diagnostics are in
+[`data/wiki-media/discovery.json`](../data/wiki-media/discovery.json); current
+coverage is in [`report.json`](../data/wiki-media/report.json).
+
+See [reproducible pipeline and mapping rules](../docs/WIKI_MEDIA.md). Unknown
+image permission remains unverified; the CC-BY-SA text label from siteinfo is not
+applied to image rights. Factual enrichment is an overlay with conflicts and
+provenance, preserving verified catalogue values. No prices are inferred. The
+older unverified-endpoint notes below are historical brief assumptions.
+
+## Historical brief
+
 - **Nguồn/link:** Sky Wiki (Fandom). Brief không có URL wiki, tên module hoặc trang API chính xác; chưa có link truy cập đã xác minh.
 - **Dữ liệu theo brief:** tên, giá, slot; có module dữ liệu cấu trúc. Season/spirit liên quan cần kiểm tra các liên kết thực tế.
 - **Format:** MediaWiki API; chưa biết action, tên module, dạng nội dung module hoặc envelope response. Không khẳng định module là JSON: nội dung có thể cần parser riêng sau khi xem mẫu thật. JSON chuẩn hóa nội bộ không phải response upstream.

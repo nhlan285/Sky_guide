@@ -1,6 +1,7 @@
 {
   "$schema": "https://openapi.vercel.sh/vercel.json",
   "framework": "vite",
+  "git": { "deploymentEnabled": { "feature/item-real-media": false, "feature/item-asset-crawl": false } },
   "installCommand": "pnpm install --frozen-lockfile",
   "buildCommand": "pnpm lint && pnpm build",
   "outputDirectory": "dist",

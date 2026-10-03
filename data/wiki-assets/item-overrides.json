@@ -1,0 +1,11 @@
+{
+  "bindings": {
+    "Module:Spirits/data#basic_sit/hair": { "identifier": "BaseHair1", "reason": "Wiki Default hair is the first base hair; hair_b and hair_c are separate variants." },
+    "Module:Spirits/data#basic_sit/mask": { "identifier": "BaseMask", "reason": "Wiki Default mask is the catalogue Base mask." },
+    "Module:Spirits/data#basic_sit/cape": { "identifier": "BaseCape", "reason": "Wiki Default brown cape corresponds to the catalogue Base cape." },
+    "Module:Spirits/data#basic_sit/outfit": { "identifier": "BaseOutfit", "reason": "Wiki Default outfit corresponds to the catalogue Base outfit." }
+  },
+  "aliases": {},
+  "assets": {},
+  "rights": {}
+}

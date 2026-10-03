@@ -2,14 +2,18 @@ import { useEffect, useMemo, useRef } from 'react'
 import { Link, useParams, useSearchParams } from 'react-router-dom'
 import type { AcquisitionOption } from '../../data/catalog/index.ts'
 import { catalogResult } from '../../data/itemLookup/catalog.ts'
-import { costRepresentation, filterEntries, filtersFromParams, lookupById, updateFilterParams } from '../../data/itemLookup/model.ts'
-import type { LookupEntry } from '../../data/itemLookup/model.ts'
+import { activeFilterValues, clearFilterParams, contextualLookupUrl, costRepresentation, filterEntries, filtersFromParams, lookupById, updateFilterParams } from '../../data/itemLookup/model.ts'
+import type { FilterKey, LookupEntry } from '../../data/itemLookup/model.ts'
 import { useLocale } from '../../shared/i18n/useLocale'
 import { Button, SectionCard, TextInput } from '../../shared/ui/primitives'
 import { ItemThumbnail } from './ItemThumbnail.tsx'
-import { resolveItemImage } from '../../data/itemLookup/images.ts'
 import { SourceCredits } from './SourceCredits.tsx'
 import { itemCopy } from './copy.ts'
+import { useWikiCatalogue, useWikiDetail } from './useWikiMedia.ts'
+import { WikiMediaCredits } from './WikiMediaCredits.tsx'
+import { useItemAssets } from './useItemAssets.ts'
+import { ItemAssetCredits } from './ItemAssetCredits.tsx'
+import { imageSources } from '../../data/itemLookup/media.ts'
 
 const catalog = catalogResult.valid ? catalogResult.value : null
 const seasonNames = new Map(catalog?.seasons.map(s => [s.id, s.name.default]))
@@ -23,6 +27,10 @@ const options = {
 }
 const pageSize = 36
 
+function ContextLink({ filter, value, children, search }: { filter: FilterKey; value: string; children: string; search: string }) {
+  return <Link className="context-chip" to={contextualLookupUrl(new URLSearchParams(search), filter, value)}>{children}<span aria-hidden="true">↗</span></Link>
+}
+
 function Cost({ option }: { option: AcquisitionOption }) {
   const { locale } = useLocale()
   const copy = itemCopy[locale]
@@ -35,14 +43,13 @@ function ItemCard({ entry, search }: { entry: LookupEntry; search: string }) {
   const { locale } = useLocale()
   const copy = itemCopy[locale]
   const offer = entry.item.acquisitionOptions.find(o => o.costStatus !== 'unknown') ?? entry.item.acquisitionOptions[0]
-  const evidence = entry.offers.find(e => e.id === offer?.id)
   return <li><Link className="item-card" to={`/items/${entry.id}${search}`} aria-label={`${entry.item.name.default} — ${copy.open}`}>
     <ItemThumbnail entry={entry} />
-    <div className="item-card__body"><span className="item-card__category">{copy.categories[entry.category]}</span>
+    <div className="item-card__body">
     <h2>{entry.item.name.default}</h2>
+    <span className="item-card__category">{copy.categories[entry.category]}</span>
     <p className="item-card__origin">{entry.item.spiritIds.map(id => spiritNames.get(id)).filter(Boolean).join(' · ') || entry.item.seasonIds.map(id => seasonNames.get(id)).filter(Boolean).join(' · ') || copy.unknown}</p>
-    <div className="item-card__cost"><p>{offer ? <Cost option={offer} /> : copy.unknownCost}</p>{evidence ? <small>{copy.acquisitions[evidence.acquisition]}{evidence.seasonPass ? ` · ${copy.pass}` : ''}{evidence.bundle ? ` · ${copy.bundle}` : ''}</small> : null}</div>
-    <span className="item-card__open">{copy.open} <span aria-hidden="true">↗</span></span></div>
+    <div className="item-card__cost"><p>{offer ? <Cost option={offer} /> : copy.unknownCost}</p></div></div>
   </Link></li>
 }
 
@@ -50,24 +57,35 @@ function ItemDetail({ entry, search }: { entry: LookupEntry; search: string }) {
   const { locale } = useLocale()
   const copy = itemCopy[locale]
   const item = entry.item
-  const image = resolveItemImage(entry.image)
+  const wiki = useWikiDetail(entry.id)
+  const assets = useItemAssets(entry.id)
+  const primary = assets.value?.primary ?? entry.asset
+  const gallery = assets.value?.gallery ?? []
+  const wikiImages = [wiki.detail?.primaryId, ...(wiki.detail?.galleryIds ?? [])].flatMap(id => id && wiki.media?.[id] ? [wiki.media[id]] : [])
+  const previews = gallery.filter(image => ['worn-preview', 'alternate'].includes(image.kind))
+  const otherImages = gallery.filter(image => !previews.includes(image))
+  const mediaSources = imageSources(entry.images)
+  const relation = (ids: string[], names: Map<string, string>, filter: 'season' | 'spirit') => ids.length ? ids.map(id => names.has(id) ? <ContextLink key={id} filter={filter} value={id} search={search}>{names.get(id)!}</ContextLink> : <span key={id}>{copy.unknown}</span>) : copy.unknown
   const sources = catalog?.provenance.filter(source => item.provenanceIds.includes(source.id)) ?? []
   return <>
     <Link to={`/items${search}`} className="text-link">← {copy.back}</Link>
-    <div className="item-detail__hero"><div><ItemThumbnail key={entry.id} entry={entry} detail />
-      {image ? <p className="item-image-credit"><a href={image.sourceUrl}>{copy.imageCredit} ↗</a> · {image.credit} · <a href={image.permissionUrl}>{image.license}</a></p> : <p className="item-image-credit">{copy.imageNote}</p>}
-    </div><div><p className="eyebrow">{copy.categories[entry.category]}</p><h1 id="page-title" tabIndex={-1}>{item.name.default}</h1></div></div>
+    <div className="item-detail__hero"><div><ItemThumbnail key={entry.id} entry={entry} detail asset={primary} />
+    </div><div><p className="eyebrow">{copy.categories[entry.category]}</p><h1 id="page-title" tabIndex={-1}>{item.name.default}</h1><div className="item-detail__context">{relation(item.seasonIds, seasonNames, 'season')}{item.spiritIds.length ? relation(item.spiritIds, spiritNames, 'spirit') : null}</div></div></div>
+    {wiki.failed ? <p role="status">{copy.mediaUnavailable} <button type="button" className="button button--quiet" onClick={wiki.retry}>{copy.retry}</button></p> : null}
+    {assets.failed ? <p role="status">{copy.mediaUnavailable} <button type="button" className="button button--quiet" onClick={assets.retry}>{copy.retry}</button></p> : null}
+    {previews.length ? <section className="item-preview"><h2>{copy.wornPreview}</h2><div className="item-gallery">{previews.map(media => <figure key={media.mediaId}><ItemThumbnail entry={entry} asset={media} description={`${item.name.default} — ${media.kind === 'alternate' ? copy.alternateView : copy.wornPreview}`} /><figcaption>{media.kind === 'alternate' ? copy.alternateView : copy.wornPreview}</figcaption></figure>)}</div></section> : null}
+    {otherImages.length ? <section className="item-preview"><h2>{copy.previews}</h2><div className="item-gallery">{otherImages.map(media => <figure key={media.mediaId}><ItemThumbnail entry={entry} asset={media} description={`${item.name.default} — ${copy.referenceImage}`} /></figure>)}</div></section> : null}
     <div className="item-detail__grid">
       <div className="item-detail__facts">
-        <SectionCard id="item-identity" title={copy.identity}><dl className="item-facts"><dt>{copy.category}</dt><dd>{copy.categories[entry.category]}</dd><dt>{copy.slot}</dt><dd>{copy.slots[item.slot]}</dd></dl></SectionCard>
-        <SectionCard id="item-origin" title={copy.origin}><dl className="item-facts"><dt>{copy.season}</dt><dd>{item.seasonIds.map(id => seasonNames.get(id)).join(' · ') || copy.unknown}</dd><dt>{copy.spirit}</dt><dd>{item.spiritIds.map(id => spiritNames.get(id)).join(' · ') || copy.unknown}</dd></dl></SectionCard>
+        <SectionCard id="item-identity" title={copy.identity}><dl className="item-facts"><dt>{copy.category}</dt><dd>{entry.category !== 'unknown' ? <ContextLink filter="category" value={entry.category} search={search}>{copy.categories[entry.category]}</ContextLink> : copy.categories[entry.category]}</dd><dt>{copy.slot}</dt><dd>{item.slot !== 'unknown' ? <ContextLink filter="slot" value={item.slot} search={search}>{copy.slots[item.slot]}</ContextLink> : copy.unknown}</dd></dl></SectionCard>
+        <SectionCard id="item-origin" title={copy.origin}><dl className="item-facts"><dt>{copy.season}</dt><dd>{relation(item.seasonIds, seasonNames, 'season')}</dd><dt>{copy.spirit}</dt><dd>{relation(item.spiritIds, spiritNames, 'spirit')}</dd></dl></SectionCard>
         <SectionCard id="item-quality" title={copy.dataQuality}><p>{copy.qualityNote}</p><p className="section-note">{entry.categoryEvidence ?? copy.unknown}</p></SectionCard>
       </div>
       <SectionCard id="item-acquisition" title={copy.offers}>
         <p className="section-description">{copy.priceNote}</p>
         {item.acquisitionOptions.length ? <ol className="item-offers">{item.acquisitionOptions.map(option => {
           const evidence = entry.offers.find(offer => offer.id === option.id)!
-          return <li key={option.id}><h3>{copy.acquisitions[evidence.acquisition]}</h3><p className="item-offers__cost"><Cost option={option} /></p>
+          return <li key={option.id}><h3>{evidence.acquisition !== 'unknown' ? <ContextLink filter="acquisition" value={evidence.acquisition} search={search}>{copy.acquisitions[evidence.acquisition]}</ContextLink> : copy.unknown}</h3><p className="item-offers__cost"><Cost option={option} /></p>
             {evidence.money !== null ? <p>{evidence.money} · {copy.money}</p> : null}
             {evidence.seasonPass ? <p className="section-note">{copy.pass}</p> : null}
             {evidence.bundle ? <p className="section-note">{copy.bundle}</p> : null}
@@ -77,6 +95,9 @@ function ItemDetail({ entry, search }: { entry: LookupEntry; search: string }) {
       </SectionCard>
     </div>
     <SectionCard id="item-sources" title={copy.sources}>
+      <WikiMediaCredits detail={wiki.detail} media={wikiImages} />
+      <ItemAssetCredits assets={[...(primary ? [primary] : []), ...gallery]} />
+      {mediaSources.length ? <details className="item-media-sources"><summary>{copy.imageCredit} ({mediaSources.length})</summary><ul>{mediaSources.map((media, index) => <li key={`${media.sourceUrl}-${index}`}><a href={media.sourceUrl}>{media.sourceLabel} ↗</a><p>{media.reuseStatus === 'reference-only' ? copy.referenceOnly : `${media.credit} · ${media.license}`}</p></li>)}</ul></details> : null}
       <SourceCredits />
       <details className="item-technical"><summary>{copy.technicalMetadata}</summary><dl className="item-facts"><dt>{copy.upstreamId}</dt><dd>{entry.upstreamId}</dd><dt>{copy.identifier}</dt><dd><code>{entry.identifier}</code></dd></dl>
         <ul className="item-source-list">{sources.map(source => <li key={source.id}><a href={source.sourceUrl ?? undefined}>{source.sourceRecordKey}</a></li>)}</ul>
@@ -90,8 +111,9 @@ export function Items() {
   const [params, setParams] = useSearchParams()
   const { locale } = useLocale()
   const copy = itemCopy[locale]
+  const wiki = useWikiCatalogue()
   const { query, category, slot, season, spirit, acquisition } = filtersFromParams(params)
-  const results = useMemo(() => filterEntries(catalog?.entries ?? [], { query, category, slot, season, spirit, acquisition }), [query, category, slot, season, spirit, acquisition])
+  const results = useMemo(() => filterEntries(wiki.entries, { query, category, slot, season, spirit, acquisition }).sort((a, b) => Number(Boolean(b.asset)) - Number(Boolean(a.asset)) || a.item.name.default.localeCompare(b.item.name.default, 'en') || a.id.localeCompare(b.id, 'en')), [wiki.entries, query, category, slot, season, spirit, acquisition])
   const pageCount = Math.max(1, Math.ceil(results.length / pageSize))
   const parsedPage = Number(params.get('page') ?? 1)
   const page = Number.isSafeInteger(parsedPage) ? Math.min(pageCount, Math.max(1, parsedPage)) : 1
@@ -100,6 +122,10 @@ export function Items() {
   const heading = useRef<HTMLDivElement>(null)
   useEffect(() => { heading.current?.querySelector<HTMLElement>('#page-title')?.focus({ preventScroll: true }) }, [id])
   const changeFilter = (key: Parameters<typeof updateFilterParams>[1], value: string) => setParams(previous => updateFilterParams(previous, key, value), { replace: true })
+  const clear = () => setParams(previous => clearFilterParams(previous))
+  const active = activeFilterValues(params)
+  const filterLabel = (key: FilterKey) => key === 'q' ? copy.search : copy[key]
+  const filterValue = (key: FilterKey, value: string) => key === 'season' ? seasonNames.get(value) ?? value : key === 'spirit' ? spiritNames.get(value) ?? value : key === 'category' ? copy.categories[value as keyof typeof copy.categories] ?? value : key === 'slot' ? copy.slots[value] ?? value : key === 'acquisition' ? copy.acquisitions[value as keyof typeof copy.acquisitions] ?? value : value
   const select = (key: Parameters<typeof updateFilterParams>[1], label: string, values: readonly string[], name: (value: string) => string) => values.length ? <div className="input-field" key={key}><label htmlFor={`filter-${key}`}>{label}</label><select id={`filter-${key}`} value={params.get(key) ?? ''} onChange={event => changeFilter(key, event.target.value)}><option value="">{copy.all}</option>{values.map(value => <option value={value} key={value}>{name(value)}</option>)}</select></div> : null
   const goToPage = (nextPage: number) => {
     setParams(previous => { const next = new URLSearchParams(previous); next.set('page', String(nextPage)); return next })
@@ -108,21 +134,23 @@ export function Items() {
   }
   if (!catalog) return <div className="information-page"><h1 id="page-title" tabIndex={-1}>{copy.title}</h1><p role="alert">{copy.unavailable}</p><Link to="/hub" className="button">Hub</Link></div>
   if (id) {
-    const entry = lookupById(catalog.entries, id)
+    const entry = lookupById(wiki.entries, id)
     return <div ref={heading} className="items-page">{entry ? <ItemDetail entry={entry} search={search} /> : <><h1 id="page-title" tabIndex={-1}>{copy.notFound}</h1><Link to={`/items${search}`} className="button">{copy.back}</Link></>}</div>
   }
   return <div ref={heading} className="items-page">
     <div className="page-intro items-intro"><p className="eyebrow">Sky Guide / {copy.title}</p><h1 id="page-title" tabIndex={-1}>{copy.title}</h1><p>{copy.subtitle}</p></div>
-    <div className="items-search"><TextInput id="catalogue-query" label={copy.search} type="search" placeholder={copy.placeholder} value={query} onChange={event => changeFilter('q', event.target.value)} /><Button className="button--quiet" onClick={() => setParams({})}>{copy.clear}</Button></div>
+    {wiki.failed ? <p role="status">{copy.mediaUnavailable} <button type="button" className="button button--quiet" onClick={wiki.retry}>{copy.retry}</button></p> : null}
+    <div className="items-search"><TextInput id="catalogue-query" label={copy.search} type="search" placeholder={copy.placeholder} value={query} onChange={event => changeFilter('q', event.target.value)} /><Button className="button--quiet" onClick={clear}>{copy.clear}</Button></div>
+    {active.length ? <section className="active-filters" aria-label={copy.activeFilters}><p>{copy.activeFilters}</p><ul>{active.map(({ key, value }) => <li key={key}><span>{filterLabel(key)}: <strong>{filterValue(key, value)}</strong></span><button type="button" aria-label={`${copy.removeFilter} ${filterLabel(key)}: ${filterValue(key, value)}`} onClick={() => changeFilter(key, '')}>×</button></li>)}</ul></section> : null}
     <details className="catalogue-filters"><summary>{copy.filters} <span>{[category, slot, season, spirit, acquisition].filter(Boolean).length || ''}</span></summary><div className="catalogue-filters__grid">
-      {select('category', copy.category, options.categories, value => copy.categories[value as keyof typeof copy.categories])}
+      {select('category', copy.category, [...new Set(wiki.entries.map(e => e.category))].sort(), value => copy.categories[value as keyof typeof copy.categories])}
       {select('slot', copy.slot, options.slots, value => copy.slots[value])}
       {select('season', copy.season, options.seasons, value => seasonNames.get(value) ?? value)}
       {select('spirit', copy.spirit, options.spirits, value => spiritNames.get(value) ?? value)}
       {select('acquisition', copy.acquisition, options.acquisitions, value => copy.acquisitions[value as keyof typeof copy.acquisitions])}
     </div></details>
     <div className="catalogue-results" ref={resultsRef} tabIndex={-1}><div className="catalogue-results__bar"><p role="status" aria-live="polite">{results.length.toLocaleString(locale)} {copy.results}</p><span>{copy.page} {page} / {pageCount}</span></div>
-      {results.length ? <ul className="item-grid">{results.slice((page - 1) * pageSize, page * pageSize).map(entry => <ItemCard key={entry.id} entry={entry} search={search} />)}</ul> : <div className="catalogue-empty"><h2>{copy.empty}</h2><p>{copy.emptyHint}</p><Button onClick={() => setParams({})}>{copy.clear}</Button></div>}
+      {results.length ? <ul className="item-grid">{results.slice((page - 1) * pageSize, page * pageSize).map(entry => <ItemCard key={entry.id} entry={entry} search={search} />)}</ul> : <div className="catalogue-empty"><h2>{copy.empty}</h2><p>{copy.emptyHint}</p><Button onClick={clear}>{copy.clear}</Button></div>}
       {pageCount > 1 ? <nav className="catalogue-pagination" aria-label={copy.page}><Button className="button--quiet" disabled={page <= 1} onClick={() => goToPage(page - 1)}>{copy.previous}</Button><span>{page} / {pageCount}</span><Button className="button--quiet" disabled={page >= pageCount} onClick={() => goToPage(page + 1)}>{copy.next}</Button></nav> : null}
     </div>
     <SourceCredits />
