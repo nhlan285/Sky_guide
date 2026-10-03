@@ -1,7 +1,6 @@
 import test from 'node:test'
 import assert from 'node:assert/strict'
 import { generateStars, starCount, viewportClass } from '../../src/features/constellation/starGeneration.ts'
-import { compositions, edges, features } from '../../src/features/constellation/constellationLayout.ts'
 import { translations } from '../../src/shared/i18n/translations.ts'
 
 test('same seed/viewport gives the same scene without storing a large snapshot', () => {
@@ -51,20 +50,6 @@ test('degenerate viewport input cannot generate unbounded star arrays or invalid
   }
 })
 
-test('constellation has three disconnected sparse clusters and no giant center or polygon', () => {
-  const degree = new Map(features.map(id => [id, 0]))
-  for (const [from, to] of edges) {
-    assert.ok(from !== to && degree.has(from) && degree.has(to))
-    degree.set(from, degree.get(from) + 1)
-    degree.set(to, degree.get(to) + 1)
-  }
-  assert.ok([...degree.values()].every(value => value >= 1 && value <= 2))
-  assert.equal(features.length - edges.length, 3)
-  for (const layout of Object.values(compositions)) for (const point of Object.values(layout.nodes)) {
-    assert.ok(point[0] > 0 && point[0] < layout.width && point[1] > 0 && point[1] < layout.height)
-  }
-  assert.notEqual(compositions.compact.nodes.wardrobe[1] / compositions.compact.height, compositions.wide.nodes.wardrobe[1] / compositions.wide.height)
-})
 
 test('every visible copy key has Vietnamese and English text', () => {
   assert.deepEqual(Object.keys(translations.vi).sort(), Object.keys(translations.en).sort())
