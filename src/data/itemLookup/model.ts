@@ -5,6 +5,8 @@ import type { ValidationResult } from '../core/index.ts'
 import { array, nonBlank, unique } from '../catalog/shared.ts'
 import { validateCatalogueImage } from './images.ts'
 import type { CatalogueImage } from './images.ts'
+import { validateItemImages } from './media.ts'
+import type { ItemImages } from './media.ts'
 
 export const categories = ['hair', 'mask', 'face-accessory', 'cape', 'outfit', 'shoes', 'head-accessory', 'neck-accessory', 'prop', 'music-sheet', 'expression', 'other', 'unknown'] as const
 export type Category = typeof categories[number]
@@ -26,6 +28,7 @@ export interface LookupMetadata {
   categoryEvidence: string | null
   offers: OfferEvidence[]
   image?: CatalogueImage | null
+  images?: ItemImages | null
 }
 export interface LookupEntry extends LookupMetadata { item: Item }
 
@@ -39,6 +42,7 @@ export function validateLookupMetadata(input: unknown): ValidationResult<LookupM
     id: validateId, upstreamId: natural, identifier: nonBlank,
     category: enumeration(categories), categoryEvidence: nullable(validateString),
     image: value => value === undefined ? success(undefined) : nullable(validateCatalogueImage)(value),
+    images: value => value === undefined ? success(undefined) : nullable(validateItemImages)(value),
     offers: unique(value => object<OfferEvidence>(value, {
       id: validateId, acquisition: enumeration(acquisitions), seasonPass: flag, bundle: flag,
       money: nullable(money), sourceUrl: nonBlank,
@@ -82,4 +86,17 @@ export function updateFilterParams(previous: URLSearchParams, key: 'q' | 'catego
   else next.delete(key)
   next.delete('page')
   return next
+}
+export type FilterKey = Parameters<typeof updateFilterParams>[1]
+export function contextualLookupUrl(previous: URLSearchParams, key: FilterKey, value: string): string {
+  return `/items?${updateFilterParams(previous, key, value).toString()}`
+}
+export function clearFilterParams(previous: URLSearchParams): URLSearchParams {
+  const next = new URLSearchParams(previous)
+  for (const key of ['q', 'category', 'slot', 'season', 'spirit', 'acquisition', 'page']) next.delete(key)
+  return next
+}
+export function activeFilterValues(params: URLSearchParams): { key: FilterKey; value: string }[] {
+  const keys: FilterKey[] = ['q', 'category', 'slot', 'season', 'spirit', 'acquisition']
+  return keys.flatMap(key => { const value = params.get(key); return value ? [{ key, value }] : [] })
 }
