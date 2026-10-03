@@ -1,0 +1,18 @@
+{
+  "name": "Sky Guide",
+  "short_name": "Sky Guide",
+  "description": "A community guide for exploring Sky.",
+  "start_url": "/",
+  "scope": "/",
+  "display": "standalone",
+  "background_color": "#071a38",
+  "theme_color": "#071a38",
+  "icons": [
+    {
+      "src": "/sky-guide-icon.webp",
+      "sizes": "512x512",
+      "type": "image/webp",
+      "purpose": "any"
+    }
+  ]
+}
