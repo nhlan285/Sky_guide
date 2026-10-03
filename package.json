@@ -16,7 +16,10 @@
     "test": "node --test tests/data/*.test.mjs",
     "preview": "vite preview",
     "import:tsa": "node scripts/import-tsa.mjs",
-    "validate:catalog": "node scripts/validate-catalog.mjs"
+    "validate:catalog": "node scripts/validate-catalog.mjs",
+    "media:wiki:update": "node scripts/import-wiki-media.mjs",
+    "media:wiki:validate": "node scripts/validate-wiki-media.mjs",
+    "media:wiki:stats": "node scripts/wiki-media-stats.mjs"
   },
   "dependencies": {
     "react": "19.3.0",
