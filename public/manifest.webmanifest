@@ -9,8 +9,8 @@
   "theme_color": "#071a38",
   "icons": [
     {
-      "src": "/sky-guide-icon.webp",
-      "sizes": "192x192",
+      "src": "/sky-guide-icon.webp?v=2",
+      "sizes": "512x512",
       "type": "image/webp",
       "purpose": "any maskable"
     }
