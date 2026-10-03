@@ -5,6 +5,8 @@ node_modules/
 dist/
 build/
 .cache/
+.pnpm-store/
+data/wiki-assets/raw/
 .catalogue-stage/
 .vite/
 coverage/

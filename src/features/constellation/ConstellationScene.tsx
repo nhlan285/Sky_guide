@@ -5,7 +5,7 @@ import { useLocale } from '../../shared/i18n/useLocale'
 import { clusters, compositionForViewport, destinations } from './celestialAtlas'
 import type { FeatureId } from './celestialAtlas'
 import { CelestialCluster } from './CelestialCluster'
-import { useTheme } from './useTheme'
+import { useTheme } from './useTheme.tsx'
 import { useSkyNavigation } from './useSkyNavigation'
 
 export function ConstellationScene() {

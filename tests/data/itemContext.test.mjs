@@ -125,7 +125,7 @@ test('curated source mapping is validated against stable IDs; duplicate/unknown 
   assert.equal(sample.item.name.default.includes('Sky Wiki'), false)
 })
 
-test('thumbnail component renders approved primary/gallery media and suppresses reference-only/missing images', async () => {
+test('thumbnail suppresses legacy external primary/gallery media and shows neutral local-asset fallback', async () => {
   // Compile components locally and render static markup. No browser, navigation, image download or screenshot.
   const server = await createServer({ logLevel: 'silent', server: { middlewareMode: true, hmr: false, watch: null }, appType: 'custom' })
   try {
@@ -134,11 +134,11 @@ test('thumbnail component renders approved primary/gallery media and suppresses 
     const sample = lookupById(catalog.entries, 'tsa-cosmetic-1211')
     const render = props => renderToStaticMarkup(createElement(LocaleProvider, null, createElement(ItemThumbnail, { entry: sample, ...props })))
     const approved = render({ entry: { ...sample, images: { primary: image, gallery: [] } } })
-    assert.ok(approved.includes(`src="${image.url}"`))
-    assert.ok(approved.includes('loading="lazy"'))
+    assert.ok(approved.includes('item-thumbnail__placeholder'))
+    assert.ok(!approved.includes('<img'))
     assert.ok(!approved.includes('Synthetic fixture source'))
     const preview = render({ media: { ...image, kind: 'worn-preview' }, description: 'Synthetic worn preview' })
-    assert.ok(preview.includes('alt="Synthetic worn preview"'))
+    assert.ok(!preview.includes('<img'))
     for (const entry of [sample, { ...sample, images: null, image: null }]) {
       const fallback = render({ entry })
       assert.ok(fallback.includes('item-thumbnail__placeholder'))

@@ -7,12 +7,13 @@ import type { FilterKey, LookupEntry } from '../../data/itemLookup/model.ts'
 import { useLocale } from '../../shared/i18n/useLocale'
 import { Button, SectionCard, TextInput } from '../../shared/ui/primitives'
 import { ItemThumbnail } from './ItemThumbnail.tsx'
-import { resolveItemImage } from '../../data/itemLookup/images.ts'
-import { displayMedia, imageSources } from '../../data/itemLookup/media.ts'
 import { SourceCredits } from './SourceCredits.tsx'
 import { itemCopy } from './copy.ts'
 import { useWikiCatalogue, useWikiDetail } from './useWikiMedia.ts'
 import { WikiMediaCredits } from './WikiMediaCredits.tsx'
+import { useItemAssets } from './useItemAssets.ts'
+import { ItemAssetCredits } from './ItemAssetCredits.tsx'
+import { imageSources } from '../../data/itemLookup/media.ts'
 
 const catalog = catalogResult.valid ? catalogResult.value : null
 const seasonNames = new Map(catalog?.seasons.map(s => [s.id, s.name.default]))
@@ -57,24 +58,23 @@ function ItemDetail({ entry, search }: { entry: LookupEntry; search: string }) {
   const copy = itemCopy[locale]
   const item = entry.item
   const wiki = useWikiDetail(entry.id)
-  const wikiPrimary = wiki.detail?.primaryId ? wiki.media?.[wiki.detail.primaryId] : undefined
+  const assets = useItemAssets(entry.id)
+  const primary = assets.value?.primary ?? entry.asset
+  const gallery = assets.value?.gallery ?? []
   const wikiImages = [wiki.detail?.primaryId, ...(wiki.detail?.galleryIds ?? [])].flatMap(id => id && wiki.media?.[id] ? [wiki.media[id]] : [])
-  const kindOf = (image: typeof wikiImages[number]) => image.mappings.find(m => m.itemIds.includes(entry.id))?.kind ?? image.mediaKind
-  const previews = wikiImages.filter(image => ['worn-preview', 'alternate-view'].includes(kindOf(image)))
-  const otherImages = wikiImages.filter(image => image !== wikiPrimary && !previews.includes(image))
-  const image = entry.images?.primary ? displayMedia(entry.images.primary) : resolveItemImage(entry.image)
+  const previews = gallery.filter(image => ['worn-preview', 'alternate'].includes(image.kind))
+  const otherImages = gallery.filter(image => !previews.includes(image))
   const mediaSources = imageSources(entry.images)
-  const gallery = entry.images?.gallery.filter(media => displayMedia(media)) ?? []
   const relation = (ids: string[], names: Map<string, string>, filter: 'season' | 'spirit') => ids.length ? ids.map(id => names.has(id) ? <ContextLink key={id} filter={filter} value={id} search={search}>{names.get(id)!}</ContextLink> : <span key={id}>{copy.unknown}</span>) : copy.unknown
   const sources = catalog?.provenance.filter(source => item.provenanceIds.includes(source.id)) ?? []
   return <>
     <Link to={`/items${search}`} className="text-link">← {copy.back}</Link>
-    <div className="item-detail__hero"><div><ItemThumbnail key={entry.id} entry={entry} detail wikiMedia={wikiPrimary} />
+    <div className="item-detail__hero"><div><ItemThumbnail key={entry.id} entry={entry} detail asset={primary} />
     </div><div><p className="eyebrow">{copy.categories[entry.category]}</p><h1 id="page-title" tabIndex={-1}>{item.name.default}</h1><div className="item-detail__context">{relation(item.seasonIds, seasonNames, 'season')}{item.spiritIds.length ? relation(item.spiritIds, spiritNames, 'spirit') : null}</div></div></div>
     {wiki.failed ? <p role="status">{copy.mediaUnavailable} <button type="button" className="button button--quiet" onClick={wiki.retry}>{copy.retry}</button></p> : null}
-    {previews.length ? <section className="item-preview"><h2>{copy.wornPreview}</h2><div className="item-gallery">{previews.map(media => <figure key={media.mediaId}><ItemThumbnail entry={entry} wikiMedia={media} description={`${item.name.default} — ${kindOf(media) === 'alternate-view' ? copy.alternateView : copy.wornPreview}`} /><figcaption>{kindOf(media) === 'alternate-view' ? copy.alternateView : copy.wornPreview}</figcaption></figure>)}</div></section> : null}
-    {otherImages.length ? <section className="item-preview"><h2>{copy.previews}</h2><div className="item-gallery">{otherImages.map(media => <figure key={media.mediaId}><ItemThumbnail entry={entry} wikiMedia={media} description={`${item.name.default} — ${copy.referenceImage}`} /></figure>)}</div></section> : null}
-    {gallery.length ? <section className="item-gallery" aria-label={copy.previews}>{gallery.map(media => <figure key={media.sourceUrl}><ItemThumbnail entry={entry} media={media} description={`${item.name.default} — ${media.kind === 'worn-preview' ? copy.wornPreview : copy.referenceImage}`} /><figcaption><a href={media.sourceUrl}>{media.kind === 'worn-preview' ? copy.wornPreview : copy.referenceImage} ↗</a></figcaption></figure>)}</section> : null}
+    {assets.failed ? <p role="status">{copy.mediaUnavailable} <button type="button" className="button button--quiet" onClick={assets.retry}>{copy.retry}</button></p> : null}
+    {previews.length ? <section className="item-preview"><h2>{copy.wornPreview}</h2><div className="item-gallery">{previews.map(media => <figure key={media.mediaId}><ItemThumbnail entry={entry} asset={media} description={`${item.name.default} — ${media.kind === 'alternate' ? copy.alternateView : copy.wornPreview}`} /><figcaption>{media.kind === 'alternate' ? copy.alternateView : copy.wornPreview}</figcaption></figure>)}</div></section> : null}
+    {otherImages.length ? <section className="item-preview"><h2>{copy.previews}</h2><div className="item-gallery">{otherImages.map(media => <figure key={media.mediaId}><ItemThumbnail entry={entry} asset={media} description={`${item.name.default} — ${copy.referenceImage}`} /></figure>)}</div></section> : null}
     <div className="item-detail__grid">
       <div className="item-detail__facts">
         <SectionCard id="item-identity" title={copy.identity}><dl className="item-facts"><dt>{copy.category}</dt><dd>{entry.category !== 'unknown' ? <ContextLink filter="category" value={entry.category} search={search}>{copy.categories[entry.category]}</ContextLink> : copy.categories[entry.category]}</dd><dt>{copy.slot}</dt><dd>{item.slot !== 'unknown' ? <ContextLink filter="slot" value={item.slot} search={search}>{copy.slots[item.slot]}</ContextLink> : copy.unknown}</dd></dl></SectionCard>
@@ -96,11 +96,8 @@ function ItemDetail({ entry, search }: { entry: LookupEntry; search: string }) {
     </div>
     <SectionCard id="item-sources" title={copy.sources}>
       <WikiMediaCredits detail={wiki.detail} media={wikiImages} />
-      {image ? <p className="item-image-credit"><a href={image.sourceUrl}>{copy.imageCredit} ↗</a> · {image.credit} · <a href={image.permissionUrl}>{image.license}</a></p> : null}
-      {mediaSources.length ? <details className="item-media-sources"><summary>{copy.imageCredit} ({mediaSources.length})</summary><ul>{mediaSources.map((media, index) => <li key={`${media.sourceUrl}-${index}`}><a href={media.sourceUrl}>{media.sourceLabel} · {'kind' in media && media.kind === 'worn-preview' ? copy.wornPreview : copy.referenceImage} ↗</a>
-        <p>{media.reuseStatus === 'reference-only' ? copy.referenceOnly : `${media.credit} · ${media.license}`}</p>
-        {media.reuseStatus === 'reference-only' ? <a href={media.identitySourceUrl}>{copy.technicalMetadata} ↗</a> : <a href={media.permissionUrl}>{media.license}</a>}
-      </li>)}</ul></details> : null}
+      <ItemAssetCredits assets={[...(primary ? [primary] : []), ...gallery]} />
+      {mediaSources.length ? <details className="item-media-sources"><summary>{copy.imageCredit} ({mediaSources.length})</summary><ul>{mediaSources.map((media, index) => <li key={`${media.sourceUrl}-${index}`}><a href={media.sourceUrl}>{media.sourceLabel} ↗</a><p>{media.reuseStatus === 'reference-only' ? copy.referenceOnly : `${media.credit} · ${media.license}`}</p></li>)}</ul></details> : null}
       <SourceCredits />
       <details className="item-technical"><summary>{copy.technicalMetadata}</summary><dl className="item-facts"><dt>{copy.upstreamId}</dt><dd>{entry.upstreamId}</dd><dt>{copy.identifier}</dt><dd><code>{entry.identifier}</code></dd></dl>
         <ul className="item-source-list">{sources.map(source => <li key={source.id}><a href={source.sourceUrl ?? undefined}>{source.sourceRecordKey}</a></li>)}</ul>
@@ -116,7 +113,7 @@ export function Items() {
   const copy = itemCopy[locale]
   const wiki = useWikiCatalogue()
   const { query, category, slot, season, spirit, acquisition } = filtersFromParams(params)
-  const results = useMemo(() => filterEntries(wiki.entries, { query, category, slot, season, spirit, acquisition }).sort((a, b) => Number(Boolean(b.wiki?.primary)) - Number(Boolean(a.wiki?.primary)) || a.item.name.default.localeCompare(b.item.name.default, 'en') || a.id.localeCompare(b.id, 'en')), [wiki.entries, query, category, slot, season, spirit, acquisition])
+  const results = useMemo(() => filterEntries(wiki.entries, { query, category, slot, season, spirit, acquisition }).sort((a, b) => Number(Boolean(b.asset)) - Number(Boolean(a.asset)) || a.item.name.default.localeCompare(b.item.name.default, 'en') || a.id.localeCompare(b.id, 'en')), [wiki.entries, query, category, slot, season, spirit, acquisition])
   const pageCount = Math.max(1, Math.ceil(results.length / pageSize))
   const parsedPage = Number(params.get('page') ?? 1)
   const page = Number.isSafeInteger(parsedPage) ? Math.min(pageCount, Math.max(1, parsedPage)) : 1

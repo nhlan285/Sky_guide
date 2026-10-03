@@ -8,6 +8,7 @@ import type { CatalogueImage } from './images.ts'
 import { validateItemImages } from './media.ts'
 import type { ItemImages } from './media.ts'
 import type { WikiSummary } from './wiki.ts'
+import type { ItemAsset } from './assets.ts'
 
 export const categories = ['hair', 'mask', 'face-accessory', 'cape', 'outfit', 'shoes', 'head-accessory', 'neck-accessory', 'prop', 'instrument', 'music-sheet', 'expression', 'other', 'unknown'] as const
 export type Category = typeof categories[number]
@@ -31,7 +32,7 @@ export interface LookupMetadata {
   image?: CatalogueImage | null
   images?: ItemImages | null
 }
-export interface LookupEntry extends LookupMetadata { item: Item; wiki?: WikiSummary }
+export interface LookupEntry extends LookupMetadata { item: Item; wiki?: WikiSummary; asset?: ItemAsset | null }
 
 export function natural(input: unknown): ValidationResult<number> {
   return typeof input === 'number' && Number.isSafeInteger(input) && input >= 0 ? success(input) : failure('invalid_value', 'Expected a non-negative stable integer ID.')

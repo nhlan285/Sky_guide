@@ -3,6 +3,7 @@ import manifest from '../../data/itemLookup/wikiManifest.json'
 import { catalogResult } from '../../data/itemLookup/catalog.ts'
 import { enrichEntries, parseWikiIndex, parseWikiShard, wikiBucket } from '../../data/itemLookup/wiki.ts'
 import type { WikiIndex, WikiShard } from '../../data/itemLookup/wiki.ts'
+import { useAssetIndex } from './useItemAssets.ts'
 
 const entries = catalogResult.valid ? catalogResult.value.entries : []
 const ids = new Set(entries.map(e => e.id))
@@ -18,6 +19,7 @@ function loadIndex() {
   return indexPromise
 }
 export function useWikiCatalogue() {
+  const assets = useAssetIndex()
   const [index, setIndex] = useState<WikiIndex | null>(null)
   const [failed, setFailed] = useState(false)
   const [attempt, setAttempt] = useState(0)
@@ -26,7 +28,7 @@ export function useWikiCatalogue() {
     loadIndex().then(value => { if (live) { setIndex(value); setFailed(false) } }, () => { if (live) setFailed(true) })
     return () => { live = false }
   }, [attempt])
-  return { entries: useMemo(() => enrichEntries(entries, index), [index]), failed, retry: () => setAttempt(a => a + 1) }
+  return { entries: useMemo(() => enrichEntries(entries, index).map(e => ({ ...e, asset: assets.value?.entries[e.id]?.primary ?? null })), [index, assets.value]), failed: failed || assets.failed, retry: () => { setAttempt(a => a + 1); assets.retry() } }
 }
 export function useWikiDetail(id: string) {
   const [state, setState] = useState<{ id: string; shard: WikiShard | null; failed: boolean } | null>(null)

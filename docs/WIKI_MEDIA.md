@@ -1,5 +1,9 @@
 # Real catalogue media
 
+**Current:** [E: asset storage](ITEM_ASSETS.md) supersedes runtime hotlinks.
+Catalogue artwork now uses controlled processed assets. The remainder of this
+document describes the earlier media-discovery adapter and its historical checks.
+
 This feature is local-only on `feature/item-real-media`, based on develop
 `b873a47cc091e717f17aad5805de5b45183cc808`. The branch disables its automatic Vercel
 deployment in `vercel.json`. It does not change the wardrobe asset registry.
