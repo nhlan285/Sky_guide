@@ -7,8 +7,9 @@ import { validateCatalogueImage } from './images.ts'
 import type { CatalogueImage } from './images.ts'
 import { validateItemImages } from './media.ts'
 import type { ItemImages } from './media.ts'
+import type { WikiSummary } from './wiki.ts'
 
-export const categories = ['hair', 'mask', 'face-accessory', 'cape', 'outfit', 'shoes', 'head-accessory', 'neck-accessory', 'prop', 'music-sheet', 'expression', 'other', 'unknown'] as const
+export const categories = ['hair', 'mask', 'face-accessory', 'cape', 'outfit', 'shoes', 'head-accessory', 'neck-accessory', 'prop', 'instrument', 'music-sheet', 'expression', 'other', 'unknown'] as const
 export type Category = typeof categories[number]
 export const acquisitions = ['spirit-current', 'spirit-seasonal', 'season-items', 'shop', 'default', 'unknown'] as const
 export type Acquisition = typeof acquisitions[number]
@@ -30,7 +31,7 @@ export interface LookupMetadata {
   image?: CatalogueImage | null
   images?: ItemImages | null
 }
-export interface LookupEntry extends LookupMetadata { item: Item }
+export interface LookupEntry extends LookupMetadata { item: Item; wiki?: WikiSummary }
 
 export function natural(input: unknown): ValidationResult<number> {
   return typeof input === 'number' && Number.isSafeInteger(input) && input >= 0 ? success(input) : failure('invalid_value', 'Expected a non-negative stable integer ID.')
@@ -68,7 +69,7 @@ export function clearFilters(): LookupFilters { return { query: '', category: ''
 export function normalizeQuery(query: string): string { return query.trim().replace(/\s+/g, ' ').toLowerCase() }
 export function filterEntries(entries: readonly LookupEntry[], filters: LookupFilters): LookupEntry[] {
   const query = normalizeQuery(filters.query)
-  return entries.filter(entry => (!query || normalizeQuery(`${entry.item.name.default} ${entry.identifier} ${entry.upstreamId} ${entry.id}`).includes(query)) &&
+  return entries.filter(entry => (!query || normalizeQuery(`${entry.item.name.default} ${entry.identifier} ${entry.upstreamId} ${entry.id} ${entry.wiki?.aliases.join(' ') ?? ''}`).includes(query)) &&
     (!filters.category || entry.category === filters.category) && (!filters.slot || entry.item.slot === filters.slot) &&
     (!filters.season || entry.item.seasonIds.includes(filters.season)) && (!filters.spirit || entry.item.spiritIds.includes(filters.spirit)) &&
     (!filters.acquisition || entry.offers.some(offer => offer.acquisition === filters.acquisition)))
