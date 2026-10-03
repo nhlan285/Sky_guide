@@ -8,7 +8,7 @@ import { clearFilters, costRepresentation, filterEntries, filtersFromParams, loo
 import { hasDataset, readCatalog, validateEnvelope, validateManifest } from '../../src/data/itemLookup/release.ts'
 import { classify, normalizeCost, normalizeRecord, normalizeSources } from '../../scripts/tsa/normalize.mjs'
 import { offers, parseSource, revision } from '../../scripts/tsa/source.mjs'
-import { destinations } from '../../src/features/constellation/constellationLayout.ts'
+import { destinations } from '../../src/features/constellation/celestialAtlas.ts'
 
 assert.equal(catalogResult.valid, true)
 const catalog = catalogResult.value
