@@ -30,7 +30,7 @@ Các nội dung đã hỏi theo brief:
 
 ## Danh sách asset cần placeholder
 
-**Hiện trạng repo:** chưa tải hoặc sử dụng asset game/Wiki/model thật. P0-W01 đã có [fixture SVG hình học tự tạo](../tests/fixtures/wardrobe/README.md), không là Sky asset/calibration thật. Danh sách sau là kế hoạch thay thế, không phải inventory full assets.
+**Hiện trạng repo:** Item Catalogue có [metadata và URL ảnh công khai Sky Wiki](WIKI_MEDIA.md) theo yêu cầu local feature ngày 2026-10-03; không tải binary ảnh vào Git. Quyền riêng của ảnh vẫn `unverified`, không được đổi thành approved. Phạm vi này không mở Full AssetRegistry hoặc quyền wardrobe/3D. P0-W01 có [fixture SVG hình học tự tạo](../tests/fixtures/wardrobe/README.md), không là Sky asset/calibration thật. Danh sách sau là kế hoạch wardrobe, không phải inventory full assets.
 
 | Asset | Trạng thái | Phương án tạm | Điều kiện thay |
 |---|---|---|---|

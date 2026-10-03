@@ -1,5 +1,11 @@
 # K13 — Model/asset nhân vật & icon trang phục đầy đủ
 
+**Local Item Catalogue, 2026-10-03:** theo yêu cầu mới của owner, catalogue hiển thị
+URL ảnh công khai từ Wiki với metadata quyền `unverified` và ghi công tại detail.
+Đây là [phạm vi media tham khảo riêng](../docs/WIKI_MEDIA.md), không phải quyền
+TGC mới, không là layer wardrobe hoặc Full AssetRegistry. Các gate wardrobe/3D
+bên dưới vẫn giữ nguyên.
+
 - **Nguồn/link:** TGC qua Support trong game (Helpshift). Đã có phản hồi từ Sky Player Support / Ray (không đưa ticket ID, ngày nhận hay địa chỉ liên hệ cá nhân vào public repo vì chưa lưu evidence riêng tư này). Sky Content Library là nội dung đang hỏi quyền, không phải nguồn đã được phép dùng.
 - **Dữ liệu/format:** model nhân vật, wardrobe/cosmetics và icon đầy đủ; format, topology, skeleton, anchor, scale, dye mask đều chưa có. Không giả định có glTF/FBX/SDK hoặc API tải.
 - **Truy xuất:** đã nhận phản hồi Support nhưng cần clarification về permission scope. Không rip file game, không can thiệp game client, không tích hợp thatskymod. Phương án trước mắt là duy trì khung 2D với asset placeholder có metadata thay thế được.
