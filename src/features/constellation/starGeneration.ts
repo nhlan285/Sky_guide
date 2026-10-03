@@ -49,7 +49,7 @@ export function generateStars({ width, height, dpr = 1, seed = 87231, lowQuality
       y = (right ? 0.55 : 0.26) + gaussian() * 0.18
     }
     // Preserve a quieter title pocket without cutting a hard rectangular hole.
-    if (Math.hypot(x - 0.5, y - (size === 'compact' ? 0.63 : 0.51)) < 0.16 && random() < 0.72) {
+    if (Math.hypot(x - 0.5, y - 0.5) < 0.16 && random() < 0.72) {
       x = random() < 0.5 ? x * 0.65 : 0.35 + x * 0.65
     }
     const depthValue = random()

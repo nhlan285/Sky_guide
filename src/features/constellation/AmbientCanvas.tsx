@@ -55,8 +55,9 @@ export function AmbientCanvas({ visual }: { visual: SkyVisualState }) {
       }
       // A low-resolution procedural haze texture is reused, not blurred per frame.
       galaxy = document.createElement('canvas')
-      galaxy.width = Math.min(1000, Math.round(width))
-      galaxy.height = Math.max(1, Math.round(galaxy.width * height / width))
+      const hazeScale = Math.min(1, 1000 / width, 1000 / height)
+      galaxy.width = Math.max(1, Math.round(width * hazeScale))
+      galaxy.height = Math.max(1, Math.round(height * hazeScale))
       const haze = galaxy.getContext('2d')
       if (!haze) return
       const seed = seededRandom(1928)
