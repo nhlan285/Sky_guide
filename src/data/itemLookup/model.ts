@@ -3,6 +3,8 @@ import { validateItem } from '../catalog/index.ts'
 import { enumeration, failure, nullable, object, success, validateId, validateString } from '../core/index.ts'
 import type { ValidationResult } from '../core/index.ts'
 import { array, nonBlank, unique } from '../catalog/shared.ts'
+import { validateCatalogueImage } from './images.ts'
+import type { CatalogueImage } from './images.ts'
 
 export const categories = ['hair', 'mask', 'face-accessory', 'cape', 'outfit', 'shoes', 'head-accessory', 'neck-accessory', 'prop', 'music-sheet', 'expression', 'other', 'unknown'] as const
 export type Category = typeof categories[number]
@@ -23,6 +25,7 @@ export interface LookupMetadata {
   category: Category
   categoryEvidence: string | null
   offers: OfferEvidence[]
+  image?: CatalogueImage | null
 }
 export interface LookupEntry extends LookupMetadata { item: Item }
 
@@ -35,6 +38,7 @@ export function validateLookupMetadata(input: unknown): ValidationResult<LookupM
   const result = object<LookupMetadata>(input, {
     id: validateId, upstreamId: natural, identifier: nonBlank,
     category: enumeration(categories), categoryEvidence: nullable(validateString),
+    image: value => value === undefined ? success(undefined) : nullable(validateCatalogueImage)(value),
     offers: unique(value => object<OfferEvidence>(value, {
       id: validateId, acquisition: enumeration(acquisitions), seasonPass: flag, bundle: flag,
       money: nullable(money), sourceUrl: nonBlank,

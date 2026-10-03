@@ -1,0 +1,20 @@
+{
+  "schemaVersion": 1,
+  "records": [],
+  "review": {
+    "status": "no-individual-item-image-approved",
+    "reviewedOn": "2026-10-03",
+    "sources": [
+      {
+        "url": "https://skycreators.notion.site/Sky-Children-of-the-Light-Content-Library-1c2fa774413980dfa7f0fa839b12cf1b",
+        "finding": "Library guidelines support free community projects using library assets. No individual item/file pair and durable delivery URL were verified in accessible public content; no library image imported."
+      },
+      {
+        "url": "https://thatgamecompany.helpshift.com/hc/en/17-sky-children-of-the-light/faq/655-can-i-share-my-fan-art-and-other-sky-inspired-works/",
+        "finding": "General fan-content guidelines do not grant an IP license and prohibit extracted game assets. They do not approve arbitrary Wiki thumbnails."
+      }
+    ],
+    "wikiStatus": "Per-file source and reuse evidence could not be verified through accessible public pages. No Wiki thumbnail approved.",
+    "fullAssets": "pending legal confirmation"
+  }
+}

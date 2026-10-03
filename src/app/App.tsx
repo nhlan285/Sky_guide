@@ -7,6 +7,7 @@ import { SkyAtmosphere } from '../features/constellation/SkyAtmosphere'
 import { SkyControls } from '../features/constellation/SkyControls'
 import { ThemeProvider, useTheme } from '../features/constellation/useTheme'
 import { LocaleProvider, useLocale } from '../shared/i18n/useLocale'
+import { SourceCredits } from '../features/items/SourceCredits.tsx'
 
 const WardrobeEditor = lazy(() => import('../features/wardrobe/WardrobeEditor').then(module => ({ default: module.WardrobeEditor })))
 const Items = lazy(() => import('../features/items/Items').then(module => ({ default: module.Items })))
@@ -71,6 +72,7 @@ function About() {
       <SectionCard id="about-data" title={t('about.data')}>
         <p>{t('about.data.text')}</p>
         <Link className="button" to="/items">{t('nav.itemLookup')}</Link>
+        <SourceCredits />
       </SectionCard>
       <SectionCard id="about-rights" title={t('about.rights')}>
         <p>{t('about.rights.text')}</p>
@@ -132,7 +134,7 @@ function AppContent() {
   }, [pathname, hash, t])
 
   return (
-    <div className={`app-shell ${isLanding ? 'app-shell--landing' : 'app-shell--hub'} ${visual.daylightWeight > 0.6 ? 'sky-ui--light' : 'sky-ui--dark'}`}>
+    <div className={`app-shell ${isLanding ? 'app-shell--landing' : 'app-shell--hub'} ${visual.daylightWeight > 0.6 ? 'sky-ui--light' : 'sky-ui--dark'}${visual.sunsetWeight > 0.4 ? ' sky-ui--sunset' : ''}`}>
       <MemoizedSkyAtmosphere />
       <a className="skip-link" href="#main-content">{t('a11y.skipNav')}</a>
       {isLanding ? null : <Header />}

@@ -20,7 +20,7 @@
 .constellation-node--2 .constellation-node__light::after { content: ''; position: absolute; width: 2px; height: 2px; margin: -20px 0 0 27px; background: #eaf5ff; border-radius: 50%; opacity: .7; }
 .constellation-node__label { text-align: center; font-size: .925rem; line-height: 1.35; font-weight: 500; padding: .15rem .55rem; border-radius: .35rem; background: var(--scene-label); overflow-wrap: anywhere; }
 .constellation-node.is-active .constellation-node__light > span { transform: scale(1.22); box-shadow: 0 0 9px 3px #d4e9fa, 0 0 32px 10px rgba(158,205,243,.32); }
-.constellation-node:focus-visible, .landing-enter:focus-visible, .sky-controls > summary:focus-visible { outline: 3px solid #173244; outline-offset: 4px; box-shadow: 0 0 0 4px #f4faff; }
+.constellation-node:focus-visible, .landing-enter:focus-visible, .sky-controls__trigger:focus-visible { outline: 3px solid #173244; outline-offset: 4px; box-shadow: 0 0 0 4px #f4faff; }
 .sky-ui--light .constellation-node__light > span { background: #fafcff; box-shadow: 0 0 6px 1px rgba(255,255,255,.9); }
 .landing-identity { position: absolute; transform: translate(-50%, -50%); width: min(40vw, 32rem); text-align: center; z-index: 2; }
 .landing-identity::before { content: ''; position: absolute; inset: -3rem -2rem; background: radial-gradient(ellipse, var(--scene-scrim), transparent 72%); z-index: -1; pointer-events: none; }
@@ -30,10 +30,11 @@
 .landing-enter:hover { background: var(--surface-soft); }
 .landing-disclosure { font-size: .75rem; line-height: 1.4; text-align: center; width: min(100%, 42rem); justify-self: center; margin: 0; color: var(--text); background: var(--scene-label); border-radius: .35rem; padding: .3rem .6rem; }
 .sky-controls { position: relative; font-size: .875rem; z-index: 6; }
-.sky-controls > summary { cursor: pointer; list-style: none; display: flex; align-items: center; gap: .8rem; min-height: 44px; padding: .5rem .85rem; border-radius: 99px; background: var(--scene-label); color: var(--text); }
-.sky-controls > summary::-webkit-details-marker { display: none; }
-.sky-controls__panel { position: absolute; right: 0; top: calc(100% + .75rem); width: min(19rem, calc(100vw - 2rem)); color: var(--text); background: var(--surface); border: 1px solid var(--border); border-radius: var(--radius-card); padding: 1.25rem; box-shadow: 0 16px 50px rgba(4,15,28,.2); }
-.sky-controls__panel > p:first-child { font-weight: 650; }
+.sky-controls__trigger { cursor: pointer; display: flex; align-items: center; gap: .6rem; min-height: 44px; padding: .5rem .85rem; border: 1px solid var(--control-border); border-radius: 99px; background: var(--scene-label); color: var(--text); font: inherit; white-space: nowrap; }
+.sky-settings { position: fixed; inset: 0; margin: auto; width: min(25rem, calc(100vw - 2rem)); max-width: none; max-height: calc(100svh - 2rem); max-height: calc(100dvh - 2rem); overflow-y: auto; overscroll-behavior: contain; padding: 1.5rem; color: var(--text); background: var(--surface); border: 1px solid var(--control-border); border-radius: var(--radius-card); box-shadow: 0 20px 70px rgba(4,15,28,.35); }
+.sky-settings::backdrop { background: rgba(6,16,27,.6); backdrop-filter: blur(6px); }
+.sky-settings__heading { display: flex; align-items: center; justify-content: space-between; gap: 1rem; margin-bottom: 1.5rem; }
+.sky-settings__heading h2 { font-size: 1.1rem; margin: 0; }
 .sky-controls fieldset { padding: 0; border: 0; margin: 0; min-width: 0; }
 .sky-controls legend { font-size: .8rem; color: var(--muted); margin-bottom: .5rem; }
 .sky-options { display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); gap: .4rem; }
@@ -56,6 +57,7 @@
 .constellation-scene--compact .landing-identity p { font-size: .85rem; line-height: 1.4; margin-block: .5rem 0; }
 .constellation-scene--compact .landing-enter { margin-top: .5rem; }
 @media (max-width: 639px) {
+  .sky-settings { inset: auto .5rem max(.5rem, env(safe-area-inset-bottom)); width: calc(100% - 1rem); margin: 0; max-height: calc(100svh - 1rem - env(safe-area-inset-top) - env(safe-area-inset-bottom)); max-height: calc(100dvh - 1rem - env(safe-area-inset-top) - env(safe-area-inset-bottom)); padding: 1.25rem max(1.25rem, env(safe-area-inset-right)) max(1.25rem, env(safe-area-inset-bottom)) max(1.25rem, env(safe-area-inset-left)); border-radius: 1.4rem; }
   .constellation-node { width: 6.5rem; }
   .constellation-node__label { font-size: .825rem; }
   .landing-identity { width: calc(100% - 3rem); max-width: 20rem; }
@@ -78,18 +80,8 @@
 @media (max-height: 480px) {
   .constellation-landing { padding-block: max(.35rem, env(safe-area-inset-top)) max(.35rem, env(safe-area-inset-bottom)); gap: .2rem; }
   .landing-disclosure { font-size: .65rem; padding-block: .15rem; }
-  .sky-controls__panel { padding: .65rem; top: calc(100% + .2rem); }
-  .sky-controls__note { margin-block: .25rem .5rem; font-size: .7rem; }
-}
-@media (max-height: 480px) and (min-width: 640px) {
-  .sky-controls__panel { width: min(30rem, calc(100vw - 2rem)); display: grid; grid-template-columns: 1.3fr 1fr; gap: .25rem 1rem; }
-  .sky-controls__panel > p:first-child { grid-column: 1 / -1; margin-bottom: .25rem; }
-  .sky-controls__panel > fieldset:last-child { grid-column: 2; grid-row: 2; }
-  .sky-controls__note { grid-column: 1 / -1; }
-}
-@media (max-height: 400px) {
-  .app-shell--landing .sky-controls__panel > p:first-child { margin-bottom: .25rem; }
-  .app-shell--landing .sky-controls__note { display: none; }
+  .sky-settings { padding-block: 1rem; }
+  .sky-settings__heading { margin-bottom: .75rem; }
 }
 @media (prefers-reduced-motion: reduce) {
   .constellation-edge, .constellation-node__light > span { transition: none; }

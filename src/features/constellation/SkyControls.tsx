@@ -1,33 +1,43 @@
-import { useEffect, useRef } from 'react'
+import { useEffect, useId, useRef } from 'react'
 import { useTheme } from './useTheme'
 import { useLocale } from '../../shared/i18n/useLocale'
+import { outsideBounds } from './dialog.ts'
 
 const modes = ['auto', 'daylight', 'sunset', 'night'] as const
 export function SkyControls() {
-  const details = useRef<HTMLDetailsElement>(null)
+  const dialog = useRef<HTMLDialogElement>(null)
+  const trigger = useRef<HTMLButtonElement>(null)
+  const previousOverflow = useRef<string | null>(null)
+  const id = useId()
   const { mode, setMode } = useTheme()
   const { locale, setLocale, t } = useLocale()
   useEffect(() => {
-    const outside = (event: PointerEvent) => {
-      if (event.target instanceof Node && !details.current?.contains(event.target) && details.current) details.current.open = false
+    return () => {
+      if (previousOverflow.current !== null) document.body.style.overflow = previousOverflow.current
     }
-    document.addEventListener('pointerdown', outside)
-    return () => document.removeEventListener('pointerdown', outside)
   }, [])
+  function open() {
+    if (!dialog.current || dialog.current.open) return
+    previousOverflow.current = document.body.style.overflow
+    document.body.style.overflow = 'hidden'
+    dialog.current.showModal()
+  }
+  function closed() {
+    if (previousOverflow.current !== null) document.body.style.overflow = previousOverflow.current
+    previousOverflow.current = null
+    trigger.current?.focus({ preventScroll: true })
+  }
   return (
-    <details ref={details} className="sky-controls" onKeyDown={event => {
-      if (event.key === 'Escape' && details.current?.open) {
-        details.current.open = false
-        details.current.querySelector('summary')?.focus()
-      }
-    }}>
-      <summary>{t('sky.controls')} <span aria-hidden="true">⌄</span></summary>
-      <div className="sky-controls__panel">
-        <p>{t('sky.settings')}</p>
+    <div className="sky-controls">
+      <button ref={trigger} type="button" className="sky-controls__trigger" aria-haspopup="dialog" aria-controls={id} onClick={open}>{t('sky.controls')} <span aria-hidden="true">⌄</span></button>
+      <dialog ref={dialog} id={id} className="sky-settings" aria-labelledby={`${id}-title`} onClose={closed} onClick={event => {
+        if (event.target === event.currentTarget && outsideBounds(event.clientX, event.clientY, event.currentTarget.getBoundingClientRect())) event.currentTarget.close()
+      }}>
+        <div className="sky-settings__heading"><h2 id={`${id}-title`}>{t('sky.settings')}</h2><button type="button" className="button button--quiet" onClick={() => dialog.current?.close()}>{t('sky.close')}</button></div>
         <fieldset><legend>{t('sky.mode')}</legend>
           <div className="sky-options">{modes.map(next => (
             <label key={next}>
-              <input type="radio" name="sky-theme" value={next} checked={mode === next} onChange={() => setMode(next)} />
+              <input type="radio" name={`${id}-theme`} value={next} checked={mode === next} onChange={() => setMode(next)} />
               <span>{t(`landing.theme.${next}`)}</span>
             </label>
           ))}</div>
@@ -36,12 +46,12 @@ export function SkyControls() {
         <fieldset><legend>{t('sky.language')}</legend>
           <div className="sky-options">{(['vi', 'en'] as const).map(next => (
             <label key={next}>
-              <input type="radio" name="sky-language" value={next} checked={locale === next} onChange={() => setLocale(next)} />
+              <input type="radio" name={`${id}-language`} value={next} checked={locale === next} onChange={() => setLocale(next)} />
               <span>{t(`lang.${next}`)}</span>
             </label>
           ))}</div>
         </fieldset>
-      </div>
-    </details>
+      </dialog>
+    </div>
   )
 }

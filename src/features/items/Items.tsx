@@ -5,8 +5,9 @@ import { catalogResult } from '../../data/itemLookup/catalog.ts'
 import { costRepresentation, filterEntries, filtersFromParams, lookupById, updateFilterParams } from '../../data/itemLookup/model.ts'
 import type { LookupEntry } from '../../data/itemLookup/model.ts'
 import { useLocale } from '../../shared/i18n/useLocale'
-import { Button, SectionCard, StatusBadge, TextInput } from '../../shared/ui/primitives'
-import { CategoryGlyph } from './CategoryGlyph.tsx'
+import { Button, SectionCard, TextInput } from '../../shared/ui/primitives'
+import { ItemThumbnail } from './ItemThumbnail.tsx'
+import { resolveItemImage } from '../../data/itemLookup/images.ts'
 import { SourceCredits } from './SourceCredits.tsx'
 import { itemCopy } from './copy.ts'
 
@@ -36,11 +37,12 @@ function ItemCard({ entry, search }: { entry: LookupEntry; search: string }) {
   const offer = entry.item.acquisitionOptions.find(o => o.costStatus !== 'unknown') ?? entry.item.acquisitionOptions[0]
   const evidence = entry.offers.find(e => e.id === offer?.id)
   return <li><Link className="item-card" to={`/items/${entry.id}${search}`} aria-label={`${entry.item.name.default} — ${copy.open}`}>
-    <div className="item-card__top"><CategoryGlyph category={entry.category} /><span className="item-card__category">{copy.categories[entry.category]}</span><span className="item-card__arrow" aria-hidden="true">↗</span></div>
+    <ItemThumbnail entry={entry} />
+    <div className="item-card__body"><span className="item-card__category">{copy.categories[entry.category]}</span>
     <h2>{entry.item.name.default}</h2>
     <p className="item-card__origin">{entry.item.spiritIds.map(id => spiritNames.get(id)).filter(Boolean).join(' · ') || entry.item.seasonIds.map(id => seasonNames.get(id)).filter(Boolean).join(' · ') || copy.unknown}</p>
     <div className="item-card__cost"><p>{offer ? <Cost option={offer} /> : copy.unknownCost}</p>{evidence ? <small>{copy.acquisitions[evidence.acquisition]}{evidence.seasonPass ? ` · ${copy.pass}` : ''}{evidence.bundle ? ` · ${copy.bundle}` : ''}</small> : null}</div>
-    <div className="item-card__footer"><span>{copy.sourceBadge}</span><span>#{entry.upstreamId}</span></div>
+    <span className="item-card__open">{copy.open} <span aria-hidden="true">↗</span></span></div>
   </Link></li>
 }
 
@@ -48,14 +50,16 @@ function ItemDetail({ entry, search }: { entry: LookupEntry; search: string }) {
   const { locale } = useLocale()
   const copy = itemCopy[locale]
   const item = entry.item
+  const image = resolveItemImage(entry.image)
   const sources = catalog?.provenance.filter(source => item.provenanceIds.includes(source.id)) ?? []
   return <>
     <Link to={`/items${search}`} className="text-link">← {copy.back}</Link>
-    <div className="item-detail__hero"><CategoryGlyph category={entry.category} /><div><StatusBadge tone="info">{copy.sourceBadge}</StatusBadge><h1 id="page-title" tabIndex={-1}>{item.name.default}</h1><p>{copy.categories[entry.category]}</p></div></div>
-    <p className="section-note">{copy.imageNote}</p>
+    <div className="item-detail__hero"><div><ItemThumbnail key={entry.id} entry={entry} detail />
+      {image ? <p className="item-image-credit"><a href={image.sourceUrl}>{copy.imageCredit} ↗</a> · {image.credit} · <a href={image.permissionUrl}>{image.license}</a></p> : <p className="item-image-credit">{copy.imageNote}</p>}
+    </div><div><p className="eyebrow">{copy.categories[entry.category]}</p><h1 id="page-title" tabIndex={-1}>{item.name.default}</h1></div></div>
     <div className="item-detail__grid">
       <div className="item-detail__facts">
-        <SectionCard id="item-identity" title={copy.identity}><dl className="item-facts"><dt>{copy.upstreamId}</dt><dd>{entry.upstreamId}</dd><dt>{copy.identifier}</dt><dd><code>{entry.identifier}</code></dd><dt>{copy.category}</dt><dd>{copy.categories[entry.category]}</dd><dt>{copy.slot}</dt><dd>{copy.slots[item.slot]}</dd></dl></SectionCard>
+        <SectionCard id="item-identity" title={copy.identity}><dl className="item-facts"><dt>{copy.category}</dt><dd>{copy.categories[entry.category]}</dd><dt>{copy.slot}</dt><dd>{copy.slots[item.slot]}</dd></dl></SectionCard>
         <SectionCard id="item-origin" title={copy.origin}><dl className="item-facts"><dt>{copy.season}</dt><dd>{item.seasonIds.map(id => seasonNames.get(id)).join(' · ') || copy.unknown}</dd><dt>{copy.spirit}</dt><dd>{item.spiritIds.map(id => spiritNames.get(id)).join(' · ') || copy.unknown}</dd></dl></SectionCard>
         <SectionCard id="item-quality" title={copy.dataQuality}><p>{copy.qualityNote}</p><p className="section-note">{entry.categoryEvidence ?? copy.unknown}</p></SectionCard>
       </div>
@@ -72,8 +76,12 @@ function ItemDetail({ entry, search }: { entry: LookupEntry; search: string }) {
         })}</ol> : <p>{copy.noOffers}</p>}
       </SectionCard>
     </div>
-    <SectionCard id="item-sources" title={copy.sources}><ul className="item-source-list">{sources.map(source => <li key={source.id}><a href={source.sourceUrl ?? undefined}>{source.sourceRecordKey}</a></li>)}</ul></SectionCard>
-    <SourceCredits />
+    <SectionCard id="item-sources" title={copy.sources}>
+      <SourceCredits />
+      <details className="item-technical"><summary>{copy.technicalMetadata}</summary><dl className="item-facts"><dt>{copy.upstreamId}</dt><dd>{entry.upstreamId}</dd><dt>{copy.identifier}</dt><dd><code>{entry.identifier}</code></dd></dl>
+        <ul className="item-source-list">{sources.map(source => <li key={source.id}><a href={source.sourceUrl ?? undefined}>{source.sourceRecordKey}</a></li>)}</ul>
+      </details>
+    </SectionCard>
   </>
 }
 

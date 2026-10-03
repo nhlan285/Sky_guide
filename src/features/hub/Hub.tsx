@@ -4,29 +4,25 @@ import { Button, SectionCard, StatusBadge, TextInput } from '../../shared/ui/pri
 import { useLocale } from '../../shared/i18n/useLocale'
 import { catalogueSummary } from '../../data/itemLookup/summary.ts'
 import { itemCopy } from '../items/copy.ts'
+import { SourceCredits } from '../items/SourceCredits.tsx'
 
 export function Hub() {
   const { t, locale } = useLocale()
   const navigate = useNavigate()
   const copy = itemCopy[locale]
   return (
-    <>
+    <div className="hub-page">
       <div className="page-intro hub-hero">
         <p className="eyebrow">{t('hub.eyebrow')}</p>
         <h1 id="page-title" tabIndex={-1}>{t('hub.title')}</h1>
         <p>{t('hub.subtitle')}</p>
       </div>
 
-      <aside className="source-strip" aria-label={t('hub.sourceLabel')}>
-        <StatusBadge tone="info">{copy.sourceBadge}</StatusBadge>
-        <p>{t('hub.source')}</p>
-      </aside>
-
       <div className="hub-grid">
-        <SectionCard id="item-lookup" title={t('hub.items')} className="hub-grid__wide hub-lookup" badge={<StatusBadge tone="info">{copy.sourceBadge}</StatusBadge>}>
+        <SectionCard id="item-lookup" title={t('hub.items')} className="hub-grid__wide hub-lookup">
           <div className="hub-lookup__layout"><div><p className="section-description">{t('hub.items.desc')}</p>
             <p className="hub-lookup__count">{catalogueSummary?.accepted.toLocaleString(locale) ?? '—'} <span>{copy.total}</span></p>
-            <p className="section-note">{copy.snapshot}</p><Link to="/items" className="text-link">{copy.browse} ↗</Link>
+            <Link to="/items" className="text-link">{copy.browse} ↗</Link>
           </div>
           {catalogueSummary ? <form className="lookup-controls" onSubmit={event => {
             event.preventDefault()
@@ -78,6 +74,7 @@ export function Hub() {
           </div>
         </details>
       </div>
-    </>
+      <SourceCredits />
+    </div>
   )
 }
