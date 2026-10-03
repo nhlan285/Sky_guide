@@ -1,20 +1,21 @@
 .sky-atmosphere { position: absolute; inset: 0 0 auto; height: 100%; z-index: 0; overflow: hidden; pointer-events: none; contain: layout paint; }
-.app-shell--hub .sky-atmosphere { height: 52rem; mask-image: linear-gradient(#000 0%, #000 36%, transparent 100%); }
-.sky-layer, .ambient-canvas, .sky-light, .clouds, .sky-horizon { position: absolute; inset: 0; width: 100%; height: 100%; }
+.app-shell--hub .sky-atmosphere { height: min(64rem, 100%); mask-image: linear-gradient(#000 0%, #000 22%, rgba(0,0,0,.65) 52%, transparent 100%); }
+.sky-layer, .ambient-canvas, .sky-light, .sky-day-haze, .clouds, .sky-horizon { position: absolute; inset: 0; width: 100%; height: 100%; }
 .sky-layer { transition: opacity 1.2s linear; }
-.sky-layer--night { background: radial-gradient(ellipse at 82% 32%, rgba(37,57,96,.25), transparent 44%), linear-gradient(#040b1d 0%, #0c1d35 60%, #283d52 100%); }
+.sky-layer--night { background: radial-gradient(ellipse at 82% 32%, rgba(56,58,109,.25), transparent 44%), linear-gradient(#04091a 0%, #101b38 65%, #1d3049 100%); }
 .sky-layer--sunrise { opacity: var(--sunrise); background: linear-gradient(#34475f 0%, #65849c 44%, #caa9a0 77%, #eac2a1 100%); }
-.sky-layer--daylight { opacity: var(--daylight); background: radial-gradient(ellipse at 20% 15%, rgba(248,250,229,.4), transparent 50%), linear-gradient(#5b9fc5 0%, #a1d1e4 55%, #e0edf0 80%, #f3f1e5 100%); }
+.sky-layer--daylight { opacity: var(--daylight); background: radial-gradient(ellipse at 20% 15%, rgba(248,250,229,.3), transparent 50%), linear-gradient(#448eba 0%, #84bdd9 46%, #bdddea 78%, #edf0e9 100%); }
 .sky-layer--sunset { opacity: var(--sunset); background: radial-gradient(ellipse at 18% 85%, rgba(246,171,107,.34), transparent 48%), linear-gradient(#273952 0%, #5e688b 36%, #a2879a 62%, #d69c91 81%, #e6b384 100%); }
 .sky-light { background: radial-gradient(ellipse at 12% 68%, rgba(255,210,153,.48), transparent 53%); opacity: var(--warmth); transition: opacity 1.2s; }
+.sky-day-haze { background: radial-gradient(ellipse at 18% 12%, rgba(255,252,228,.55), transparent 30%), linear-gradient(transparent 50%, rgba(237,246,247,.3)); opacity: var(--daylight); transition: opacity 1.2s; }
 .ambient-canvas { opacity: 1; }
-.app-shell--hub .ambient-canvas { opacity: .45; }
+.app-shell--hub .ambient-canvas { opacity: .7; }
 .clouds { opacity: var(--cloud-visibility); transition: opacity 1.2s; }
-.cloud-band { position: absolute; width: 145%; left: -22%; height: 30%; }
+.cloud-band { position: absolute; width: 135%; left: -17%; height: 42%; mask-image: linear-gradient(transparent 18%, #000 48%, #000 70%, transparent 98%); }
 .cloud-band svg { width: 100%; height: 100%; }
-.cloud-band--0 { top: 6%; height: 22%; opacity: .55; filter: blur(8px); animation: cloud-far 160s ease-in-out infinite alternate; }
-.cloud-band--1 { top: 34%; opacity: .68; filter: blur(14px); animation: cloud-mid 112s ease-in-out infinite alternate; }
-.cloud-band--2 { top: 68%; height: 36%; opacity: .82; filter: blur(22px); animation: cloud-near 78s ease-in-out infinite alternate; }
+.cloud-band--0 { top: -7%; height: 40%; opacity: .5; animation: cloud-far 160s ease-in-out infinite alternate; }
+.cloud-band--1 { top: 18%; height: 57%; opacity: .72; animation: cloud-mid 112s ease-in-out infinite alternate; }
+.cloud-band--2 { top: 55%; height: 58%; opacity: .92; animation: cloud-near 90s ease-in-out infinite alternate; }
 .sky-horizon { background: linear-gradient(transparent 75%, rgba(11,27,46,.16)); }
 .sky-paused .cloud-band { animation-play-state: paused; }
 @keyframes cloud-far { from { transform: translateX(-2%); } to { transform: translateX(3%); } }
@@ -22,6 +23,6 @@
 @keyframes cloud-near { from { transform: translateX(-6%); } to { transform: translateX(6%); } }
 @media (prefers-reduced-motion: reduce) {
   .cloud-band { animation: none; }
-  .sky-layer, .sky-light, .clouds { transition-duration: 0s; }
+  .sky-layer, .sky-light, .sky-day-haze, .clouds { transition-duration: 0s; }
 }
 @media (update: slow) { .cloud-band { animation: none; } }
