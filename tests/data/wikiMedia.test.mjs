@@ -3,7 +3,7 @@ import test from 'node:test'
 import assert from 'node:assert/strict'
 import { readFile } from 'node:fs/promises'
 import { pagesOf, paginate, canonicalTitle, mapLimit } from '../../scripts/wiki/api.mjs'
-import { readPages } from '../../scripts/wiki/discover.mjs'
+import { readPages, stableRedirects } from '../../scripts/wiki/discover.mjs'
 import { parseLuaData } from '../../scripts/wiki/lua.mjs'
 import { matchBinding, classifyMedia, choosePrimary, parseImageInfo, extractBindings } from '../../scripts/wiki/map.mjs'
 import { readCorpus, validateCorpus } from '../../scripts/wiki/output.mjs'
@@ -44,6 +44,11 @@ test('canonical resolution chains normalized names and redirects without undersc
   const responses = [{ query: { normalized: [{ from: 'File:A_B.png', to: 'File:A B.png' }], redirects: [{ from: 'File:A B.png', to: 'File:C.png' }, { from: 'File:C.png', to: 'File:D.png' }] } }]
   assert.equal(canonicalTitle('File:A_B.png', responses), 'File:D.png')
   assert.throws(() => canonicalTitle('A', [{ query: { redirects: [{ from: 'A', to: 'B' }, { from: 'B', to: 'A' }] } }]), /cycle/)
+})
+test('parallel redirect batches serialize in a stable deduplicated order', () => {
+  const first = { from: 'Z', to: 'C' }, second = { from: 'A', to: 'B' }
+  assert.deepEqual(stableRedirects([first, second, first]), [second, first])
+  assert.deepEqual(stableRedirects([second, first]), stableRedirects([first, second]))
 })
 test('concurrency limiter maintains input order and its configured ceiling', async () => {
   let active = 0, max = 0

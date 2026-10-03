@@ -5,6 +5,7 @@ import { parseLuaData } from './lua.mjs'
 export const roots = ['Cosmetics', 'Masks', 'Capes', 'Hair', 'Outfits', 'Accessories', 'Hair Accessories', 'Head Accessories', 'Face Accessories', 'Necklaces', 'Shoes', 'Instruments', 'Props', 'Held Props', 'Small Props', 'Large Props', 'Music Sheets', 'Spirits', 'Seasons', 'Events']
 export const moduleTitles = ['Module:Spirits/data', 'Module:Seasons/data', 'Module:Days Item/data', 'Module:Days/data', 'Module:Cosmetics/data', 'Module:Emotes/data', 'Module:Instruments/data', 'Module:Music Sheet/data', 'Module:Spirit Item/data']
 const inspectionTitles = ['Module:Season Item/data', 'Module:Cosmetics/Outfits/data']
+export const stableRedirects = redirects => [...new Map(redirects.map(r => [JSON.stringify(r), r])).values()].sort((a, b) => a.from.localeCompare(b.from, 'en') || a.to.localeCompare(b.to, 'en') || JSON.stringify(a).localeCompare(JSON.stringify(b), 'en'))
 export async function readPages(client, titles) {
   const found = new Map(), redirects = []
   await mapLimit(chunks([...new Set(titles)].sort(), 20), 2, async batch => {
@@ -18,7 +19,7 @@ export async function readPages(client, titles) {
       }
     }
   })
-  return { pages: [...found.values()].sort((a, b) => a.title.localeCompare(b.title, 'en')), redirects }
+  return { pages: [...found.values()].sort((a, b) => a.title.localeCompare(b.title, 'en')), redirects: stableRedirects(redirects) }
 }
 export async function discover(client, catalogue) {
   const site = await client.request({ meta: 'siteinfo', siprop: 'general|rightsinfo' })
@@ -76,7 +77,7 @@ export async function discover(client, catalogue) {
       }
     }
   })
-  const redirects = [...result.redirects, ...extraResult.redirects, ...fileRedirects]
+  const redirects = stableRedirects([...result.redirects, ...extraResult.redirects, ...fileRedirects])
   const canonical = title => canonicalTitle(title, [{ query: { redirects } }])
   return { site: site.query, pageImages: pagesOf(pageImages), modules, inspectedModules, moduleInventory, pages, requestedFileTitles: fileTitles.size, files: [...new Map(files.map(f => [f.pageid, f])).values()].sort((a, b) => a.pageid - b.pageid), categories: Object.fromEntries(Object.entries(categoryCounts).sort()), redirects, missing: [...new Set(missing)].sort(), canonical,
     pageSummaries: pages.map(p => ({ title: p.title, pageId: p.pageid, url: p.canonicalurl ?? wikiUrl(p.title), revision: p.revisions?.[0]?.revid ?? null, categories: [...new Set(p.categories.map(c => c.title))].sort() })) }
