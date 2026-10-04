@@ -5,6 +5,8 @@ node_modules/
 dist/
 build/
 .cache/
+.pnpm-store/
+data/wiki-assets/raw/
 .catalogue-stage/
 .vite/
 coverage/
@@ -65,3 +67,8 @@ data/private/
 data/evidence/
 private/
 *.private.json
+
+
+.env
+.env.local
+.env.*.local

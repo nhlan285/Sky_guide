@@ -1,5 +1,6 @@
 /* global setTimeout, URLSearchParams, fetch, AbortSignal, console */
 import { createHash } from 'node:crypto'
+import { Buffer } from 'node:buffer'
 import { mkdir, readFile, writeFile, rename } from 'node:fs/promises'
 import { join } from 'node:path'
 
@@ -42,7 +43,7 @@ export function canonicalTitle(title, responses) {
   }
   return current
 }
-export function createClient(cacheDir) {
+export function createClient(cacheDir, options = {}) {
   let nextRequest = 0, count = 0, cached = 0
   const failures = [], retries = []
   async function request(params) {
@@ -65,10 +66,13 @@ export function createClient(cacheDir) {
         const json = await response.json()
         if (json.error) throw new Error(`${json.error.code}: ${json.error.info}`)
         if (json.warnings) throw new Error(`Unexpected API warning: ${JSON.stringify(json.warnings)}`)
-        await writeFile(`${path}.tmp`, JSON.stringify(json)); await rename(`${path}.tmp`, path)
+        const serialized = JSON.stringify(json)
+        await options.beforeStore?.(Buffer.byteLength(serialized))
+        await writeFile(`${path}.tmp`, serialized); await rename(`${path}.tmp`, path)
         if (count % 40 === 0) console.log(`API: ${count} network requests, ${cached} cached`)
         return json
       } catch (error) {
+        if (['CACHE_LIMIT_REACHED', 'MINIMUM_FREE_SPACE_REACHED'].includes(error.code)) throw error
         const failure = { url, attempt: attempt + 1, message: error.message }
         if (attempt === 3) { failures.push(failure); throw error }
         retries.push(failure)

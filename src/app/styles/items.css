@@ -28,7 +28,7 @@
 .item-card__cost small { display: block; margin-top: .3rem; color: var(--muted); font-size: .8rem; line-height: 1.6; }
 .item-card__open { font-size: .8rem; color: var(--accent); display: flex; width: 100%; justify-content: space-between; }
 .item-thumbnail { position: relative; width: 100%; aspect-ratio: 1; overflow: hidden; background: radial-gradient(ellipse at 50% 65%, var(--item-stage-glow, #304357), var(--item-stage, #202f40)); border-bottom: 1px solid var(--glass-border); flex-shrink: 0; }
-.item-thumbnail img { position: absolute; inset: 0; display: block; width: 100%; height: 100%; object-fit: contain; padding: clamp(.35rem, 2vw, .8rem); }
+.item-thumbnail img { position: absolute; inset: 0; display: block; width: 100%; height: 100%; object-fit: contain; padding: clamp(.25rem, 1.5vw, .75rem); }
 .item-thumbnail__placeholder { height: 100%; display: flex; flex-direction: column; justify-content: center; align-items: center; gap: .75rem; }
 .item-thumbnail__placeholder > span, .item-thumbnail__placeholder > small { font-size: .8rem; color: var(--muted); }
 .item-thumbnail--detail { border: 1px solid var(--glass-border); border-radius: var(--radius-card); }

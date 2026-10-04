@@ -151,7 +151,7 @@ test('real image resolves ahead of placeholder, and failures remain neutral with
   assert.equal(selectWikiImage({ ...media, thumbnailUrl: 'javascript:bad' }), null)
   assert.equal(selectWikiImage({ ...media, originalUrl: url, width: 4000, height: 4000 }, true), media.thumbnailUrl)
 })
-test('asset component SSR renders actual lazy media or a neutral message, never a category glyph', async () => {
+test('legacy Wiki metadata stays provenance and does not become runtime artwork', async () => {
   const server = await createServer({ logLevel: 'silent', server: { middlewareMode: true, hmr: false, watch: null }, appType: 'custom' })
   try {
     const { ItemThumbnail } = await server.ssrLoadModule('/src/features/items/ItemThumbnail.tsx')
@@ -159,7 +159,7 @@ test('asset component SSR renders actual lazy media or a neutral message, never 
     const enriched = enrichEntries(catalogResult.value.entries, parseWikiIndex(rawIndex, manifest.version, ids))
     const render = entry => renderToStaticMarkup(createElement(LocaleProvider, null, createElement(ItemThumbnail, { entry })))
     const real = render(enriched.find(e => e.wiki.primary))
-    assert.ok(real.includes('static.wikia.nocookie.net')); assert.ok(real.includes('loading="lazy"')); assert.ok(real.includes('decoding="async"'))
+    assert.ok(!real.includes('static.wikia.nocookie.net')); assert.ok(!real.includes('<img')); assert.ok(real.includes('item-thumbnail__placeholder'))
     const missing = render({ ...enriched[0], wiki: undefined, images: null, image: null })
     assert.ok(missing.includes('Chưa có hình ảnh')); assert.ok(!missing.includes('<svg')); assert.ok(!missing.includes('<img'))
     assert.ok(!real.includes('category-glyph')); assert.ok(!real.includes('Sky Wiki'))

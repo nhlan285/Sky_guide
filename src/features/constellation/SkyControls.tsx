@@ -1,5 +1,5 @@
 import { useEffect, useId, useRef } from 'react'
-import { useTheme } from './useTheme'
+import { useTheme } from './useTheme.tsx'
 import { useLocale } from '../../shared/i18n/useLocale'
 import { outsideBounds } from './dialog.ts'
 

@@ -1,9 +1,27 @@
 {
   "$schema": "https://openapi.vercel.sh/vercel.json",
   "framework": "vite",
-  "git": { "deploymentEnabled": { "feature/item-real-media": false } },
+  "git": {
+    "deploymentEnabled": {
+      "feature/item-real-media": false,
+      "feature/item-asset-crawl": false
+    }
+  },
   "installCommand": "pnpm install --frozen-lockfile",
   "buildCommand": "pnpm lint && pnpm build",
   "outputDirectory": "dist",
-  "rewrites": [{ "source": "/(.*)", "destination": "/index.html" }]
+  "rewrites": [
+    {
+      "source": "/assets/items/manifests/:name.json",
+      "destination": "/api/manifest/:name.json"
+    },
+    {
+      "source": "/assets/items/:variant/:file",
+      "destination": "/api/asset/:variant/:file"
+    },
+    {
+      "source": "/(.*)",
+      "destination": "/index.html"
+    }
+  ]
 }
