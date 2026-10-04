@@ -13,3 +13,5 @@ export {
   validateTravelingSpiritPrediction, validateTravelingSpiritPredictions,
   validateTravelingSpiritVisit, validateTravelingSpiritVisits,
 } from './traveling.ts'
+export * from './geography.ts'
+export * from './prices.ts'
