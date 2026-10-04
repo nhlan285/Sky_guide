@@ -25,7 +25,7 @@
 .wardrobe-item { display: grid; grid-template-columns: 3.5rem minmax(0, 1fr); align-items: center; gap: .25rem .65rem; border-radius: .9rem; border: 1px solid var(--control-border); padding: .8rem; color: var(--text); background: var(--surface-soft); text-align: left; cursor: pointer; min-width: 0; }
 .wardrobe-item:hover { border-color: var(--accent); }
 .wardrobe-item.is-equipped { outline: 2px solid var(--accent); outline-offset: -2px; }
-.item-thumbnail { width: 3.5rem; height: 4rem; grid-row: span 3; overflow: visible; }
+.wardrobe-editor .item-thumbnail { width: 3.5rem; height: 4rem; grid-row: span 3; overflow: visible; }
 .wardrobe-item__name { font-size: .875rem; font-weight: 600; line-height: 1.35; overflow-wrap: anywhere; }
 .wardrobe-item__state { color: var(--muted); font-size: .7rem; }
 .wardrobe-item__action { font-size: .75rem; text-decoration: underline; text-underline-offset: .2em; }
@@ -74,7 +74,7 @@
   .wardrobe-categories { grid-template-columns: repeat(3, minmax(0, 1fr)); }
   .wardrobe-items { grid-template-columns: repeat(2, minmax(0, 1fr)); }
   .wardrobe-item { grid-template-columns: 1fr; text-align: center; justify-items: center; }
-  .item-thumbnail { grid-row: auto; width: 4rem; height: 4.5rem; }
+  .wardrobe-editor .item-thumbnail { grid-row: auto; width: 4rem; height: 4.5rem; }
   .wardrobe-dye { margin-top: 1rem; }
   .wardrobe-palette { grid-template-columns: repeat(6, minmax(0, 1fr)); }
   .wardrobe-sizes { grid-template-columns: repeat(4, minmax(0, 1fr)); }
