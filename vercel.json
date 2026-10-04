@@ -13,11 +13,19 @@
   "routes": [
     {
       "src": "/assets/items/manifests/(?<name>index|items-[0-2][0-9])\\.json",
-      "dest": "/api/manifest/$name"
+      "dest": "/api/manifest/[name]?name=$name"
     },
     {
       "src": "/assets/items/(?<variant>thumbnails|cards|detail)/(?<file>[a-f0-9]{64}\\.webp)",
-      "dest": "/api/asset/$variant/$file"
+      "dest": "/api/asset/[...path]?variant=$variant&file=$file"
+    },
+    {
+      "src": "/api/manifest/(?<name>index|items-[0-2][0-9])(?:\\.json)?",
+      "dest": "/api/manifest/[name]?name=$name"
+    },
+    {
+      "src": "/api/asset/(?<variant>thumbnails|cards|detail)/(?<file>[a-f0-9]{64}\\.webp)",
+      "dest": "/api/asset/[...path]?variant=$variant&file=$file"
     },
     {
       "handle": "filesystem"
