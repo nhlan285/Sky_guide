@@ -26,15 +26,20 @@
     "validate:catalog": "node scripts/validate-catalog.mjs",
     "media:wiki:update": "node scripts/import-wiki-media.mjs",
     "media:wiki:validate": "node scripts/validate-wiki-media.mjs",
-    "media:wiki:stats": "node scripts/wiki-media-stats.mjs"
+    "media:wiki:stats": "node scripts/wiki-media-stats.mjs",
+    "assets:sync:r2": "node scripts/assets/r2-sync.mjs",
+    "assets:sync:r2:dry-run": "node scripts/assets/r2-sync.mjs --dry-run"
   },
   "dependencies": {
+    "@aws-sdk/client-s3": "3.1146.0",
+    "@aws-sdk/s3-request-presigner": "3.1146.0",
     "react": "19.3.0",
     "react-dom": "19.3.0",
     "react-router-dom": "7.18.4"
   },
   "devDependencies": {
     "@eslint/js": "10.0.1",
+    "@types/node": "26.6.4",
     "@types/react": "19.3.0",
     "@types/react-dom": "19.3.0",
     "eslint": "10.11.0",
