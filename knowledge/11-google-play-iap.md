@@ -1,5 +1,16 @@
 # K11 — Google Play listing chính thức
 
+## Xác minh bổ sung 2026-10-04
+
+Package `com.tgc.sky.android`; [US](https://play.google.com/store/apps/details?id=com.tgc.sky.android&hl=en&gl=US)
+và [VN](https://play.google.com/store/apps/details?id=com.tgc.sky.android&hl=vi&gl=VN)
+trả HTTP 200 HTML qua Node. Web reader thất bại nhưng CLI đọc được. Chưa có giá
+từng IAP SKU Android USD/VND: generic range và app price 0 không được gán vào
+item. `hl` là ngôn ngữ; `gl` là vùng request, chưa phải xác nhận checkout/account.
+Không lấy giá iOS làm giá Android. [Evidence/mapping](16-image-price-sources.md).
+
+## Hồ sơ scaffold gốc (trạng thái lịch sử)
+
 - **Nguồn/link:** Google Play listing chính thức của Sky; brief chưa có package ID, vùng hoặc URL.
 - **Dữ liệu:** giá IAP công khai theo Android/storefront; khoảng giá tổng quát không đủ để suy ra giá mỗi SKU.
 - **Format:** listing web/store chưa khảo sát; không có API đã nêu trong brief.
