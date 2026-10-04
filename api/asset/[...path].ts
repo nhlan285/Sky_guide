@@ -1,15 +1,11 @@
 /**
  * Vercel Function: private Cloudflare R2 asset signer
  *
- * Route:
- *   GET /api/asset/<variant>/<sha256>.webp
+ * Public route:
+ *   GET /assets/items/<variant>/<sha256>.webp
  *
- * Flow:
- *   browser
- *     -> Vercel Function
- *     -> generate short-lived R2 presigned URL
- *     -> 302 redirect
- *     -> browser downloads directly from Cloudflare R2
+ * Internal route:
+ *   GET /api/asset/<variant>/<sha256>.webp
  *
  * R2 credentials remain server-side only.
  */
@@ -21,14 +17,20 @@ import {
 } from '@aws-sdk/client-s3'
 import { getSignedUrl } from '@aws-sdk/s3-request-presigner'
 
-const ALLOWED_VARIANTS = new Set([
-  'thumbnails',
-  'cards',
-  'detail',
-])
-
-const SHA256_WEBP_RE = /^[a-f0-9]{64}\.webp$/
+const ASSET_RE =
+  /^(?:\/api\/asset\/|\/assets\/items\/)(thumbnails|cards|detail)\/([a-f0-9]{64}\.webp)$/
 const SIGNED_URL_TTL_SECONDS = 3600
+
+function assetKey(
+  pathname: string,
+): { variant: string; filename: string } | null {
+  const match = ASSET_RE.exec(pathname)
+  if (!match) return null
+  return {
+    variant: match[1],
+    filename: match[2],
+  }
+}
 
 function getR2Client(): S3Client | null {
   const endpoint = process.env.R2_ENDPOINT
@@ -65,39 +67,22 @@ export default async function handler(
   const client = getR2Client()
 
   if (!bucket || !client) {
+    console.error('[asset-r2] storage not configured')
     return new Response('Storage not configured', {
       status: 503,
     })
   }
 
-  const url = new URL(req.url)
+  const parsed = assetKey(new URL(req.url).pathname)
 
-  const rawPath = url.pathname.replace(
-    /^\/api\/asset\//,
-    '',
-  )
-
-  const slash = rawPath.indexOf('/')
-
-  if (slash === -1) {
+  if (!parsed) {
     return new Response('Not Found', {
       status: 404,
     })
   }
 
-  const variant = rawPath.slice(0, slash)
-  const filename = rawPath.slice(slash + 1)
-
-  if (
-    !ALLOWED_VARIANTS.has(variant) ||
-    !SHA256_WEBP_RE.test(filename)
-  ) {
-    return new Response('Not Found', {
-      status: 404,
-    })
-  }
-
-  const key = `items/${variant}/${filename}`
+  const key =
+    `items/${parsed.variant}/${parsed.filename}`
 
   try {
     const command =
