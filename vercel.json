@@ -10,18 +10,21 @@
   "installCommand": "pnpm install --frozen-lockfile",
   "buildCommand": "pnpm lint && pnpm build",
   "outputDirectory": "dist",
-  "rewrites": [
+  "routes": [
     {
-      "source": "/assets/items/manifests/:name.json",
-      "destination": "/api/manifest/:name.json"
+      "src": "/assets/items/manifests/(?<name>index|items-[0-2][0-9])\\.json",
+      "dest": "/api/manifest/$name.json"
     },
     {
-      "source": "/assets/items/:variant/:file",
-      "destination": "/api/asset/:variant/:file"
+      "src": "/assets/items/(?<variant>thumbnails|cards|detail)/(?<file>[a-f0-9]{64}\\.webp)",
+      "dest": "/api/asset/$variant/$file"
     },
     {
-      "source": "/(.*)",
-      "destination": "/index.html"
+      "handle": "filesystem"
+    },
+    {
+      "src": "/(.*)",
+      "dest": "/index.html"
     }
   ]
 }
