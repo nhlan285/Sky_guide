@@ -1,61 +1,65 @@
 # Current handoff — 2026-10-04
 
-## Task / branch / baseline
+## Task and branch
 
-Autonomous approved master run, LARGE/ARCHITECTURAL. Active phase R1:
-[DATA_FOUNDATION](plan/DATA_FOUNDATION.md); master [roadmap](plan/IMPLEMENTATION_PLAN.md).
-Execution branch: `codex/master-plan-execution`.
-Current HEAD: `199bdd58c37b848b6b550b1adfdb7e7e70a5f791`; D02/D03 validation in progress.
-Planning branch `codex/roadmap-data-event-media-refresh` and execution baseline
-pushed and verified remotely. Remote main was already at 8b371de at preflight;
-this run did not merge main. Both associated working trees were clean.
+Autonomous approved master roadmap run; continue every safe unblocked task.
+Branch: `codex/master-plan-execution`.
+Latest verified pushed HEAD before this checkpoint: `518eebe295710721d6fd2c50bce9a66936d8b1e4`.
+Planning baseline `8b371de` pushed to `codex/roadmap-data-event-media-refresh`.
+Remote main was already at that baseline before this run; no main merge performed.
+Master: [IMPLEMENTATION_PLAN](plan/IMPLEMENTATION_PLAN.md).
+R1 plan: [DATA_FOUNDATION](plan/DATA_FOUNDATION.md).
+Independent lane: [LOCAL_STATE_FOUNDATION](plan/LOCAL_STATE_FOUNDATION.md).
 
-## Completed work / intentional areas
+## Completed work and commits
 
-R0 planning validation: 173 unique tasks, scaffold/local links PASS. Existing Q20–Q23
-cover DB, storage, item reconciliation, Events, previews and Music scopes.
-R1 D01 implementation slice: typed identity graph validation, scoped crosswalk,
-FK/cardinality, revision history, alias/tombstone/retirement and event ownership.
-Relational table mapping and I01 migration/backup/restore/rollback review package:
-[contract](architecture/data-foundation.md). Entity payloads retain existing validators.
-Changes: `src/data/domain/identity.ts`, `tests/data/domainIdentity.test.mjs`, R1
-active plan, architecture review package, roadmap pointer and this handoff.
-No catalog mutations, downloads, credentials, provisioning or UI/runtime changes.
+- `199bdd5`: relational mapping + identity/FK/cardinality/revision/crosswalk/
+  alias/tombstone validation. Existing K15 payload validators remain in place.
+- `533243c`: provider-neutral snapshot API and media registry/delivery contracts.
+  API is unmounted; no production consumer switched. Rights/evidence/revocation
+  overlays fail closed, current R2 paths retained. No binaries downloaded/uploaded.
+- `518eebe`: staged source hash/normalization/quarantine, digest-bound review,
+  global-generation CAS contract, bounded retry/health/LKG and local restore tests.
+  Only in-memory fixture store, not a DB transaction/migration/restore acceptance.
+- Current milestone: P2-U01 wrapper and locale legacy migration, explicit session
+  status/retry/reset in existing settings UI; cross-tab/read/quota/version handling.
+- Existing P0-I01–I03 and P1-W02 acceptance evidence reviewed and task rows updated;
+  no new legal rights, framework upgrade or deployment claimed.
 
-## Validation
+## Validation / modified areas
 
-Identity tests 6/6 PASS; TypeScript PASS; focused ESLint PASS; diff whitespace PASS.
-Initial type-key inference and test-global lint errors fixed and checks rerun.
-Full suite/build NOT RUN yet for this slice; required after API/storage completion.
-Real PostgreSQL migration/up/down/backup restore NOT RUN (no approved provider).
-Lockfile install completed using pinned pnpm 10.30.3. Temporary/cache environment
-on E:. Prior product/source state remains as recorded in R0 baseline.
+Full suite 200/200 PASS. Full lint, typecheck, catalog validation (1808 items) and
+build PASS. Build warnings: React Router module directives and existing large
+Item chunk. No browser visual QA yet. Local storage focused tests 7/7 PASS.
+R1 focused tests 24/24 included in total. Docs checks and diff inspection before
+checkpoint. DB up/down/live backup restore NOT RUN; provider not approved.
 
-## Gates / decisions
+Current slice changes: `src/shared/storage/versionedStorage.ts`, locale adapter/
+provider/translations, `SkyControls.tsx`, `tests/data/localStorage.test.mjs`, plans
+and this handoff. No unrelated user changes existed at preflight.
 
-Q20 canonical relational metadata; binary media in object storage; public allowlist,
-unknown/free distinction, stable K15 IDs and current R2 routes preserved.
-Schema/API/storage review before P9-I02 provider/quota approval and provisioning.
-P9-D04/P9-V01 real integration and R2–R6 depend on that foundation gate.
-No paid resources, merge, deployment, mass crawl or rights assumption authorized.
-Global rules 41–47 checkpoints apply. Usage snapshot: 46% short-window remaining,
-76% weekly remaining at preflight; no low-usage trigger. No context percentage exposed.
+## Decisions / gates
 
-## Checkpoint tests / exact next action
+Q20 portable relational metadata, object-storage binaries; Q21 role-based image
+reconciliation; Q22 preview/Music scopes; Q23 LA timezone/Event provenance retained.
+No paid resources, provisioning, merge/release, destructive data operations or
+rights assumptions. Bulk working data remains on E:. Existing K15 IDs/costs preserved.
+R1 schema/API/storage review request is pending asynchronously with the user.
+Then P9-I02 provider/quota approval; real D04/V01 and R2–R6 retain dependencies.
+While that waits, independent old-roadmap tasks may continue: P2-D03, local UX,
+source research with required source/rights skills, later approved fixture work.
+Do not interpret the R1 gate as blocking the whole roadmap.
 
-Checkpoint drill: PASS — 199bdd58c37b848b6b550b1adfdb7e7e70a5f791 committed/pushed; remote SHA matched; D02/D03 work continued.
+## Continuity tests / exact next action
+
+Checkpoint drill: PASS at `199bdd58c37b848b6b550b1adfdb7e7e70a5f791`: handoff,
+commit, push, remote SHA verification; D02/D03 implementation then continued.
 Compaction continuity test: NOT TRIGGERED. Usage checkpoint: NOT TRIGGERED.
-After first milestone push is verified, record PASS then continue P9-D02/D03:
-provider-neutral read API, public projection boundary and media delivery/revocation
-contracts with focused tests. Keep this branch. Do not provision DB before review.
+Last measured usage remaining: 52% short-window / 67% weekly; no low threshold.
+No exact context percentage exposed. Native compaction only; never shell /compact.
 
-D02/D03: API snapshot and read facade, media registry/delivery boundary implemented.
-Focused tests 18/18 PASS; focused lint PASS; typecheck PASS before final guard.
-Next: full suite/lint/build then checkpoint the API/media slice.
-
-R1 sync local subset implemented: source hashing, quarantine, digest-bound review,
-GLOBAL generation CAS contract, bounded retry/offline/LKG and local snapshot restore.
-Focused identity/sync tests 12/12 PASS; focused lint/typecheck PASS. Earlier full
-suite 187/187 and build PASS before this slice; final expanded suite pending.
-Pending user review requested asynchronously; no provider selected or provisioned.
-Next: checkpoint sync then audit independent legacy tasks while R1 approval waits.
+Exact next action: push P2-U01 milestone after docs/diff checks. Then create a narrow
+P2-D03 plan and implement Map/Marker/Route + price-mapping validators using existing
+core/catalog primitives and DATA_SCHEMA. No real data/source import or price
+calculation algorithm. If user approves R1, proceed to provider comparison/quota
+research before selecting/provisioning anything. Keep one execution branch.

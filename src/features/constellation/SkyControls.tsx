@@ -10,7 +10,7 @@ export function SkyControls() {
   const previousOverflow = useRef<string | null>(null)
   const id = useId()
   const { mode, setMode } = useTheme()
-  const { locale, setLocale, t } = useLocale()
+  const { locale, setLocale, t, storageIssue, retryLocaleSave, resetLocale } = useLocale()
   useEffect(() => {
     return () => {
       if (previousOverflow.current !== null) document.body.style.overflow = previousOverflow.current
@@ -51,6 +51,14 @@ export function SkyControls() {
             </label>
           ))}</div>
         </fieldset>
+        {storageIssue ? <div>
+          <p className="sky-controls__note" role="status">{t(storageIssue === 'future_version' ? 'storage.future' : 'storage.sessionOnly')}</p>
+          {storageIssue === 'future_version'
+            ? <button type="button" className="button button--quiet" onClick={resetLocale}>{t('storage.resetLocale')}</button>
+            : <button type="button" className="button button--quiet" onClick={retryLocaleSave}>{t('storage.retry')}</button>}
+          {storageIssue === 'corrupt' || storageIssue === 'migration_failed'
+            ? <button type="button" className="button button--quiet" onClick={resetLocale}>{t('storage.resetLocale')}</button> : null}
+        </div> : null}
       </dialog>
     </div>
   )

@@ -1,5 +1,8 @@
 export type Locale = 'vi' | 'en'
 const vi = {
+  'storage.sessionOnly': 'Chưa lưu được ngôn ngữ. Lựa chọn hiện tại chỉ dùng trong phiên này.',
+  'storage.future': 'Thiết lập ngôn ngữ được lưu bởi phiên bản mới hơn. Lựa chọn hiện tại chỉ dùng trong phiên này.',
+  'storage.retry': 'Thử lưu lại', 'storage.resetLocale': 'Đặt lại ngôn ngữ trên thiết bị',
   'nav.home': 'Trang chủ', 'nav.hub': 'Khám phá', 'nav.itemLookup': 'Tra cứu item',
   'nav.wardrobe': 'Wardrobe', 'nav.about': 'Giới thiệu', 'nav.menu': 'Menu', 'nav.close': 'Đóng',
   'landing.title': 'Sky Guide', 'landing.subtitle': 'Một bầu trời, những hành trình mới.',
@@ -47,6 +50,9 @@ const vi = {
 } as const
 export type TranslationKey = keyof typeof vi
 const en: Record<TranslationKey, string> = {
+  'storage.sessionOnly': 'Language could not be saved. Your current choice applies only to this session.',
+  'storage.future': 'Language settings were saved by a newer version. Your current choice applies only to this session.',
+  'storage.retry': 'Try saving again', 'storage.resetLocale': 'Reset language on this device',
   'nav.home': 'Home', 'nav.hub': 'Explore', 'nav.itemLookup': 'Item lookup', 'nav.wardrobe': 'Wardrobe',
   'nav.about': 'About', 'nav.menu': 'Menu', 'nav.close': 'Close',
   'landing.title': 'Sky Guide', 'landing.subtitle': 'One sky. New journeys.', 'landing.enter': 'Enter the guide',

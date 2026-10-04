@@ -12,7 +12,7 @@ not change completion status of unrelated product phases. See [current handoff](
 
 Completed scoped follow-up (2026-10-04): [item image sizing and source verification](ITEM_IMAGES_PRICE_SOURCES.md), merged as **PR #10**, `origin/main` **c0c0ee0**. Research prepares future reconciliation; it does not publish new catalog prices or complete all source coverage.
 
-Current checkpoint: **R1 — data/storage contracts IN PROGRESS**, [active task plan](DATA_FOUNDATION.md). R0 baseline `8b371de` is committed and pushed; D01 identity validation and relational mapping are implemented for review, not live DB completion. The additive Phase 9 track is the next execution order; Phase 0–8 IDs and historical dependencies remain traceable. Living Sky / responsive atlas and Hub shell are production; K15 Item Lookup has ~1.808 records on `/items` and `/items/:id`. Wardrobe is an interactive self-created/fixture demo. R2 runtime routing and Item/Wardrobe CSS collision are fixed on main. These scoped results do not satisfy every Phase 7 release flow or K01–K12/full generic pipeline DoD.
+Current checkpoint: **R1 — data/storage contracts IN PROGRESS**, [active task plan](DATA_FOUNDATION.md). R0 baseline `8b371de` is committed and pushed; R1 contracts and local sync checks are implemented, awaiting maintainer/provider review, not live DB completion. Independent P2-U01 local storage is DONE; P2-D03 schemas are the next unblocked lane. The additive Phase 9 track is the next execution order; Phase 0–8 IDs and historical dependencies remain traceable. Living Sky / responsive atlas and Hub shell are production; K15 Item Lookup has ~1.808 records on `/items` and `/items/:id`. Wardrobe is an interactive self-created/fixture demo. R2 runtime routing and Item/Wardrobe CSS collision are fixed on main. These scoped results do not satisfy every Phase 7 release flow or K01–K12/full generic pipeline DoD.
 
 Mỗi hàng là một task độc lập để copy: **ID + module + việc/đầu ra + nghiệm thu + phụ thuộc + độ phức tạp + gate**. Không có ước lượng thời gian. Task chưa có trạng thái nghiệm thu cụ thể vẫn là **chưa làm**; các hàng DONE ghi ngày và phạm vi bằng chứng. Không đánh dấu API, calibration, asset, UI hoặc deploy đã sẵn sàng chỉ vì có tài liệu.
 
@@ -38,9 +38,9 @@ Phụ thuộc phase là điều kiện nền; cột phụ thuộc bổ sung quan
 
 | ID | Việc / đầu ra cụ thể | Nghiệm thu | Phụ thuộc | Độ phức tạp | Gate |
 |---|---|---|---|---|---|
-| P0-I01 | Ghi quyết định React/TypeScript/Vite, router, package manager và phiên bản hỗ trợ vào Architecture | Có lựa chọn/phiên bản được kiểm tra lúc code, lý do và build command; không cài framework thứ hai không cần thiết | — | Thấp | — |
-| P0-I02 | Khởi tạo manifest dependency, TypeScript và entry app rỗng trong khung `src` | Install/build chạy tái lập với lockfile; không chứa demo dữ liệu thật giả | P0-I01 | Thấp | — |
-| P0-I03 | Tạo quy tắc lint/typecheck và script build | Lệnh được mô tả, lỗi type thực sự làm build gate fail | P0-I02 | Thấp | — |
+| P0-I01 | **DONE 2026-10-04 — existing implementation/evidence verified:** Ghi quyết định React/TypeScript/Vite, router, package manager và phiên bản hỗ trợ vào Architecture | Có lựa chọn/phiên bản được kiểm tra lúc code, lý do và build command; không cài framework thứ hai không cần thiết | — | Thấp | — |
+| P0-I02 | **DONE 2026-10-04 — existing implementation/evidence verified:** Khởi tạo manifest dependency, TypeScript và entry app rỗng trong khung `src` | Install/build chạy tái lập với lockfile; không chứa demo dữ liệu thật giả | P0-I01 | Thấp | — |
+| P0-I03 | **DONE 2026-10-04 — existing implementation/evidence verified:** Tạo quy tắc lint/typecheck và script build | Lệnh được mô tả, lỗi type thực sự làm build gate fail | P0-I02 | Thấp | — |
 | P0-I04 | Thiết lập Vercel project/preview, output và routing fallback | Root và deep link mở đúng bản preview; ghi cách rollback; chưa bật tài nguyên trả phí | P0-I03 | Trung bình | — |
 
 ### Data pipeline
@@ -113,7 +113,7 @@ Phụ thuộc phase là điều kiện nền; cột phụ thuộc bổ sung quan
 | ID | Việc / đầu ra cụ thể | Nghiệm thu | Phụ thuộc | Độ phức tạp | Gate |
 |---|---|---|---|---|---|
 | P1-W01 | **DONE 2026-10-03** — Package demo hình học mới và metadata quyền | [Demo riêng](../../src/features/wardrobe/demo/README.md), 12 item / 6 slot, assets self_created_placeholder + fixture; không tái dùng SVG Phase 0 hoặc nhập public catalog thật | P0-W01 | Thấp | — |
-| P1-W02 | Liệt kê riêng dữ liệu cần TGC: model/layer/rig/dye/calibration | K13 và Legal có danh sách thiếu; toàn bộ full asset giữ pending legal confirmation | P0-D03 | Thấp | — |
+| P1-W02 | **DONE 2026-10-04 — existing implementation/evidence verified:** Liệt kê riêng dữ liệu cần TGC: model/layer/rig/dye/calibration | K13 và Legal có danh sách thiếu; toàn bộ full asset giữ pending legal confirmation | P0-D03 | Thấp | — |
 
 ### Legal / TGC permission execution
 
@@ -176,7 +176,7 @@ Phụ thuộc phase là điều kiện nền; cột phụ thuộc bổ sung quan
 
 | ID | Module | Việc / đầu ra cụ thể | Nghiệm thu | Phụ thuộc | Độ phức tạp | Gate |
 |---|---|---|---|---|---|---|
-| P2-U01 | UX | Tạo storage wrapper có parse/version/migration/memory fallback | Reload round-trip; corrupted/quota-denied vẫn mở app; thông báo không lưu được rõ | P0-I02 | Trung bình | — |
+| P2-U01 | UX | **DONE 2026-10-04:** [local-state plan](LOCAL_STATE_FOUNDATION.md), 7 focused tests + 200 total, lint/typecheck/build PASS; Tạo storage wrapper có parse/version/migration/memory fallback | Reload round-trip; corrupted/quota-denied vẫn mở app; thông báo không lưu được rõ | P0-I02 | Trung bình | — |
 | P2-W01 | Wardrobe | **DONE 2026-10-03** — Reducer thuần và state dẫn xuất | Equip/replace/unequip/reset/size/dye/random được validate; base không đổi do rule, tháo trigger derive về base; ID/revision sai giữ selection; behavioral tests | P2-D04 | Trung bình | — |
 | P2-H01 | Hub | **OPEN tổng thể; K15 loader đã có** — data access cho public projection | Giữ loader Item Lookup; evolve qua P9-D02 API abstraction, JSON là snapshot/fallback/export; frontend không gọi provider DB; không fetch raw/draft | P2-D12; P9-D02 cho API evolution | Trung bình | — |
 
