@@ -1,0 +1,559 @@
+{
+  "schemaVersion": 1,
+  "purpose": "research-only; no runtime import or catalog publication",
+  "verificationDate": "2026-10-04",
+  "evidenceAssembledAt": "2026-10-04T07:09:12.871Z",
+  "requestedMarkets": [
+    {
+      "platform": "ios",
+      "market": "US",
+      "currencyCode": "USD"
+    },
+    {
+      "platform": "ios",
+      "market": "VN",
+      "currencyCode": "VND"
+    },
+    {
+      "platform": "android",
+      "market": "US",
+      "currencyCode": "USD"
+    },
+    {
+      "platform": "android",
+      "market": "VN",
+      "currencyCode": "VND"
+    }
+  ],
+  "sources": {
+    "skyGameData": {
+      "status": "candidate; sampled and pinned; adapter not implemented",
+      "sourceUrl": "https://github.com/Silverfeelin/SkyGame-Data",
+      "attribution": "Silverfeelin and SkyGame-Data contributors",
+      "githubSnapshot": {
+        "sha": "2edbca149787aadbdd7665458c56ceecc5a5be07",
+        "date": "2026-10-03T12:56:01Z",
+        "license": {
+          "key": "mit",
+          "name": "MIT License",
+          "spdx_id": "MIT",
+          "url": "https://api.github.com/licenses/mit",
+          "node_id": "MDc6TGljZW5zZTEz"
+        },
+        "branch": "master"
+      },
+      "package": {
+        "name": "skygame-data",
+        "version": "1.3.19",
+        "gitHead": "5b9afacf02f8c6b93198aabf94a8c5d82a9d4c6b"
+      },
+      "datasetEnvelope": "{items:[]}",
+      "datasets": [
+        {
+          "name": "items",
+          "url": "https://unpkg.com/skygame-data@1.3.19/assets/items.json",
+          "status": 200,
+          "contentType": "application/json",
+          "recordCount": 3319,
+          "utf8Bytes": 1045150,
+          "sha256": "31f147be2226faaa4b3cab868a52f1bd384c9bd61c58ed604bbd179eb2b9845b"
+        },
+        {
+          "name": "nodes",
+          "url": "https://unpkg.com/skygame-data@1.3.19/assets/nodes.json",
+          "status": 200,
+          "contentType": "application/json",
+          "recordCount": 6103,
+          "utf8Bytes": 375962,
+          "sha256": "b44578d030561858b74fd0fe49399521af7c047667a662e4b70a4aa1427a7896"
+        },
+        {
+          "name": "spirits",
+          "url": "https://unpkg.com/skygame-data@1.3.19/assets/spirits.json",
+          "status": 200,
+          "contentType": "application/json",
+          "recordCount": 273,
+          "utf8Bytes": 73063,
+          "sha256": "358f8a4503022ddc2ad48d68ba4215efc457c9d6459a39bed5729524bce7a0e8"
+        },
+        {
+          "name": "spirit-trees",
+          "url": "https://unpkg.com/skygame-data@1.3.19/assets/spirit-trees.json",
+          "status": 200,
+          "contentType": "application/json",
+          "recordCount": 578,
+          "utf8Bytes": 25516,
+          "sha256": "94be95e39077d03f6ba8a516fa010ffe619b8beaa56f3d4652f582ae78e1ba3a"
+        },
+        {
+          "name": "traveling-spirits",
+          "url": "https://unpkg.com/skygame-data@1.3.19/assets/traveling-spirits.json",
+          "status": 200,
+          "contentType": "application/json",
+          "recordCount": 175,
+          "utf8Bytes": 14734,
+          "sha256": "9f454c19d8b4b0769ce58ef516c91c645695e066ef572ed985340683af29d8a0"
+        },
+        {
+          "name": "special-visits",
+          "url": "https://unpkg.com/skygame-data@1.3.19/assets/special-visits.json",
+          "status": 200,
+          "contentType": "application/json",
+          "recordCount": 17,
+          "utf8Bytes": 6613,
+          "sha256": "749661748769b659e145439bdbf0d81646be324c4a23cf159ac82f5249885cef"
+        },
+        {
+          "name": "special-visit-spirits",
+          "url": "https://unpkg.com/skygame-data@1.3.19/assets/special-visit-spirits.json",
+          "status": 200,
+          "contentType": "application/json",
+          "recordCount": 62,
+          "utf8Bytes": 3979,
+          "sha256": "c817647fc78cd36467689fa6b6aea91025c97dd5e2f91a575b1374cb54d6d838"
+        },
+        {
+          "name": "shops",
+          "url": "https://unpkg.com/skygame-data@1.3.19/assets/shops.json",
+          "status": 200,
+          "contentType": "application/json",
+          "recordCount": 195,
+          "utf8Bytes": 19882,
+          "sha256": "34510fd156859da38a89266364101b3996cb3f2a0fcaaa73a14cc0ea561a46ec"
+        },
+        {
+          "name": "item-lists",
+          "url": "https://unpkg.com/skygame-data@1.3.19/assets/item-lists.json",
+          "status": 200,
+          "contentType": "application/json",
+          "recordCount": 29,
+          "utf8Bytes": 12502,
+          "sha256": "6a07fd0f60d1342486f7f01b079e557f2b50b3f0c5577004400c6981f1d9f33c"
+        },
+        {
+          "name": "iaps",
+          "url": "https://unpkg.com/skygame-data@1.3.19/assets/iaps.json",
+          "status": 200,
+          "contentType": "application/json",
+          "recordCount": 526,
+          "utf8Bytes": 54082,
+          "sha256": "dfa3312c04b2cfae64dcf51f8a16c254b9f8042ea579efd2f050fa74eee20927"
+        }
+      ],
+      "failedEndpoint": {
+        "url": "https://unpkg.com/skygame-data@1.3.19/assets/returning-spirits.json",
+        "status": 404,
+        "replacementDatasets": [
+          "special-visits",
+          "special-visit-spirits"
+        ]
+      },
+      "currencyContract": {
+        "url": "https://unpkg.com/skygame-data@1.3.19/dist/interfaces/cost.interface.d.ts",
+        "status": 200,
+        "c": "candles",
+        "h": "hearts",
+        "sc": "seasonal candles",
+        "sh": "seasonal hearts",
+        "ac": "ascended candles",
+        "ec": "event currency"
+      },
+      "iapContract": {
+        "url": "https://unpkg.com/skygame-data@1.3.19/dist/interfaces/iap.interface.d.ts",
+        "status": 200,
+        "priceCurrency": "USD",
+        "platform": null,
+        "market": null,
+        "observedAtPerSku": null
+      },
+      "license": {
+        "dataRepository": "MIT",
+        "plannerRepository": "MIT with exclusions",
+        "plannerExclusions": [
+          "/assets/game/*",
+          "/assets/external/*",
+          "/assets/icons/*"
+        ],
+        "artworkReuseApproved": false
+      }
+    },
+    "wiki": {
+      "sourceUrl": "https://sky-children-of-the-light.fandom.com/api.php",
+      "status": 200,
+      "contentType": "application/json",
+      "attribution": "Sky Wiki contributors; file uploader recorded separately",
+      "pages": [
+        {
+          "title": "Traveling Spirits",
+          "pageId": 2914,
+          "revision": 111680,
+          "revisionTimestamp": "2026-10-02T21:27:50Z",
+          "contentModel": "wikitext",
+          "url": "https://sky-children-of-the-light.fandom.com/wiki/Traveling_Spirits"
+        },
+        {
+          "title": "Anxious Angler",
+          "pageId": 11361,
+          "revision": 110817,
+          "revisionTimestamp": "2026-09-01T19:58:22Z",
+          "contentModel": "wikitext",
+          "url": "https://sky-children-of-the-light.fandom.com/wiki/Anxious_Angler"
+        },
+        {
+          "title": "Module:Cost/data",
+          "pageId": 12253,
+          "revision": 89343,
+          "revisionTimestamp": "2025-02-10T01:58:22Z",
+          "contentModel": "Scribunto",
+          "url": "https://sky-children-of-the-light.fandom.com/wiki/Module:Cost/data"
+        },
+        {
+          "title": "Module:Season Item/data",
+          "pageId": 15061,
+          "revision": 87845,
+          "revisionTimestamp": "2025-01-16T00:19:21Z",
+          "contentModel": "Scribunto",
+          "url": "https://sky-children-of-the-light.fandom.com/wiki/Module:Season_Item/data"
+        },
+        {
+          "title": "Nesting Workshop",
+          "pageId": 19107,
+          "revision": 111593,
+          "revisionTimestamp": "2026-09-28T14:55:01Z",
+          "contentModel": "wikitext",
+          "url": "https://sky-children-of-the-light.fandom.com/wiki/Nesting_Workshop"
+        }
+      ],
+      "rights": "text licensing and artwork permission are separate; no grant inferred"
+    },
+    "tsa": {
+      "sourceId": "K15",
+      "sourceUrl": "https://github.com/thatskyapplication/thatskyapplication",
+      "pinnedCommit": "74007cf878ef44c764eb5a143ef01d4c80982509",
+      "adapter": "scripts/tsa/normalize.mjs",
+      "shops": [
+        "starterPackItems",
+        "secretAreaItems",
+        "clothingShopItems",
+        "nestingWorkshopItems"
+      ],
+      "moneyCurrency": null
+    },
+    "officialPatch": {
+      "sourceId": "K06",
+      "sourceUrl": "https://thatgamecompany.helpshift.com/hc/en/17-sky-children-of-the-light/faq/1308-patch-notes---april-10-2024---0-25-0-257483-android-huawei-256148-ios-playstation-257607-pc-255731-switch/?l=en",
+      "verificationMethod": "web reader",
+      "status": "readable",
+      "publishedDate": "2024-04-10",
+      "sample": {
+        "name": "Cinnamoroll Pop-Up Cafe Mini Companion",
+        "amountDecimal": "6.99",
+        "currencyCode": "USD",
+        "platform": null,
+        "priceScope": "historical reference, not current checkout"
+      },
+      "confirms": [
+        "Nesting permanent rotating shop",
+        "Nesting Challenge Board independent of season"
+      ]
+    },
+    "appleUS": {
+      "sourceId": "K10",
+      "sourceUrl": "https://apps.apple.com/us/app/sky-children-of-the-light/id1462117269",
+      "verificationMethod": "web reader",
+      "status": "readable",
+      "appId": "1462117269",
+      "platform": "ios",
+      "market": "US",
+      "currencyCode": "USD",
+      "publicPriceSamples": [
+        {
+          "label": "Starter Pack",
+          "amountDecimal": "4.99"
+        },
+        {
+          "label": "Season Pass Regular",
+          "amountDecimal": "9.99"
+        },
+        {
+          "label": "Season Pass Pack",
+          "amountDecimal": "19.99"
+        }
+      ],
+      "storeProductIds": null,
+      "coverage": "partial public list; no full SKU feed"
+    },
+    "publicStoreRetrievals": [
+      {
+        "name": "apple-vn.html",
+        "requestedUrl": "https://apps.apple.com/vn/app/sky-children-of-the-light/id1462117269",
+        "status": 404,
+        "finalUrl": "https://apps.apple.com/vn/app/sky-children-of-the-light/id1462117269",
+        "contentType": "text/html",
+        "bytes": 1146
+      },
+      {
+        "name": "play-us.html",
+        "requestedUrl": "https://play.google.com/store/apps/details?id=com.tgc.sky.android&hl=en&gl=US",
+        "status": 200,
+        "finalUrl": "https://play.google.com/store/apps/details?id=com.tgc.sky.android&hl=en&gl=US",
+        "contentType": "text/html; charset=utf-8",
+        "bytes": 1334499
+      },
+      {
+        "name": "play-vn.html",
+        "requestedUrl": "https://play.google.com/store/apps/details?id=com.tgc.sky.android&hl=vi&gl=VN",
+        "status": 200,
+        "finalUrl": "https://play.google.com/store/apps/details?id=com.tgc.sky.android&hl=vi&gl=VN",
+        "contentType": "text/html; charset=utf-8",
+        "bytes": 1315277
+      }
+    ],
+    "appPricingLab": {
+      "sourceId": "K12",
+      "sourceUrl": "https://apppricinglab.com",
+      "verificationMethod": "web reader homepage",
+      "status": "candidate",
+      "skyRecordVerified": false,
+      "apiVerified": false,
+      "exportVerified": false
+    },
+    "webStore": {
+      "sourceUrl": "https://store.thatskygame.com/",
+      "officialReference": "https://thatgamecompany.helpshift.com/hc/en/17-sky-children-of-the-light/faq/1268-what-is-the-sky-web-store/",
+      "status": "official FAQ confirms separate channel; no checkout inspection",
+      "platform": "web",
+      "iosAndroidPriceSubstitute": false
+    }
+  },
+  "samples": {
+    "anglerCape": {
+      "internalItemId": "tsa-cosmetic-1216",
+      "sourceItem": {
+        "id": 1380,
+        "guid": "Q0E7lpa192",
+        "type": "Cape",
+        "name": "Anxious Angler Cape",
+        "icon": "https://static.wikia.nocookie.net/sky-children-of-the-light/images/b/bf/SOAbyss-Anxious-Angler-cape-Morybel-0146.png",
+        "previewUrl": "https://static.wikia.nocookie.net/sky-children-of-the-light/images/b/bb/SOAbyss-Anxious-Angler-Cape-back.png",
+        "dye": {
+          "previewUrl": "https://sky-planner.com/assets/game/dyes/cape/Abyss_AnglerCape.jpg",
+          "primary": {}
+        },
+        "_wiki": {
+          "href": "https://sky-children-of-the-light.fandom.com/wiki/Anxious_Angler#Cape"
+        },
+        "order": 6100,
+        "group": "SeasonPass"
+      },
+      "sourceIdEqualityAllowed": false,
+      "spiritGuid": "4gwH1Tn9he",
+      "travelingVisit": {
+        "guid": "8WZvXQFo6n",
+        "date": "2024-01-18",
+        "spirit": "4gwH1Tn9he",
+        "tree": "NdB6VF6E1G"
+      },
+      "tree": {
+        "guid": "NdB6VF6E1G",
+        "node": "w7O7kFaQ4l"
+      },
+      "directNode": {
+        "guid": "9in0prFSJ_",
+        "item": "Q0E7lpa192",
+        "c": 70
+      },
+      "verification": "root traversed through n/ne/nw to the directNode; Wiki matches 70 candles",
+      "seasonal": {
+        "seasonPassRequired": true,
+        "directItemPrice": null,
+        "prerequisiteTotal": {
+          "currency": "seasonal candles",
+          "amount": 62
+        },
+        "priceBasis": "prerequisite total, not direct item price"
+      },
+      "specialVisitSpirit": {
+        "guid": "J8STDoY-Ow",
+        "spirit": "4gwH1Tn9he",
+        "tree": "R2WmeZDMqd"
+      },
+      "specialVisit": {
+        "guid": "TSbUGdWmTY",
+        "name": "Special Visit #10",
+        "date": "2025-08-18",
+        "endDate": "2025-08-31",
+        "spiritRecordGuid": "J8STDoY-Ow"
+      },
+      "specialVisitTree": {
+        "guid": "R2WmeZDMqd",
+        "node": "WsJjGE_da0"
+      },
+      "specialVisitCapeNode": {
+        "guid": "A8ZaRauozx",
+        "item": "Q0E7lpa192",
+        "c": 70
+      }
+    },
+    "nesting": {
+      "shop": {
+        "guid": "he4MHA7_uC",
+        "type": "Object",
+        "name": "Nesting Workshop Counter",
+        "permanent": "nesting",
+        "itemList": "AKNI67tVW-"
+      },
+      "itemListGuid": "AKNI67tVW-",
+      "samples": [
+        {
+          "row": {
+            "guid": "_qe1M1aTek",
+            "item": "RAqHfOMGuf",
+            "quantity": 1
+          },
+          "item": {
+            "id": 2129,
+            "guid": "RAqHfOMGuf",
+            "type": "Furniture",
+            "name": "Stone Stool",
+            "icon": "https://static.wikia.nocookie.net/sky-children-of-the-light/images/b/b8/Shared-Spaces-Stool-prop-icon-Morybel-0146.png",
+            "previewUrl": "https://static.wikia.nocookie.net/sky-children-of-the-light/images/2/2a/Shared-Spaces-Stool-prop.png",
+            "_wiki": {
+              "href": "https://sky-children-of-the-light.fandom.com/wiki/Nesting_Workshop#Stone_Stool"
+            },
+            "order": 5400
+          }
+        },
+        {
+          "row": {
+            "guid": "zvfy6tW379",
+            "item": "pk88jDrFaq",
+            "c": 32,
+            "quantity": 4
+          },
+          "item": {
+            "id": 2130,
+            "guid": "pk88jDrFaq",
+            "type": "Furniture",
+            "name": "Stone Small Bench",
+            "icon": "https://static.wikia.nocookie.net/sky-children-of-the-light/images/4/4b/Stone-Single-Bench-Prop-icon.png",
+            "previewUrl": "https://static.wikia.nocookie.net/sky-children-of-the-light/images/9/9b/Stone-Single-Bench-Prop.png",
+            "_wiki": {
+              "href": "https://sky-children-of-the-light.fandom.com/wiki/Nesting_Workshop#Stone_Single_Bench"
+            },
+            "order": 5500
+          }
+        },
+        {
+          "row": {
+            "guid": "0iQelpalwE",
+            "item": "m1jq0R3vip",
+            "ac": 35,
+            "quantity": 1
+          },
+          "item": {
+            "id": 2131,
+            "guid": "m1jq0R3vip",
+            "type": "Furniture",
+            "name": "Stone Oven",
+            "icon": "https://static.wikia.nocookie.net/sky-children-of-the-light/images/a/a8/Stone-Wood-Fired-Oven-Prop-icon.png",
+            "previewUrl": "https://static.wikia.nocookie.net/sky-children-of-the-light/images/f/f8/Stone-Wood-Fired-Oven-Prop.png",
+            "_wiki": {
+              "href": "https://sky-children-of-the-light.fandom.com/wiki/Nesting_Workshop#Stone_Wood-Fired_Oven"
+            },
+            "order": 7500
+          }
+        },
+        {
+          "row": {
+            "guid": "uZmMGZNLqo",
+            "item": "pJ_qec46o4",
+            "h": 24,
+            "quantity": 1
+          },
+          "item": {
+            "id": 2132,
+            "guid": "pJ_qec46o4",
+            "type": "Furniture",
+            "name": "Stone Single Bed",
+            "icon": "https://static.wikia.nocookie.net/sky-children-of-the-light/images/8/8d/Stone-Single-Bed-Prop-icon.png",
+            "previewUrl": "https://static.wikia.nocookie.net/sky-children-of-the-light/images/5/5f/Stone-Single-Bed-Prop.png",
+            "dye": {
+              "previewUrl": "",
+              "infoUrl": "",
+              "primary": {},
+              "secondary": {}
+            },
+            "_wiki": {
+              "href": "https://sky-children-of-the-light.fandom.com/wiki/Nesting_Workshop#Stone_Single_Bed"
+            },
+            "order": 6900
+          }
+        }
+      ],
+      "benchPriceBasis": {
+        "sourceRow": {
+          "guid": "zvfy6tW379",
+          "item": "pk88jDrFaq",
+          "c": 32,
+          "quantity": 4
+        },
+        "wikiFirstCopy": {
+          "currency": "candles",
+          "amount": 8
+        },
+        "wikiAdditionalCopies": {
+          "quantity": 3,
+          "currency": "candles",
+          "amount": 32
+        },
+        "normalizedPrice": null,
+        "status": "needs ownership/quantity semantics reconciliation; do not infer unit price"
+      }
+    },
+    "starterPackReference": {
+      "guid": "h7MofWX407",
+      "name": "Starter Pack",
+      "price": 4.99,
+      "c": 20,
+      "items": [
+        "Z5JkGSWLbw"
+      ]
+    },
+    "image": {
+      "pageId": 9935,
+      "title": "File:SOAbyss-Anxious-Angler-cape-Morybel-0146.png",
+      "url": "https://static.wikia.nocookie.net/sky-children-of-the-light/images/b/bf/SOAbyss-Anxious-Angler-cape-Morybel-0146.png/revision/latest?cb=20230818155524",
+      "descriptionUrl": "https://sky-children-of-the-light.fandom.com/wiki/File:SOAbyss-Anxious-Angler-cape-Morybel-0146.png",
+      "size": 18168,
+      "width": 300,
+      "height": 300,
+      "mime": "image/png",
+      "sha1": "2f5b438e4e0b0e6fc3b36571c85eec158a811f4c",
+      "timestamp": "2023-08-18T15:55:24Z",
+      "uploader": "Morybel",
+      "legalStatus": "unknown",
+      "fileLicenseReturned": false
+    }
+  },
+  "unresolved": [
+    "Android USD per-SKU",
+    "Android VND per-SKU",
+    "iOS VND listing and per-SKU",
+    "cash bundle/SKU matching",
+    "source-wide catalog crosswalk",
+    "Nesting ownership/quantity basis",
+    "artwork rights",
+    "historical/current offer freshness"
+  ],
+  "publicationRules": [
+    "missing != free",
+    "prerequisite total != item price",
+    "package money != platform checkout price",
+    "source numeric IDs are not internal IDs",
+    "web != iOS/Android",
+    "text/code license != artwork grant",
+    "no FX conversion",
+    "quarantine ambiguous mappings; retain last-known-good"
+  ]
+}

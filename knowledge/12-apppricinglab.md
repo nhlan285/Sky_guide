@@ -1,5 +1,13 @@
 # K12 — AppPricingLab
 
+## Xác minh bổ sung 2026-10-04
+
+Home đọc được và giới thiệu theo dõi IAP Apple/Google. Chưa xác minh record Sky,
+API/export, coverage SKU/market hay lịch sử truy xuất được. Giữ candidate, chưa
+thiết kế adapter theo lời giới thiệu. [Nguồn đối chiếu mới/evidence](16-image-price-sources.md).
+
+## Hồ sơ scaffold gốc (trạng thái lịch sử)
+
 - **Nguồn/link:** [apppricinglab.com](https://apppricinglab.com), domain có trong brief; chưa có trang Sky hoặc API.
 - **Dữ liệu:** brief mô tả dịch vụ theo dõi lịch sử giá tự động. Điều này không chứng minh có API công khai, export miễn phí hay bao phủ IAP từng SKU.
 - **Format:** chưa biết; không khẳng định JSON/CSV hoặc tên field.

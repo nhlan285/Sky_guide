@@ -10,6 +10,10 @@ Scoped infrastructure repair (2026-10-04): [R2 runtime debugging](R2_RUNTIME_DEB
 This task preserves the asset corpus, catalog, UI and storage architecture; it does
 not change completion status of unrelated product phases. See [current handoff](../CURRENT_STATE.md).
 
+Active scoped follow-up (2026-10-04): [item image sizing and source verification](ITEM_IMAGES_PRICE_SOURCES.md).
+Research prepares the future acquisition/image crawler; it does not publish new
+catalog prices or mark all source coverage complete.
+
 Mỗi hàng là một task độc lập để copy: **ID + module + việc/đầu ra + nghiệm thu + phụ thuộc + độ phức tạp + gate**. Không có ước lượng thời gian. Task chưa có trạng thái nghiệm thu cụ thể vẫn là **chưa làm**; các hàng DONE ghi ngày và phạm vi bằng chứng. Không đánh dấu API, calibration, asset, UI hoặc deploy đã sẵn sàng chỉ vì có tài liệu.
 
 - **Thấp / Trung bình / Cao:** mức phức tạp tương đối, không phải thời lượng.

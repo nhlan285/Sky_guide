@@ -1,5 +1,11 @@
 # Knowledge Base — sổ nguồn
 
+Xác minh bổ sung 2026-10-04: [ảnh và giá item theo mùa/TS/shop/IAP](16-image-price-sources.md),
+[evidence nhỏ có version/revision](evidence/image-price-sources-2026-10-04.json).
+Bao gồm ứng viên SkyGame-Data/Sky Planner và USD/VND tách iOS/Android.
+Đây là nghiên cứu cho crawler tương lai; bảng scaffold lịch sử bên dưới không
+được coi là trạng thái mới nhất. Chưa import/publish nguồn mới hoặc đóng mọi gate.
+
 Cơ sở scaffold: [mục 3 của brief](../docs/PROJECT_BRIEF.md). K01–K14 bên dưới là hồ sơ gốc; trạng thái scaffold không phải bằng chứng kết nối. **K15 bổ sung được user duyệt cho Real Hub Feature V1:** [ThatSkyApplication public utility](15-thatskyapplication.md), đã kiểm tra revision/giấy phép và import catalogue; không thay đổi gate của các nguồn gốc.
 
 “Đã sẵn sàng dùng” bên dưới mô tả hướng triển khai text theo brief; **không** có nghĩa endpoint, schema response, giấy phép hoặc dữ liệu hiện tại đã được kiểm chứng. Mọi adapter phải qua bước xác minh ở Phase 1. Với đường dẫn không có trong brief, giữ `sourceUrl=null` cho tới khi xác minh; không bịa URL. Các link tên miền chỉ được chuẩn hóa từ tên miền ghi trong brief, chưa xác nhận đường dẫn chi tiết.
