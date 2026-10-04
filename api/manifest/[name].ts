@@ -42,7 +42,7 @@ function getR2Client(): S3Client | null {
   })
 }
 
-export default async function handler(
+async function handler(
   req: Request,
 ): Promise<Response> {
   if (req.method !== 'GET' && req.method !== 'HEAD') {
@@ -64,7 +64,11 @@ export default async function handler(
     })
   }
 
-  const raw = manifestName(new URL(req.url).pathname)
+  const url = new URL(req.url)
+  // Explicit routes target the function artifact, carrying the logical name.
+  const raw = url.pathname === '/api/manifest/[name]'
+    ? manifestName(`/api/manifest/${url.searchParams.get('name') ?? ''}`)
+    : manifestName(url.pathname)
 
   if (!raw) {
     return new Response('Not Found', {
@@ -138,3 +142,6 @@ export default async function handler(
     )
   }
 }
+
+// A default function is a Node (req, res) handler on Vercel. Opt into Web APIs.
+export default { fetch: handler }

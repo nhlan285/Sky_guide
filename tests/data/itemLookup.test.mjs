@@ -175,5 +175,5 @@ test('Items navigation, detail route and Vercel SPA reload are wired; Hub lookup
   assert.match(app, /path="\/items"/)
   assert.match(hub, /<Button type="submit">/)
   assert.ok(!/id="item-query"[^>]*readOnly/.test(hub))
-  assert.ok(config.rewrites.some(rule => rule.source === '/(.*)' && rule.destination === '/index.html'))
+  assert.ok(config.routes.some(rule => rule.src === '/(.*)' && rule.dest === '/index.html'))
 })
