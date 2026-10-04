@@ -1,5 +1,5 @@
 /**
- * Vercel Function: private Cloudflare R2 manifest signer
+ * Vercel Function: private Cloudflare R2 manifest proxy
  *
  * Route:
  *   GET /api/manifest/<name>.json
@@ -11,9 +11,11 @@
  * Flow:
  *   browser
  *     -> Vercel Function
- *     -> generate short-lived R2 presigned URL
- *     -> 302 redirect
- *     -> browser downloads JSON directly from Cloudflare R2
+ *     -> fetch private manifest from R2
+ *     -> return JSON from the same origin
+ *
+ * Keeping manifest bytes on the Vercel response avoids browser CORS
+ * failures while image bytes still redirect directly to private R2.
  *
  * R2 credentials remain server-side only.
  */
@@ -23,7 +25,6 @@ import {
   HeadObjectCommand,
   S3Client,
 } from '@aws-sdk/client-s3'
-import { getSignedUrl } from '@aws-sdk/s3-request-presigner'
 
 const ALLOWED_NAMES = new Set<string>(['index'])
 
@@ -32,8 +33,6 @@ for (let i = 0; i <= 29; i++) {
     `items-${String(i).padStart(2, '0')}`,
   )
 }
-
-const SIGNED_URL_TTL_SECONDS = 300
 
 function getR2Client(): S3Client | null {
   const endpoint = process.env.R2_ENDPOINT
@@ -90,29 +89,45 @@ export default async function handler(
   const key = `manifests/${raw}.json`
 
   try {
-    const command =
-      req.method === 'HEAD'
-        ? new HeadObjectCommand({
-            Bucket: bucket,
-            Key: key,
-          })
-        : new GetObjectCommand({
-            Bucket: bucket,
-            Key: key,
-          })
+    if (req.method === 'HEAD') {
+      await client.send(
+        new HeadObjectCommand({
+          Bucket: bucket,
+          Key: key,
+        }),
+      )
 
-    const signedUrl = await getSignedUrl(
-      client,
-      command,
-      {
-        expiresIn: SIGNED_URL_TTL_SECONDS,
-      },
+      return new Response(null, {
+        status: 200,
+        headers: {
+          'Content-Type':
+            'application/json; charset=utf-8',
+          'Cache-Control':
+            'private, max-age=60',
+          'X-Content-Type-Options':
+            'nosniff',
+        },
+      })
+    }
+
+    const result = await client.send(
+      new GetObjectCommand({
+        Bucket: bucket,
+        Key: key,
+      }),
     )
 
-    return new Response(null, {
-      status: 302,
+    if (!result.Body) {
+      throw new Error('R2 manifest body missing')
+    }
+
+    const body = await result.Body.transformToString()
+
+    return new Response(body, {
+      status: 200,
       headers: {
-        Location: signedUrl,
+        'Content-Type':
+          'application/json; charset=utf-8',
         'Cache-Control':
           'private, max-age=60',
         'X-Content-Type-Options':
