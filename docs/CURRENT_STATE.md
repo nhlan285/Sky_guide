@@ -1,72 +1,56 @@
 # Current handoff — 2026-10-04
 
-## Task and branch
-
-Autonomous approved master roadmap run; continue every safe unblocked task.
-Branch: `codex/master-plan-execution`.
-Latest verified pushed HEAD before this checkpoint: `4639c0c23b5fa77e7de5bd2475363e6a5e36df92`.
-Planning baseline `8b371de` pushed to `codex/roadmap-data-event-media-refresh`.
-Remote main was already at that baseline before this run; no main merge performed.
+## Task / branch / baseline
+Autonomous approved master roadmap run; continue safe unblocked work sequentially.
+Branch `codex/master-plan-execution`; verified local and remote HEAD
+`f0348ab9f707d32b76a96e0d76c5bba96be3660c` before this milestone.
+Planning baseline `8b371de` is pushed. No merge or production deployment performed.
 Master: [IMPLEMENTATION_PLAN](plan/IMPLEMENTATION_PLAN.md).
-R1 plan: [DATA_FOUNDATION](plan/DATA_FOUNDATION.md).
-Independent lane: [LOCAL_STATE_FOUNDATION](plan/LOCAL_STATE_FOUNDATION.md).
+R1 review: [DATA_FOUNDATION](plan/DATA_FOUNDATION.md).
+Current independent task: [OUTFIT_LOCAL](plan/OUTFIT_LOCAL.md), P4-W09.
 
-## Completed work and commits
+## Completed checkpoints
+- `199bdd5`: portable identity/relational validation contracts.
+- `533243c`: unmounted snapshot API and fail-closed media delivery contracts.
+- `518eebe`: reviewed source staging/CAS/LKG contracts with in-memory fixture tests.
+- `4639c0c`: P2-U01 versioned local storage and locale recovery UI.
+- `f0348ab`: P2-D03 geography and price-mapping validators.
+R1 live DB/migrations are NOT implemented; provider review remains pending.
 
-- `199bdd5`: relational mapping + identity/FK/cardinality/revision/crosswalk/
-  alias/tombstone validation. Existing K15 payload validators remain in place.
-- `533243c`: provider-neutral snapshot API and media registry/delivery contracts.
-  API is unmounted; no production consumer switched. Rights/evidence/revocation
-  overlays fail closed, current R2 paths retained. No binaries downloaded/uploaded.
-- `518eebe`: staged source hash/normalization/quarantine, digest-bound review,
-  global-generation CAS contract, bounded retry/health/LKG and local restore tests.
-  Only in-memory fixture store, not a DB transaction/migration/restore acceptance.
-- Current milestone: P2-U01 wrapper and locale legacy migration, explicit session
-  status/retry/reset in existing settings UI; cross-tab/read/quota/version handling.
-- Existing P0-I01–I03 and P1-W02 acceptance evidence reviewed and task rows updated;
-  no new legal rights, framework upgrade or deployment claimed.
+## Current implementation / validation
+P4-W09 local demo library: explicit save/rename/delete/load, reload restoration,
+validated selection/dye/base size, 50-entry/80-character bounds, package-scoped key.
+Storage retry now re-reads after a failed read instead of overwriting saved data
+with defaults. Rename focus returns after commit/cancel; deletion focuses new name.
+Intentional areas: Wardrobe persistence/editor/reducer/copy/CSS, storage wrapper,
+localStorage and outfitPersistence tests, translations, phase plan and handoff.
+Focused storage/outfit/wardrobe tests 44/44 PASS; latest outfit tests 5/5 PASS
+with explicit non-default dye/base size. Typecheck and focused lint PASS before
+latest focus/copy edit; final full suite 215/215, lint/typecheck/catalog/build PASS.
+Hidden localhost IAB: save, reload same six selected items, rename long name,
+mobile 390x844 panel, rename cancel/focus, delete cancel/confirm and empty state
+PASS. No horizontal overflow (375px content including scrollbar), console errors
+none. Test-only library entry removed. No game assets or user data modified.
+Screenshot outside Git in Codex visualizations: outfit-local-mobile.jpg.
 
-## Validation / modified areas
+## Gates / constraints
+R1 schema/API/storage maintainer review requested, not answered explicitly.
+Provider/quota approval before provisioning; R2-R6 keep documented dependencies.
+No paid resources, bulk downloads, rights assumptions, merge, release or history
+rewrite. Bulk working data on E:. Self-created demo only; no game assets/cloud.
+Existing K15 IDs/costs and Q20-Q23 decisions retained.
 
-Full suite 200/200 PASS. Full lint, typecheck, catalog validation (1808 items) and
-build PASS. Build warnings: React Router module directives and existing large
-Item chunk. No browser visual QA yet. Local storage focused tests 7/7 PASS.
-R1 focused tests 24/24 included in total. Docs checks and diff inspection before
-checkpoint. DB up/down/live backup restore NOT RUN; provider not approved.
+## Continuity
+Checkpoint drill PASS at `199bdd58c37b848b6b550b1adfdb7e7e70a5f791` followed by
+implementation. Native compaction occurred during P4-W09. Resume verified globals,
+this handoff, OUTFIT_LOCAL plan, intended dirty tree, local/remote f0348ab; resumed
+focus fix and browser QA successfully. Full compaction drill NOT PASS: handoff at
+the trigger was stale and P4-W09 had not been committed/pushed before compaction.
+Recovery succeeded; this corrected handoff records the limitation honestly.
+Usage checkpoint NOT TRIGGERED. Last observed remaining 52% short / 67% weekly;
+no exact context percentage exposed. Never run shell /compact.
 
-Current slice changes: `src/shared/storage/versionedStorage.ts`, locale adapter/
-provider/translations, `SkyControls.tsx`, `tests/data/localStorage.test.mjs`, plans
-and this handoff. No unrelated user changes existed at preflight.
-
-## Decisions / gates
-
-Q20 portable relational metadata, object-storage binaries; Q21 role-based image
-reconciliation; Q22 preview/Music scopes; Q23 LA timezone/Event provenance retained.
-No paid resources, provisioning, merge/release, destructive data operations or
-rights assumptions. Bulk working data remains on E:. Existing K15 IDs/costs preserved.
-R1 schema/API/storage review request is pending asynchronously with the user.
-Then P9-I02 provider/quota approval; real D04/V01 and R2–R6 retain dependencies.
-While that waits, independent old-roadmap tasks may continue: P2-D03, local UX,
-source research with required source/rights skills, later approved fixture work.
-Do not interpret the R1 gate as blocking the whole roadmap.
-
-## Continuity tests / exact next action
-
-Checkpoint drill: PASS at `199bdd58c37b848b6b550b1adfdb7e7e70a5f791`: handoff,
-commit, push, remote SHA verification; D02/D03 implementation then continued.
-Compaction continuity test: NOT TRIGGERED. Usage checkpoint: NOT TRIGGERED.
-Last measured usage remaining: 52% short-window / 67% weekly; no low threshold.
-No exact context percentage exposed. Native compaction only; never shell /compact.
-
-Exact next action: push P2-U01 milestone after docs/diff checks. Then create a narrow
-P2-D03 plan and implement Map/Marker/Route + price-mapping validators using existing
-core/catalog primitives and DATA_SCHEMA. No real data/source import or price
-calculation algorithm. If user approves R1, proceed to provider comparison/quota
-research before selecting/provisioning anything. Keep one execution branch.
-
-P2-D03 complete: geography/price validators plus 9 focused tests; 209/209 full
-tests PASS, lint/typecheck/catalog/build PASS. Intentional files: geography.ts,
-prices.ts, catalog index, guidePrices.test.mjs and phase/roadmap docs.
-Exact next action superseding above: push schema checkpoint then create P4-W09
-phase plan; implement local outfit library with validated snapshots and existing
-demo renderer/reducer. No game assets, cloud, or implicit autosave.
+## Exact next action
+Full tests/lint/build PASS. Finish docs/diff checks for P4-W09, mark acceptance only
+when passing, commit/push and verify remote. Then create narrow P4-W10 share
+codec plan (Q13 compressed versioned URL fragment), preserve all external gates.

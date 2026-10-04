@@ -1,4 +1,4 @@
-import { SLOTS, validateSelection } from '../../data/wardrobe/index.ts'
+import { SLOTS, validateSelection, validateOutfitSnapshot } from '../../data/wardrobe/index.ts'
 import type { Slot, WardrobePackage, WardrobeSelection } from '../../data/wardrobe/index.ts'
 
 export type WardrobeIssue = 'invalid_action' | 'capacity_exceeded' | 'invalid_dye' | 'rejected_combination' | 'rule_conflict' | 'revision_mismatch'
@@ -7,6 +7,7 @@ export interface WardrobeState {
   effectiveSizeCode: string; appliedRuleIds: string[]; issue: WardrobeIssue | null
 }
 export type WardrobeAction =
+  | { type: 'restore_outfit'; snapshot: unknown }
   | { type: 'equip'; slot: Slot; itemId: string }
   | { type: 'replace'; slot: Slot; itemId: string; replacedItemId: string }
   | { type: 'unequip'; slot: Slot; itemId: string }
@@ -49,6 +50,13 @@ export function wardrobeReducer(state: WardrobeState, action: WardrobeAction, pk
   let selection = state.selection
   if ('slot' in action && !SLOTS.includes(action.slot)) return reject('invalid_action')
   switch (action.type) {
+    case 'restore_outfit': {
+      const restored = validateOutfitSnapshot(action.snapshot, pkg)
+      if (!restored.valid) return reject('invalid_action')
+      const { schemaVersion, baseSizeCode, equippedBySlot, dyeByItemRegion } = restored.value
+      selection = { schemaVersion, baseSizeCode, equippedBySlot, dyeByItemRegion }
+      break
+    }
     case 'equip':
     case 'replace': {
       const item = pkg.items.find(entry => entry.id === action.itemId && entry.slot === action.slot)

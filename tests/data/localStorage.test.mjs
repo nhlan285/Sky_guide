@@ -94,3 +94,13 @@ test('invalid writes preserve the valid value and read results are detached', ()
   const result = local.read(); result.value = 'vi'
   assert.equal(local.read().value, 'en')
 })
+
+test('retry after a denied read reloads saved data instead of writing an empty default', () => {
+  const storage = memory(); storage.setItem('fixture-language', '{"version":2,"value":"en"}')
+  let denied = true
+  const local = wrapper(storage, { storage: () => { if (denied) throw new Error('denied'); return storage } })
+  assert.equal(local.read().value, 'vi')
+  denied = false
+  assert.equal(local.retry().value, 'en')
+  assert.equal(wrapper(storage).read().value, 'en')
+})

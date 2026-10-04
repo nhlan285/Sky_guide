@@ -52,6 +52,13 @@
 .wardrobe-equipped li > div > span { min-width: 0; overflow-wrap: anywhere; }
 .wardrobe-equipped button { background: var(--surface-soft); color: var(--text); border: 1px solid var(--control-border); border-radius: .5rem; padding: .4rem .65rem; min-height: 44px; cursor: pointer; font-size: .75rem; }
 .wardrobe-actions { display: grid; gap: .65rem; margin-bottom: .8rem; }
+.wardrobe-saved { margin-top: 1.5rem; padding-top: 1rem; border-top: 1px solid var(--border); }
+.wardrobe-saved form { display: grid; gap: .65rem; }
+.wardrobe-saved__list { list-style: none; padding: 0; display: grid; gap: 1rem; }
+.wardrobe-saved__list li { display: grid; gap: .65rem; padding-block: .75rem; border-top: 1px solid var(--border); min-width: 0; }
+.wardrobe-saved__name { overflow-wrap: anywhere; font-size: .85rem; }
+.wardrobe-saved__actions { display: flex; flex-wrap: wrap; gap: .5rem; }
+.wardrobe-saved__actions .button { min-height: 44px; font-size: .75rem; }
 .wardrobe-rule-output { color: var(--warning-text); background: var(--warning-surface); padding: .6rem; font-size: .8rem; border-radius: .5rem; }
 @media (max-width: 1099px) {
   .wardrobe-workspace { grid-template-columns: minmax(0, 1fr) minmax(0, 1.6fr); }

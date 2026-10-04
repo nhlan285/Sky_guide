@@ -1,6 +1,11 @@
 import type { Locale } from '../../shared/i18n/translations'
 
 const vi = {
+  savedOutfits: 'Bản phối đã lưu', outfitName: 'Tên bản phối', saveNewOutfit: 'Lưu thành bản phối mới', loadOutfit: 'Mặc bản phối',
+  renameOutfit: 'Đổi tên', confirmRename: 'Lưu tên', deleteOutfit: 'Xóa', confirmDelete: 'Xóa bản phối này khỏi thư viện trên thiết bị?', cancel: 'Hủy',
+  noSavedOutfits: 'Chưa có bản phối đã lưu.', libraryNote: 'Lưu trên thiết bị này. Khi mở lại editor, bản phối được lưu hoặc mở gần nhất sẽ được khôi phục.',
+  librarySession: 'Chưa truy cập hoặc lưu được thư viện. Dữ liệu hiện tại chỉ giữ trong phiên này.', libraryFuture: 'Thư viện được lưu bởi phiên bản mới hơn; dữ liệu cũ được giữ nguyên. Các thay đổi hiện tại chỉ ở phiên này.',
+  retrySave: 'Thử lại', libraryMessages: { saved: 'Đã lưu trên thiết bị.', loaded: 'Đã mở bản phối.', renamed: 'Đã đổi tên.', deleted: 'Đã xóa bản phối đã chọn.', error: 'Không thể cập nhật thư viện. Kiểm tra tên, số bản phối hoặc dữ liệu đã lưu.' },
   title: 'Wardrobe', subtitle: 'Một dáng hình. Nhiều cách phối.', demo: 'Demo tự tạo',
   disclosure: 'Hình và thông số hiện tại là placeholder tự tạo, không phải tài nguyên Sky và chưa được đối chiếu với game.',
   picker: 'Chọn đồ', outfit: 'Đang mặc', colors: 'Màu sắc', preview: 'Bản phối của bạn',
@@ -10,11 +15,16 @@ const vi = {
   effective: 'Tỷ lệ đang hiển thị', base: 'Tỷ lệ bạn chọn', noDye: 'Không hỗ trợ đổi màu', dyeHint: 'Chọn đồ ở nhóm bên cạnh để chỉnh vùng màu được hỗ trợ.',
   resetRegion: 'Màu mặc định', resetColors: 'Đặt lại màu của món này', controls: 'Chỉnh bản phối',
   error: 'Thao tác chưa hợp lệ. Bản phối trước đó được giữ lại.', renderError: 'Một số lớp thiếu hình hoặc calibration phù hợp; lớp đó đã được bỏ khỏi preview.',
-  layerHint: 'Áo choàng có lớp sau và lớp vai phía trước.', session: 'Bản phối chỉ giữ trong phiên editor hiện tại.',
+  layerHint: 'Áo choàng có lớp sau và lớp vai phía trước.', session: 'Lưu bản phối bên dưới để giữ lại sau khi đóng editor.',
   slots: { mask: 'Mặt', hair: 'Tóc', cape: 'Choàng', top: 'Áo', bottom: 'Quần', accessory: 'Phụ kiện' },
   sizes: ['Nhỏ', 'Vừa', 'Tiêu chuẩn', 'Cao'], palette: ['Xanh sương', 'Cát', 'Hồng đất', 'Xanh lam', 'Lá nhạt', 'Ngà'],
 }
 const en: typeof vi = {
+  savedOutfits: 'Saved outfits', outfitName: 'Outfit name', saveNewOutfit: 'Save as a new outfit', loadOutfit: 'Wear outfit',
+  renameOutfit: 'Rename', confirmRename: 'Save name', deleteOutfit: 'Delete', confirmDelete: 'Delete this outfit from the library on this device?', cancel: 'Cancel',
+  noSavedOutfits: 'No saved outfits yet.', libraryNote: 'Saved on this device. Reopening the editor restores the most recently saved or opened outfit.',
+  librarySession: 'The library could not be read or saved. Current data stays in this session only.', libraryFuture: 'This library was saved by a newer version. Existing data is preserved; current changes stay in this session only.',
+  retrySave: 'Try again', libraryMessages: { saved: 'Saved on this device.', loaded: 'Outfit opened.', renamed: 'Outfit renamed.', deleted: 'Selected outfit deleted.', error: 'Could not update the library. Check the name, outfit limit or saved data.' },
   title: 'Wardrobe', subtitle: 'One silhouette. Many possibilities.', demo: 'Self-created demo',
   disclosure: 'The shapes and measurements are self-created placeholders, not Sky assets and not calibrated against the game.',
   picker: 'Choose items', outfit: 'Current outfit', colors: 'Colors', preview: 'Your composition',
@@ -24,7 +34,7 @@ const en: typeof vi = {
   effective: 'Displayed scale', base: 'Your base scale', noDye: 'Color changes unsupported', dyeHint: 'Choose an item in the picker to edit supported color regions.',
   resetRegion: 'Default color', resetColors: 'Reset this item’s colors', controls: 'Edit outfit',
   error: 'This action is invalid. Your previous selection has been kept.', renderError: 'Some layers lack matching geometry or calibration and were omitted from the preview.',
-  layerHint: 'Capes include a rear layer and a front shoulder layer.', session: 'This outfit stays in the current editor session only.',
+  layerHint: 'Capes include a rear layer and a front shoulder layer.', session: 'Save the outfit below to keep it after closing the editor.',
   slots: { mask: 'Face', hair: 'Hair', cape: 'Cape', top: 'Top', bottom: 'Bottom', accessory: 'Accessory' },
   sizes: ['Small', 'Medium', 'Standard', 'Tall'], palette: ['Mist', 'Sand', 'Clay rose', 'Blue', 'Sage', 'Ivory'],
 }

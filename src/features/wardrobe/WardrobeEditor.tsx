@@ -10,6 +10,8 @@ import { createWardrobeState, wardrobeReducer } from './engine'
 import { deriveRenderModel } from './model'
 import { ItemThumbnail, PaperDoll } from './PaperDoll'
 import { wardrobeCopy } from './copy'
+import { createOutfitStorage } from './persistence'
+import { SavedOutfits } from './SavedOutfits'
 
 const reduce = (state: ReturnType<typeof createWardrobeState>, action: Parameters<typeof wardrobeReducer>[1]) => wardrobeReducer(state, action, demoPackage)
 
@@ -18,7 +20,13 @@ export function WardrobeEditor() {
   const title = useRef<HTMLHeadingElement>(null)
   useEffect(() => { title.current?.focus({ preventScroll: true }) }, [])
   const copy = wardrobeCopy[locale]
-  const [state, dispatch] = useReducer(reduce, null, () => createWardrobeState(demoPackage, demoDefaultSize))
+  const [outfitStorage] = useState(() => createOutfitStorage(demoPackage, () => window.localStorage))
+  const [state, dispatch] = useReducer(reduce, null, () => {
+    const initial = createWardrobeState(demoPackage, demoDefaultSize)
+    const library = outfitStorage.read().value
+    const last = library.outfits.find(outfit => outfit.id === library.lastOutfitId)
+    return last ? wardrobeReducer(initial, { type: 'restore_outfit', snapshot: last }, demoPackage) : initial
+  })
   const [slot, setSlot] = useState<Slot>('cape')
   const [panel, setPanel] = useState<'picker' | 'outfit'>('picker')
   const { selection } = state
@@ -111,6 +119,7 @@ export function WardrobeEditor() {
           <Button className="button--quiet" onClick={() => dispatch({ type: 'reset_outfit' })}>{copy.resetOutfit}</Button>
         </div>
         <p className="wardrobe-small">{copy.session}</p>
+        <SavedOutfits storage={outfitStorage} selection={selection} onLoad={snapshot => dispatch({ type: 'restore_outfit', snapshot })} />
       </section>
     </div>
   </div>

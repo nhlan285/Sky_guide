@@ -21,10 +21,12 @@ export function createVersionedStorage<T>(options: VersionedStorageOptions<T>) {
   let issue: StorageIssue | null = null
   let memoryOnly = false
   let futureVersion = false
+  let dirty = false
   const state = (): StoredState<T> => ({ value: structuredClone(memory), persistence: memoryOnly ? 'memory' : 'persistent', issue })
   const fallback = (reason: StorageIssue) => { issue = reason; memoryOnly = true; return state() }
   function persist(value: T): StoredState<T> {
     memory = structuredClone(value)
+    dirty = true
     if (futureVersion) return fallback('future_version')
     let target: KeyStorage
     let existing: string | null
@@ -43,7 +45,7 @@ export function createVersionedStorage<T>(options: VersionedStorageOptions<T>) {
       const encoded = JSON.stringify({ version: options.version, value })
       if (encoded.length > options.maxChars) return fallback('write_failed')
       target.setItem(options.key, encoded)
-      memoryOnly = false; issue = null
+      memoryOnly = false; issue = null; dirty = false
       return state()
     } catch { return fallback('write_failed') }
   }
@@ -83,9 +85,13 @@ export function createVersionedStorage<T>(options: VersionedStorageOptions<T>) {
     memory = structuredClone(options.defaultValue)
     try {
       options.storage().removeItem(options.key)
-      futureVersion = false; memoryOnly = false; issue = null
+      futureVersion = false; memoryOnly = false; issue = null; dirty = false
       return state()
     } catch { return fallback('write_failed') }
   }
-  return { read, write, reset, retry: () => { if (!memoryOnly) read(); return persist(memory) } }
+  return { read, write, reset, retry: () => {
+    if (dirty) return persist(memory)
+    memoryOnly = false; futureVersion = false
+    return read()
+  } }
 }
