@@ -91,6 +91,65 @@ Sky Guide PostgreSQL server; preserve repository/API contracts and export format
 
 ## Review and remaining gates
 
+### Read API and snapshot adapter
+
+`DomainRepository.readCatalog()` returns one validated public snapshot or null.
+`createSnapshotRepository` verifies the supplied manifest's dataset bytes before
+using existing K15 parsers. It rejects draft/fixture/unverified provenance and
+returns detached copies. This compatibility adapter supports the existing K15
+release only; migration-bearing manifests require a reviewed canonical adapter.
+It performs no filesystem/network reads. Callers supply approved manifest files.
+
+`createDomainApi` is an unmounted Web Request/Response handler:
+
+| Endpoint | Contract |
+|---|---|
+| GET /api/items | q/slot/season/spirit, limit 1–100, offset; stable ID sort |
+| GET /api/items/:id | Allowlisted Item payload, original costs/nulls |
+| GET /api/spirits | q/season, same pagination |
+| GET /api/spirits/:id | Allowlisted Spirit payload |
+| GET /api/events/* | 503 source_unavailable until R3 has verified schedules |
+
+Envelope: schemaVersion, catalogVersion, generatedAt, serverTime, freshness,
+allowlisted provenance, data; lists add page offset/limit/total/nextOffset. First
+page captures catalogVersion; later offsets require that version. Snapshot changed
+→ 409 version_mismatch, restart pagination. Invalid/duplicate query → 400; missing
+record → 404; provider/validation failure or no snapshot → 503; non-GET → 405.
+No raw error/SQL/credentials are exposed. The adapter owns validation; a future DB
+adapter must pass identical contract/parity tests. Fixture substitution is not
+proof of a working DB adapter.
+
+Cache-Control remains no-store pending measured quota/TTL policy. Missing validity
+or expired validity produces stale; offline keeps LKG payload with its label. No
+per-second request loop is introduced. The actual event response contract reserves
+absolute timestamps, IANA LA timezone, source type/confidence and scheduleVersion;
+R1 does not fabricate occurrences. Frontend migration/routes remain gated.
+
+### Media metadata and delivery
+
+`validateMediaRecord` validates hash/key/MIME/role/revision/source/provenance and
+typed relation IDs. New immutable keys use media/<sha256>.<extension>; legacy keys
+items/{thumbnails,cards,detail}/<sha256>.webp retain current /assets/items delivery
+paths. Identity never uses a signed URL. Real binaries remain in object storage.
+
+Verified publication requires approval of the current revision, public evidence
+URL, public credit/provenance and fixture=false. Private evidence is excluded.
+Caller supplies validated active relation IDs and reviewed public evidence URLs;
+the validator cannot establish legal permission from the URL itself.
+`publicMedia` applies the current revoked ID/hash overlay even on older snapshots.
+`ObjectStorage.resolveDelivery` hides signing/provider SDKs and credentials;
+`resolveMediaDelivery` checks the current ledger before and after resolution,
+rejects expired/unsafe URLs and fails closed when storage/ledger is unavailable.
+
+This does not retrofit enforcement into the deployed R2 signer. Already-issued
+signed URLs may remain usable until expiry; the production adapter must define
+bounded expiry and a tested purge/deny mechanism before rights-sensitive rollout.
+R1 no-store applies to its response contract; actual provider caches and old
+clients require deployment acceptance in P9-I02/P9-V01. Audio identity is retained
+for Call; media playback/transcoding belongs to R4, not this contract slice.
+
+### Review checklist
+
 - Review table/cardinality mapping and API/media contracts, including private
   export, revocations, version pinning and inactive future modules.
 - Choose provider after current free-tier quota/terms comparison; approve exact

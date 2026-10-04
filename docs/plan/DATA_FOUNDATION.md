@@ -31,14 +31,14 @@ No binary files or credentials in domain data. Public export is allowlisted.
 - [x] Locate, validate and push R0; create/push one execution branch.
 - [x] D01: relational mapping and identity graph validation: composite identity,
   revisions, scoped crosswalks, FK cardinalities, aliases/tombstones, provenance.
-- [ ] D02: injected snapshot repository + request handler contracts for item and
+- [x] D02 contract slice: injected snapshot repository + request handler contracts for item and
   spirit lists/details; explicit unavailable event endpoint until R3. Pagination,
   filter, version mismatch, errors, unknown values and no private-field spread.
-- [ ] D03: AssetRegistry metadata/delivery interface, hash/key/rights/relations,
+- [x] D03 contract slice: AssetRegistry metadata/delivery interface, hash/key/rights/relations,
   public evidence allowlist and revocation overlay; preserve existing R2 paths.
 - [x] I01: backup/restore/migration/rollback/quota runbook and review checklist.
 - [ ] Focused tests, lint/typecheck/catalog/build and docs checks; inspect diff.
-- [ ] Checkpoint drill commit/push/remote verification; continue next safe slice.
+- [x] Checkpoint drill commit/push/remote verification; continue next safe slice.
 - [ ] Record provider/review gates and audit remaining independent work.
 
 ## Risks / UX / security
@@ -69,4 +69,6 @@ checkpoint the validated D01 slice, then implement D02/D03 contracts.
 
 Read CURRENT_STATE for latest commit/checks. Baseline scaffold: PASS, 173 unique
 tasks; lockfile install with pnpm 10.30.3 completed. No runtime source changes yet.
-Checkpoint drill: NOT RUN. Compaction continuity test: NOT TRIGGERED.
+Checkpoint drill: PASS — `199bdd58c37b848b6b550b1adfdb7e7e70a5f791` committed,
+pushed and verified with ls-remote; work continued with D02/D03. Their focused
+tests bring the total to 18 PASS. Compaction continuity test: NOT TRIGGERED.

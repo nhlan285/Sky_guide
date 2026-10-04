@@ -5,7 +5,7 @@
 Autonomous approved master run, LARGE/ARCHITECTURAL. Active phase R1:
 [DATA_FOUNDATION](plan/DATA_FOUNDATION.md); master [roadmap](plan/IMPLEMENTATION_PLAN.md).
 Execution branch: `codex/master-plan-execution`.
-HEAD before first implementation checkpoint: `8b371de6a2b852e3175a55b5f8de2b9cc11d8b54`.
+Current HEAD: `199bdd58c37b848b6b550b1adfdb7e7e70a5f791`; D02/D03 validation in progress.
 Planning branch `codex/roadmap-data-event-media-refresh` and execution baseline
 pushed and verified remotely. Remote main was already at 8b371de at preflight;
 this run did not merge main. Both associated working trees were clean.
@@ -43,8 +43,12 @@ Global rules 41–47 checkpoints apply. Usage snapshot: 46% short-window remaini
 
 ## Checkpoint tests / exact next action
 
-Checkpoint drill: commit/push verification PENDING for first milestone.
+Checkpoint drill: PASS — 199bdd58c37b848b6b550b1adfdb7e7e70a5f791 committed/pushed; remote SHA matched; D02/D03 work continued.
 Compaction continuity test: NOT TRIGGERED. Usage checkpoint: NOT TRIGGERED.
 After first milestone push is verified, record PASS then continue P9-D02/D03:
 provider-neutral read API, public projection boundary and media delivery/revocation
 contracts with focused tests. Keep this branch. Do not provision DB before review.
+
+D02/D03: API snapshot and read facade, media registry/delivery boundary implemented.
+Focused tests 18/18 PASS; focused lint PASS; typecheck PASS before final guard.
+Next: full suite/lint/build then checkpoint the API/media slice.
