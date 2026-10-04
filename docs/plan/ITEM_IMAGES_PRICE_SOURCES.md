@@ -76,6 +76,9 @@ and small evidence JSON record actual mappings and unresolved coverage. No price
 or asset publication. USD community references lack platform/market observations;
 VND and Android per-SKU remain blockers for a future crawler, not this research.
 
-Exact next step: maintainer review of codex/item-images-source-research; no Codex
-merge. Separate future phase: crosswalk/offer adapters then verified store captures,
-with contracts/rights/quantity decisions before bulk crawling or schema changes.
+Completion checkpoint: **PR #10 merged 2026-10-04**, main `c0c0ee0`, by maintainer.
+Branch/base above are historical evidence, not a pending merge. Next execution
+order is [roadmap R1–R6](IMPLEMENTATION_PLAN.md): data/storage contracts first,
+then role-based media reconciliation pilot (P9-D05/P9-D06/P9-V02), not an automatic
+bulk crawler. Crosswalk/offers/store captures still require separate reviewed
+scope, rights/quantity/source contracts; research did not implement them.

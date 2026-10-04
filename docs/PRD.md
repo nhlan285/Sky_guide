@@ -2,11 +2,13 @@
 
 Nguồn: [brief gốc](PROJECT_BRIEF.md), đặc biệt mục 1–2. Tài liệu này viết lại phạm vi đầy đủ; tiêu chí nghiệm thu và cách chia release là **đề xuất**, không phải thông tin game mới. Nguồn dữ liệu: [Knowledge Base](../knowledge/README.md).
 
+Evolution được maintainer duyệt **2026-10-04**: [roadmap Q20–Q23 / Phase 9](plan/IMPLEMENTATION_PLAN.md) bổ sung canonical relational DB + object storage/API, item media reconciliation, Event Service đa nguồn, Emote/Call-Honk preview và Music Playground. Đây là APPROVED/DESIGNED, implementation OPEN; không chứng minh provision DB, verified event adapters hoặc media đủ rights. Trạng thái thực tế ở [CURRENT_STATE](CURRENT_STATE.md).
+
 ## Sản phẩm và phạm vi
 
 Web-app miễn phí cho cộng đồng Sky: Children of the Light, gồm Wardrobe là tính năng lõi khác biệt và Hub thông tin. Không yêu cầu đăng nhập, không có tài khoản người dùng server-side, không tính năng trả phí. Deploy Vercel, ưu tiên browser/PWA có thông báo; native app chỉ nghiên cứu về sau. Không rip asset, không sửa hoặc tích hợp game client; thatskymod không tích hợp.
 
-Không thêm marketplace, chat, social graph, cloud save hoặc hệ tài khoản. Git/review của người duy trì là vận hành nội dung, không phải tài khoản sản phẩm dành cho người dùng.
+V1 không thêm marketplace, chat, social graph, cloud save hoặc hệ tài khoản. Canonical domain DB do maintainer quản lý khác user state local. Music V1 playable, V1.1 Sheets rights-gated, V1.2 Compose local; community/cloud/login V2 chỉ là scope tương lai cần review riêng. Git/review của người duy trì là vận hành nội dung, không phải tài khoản sản phẩm.
 
 ## Module Wardrobe
 
@@ -26,7 +28,7 @@ Không thêm marketplace, chat, social graph, cloud save hoặc hệ tài khoả
 |---|---|---|---|
 | H01 | Database item/cosmetic: tên, giá, season, spirit sở hữu | Danh sách tìm/lọc theo slot/season/spirit; trang chi tiết hiển thị loại tiền, nguồn và độ mới; missing khác với miễn phí | K01, K02 |
 | H02 | TS tracker: lịch sử + dự đoán | Timeline lịch sử dẫn nguồn; dự đoán tách phần, gắn nhãn và cách suy luận, không hiển thị như lịch chính thức; thiếu phương pháp thì chưa có dự đoán | K03, K04 |
-| H03 | Season/event hiện tại + đếm ngược | Card tên/trạng thái/mốc nguồn; countdown đồng bộ ThatSkyAPI; thiếu mốc có xác nhận thì hiện chưa có thời gian, không tự đặt lịch | K05 và nội dung kiểm chứng từ K01/K06; coverage còn mở |
+| H03 | Season/event hiện tại + đếm ngược | Q23 live API/verified rules/occurrences, IANA America/Los_Angeles/DST + user timezone, local countdown không per-second poll; LKG/health/unknown và prediction label rõ | P9-D07 multi-source verification; K05 optional, K01/K06 enrichment; DATA coverage còn mở |
 | H04 | Patch notes/tin chính thức | Feed có tiêu đề, version/ngày khi biết, tóm tắt riêng, link bài gốc | K06 |
 | H05 | Leak Discord có duyệt thủ công | Intake → review → approved/rejected; chỉ approved xuất bản, luôn phân biệt tin chưa xác nhận; sửa/gỡ có lịch sử | K14, đối chiếu K06 |
 | H06 | Map theo season/realm, Map Shrine locations | Chọn map/realm/season, bật/tắt marker shrine/Children of Light; map và tọa độ cùng revision; khi thiếu quyền ảnh dùng text/sơ đồ placeholder | K07 |
@@ -53,7 +55,7 @@ Mỗi module có loading, empty, unavailable/error, stale, offline khi áp dụn
 3. **Hoàn thiện Hub + UX đặc biệt/PWA:** duyệt leak, route, IAP và QR sau khi protocol rõ; notification có giới hạn minh bạch.
 4. **Full asset có điều kiện:** mở khi TGC xác nhận đúng quyền và đã nhận được asset phù hợp; không chặn release Hub/placeholder.
 
-Đây là thứ tự công việc, không cắt bỏ yêu cầu nào. Feature chưa đủ nguồn/quyền được đánh dấu blocked/unavailable và có task theo dõi.
+Đây là roadmap release lịch sử, không tuyên bố mọi module DONE. Current execution sau Item Lookup/PR #10 là **R0→R1 data/storage contracts→R2 media pilot→R3 Event→R4 animated preview→R5 Music V1→R6 expansion**, dependency/gates tại Implementation Plan. Feature thiếu nguồn/quyền giữ blocked/unavailable và task mở.
 
 ## Nghiệm thu toàn sản phẩm
 

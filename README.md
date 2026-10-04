@@ -8,24 +8,24 @@ Web-app cộng đồng dành cho *Sky: Children of the Light*, được định 
 Dự án miễn phí, không yêu cầu đăng nhập và không có tính năng trả phí. Hướng triển khai là web-app/PWA trên Vercel; native app chưa nằm trong giai đoạn đầu.
 
 > [!IMPORTANT]
-> Repo có landing living sky, Hub trạng thái nguồn và Wardrobe demo tương tác bằng hình học tự tạo. Chưa có catalog thật hoặc asset game được phân phối trong repo.
+> Repo có Living Sky/responsive atlas và Hub shell production, K15 Item Lookup ~1.808 records (`/items`, `/items/:id`) và Wardrobe demo tương tác bằng hình học tự tạo. Full game/Wardrobe assets vẫn legal-gated. Trạng thái/next slice: [CURRENT_STATE](docs/CURRENT_STATE.md).
 
 ## Trạng thái dự án
 
 | Hạng mục | Trạng thái |
 |---|---|
 | Product brief, PRD và architecture | Hoàn thành bản khởi tạo |
-| Knowledge Base | 14 hồ sơ nguồn, chờ xác minh endpoint và dữ liệu mẫu |
-| Data schema | Core/catalog/Wardrobe validators đã có; chưa importer/export pipeline hoặc dữ liệu thật |
-| Implementation plan | 9 phase, 134 task |
-| Source code | React + TypeScript + Vite SPA, React Router (`/`, `/hub`, `/wardrobe`, `/about`, not-found) |
+| Knowledge Base | K01–K14 lịch sử, K15 catalogue + image/price source dossier; generic coverage còn OPEN |
+| Data schema | Core/catalog/Wardrobe validators và scoped K15 importer/manifest/loader đã có; central DB architecture approved, chưa provisioned |
+| Implementation plan | Phase 0–8 lịch sử + Phase 9 execution checkpoints R0–R6; status/gates theo từng task |
+| Source code | React + TypeScript + Vite SPA, React Router (`/`, `/hub`, `/items`, `/items/:id`, `/wardrobe`, `/about`, not-found) |
 | Wardrobe 2D | Demo tự tạo: 6 slot / 12 item, equip/replace/remove/reset/random, 4 tỷ lệ demo và palette vùng màu; chưa lưu/share outfit |
 | Asset 3D/wardrobe đầy đủ | **Pending legal confirmation** từ TGC |
 | Deploy Vercel | Cấu hình Vite SPA trong `vercel.json`; Preview theo quy trình bên dưới |
 
 ## Tài liệu chính
 
-1. [Project Brief](docs/PROJECT_BRIEF.md) — nguồn sự thật duy nhất về phạm vi sản phẩm và tình trạng pháp lý.
+1. [Project Brief](docs/PROJECT_BRIEF.md) — baseline sản phẩm; quyết định evolution 2026-10-04 tại roadmap Q20–Q23, legal status tại tài liệu riêng.
 2. [Knowledge Base](knowledge/README.md) — danh mục nguồn, cách truy xuất dự kiến và những điều chưa xác minh.
 3. [PRD](docs/PRD.md) — yêu cầu sản phẩm theo từng module.
 4. [Architecture](docs/ARCHITECTURE.md) — kiến trúc React + TypeScript + Vite được đề xuất.
@@ -78,7 +78,7 @@ Wardrobe V1: mở `/wardrobe` trực tiếp hoặc từ constellation/Hub. [Mani
 
 ### Vercel Preview và rollback
 
-`vercel.json` áp dụng cho Preview/Production: install frozen lockfile, build `pnpm lint && pnpm build`, output `dist` đã xác minh bằng build thật. SPA rewrite `/(.*)` → `/index.html` theo [Vercel Vite docs](https://vercel.com/docs/frameworks/frontend/vite); React Router xử lý `/about` và route không tồn tại. Không cấu hình database/KV/cron hoặc resource trả phí.
+`vercel.json` áp dụng Preview/Production: frozen install, `pnpm lint && pnpm build`, output `dist`. API/R2 routes trước SPA fallback theo [runtime repair](docs/plan/R2_RUNTIME_DEBUG.md). Central DB chưa provisioned; Q15/Q20 cho phép free-tier relational/object storage và scheduler khi task/quota approved, không tự tạo paid resource. Frontend giữ React/Vite SPA, không thêm SSR.
 
 CLI dùng ngoài dependency app:
 

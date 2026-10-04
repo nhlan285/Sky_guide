@@ -1,5 +1,15 @@
 # Item assets on E:
 
+2026-10-04 roadmap evolution: [Q20–Q22 / R1–R4](plan/IMPLEMENTATION_PLAN.md)
+defines the future provider-neutral AssetRegistry/object-storage contract and
+role-based media reconciliation pilot. Existing pipeline below remains current
+implementation evidence, not proof that the new pilot is complete. Future
+`itemImage`/`referenceImages[]` roles must follow explicit structured source
+labels, not dimensions/aspect/DOM order/first image or current ranking alone;
+dedupe the primary out of references, preserve provenance and fail closed on
+unclear rights. Warrior of Love Hair is mandatory regression coverage. No bulk
+swap/crawl authorized by the roadmap; E: working-data guards remain in force.
+
 This feature branch is for local review. No browser automation, upload, deployment,
 or merge is part of the pipeline. Acquisition is independent of reuse permission.
 Public Wiki text licensing does not approve the images.

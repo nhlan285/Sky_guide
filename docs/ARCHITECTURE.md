@@ -5,14 +5,14 @@
 Các quyết định nhóm A được duyệt ngày **2026-09-29** và là baseline triển khai, không còn là đề xuất mở:
 
 - **Frontend:** React + TypeScript + Vite, client-side SPA, không SSR; routing dùng React Router; package manager dùng pnpm; runtime dùng Node LTS. Phiên bản cụ thể phải được kiểm tra và pin khi thực hiện P0-I01.
-- **Deploy:** repo `nhlan285/Sky_guide`, Vercel preview trước, domain `*.vercel.app` ở giai đoạn đầu; không tạo cron, DB, KV hoặc tài nguyên trả phí mặc định.
+- **Deploy:** repo `nhlan285/Sky_guide`, Vercel preview trước, domain `*.vercel.app`; Q15 **evolved 2026-10-04** cho phép free-tier relational DB/object storage và scheduler khi task/quota approved; không tự tạo tài nguyên trả phí.
 - **Wardrobe renderer:** SVG paper-doll 2D với silhouette/layer tự tạo, hệ tọa độ chuẩn hóa [0,1] gốc trên-trái; dữ liệu size/rule demo phải gắn `fixture=true` và tách khỏi dữ liệu game thật.
 - **Local state/share:** `localStorage` qua wrapper versioned có parse/validate và fallback in-memory; IndexedDB chỉ khi thật sự cần. Outfit share dùng URL fragment với payload versioned, nén + base64url, có `schemaVersion` và `catalogVersion`; không chứa QR/profile/dữ liệu cá nhân.
 - **Notification:** mức đầu chỉ in-app reminder + notification khi app đang mở và người dùng chủ động bật. Web Push nền chỉ ở trạng thái research cho tới khi phạm vi lưu subscription server-side được thay đổi rõ ràng.
 - **Ngôn ngữ/khả năng truy cập:** UI mặc định tiếng Việt; tên item/spirit/season giữ tên gốc tiếng Anh từ nguồn; ID không phụ thuộc tên hiển thị. Mục tiêu browser là Chrome/Edge desktop bản mới, Chrome Android và Safari iOS bản gần đây; accessibility hướng tới WCAG 2.2 AA.
 
 
-Tài liệu là **đề xuất thiết kế**, chưa cài dependency, chưa triển khai dịch vụ. Nguồn sản phẩm: [brief](PROJECT_BRIEF.md). Contract nguồn chỉ lấy từ [K01–K14](../knowledge/README.md); endpoint/SDK/platform capability phải xác minh khi triển khai, không được coi là đã kiểm tra ở scaffold này.
+Tài liệu giữ thiết kế/history scaffold; hiện SPA, Living Sky/Hub, K15 Item Lookup và Wardrobe demo đã có trên main. Trạng thái mới nhất ở [CURRENT_STATE](CURRENT_STATE.md). Nguồn sản phẩm: [brief](PROJECT_BRIEF.md) + quyết định maintainer 2026-10-04 trong roadmap Q20–Q23; contract source phải qua [KB](../knowledge/README.md). Design approval không xác minh source/provider hoặc chứng minh implementation.
 
 ## Stack và ranh giới hệ thống
 
@@ -21,12 +21,14 @@ Tài liệu là **đề xuất thiết kế**, chưa cài dependency, chưa tri�
 - Lý do: giữ stack đã duyệt, Vite build static SPA, React Router xử lý route client, pnpm + lockfile tái lập dependency. TypeScript 5.9.3 là bản ổn định tương thích lint tooling; không cần frontend framework thứ hai.
 - Build contract: `pnpm install --frozen-lockfile`, `pnpm build` (typecheck rồi production Vite build), output `dist`. Lệnh độc lập và kiểm tra deployment được ghi ở README.
 - Renderer đầu: 2D paper-doll, lớp ảnh/hình SVG tự tạo xếp theo cấu hình, không engine 3D giai đoạn đầu.
-- Public catalog: file JSON versioned được validate và build cùng app. Không cần database server ở release đầu; schema logic vẫn có ID/quan hệ để thay kho dữ liệu khi có nhu cầu đã xác nhận.
+- Public catalog hiện tại: K15 JSON versioned validate/build cùng app. **Q20 supersedes canonical Q01:** long-term canonical metadata/relationships ở central PostgreSQL-compatible relational DB; JSON vẫn projection/export/cacheable snapshot/rollback/fixture. DB architecture approved, chưa provisioned.
 - User state: reducer/context theo feature; localStorage cho thiết lập/outfit gọn. IndexedDB chỉ dùng khi route/cache hoặc lượng bản ghi vượt phạm vi gọn; chốt ngưỡng sau đo thực tế, không đặt hai kho làm nguồn sự thật cùng lúc.
-- Deploy: Vercel static build. Vercel Function proxy time **chỉ là phương án** nếu K05 không cho gọi trực tiếp qua CORS; không biến proxy thành crawler tổng quát hoặc nơi lưu người dùng.
+- Deploy: Vercel SPA/PWA/static delivery, functions/API facade khi cần và CDN/cache-facing layer; existing R2 runtime routing đã sửa. Deployment storage/repository JSON không là database. K05 time proxy vẫn optional sau verify, không là dependency duy nhất cho Event Service.
 - PWA: manifest + service worker, shell/cache public có version; thông báo xem phần riêng. Native ngoài các phase đầu.
 
 ## Luồng dữ liệu
+
+Diagram sau là **historical JSON projection path** của Q01; canonical/API evolution theo Q20 ở mục dưới. Các private/export/rights boundaries vẫn áp dụng.
 
 ```mermaid
 flowchart LR
@@ -46,7 +48,7 @@ flowchart LR
 
 ### Kho dữ liệu đã chốt — P0-D01 / Q01 (2026-10-01)
 
-Release 1 dùng **JSON normalized versioned trong Git**, không database server. Quyết định này cụ thể hóa public catalog/provenance/review gates của Architecture v1 approved; không thay baseline hoặc xác nhận nguồn thật.
+**Historical decision, SUPERSEDED / EVOLVED 2026-10-04 bởi Q20 về canonical ownership:** ngày 2026-10-01 Release 1 chọn JSON normalized versioned trong Git, không database server. Bảng sau giữ contract public projection và private boundaries; không mô tả JSON là canonical dài hạn hoặc xác nhận nguồn thật.
 
 | Vùng | Vị trí quy định | Ai sử dụng / ranh giới |
 |---|---|---|
@@ -58,13 +60,48 @@ Release 1 dùng **JSON normalized versioned trong Git**, không database server.
 
 `<private-workspace>` là thư mục vận hành ngoài repo hoặc checkout của repo riêng tư, do maintainer quản lý; chưa tạo workspace/repo riêng tư trong task này. Q16/P0-D03 đã chốt **contract nơi logic** `Sky Guide private workspace → Legal → TGC`, owner Maintainer / repository owner và [private evidence ledger](TGC_FOLLOW_UP.md); không là path/dịch vụ storage đã provisioning hoặc xác nhận permission TGC. Không đặt workspace này bên trong `public/`, `src/` hoặc checkout triển khai. Ignore các đường `data/raw/`, `data/draft/`, `data/reviewed/`, `data/quarantine/`, `data/private/`, `private/` chỉ là phòng ngừa local, **không biến chúng thành kho được phép commit** và không bảo vệ file đã tracked.
 
-Luồng duy nhất: raw → normalized draft → validate/diff → review đúng revision → **public projection theo allowlist field** → `data/public/<catalogVersion>/` → review Git/build Preview → phát hành. Không copy nguyên candidate/raw rồi xóa vài field. Nội dung sửa sau approval phải review lại; lỗi parse/validate/export giữ nguyên release tốt trước đó, không xuất catalog rỗng thay thế. Owner/reviewer/tool/source Discord vẫn cần chốt riêng ở Q02; Q01 không cấp quyền publish leak.
+Luồng export snapshot: raw → normalized draft → validate/diff → review đúng revision → **public projection theo allowlist field** → `data/public/<catalogVersion>/` → review Git/build Preview → phát hành. Q20 bổ sung reviewed canonical DB + public API, không bỏ export/private gates. Không copy nguyên candidate/raw rồi xóa vài field. Nội dung sửa sau approval phải review lại; lỗi parse/validate/export giữ nguyên release tốt trước đó, không xuất catalog rỗng thay thế. Owner/reviewer/tool/source Discord vẫn cần chốt riêng ở Q02; Q01 không cấp quyền publish leak.
 
 Client chỉ đọc release public được code chọn rõ; `src/data/` dành cho types/validators/read adapters, không là kho raw/draft. Build không đọc private workspace, không dùng glob toàn `data/**`, không fetch raw/draft ở runtime. `public/` của Vite được copy nguyên vào output nên chỉ chứa tài nguyên đã được phép công khai; không dùng làm vùng staging. `.vercelignore` loại vùng vận hành/fixture khỏi upload CLI; Git deployment chỉ nhận file tracked, vì vậy review Git và export gate vẫn bắt buộc.
 
 Contract manifest/dataset, version và whitelist provenance nằm tại [DATA_SCHEMA](DATA_SCHEMA.md#public-catalog-contract--q01). Catalog build cùng code; rollback chọn deployment hoặc commit có cùng catalog/asset manifest tương thích. Raw/evidence không cần và không được mang theo deployment rollback. Không tạo manifest/catalog giả để biểu thị nguồn đã sẵn sàng: module chưa có dataset được coi là unavailable.
 
-P0-D01 chốt **contract và ranh giới**. Types/validators (P2-D01–D04), importer (P2-D05–D10), export/rights gates (P2-D11), manifest/rollback implementation (P2-D12), build gate (P2-I01) và client data access (P2-H01) chưa triển khai. Người vận hành dùng Git hiện có; không xây auth/admin account cho sản phẩm.
+P0-D01 giữ DONE về **contract và ranh giới**. P2-D01/P2-D02/P2-D04 validators DONE theo roadmap; K15 importer/manifest/loader/build validation chỉ complete scoped Item Lookup. P2-D10–P2-D12/P2-I01/P2-H01 generic DoD vẫn OPEN. Không xây user auth/admin account trong V1.
+
+### Central data / storage evolution — Q20–Q23 (2026-10-04)
+
+**APPROVED/DESIGNED, implementation OPEN.** Canonical domain metadata/relationships
+được maintainer review/promote vào relational DB PostgreSQL-compatible, schema
+provider-neutral: Item, Spirit, Season, Event, EventRule, EventOverride, Location,
+Cosmetic/Music/Emote/Honk-Call metadata và Media/provenance. Source-scoped crosswalk
+giữ stable IDs K15, FK, revisions, soft deletion/alias/tombstone. Upstream là evidence;
+raw/draft/quarantine/private rights evidence không trở thành public API fields.
+
+Binary images/posters/video/honk-call audio-video/emote video/music samples ở
+**Cloudflare R2 / S3-compatible object storage** (preferred direction); DB chỉ
+ID/storage key/URL khi cần/role/source/provenance/rights/revision/timestamps/FKs.
+Existing R2 image runtime không đồng nghĩa central DB/preview/sample pipeline xong.
+Frontend đọc data abstraction qua `/api/items`, `/api/items/:id`, `/api/events/*`,
+`/api/spirits/*`, không direct provider DB; JSON snapshot fallback/export vẫn hợp lệ.
+Item/spirit TTL dài, live schedule TTL ngắn theo contract/quota, cache invalidation
+khi revision/rights đổi; không poll countdown backend mỗi giây.
+
+Sync dùng snapshot/hash/diff/normalization/quarantine/retry/source health/LKG,
+promotion có review. Migration phải audit DB size/query latency/connections/
+CPU/RAM/egress/cache hit/API latency và quota request/operation/egress/CPU/RAM/IOPS;
+backup/export, restore test, rollback trước migrate sang larger managed PostgreSQL
+hoặc PostgreSQL trên Sky Guide cloud server; frontend API contract giữ nguyên.
+Provider lựa chọn sau review, không mặc định Supabase/Neon/Cloudflare DB. Không
+provision trong task docs; scheduler/worker/cron chỉ khi task/quota approved, không
+tự tạo paid resources. User state V1 tiếp tục local.
+
+Item media Q21: `itemImage` 0..1 + `referenceImages[]` 0..N, dedupe primary khỏi
+references; explicit source roles, không geometry/DOM-order inference. Event Q23
+đa nguồn qua registry/verification, IANA `America/Los_Angeles`/DST, versioned
+rules/occurrences, effective temporary overrides giữ base và LKG health. Q22 shared
+poster/lazy animated preview và Music itemId→sampleSetId không binary trong DB.
+Chi tiết contract, budgets, validation và thứ tự **R0→R1→R2→R3→R4→R5→R6** ở
+[roadmap Phase 9](plan/IMPLEMENTATION_PLAN.md#phase-9--data-event-và-media-refresh-approveddesigned-2026-10-04).
 
 ## Tổ chức thư mục mã (chỉ khung)
 
@@ -78,7 +115,7 @@ P0-D01 chốt **contract và ranh giới**. Types/validators (P2-D01–D04), imp
 | `src/data` | Normalized types, validation, data read adapters; không chứa draft |
 | `src/pwa` | Manifest integration, service worker lifecycle, notification capability |
 
-Scripts import và JSON public sẽ được thêm ở task dữ liệu tương ứng; shell/build hiện có không tích hợp nguồn thật.
+K15 scoped importer/JSON public/loader đã có; generic adapters cho module khác và central DB/API còn OPEN theo roadmap, không suy complete từ shell/build.
 
 ## Contract Wardrobe 2D đã chốt — P0-W01 / P0-W02 / Q08 (2026-10-02)
 
@@ -137,18 +174,26 @@ Contract tọa độ/transform và thứ tự lớp được chốt ở mục Q0
 | TS history | [K03](../knowledge/03-wiki-traveling-spirits.md), [K04](../knowledge/04-ts-calculator.md) | Hai adapter độc lập → diff → biên tập xử lý xung đột |
 | Time | [K05](../knowledge/05-thatskyapi.md) | Tích hợp trực tiếp nếu khả thi; TimeReference riêng, không build-time timestamp cố định làm đồng hồ live |
 | Patch/news | [K06](../knowledge/06-official-patch-notes.md) | Tóm tắt + link thủ công → review; automation chỉ sau kiểm tra |
-| Season/event | K01/K06 nếu có chứng cứ phù hợp | Không gán K05 là feed season; chưa có chứng cứ thì unavailable |
+| Season/event | Q23 source registry đa nguồn đã verify theo field | Official → verified official override → structured community → cross-checked → calculated/prediction có nhãn; P9-D07 verify candidates/KB trước adapters; không gán K05 là feed season |
 | Map/markers | [K07](../knowledge/07-wiki-map-shrines.md) | Text + tọa độ biên tập + asset riêng có quyền; không suy ra coordinate từ tên |
 | Route | [K08](../knowledge/08-appunwrapper.md), [K09](../knowledge/09-wiki-video-playlists.md) | Viết lại từng bước, dẫn nguồn; không copy full text/media |
 | IAP | [K10](../knowledge/10-app-store-iap.md)–[K12](../knowledge/12-apppricinglab.md) | Observation có platform/market/time → SKU mapping đã xác minh → phép tính có giả định |
 | Asset | [K13](../knowledge/13-tgc-assets.md) | Registry placeholder trước; full asset chỉ sau legal gate |
 | Leak | [K14](../knowledge/14-discord-editorial.md) | Intake manual → đối chiếu K06 → người duyệt → public projection |
 
-Mỗi lần import: kiểm tra nguồn → lưu provenance/snapshot cho phép → normalize → validate quan hệ → quarantine bản ghi hỏng → diff với bản cũ → review → xuất public JSON → build preview → publish khi đạt gate. Parser lỗi không được làm danh sách rỗng ghi đè bản tốt. Upstream đổi field phải báo lỗi và giữ last-known-good có nhãn stale. Retry/backoff, cadence và TTL đặt theo đặc tính nguồn sau xác minh, không suy đoán hạn mức API.
+Mỗi lần import: kiểm tra nguồn → lưu provenance/snapshot cho phép → normalize → validate quan hệ → quarantine bản ghi hỏng → diff với bản cũ → review → canonical promotion/public projection theo Q20 → publish khi đạt gate. JSON build snapshot là một delivery path, không bắt buộc rebuild frontend cho mỗi live event update. Parser lỗi không làm danh sách rỗng ghi đè bản tốt. Upstream đổi field báo lỗi và giữ LKG có nhãn stale. Retry/backoff/cadence/TTL theo source contract/quota đã verify.
 
 ## Countdown và thời gian
 
-TimeReference cần thời gian nguồn, thời điểm nhận và đơn vị đã kiểm chứng. UI ước lượng thời gian trôi qua từ mốc này để render mỗi giây; đây là nội suy hiển thị, không tự xây lịch game. Mốc bắt đầu/kết thúc season/event phải có provenance riêng. Khi tab thức dậy/timer bị throttled, đồng bộ lại; nguồn hết hạn thì báo stale, khi không có mốc tin cậy thì không hiện countdown chính xác giả. DST được kiểm tra qua fixture có ý nghĩa từ contract K05. Không dùng thời gian LA hardcode thành UTC offset cố định.
+Q23 Event Engine resolve verified EventRule/Override thành EventOccurrence theo
+IANA **America/Los_Angeles**, không hardcoded UTC-7/UTC-8 hoặc giờ Việt Nam source
+of truth. Recurring anchor/offset/interval/effectiveFrom/effectiveUntil ở domain,
+không UI; override effective range/priority không mutate base rule. Live API trả
+server/generated time/version/active/upcoming/startsAt/endsAt/source confidence;
+TimeReference K05 optional sau verify. UI countdown local/localize user timezone,
+sleep/wake revalidate có giới hạn, không per-second API poll. Upstream failure giữ
+LKG + healthy/delayed/stale/offline; no verified dates/LKG thì unavailable.
+Prediction/calculated không như official; DST/override/source-failure tests ở P9-V03.
 
 ## PWA và notification
 
@@ -167,4 +212,4 @@ Build gate: type/lint theo tool đã chọn, schema/reference checks, cấm draf
 
 ## Các quyết định còn mở
 
-React + TypeScript + Vite, React Router, pnpm, Node LTS, URL fragment cho outfit, renderer SVG 2D, notification foreground, ngôn ngữ UI đầu và browser/accessibility target đã được chốt trong nhóm A. Q01/P0-D01 đã chốt JSON normalized versioned và ranh giới public/raw/draft; schema domain sẽ được kiểm chứng khi triển khai Phase 2, mapping upstream vẫn chờ Phase 1. Moderation leak, prediction TS, QR protocol, price mapping, attribution và các nguồn dữ liệu vẫn theo trạng thái mở/gate tương ứng trong [Decisions & open questions](plan/IMPLEMENTATION_PLAN.md). Không có endpoint, dữ liệu game hoặc license mới nào được xác nhận chỉ bằng tài liệu kiến trúc này.
+Stack/renderer/local state/foreground notification giữ quyết định cũ. Q01 projection/private boundaries giữ, canonical ownership superseded bởi Q20; Q15 evolved, Q21–Q23 approved/design chưa implemented. Moderation leak, prediction TS, QR, price mapping, attribution/source/rights còn gate tương ứng trong [roadmap](plan/IMPLEMENTATION_PLAN.md). Không endpoint, game data, provider quota hoặc license nào được xác nhận chỉ bằng kiến trúc này.

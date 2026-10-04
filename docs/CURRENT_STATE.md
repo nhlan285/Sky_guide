@@ -1,57 +1,79 @@
 # Current handoff — 2026-10-04
 
-Branch: `codex/item-images-source-research`, based on `origin/main` **26dbd9c**.
-Main now contains the R2 runtime fix and the scoped Wardrobe selector fix; this
-task does not continue the abandoned Opus changes.
-Active task: [image sizing / source research](plan/ITEM_IMAGES_PRICE_SOURCES.md).
-Stable roadmap: [implementation plan](plan/IMPLEMENTATION_PLAN.md).
+Branch: `codex/roadmap-data-event-media-refresh`, based on freshly fetched
+`origin/main` **c0c0ee0c55bc11d15a24269b2c0b591fb7940287** — merge PR #10
+`codex/item-images-source-research`. Working tree was clean before this task.
+`origin/develop` is 13 commits behind main / 0 ahead; not used as base or merged.
+Master roadmap: [IMPLEMENTATION_PLAN](plan/IMPLEMENTATION_PLAN.md).
+Active phase: **R0 docs reconciliation**, [task plan](plan/ROADMAP_RECONCILIATION.md).
+R0 docs-only work complete; handoff to R1 after this docs commit/review.
 
-## Completed scoped work
+## Completed product state (scope preserved)
 
-- CSS: catalogue min column 18rem, image ratio 5:4; detail hero up to 38rem/608px,
-  gallery min column 18rem. Artwork remains contain, real variants/fallbacks and
-  existing light/dark design preserved; no changes to Wardrobe, API or R2 corpus.
-- Browser CLI verified real item 1216, item 1204 with long title, catalogue,
-  empty search and missing-item recovery. Desktop 1440px: hero 608px square, gallery ~373px square,
-  catalogue ~369x295px. Mobile 390px: detail/gallery ~356px square, catalogue
-  ~356x285px; at 320px detail 286px square, catalogue ~286x229px. No horizontal
-  overflow or browser errors. Screenshots are ignored local files under
-  `tmp/source-research/`; they are not product assets.
-- [Source dossier](../knowledge/16-image-price-sources.md) and
-  [small evidence registry](../knowledge/evidence/image-price-sources-2026-10-04.json):
-  SkyGame-Data package 1.3.19 (10 datasets, distinct GitHub/package snapshots),
-  Wiki revisions/imageinfo, seasonal vs TS/special-visit mapping, independent
-  Nesting shop/quantity semantics, official patch notes and public store coverage.
-- User chose USD and VND, separated iOS/Android. iOS-US public list has sample
-  USD prices; iOS-VN same ID returns 404. Google Play US/VN return 200 but no
-  per-SKU prices verified. AppPricingLab remains candidate. Web store is a
-  separate channel. No inferred FX rates, Android prices or free missing prices.
+- Living Sky / responsive atlas and Hub shell are production, per maintainer's
+  current acceptance state. This docs task did not run fresh deployment/browser QA.
+- K15 real Item Lookup: ~1,808 catalogue records, `/items`, `/items/:id`, pinned
+  source/provenance + scoped importer/manifest/loader. K01–K12 and full generic
+  source pipeline do not become DONE from this result.
+- Wardrobe interactive demo uses self-created/fixture assets; no full game assets,
+  persistence/share or visible override completion claimed.
+- R2 runtime routing and Item/Wardrobe CSS collision fixes are in main.
+  [R2 evidence/runbook](plan/R2_RUNTIME_DEBUG.md) preserves scoped validation.
+- **PR #10 merged** in main c0c0ee0: item sizing, verified image/price source
+  research, [dossier](../knowledge/16-image-price-sources.md) and small evidence
+  registry. [Completed source phase](plan/ITEM_IMAGES_PRICE_SOURCES.md).
+  Prior validation: lint/build/catalog/typecheck PASS, 169/169 tests PASS, browser
+  sizing/long-title/empty/missing/mobile checks recorded there; not rerun in R0.
 
-## Validation and limitations
+## R0 changes / decisions
 
-Final pnpm lint PASS; pnpm test **169/169 PASS**; pnpm build PASS including catalog
-validation and typecheck. Existing React Router directive / large-chunk warnings
-remain. Evidence JSON parses and sample references/unknown-cost distinctions pass
-bounded assertions. Temporary research helpers removed; lint config unchanged.
-No new unit test for CSS-only sizing; actual layout checked in browser and existing
-asset/fallback/query tests pass. No new deployment requested; Git push is authorized.
+Documentation only: roadmap task/dependency/feature matrices, active phase plan,
+Architecture/Schema/PRD evolution notes, handoff and direct source/asset/status
+contradictions. No source code, dependencies, corpus, environment or cloud changes.
+All historical DONE task IDs stay DONE; R0 adds P9-R01 only as docs completion.
 
-Low-resolution icons still look soft enlarged. Rights approval, full crosswalk,
-Nesting first/additional quantity reconciliation and Android/VND per-SKU coverage
-remain future crawler blockers. Do not present this research as complete catalog
-verification or source publication. Gate/pipeline/schema completion status remains
-unchanged. No mass crawl/download, source data/R2 write, env change or merge.
+- Q01 historical CLOSED retained, canonical ownership **SUPERSEDED / EVOLVED**
+  by Q20; projection/manifest/private/export/rights contracts remain.
+- Q15 evolved: free-tier relational DB and R2/S3 storage permitted in architecture;
+  scheduler only with task/quota approval; no automatic paid resources.
+- Q20 central PostgreSQL-compatible canonical metadata + provider-neutral API,
+  object-storage binaries; JSON projection/export/cache/snapshot/rollback/fixture.
+- Q21 role-based itemImage/referenceImages reconciliation, dedupe, Warrior of Love
+  Hair regression and one-season pilot before broader catalogue rollout.
+- Q22 shared Emote/Call-Honk poster/video/audio pipeline + Music stable item IDs,
+  V1 playable → V1.1 Sheets → V1.2 local Compose → V2 separately approved scope.
+- Q23 multi-source Event Engine, IANA LA/DST, effective overrides, live API/LKG;
+  Q14 source verification remains OPEN, K05 optional. Q10 market choice is already
+  USD/US + VND/VN separately iOS/Android; price/mixed/ownership mapping still OPEN.
 
-## Exact next action
+Central DB/Event/Music/animated pipeline are **APPROVED/DESIGNED**, implementation
+**OPEN**; no central DB provisioned, no verified event adapter or new clips claimed.
 
-Review the new branch and UI/source dossier; the maintainer merges personally.
-Future phase: approve contracts then implement source crosswalk and versioned
-offers, independent shop adapters and separate iOS/Android market observations.
-Do not silently promote community reference prices into official store observations.
+## Validation / blockers / boundaries
 
-## Earlier repair reference
+R0: `Check-Scaffold.ps1`, `Get-PlanTasks.ps1`, bounded Markdown table/fence,
+task/decision uniqueness, dependency/reference and local link-anchor checks,
+historical DONE comparison, docs-only diff review and `git diff --check` PASS.
+No browser QA, feature tests/build, external source fetch or bulk asset work needed
+for Markdown-only changes. Prior 169-test evidence is historical, not R0 validation.
 
-[R2 runtime debug](plan/R2_RUNTIME_DEBUG.md) records the proven artifact routing
-and Web Request export fix, regression and Preview verification. Earlier standalone
-API tsc passed; Vercel build exited 0 with pre-existing S3Client.send diagnostics.
-No API/routing changes are part of the current task.
+No R0 blocker. Future gates: schema/contracts review before DB provisioning;
+provider/task/quota approval; event source/logic verification + KB entries;
+DATA/RIGHTS/TGC per asset. Full game/Wardrobe assets remain legal-gated. Android/VND
+per-SKU, full crosswalk/quantity/ownership mappings and ambiguous media need review.
+Rights unknown fail closed; no paid resources, mass crawl/download or deployment
+authorized by a design-only decision. Commit docs, stop; no main merge/push.
+
+## Exact next implementation slice
+
+**R1: P9-D01–P9-D03 + P9-I01**, refine its detailed phase plan, then implement/review
+provider-neutral relational domain/schema mapping, stable IDs/FKs/revisions/
+soft-delete/tombstone/provenance, public API contracts, AssetRegistry/object-storage
+metadata interface and migration/scaling/backup/restore/rollback strategy using
+small synthetic fixtures. Reuse existing K15 and R2 boundaries.
+
+Review contracts/schema first. **P9-I02 provider selection/provisioning comes only
+after that review and task/quota approval**, then sync/foundation validation.
+Do not start item mass crawl, Event Engine, animated assets or Music before their
+foundation/checkpoint dependencies. R0 ends at the docs commit; refine later phase
+details when that phase begins, not from a full repository reread.

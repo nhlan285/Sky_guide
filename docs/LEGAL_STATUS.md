@@ -30,7 +30,7 @@ Các nội dung đã hỏi theo brief:
 
 ## Danh sách asset cần placeholder
 
-**Hiện trạng repo:** Item Catalogue có [metadata và URL ảnh công khai Sky Wiki](WIKI_MEDIA.md) theo yêu cầu local feature ngày 2026-10-03; không tải binary ảnh vào Git. Quyền riêng của ảnh vẫn `unverified`, không được đổi thành approved. Phạm vi này không mở Full AssetRegistry hoặc quyền wardrobe/3D. P0-W01 có [fixture SVG hình học tự tạo](../tests/fixtures/wardrobe/README.md), không là Sky asset/calibration thật. Danh sách sau là kế hoạch wardrobe, không phải inventory full assets.
+**Hiện trạng repo:** Catalogue discovery giữ [Wiki metadata/provenance lịch sử](WIKI_MEDIA.md), runtime dùng [controlled processed asset storage](ITEM_ASSETS.md) qua R2 routing đã sửa, không coi public source URL là quyền rehost. Unknown rights giữ unverified/placeholder trong public eligibility, không đổi approved. Q20–Q22/Phase 9 chỉ duyệt architecture/media plan, không mở Full AssetRegistry hoặc quyền wardrobe/3D. Item pilot/Emote/Call-Honk/music samples cần permission/license hoặc gameplay tự ghi phù hợp policy và review phạm vi; không cắt/re-host video người khác khi rights chưa rõ, Sheets copyrighted content RIGHTS-gated. P0-W01 fixture generic tự tạo không là game asset/calibration. Danh sách sau là kế hoạch wardrobe, không inventory full assets.
 
 | Asset | Trạng thái | Phương án tạm | Điều kiện thay |
 |---|---|---|---|
