@@ -39,6 +39,11 @@ No binary files or credentials in domain data. Public export is allowlisted.
 - [x] I01: backup/restore/migration/rollback/quota runbook and review checklist.
 - [ ] Focused tests, lint/typecheck/catalog/build and docs checks; inspect diff.
 - [x] Checkpoint drill commit/push/remote verification; continue next safe slice.
+- [x] D04/V01 local contract subset: synthetic staging/quarantine/review digest,
+  atomic compare-and-swap promotion, bounded retry/health/LKG and snapshot restore.
+  This follows the master-run instruction to implement provider-independent
+  contracts/tests while provisioning is gated. It does not satisfy I02 dependencies
+  for real integration, nor mark D04/V01 DONE; no scheduler or source fetch.
 - [ ] Record provider/review gates and audit remaining independent work.
 
 ## Risks / UX / security

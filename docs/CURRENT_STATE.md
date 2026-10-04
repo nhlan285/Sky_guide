@@ -52,3 +52,10 @@ contracts with focused tests. Keep this branch. Do not provision DB before revie
 D02/D03: API snapshot and read facade, media registry/delivery boundary implemented.
 Focused tests 18/18 PASS; focused lint PASS; typecheck PASS before final guard.
 Next: full suite/lint/build then checkpoint the API/media slice.
+
+R1 sync local subset implemented: source hashing, quarantine, digest-bound review,
+GLOBAL generation CAS contract, bounded retry/offline/LKG and local snapshot restore.
+Focused identity/sync tests 12/12 PASS; focused lint/typecheck PASS. Earlier full
+suite 187/187 and build PASS before this slice; final expanded suite pending.
+Pending user review requested asynchronously; no provider selected or provisioned.
+Next: checkpoint sync then audit independent legacy tasks while R1 approval waits.

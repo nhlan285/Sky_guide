@@ -40,6 +40,7 @@ export interface IdentityGraph {
 const ref = (input: unknown) => object<EntityRef>(input, { kind: enumeration(entityKinds), id: validateId })
 const revision = (input: unknown) => typeof input === 'number' && Number.isSafeInteger(input) && input > 0 ? success(input) : failure('invalid_value', 'Revision must be a positive safe integer.')
 const key = (value: EntityRef) => JSON.stringify([value.kind, value.id])
+const identityContent = (value: Identity) => JSON.stringify([value.kind, value.id, value.revision, value.schemaVersion, value.updatedAt, value.retiredAt, value.fixture, value.provenanceIds])
 const invalid = (message: string): ValidationResult<never> => failure('invalid_relationship', message)
 
 export function validateIdentityGraph(input: unknown, provenanceIds: ReadonlySet<string>, sourceIds: ReadonlySet<string>, previous?: IdentityGraph): ValidationResult<IdentityGraph> {
@@ -124,14 +125,20 @@ export function validateIdentityGraph(input: unknown, provenanceIds: ReadonlySet
     if (replacement && key(replacement) !== key(target)) return invalid('Alias and tombstone replacement disagree.')
   }
   if (previous) {
+    const outgoing = (graph: IdentityGraph, node: Identity) => JSON.stringify(graph.relations.filter(edge => relations[edge.type][0] === node.kind && edge.fromId === node.id).map(edge => [edge.type, edge.toId]).sort((a, b) => JSON.stringify(a).localeCompare(JSON.stringify(b), 'en')))
     for (const old of previous.identities) {
       const current = nodes.get(key(old))
       if (!current || current.revision < old.revision || (old.retiredAt !== null && current.retiredAt !== old.retiredAt)) return invalid('Identity history cannot disappear, regress or resurrect.')
       if (Date.parse(current.updatedAt) < Date.parse(old.updatedAt)) return invalid('Update timestamp cannot regress.')
-      if (JSON.stringify(current) !== JSON.stringify(old) && current.revision <= old.revision) return invalid('Changed identity requires a new revision.')
+      if (identityContent(current) !== identityContent(old) && current.revision <= old.revision) return invalid('Changed identity requires a new revision.')
+      if (outgoing(graph, current) !== outgoing(previous, old) && current.revision <= old.revision) return invalid('Changed relationships require a new owner revision.')
     }
     for (const old of previous.crosswalks) if (!graph.crosswalks.some(entry => entry.sourceId === old.sourceId && entry.sourceKey === old.sourceKey && key(entry.target) === key(old.target))) return invalid('Existing source identities cannot be remapped or discarded.')
     for (const old of previous.aliases) if (!graph.aliases.some(entry => key(entry.from) === key(old.from) && key(entry.to) === key(old.to))) return invalid('Existing aliases cannot be remapped or discarded.')
+    for (const old of previous.tombstones) {
+      const current = tombstones.get(key(old.target))
+      if (!current || (current.replacement ? key(current.replacement) : null) !== (old.replacement ? key(old.replacement) : null)) return invalid('Historical tombstone replacements cannot be rewritten.')
+    }
   }
   return result
 }

@@ -62,6 +62,9 @@ test('aliases resolve without ID reuse, cycles, kind changes or hidden retiremen
 
 test('new snapshots preserve identity history and require changed revisions', () => {
   const previous = graph()
+  const reordered = globalThis.structuredClone(previous)
+  reordered.identities = reordered.identities.map(node => Object.fromEntries(Object.entries(node).reverse()))
+  assert.equal(validate(reordered, previous).valid, true)
   const next = globalThis.structuredClone(previous)
   next.identities[0].provenanceIds = ['fixture-provenance']
   assert.equal(validate(next, previous).valid, false)

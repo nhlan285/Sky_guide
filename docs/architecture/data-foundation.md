@@ -150,6 +150,30 @@ for Call; media playback/transcoding belongs to R4, not this contract slice.
 
 ### Review checklist
 
+### Local sync contract subset (P9-D04/P9-V01)
+
+`stageSourceSnapshot` enforces an explicit byte budget, hashes source and normalized
+content, validates graph/projection consistency and quarantines invalid output.
+It does not fetch, schedule, persist raw data or publish. `ReviewApproval` binds
+the exact content digest and base generation; edits invalidate approval.
+`promoteReviewedSnapshot` validates again and uses an injected atomic CAS store.
+Generation/LKG must be global across sources, with separate source health; a
+per-source CAS cannot safely protect shared canonical data. The DB adapter must
+persist canonical payload, projection pointer and audit metadata in one transaction.
+That adapter is still gated; only an in-memory test double has run.
+
+Failure records leave LKG untouched, record offline health and use only explicitly
+supplied retry delays; exhausted policy disables retry. Identical reviewed data
+recovers health without re-promoting content. Source freshness and review metadata
+remain separate. Local export/restore revalidates checksums and preserves API
+payloads; this is not a SQL migration or DB backup-restore rehearsal. Current
+revocation overlay remains mandatory at delivery after any restore.
+
+No full generic canonical payload/storage adapter or live upstream integration is
+claimed. K15 snapshot compatibility remains scoped; unsupported migration manifests
+are rejected. SQL up/down, durable transactions, provider failure injection and
+live restore are still P9-I02/P9-V01 acceptance gates.
+
 - Review table/cardinality mapping and API/media contracts, including private
   export, revocations, version pinning and inactive future modules.
 - Choose provider after current free-tier quota/terms comparison; approve exact
