@@ -1,6 +1,7 @@
 import type { Locale } from '../../shared/i18n/translations'
 
 const vi = {
+  share: { title: 'Chia sẻ bản phối demo', note: 'Liên kết chỉ chứa đồ, màu và tỷ lệ. Người mở chọn áp dụng; không tự lưu vào thư viện.', loading: 'Đang xử lý…', ready: 'Có bản phối trong liên kết. Áp dụng sẽ thay lựa chọn đang chỉnh.', apply: 'Áp dụng bản phối từ liên kết', dismiss: 'Bỏ qua', create: 'Tạo liên kết bản phối hiện tại', link: 'Liên kết chia sẻ', copy: 'Sao chép liên kết', open: 'Mở liên kết ở tab mới', errors: { invalid: 'Liên kết không hợp lệ hoặc chứa lựa chọn không được hỗ trợ. Bản phối hiện tại được giữ lại.', version: 'Liên kết dùng phiên bản khác; chưa hỗ trợ chuyển đổi bản phối này.', too_large: 'Bản phối vượt giới hạn liên kết. Hãy giảm số lựa chọn.', unsupported: 'Trình duyệt chưa hỗ trợ codec chia sẻ. Hãy dùng trình duyệt có Compression Streams.' }, messages: { copied: 'Đã sao chép liên kết.', manual: 'Chưa sao chép được. Chọn ô liên kết và sao chép thủ công.', applied: 'Đã áp dụng bản phối. Lưu riêng nếu muốn giữ trên thiết bị.' } },
   savedOutfits: 'Bản phối đã lưu', outfitName: 'Tên bản phối', saveNewOutfit: 'Lưu thành bản phối mới', loadOutfit: 'Mặc bản phối',
   renameOutfit: 'Đổi tên', confirmRename: 'Lưu tên', deleteOutfit: 'Xóa', confirmDelete: 'Xóa bản phối này khỏi thư viện trên thiết bị?', cancel: 'Hủy',
   noSavedOutfits: 'Chưa có bản phối đã lưu.', libraryNote: 'Lưu trên thiết bị này. Khi mở lại editor, bản phối được lưu hoặc mở gần nhất sẽ được khôi phục.',
@@ -20,6 +21,7 @@ const vi = {
   sizes: ['Nhỏ', 'Vừa', 'Tiêu chuẩn', 'Cao'], palette: ['Xanh sương', 'Cát', 'Hồng đất', 'Xanh lam', 'Lá nhạt', 'Ngà'],
 }
 const en: typeof vi = {
+  share: { title: 'Share demo outfit', note: 'Links contain only items, colors and scale. Opening lets you apply the outfit; it does not save to your library.', loading: 'Processing…', ready: 'This link contains an outfit. Applying it replaces your current selection.', apply: 'Apply outfit from link', dismiss: 'Dismiss', create: 'Create link for current outfit', link: 'Share link', copy: 'Copy link', open: 'Open link in a new tab', errors: { invalid: 'The link is invalid or contains unsupported selections. Your current outfit is preserved.', version: 'This link uses another version; migration is not supported yet.', too_large: 'This outfit exceeds the link limit. Reduce the number of selections.', unsupported: 'This browser does not support the sharing codec. Use a browser with Compression Streams.' }, messages: { copied: 'Link copied.', manual: 'Could not copy. Select the link field and copy it manually.', applied: 'Outfit applied. Save it separately to keep it on this device.' } },
   savedOutfits: 'Saved outfits', outfitName: 'Outfit name', saveNewOutfit: 'Save as a new outfit', loadOutfit: 'Wear outfit',
   renameOutfit: 'Rename', confirmRename: 'Save name', deleteOutfit: 'Delete', confirmDelete: 'Delete this outfit from the library on this device?', cancel: 'Cancel',
   noSavedOutfits: 'No saved outfits yet.', libraryNote: 'Saved on this device. Reopening the editor restores the most recently saved or opened outfit.',

@@ -12,6 +12,7 @@ import { ItemThumbnail, PaperDoll } from './PaperDoll'
 import { wardrobeCopy } from './copy'
 import { createOutfitStorage } from './persistence'
 import { SavedOutfits } from './SavedOutfits'
+import { OutfitShare } from './OutfitShare'
 
 const reduce = (state: ReturnType<typeof createWardrobeState>, action: Parameters<typeof wardrobeReducer>[1]) => wardrobeReducer(state, action, demoPackage)
 
@@ -43,6 +44,7 @@ export function WardrobeEditor() {
       <div><h1 ref={title} id="page-title" tabIndex={-1}>{copy.title}</h1><p>{copy.subtitle}</p></div>
       <div className="wardrobe-disclosure"><StatusBadge tone="info">{copy.demo}</StatusBadge><p>{copy.disclosure}</p></div>
     </div>
+    <OutfitShare selection={selection} onLoad={snapshot => dispatch({ type: 'restore_outfit', snapshot })} />
     <div className="wardrobe-workspace" data-panel={panel}>
       <section className="wardrobe-preview" aria-labelledby="preview-title">
         <div className="preview-caption"><h2 id="preview-title">{copy.preview}</h2><span>{equipped.length} / {SLOTS.length}</span></div>

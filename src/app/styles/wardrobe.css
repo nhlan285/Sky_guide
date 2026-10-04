@@ -90,3 +90,7 @@
   .wardrobe-palette { grid-template-columns: repeat(3, minmax(44px, 1fr)); }
   .wardrobe-sizes span { padding-inline: .2rem; line-height: 1.35; }
 }
+.wardrobe-share { margin-block: var(--space-5); padding: var(--space-4); border: 1px solid var(--border); border-radius: var(--radius-card); }
+.wardrobe-share h2 { font-size: 1rem; }
+.wardrobe-share__link { display: flex; align-items: end; flex-wrap: wrap; gap: var(--space-2); margin-top: var(--space-3); }
+.wardrobe-share__link .input-field { flex: 1 1 16rem; min-width: 0; }

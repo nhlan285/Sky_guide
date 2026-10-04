@@ -12,7 +12,7 @@ not change completion status of unrelated product phases. See [current handoff](
 
 Completed scoped follow-up (2026-10-04): [item image sizing and source verification](ITEM_IMAGES_PRICE_SOURCES.md), merged as **PR #10**, `origin/main` **c0c0ee0**. Research prepares future reconciliation; it does not publish new catalog prices or complete all source coverage.
 
-Current checkpoint: **R1 — data/storage contracts IN PROGRESS**, [active task plan](DATA_FOUNDATION.md). R0 baseline `8b371de` is committed and pushed; R1 contracts and local sync checks are implemented, awaiting maintainer/provider review, not live DB completion. Independent P2-U01 local storage is DONE; P2-D03 schemas are DONE; P4-W09 local outfit persistence is DONE; P4-W10 share codec is next. The additive Phase 9 track is the next execution order; Phase 0–8 IDs and historical dependencies remain traceable. Living Sky / responsive atlas and Hub shell are production; K15 Item Lookup has ~1.808 records on `/items` and `/items/:id`. Wardrobe is an interactive self-created/fixture demo. R2 runtime routing and Item/Wardrobe CSS collision are fixed on main. These scoped results do not satisfy every Phase 7 release flow or K01–K12/full generic pipeline DoD.
+Current checkpoint: **R1 — data/storage contracts IN PROGRESS**, [active task plan](DATA_FOUNDATION.md). R0 baseline `8b371de` is committed and pushed; R1 contracts and local sync checks are implemented, awaiting maintainer/provider review, not live DB completion. Independent P2-U01 local storage is DONE; P2-D03 schemas are DONE; P4-W09 local outfit persistence is DONE; P4-W10 share codec is DONE. The additive Phase 9 track is the next execution order; Phase 0–8 IDs and historical dependencies remain traceable. Living Sky / responsive atlas and Hub shell are production; K15 Item Lookup has ~1.808 records on `/items` and `/items/:id`. Wardrobe is an interactive self-created/fixture demo. R2 runtime routing and Item/Wardrobe CSS collision are fixed on main. These scoped results do not satisfy every Phase 7 release flow or K01–K12/full generic pipeline DoD.
 
 Mỗi hàng là một task độc lập để copy: **ID + module + việc/đầu ra + nghiệm thu + phụ thuộc + độ phức tạp + gate**. Không có ước lượng thời gian. Task chưa có trạng thái nghiệm thu cụ thể vẫn là **chưa làm**; các hàng DONE ghi ngày và phạm vi bằng chứng. Không đánh dấu API, calibration, asset, UI hoặc deploy đã sẵn sàng chỉ vì có tài liệu.
 
@@ -217,7 +217,7 @@ Phụ thuộc phase là điều kiện nền; cột phụ thuộc bổ sung quan
 | P3-D01 | Data pipeline | **OPEN — evolved Q23:** TimeReference từ server/generated time của live API; K05 optional adapter | EventRule đã verify được resolve theo IANA timezone, không dựng lịch từ offset; K05 cần P1-D05 nếu dùng; lỗi giữ LKG/last-sync/stale | P2-D01, P9-H01; P1-D05 nếu bật K05 | Cao | DATA theo time source được chọn |
 | P3-D02 | Data pipeline | **OPEN:** countdown local bằng mốc EventOccurrence và elapsed time | Qua sleep/wake/background/DST; không poll backend mỗi giây; hết validity báo stale; prediction không như official | P3-D01, P3-H06, P9-V03 | Cao | DATA schedule đã verify |
 | P3-I01 | Infra | Nếu cần, thêm proxy time hẹp trên Vercel sau kiểm tra CORS | Chỉ host/endpoint allowlisted, cache/rate theo contract; không open proxy; nếu gọi trực tiếp được thì ghi không cần | P1-D05, P0-I04 | Trung bình | Q04 |
-| P3-W01 | Wardrobe | Thêm widget mở editor hoặc outfit local gần nhất | Không cần full asset; trước khi editor sẵn sàng có trạng thái demo rõ | P2-U01, P3-U02 | Thấp | — |
+| P3-W01 | Wardrobe | **DONE 2026-10-04** — Hub demo widget mở editor; P4-W09 khôi phục outfit local gần nhất | Không cần full asset; trước khi editor sẵn sàng có trạng thái demo rõ | P2-U01, P3-U02 | Thấp | — |
 
 ## Phase 4 — Wardrobe 2D placeholder đủ hành vi
 
@@ -240,7 +240,7 @@ Phụ thuộc phase là điều kiện nền; cột phụ thuộc bổ sung quan
 | P4-W07 | **DONE 2026-10-03** — Fabric/panel dye palette và reset | Chỉ path/region + mask khai báo đổi màu; thiếu mask giữ fill gốc, item unsupported có nhãn; reset region/item, behavioral tests | P4-W02, P4-W03 | Cao | — |
 | P4-W08 | Nối AssetRegistry với fallback theo từng layer | Thiếu file/quyền thì hình học placeholder có nhãn; không fetch URL tùy ý từ outfit link | P2-D11, P4-W02 | Trung bình | — |
 | P4-W09 | **DONE 2026-10-04** — Lưu/đổi tên/xóa demo outfit local và restore khi reload | Selection/dye/base size round-trip; quota lỗi vẫn giữ phiên hiện tại; xóa không ảnh hưởng outfit khác | P2-U01, P4-W07 | Trung bình | — |
-| P4-W10 | Viết codec outfit share versioned và copy/open link | Mở ở phiên trống khôi phục đúng; payload quá lớn/sai version/ID bị xử lý an toàn | P4-W09 | Cao | — |
+| P4-W10 | **DONE 2026-10-04** — Codec gzip/base64url versioned và copy/open link demo | Mở ở phiên trống khôi phục đúng; payload quá lớn/sai version/ID bị xử lý an toàn | P4-W09 | Cao | — |
 | P4-W11 | Thêm migration item alias/tombstone khi mở outfit cũ | Báo item thiếu, không thay bằng món khác âm thầm; phần hợp lệ vẫn mở | P2-D12, P4-W10 | Trung bình | — |
 | P4-W12 | Kiểm thử reducer/transform/rule/codec với chuỗi thao tác | Equip → đổi base size → override → tháo → dye → share → reload giữ đúng state; test không chỉ snapshot cấu trúc code | P4-W05–P4-W11 | Cao | — |
 

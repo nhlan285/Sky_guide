@@ -208,7 +208,7 @@ Ví dụ **công thức trừu tượng, không phải số liệu game**: một
 
 Full 3D/wardrobe: **pending legal confirmation**. Asset không đủ rights không được lọt public export; có thể dùng `geometric_placeholder` thay thế. Placeholder Wiki vẫn giữ pending và credit, không tự chuyển thành permission_confirmed.
 
-Implementation V1 (2026-10-03): [types/validators](../src/data/wardrobe/index.ts) dùng infrastructure P2-D01/P2-D02; màu trong phiên editor là hex RGB `#rrggbb`, label DyeRegion là LocalizedText. Legal status thiếu chỉ mặc định `pending_legal_confirmation`, không confirmed. [Package demo riêng](../src/features/wardrobe/demo/README.md) được task Wardrobe V1 cho phép deploy như nội dung demo tự tạo: giữ `fixture=true`, không nhập public catalog, không tái dùng fixture SVG Phase 0 và không thay gate export dữ liệu thật. State ghim package/config revision; OutfitSnapshot validator có sẵn nhưng chưa có persistence/share.
+Implementation V1 (2026-10-03): [types/validators](../src/data/wardrobe/index.ts) dùng infrastructure P2-D01/P2-D02; màu trong phiên editor là hex RGB `#rrggbb`, label DyeRegion là LocalizedText. Legal status thiếu chỉ mặc định `pending_legal_confirmation`, không confirmed. [Package demo riêng](../src/features/wardrobe/demo/README.md) được task Wardrobe V1 cho phép deploy như nội dung demo tự tạo: giữ `fixture=true`, không nhập public catalog, không tái dùng fixture SVG Phase 0 và không thay gate export dữ liệu thật. State ghim package/config revision; OutfitSnapshot validator được dùng bởi local library và versioned demo share (P4-W09/P4-W10, 2026-10-04). Public catalog migration vẫn chưa triển khai.
 
 ### Contract Q08 — configurable project / fixture behavior (2026-10-02)
 
@@ -248,3 +248,5 @@ Validator sau này phải kiểm tra FK, policy/capacity/duplicate equip, z-orde
 - Chặn full asset pending, draft leak, fixture và private evidence trong production manifest.
 - Migration có `fromVersion`, `toVersion`, alias mapping và báo cáo field mất; luôn giữ bản export cũ để rollback.
 - Dataset public có thể thiếu module; app hiển thị unavailable thay vì lỗi toàn trang. Kiểm thử hành vi cụ thể nằm trong [Plan](plan/IMPLEMENTATION_PLAN.md).
+
+Demo share implementation: xem [OUTFIT_SHARE](plan/OUTFIT_SHARE.md). Transport "#outfit=v1.<base64url-gzip>", payload allowlist selection + catalogVersion; tối đa 2048 ký tự fragment, 16 KiB UTF-8 sau giải nén, URL tổng tối đa 4096 ký tự. Không chứa local ID/name/savedAt, QR/profile hoặc asset URL. Mở link cần chọn áp dụng, không tự ghi thư viện. Khác revision báo không hỗ trợ; P4-W11 migration vẫn OPEN.
