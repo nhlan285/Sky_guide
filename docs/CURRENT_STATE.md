@@ -3,11 +3,11 @@
 ## Task / branch / checkpoint
 Autonomous master run: safe unblocked roadmap tasks, checkpoint/push;
 no merge/production deployment. Branch `codex/master-plan-execution`.
-Last verified pushed HEAD `7698d0e0c1dce2d6e5cf7aa086ca4598525f7028`.
-This PWA/Wardrobe QA milestone becomes next checkpoint; resolve SHA via `git log -1`
+Last verified pushed HEAD `c27308ae8a07dfc105b946fa24d602ac7f1c99af`.
+This lookup preference milestone becomes next checkpoint; resolve SHA via `git log -1`
 and verify remote branch before resuming. Started from7cea424.
 Master [IMPLEMENTATION_PLAN](plan/IMPLEMENTATION_PLAN.md); current completed slice
-[PWA_WARDROBE_QA](plan/PWA_WARDROBE_QA.md); source record
+[LOOKUP_PREFERENCES](plan/LOOKUP_PREFERENCES.md); source record
 [WIKI_SOURCE_VERIFICATION](plan/WIKI_SOURCE_VERIFICATION.md); R1
 [DATA_FOUNDATION](plan/DATA_FOUNDATION.md).
 
@@ -26,21 +26,22 @@ P1-D13 PARTIAL, P1-I01 scoped contract DONE; verification != integration.
 -c9609c9: independent K03 staged repeated visits; K04/reconciliation blocked403.
 -c44a40e: scoped outfit library backup/import/reset;264 tests/full checks PASS.
 -7698d0e: P6-R01/R02 Web Push/native research only; Q07 unchanged.
+-c27308a: PWA manifest/icon audit and scoped Wardrobe local UI QA.
 
 ## Current intentional changes
-P6-I01 existing manifest/name/start/scope/icon PNG dimensions audited; icon rights
-provenance and actual target install remain OPEN. P4-U01 PARTIAL local QA390/1366:
-override/remove/native size keyboard, dye/share/apply/save/reload, import preview/
-cancel/apply/invalid/reset PASS. Synthetic data only on unique localhost6194.
-No runtime/branding changes. Changed QA plan, backup/rule evidence, master/handoff.
+P3-U04 lookup preference slice: owned versioned bounded key, bare list restore,
+explicit URL precedence, user-event persistence only, scoped clear and visible
+storage/future/invalid status/retry. No market/spoiler state or unrelated key edits.
+Changed Items.tsx/copy, new preferences.ts/five behavior tests and plan/master/handoff.
 
 ## Validation / limitations
-Latest c44a40e264 full tests/lint/typecheck/catalog1808/build PASS retained; no
-repeat for docs-only QA. Native chooser/import and current demo responsive flow
-PASS. Actual download NOT VERIFIED: both in-app browser event approaches timed out,
-no console errors. Screenshots/fixtures untracked on E:/SkyGuideAssets/research/
-local-qa-2026-10-06. Broader theme/locale/reduced-motion/long-text/target devices
-NOT RUN; P4-U01/P7-U01 not fully closed. Router/large chunk warnings unchanged.
+269 full tests, full lint/typecheck, final build/catalog1808 PASS. Missing import
+lint issue fixed without disabling checks; final focused tests/Items lint PASS.
+Local query persistence/explicit URL/pagination/scoped clear/category/reload smoke
+PASS; width390/document375, no console errors. E: local QA screenshots remain
+untracked. Earlier outfit download still NOT VERIFIED (in-app event timeouts).
+Broader theme/locale/reduced-motion/long-text/target devices remain NOT RUN.
+P4-U01/P7-U01 not fully closed; Router/large chunk warnings unchanged.
 
 ## Blockers / decisions
 R1 maintainer schema/API/storage review pending; provider/quota approval required
@@ -62,9 +63,9 @@ Last exposed usage:50% short-window remaining and61% weekly remaining; account
 ordinary usage allowed. No context percentage exposed; goal remains active.
 
 ## Exact next action
-After verifying QA pushed checkpoint/clean tree, audit independent P3-U04 filter
-preferences using existing versioned storage and URL contracts. Do not invent
-market/spoiler active UI or close their missing data/owner gates. Local Vite preview
+After verifying filter preference pushed checkpoint/clean tree, audit P0-I04
+existing preview deployment evidence and rollback documentation. Do not create
+deployment or change production. No invented market/spoiler active UI. Local Vite preview
 session74189 at6194 is owned by this run; browser tab1/browser2, viewport reset.
 Close owned preview/tab after QA use; no unrelated sessions should be killed.
 R1 review question pending asynchronously; no answer means no approval. P6-U02

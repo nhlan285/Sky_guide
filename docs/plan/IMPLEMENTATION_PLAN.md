@@ -195,7 +195,7 @@ Phụ thuộc phase là điều kiện nền; cột phụ thuộc bổ sung quan
 | P3-U01 | **DONE 2026-10-02** — CSS tokens và primitive badge/button/input/section | [UI foundation](../../src/app/README.md): typography/spacing/surfaces/focus/status tokens, labeled controls và status chữ; contrast kiểm tra bằng mã, không thêm dependency; lint/typecheck/test (38/38)/build PASS | P0-U01, P0-U03 | Trung bình | — |
 | P3-U02 | **DONE 2026-10-02** — Header/navigation và responsive Hub shell | Desktop cột chính/phụ + news toàn hàng, mobile một cột theo DOM; Season/TS/news/lookup/Wardrobe và secondary compact, menu/focus/footer anchors; chưa dữ liệu/search/editor; MANUAL VISUAL CHECK REQUIRED, không browser automation | P3-U01 | Trung bình | — |
 | P3-U03 | **DONE 2026-10-02** — Shared loading/empty/error/unavailable/stale/offline UI | ContentState có nhãn/message và action callback tùy chọn khi thao tác thật đã có; Hub dùng unavailable kèm lý do, không retry/refresh hoặc cache giả; lint/typecheck/test/build PASS | P3-U01 | Thấp | — |
-| P3-U04 | Thêm local preferences cho filter/market/spoiler | Reload giữ lựa chọn; reset về default không mất outfit trừ khi người dùng chọn xóa | P2-U01, P0-H01 | Trung bình | — |
+| P3-U04 | **PARTIAL 2026-10-06 — lookup filters DONE:** [plan](LOOKUP_PREFERENCES.md) | Bare list restores validated device choices; explicit URLs win; scoped clear/retry/future/quota tests,269 full checks and local smoke PASS. Market/spoiler consumers remain gated by their modules/data | P2-U01, P0-H01 | Trung bình | Market/spoiler modules/data |
 
 ### Hub
 

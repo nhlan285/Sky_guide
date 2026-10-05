@@ -1,5 +1,5 @@
-import { useEffect, useMemo, useRef } from 'react'
-import { Link, useParams, useSearchParams } from 'react-router-dom'
+import { useEffect, useMemo, useRef, useState } from 'react'
+import { Link, useLocation, useParams, useSearchParams } from 'react-router-dom'
 import type { AcquisitionOption } from '../../data/catalog/index.ts'
 import { catalogResult } from '../../data/itemLookup/catalog.ts'
 import { activeFilterValues, clearFilterParams, contextualLookupUrl, costRepresentation, filterEntries, filtersFromParams, lookupById, updateFilterParams } from '../../data/itemLookup/model.ts'
@@ -16,6 +16,7 @@ import { ItemAssetCredits } from './ItemAssetCredits.tsx'
 import { imageSources } from '../../data/itemLookup/media.ts'
 import { wardrobeItemUrl } from '../wardrobe/navigation'
 import { wardrobeCopy } from '../wardrobe/copy'
+import { createLookupPreferenceStorage, effectiveLookupParams, initialLookupParams, lookupPreferencesFromParams } from './preferences'
 
 const catalog = catalogResult.valid ? catalogResult.value : null
 const seasonNames = new Map(catalog?.seasons.map(s => [s.id, s.name.default]))
@@ -112,7 +113,11 @@ function ItemDetail({ entry, search }: { entry: LookupEntry; search: string }) {
 
 export function Items() {
   const { id } = useParams()
-  const [params, setParams] = useSearchParams()
+  const location = useLocation()
+  const [preferenceStorage] = useState(() => createLookupPreferenceStorage(options, () => localStorage))
+  const [preferences, setPreferences] = useState(() => preferenceStorage.read())
+  const [defaultParams, setParams] = useSearchParams(initialLookupParams(location.search, id, preferences.value))
+  const params = effectiveLookupParams(location.search, id, defaultParams)
   const { locale } = useLocale()
   const copy = itemCopy[locale]
   const wiki = useWikiCatalogue()
@@ -125,14 +130,18 @@ export function Items() {
   const resultsRef = useRef<HTMLDivElement>(null)
   const heading = useRef<HTMLDivElement>(null)
   useEffect(() => { heading.current?.querySelector<HTMLElement>('#page-title')?.focus({ preventScroll: true }) }, [id])
-  const changeFilter = (key: Parameters<typeof updateFilterParams>[1], value: string) => setParams(previous => updateFilterParams(previous, key, value), { replace: true })
-  const clear = () => setParams(previous => clearFilterParams(previous))
+  const changeFilter = (key: Parameters<typeof updateFilterParams>[1], value: string) => {
+    const next = updateFilterParams(params, key, value)
+    setPreferences(preferenceStorage.write(lookupPreferencesFromParams(next)))
+    setParams(next, { replace: true })
+  }
+  const clear = () => { setPreferences(preferenceStorage.reset()); setParams(clearFilterParams(params)) }
   const active = activeFilterValues(params)
   const filterLabel = (key: FilterKey) => key === 'q' ? copy.search : copy[key]
   const filterValue = (key: FilterKey, value: string) => key === 'season' ? seasonNames.get(value) ?? value : key === 'spirit' ? spiritNames.get(value) ?? value : key === 'category' ? copy.categories[value as keyof typeof copy.categories] ?? value : key === 'slot' ? copy.slots[value] ?? value : key === 'acquisition' ? copy.acquisitions[value as keyof typeof copy.acquisitions] ?? value : value
   const select = (key: Parameters<typeof updateFilterParams>[1], label: string, values: readonly string[], name: (value: string) => string) => values.length ? <div className="input-field" key={key}><label htmlFor={`filter-${key}`}>{label}</label><select id={`filter-${key}`} value={params.get(key) ?? ''} onChange={event => changeFilter(key, event.target.value)}><option value="">{copy.all}</option>{values.map(value => <option value={value} key={value}>{name(value)}</option>)}</select></div> : null
   const goToPage = (nextPage: number) => {
-    setParams(previous => { const next = new URLSearchParams(previous); next.set('page', String(nextPage)); return next })
+    const next = new URLSearchParams(params); next.set('page', String(nextPage)); setParams(next)
     resultsRef.current?.focus({ preventScroll: true })
     resultsRef.current?.scrollIntoView({ block: 'start' })
   }
@@ -146,7 +155,11 @@ export function Items() {
     {wiki.failed ? <p role="status">{copy.mediaUnavailable} <button type="button" className="button button--quiet" onClick={wiki.retry}>{copy.retry}</button></p> : null}
     <div className="items-search"><TextInput id="catalogue-query" label={copy.search} type="search" placeholder={copy.placeholder} value={query} onChange={event => changeFilter('q', event.target.value)} /><Button className="button--quiet" onClick={clear}>{copy.clear}</Button></div>
     {active.length ? <section className="active-filters" aria-label={copy.activeFilters}><p>{copy.activeFilters}</p><ul>{active.map(({ key, value }) => <li key={key}><span>{filterLabel(key)}: <strong>{filterValue(key, value)}</strong></span><button type="button" aria-label={`${copy.removeFilter} ${filterLabel(key)}: ${filterValue(key, value)}`} onClick={() => changeFilter(key, '')}>×</button></li>)}</ul></section> : null}
-    <details className="catalogue-filters"><summary>{copy.filters} <span>{[category, slot, season, spirit, acquisition].filter(Boolean).length || ''}</span></summary><div className="catalogue-filters__grid">
+    {preferences.issue ? <p role="status">{preferences.issue === 'future_version' ? copy.preferenceFuture : preferences.issue === 'invalid_value' ? copy.preferenceInvalid : copy.preferenceMemory}</p> : null}
+      {preferences.issue && preferences.issue !== 'future_version' && preferences.issue !== 'invalid_value' ? <Button className="button--quiet" onClick={() => setPreferences(preferenceStorage.retry())}>{copy.preferenceRetry}</Button> : null}
+    <details className="catalogue-filters"><summary>{copy.filters} <span>{[category, slot, season, spirit, acquisition].filter(Boolean).length || ''}</span></summary>
+      {!preferences.issue ? <p>{copy.preferenceNote}</p> : null}
+      <div className="catalogue-filters__grid">
       {select('category', copy.category, [...new Set(wiki.entries.map(e => e.category))].sort(), value => copy.categories[value as keyof typeof copy.categories])}
       {select('slot', copy.slot, options.slots, value => copy.slots[value])}
       {select('season', copy.season, options.seasons, value => seasonNames.get(value) ?? value)}

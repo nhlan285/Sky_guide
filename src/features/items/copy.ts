@@ -7,12 +7,17 @@ interface ItemCopy {
   identity: string; origin: string; dataQuality: string; sources: string; upstreamId: string; identifier: string; revision: string; snapshot: string; imported: string; credit: string; license: string; caveat: string; imageNote: string
   creditsTitle: string; upstreamSource: string; technicalMetadata: string; categoryPlaceholder: string; imageCredit: string
   activeFilters: string; removeFilter: string; previews: string; wornPreview: string; referenceOnly: string; referenceImage: string
+  preferenceNote: string; preferenceMemory: string; preferenceFuture: string; preferenceInvalid: string; preferenceRetry: string
   imageUnavailable: string; mediaUnavailable: string; retry: string; alternateView: string; mediaPermission: string
   offers: string; noOffers: string; pass: string; bundle: string; money: string; priceNote: string; qualityNote: string; unavailable: string; browse: string; total: string
   categories: Record<Category, string>; acquisitions: Record<Acquisition, string>; slots: Record<string, string>; currencies: Record<string, string>
 }
 export const itemCopy: Record<Locale, ItemCopy> = {
   vi: {
+    preferenceNote: 'Bộ lọc được lưu trên thiết bị. Liên kết có tham số dùng bộ lọc trong liên kết; Xóa bộ lọc cũng xóa lựa chọn đã lưu.',
+    preferenceMemory: 'Bộ lọc hiện tại vẫn dùng được nhưng chưa lưu trên thiết bị. Thử lại hoặc xóa bộ lọc để về mặc định.',
+    preferenceInvalid: 'Bộ lọc này chưa thể lưu. Rút ngắn nội dung tìm kiếm hoặc chọn bộ lọc hiện có; lựa chọn đã lưu vẫn được giữ lại.',
+    preferenceFuture: 'Lựa chọn đã lưu dùng phiên bản mới hơn và chưa bị ghi đè. Xóa bộ lọc sẽ đặt riêng lựa chọn này về mặc định.', preferenceRetry: 'Thử lưu bộ lọc lại',
     imageUnavailable: 'Chưa có hình ảnh', mediaUnavailable: 'Chưa tải được dữ liệu ảnh.', retry: 'Thử lại', alternateView: 'Góc nhìn khác', mediaPermission: 'Ảnh công khai từ Sky Wiki; thông tin quyền sử dụng riêng của ảnh chưa được xác minh.',
     title: 'Tra cứu vật phẩm', subtitle: 'Tìm một cái tên, khám phá mùa và spirit phía sau. Danh mục được chuẩn hóa cho Sky Guide.',
     search: 'Tìm trong danh mục', placeholder: 'Tên tiếng Anh hoặc ID nguồn…', filters: 'Bộ lọc', category: 'Loại vật phẩm', slot: 'Slot đã xác minh', season: 'Mùa', spirit: 'Spirit', acquisition: 'Cách nhận', all: 'Tất cả', clear: 'Xóa bộ lọc',
@@ -31,6 +36,10 @@ export const itemCopy: Record<Locale, ItemCopy> = {
     currencies: { candles: 'Nến', hearts: 'Tim', ascendedCandles: 'Nến thăng hoa', seasonalCandles: 'Nến mùa', seasonalHearts: 'Tim mùa', eventTickets: 'Vé sự kiện' },
   },
   en: {
+    preferenceNote: 'Filters are saved on this device. Links with query parameters use their own filters; Clear filters also resets saved choices.',
+    preferenceMemory: 'Current filters still work but could not be saved on this device. Retry or clear filters to use defaults.',
+    preferenceInvalid: 'These filters cannot be saved. Shorten the search or choose available filters; saved choices are preserved.',
+    preferenceFuture: 'Saved choices use a newer version and have not been overwritten. Clear filters resets only these choices.', preferenceRetry: 'Retry saving filters',
     imageUnavailable: 'Image unavailable', mediaUnavailable: 'Image data could not be loaded.', retry: 'Try again', alternateView: 'Alternate view', mediaPermission: 'Public images from Sky Wiki; individual image reuse permissions have not been verified.',
     title: 'Item lookup', subtitle: 'Find a name. Discover its season and spirit. A catalogue normalized for Sky Guide.', search: 'Search the catalogue', placeholder: 'English name or source ID…', filters: 'Filters', category: 'Category', slot: 'Verified slot', season: 'Season', spirit: 'Spirit', acquisition: 'Acquisition', all: 'All', clear: 'Clear filters',
     results: 'results', empty: 'No matching items', emptyHint: 'Try an English name, source ID or fewer filters.', previous: 'Previous', next: 'Next', page: 'Page', open: 'View details', back: 'Back to catalogue', notFound: 'Item not found', unknown: 'Not verified', unknownCost: 'Cost not verified', free: 'Free',
