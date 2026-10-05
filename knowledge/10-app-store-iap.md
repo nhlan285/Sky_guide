@@ -12,6 +12,12 @@ listing không phải storefront VN. User chọn USD/VND, iOS/Android độc l�
 
 ## Hồ sơ scaffold gốc (trạng thái lịch sử)
 
+P1-D10 nghiệm thu source coverage2026-10-06: tái dùng mẫu đã verify2026-10-04,
+không gọi giá này mới/current. [Capability evidence](evidence/k10-k12-price-capability-2026-10-06.json)
+giữ iOS/US/USD, app ID, label/amount và thiếu storeProductId/contents. VN404 chỉ
+là retrieval result, chưa có VND; không suy từ US hay ngôn ngữ Việt. Source task
+DONE về listing/market/coverage, full-SKU mapping và price importer còn DATA-gated.
+
 - **Nguồn/link:** App Store listing chính thức của Sky. Brief chưa có app ID, storefront hoặc URL listing.
 - **Dữ liệu:** giá IAP công khai; sản phẩm, thị trường, tiền tệ và thời điểm quan sát phải được ghi riêng.
 - **Format:** listing web/store chưa khảo sát; brief không nêu API hoặc bảo đảm mọi SKU đều hiện trên listing.

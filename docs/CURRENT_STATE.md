@@ -3,9 +3,9 @@
 ## Task / branch / checkpoint
 Autonomous approved master roadmap: continue safe unblocked tasks, no merge/deploy.
 Branch `codex/master-plan-execution`. Verified pushed implementation HEAD:
-`12087cdcd76fe2781755ae08f03a73e160845fd2`. This handoff is the next checkpoint
+`4003ca0bf2a1e9d633372946e14b4fde342896b3`. This handoff is the next checkpoint
 commit; identify its SHA with `git log -1` and verify the remote branch before resuming.
-Session resumed from7cea424; P1-D02/D03/D05–D09 source samples completed.
+Session resumed from7cea424; P1-D02/D03/D05–D12 source/capability reviews completed.
 Master [IMPLEMENTATION_PLAN](plan/IMPLEMENTATION_PLAN.md); R1 review plan
 [DATA_FOUNDATION](plan/DATA_FOUNDATION.md); active slice
 [WIKI_SOURCE_VERIFICATION](plan/WIKI_SOURCE_VERIFICATION.md).
@@ -31,12 +31,14 @@ K04 directory111722 confirms ln.cookie OneDrive embed, GET403; actual columns/
 export unavailable. K05 observed /skytime GET200/JSON: epoch milliseconds,
 America/Los_Angeles fields match, HTTP ACAO*. Notice discourages repeat calls;
 numeric quota/TTL/license unknown, no schedule fields verified.
-K04/K05 pushedf278c8c; K06/K07 pushed12087cd. K08 AppUnwrapper2019 Eden review
-and K09 Wiki-linked playlist/original video metadata done. Obsolete glitch and
-unknown map artist/current gameplay noted; footage/timestamps unseen, no steps
-invented. Raw K09 at E:/SkyGuideAssets/research/k09-2026-10-06. Intentional files:
-K08/K09 profiles/evidence, master rows, handoff/plan; no runtime/public data,
-binary/frame download, schema changes or rights approval.
+K04/K05 pushedf278c8c; K06/K07 pushed12087cd; K08/K09 pushed4003ca0.
+Current K10/K11 acceptance reuses2026-10-04 evidence without fresh price claim.
+K12 actual Sky Apple/Google pages checked: iOS10 rows/one2026-03-29 snapshot,
+Android SKU prices absent; SKU/market/currency/contents unknown. Terms permit
+research/backlink, prohibit systematic scrape/bulk/competing redistribution.
+Raw K12 at E:/SkyGuideAssets/research/k12-2026-10-06. Intentional files: K10–K12
+profiles/evidence, master rows, handoff/plan; no runtime/public price import,
+binary download, schema change or automated provider integration.
 No upstream Lua was executed, no assets downloaded or rights inferred.
 
 ## Validation
@@ -54,6 +56,7 @@ K06 manual source heading/date/platform/link PASS; K07 three envelopes/hash/map
 revision/location/rights assertions PASS. JSON parse/scaffold/diff checked before commit.
 K08 article title/date/correction reviewed; K09 Wiki ID/oEmbed hash/title/channel
 and unseen-footage limits PASS. JSON/scaffold/diff checked before checkpoint.
+K10–K12 four content hashes + historical platform/market/missing-field guards PASS.
 Existing build warnings: React Router directives and large catalog chunk.
 Old dev-server handle1951 is no longer available after session recovery; server
 liveness is unverified. Start a fresh server only when later UI verification needs it.
@@ -76,8 +79,8 @@ recorded honestly, not claimed as a successful pre-compaction drill.
 No manual compaction tool exists; never run `/compact` as a shell command.
 
 ## Exact next action
-After verifying pushed milestone, continue P1-D10/D11 acceptance review using
-existing2026-10-04 store evidence, retaining sample date and unknown SKU/contents/
-market details; no claim those historical prices are newly checked. Then P1-D12
-AppPricingLab public Sky/export capability, no login/paid account/guessed API.
+After verifying pushed milestone, P1-D13 per-source mapping from existing
+profiles/evidence; K04 actual columns remain BLOCKED, do not close its mapping.
+Then independent P2-D06 reviewed spirit-tree input/unique-path calculator under
+existing schemas; no provider provisioning, public data mutation or DB sink.
 R1 gates unchanged; research does not approve public import/assets.

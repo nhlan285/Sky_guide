@@ -149,3 +149,24 @@ not verified, no invented route or binary/frame download. Metadata evidence
 manual link/date/credit comparison and JSON/hash checks before checkpoint.
 Exact next: P1-D10/D11 reuse2026-10-04 listing evidence, verify acceptance coverage
 and unresolved market/SKU facts; P1-D12 AppPricingLab actual Sky/export contract.
+
+## Current slices — P1-D10–D12 source capability review (2026-10-06)
+MEDIUM source coverage/market review. P0-H01 dependencies satisfied in master.
+K10/K11: reuse dated2026-10-04 verified listing evidence, never relabel old prices
+as live/current; acceptance allows SKU unknown, records missing contents/coverage.
+K12: inspect actual public Sky record/search/terms/export capability; no payment,
+login/guessed API. Outcome may be explicit unavailable/manual limit, not a fake
+IAP adapter. Profiles/evidence/master/handoff only, no numeric catalog prices.
+Next: confirm historical evidence market/platform distinctions and public search.
+
+### K10–K12 completion — 2026-10-06
+K10/K11 existing2026-10-04 evidence satisfies listing/market/coverage acceptance;
+dated labels retained, no fresh-current claim or fabricated SKU/contents/VND.
+K12 observed search form→actual Apple/Google Sky pages and iOS IAP page;10 rows,
+one old2026-03-29 snapshot, Android price/SKU/market missing. Actual terms permit
+research/backlink and prohibit systematic scrape/bulk/competing redistribution.
+Conclusion manual partial/stale source; no verified SKU API/CSV, badge not feed.
+Four K12 content hashes + historical platform/market/unknown guards PASS.
+Exact next: P1-D13 per-source field map, keeping K04 missing columns BLOCKED;
+then independent P2-D06 reviewed spirit-tree input/path calculator, no provider
+provisioning or runtime catalog switch. Generic pipeline/API sink still R1-gated.

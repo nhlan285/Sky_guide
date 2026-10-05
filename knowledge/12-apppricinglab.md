@@ -6,6 +6,24 @@ Home đọc được và giới thiệu theo dõi IAP Apple/Google. Chưa xác m
 API/export, coverage SKU/market hay lịch sử truy xuất được. Giữ candidate, chưa
 thiết kế adapter theo lời giới thiệu. [Nguồn đối chiếu mới/evidence](16-image-price-sources.md).
 
+## P1-D12 capability review — 2026-10-06
+Form public thực dùng GET `/search`, input `q`; tìm Sky trả link
+[iOS record](https://apppricinglab.com/app/apple/1462117269) và
+[Android record](https://apppricinglab.com/app/google_play/com.tgc.sky.android).
+[IAP page](https://apppricinglab.com/iap/apple/1462117269) có10 mục iOS nhưng
+checked2026-03-29 và chỉ một crawl snapshot; không suy dữ liệu Sky mới từ ngày
+update homepage. Android không thấy giá từng SKU. $ giữ raw, chưa khẳng định
+market/currencyCode, không có storeProductId/contents. Regular Candles lặp nhãn
+không được tự ghép SKU. [Evidence](evidence/k10-k12-price-capability-2026-10-06.json)
+giữ retrieval/hash/field missing và sample giới hạn.
+
+[Terms2026-03-25](https://apppricinglab.com/terms) cho tham khảo research/link với
+backlink rõ tới page gốc, cấm scrape/bulk download/redistribute competing dataset.
+Không thấy API SKU/export trong các page đã kiểm tra; stats badge không phải
+price feed. Kết luận manual partial source, P1-D12 DONE về capability review;
+không có importer tự động hoặc promise free full history. Risk text scaffold
+giữ nguyên nhưng điều kiện thực tế này chi phối cách dùng.
+
 ## Hồ sơ scaffold gốc (trạng thái lịch sử)
 
 - **Nguồn/link:** [apppricinglab.com](https://apppricinglab.com), domain có trong brief; chưa có trang Sky hoặc API.

@@ -11,6 +11,12 @@ Không lấy giá iOS làm giá Android. [Evidence/mapping](16-image-price-sourc
 
 ## Hồ sơ scaffold gốc (trạng thái lịch sử)
 
+P1-D11 nghiệm thu source coverage2026-10-06: tái dùng HTTP200 US/VN HTML ngày
+2026-10-04, không phát sinh giá SKU. [Capability evidence](evidence/k10-k12-price-capability-2026-10-06.json)
+ghi app package, request gl/hl tách checkout market; iapSkuPrices=null. App free
+không nghĩa IAP free; không dùng range hoặc giá iOS để ghép item Android. Source
+task DONE về listing và missing coverage, không phải per-SKU integration.
+
 - **Nguồn/link:** Google Play listing chính thức của Sky; brief chưa có package ID, vùng hoặc URL.
 - **Dữ liệu:** giá IAP công khai theo Android/storefront; khoảng giá tổng quát không đủ để suy ra giá mỗi SKU.
 - **Format:** listing web/store chưa khảo sát; không có API đã nêu trong brief.

@@ -103,9 +103,9 @@ Phụ thuộc phase là điều kiện nền; cột phụ thuộc bổ sung quan
 | P1-D07 | **DONE 2026-10-06** — K07 source/text +2 map metadata samples | Page/file/image revisions/dimensions; Ray credit/Self vs Fairuse tách; coordinates unknown, không tải binary; coverage/import chưa làm | P0-D02 | Trung bình | DATA K07, RIGHTS vẫn giữ |
 | P1-D08 | **DONE 2026-10-06** — AppUnwrapper2019 Eden guide source review | Link/date/scope; glitch obsolete, map creator unknown/current mechanics unverified; không copy walkthrough | P0-D02 | Thấp | DATA K08 cho route QA |
 | P1-D09 | **DONE 2026-10-06** — Wiki TS playlist + Eden original video metadata | Wiki revision/link/credit và oEmbed creator verified; footage/timestamps/coverage chưa xem, không tải media | P0-D02 | Thấp | DATA K09 cho route QA |
-| P1-D10 | Xác minh listing App Store, market và coverage IAP K10 | Phân biệt giá item/SKU với range; ghi missing package contents | P0-H01 | Trung bình | DATA K10 |
-| P1-D11 | Xác minh listing Google Play, market và coverage IAP K11 | Không suy giá từ iOS; có SKU hoặc ghi unknown, không dựng package ID | P0-H01 | Trung bình | DATA K11 |
-| P1-D12 | Xác minh AppPricingLab hỗ trợ gì cho Sky/IAP/market K12 | Có kết luận API/export/manual/không khả dụng kèm chứng cứ; không giả dữ liệu app price là IAP price | P0-H01 | Trung bình | DATA K12 |
+| P1-D10 | **DONE 2026-10-06** — K10 dated listing/market/coverage acceptance | Reuse verified2026-10-04 iOS US/USD samples; SKU/contents/VND unknown, không gọi current price | P0-H01 | Trung bình | DATA K10 cho SKU import |
+| P1-D11 | **DONE 2026-10-06** — K11 dated package/listing coverage acceptance | Reuse2026-10-04 US/VN HTTP200; per-SKU price unknown, app/range/iOS không thay Android IAP | P0-H01 | Trung bình | DATA K11 cho SKU import |
+| P1-D12 | **DONE 2026-10-06** — K12 actual Sky records/manual capability | iOS10 items/one2026-03-29 snapshot; Android price absent, SKU/market/contents unknown; terms cấm bulk, API/export chưa verify | P0-H01 | Trung bình | DATA K12 cho import |
 | P1-D13 | Ghi mapping field upstream → schema nội bộ từng nguồn đã xác minh | Mỗi field chỉ rõ transformed/raw/unknown và provenance; không đổi risk text | P1-D01–P1-D12 theo nguồn | Trung bình | DATA theo nguồn |
 
 ### Wardrobe
