@@ -3,11 +3,11 @@
 ## Task / branch / checkpoint
 Autonomous master run: safe unblocked roadmap tasks, checkpoint/push;
 no merge/production deployment. Branch `codex/master-plan-execution`.
-Last verified pushed HEAD `c9609c9ff67c81fcaed1f09e78f55b7cb8332668`.
-This P6-U03 outfit backup milestone becomes next checkpoint; resolve SHA via `git log -1`
+Last verified pushed HEAD `c44a40eea4f7a0c82f6ef19230cc248863e37816`.
+This P6-R01/R02 research milestone becomes next checkpoint; resolve SHA via `git log -1`
 and verify remote branch before resuming. Started from7cea424.
 Master [IMPLEMENTATION_PLAN](plan/IMPLEMENTATION_PLAN.md); current completed slice
-[OUTFIT_BACKUP](plan/OUTFIT_BACKUP.md); source record
+[WEB_PUSH_NATIVE_RESEARCH](plan/WEB_PUSH_NATIVE_RESEARCH.md); source record
 [WIKI_SOURCE_VERIFICATION](plan/WIKI_SOURCE_VERIFICATION.md); R1
 [DATA_FOUNDATION](plan/DATA_FOUNDATION.md).
 
@@ -24,23 +24,20 @@ P1-D13 PARTIAL, P1-I01 scoped contract DONE; verification != integration.
 -08a80f1: P2-D05 staged Wiki items; source100805 duplicates quarantine correctly.
 -548db41: P4-W04–W06 visible fictional scale rule + exact demo r1/r2 continuity.
 -c9609c9: independent K03 staged repeated visits; K04/reconciliation blocked403.
+-c44a40e: scoped outfit library backup/import/reset;264 tests/full checks PASS.
 
 ## Current intentional changes
-P6-U03 scoped outfit library backup/import/reset DONE. Bounded UTF-8 JSON with
-fixed format/version/package; validation/projected fields before explicit library
-replacement; exact demo r1 compatibility. Download link, file preview count,
-apply/cancel and reset-confirm/cancel; library operations preserve editor draft,
-other local keys and future-version/raw storage protection. No QR/secrets dump.
-Changed areas: backup.ts, OutfitBackup.tsx, SavedOutfits/copy, scoped CSS,
-six behavior tests, demoREADME/OUTFIT_LOCAL continuity note, plan/master/handoff.
-No provider, browser CLI installation, dependency or public catalog changes.
+P6-R01/R02 research deliverables DONE; no Web Push/native implementation. Primary
+MDN Push/Notifications and WebKit Home Screen platform docs checked2026-10-06.
+Private subscription/sender/retention/consent/cost boundaries and native proposal
+criteria documented. Q07 foreground-only V1 unchanged; no services created.
+Changed files: WEB_PUSH_NATIVE_RESEARCH plan, Architecture pointer, master/handoff.
 
 ## Validation / limitations
-Six new focused/264 full tests PASS. Lint/typecheck/catalog1808/final build PASS
-after file input CSS bound. Tests cover projection/no secrets, r1 roundtrip,
-invalid/future IDs/version/revisions, UTF-8 size, no preview writes, quota/future
-protection, scoped reset. React skill review complete. Browser/native file picker/
-download/responsive QA NOT RUN. Existing Router/large chunk warnings unchanged.
+Research diff/scaffold65 Markdown/173 unique tasks PASS. No extra runtime tests
+for docs-only slice. Latest c44a40e264 full tests/lint/typecheck/catalog1808/build
+PASS after file input CSS bound. Browser/native file-picker/download/responsive
+QA NOT RUN. Existing Router/large chunk warnings unchanged.
 
 ## Blockers / decisions
 R1 maintainer schema/API/storage review pending; provider/quota approval required
@@ -62,10 +59,11 @@ Last exposed usage:50% short-window remaining and61% weekly remaining; account
 ordinary usage allowed. No context percentage exposed; goal remains active.
 
 ## Exact next action
-After verifying backup pushed checkpoint/clean tree, complete P6-R01/R02 scoped
-Web Push/native research from primary docs: subscription/server/privacy/cost and
-retention boundaries; no actual push service or native project. P6-U02 visible
-active settings still needs verified schedule (UX contract forbids fake working
-toggle); P2-D08/P2-D09/central dependencies remain gated. K04 needs real export.
-Then audit next safe task by dependency, preserving all external gates;
+After verifying research pushed checkpoint/clean tree, audit P6-I01 existing
+public/manifest.webmanifest and icon provenance/install capability. index.html
+already links manifest/icons; do not create duplicates. Actual browser/install
+test and self-created icon evidence must be verified before full DoD claim.
+R1 review question pending asynchronously; no answer means no approval. P6-U02
+active settings still schedule-gated; central and K04/rights gates preserved.
+Then audit next safe task by dependency;
 never mark roadmap DONE just because a checkpoint survived.

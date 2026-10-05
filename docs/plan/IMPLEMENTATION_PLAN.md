@@ -330,8 +330,8 @@ Phụ thuộc phase là điều kiện nền; cột phụ thuộc bổ sung quan
 
 | ID | Module | Việc / đầu ra cụ thể | Nghiệm thu | Phụ thuộc | Độ phức tạp | Gate |
 |---|---|---|---|---|---|---|
-| P6-R01 | Infra | Viết đánh giá Web Push nền: subscription, sender, chi phí, retention, quyền | Chỉ tài liệu; chỉ rõ lưu server subscription khác yêu cầu local; chưa triển khai nếu chưa thay scope | P0-U02 | Trung bình | — |
-| P6-R02 | UX | Ghi tiêu chí nghiên cứu native về sau | Không tạo native project hoặc đưa vào đường găng; chỉ ghi nhu cầu chưa đáp ứng bằng web | P6-R01 | Thấp | — |
+| P6-R01 | Infra | **DONE 2026-10-06 — research only:** [Web Push assessment](WEB_PUSH_NATIVE_RESEARCH.md) | Primary MDN/WebKit evidence, private subscription/sender/retention/consent/cost boundaries; no service or $0 quota claim; Q07 foreground V1 unchanged | P0-U02 | Trung bình | Scope/provider/quota approval before implementation |
+| P6-R02 | UX | **DONE 2026-10-06 — future native criteria** in same research | Measured web capability gaps/install/offline/audio/accessibility, scope/budget/maintenance and shared ID/API conditions; no native project/stack selected | P6-R01 | Thấp | Separate approved project scope |
 
 ## Phase 7 — kiểm chứng, public release và bàn giao vận hành
 

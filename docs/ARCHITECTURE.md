@@ -199,6 +199,8 @@ Prediction/calculated không như official; DST/override/source-failure tests �
 
 ## PWA và notification
 
+Research-only [P6-R01/R02 assessment](plan/WEB_PUSH_NATIVE_RESEARCH.md) distinguishes private Web Push subscription/sender infrastructure from local foreground V1 and defines criteria for a future native proposal. No push service or native project is implemented or authorized by that assessment.
+
 Phân biệt hai mức đề xuất để không xung đột yêu cầu toàn bộ trạng thái local:
 
 1. **Mức đầu:** in-app reminder và notification do người dùng bật khi app đang hoạt động, dùng mốc nguồn đã kiểm chứng. Capability detection, xin quyền qua thao tác trực tiếp, xử lý denied/unsupported. Không hứa hẹn báo đúng lúc khi app đóng hoặc tab bị ngủ.
