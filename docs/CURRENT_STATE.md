@@ -3,11 +3,11 @@
 ## Task / branch / checkpoint
 Autonomous master run: safe unblocked roadmap tasks, checkpoint/push;
 no merge/production deployment. Branch `codex/master-plan-execution`.
-Last verified pushed HEAD `c53a11153f639af666d9245ca4923fd955377b38`.
-This remaining-gates handoff becomes next checkpoint; resolve SHA via `git log -1`
+Last verified pushed HEAD `55382434c877e2d6004cccf09fcdfb394bc44ec0`.
+This attribution handoff becomes next checkpoint; resolve SHA via `git log -1`
 and verify remote branch before resuming. Started from7cea424.
 Master [IMPLEMENTATION_PLAN](plan/IMPLEMENTATION_PLAN.md); current completed slice
-[MANUAL_OFFICIAL_NEWS](plan/MANUAL_OFFICIAL_NEWS.md); source record
+[ATTRIBUTION_TEMPLATE_REVIEW](plan/ATTRIBUTION_TEMPLATE_REVIEW.md); source record
 [WIKI_SOURCE_VERIFICATION](plan/WIKI_SOURCE_VERIFICATION.md); R1
 [DATA_FOUNDATION](plan/DATA_FOUNDATION.md).
 
@@ -33,14 +33,20 @@ reconciled, P3-I01 no proxy currently required from K05 sample.
 -e40d48c: disclosure contrast fix + local theme/locale/80-char/320px QA.
 -c53a111: manual official-news draft file contract;274 full checks/pinned K06
 fixture-only dry-run PASS, no publication.
+-5538243: remaining dependency-gates handoff. Next docs slice: P1-U01 reusable
+text/sheet/route/asset attribution drafts; Q12 and media rights remain pending.
 
 ## Current intentional changes
-No runtime changes after c53a111. Reviewed remaining master tasks by dependencies;
-full roadmap is OPEN. Contract/local fixture work does not satisfy live canonical,
-editorial approval, full-source coverage or target-device DoD. This handoff is the
-only current intentional change; do not start a new architecture from assumptions.
+No runtime changes after c53a111. Current docs-only changes: attribution templates,
+focused review plan, master P1-U01 PARTIAL row and this handoff. SourceRecord/public
+privacy boundaries and existing K15 credit/notice preserved. Cached Wiki siteinfo
+declares CC-BY-SA without a version; no new license approval or asset permission.
+Full roadmap is OPEN. Contract/local fixture work does not satisfy live canonical,
+editorial approval, full-source coverage or target-device DoD.
 
 ## Validation / limitations
+Attribution docs scaffold/link checks PASS:71 Markdown files/14 source profiles/
+173 unique tasks; diff check PASS. Runtime suite not rerun for docs-only changes.
 274 full tests, full lint/typecheck/catalog1808/build PASS. Pure validator dry-run
 PASS with one fixture draft; no browser needed. Initial lint issues fixed, checks
 not disabled. Earlier local query/wardrobe/theme/locale/80-char/320px smoke PASS;
@@ -70,7 +76,9 @@ Last exposed usage:15% short-window remaining and55% weekly remaining; account
 ordinary usage allowed. No context percentage exposed; goal remains active.
 
 ## Exact next action
-Verify this pushed handoff/clean branch, then resolve the pending R1 review before
+Verify this pushed attribution checkpoint/clean branch, then resolve Q12 using
+applicable source/license evidence before finalizing or publishing credits.
+Templates alone do not grant rights. Resolve the pending R1 review before
 provider selection/quota audit or live foundation work. Concrete review artifacts:
 DATA_FOUNDATION, docs/architecture/data-foundation.md, src/data/domain contracts
 and domain tests. The asynchronous review question has no answer; no approval.

@@ -137,7 +137,7 @@ Phụ thuộc phase là điều kiện nền; cột phụ thuộc bổ sung quan
 
 | ID | Việc / đầu ra cụ thể | Nghiệm thu | Phụ thuộc | Độ phức tạp | Gate |
 |---|---|---|---|---|---|
-| P1-U01 | Soạn attribution template cho text, sheet, route và asset | Các bản mẫu phân biệt quyền text/ảnh; có chỗ link/tác giả/đánh dấu sửa đổi | P1-D13 | Thấp | Q12 |
+| P1-U01 | **PARTIAL 2026-10-06** — draft attribution cho text/sheet/route/asset | [Templates](../ATTRIBUTION_TEMPLATES.md), [review plan](ATTRIBUTION_TEMPLATE_REVIEW.md); provenance/link/creator/actual changes và rights riêng; chưa chốt license version/Q12 hay publication | P1-D13 PARTIAL; K04 columns blocked | Thấp | Q12, RIGHTS nếu media |
 | P1-I01 | **DONE 2026-10-06** — [source fetch/recovery contract](../SOURCE_FETCH_CONTRACTS.md) cho verified samples và missing fallback | Không dựng quota/TTL; manual/inactive K04/K12, K05 notice; owner maintainer, retain accepted/LKG; chưa automation/runtime | P1-D13 theo source có map; missing sources inactive | Trung bình | DATA cho runtime integration |
 
 ## Phase 2 — schema, storage và pipeline an toàn
