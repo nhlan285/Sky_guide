@@ -17,3 +17,5 @@ export {
 } from './traveling.ts'
 export * from './geography.ts'
 export * from './prices.ts'
+export { stageManualOfficialNews, MAX_MANUAL_NEWS_BYTES } from './officialNewsInput.ts'
+export type { OfficialArticleDraft, RegisteredOfficialEvidence, ManualOfficialNewsContext, ManualOfficialNewsResult } from './officialNewsInput.ts'

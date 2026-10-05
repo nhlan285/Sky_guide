@@ -3,11 +3,11 @@
 ## Task / branch / checkpoint
 Autonomous master run: safe unblocked roadmap tasks, checkpoint/push;
 no merge/production deployment. Branch `codex/master-plan-execution`.
-Last verified pushed HEAD `68d35b959e3098647962fbf511ce770c597296da`.
-This local UX/contrast milestone becomes next checkpoint; resolve SHA via `git log -1`
+Last verified pushed HEAD `e40d48c5de1ee5a86461e803da265da25e500a3c`.
+This manual official-news draft milestone becomes next checkpoint; resolve SHA via `git log -1`
 and verify remote branch before resuming. Started from7cea424.
 Master [IMPLEMENTATION_PLAN](plan/IMPLEMENTATION_PLAN.md); current completed slice
-[PWA_WARDROBE_QA](plan/PWA_WARDROBE_QA.md); source record
+[MANUAL_OFFICIAL_NEWS](plan/MANUAL_OFFICIAL_NEWS.md); source record
 [WIKI_SOURCE_VERIFICATION](plan/WIKI_SOURCE_VERIFICATION.md); R1
 [DATA_FOUNDATION](plan/DATA_FOUNDATION.md).
 
@@ -30,26 +30,22 @@ P1-D13 PARTIAL, P1-I01 scoped contract DONE; verification != integration.
 -588bb31: bounded lookup filter preferences;269 tests + full checks/local smoke.
 -68d35b9: existing Git Preview verified; protected content403; P0-I04 scaffold
 reconciled, P3-I01 no proxy currently required from K05 sample.
+-e40d48c: disclosure contrast fix + local theme/locale/80-char/320px QA.
 
 ## Current intentional changes
-P7-U01 current demo QA: Daylight/English/Night retain selected items/dye/base/rule;
-80-char synthetic name/320px no overflow. Found small disclosure contrast below
-target; changed only wardrobe.css disclosure color to existing primary token.
-Fresh background samples4.67–5.61 after fix; not whole-page contrast certification.
-Changed CSS, QA evidence/master/handoff. No branding/layout/OS settings changes.
+P2-D08 official-news private draft file contract: bounded JSON, registered IDs,
+verified K06 sources/distinct evidence mapping, no date-only midnight, no approval/
+publication, atomic sanitized quarantine. Changed catalog officialNewsInput.ts,
+index/README, five tests, phase plan/master/handoff. E: pinned K06 metadata dry-run
+uses fixture article ID only; publishedAt/sourceRevision null preserved.
 
 ## Validation / limitations
-269 full tests, full lint/typecheck, final build/catalog1808 PASS. Missing import
-lint issue fixed without disabling checks; final focused tests/Items lint PASS.
-Local query persistence/explicit URL/pagination/scoped clear/category/reload smoke
-PASS; width390/document375, no console errors. E: local QA screenshots remain
-untracked. Earlier outfit download still NOT VERIFIED (in-app event timeouts).
-Broader theme/locale/reduced-motion/long-text/target devices remain NOT RUN.
-P4-U01/P7-U01 not fully closed; Router/large chunk warnings unchanged.
-After CSS fix: full lint and final build/catalog/typecheck PASS;269 behavior tests
-retained, not repeated for CSS-only change. Fresh computed Daylight/Night colors
-verified. Theme/locale and80-char/320px local checks now PASS. Reduced-motion OS
-runtime/full focus/contrast certification and target devices still NOT RUN.
+274 full tests, full lint/typecheck/catalog1808/build PASS. Pure validator dry-run
+PASS with one fixture draft; no browser needed. Initial lint issues fixed, checks
+not disabled. Earlier local query/wardrobe/theme/locale/80-char/320px smoke PASS;
+actual download NOT VERIFIED (in-app event timeouts). Reduced-motion OS runtime,
+full focus/contrast certification and target devices still NOT RUN. P4-U01/P7-U01
+not fully closed; Router/large chunk warnings unchanged.
 
 ## Blockers / decisions
 R1 maintainer schema/API/storage review pending; provider/quota approval required
@@ -73,14 +69,12 @@ Last exposed usage:50% short-window remaining and61% weekly remaining; account
 ordinary usage allowed. No context percentage exposed; goal remains active.
 
 ## Exact next action
-After verifying UX pushed checkpoint/clean tree, inspect P2-D08 independent manual
-official-news draft file contract against DATA_SCHEMA and K06 evidence. No public
-promotion, leak workflow, season/event schedules, provider or UI integration.
-Use sky-normalize-data skill; leave overall D08 PARTIAL if only official news input
-can be safely completed. Close owned local QA browser/preview before next code slice.
-Local Vite preview
-session74189 at6194 is owned by this run; browser tab1/browser2, viewport reset.
-Close owned preview/tab after QA use; no unrelated sessions should be killed.
+After verifying manual-news pushed checkpoint/clean tree, audit remaining executable
+tasks against current external gates. R1 schema/API/storage review question is still
+pending; concrete artifacts at DATA_FOUNDATION/architecture data-foundation; no
+answer means no approval/provider/quota. Do not start R2–R6 before their foundation
+DoD. Do not invent DATA/rights/owner/target-device evidence. Local browser tab1 and
+owned Vite session74189 have been closed; viewport reset. No running owned QA server.
 R1 review question pending asynchronously; no answer means no approval. P6-U02
 active settings still schedule-gated; central and K04/rights gates preserved.
 Then audit next safe task by dependency;

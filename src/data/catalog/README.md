@@ -36,3 +36,16 @@ even a matching aggregate elsewhere never fills missing cost. Explicit known zer
 and free remain different node facts. Overflow/invalid input fails without a numeric
 estimate. Neither function mutates input or persists anything. A future UI must
 label incomplete results as partial and keep source revision/provenance available.
+
+P2-D08 official-news file slice: `stageManualOfficialNews(text, context)` accepts
+bounded UTF-8 JSON `{schemaVersion:1,articles:[...]}` and stages only official
+Article drafts. Caller supplies registered article IDs, verified K06 SourceRecords
+and distinct official-evidence ID→provenance/publication-time mappings. Input file
+cannot grant verification/approval or infer a publication instant from a date-only
+release label. `updatedAt` is the local draft edit time, not source modification
+time; `publishedAt` remains null without explicit registered instant evidence.
+Malformed/invalid/duplicate/unknown records quarantine the entire file, with code/
+path reports and no partial candidates. Declared fields only; no private extras,
+IO, public export, leak workflow or Hub integration. See
+[manual official-news plan](../../../docs/plan/MANUAL_OFFICIAL_NEWS.md). Real
+canonical article/evidence registries and editorial review remain separate work.
