@@ -3,11 +3,11 @@
 ## Task / branch / checkpoint
 Autonomous master run: safe unblocked roadmap tasks, checkpoint/push;
 no merge/production deployment. Branch `codex/master-plan-execution`.
-Last verified pushed HEAD `08a80f13beecbde6b10a77af358cc4135cd08f5e`.
-This P4-W04–W06 milestone becomes next checkpoint; resolve SHA via `git log -1`
+Last verified pushed HEAD `548db41bca3db4cf66ffffddffa26a3a050fe7df`.
+This P2-D07 K03 milestone becomes next checkpoint; resolve SHA via `git log -1`
 and verify remote branch before resuming. Started from7cea424.
 Master [IMPLEMENTATION_PLAN](plan/IMPLEMENTATION_PLAN.md); current completed slice
-[WARDROBE_SIZE_RULES](plan/WARDROBE_SIZE_RULES.md); source record
+[WIKI_VISIT_ADAPTER](plan/WIKI_VISIT_ADAPTER.md); source record
 [WIKI_SOURCE_VERIFICATION](plan/WIKI_SOURCE_VERIFICATION.md); R1
 [DATA_FOUNDATION](plan/DATA_FOUNDATION.md).
 
@@ -22,23 +22,23 @@ reviewed sync/CAS/LKG fixture contracts; no live DB.
 P1-D13 PARTIAL, P1-I01 scoped contract DONE; verification != integration.
 -8899195: P2-D06 manual spirit-tree input + unique path subtotal/unknown handling.
 -08a80f1: P2-D05 staged Wiki items; source100805 duplicates quarantine correctly.
+-548db41: P4-W04–W06 visible fictional scale rule + exact demo r1/r2 continuity.
 
 ## Current intentional changes
-P4-W04–W06 demo size/rules DONE. Fictional tile mask uses small preset, keeps base
-scale and restores it on remove/replace/reset. Specific rule conflict IDs/reasons
-and missing calibration feedback; rejected action keeps accepted outfit.
-Package r2 has exact r1 continuity: full validation, same item/size/dye/geometry
-IDs, recompute effective state, old local key retained, read never auto-writes.
-Changed areas: compatibility.ts, engine/draft/share/persistence, manifest/README,
-editor/copy, seven behavior tests, Architecture/master/current plan/handoff.
-Generic aliases/tombstones NOT implemented. No asset/provider/dependency change.
+P2-D07 PARTIAL: independent K03 pure staged Wiki visit adapter DONE; K04403 still
+blocks sheet and reconciliation. Exact source table/header, explicit spirit/visit
+crosswalk and registry/provenance/cutoff; repeated visits separate, date-only/raw
+label and null end/timezone/tree preserved. Any mapped row/parser/validation error
+returns null candidateVisits; no public history writes/predictions/schedule inference.
+Changed areas: scripts/wiki/visits.mjs, seven tests, catalog README, K03 profile,
+WIKI_VISIT_ADAPTER plan/master/handoff. No asset/provider/dependency changes.
 
 ## Validation / limitations
-Seven new/54 focused and251 full tests PASS. Final lint/typecheck,
-catalog1808/build PASS after transient conflict-ID feedback change. Existing
-Router directives/large catalog chunk warnings unchanged. Initial test wrong
-fixture hair ID fixed. Browser/manual visual NOT RUN (no CLI installation);
-P4-U01 remains OPEN. K15 runtime unchanged; no generic publication/DB claims.
+Seven new focused/258 full tests PASS. Lint/typecheck/catalog1808/build PASS.
+Offline E: Spirit Visits111650 returned TS#1152024-06-06 and TS#122020-06-25,
+matching evidence, using synthetic canonical IDs only. Raw labels preserved,
+end/timezone null. Unsupported selected markup quarantines, no coverage claim.
+Existing Router/large chunk build warnings unchanged. P4-U01 visual QA NOT RUN.
 
 ## Blockers / decisions
 R1 maintainer schema/API/storage review pending; provider/quota approval required
@@ -58,9 +58,10 @@ resumed after8899195 with branch/remote matched and only planned P2-D05 untracke
 Current run uses milestone commits/push verification and native compaction.
 
 ## Exact next action
-After verifying P4-W04–W06 pushed checkpoint/clean tree, implement independent
-K03 staged Wiki TS-visit adapter portion of P2-D07, using cached verified revision
-and explicit IDs/provenance. K04 sheet/reconciliation still403-blocked; preserve
-repeated visits/date precision, no inferred end/timezone/SV->TS promotion.
-P2-D08/P2-D09 and central publication dependencies remain gated. Continue tasks;
+After verifying K03 pushed checkpoint/clean tree, plan independent P6-U03 local
+outfit backup/import/reset using existing validated versioned storage. Scope must
+be visible: outfit library only, no QR/secrets/raw full-localStorage dump; import
+validated before apply, reset explicit confirmation and editor draft kept unless
+explicitly requested. P2-D08/P2-D09/central publication dependencies stay gated;
+K04 access requires actual sample/export. Continue safe unblocked tasks;
 never mark roadmap DONE just because a checkpoint survived.

@@ -28,4 +28,8 @@ Upcoming Nodding Muralist2026-10-08–11 giữ raw range riêng, không gọi hi
 Schedule dùng PST/PDT, Thursday00:00 và Sunday23:59 nhưng cũng ghi96h; không tự
 giải quyết boundary. Hai lần đầu60h, cadence cũ khác. IANA/Event Engine là task
 riêng, không derive historical instant từ offset. Spirit/tree ID cần crosswalk.
-P1-D03 DONE về source/date mẫu/field thiếu; parser, coverage/K04 vẫn OPEN.
+P1-D03 DONE về source/date mẫu/field thiếu. P2-D07 K03 staged adapter implemented
+2026-10-06 in scripts/wiki/visits.mjs, with caller IDs/provenance/date cutoff;
+cached111650 confirms the two sample dates and null end/timezone. It supports
+only the recognized Appearances by Spirit layout and selected rows, not full
+coverage or public history. K04 sheet/reconciliation remains BLOCKED403.
