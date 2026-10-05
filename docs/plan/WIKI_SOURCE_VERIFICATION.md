@@ -170,3 +170,13 @@ Four K12 content hashes + historical platform/market/unknown guards PASS.
 Exact next: P1-D13 per-source field map, keeping K04 missing columns BLOCKED;
 then independent P2-D06 reviewed spirit-tree input/path calculator, no provider
 provisioning or runtime catalog switch. Generic pipeline/API sink still R1-gated.
+
+## Mapping/fetch handoff — 2026-10-06
+P1-D13 per-source map documented in knowledge/SOURCE_FIELD_MAPPING; K04 columns
+remain BLOCKED, whole mapping PARTIAL. P1-I01 source/missing fallback documented
+in docs/SOURCE_FETCH_CONTRACTS: observed contracts/local bounds distinct from
+unknown quota/TTL, manual owner, K05 repeat-call notice, K12 no automatic scraper.
+No license version guessed. P1-U01 full credit templates still Q12-gated; can
+prepare drafts but cannot finalize source-license choice. Exact next independent
+implementation: P2-D06 manual reviewed spirit-tree input + unique-path totals,
+existing catalog graph validators reused. No DB sink or inferred canonical IDs.

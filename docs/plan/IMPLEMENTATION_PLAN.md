@@ -106,7 +106,7 @@ Phụ thuộc phase là điều kiện nền; cột phụ thuộc bổ sung quan
 | P1-D10 | **DONE 2026-10-06** — K10 dated listing/market/coverage acceptance | Reuse verified2026-10-04 iOS US/USD samples; SKU/contents/VND unknown, không gọi current price | P0-H01 | Trung bình | DATA K10 cho SKU import |
 | P1-D11 | **DONE 2026-10-06** — K11 dated package/listing coverage acceptance | Reuse2026-10-04 US/VN HTTP200; per-SKU price unknown, app/range/iOS không thay Android IAP | P0-H01 | Trung bình | DATA K11 cho SKU import |
 | P1-D12 | **DONE 2026-10-06** — K12 actual Sky records/manual capability | iOS10 items/one2026-03-29 snapshot; Android price absent, SKU/market/contents unknown; terms cấm bulk, API/export chưa verify | P0-H01 | Trung bình | DATA K12 cho import |
-| P1-D13 | Ghi mapping field upstream → schema nội bộ từng nguồn đã xác minh | Mỗi field chỉ rõ transformed/raw/unknown và provenance; không đổi risk text | P1-D01–P1-D12 theo nguồn | Trung bình | DATA theo nguồn |
+| P1-D13 | **PARTIAL 2026-10-06** — [mapping](../../knowledge/SOURCE_FIELD_MAPPING.md) K01–K03/K05–K12 DONE theo source samples | Transformed/raw/unknown/provenance tách; K04 columns BLOCKED, không gọi toàn bộ mapping DONE | P1-D01–P1-D12 theo nguồn | Trung bình | DATA K04/field coverage |
 
 ### Wardrobe
 
@@ -138,7 +138,7 @@ Phụ thuộc phase là điều kiện nền; cột phụ thuộc bổ sung quan
 | ID | Việc / đầu ra cụ thể | Nghiệm thu | Phụ thuộc | Độ phức tạp | Gate |
 |---|---|---|---|---|---|
 | P1-U01 | Soạn attribution template cho text, sheet, route và asset | Các bản mẫu phân biệt quyền text/ảnh; có chỗ link/tác giả/đánh dấu sửa đổi | P1-D13 | Thấp | Q12 |
-| P1-I01 | Ghi cách fetch/cache/retry theo từng contract thực tế | Không có hạn mức/TTL phỏng đoán; unknown có fallback/manual và owner | P1-D13 | Trung bình | DATA theo nguồn |
+| P1-I01 | **DONE 2026-10-06** — [source fetch/recovery contract](../SOURCE_FETCH_CONTRACTS.md) cho verified samples và missing fallback | Không dựng quota/TTL; manual/inactive K04/K12, K05 notice; owner maintainer, retain accepted/LKG; chưa automation/runtime | P1-D13 theo source có map; missing sources inactive | Trung bình | DATA cho runtime integration |
 
 ## Phase 2 — schema, storage và pipeline an toàn
 
