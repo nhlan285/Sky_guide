@@ -144,6 +144,8 @@ Thiếu policy/size/asset/anchor hoặc lệch revision trả trạng thái rõ 
 
 State đầu vào `WardrobeSelection`: `schemaVersion`, `baseSizeCode`, `equippedBySlot`, `dyeByItemRegion`. State dẫn xuất: `effectiveSizeCode`, `appliedRuleIds`, `renderLayers`, cảnh báo asset/anchor thiếu. Không persist state dẫn xuất để tránh lỗi khi đổi bảng/rule.
 
+Demo compatibility decision (2026-10-06): adding the fictional tile-mask scale rule changes package `demo-wardrobe-v1-r1` to `r2`. Geometry and item/size IDs remain unchanged. The editor permits only that exact demo-ID-scoped snapshot transition, revalidates all fields and recomputes effective state. Its local library keeps the original r1 key; read projects in memory and an explicit save writes r2. Other versions/IDs remain rejected. This bounded continuity contract does not implement generic item aliases/tombstones (P4-W11).
+
 Trình tự xử lý theo contract Q08:
 
 1. Validate ID item/slot, khả năng phối và định dạng màu.

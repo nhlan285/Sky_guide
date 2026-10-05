@@ -1,10 +1,11 @@
-import { SLOTS, validateSelection, validateOutfitSnapshot } from '../../data/wardrobe/index.ts'
+import { SLOTS, validateSelection } from '../../data/wardrobe/index.ts'
+import { validateCompatibleOutfitSnapshot } from './compatibility.ts'
 import type { Slot, WardrobePackage, WardrobeSelection } from '../../data/wardrobe/index.ts'
 
 export type WardrobeIssue = 'invalid_action' | 'capacity_exceeded' | 'invalid_dye' | 'rejected_combination' | 'rule_conflict' | 'revision_mismatch'
 export interface WardrobeState {
   selection: WardrobeSelection; configRevision: string; packageRevision: string
-  effectiveSizeCode: string; appliedRuleIds: string[]; issue: WardrobeIssue | null
+  effectiveSizeCode: string; appliedRuleIds: string[]; issue: WardrobeIssue | null; issueRuleIds: string[]
 }
 export type WardrobeAction =
   | { type: 'restore_outfit'; snapshot: unknown }
@@ -38,20 +39,20 @@ export function createWardrobeState(pkg: WardrobePackage, baseSizeCode: string):
     schemaVersion: 1, baseSizeCode, equippedBySlot: { mask: [], hair: [], cape: [], top: [], bottom: [], accessory: [] }, dyeByItemRegion: {},
   }
   if (!validateSelection(selection, pkg).valid) throw new Error('Invalid initial wardrobe configuration.')
-  return { selection, configRevision: pkg.config.revision, packageRevision: pkg.revision, ...resolveRules(selection, pkg) }
+  return { selection, configRevision: pkg.config.revision, packageRevision: pkg.revision, issueRuleIds: [], ...resolveRules(selection, pkg) }
 }
 function withoutColors(colors: WardrobeSelection['dyeByItemRegion'], ids: readonly string[]) {
   return Object.fromEntries(Object.entries(colors).filter(([id]) => !ids.includes(id)))
 }
 
 export function wardrobeReducer(state: WardrobeState, action: WardrobeAction, pkg: WardrobePackage): WardrobeState {
-  const reject = (issue: WardrobeIssue): WardrobeState => ({ ...state, issue })
+  const reject = (issue: WardrobeIssue, issueRuleIds: string[] = []): WardrobeState => ({ ...state, issue, issueRuleIds })
   if (state.configRevision !== pkg.config.revision || state.packageRevision !== pkg.revision) return reject('revision_mismatch')
   let selection = state.selection
   if ('slot' in action && !SLOTS.includes(action.slot)) return reject('invalid_action')
   switch (action.type) {
     case 'restore_outfit': {
-      const restored = validateOutfitSnapshot(action.snapshot, pkg)
+      const restored = validateCompatibleOutfitSnapshot(action.snapshot, pkg)
       if (!restored.valid) return reject('invalid_action')
       const { schemaVersion, baseSizeCode, equippedBySlot, dyeByItemRegion } = restored.value
       selection = { schemaVersion, baseSizeCode, equippedBySlot, dyeByItemRegion }
@@ -63,7 +64,7 @@ export function wardrobeReducer(state: WardrobeState, action: WardrobeAction, pk
       const policy = pkg.config.slotPolicies.find(entry => entry.slot === action.slot)
       if (!item || !policy) return reject('invalid_action')
       const ids = selection.equippedBySlot[action.slot]
-      if (ids.includes(item.id)) return { ...state, issue: null }
+      if (ids.includes(item.id)) return { ...state, issue: null, issueRuleIds: [] }
       if (action.type === 'replace' && !ids.includes(action.replacedItemId)) return reject('invalid_action')
       if (action.type === 'equip' && ids.length >= policy.maxItems) return reject('capacity_exceeded')
       const next = action.type === 'replace' ? ids.map(id => id === action.replacedItemId ? item.id : id) : [...ids, item.id]
@@ -121,6 +122,6 @@ export function wardrobeReducer(state: WardrobeState, action: WardrobeAction, pk
   const validation = validateSelection(selection, pkg)
   if (!validation.valid) return reject(action.type === 'set_dye' || action.type === 'reset_region' ? 'invalid_dye' : 'invalid_action')
   const resolved = resolveRules(validation.value, pkg)
-  if (resolved.issue) return reject(resolved.issue)
-  return { ...state, selection: validation.value, ...resolved }
+  if (resolved.issue) return reject(resolved.issue, resolved.appliedRuleIds)
+  return { ...state, selection: validation.value, issueRuleIds: [], ...resolved }
 }

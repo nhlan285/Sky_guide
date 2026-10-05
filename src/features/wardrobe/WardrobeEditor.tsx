@@ -45,6 +45,8 @@ export function WardrobeEditor() {
   const current = demoPackage.items.find(item => currentIds.includes(item.id))
   const supportedRegions = current?.dyeRegions.filter(region => region.support === 'demo' && region.maskAssetId && demoGeometry.get(region.maskAssetId)?.paths.length) ?? []
   const equipped = demoPackage.items.filter(item => selection.equippedBySlot[item.slot].includes(item.id))
+  const activeRules = demoPackage.rules.filter(rule => state.appliedRuleIds.includes(rule.id))
+  const ruleReason = (rule: typeof demoPackage.rules[number]) => rule.id === 'demo-rule-tile-small' ? copy.ruleTileSmall : rule.reason
 
   return <div className="wardrobe-editor">
     <div className="wardrobe-intro">
@@ -58,7 +60,11 @@ export function WardrobeEditor() {
         <div className="preview-caption"><h2 id="preview-title">{copy.preview}</h2><span>{equipped.length} / {SLOTS.length}</span></div>
         <div className="preview-stage"><PaperDoll model={model} selection={selection} label={copy.previewLabel} /></div>
         <p className="preview-note">{copy.layerHint}</p>
-        <p className="wardrobe-feedback" role="status" aria-live="polite">{state.issue ? copy.error : model.warnings.length ? copy.renderError : equipped.map(item => name(item.name)).join(' · ') || copy.empty}</p>
+        <p className="wardrobe-feedback" role="status" aria-live="polite">{state.issue ? copy.issues[state.issue] : model.warnings.length ? model.warnings.map(warning => copy.warnings[warning]).join(' ') : equipped.map(item => name(item.name)).join(' · ') || copy.empty}</p>
+        {state.issueRuleIds.length > 0 && <ul className="wardrobe-small">{state.issueRuleIds.map(id => {
+          const rule = demoPackage.rules.find(entry => entry.id === id)
+          return <li key={id}>{id}{rule ? ` · ${ruleReason(rule)}` : ''}</li>
+        })}</ul>}
       </section>
       <div className="wardrobe-panel-switch" role="group" aria-label={copy.controls}>
         <Button aria-pressed={panel === 'picker'} aria-controls="wardrobe-picker" onClick={() => setPanel('picker')}>{copy.picker}</Button>
@@ -115,7 +121,11 @@ export function WardrobeEditor() {
           </label>)}
         </fieldset>
         <p className="wardrobe-small">{copy.sizeNote}</p>
-        {state.effectiveSizeCode !== selection.baseSizeCode && <p className="wardrobe-rule-output">{copy.effective}: {copy.sizes[demoPackage.sizes.findIndex(size => size.code === state.effectiveSizeCode)]}<br />{copy.base}: {copy.sizes[demoPackage.sizes.findIndex(size => size.code === selection.baseSizeCode)]}</p>}
+        {activeRules.length > 0 && <div className="wardrobe-rule-output wardrobe-small" role="status" aria-live="polite">
+          <p>{copy.ruleTitle}</p>
+          <p>{copy.effective}: {copy.sizes[demoPackage.sizes.findIndex(size => size.code === state.effectiveSizeCode)]}<br />{copy.base}: {copy.sizes[demoPackage.sizes.findIndex(size => size.code === selection.baseSizeCode)]}</p>
+          {activeRules.map(rule => <p key={rule.id}>{ruleReason(rule)}</p>)}
+        </div>}
         <ul className="wardrobe-equipped">
           {SLOTS.map(key => <li key={key}><span className="wardrobe-equipped__slot">{copy.slots[key]}</span>
             {selection.equippedBySlot[key].length ? selection.equippedBySlot[key].map(id => {
