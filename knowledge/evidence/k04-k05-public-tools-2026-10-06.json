@@ -1,0 +1,45 @@
+{
+  "schemaVersion": 1,
+  "purpose": "source research only; no spreadsheet import/time integration/public media",
+  "directory": {
+    "title": "Fan-Made Sky Tools", "pageId":20256, "revision":111722,
+    "sourceUrl":"https://sky-children-of-the-light.fandom.com/wiki/Fan-Made_Sky_Tools?oldid=111722",
+    "retrievedAt":"2026-10-05T16:59:58.625Z", "bytes":11902,
+    "sha256":"f66aff037242f9d113f31630f3b69482127328ebe0c2067732390ba4bf0d3d90"
+  },
+  "K04": {
+    "author":"ln.cookie on Discord", "title":"Spreadsheet Sky TS Calculator",
+    "platform":"OneDrive public embed link advertised in source directory",
+    "sourceUrl":"directory revision above; full public embed locator retained only in E working response",
+    "linkHintTab":"Sky COTL - TS Visits", "linkHintCell":"D5",
+    "hintStatus":"ActiveCell URL parameter is a hint, not verified worksheet/column data",
+    "requestStartedAt":"2026-10-05T17:01:03.822Z", "status":403,
+    "responseSha256":"62eabd844bfddafb289793409c28edebee3d751c698b1a49618d6356cb2b0ae6",
+    "responseBytes":871, "responseMessage":"The request is blocked.",
+    "columns":null, "worksheetData":null, "exportCapability":"unknown",
+    "statusConclusion":"BLOCKED: public access in this environment failed; no login/alternative export route or private access attempted",
+    "next":"owner-provided accessible public sheet/export or permitted manual sample; verify columns/revision/author before import"
+  },
+  "K05": {
+    "authorAttribution":"Light-a-Leo, source directory attribution; not independently owner-verified",
+    "sourceUrl":"https://thatskyapi.com/skytime", "method":"GET",
+    "requestStartedAt":"2026-10-05T17:01:04.237Z", "responseStoredAtHost":"2026-10-05T17:01:04.519Z",
+    "status":200, "contentType":"application/json", "accessControlAllowOrigin":"*",
+    "bytes":344, "sha256":"ef23386858b50d78eaa706b4edac753fe626baf2cc20f39b29ca31950a60990c",
+    "sample": {"full_date":"2026-10-05","full_time":"10:01:06","day_of_year":278,"hour":10,"minute":1,"second":6,"epoch":1791219666424,"timezone":"America/Los_Angeles","status":"Public API Active"},
+    "mapping": {
+      "epoch":"Unix epoch milliseconds, source instant2026-10-05T17:01:06.424Z; verified against returned LA fields",
+      "timezone":"IANA America/Los_Angeles, no fixed UTC offset hardcode",
+      "full_date/full_time":"local date/time strings, not independently offset-bearing instants",
+      "receivedAtDevice":"capture separately in actual adapter; source instant differs from host record, do not claim zero skew",
+      "events":"this response contains time fields only; no schedule dates or season/event feed verified",
+      "validityUntil":"unknown; do not infer a permanent valid lifetime"
+    },
+    "usageNoticeSummary":"Response requests avoiding spam and suggests one successful time call per app instance followed by a local clock",
+    "numericRateLimit":null, "cacheTtl":null, "serviceLicense":"unknown",
+    "corsScope":"one observed HTTP response header; browser acceptance not run",
+    "dstValidationScope":"sample epoch agrees with LA local fields; synthetic IANA transition fixtures validate interpretation, not historical endpoint responses",
+    "integrationStatus":"not implemented; optional time reference, not Event Service source approval"
+  },
+  "attribution": {"textSource":"Sky Wiki contributors, ln.cookie, Light-a-Leo as directory lists","licenseNote":"Directory text label via K01 does not grant workbook/API/media rights","transformNote":"Metadata/response summarized and field mapping reviewed; no asset downloads"}
+}

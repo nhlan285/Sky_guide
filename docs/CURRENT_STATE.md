@@ -1,11 +1,11 @@
-# Current handoff — 2026-10-05
+# Current handoff — 2026-10-06
 
 ## Task / branch / checkpoint
 Autonomous approved master roadmap: continue safe unblocked tasks, no merge/deploy.
 Branch `codex/master-plan-execution`. Verified pushed implementation HEAD:
-`2e6d110879fb7a26b2db1c3faa438ca936bf8b26`. This handoff is the next checkpoint
+`00d9de62b7c0254eb44082634b4304d8ed1d2949`. This handoff is the next checkpoint
 commit; identify its SHA with `git log -1` and verify the remote branch before resuming.
-Session resumed deterministically from7cea424; P1-D02 and P1-D03 completed.
+Session resumed deterministically from7cea424; P1-D02/D03/D05 completed.
 Master [IMPLEMENTATION_PLAN](plan/IMPLEMENTATION_PLAN.md); R1 review plan
 [DATA_FOUNDATION](plan/DATA_FOUNDATION.md); active slice
 [WIKI_SOURCE_VERIFICATION](plan/WIKI_SOURCE_VERIFICATION.md).
@@ -23,16 +23,17 @@ Master [IMPLEMENTATION_PLAN](plan/IMPLEMENTATION_PLAN.md); R1 review plan
 P3-W01 existing Hub demo widget now restores last saved outfit.
 
 K02 completed/pushed2e6d110:10 reviewed nodes/9 edges; root cost stays unknown.
-K03 current milestone:3 pinned responses,2 distinct historical visit starts,
+K03 completed/pushed00d9de6:3 pinned responses,2 distinct historical visit starts,
 missing end/timezone retained; SV/upcoming/never-returned rows kept distinct.
 
 ## Active work / intentionally modified areas
-P1-D02 K02 manual sample DONE. Four bounded public API requests succeeded HTTP200
-without API warnings/errors. Raw JSON, extracted Lua and verification script at
-`E:/SkyGuideAssets/research/k02-2026-10-05/`; do not refetch or commit raw data.
-K03 raw samples at E:/SkyGuideAssets/research/k03-2026-10-05; cached files reused.
-Current intentional files: K03 profile/evidence, master task row, handoff and plan.
-K02 committed already; no runtime/public data or schema changes in either slice.
+K04 directory111722 confirms ln.cookie OneDrive embed, GET403; actual columns/
+export unavailable. K05 observed /skytime GET200/JSON: epoch milliseconds,
+America/Los_Angeles fields match, HTTP ACAO*. Notice discourages repeat calls;
+numeric quota/TTL/license unknown, no schedule fields verified.
+Raw samples in E:/SkyGuideAssets/research/k04-2026-10-05 and k05-2026-10-06.
+Current intentional files: K04/K05 profiles, small evidence, master row, handoff,
+active plan. No runtime/public data/schema changes; share access locator outside Git.
 No upstream Lua was executed, no assets downloaded or rights inferred.
 
 ## Validation
@@ -44,12 +45,15 @@ No runtime changes since those checks. K0218/18 parser/media tests PASS; exact
 page node values, pinned defaults, acyclic graph and unique path totals PASS.
 Checkpoint docs: scaffold57 Markdown/173 tasks and `git diff --check` PASS.
 K03 source hashes/revisions/date crosschecks and missing-field isolation PASS.
+K05 checksum/epoch/LA fields +6 synthetic IANA/DST mappings PASS. K04 missing
+access/columns retained. Synthetic DST cases do not claim live historic responses.
 Existing build warnings: React Router directives and large catalog chunk.
 Old dev-server handle1951 is no longer available after session recovery; server
 liveness is unverified. Start a fresh server only when later UI verification needs it.
 
 ## Gates / decisions
 R1 schema/API/storage review pending; provider/quota approval before resources.
+K04 BLOCKED by public embed403; needs accessible public sample/export from source.
 Live DB/migration/backup restore NOT implemented. R2-R6 retain dependency gates.
 No paid resources, bulk crawl, rights assumptions, destructive Git or main merge.
 Working data on E:. No full game assets, cloud/account or implicit disk save.
@@ -65,8 +69,7 @@ recorded honestly, not claimed as a successful pre-compaction drill.
 No manual compaction tool exists; never run `/compact` as a shell command.
 
 ## Exact next action
-After verifying pushed milestone, attempt P1-D04 K04 public ln.cookie sheet
-discovery/structure. Brief supplies no URL; do not invent ID/export route or
-inspect private Drive. If no attributable public source, record precise blocker
-and continue independent P1-D05 ThatSkyAPI endpoint/units/semantics verification.
+After verifying pushed milestone, continue P1-D06 K06 official patch notes URL/
+one article title/date/version/link. Preserve missing article fields; no invented
+RSS/API or full article copy. Then next independent P1-D07 K07 map metadata/text.
 R1 gates unchanged; research does not approve public import/assets.

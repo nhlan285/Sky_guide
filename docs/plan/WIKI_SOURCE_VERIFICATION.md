@@ -90,3 +90,23 @@ boundary ambiguity and historical exceptions. No runtime/public data changed.
 Exact next: P1-D04 K04 find actual ln.cookie sheet link/structure from public
 source; never invent spreadsheet ID/export/API. If unavailable record blocker
 and proceed P1-D05 independently.
+
+## Current slices — P1-D04/K04 and P1-D05/K05 (2026-10-05)
+MEDIUM independent source verification, dependencies P0-D02 satisfied.
+K04: exact ln.cookie public sheet via attributable directory, actual tab/column
+sample and access/export capability; no login/private Drive, no permission bypass.
+K05: actual owner/domain/endpoint/units/semantics, response/time sample only after
+identifying service; no guessed host/path or default event feed. Profile/evidence
+and plans only. Missing attributable endpoint is a blocker, not proof no service.
+Bounded public searches/requests; retain raw on E:. Continue next source if gated.
+
+### K04/K05 checkpoint — 2026-10-06
+Directory Fan-Made Sky Tools111722 supplies attributable public links. K04
+OneDrive embed403: tab hint not data, columns/export unknown, task BLOCKED; no
+private access or guessed export. K05 /skytime200/JSON has epoch milliseconds
+and IANA America/Los_Angeles. Actual sample matches local fields;6 synthetic
+DST/season-offset cases validate interpretation, not live endpoint history.
+HTTP ACAO* observed, browser not run; quota/TTL/license unknown and repeat-call
+notice recorded. Time-only response cannot establish schedule feed. P1-D05 source
+sample DONE, adapter not implemented. Profile/evidence/plans only; raw/link on E:.
+Exact next: P1-D06 K06 official patch note URL/article/date/version, then K07.
