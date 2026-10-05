@@ -3,11 +3,11 @@
 ## Task / branch / checkpoint
 Autonomous master run: safe unblocked roadmap tasks, checkpoint/push;
 no merge/production deployment. Branch `codex/master-plan-execution`.
-Last verified pushed HEAD `c44a40eea4f7a0c82f6ef19230cc248863e37816`.
-This P6-R01/R02 research milestone becomes next checkpoint; resolve SHA via `git log -1`
+Last verified pushed HEAD `7698d0e0c1dce2d6e5cf7aa086ca4598525f7028`.
+This PWA/Wardrobe QA milestone becomes next checkpoint; resolve SHA via `git log -1`
 and verify remote branch before resuming. Started from7cea424.
 Master [IMPLEMENTATION_PLAN](plan/IMPLEMENTATION_PLAN.md); current completed slice
-[WEB_PUSH_NATIVE_RESEARCH](plan/WEB_PUSH_NATIVE_RESEARCH.md); source record
+[PWA_WARDROBE_QA](plan/PWA_WARDROBE_QA.md); source record
 [WIKI_SOURCE_VERIFICATION](plan/WIKI_SOURCE_VERIFICATION.md); R1
 [DATA_FOUNDATION](plan/DATA_FOUNDATION.md).
 
@@ -25,19 +25,22 @@ P1-D13 PARTIAL, P1-I01 scoped contract DONE; verification != integration.
 -548db41: P4-W04–W06 visible fictional scale rule + exact demo r1/r2 continuity.
 -c9609c9: independent K03 staged repeated visits; K04/reconciliation blocked403.
 -c44a40e: scoped outfit library backup/import/reset;264 tests/full checks PASS.
+-7698d0e: P6-R01/R02 Web Push/native research only; Q07 unchanged.
 
 ## Current intentional changes
-P6-R01/R02 research deliverables DONE; no Web Push/native implementation. Primary
-MDN Push/Notifications and WebKit Home Screen platform docs checked2026-10-06.
-Private subscription/sender/retention/consent/cost boundaries and native proposal
-criteria documented. Q07 foreground-only V1 unchanged; no services created.
-Changed files: WEB_PUSH_NATIVE_RESEARCH plan, Architecture pointer, master/handoff.
+P6-I01 existing manifest/name/start/scope/icon PNG dimensions audited; icon rights
+provenance and actual target install remain OPEN. P4-U01 PARTIAL local QA390/1366:
+override/remove/native size keyboard, dye/share/apply/save/reload, import preview/
+cancel/apply/invalid/reset PASS. Synthetic data only on unique localhost6194.
+No runtime/branding changes. Changed QA plan, backup/rule evidence, master/handoff.
 
 ## Validation / limitations
-Research diff/scaffold65 Markdown/173 unique tasks PASS. No extra runtime tests
-for docs-only slice. Latest c44a40e264 full tests/lint/typecheck/catalog1808/build
-PASS after file input CSS bound. Browser/native file-picker/download/responsive
-QA NOT RUN. Existing Router/large chunk warnings unchanged.
+Latest c44a40e264 full tests/lint/typecheck/catalog1808/build PASS retained; no
+repeat for docs-only QA. Native chooser/import and current demo responsive flow
+PASS. Actual download NOT VERIFIED: both in-app browser event approaches timed out,
+no console errors. Screenshots/fixtures untracked on E:/SkyGuideAssets/research/
+local-qa-2026-10-06. Broader theme/locale/reduced-motion/long-text/target devices
+NOT RUN; P4-U01/P7-U01 not fully closed. Router/large chunk warnings unchanged.
 
 ## Blockers / decisions
 R1 maintainer schema/API/storage review pending; provider/quota approval required
@@ -47,7 +50,7 @@ sample/export. K12 terms prohibit systematic scrape/bulk/competing redistributio
 manual reference/backlink only, not automatic SKU feed. Q12 license-version/
 credit finalization pending. Full TGC/community media rights still fail closed.
 P4-W11 depends generic P2-D12; demo r1/r2 compatibility is only bounded continuity.
-P4-U01 awaits visual/responsive QA. No paid resource, destructive Git, mass crawl
+P4-U01 has scoped QA but broader acceptance remains. No paid resource, destructive Git, mass crawl
 or implicit disk autosave.
 
 ## Continuity
@@ -59,10 +62,11 @@ Last exposed usage:50% short-window remaining and61% weekly remaining; account
 ordinary usage allowed. No context percentage exposed; goal remains active.
 
 ## Exact next action
-After verifying research pushed checkpoint/clean tree, audit P6-I01 existing
-public/manifest.webmanifest and icon provenance/install capability. index.html
-already links manifest/icons; do not create duplicates. Actual browser/install
-test and self-created icon evidence must be verified before full DoD claim.
+After verifying QA pushed checkpoint/clean tree, audit independent P3-U04 filter
+preferences using existing versioned storage and URL contracts. Do not invent
+market/spoiler active UI or close their missing data/owner gates. Local Vite preview
+session74189 at6194 is owned by this run; browser tab1/browser2, viewport reset.
+Close owned preview/tab after QA use; no unrelated sessions should be killed.
 R1 review question pending asynchronously; no answer means no approval. P6-U02
 active settings still schedule-gated; central and K04/rights gates preserved.
 Then audit next safe task by dependency;

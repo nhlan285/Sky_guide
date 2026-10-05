@@ -31,6 +31,8 @@ tests implemented;264 full tests/lint/typecheck/catalog1808/final build PASS.
 React skill review covered event-driven IO, bounded versioned storage, stale async
 ticket/unmount guard, Blob URL cleanup, native labels/status/focus/cancel and
 no new dependencies. File input width constrained to panel. Browser/file picker,
-download and responsive visual QA NOT RUN; existing build warnings unchanged.
+download and responsive visual QA were NOT RUN at initial checkpoint. Follow-up
+[local QA](PWA_WARDROBE_QA.md): import/cancel/invalid/reset/mobile PASS; actual
+download not verified after in-app browser event timeouts. Existing warnings unchanged.
 Exact next: checkpoint/push then independent P6-R01/R02 Web Push/native research.
 Other local-data kinds remain future explicit scopes; labels say outfit library only.

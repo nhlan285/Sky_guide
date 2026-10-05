@@ -248,7 +248,7 @@ Phụ thuộc phase là điều kiện nền; cột phụ thuộc bổ sung quan
 
 | ID | Module | Việc / đầu ra cụ thể | Nghiệm thu | Phụ thuộc | Độ phức tạp | Gate |
 |---|---|---|---|---|---|---|
-| P4-U01 | UX | **OPEN — editor 3 vùng desktop + segmented mobile, share/fixture override implemented** | Native controls; base/effective/reason, conflict and missing-calibration feedback; theme/locale retain state. MANUAL VISUAL CHECK REQUIRED; implementation does not close visual/responsive acceptance | P4-W03, P4-W07, P3-U01 | Trung bình | — |
+| P4-U01 | UX | **PARTIAL 2026-10-06 — local desktop/mobile demo QA:** [evidence](PWA_WARDROBE_QA.md) | 390/1366 layout, native size keyboard, override/remove, dye/share/save/reload, backup import/cancel/reset PASS; actual download/target devices/theme/locale/long-text/reduced motion remain OPEN | P4-W03, P4-W07, P3-U01 | Trung bình | — |
 | P4-D01 | Data pipeline | Kiểm tra liên kết item → asset/binding/dye/rule | Fixture và pending full asset không lọt production; demo package được nhận diện riêng | P4-W08, P2-D11 | Trung bình | — |
 | P4-H01 | Hub | **DONE 2026-10-05** — Catalog → demo explanation và giữ draft khi chuyển trang | Item chưa render được mở placeholder có giải thích; nav không reset outfit đang sửa | P3-H02, P3-W01, P4-W09 | Thấp | — |
 | P4-I01 | Infra | Smoke editor trên Vercel preview qua link trực tiếp | Refresh/deep link/share không 404, asset demo tải đúng, không cần login | P0-I04, P4-W10, P4-U01 | Trung bình | — |
@@ -304,7 +304,7 @@ Phụ thuộc phase là điều kiện nền; cột phụ thuộc bổ sung quan
 
 | ID | Việc / đầu ra cụ thể | Nghiệm thu | Phụ thuộc | Độ phức tạp | Gate |
 |---|---|---|---|---|---|
-| P6-I01 | Tạo manifest/name/icons tự tạo/start URL và capability install | Không dùng icon TGC chưa rõ quyền; kiểm tra khả năng cài trên browser mục tiêu thực tế | P3-U02 | Trung bình | — |
+| P6-I01 | **PARTIAL 2026-10-06 — existing manifest/icons audited:** [evidence](PWA_WARDROBE_QA.md) | Manifest/start/scope/name + PNG dimensions verified; icon provenance and actual target install NOT VERIFIED, preserve branding until evidence | P3-U02 | Trung bình | Icon rights/install evidence |
 | P6-I02 | Tạo service worker cache shell và catalog public versioned | Offline mở shell + bản catalog đã có; request draft/QR không có trong cache | P2-D12, P6-I01 | Cao | — |
 | P6-I03 | Viết lifecycle update/cache cleanup có version tương thích | Không trộn code mới với data cũ không tương thích; cache hỏng có fallback rõ | P6-I02 | Cao | — |
 | P6-I04 | Kiểm tra quota/storage eviction và restore online | Cache bị xóa không crash; online tải lại; không hứa local data sống vĩnh viễn | P6-I03, P2-U01 | Trung bình | — |

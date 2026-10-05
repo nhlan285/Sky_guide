@@ -38,6 +38,8 @@ existing Router directive/large chunk warnings unchanged. Initial conflict test
 used nonexistent hair-wave ID; corrected to actual hair-round, no rule disabled.
 Compatibility helper used by share/library/reducer/draft; no unrelated identities,
 geometry or styles changed. Rule failures carry transient issueRuleIds for UI
-feedback; none are persisted. Browser/manual visuals NOT RUN; P4-U01 remains OPEN.
+feedback; none are persisted. Follow-up [local QA](PWA_WARDROBE_QA.md) verifies
+visible override/remove/keyboard and dye/share/save/reload at390/1366; broader
+P4-U01 acceptance remains PARTIAL.
 Exact next: checkpoint/push; implement independent K03 Wiki staging portion of
 P2-D07 using cached revision. K04 adapter/reconciliation remains access-blocked.
