@@ -57,3 +57,17 @@ only if needed, pin revision, then manually reconcile nodes/edges/costs and writ
 K02 profile/small evidence JSON. Validate JSON, relevant tests, scaffold/diff;
 update master task/handoff and checkpoint before proceeding. Raw responses stay
 on E:; K15/runtime and rights/provider gates remain unchanged.
+
+### P1-D02 completion — 2026-10-05
+Ten sample nodes and nine prerequisites reconciled; graph acyclic. Cost/data89343
+retrieved16:46:56.898Z, SHA787b4197bc6002941c83dba05505075dfe1f5bcc6c5fcf823af50fb6993d1d66,
+HTTP200/2808 bytes. Root emote has NO default cost: unknown retained. Three
+blessing/heart defaults independently corroborated by index prose; wing explicit
+1 AC overrides generic2 AC. Known subtotal14 C/4 H/1 AC matches index aggregate,
+but complete=false. Outfit/shared paths preserve unknown and deduplicate trunk.
+K02 profile/evidence/master updated, no runtime/code/schema/public mutation.
+Working verification script remains on E:, not Git.
+Validation: exact page values/pinned default costs, response envelopes, nine-edge
+DAG, unique closure/subtotals checked. Exact next: P1-D03 K03 bounded revision
+sample; date-only remains date-only, history separated from prediction. Continue
+independent source tasks while R1 provider/review gate waits.

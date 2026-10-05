@@ -95,7 +95,7 @@ Phụ thuộc phase là điều kiện nền; cột phụ thuộc bổ sung quan
 | ID | Việc / đầu ra cụ thể | Nghiệm thu | Phụ thuộc | Độ phức tạp | Gate |
 |---|---|---|---|---|---|
 | P1-D01 | **DONE 2026-10-05** — K01 endpoint/Lua modules/revision và mẫu field có provenance | Ghi endpoint thật, action/format thực, field có/không; không giả module là JSON | P0-D02 | Trung bình | DATA K01 |
-| P1-D02 | Xác minh URL/format Regular Spirits và mẫu cây cho K02 | Một tree có node/cạnh/cost được đối chiếu thủ công; ghi field thiếu | P0-D02 | Trung bình | DATA K02 |
+| P1-D02 | **DONE 2026-10-05** — K02 endpoint/revision và tree10 nodes/9 cạnh được review | Mẫu Pointing Candlemaker, cost explicit/default tách provenance; root unknown, totals partial; [evidence](../../knowledge/evidence/k02-regular-spirit-tree-2026-10-05.json) | P0-D02 | Trung bình | DATA K02 cho adapter/coverage |
 | P1-D03 | Xác minh trang Traveling Spirits, quy ước ngày và mẫu lịch sử K03 | Có khoảng ngày gốc, precision/timezone nếu biết và source revision | P0-D02 | Trung bình | DATA K03 |
 | P1-D04 | Xác minh link sheet ln.cookie, tab/cột và cách lấy K04 | Ghi tác giả, cột thực, quyền truy cập/export thực tế; fallback nhập tay nếu không export | P0-D02 | Trung bình | DATA K04 |
 | P1-D05 | Xác minh ThatSkyAPI endpoint, units và semantics response | Lưu mẫu time; xác định có/không event schedule, CORS, giới hạn và điều kiện dùng thực tế | P0-D02 | Cao | DATA K05 |

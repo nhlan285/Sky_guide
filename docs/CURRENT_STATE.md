@@ -3,9 +3,9 @@
 ## Task / branch / checkpoint
 Autonomous approved master roadmap: continue safe unblocked tasks, no merge/deploy.
 Branch `codex/master-plan-execution`. Verified pushed implementation HEAD:
-`f1d32e5974be3ba58abac1b5fb2a9bb58c5024a4`. This handoff is the next checkpoint
+`7cea4245da7b9c6a1b6951bb360d540c84bdfaff`. This handoff is the next checkpoint
 commit; identify its SHA with `git log -1` and verify the remote branch before resuming.
-User requested compaction/session transition while P1-D02 was in progress.
+Session resumed deterministically from7cea424; current P1-D02 milestone completed.
 Master [IMPLEMENTATION_PLAN](plan/IMPLEMENTATION_PLAN.md); R1 review plan
 [DATA_FOUNDATION](plan/DATA_FOUNDATION.md); active slice
 [WIKI_SOURCE_VERIFICATION](plan/WIKI_SOURCE_VERIFICATION.md).
@@ -23,12 +23,12 @@ Master [IMPLEMENTATION_PLAN](plan/IMPLEMENTATION_PLAN.md); R1 review plan
 P3-W01 existing Hub demo widget now restores last saved outfit.
 
 ## Active work / intentionally modified areas
-P1-D02 K02 remains OPEN. Three bounded public API requests succeeded HTTP200
-without API warnings/errors. Raw JSON and extracted Lua are cached only at
+P1-D02 K02 manual sample DONE. Four bounded public API requests succeeded HTTP200
+without API warnings/errors. Raw JSON, extracted Lua and verification script at
 `E:/SkyGuideAssets/research/k02-2026-10-05/`; do not refetch or commit raw data.
 Phase plan records revisions/checksums and unfinished reconciliation.
-K02 profile/evidence, master task status and runtime code have NOT changed yet.
-This checkpoint intentionally changes only this handoff and the active source plan.
+K02 profile/evidence, master task row, handoff and active plan changed intentionally.
+Ten nodes/nine edges acyclic; root emote cost unknown, so path totals incomplete.
 No upstream Lua was executed, no assets downloaded or rights inferred.
 
 ## Validation
@@ -36,8 +36,8 @@ Product baseline at `3e0b1be`: full226/226 tests, lint/typecheck/catalog/build P
 Browser checks passed for draft/item roundtrip, canonical unsupported-item message,
 filter return, unknown-item recovery and mobile390x844 overflow/focus.
 K01 at `f1d32e5`:18/18 parser/media tests, evidence JSON, scaffold and diff PASS.
-No runtime changes since those checks. K02 response validity checked; manual
-node/edge/cost reconciliation and K02 acceptance validation NOT RUN/completed.
+No runtime changes since those checks. K0218/18 parser/media tests PASS; exact
+page node values, pinned defaults, acyclic graph and unique path totals PASS.
 Checkpoint docs: scaffold57 Markdown/173 tasks and `git diff --check` PASS.
 Existing build warnings: React Router directives and large catalog chunk.
 Old dev-server handle1951 is no longer available after session recovery; server
@@ -60,12 +60,8 @@ recorded honestly, not claimed as a successful pre-compaction drill.
 No manual compaction tool exists; never run `/compact` as a shell command.
 
 ## Exact next action
-Verify branch/HEAD/status and pushed checkpoint, read active plan and apply
-sky-wiki-source. Inspect cached `Friendship-Tree.lua` around lines380-465 and
-`Cost.lua` token handling. If needed fetch only the observed `Module:Cost/data`
-dependency and pin its revision. Reconcile Pointing Candlemaker nodes, explicit
-costs and prerequisite edges against page and renderer; preserve unknowns and
-distinguish node cost from path total. Write K02 profile + small evidence JSON,
-validate, update P1-D02 status, commit/push, then continue unblocked roadmap tasks.
-Do not infer edges from layout or prices from generic defaults; do not call the
-roadmap DONE while original acceptance criteria and external gates remain open.
+After verifying pushed milestone, continue P1-D03 K03 Traveling Spirits with a
+bounded URL/revision/date sample under sky-wiki-source. Date-only remains
+date-only; unknown timezone stays null; separate history from prediction.
+Record source field mapping/evidence, validate, checkpoint and proceed to next
+unblocked task. R1 gates unchanged; research does not approve public import/assets.
