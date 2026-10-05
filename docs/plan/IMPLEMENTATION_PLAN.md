@@ -41,7 +41,7 @@ Phụ thuộc phase là điều kiện nền; cột phụ thuộc bổ sung quan
 | P0-I01 | **DONE 2026-10-04 — existing implementation/evidence verified:** Ghi quyết định React/TypeScript/Vite, router, package manager và phiên bản hỗ trợ vào Architecture | Có lựa chọn/phiên bản được kiểm tra lúc code, lý do và build command; không cài framework thứ hai không cần thiết | — | Thấp | — |
 | P0-I02 | **DONE 2026-10-04 — existing implementation/evidence verified:** Khởi tạo manifest dependency, TypeScript và entry app rỗng trong khung `src` | Install/build chạy tái lập với lockfile; không chứa demo dữ liệu thật giả | P0-I01 | Thấp | — |
 | P0-I03 | **DONE 2026-10-04 — existing implementation/evidence verified:** Tạo quy tắc lint/typecheck và script build | Lệnh được mô tả, lỗi type thực sự làm build gate fail | P0-I02 | Thấp | — |
-| P0-I04 | Thiết lập Vercel project/preview, output và routing fallback | Root và deep link mở đúng bản preview; ghi cách rollback; chưa bật tài nguyên trả phí | P0-I03 | Trung bình | — |
+| P0-I04 | **DONE scaffold 2026-10-01; reconciled2026-10-06:** existing project/preview/output/fallback + rollback README | Historical authenticated root/about render accepted; current Git preview588bb31 READY verified. Protected-content fetch403, fresh render not claimed; [audit](PREVIEW_AUDIT.md) | P0-I03 | Trung bình | Fresh smoke requires protected access |
 
 ### Data pipeline
 
@@ -216,7 +216,7 @@ Phụ thuộc phase là điều kiện nền; cột phụ thuộc bổ sung quan
 |---|---|---|---|---|---|---|
 | P3-D01 | Data pipeline | **OPEN — evolved Q23:** TimeReference từ server/generated time của live API; K05 optional adapter | EventRule đã verify được resolve theo IANA timezone, không dựng lịch từ offset; K05 cần P1-D05 nếu dùng; lỗi giữ LKG/last-sync/stale | P2-D01, P9-H01; P1-D05 nếu bật K05 | Cao | DATA theo time source được chọn |
 | P3-D02 | Data pipeline | **OPEN:** countdown local bằng mốc EventOccurrence và elapsed time | Qua sleep/wake/background/DST; không poll backend mỗi giây; hết validity báo stale; prediction không như official | P3-D01, P3-H06, P9-V03 | Cao | DATA schedule đã verify |
-| P3-I01 | Infra | Nếu cần, thêm proxy time hẹp trên Vercel sau kiểm tra CORS | Chỉ host/endpoint allowlisted, cache/rate theo contract; không open proxy; nếu gọi trực tiếp được thì ghi không cần | P1-D05, P0-I04 | Trung bình | Q04 |
+| P3-I01 | Infra | **DONE conditional decision2026-10-06 — no proxy needed from current evidence:** [audit](PREVIEW_AUDIT.md) | K05 anonymous simple GET HTTP200/CORS* sample; no proxy added, unknown TTL/quota retained. Actual schedule/time consumer browser integration still OPEN | P1-D05, P0-I04 | Trung bình | Q04 |
 | P3-W01 | Wardrobe | **DONE 2026-10-04** — Hub demo widget mở editor; P4-W09 khôi phục outfit local gần nhất | Không cần full asset; trước khi editor sẵn sàng có trạng thái demo rõ | P2-U01, P3-U02 | Thấp | — |
 
 ## Phase 4 — Wardrobe 2D placeholder đủ hành vi
@@ -251,7 +251,7 @@ Phụ thuộc phase là điều kiện nền; cột phụ thuộc bổ sung quan
 | P4-U01 | UX | **PARTIAL 2026-10-06 — local desktop/mobile demo QA:** [evidence](PWA_WARDROBE_QA.md) | 390/1366 layout, native size keyboard, override/remove, dye/share/save/reload, backup import/cancel/reset PASS; actual download/target devices/theme/locale/long-text/reduced motion remain OPEN | P4-W03, P4-W07, P3-U01 | Trung bình | — |
 | P4-D01 | Data pipeline | Kiểm tra liên kết item → asset/binding/dye/rule | Fixture và pending full asset không lọt production; demo package được nhận diện riêng | P4-W08, P2-D11 | Trung bình | — |
 | P4-H01 | Hub | **DONE 2026-10-05** — Catalog → demo explanation và giữ draft khi chuyển trang | Item chưa render được mở placeholder có giải thích; nav không reset outfit đang sửa | P3-H02, P3-W01, P4-W09 | Thấp | — |
-| P4-I01 | Infra | Smoke editor trên Vercel preview qua link trực tiếp | Refresh/deep link/share không 404, asset demo tải đúng, không cần login | P0-I04, P4-W10, P4-U01 | Trung bình | — |
+| P4-I01 | Infra | **BLOCKED2026-10-06 protected content:** current Git Preview588bb31 READY; [audit](PREVIEW_AUDIT.md) | Connector metadata allowed but protected fetch403; remote deep-link/share/render not verified. Local demo QA separate; do not disable protection | P0-I04, P4-W10, P4-U01 | Trung bình | Vercel project/team content access |
 
 ## Phase 5 — Hub chuyên sâu, kiểm duyệt và QR profile
 

@@ -100,6 +100,11 @@ Nghiệm thu P0-I01–I04 ngày 2026-10-01:
 - CLI tự gán deployment đầu thành Production: [sky-guide-six.vercel.app](https://sky-guide-six.vercel.app); deployment nghiệm thu phía trên là Preview riêng. Không cấu hình resource trả phí.
 - GitHub auto-connect chưa thành công; Preview hiện deploy qua CLI. Đây không chặn P0-I04. Muốn auto-deploy khi push, maintainer cần cấp GitHub repository access cho Vercel rồi kết nối repo trong Project Settings → Git.
 
+Đối chiếu ngày2026-10-06: Git Preview cho `codex/master-plan-execution` đã có,
+source git/READY và SHA588bb31 được connector xác minh. Ghi chú auto-connect bên
+trên là lịch sử2026-10-01. Fetch nội dung protected hiện403; không coi trang login
+HTTP200 là render app. Chi tiết và giới hạn ở [preview audit](docs/plan/PREVIEW_AUDIT.md).
+
 Kiểm tra cấu trúc tài liệu và liên kết nội bộ:
 
 ```powershell

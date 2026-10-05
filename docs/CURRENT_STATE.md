@@ -3,11 +3,11 @@
 ## Task / branch / checkpoint
 Autonomous master run: safe unblocked roadmap tasks, checkpoint/push;
 no merge/production deployment. Branch `codex/master-plan-execution`.
-Last verified pushed HEAD `c27308ae8a07dfc105b946fa24d602ac7f1c99af`.
-This lookup preference milestone becomes next checkpoint; resolve SHA via `git log -1`
+Last verified pushed HEAD `588bb316510bb4540e277006e7e9f7597aebce02`.
+This existing-preview audit milestone becomes next checkpoint; resolve SHA via `git log -1`
 and verify remote branch before resuming. Started from7cea424.
 Master [IMPLEMENTATION_PLAN](plan/IMPLEMENTATION_PLAN.md); current completed slice
-[LOOKUP_PREFERENCES](plan/LOOKUP_PREFERENCES.md); source record
+[PREVIEW_AUDIT](plan/PREVIEW_AUDIT.md); source record
 [WIKI_SOURCE_VERIFICATION](plan/WIKI_SOURCE_VERIFICATION.md); R1
 [DATA_FOUNDATION](plan/DATA_FOUNDATION.md).
 
@@ -27,12 +27,15 @@ P1-D13 PARTIAL, P1-I01 scoped contract DONE; verification != integration.
 -c44a40e: scoped outfit library backup/import/reset;264 tests/full checks PASS.
 -7698d0e: P6-R01/R02 Web Push/native research only; Q07 unchanged.
 -c27308a: PWA manifest/icon audit and scoped Wardrobe local UI QA.
+-588bb31: bounded lookup filter preferences;269 tests + full checks/local smoke.
 
 ## Current intentional changes
-P3-U04 lookup preference slice: owned versioned bounded key, bare list restore,
-explicit URL precedence, user-event persistence only, scoped clear and visible
-storage/future/invalid status/retry. No market/spoiler state or unrelated key edits.
-Changed Items.tsx/copy, new preferences.ts/five behavior tests and plan/master/handoff.
+P0-I04 historical scaffold acceptance reconciled with current Git preview588bb31
+READY/source git/exact branch+SHA. Protected-content fetch403: connector project/team
+access missing; P4-I01 remote smoke BLOCKED, auth-page HTTP200 not app success.
+P3-I01 conditional no-proxy decision based on K05 single anonymous CORS* sample;
+actual schedule/time browser consumer remains OPEN. Changed preview audit, master,
+README historical/current distinction, handoff. No deploy/protection/prod changes.
 
 ## Validation / limitations
 269 full tests, full lint/typecheck, final build/catalog1808 PASS. Missing import
@@ -53,6 +56,8 @@ credit finalization pending. Full TGC/community media rights still fail closed.
 P4-W11 depends generic P2-D12; demo r1/r2 compatibility is only bounded continuity.
 P4-U01 has scoped QA but broader acceptance remains. No paid resource, destructive Git, mass crawl
 or implicit disk autosave.
+Vercel metadata reads allowed; protected Preview content fetch403. Grant/refresh
+project/team connector access or maintainer manual smoke before claiming P4-I01.
 
 ## Continuity
 Checkpoint drill PASS at199bdd5. Earlier pre-trigger compaction/quota drills NOT
@@ -63,9 +68,10 @@ Last exposed usage:50% short-window remaining and61% weekly remaining; account
 ordinary usage allowed. No context percentage exposed; goal remains active.
 
 ## Exact next action
-After verifying filter preference pushed checkpoint/clean tree, audit P0-I04
-existing preview deployment evidence and rollback documentation. Do not create
-deployment or change production. No invented market/spoiler active UI. Local Vite preview
+After verifying preview-audit pushed checkpoint/clean tree, continue local P7-U01
+current-demo theme/locale/long-text/keyboard checks using isolated synthetic origin.
+No target native install/protected Preview smoke claim. No invented market/spoiler
+active UI. Local Vite preview
 session74189 at6194 is owned by this run; browser tab1/browser2, viewport reset.
 Close owned preview/tab after QA use; no unrelated sessions should be killed.
 R1 review question pending asynchronously; no answer means no approval. P6-U02

@@ -37,14 +37,17 @@ No binary files or credentials in domain data. Public export is allowlisted.
 - [x] D03 contract slice: AssetRegistry metadata/delivery interface, hash/key/rights/relations,
   public evidence allowlist and revocation overlay; preserve existing R2 paths.
 - [x] I01: backup/restore/migration/rollback/quota runbook and review checklist.
-- [ ] Focused tests, lint/typecheck/catalog/build and docs checks; inspect diff.
+- [x] Focused tests, lint/typecheck/catalog/build and docs checks; inspect diff.
+  Contract milestones passed; latest master-run full269 PASS at588bb31. This is
+  local validation, not provider/schema review or live migration acceptance.
 - [x] Checkpoint drill commit/push/remote verification; continue next safe slice.
 - [x] D04/V01 local contract subset: synthetic staging/quarantine/review digest,
   atomic compare-and-swap promotion, bounded retry/health/LKG and snapshot restore.
   This follows the master-run instruction to implement provider-independent
   contracts/tests while provisioning is gated. It does not satisfy I02 dependencies
   for real integration, nor mark D04/V01 DONE; no scheduler or source fetch.
-- [ ] Record provider/review gates and audit remaining independent work.
+- [x] Record provider/review gates and audit remaining independent work.
+  Concrete contracts delivered; maintainer review question remains pending.
 
 ## Risks / UX / security
 
