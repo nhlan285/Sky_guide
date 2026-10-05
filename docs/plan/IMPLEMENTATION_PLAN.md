@@ -99,8 +99,8 @@ Phụ thuộc phase là điều kiện nền; cột phụ thuộc bổ sung quan
 | P1-D03 | **DONE 2026-10-05** — K03 URL/format/history date sample | Hai lần Leaping Dancer giữ date-only, end/timezone unknown, TS/SV/upcoming tách; revision/provenance có [evidence](../../knowledge/evidence/k03-traveling-visits-2026-10-05.json) | P0-D02 | Trung bình | DATA K03 cho full import |
 | P1-D04 | **BLOCKED 2026-10-06** — link/tác giả ln.cookie đã tìm, OneDrive embed403 | Chưa đọc tab/cột/export; cần public sample/export truy cập được, không đoán route | P0-D02 | Trung bình | DATA K04/access |
 | P1-D05 | **DONE 2026-10-06** — ThatSkyAPI /skytime GET/source sample | Epoch milliseconds/LA fields khớp; HTTP CORS*, time-only sample; quota/TTL/license unknown và notice hạn chế call ghi rõ | P0-D02 | Cao | DATA K05 cho integration |
-| P1-D06 | Kiểm tra URL patch notes và mẫu article K06 | Mapping title/date/version/link có căn cứ; không phát minh API/RSS | P0-D02 | Thấp | DATA K06 |
-| P1-D07 | Xác minh trang Map Shrines và metadata từng map K07 | Text/location và tác giả/quyền ảnh được tách; không tải ảnh chưa rõ quyền vào public assets | P0-D02 | Trung bình | DATA K07, RIGHTS |
+| P1-D06 | **DONE 2026-10-06** — K06 section/article Hotfix34.4 verified | Title/release-date-only/version/platform/link; relative updatedAt unknown, summary riêng; không dựng API/RSS | P0-D02 | Thấp | DATA K06 cho feed |
+| P1-D07 | **DONE 2026-10-06** — K07 source/text +2 map metadata samples | Page/file/image revisions/dimensions; Ray credit/Self vs Fairuse tách; coordinates unknown, không tải binary; coverage/import chưa làm | P0-D02 | Trung bình | DATA K07, RIGHTS vẫn giữ |
 | P1-D08 | Chọn và kiểm tra bài AppUnwrapper liên quan Eden/season | Lưu link/ngày/phạm vi, ghi phần đã lỗi thời hoặc chưa đối chiếu | P0-D02 | Thấp | DATA K08 |
 | P1-D09 | Xác minh playlist dẫn từ Wiki và tác giả K09 | Có link trang dẫn + link video gốc + phần tham khảo, không tự tải media | P0-D02 | Thấp | DATA K09 |
 | P1-D10 | Xác minh listing App Store, market và coverage IAP K10 | Phân biệt giá item/SKU với range; ghi missing package contents | P0-H01 | Trung bình | DATA K10 |

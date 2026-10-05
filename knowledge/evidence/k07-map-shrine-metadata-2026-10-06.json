@@ -1,0 +1,131 @@
+{
+  "schemaVersion": 1,
+  "purpose": "source metadata/text research only, no image download/public map or coordinate import",
+  "sourceUrl": "https://sky-children-of-the-light.fandom.com/wiki/Map_Shrines?oldid=110075",
+  "revision": 110075,
+  "responses": [
+    {
+      "retrievedAt": "2026-10-05T17:05:33.523Z",
+      "url": "https://sky-children-of-the-light.fandom.com/api.php?action=query&format=json&formatversion=2&prop=revisions&rvprop=ids%7Ctimestamp%7Ccontent&rvslots=main&redirects=1&titles=Map+Shrines",
+      "status": 200,
+      "bytes": 10450,
+      "sha256": "712134a070d42d9b2fa99495e79e3495e4cfc1ebc7d27bb84b5c03c94f01232d",
+      "request": {
+        "action": "query",
+        "format": "json",
+        "formatversion": "2",
+        "prop": "revisions",
+        "rvprop": "ids|timestamp|content",
+        "rvslots": "main",
+        "redirects": "1",
+        "titles": "Map Shrines"
+      }
+    },
+    {
+      "retrievedAt": "2026-10-05T17:06:08.649Z",
+      "url": "https://sky-children-of-the-light.fandom.com/api.php?action=query&format=json&formatversion=2&prop=revisions&rvprop=ids%7Ctimestamp%7Ccontent&rvslots=main&redirects=1&titles=File%3AGame-map-HD.png%7CFile%3AMap-of-map-shrines-Ray.png",
+      "status": 200,
+      "bytes": 997,
+      "sha256": "a4a9fef8888c45894be49dedcd62180d7eedbdb22f4e2fc747f6acfa76bff554",
+      "request": {
+        "action": "query",
+        "format": "json",
+        "formatversion": "2",
+        "prop": "revisions",
+        "rvprop": "ids|timestamp|content",
+        "rvslots": "main",
+        "redirects": "1",
+        "titles": "File:Game-map-HD.png|File:Map-of-map-shrines-Ray.png"
+      }
+    },
+    {
+      "retrievedAt": "2026-10-05T17:07:22.125Z",
+      "url": "https://sky-children-of-the-light.fandom.com/api.php?action=query&format=json&formatversion=2&titles=File%3AGame-map-HD.png%7CFile%3AMap-of-map-shrines-Ray.png&prop=imageinfo&iiprop=timestamp%7Csize%7Cextmetadata",
+      "request": {
+        "action": "query",
+        "format": "json",
+        "formatversion": "2",
+        "titles": "File:Game-map-HD.png|File:Map-of-map-shrines-Ray.png",
+        "prop": "imageinfo",
+        "iiprop": "timestamp|size|extmetadata"
+      },
+      "status": 200,
+      "bytes": 749,
+      "sha256": "a3d5a473681fbf53df52ab3ee67aa244cbee6d36aee4b42eeb5a44f01cd18625"
+    }
+  ],
+  "locations": [
+    {
+      "realmName": "Home",
+      "labelOwnWords": "Shrine beside the Isle portal",
+      "sourceFileTitle": "Home-Map-Shrine.jpg",
+      "canonicalMapId": null,
+      "coordinates": null,
+      "sourceRevision": 110075
+    }
+  ],
+  "maps": [
+    {
+      "fileTitle": "File:Map-of-map-shrines-Ray.png",
+      "pageId": 12739,
+      "descriptionRevision": 89073,
+      "sourceUrl": "https://sky-children-of-the-light.fandom.com/wiki/File%3AMap-of-map-shrines-Ray.png?oldid=89073",
+      "imageRevisionTimestamp": "2025-02-07T10:14:47Z",
+      "width": 1000,
+      "height": 1000,
+      "reportedBinaryBytes": 349059,
+      "creator": "Ray808080",
+      "creditNote": "Page summary explicitly names artist",
+      "sourceLicenseTemplate": "Self",
+      "rightsStatus": "pending",
+      "rightsEvidenceRef": null,
+      "coordinateSystem": null,
+      "markerCoordinates": null,
+      "metadataLimit": "extmetadata contains DateTime/ObjectName only, no creator/license grant",
+      "binaryDownloaded": false
+    },
+    {
+      "fileTitle": "File:Game-map-HD.png",
+      "pageId": 13096,
+      "descriptionRevision": 108291,
+      "sourceUrl": "https://sky-children-of-the-light.fandom.com/wiki/File%3AGame-map-HD.png?oldid=108291",
+      "imageRevisionTimestamp": "2026-06-23T22:13:21Z",
+      "width": 2000,
+      "height": 2000,
+      "reportedBinaryBytes": 5674723,
+      "creator": null,
+      "creditNote": "Current summary thanks Rory and team; past photomerge uploads credit Ray808080/Ghostingskies/Mono. Acknowledgment is not verified creator ownership.",
+      "sourceLicenseTemplate": "Fairuse",
+      "rightsStatus": "pending",
+      "rightsEvidenceRef": null,
+      "coordinateSystem": null,
+      "markerCoordinates": null,
+      "metadataLimit": "extmetadata contains DateTime/ObjectName only, no creator/license grant",
+      "binaryDownloaded": false
+    }
+  ],
+  "observations": {
+    "inGameMap": "Source says symbols indicate areas, not exact Children of Light locations",
+    "counts": "Page says65 shrines; embedded Nastymold2022 guide labels57. Historical guide count must not overwrite current page.",
+    "mapVariants": "Ray map labelled Oct19,2022; current game HD summary June23,2026; no geometry equivalence assumed"
+  },
+  "mapping": {
+    "realm": "name needs realm FK crosswalk",
+    "fileTitle": "candidate Asset source key, no public storage URL assigned",
+    "dimensions": "metadata only; no coordinate space approved",
+    "location": "text annotation with page revision; positional coordinates remain null",
+    "credits": "per-map creator/evidence, uploader or acknowledgment not automatic rights",
+    "rights": "Self/Fairuse label does not satisfy project display/rehost allowlist"
+  },
+  "attribution": {
+    "textSource": "Sky Wiki contributors; Ray808080 explicit map credit; others only roles described above",
+    "licenseNote": "K01 text label does not cover community map/TGC imagery",
+    "transformNote": "Own short location text + summarized image metadata, no binary copying"
+  },
+  "limitations": [
+    "One text location/two map candidates, not all-map coverage",
+    "No machine-readable precise marker coordinates verified",
+    "No map reuse permission or public assets",
+    "Revision of page differs from image upload timestamp"
+  ]
+}

@@ -3,9 +3,9 @@
 ## Task / branch / checkpoint
 Autonomous approved master roadmap: continue safe unblocked tasks, no merge/deploy.
 Branch `codex/master-plan-execution`. Verified pushed implementation HEAD:
-`00d9de62b7c0254eb44082634b4304d8ed1d2949`. This handoff is the next checkpoint
+`f278c8ce64f6813e6a3571c864aa951976f753dd`. This handoff is the next checkpoint
 commit; identify its SHA with `git log -1` and verify the remote branch before resuming.
-Session resumed deterministically from7cea424; P1-D02/D03/D05 completed.
+Session resumed deterministically from7cea424; P1-D02/D03/D05/D06/D07 completed.
 Master [IMPLEMENTATION_PLAN](plan/IMPLEMENTATION_PLAN.md); R1 review plan
 [DATA_FOUNDATION](plan/DATA_FOUNDATION.md); active slice
 [WIKI_SOURCE_VERIFICATION](plan/WIKI_SOURCE_VERIFICATION.md).
@@ -31,9 +31,11 @@ K04 directory111722 confirms ln.cookie OneDrive embed, GET403; actual columns/
 export unavailable. K05 observed /skytime GET200/JSON: epoch milliseconds,
 America/Los_Angeles fields match, HTTP ACAO*. Notice discourages repeat calls;
 numeric quota/TTL/license unknown, no schedule fields verified.
-Raw samples in E:/SkyGuideAssets/research/k04-2026-10-05 and k05-2026-10-06.
-Current intentional files: K04/K05 profiles, small evidence, master row, handoff,
-active plan. No runtime/public data/schema changes; share access locator outside Git.
+K04/K05 checkpoint pushedf278c8c. Current K06 official article source sample
+and K07 page/file/image metadata done. K07 rights pending, no coordinates guessed.
+Raw K07 at E:/SkyGuideAssets/research/k07-2026-10-06. Current intentional files:
+K06/K07 profiles/evidence, master row, handoff and active plan. No runtime/public
+data/schema changes, binary download or rights approval.
 No upstream Lua was executed, no assets downloaded or rights inferred.
 
 ## Validation
@@ -47,6 +49,8 @@ Checkpoint docs: scaffold57 Markdown/173 tasks and `git diff --check` PASS.
 K03 source hashes/revisions/date crosschecks and missing-field isolation PASS.
 K05 checksum/epoch/LA fields +6 synthetic IANA/DST mappings PASS. K04 missing
 access/columns retained. Synthetic DST cases do not claim live historic responses.
+K06 manual source heading/date/platform/link PASS; K07 three envelopes/hash/map
+revision/location/rights assertions PASS. JSON parse/scaffold/diff checked before commit.
 Existing build warnings: React Router directives and large catalog chunk.
 Old dev-server handle1951 is no longer available after session recovery; server
 liveness is unverified. Start a fresh server only when later UI verification needs it.
@@ -69,7 +73,7 @@ recorded honestly, not claimed as a successful pre-compaction drill.
 No manual compaction tool exists; never run `/compact` as a shell command.
 
 ## Exact next action
-After verifying pushed milestone, continue P1-D06 K06 official patch notes URL/
-one article title/date/version/link. Preserve missing article fields; no invented
-RSS/API or full article copy. Then next independent P1-D07 K07 map metadata/text.
+After verifying pushed milestone, continue P1-D08 K08 one AppUnwrapper Eden/season
+article metadata/scope and known outdated/unverified details. No full walkthrough
+copy or asset reuse. Then P1-D09 K09 Wiki-linked playlist original creator/link.
 R1 gates unchanged; research does not approve public import/assets.

@@ -110,3 +110,24 @@ HTTP ACAO* observed, browser not run; quota/TTL/license unknown and repeat-call
 notice recorded. Time-only response cannot establish schedule feed. P1-D05 source
 sample DONE, adapter not implemented. Profile/evidence/plans only; raw/link on E:.
 Exact next: P1-D06 K06 official patch note URL/article/date/version, then K07.
+
+## Current slices — P1-D06/K06 and P1-D07/K07 (2026-10-06)
+MEDIUM source metadata research after P0-D02; K04 blocked independently.
+K06: official patch note section plus one article title/date/version/link; own
+short summary, no full article copy or guessed feed. K07: revision-pinned Map
+Shrines text/location plus source artwork title/creator/license status, no binary
+map download, inferred coordinates or public asset. Profile/evidence/plans only.
+Acceptance: actual source links and observed fields, missing rights/data explicit.
+Next: section navigation and bounded Map Shrines revision source sample.
+
+### K06/K07 completion — 2026-10-06
+K06 official section→article Hotfix34.4/2026-08-10/PlayStation+iOS; date-only,
+relative51d updated label not an instant, edited availability notice respected.
+Own short summary only; no newest-release/feed/revision claim. K07 page110075,
+filepages89073/108291 + imageinfo: Ray1000² and game-HD2000²; creator/acknowledgment
+and Self/Fairuse distinguished, pending rights retained. One Home text location,
+coordinates/map crosswalk unknown;65 current vs57 historical guide not merged.
+Three K07 response envelope/hash/location/rights/metadata assertions PASS; manual
+K06 heading/date/platform/link comparison PASS. JSON/scaffold/diff validation
+before commit. Exact next: P1-D08 K08 specific Eden/season article; original brief
+forbids copying walkthrough, current game correctness unknown until compared.
