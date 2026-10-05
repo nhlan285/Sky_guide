@@ -14,6 +14,8 @@ import { WikiMediaCredits } from './WikiMediaCredits.tsx'
 import { useItemAssets } from './useItemAssets.ts'
 import { ItemAssetCredits } from './ItemAssetCredits.tsx'
 import { imageSources } from '../../data/itemLookup/media.ts'
+import { wardrobeItemUrl } from '../wardrobe/navigation'
+import { wardrobeCopy } from '../wardrobe/copy'
 
 const catalog = catalogResult.valid ? catalogResult.value : null
 const seasonNames = new Map(catalog?.seasons.map(s => [s.id, s.name.default]))
@@ -71,6 +73,8 @@ function ItemDetail({ entry, search }: { entry: LookupEntry; search: string }) {
     <Link to={`/items${search}`} className="text-link">← {copy.back}</Link>
     <div className="item-detail__hero"><div><ItemThumbnail key={entry.id} entry={entry} detail asset={primary} />
     </div><div><p className="eyebrow">{copy.categories[entry.category]}</p><h1 id="page-title" tabIndex={-1}>{item.name.default}</h1><div className="item-detail__context">{relation(item.seasonIds, seasonNames, 'season')}{item.spiritIds.length ? relation(item.spiritIds, spiritNames, 'spirit') : null}</div></div></div>
+    <p><Link className="button" to={wardrobeItemUrl(entry.id, search)}>{wardrobeCopy[locale].itemIntent.tryItem}</Link></p>
+    <p className="section-note">{wardrobeCopy[locale].itemIntent.note}</p>
     {wiki.failed ? <p role="status">{copy.mediaUnavailable} <button type="button" className="button button--quiet" onClick={wiki.retry}>{copy.retry}</button></p> : null}
     {assets.failed ? <p role="status">{copy.mediaUnavailable} <button type="button" className="button button--quiet" onClick={assets.retry}>{copy.retry}</button></p> : null}
     {previews.length ? <section className="item-preview"><h2>{copy.wornPreview}</h2><div className="item-gallery">{previews.map(media => <figure key={media.mediaId}><ItemThumbnail entry={entry} asset={media} description={`${item.name.default} — ${media.kind === 'alternate' ? copy.alternateView : copy.wornPreview}`} /><figcaption>{media.kind === 'alternate' ? copy.alternateView : copy.wornPreview}</figcaption></figure>)}</div></section> : null}
