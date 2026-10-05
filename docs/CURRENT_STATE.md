@@ -3,8 +3,8 @@
 ## Task / branch / checkpoint
 Autonomous master run: safe unblocked roadmap tasks, checkpoint/push;
 no merge/production deployment. Branch `codex/master-plan-execution`.
-Last verified pushed HEAD `e40d48c5de1ee5a86461e803da265da25e500a3c`.
-This manual official-news draft milestone becomes next checkpoint; resolve SHA via `git log -1`
+Last verified pushed HEAD `c53a11153f639af666d9245ca4923fd955377b38`.
+This remaining-gates handoff becomes next checkpoint; resolve SHA via `git log -1`
 and verify remote branch before resuming. Started from7cea424.
 Master [IMPLEMENTATION_PLAN](plan/IMPLEMENTATION_PLAN.md); current completed slice
 [MANUAL_OFFICIAL_NEWS](plan/MANUAL_OFFICIAL_NEWS.md); source record
@@ -31,13 +31,14 @@ P1-D13 PARTIAL, P1-I01 scoped contract DONE; verification != integration.
 -68d35b9: existing Git Preview verified; protected content403; P0-I04 scaffold
 reconciled, P3-I01 no proxy currently required from K05 sample.
 -e40d48c: disclosure contrast fix + local theme/locale/80-char/320px QA.
+-c53a111: manual official-news draft file contract;274 full checks/pinned K06
+fixture-only dry-run PASS, no publication.
 
 ## Current intentional changes
-P2-D08 official-news private draft file contract: bounded JSON, registered IDs,
-verified K06 sources/distinct evidence mapping, no date-only midnight, no approval/
-publication, atomic sanitized quarantine. Changed catalog officialNewsInput.ts,
-index/README, five tests, phase plan/master/handoff. E: pinned K06 metadata dry-run
-uses fixture article ID only; publishedAt/sourceRevision null preserved.
+No runtime changes after c53a111. Reviewed remaining master tasks by dependencies;
+full roadmap is OPEN. Contract/local fixture work does not satisfy live canonical,
+editorial approval, full-source coverage or target-device DoD. This handoff is the
+only current intentional change; do not start a new architecture from assumptions.
 
 ## Validation / limitations
 274 full tests, full lint/typecheck/catalog1808/build PASS. Pure validator dry-run
@@ -65,16 +66,29 @@ Checkpoint drill PASS at199bdd5. Earlier pre-trigger compaction/quota drills NOT
 PASS; no manual compaction tool or invented context percentage. Native compaction
 resumed after8899195 with branch/remote matched and only planned P2-D05 untracked.
 Current run uses milestone commits/push verification and native compaction.
-Last exposed usage:50% short-window remaining and61% weekly remaining; account
+Last exposed usage:15% short-window remaining and55% weekly remaining; account
 ordinary usage allowed. No context percentage exposed; goal remains active.
 
 ## Exact next action
-After verifying manual-news pushed checkpoint/clean tree, audit remaining executable
-tasks against current external gates. R1 schema/API/storage review question is still
-pending; concrete artifacts at DATA_FOUNDATION/architecture data-foundation; no
-answer means no approval/provider/quota. Do not start R2–R6 before their foundation
-DoD. Do not invent DATA/rights/owner/target-device evidence. Local browser tab1 and
-owned Vite session74189 have been closed; viewport reset. No running owned QA server.
+Verify this pushed handoff/clean branch, then resolve the pending R1 review before
+provider selection/quota audit or live foundation work. Concrete review artifacts:
+DATA_FOUNDATION, docs/architecture/data-foundation.md, src/data/domain contracts
+and domain tests. The asynchronous review question has no answer; no approval.
+If approved, compare permitted free-tier providers/actual quota and obtain explicit
+provider/task approval before resources. Do not start R2–R6 before foundation DoD.
+
+Remaining dependency roots: K04 inaccessible workbook (P1-D04/D13/P2-D07/TS full
+history); reviewed canonical/source crosswalk + source coverage for real tree/news/
+map/route/SKU import (K10 titles/ranges do not prove SKU/quantity); Q02 leak owner/
+channels, Q09 prediction methodology, Q10 quantities/heart/mixed mapping, Q11 QR
+protocol, Q12 license/credit finalization; TGC/community rights and scoped pilot
+approval. Generic export/alias/cache/SW/release modules retain their upstream
+foundation/data dependencies. P4-I01 requires protected Vercel content access;
+P6-I01 icon provenance/native install and P7 target-device/full accessibility checks
+remain unverified. No mass acquisition, public promotion or production deployment
+to manufacture these facts. Downstream OPEN tasks are not arbitrarily marked DONE.
+Local browser tab1 and owned Vite session74189 closed; viewport reset. No running
+owned QA server. Working raw/dry-run/screenshot artifacts stay untracked on E:.
 R1 review question pending asynchronously; no answer means no approval. P6-U02
 active settings still schedule-gated; central and K04/rights gates preserved.
 Then audit next safe task by dependency;
