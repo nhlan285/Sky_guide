@@ -3,11 +3,11 @@
 ## Task / branch / checkpoint
 Autonomous master run: safe unblocked roadmap tasks, checkpoint/push;
 no merge/production deployment. Branch `codex/master-plan-execution`.
-Last verified pushed HEAD `548db41bca3db4cf66ffffddffa26a3a050fe7df`.
-This P2-D07 K03 milestone becomes next checkpoint; resolve SHA via `git log -1`
+Last verified pushed HEAD `c9609c9ff67c81fcaed1f09e78f55b7cb8332668`.
+This P6-U03 outfit backup milestone becomes next checkpoint; resolve SHA via `git log -1`
 and verify remote branch before resuming. Started from7cea424.
 Master [IMPLEMENTATION_PLAN](plan/IMPLEMENTATION_PLAN.md); current completed slice
-[WIKI_VISIT_ADAPTER](plan/WIKI_VISIT_ADAPTER.md); source record
+[OUTFIT_BACKUP](plan/OUTFIT_BACKUP.md); source record
 [WIKI_SOURCE_VERIFICATION](plan/WIKI_SOURCE_VERIFICATION.md); R1
 [DATA_FOUNDATION](plan/DATA_FOUNDATION.md).
 
@@ -23,22 +23,24 @@ P1-D13 PARTIAL, P1-I01 scoped contract DONE; verification != integration.
 -8899195: P2-D06 manual spirit-tree input + unique path subtotal/unknown handling.
 -08a80f1: P2-D05 staged Wiki items; source100805 duplicates quarantine correctly.
 -548db41: P4-W04–W06 visible fictional scale rule + exact demo r1/r2 continuity.
+-c9609c9: independent K03 staged repeated visits; K04/reconciliation blocked403.
 
 ## Current intentional changes
-P2-D07 PARTIAL: independent K03 pure staged Wiki visit adapter DONE; K04403 still
-blocks sheet and reconciliation. Exact source table/header, explicit spirit/visit
-crosswalk and registry/provenance/cutoff; repeated visits separate, date-only/raw
-label and null end/timezone/tree preserved. Any mapped row/parser/validation error
-returns null candidateVisits; no public history writes/predictions/schedule inference.
-Changed areas: scripts/wiki/visits.mjs, seven tests, catalog README, K03 profile,
-WIKI_VISIT_ADAPTER plan/master/handoff. No asset/provider/dependency changes.
+P6-U03 scoped outfit library backup/import/reset DONE. Bounded UTF-8 JSON with
+fixed format/version/package; validation/projected fields before explicit library
+replacement; exact demo r1 compatibility. Download link, file preview count,
+apply/cancel and reset-confirm/cancel; library operations preserve editor draft,
+other local keys and future-version/raw storage protection. No QR/secrets dump.
+Changed areas: backup.ts, OutfitBackup.tsx, SavedOutfits/copy, scoped CSS,
+six behavior tests, demoREADME/OUTFIT_LOCAL continuity note, plan/master/handoff.
+No provider, browser CLI installation, dependency or public catalog changes.
 
 ## Validation / limitations
-Seven new focused/258 full tests PASS. Lint/typecheck/catalog1808/build PASS.
-Offline E: Spirit Visits111650 returned TS#1152024-06-06 and TS#122020-06-25,
-matching evidence, using synthetic canonical IDs only. Raw labels preserved,
-end/timezone null. Unsupported selected markup quarantines, no coverage claim.
-Existing Router/large chunk build warnings unchanged. P4-U01 visual QA NOT RUN.
+Six new focused/264 full tests PASS. Lint/typecheck/catalog1808/final build PASS
+after file input CSS bound. Tests cover projection/no secrets, r1 roundtrip,
+invalid/future IDs/version/revisions, UTF-8 size, no preview writes, quota/future
+protection, scoped reset. React skill review complete. Browser/native file picker/
+download/responsive QA NOT RUN. Existing Router/large chunk warnings unchanged.
 
 ## Blockers / decisions
 R1 maintainer schema/API/storage review pending; provider/quota approval required
@@ -56,12 +58,14 @@ Checkpoint drill PASS at199bdd5. Earlier pre-trigger compaction/quota drills NOT
 PASS; no manual compaction tool or invented context percentage. Native compaction
 resumed after8899195 with branch/remote matched and only planned P2-D05 untracked.
 Current run uses milestone commits/push verification and native compaction.
+Last exposed usage:50% short-window remaining and61% weekly remaining; account
+ordinary usage allowed. No context percentage exposed; goal remains active.
 
 ## Exact next action
-After verifying K03 pushed checkpoint/clean tree, plan independent P6-U03 local
-outfit backup/import/reset using existing validated versioned storage. Scope must
-be visible: outfit library only, no QR/secrets/raw full-localStorage dump; import
-validated before apply, reset explicit confirmation and editor draft kept unless
-explicitly requested. P2-D08/P2-D09/central publication dependencies stay gated;
-K04 access requires actual sample/export. Continue safe unblocked tasks;
+After verifying backup pushed checkpoint/clean tree, complete P6-R01/R02 scoped
+Web Push/native research from primary docs: subscription/server/privacy/cost and
+retention boundaries; no actual push service or native project. P6-U02 visible
+active settings still needs verified schedule (UX contract forbids fake working
+toggle); P2-D08/P2-D09/central dependencies remain gated. K04 needs real export.
+Then audit next safe task by dependency, preserving all external gates;
 never mark roadmap DONE just because a checkpoint survived.

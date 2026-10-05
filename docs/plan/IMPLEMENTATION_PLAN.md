@@ -315,7 +315,7 @@ Phụ thuộc phase là điều kiện nền; cột phụ thuộc bổ sung quan
 |---|---|---|---|---|---|
 | P6-U01 | Tạo banner offline/last-sync và update prompt | Không ép reload làm mất outfit đang chỉnh; user chọn apply update | P6-I03, P4-W09 | Trung bình | — |
 | P6-U02 | Tạo notification settings/capability/permission flow | Prompt chỉ sau click, denied/unsupported có hướng dẫn; opt-in lưu local | P0-U02, P2-U01 | Trung bình | — |
-| P6-U03 | Tạo export/import/reset local data theo phạm vi | Import validate trước áp; reset cần xác nhận; không xuất QR raw hay bí mật | P2-U01, P4-W09 | Trung bình | — |
+| P6-U03 | **DONE 2026-10-06 — scoped outfit library:** backup JSON/preview-confirm import/confirmed reset; [plan](OUTFIT_BACKUP.md) | Six behavior tests/full264 PASS; projected/bounded/versioned data, no QR/secrets; explicit replacement/reset preserves current draft and other keys. Browser/file-picker QA remains P4-U01/P7-U01 | P2-U01, P4-W09 | Trung bình | Other data kinds require separate explicit scope |
 
 ### Hub / Data pipeline / Wardrobe
 

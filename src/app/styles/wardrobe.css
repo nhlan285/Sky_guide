@@ -53,6 +53,8 @@
 .wardrobe-equipped button { background: var(--surface-soft); color: var(--text); border: 1px solid var(--control-border); border-radius: .5rem; padding: .4rem .65rem; min-height: 44px; cursor: pointer; font-size: .75rem; }
 .wardrobe-actions { display: grid; gap: .65rem; margin-bottom: .8rem; }
 .wardrobe-saved { margin-top: 1.5rem; padding-top: 1rem; border-top: 1px solid var(--border); }
+.wardrobe-backup { display: grid; gap: .65rem; min-width: 0; }
+.wardrobe-backup input[type="file"] { width: 100%; min-width: 0; max-width: 100%; }
 .wardrobe-saved form { display: grid; gap: .65rem; }
 .wardrobe-saved__list { list-style: none; padding: 0; display: grid; gap: 1rem; }
 .wardrobe-saved__list li { display: grid; gap: .65rem; padding-block: .75rem; border-top: 1px solid var(--border); min-width: 0; }

@@ -17,6 +17,11 @@ package ID/revision so a new package cannot overwrite incompatible saved outfits
 Bound library to 50 entries, names to 80 characters and encoded data to 100k chars.
 The limits are application guards, not browser quota assumptions.
 
+Compatibility evolution2026-10-06: the exact identity-preserving demo r1->r2
+transition retains the original library key and revalidates snapshots in memory;
+see [size-rule decision](WARDROBE_SIZE_RULES.md). Other package/revision keys stay
+isolated. This avoids stranding saved outfits without general version fallback.
+
 ## Steps / Definition of Done
 
 - [x] Library parsing and pure save/rename/delete/select operations; invalid ID,

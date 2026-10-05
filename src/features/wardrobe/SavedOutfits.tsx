@@ -7,6 +7,7 @@ import { demoPackage } from './demo/demo'
 import { createOutfitStorage, deleteOutfit, renameOutfit, saveOutfit, selectOutfit } from './persistence'
 import type { OutfitLibrary } from './persistence'
 import { wardrobeCopy } from './copy'
+import { OutfitBackup } from './OutfitBackup'
 
 type Copy = typeof wardrobeCopy.vi
 function SavedOutfitRow({ outfit, copy, onLoad, onRename, onDelete }: {
@@ -45,7 +46,7 @@ export function SavedOutfits({ storage, selection, onLoad }: {
   const copy = wardrobeCopy[locale]
   const [saved, setSaved] = useState(() => storage.read())
   const [name, setName] = useState('')
-  const [message, setMessage] = useState<'saved' | 'loaded' | 'renamed' | 'deleted' | 'error' | null>(null)
+  const [message, setMessage] = useState<keyof typeof copy.libraryMessages | null>(null)
   const nameInput = useRef<HTMLInputElement>(null)
   const id = useId()
   const apply = (mutation: (library: OutfitLibrary) => ValidationResult<OutfitLibrary>, success: typeof message) => {
@@ -77,5 +78,7 @@ export function SavedOutfits({ storage, selection, onLoad }: {
         onRename={nextName => Boolean(apply(library => renameOutfit(library, demoPackage, outfit.id!, nextName), 'renamed'))}
         onDelete={() => { if (apply(library => deleteOutfit(library, demoPackage, outfit.id!), 'deleted')) nameInput.current?.focus() }} />)}
     </ul>}
+    <OutfitBackup library={saved.value} onReplace={library => { setSaved(storage.write(library)); setMessage('imported') }}
+      onReset={() => { setSaved(storage.reset()); setMessage('reset') }} />
   </section>
 }
