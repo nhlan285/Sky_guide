@@ -101,8 +101,8 @@ Phụ thuộc phase là điều kiện nền; cột phụ thuộc bổ sung quan
 | P1-D05 | **DONE 2026-10-06** — ThatSkyAPI /skytime GET/source sample | Epoch milliseconds/LA fields khớp; HTTP CORS*, time-only sample; quota/TTL/license unknown và notice hạn chế call ghi rõ | P0-D02 | Cao | DATA K05 cho integration |
 | P1-D06 | **DONE 2026-10-06** — K06 section/article Hotfix34.4 verified | Title/release-date-only/version/platform/link; relative updatedAt unknown, summary riêng; không dựng API/RSS | P0-D02 | Thấp | DATA K06 cho feed |
 | P1-D07 | **DONE 2026-10-06** — K07 source/text +2 map metadata samples | Page/file/image revisions/dimensions; Ray credit/Self vs Fairuse tách; coordinates unknown, không tải binary; coverage/import chưa làm | P0-D02 | Trung bình | DATA K07, RIGHTS vẫn giữ |
-| P1-D08 | Chọn và kiểm tra bài AppUnwrapper liên quan Eden/season | Lưu link/ngày/phạm vi, ghi phần đã lỗi thời hoặc chưa đối chiếu | P0-D02 | Thấp | DATA K08 |
-| P1-D09 | Xác minh playlist dẫn từ Wiki và tác giả K09 | Có link trang dẫn + link video gốc + phần tham khảo, không tự tải media | P0-D02 | Thấp | DATA K09 |
+| P1-D08 | **DONE 2026-10-06** — AppUnwrapper2019 Eden guide source review | Link/date/scope; glitch obsolete, map creator unknown/current mechanics unverified; không copy walkthrough | P0-D02 | Thấp | DATA K08 cho route QA |
+| P1-D09 | **DONE 2026-10-06** — Wiki TS playlist + Eden original video metadata | Wiki revision/link/credit và oEmbed creator verified; footage/timestamps/coverage chưa xem, không tải media | P0-D02 | Thấp | DATA K09 cho route QA |
 | P1-D10 | Xác minh listing App Store, market và coverage IAP K10 | Phân biệt giá item/SKU với range; ghi missing package contents | P0-H01 | Trung bình | DATA K10 |
 | P1-D11 | Xác minh listing Google Play, market và coverage IAP K11 | Không suy giá từ iOS; có SKU hoặc ghi unknown, không dựng package ID | P0-H01 | Trung bình | DATA K11 |
 | P1-D12 | Xác minh AppPricingLab hỗ trợ gì cho Sky/IAP/market K12 | Có kết luận API/export/manual/không khả dụng kèm chứng cứ; không giả dữ liệu app price là IAP price | P0-H01 | Trung bình | DATA K12 |

@@ -131,3 +131,21 @@ Three K07 response envelope/hash/location/rights/metadata assertions PASS; manua
 K06 heading/date/platform/link comparison PASS. JSON/scaffold/diff validation
 before commit. Exact next: P1-D08 K08 specific Eden/season article; original brief
 forbids copying walkthrough, current game correctness unknown until compared.
+
+## Current slices — P1-D08/K08 and P1-D09/K09 (2026-10-06)
+SMALL bounded source checks after P0-D02. One AppUnwrapper Eden/season article,
+source date/scope, own concise paraphrase and outdated/unverified limits. One
+Wiki-observed playlist/original video + creator metadata; no binary/frame download,
+rehost or embed rights inference. Profile/evidence/plans only. If media text
+unavailable, preserve observed directory link and missing creator/current checks.
+Next: actual article link and Wiki-linked playlist, avoid invented content.
+
+### K08/K09 completion — 2026-10-06
+AppUnwrapper2019-08-19 Eden article reviewed; obsolete glitch/unknown map artist
+and unverified current mechanics recorded, own summary only. Wiki Spirit Visits
+points TS playlist credited Tara; Eye of Eden109730 points original video,
+YouTube oEmbed200 verifies Tara channel/title. Footage/date/timestamps/membership
+not verified, no invented route or binary/frame download. Metadata evidence
+manual link/date/credit comparison and JSON/hash checks before checkpoint.
+Exact next: P1-D10/D11 reuse2026-10-04 listing evidence, verify acceptance coverage
+and unresolved market/SKU facts; P1-D12 AppPricingLab actual Sky/export contract.
