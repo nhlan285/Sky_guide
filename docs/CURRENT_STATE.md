@@ -3,10 +3,10 @@
 ## Task / branch / baseline
 Autonomous approved master roadmap: continue safe unblocked tasks, no merge/deploy.
 Branch `codex/master-plan-execution`. Latest verified pushed HEAD before current
-milestone: `22a29aac3a482604731573ac952e4769aea2e228`. Clean at resume preflight.
+milestone: `3e0b1be17776bbefef289e2507d0ce3fb4c2a43b`. Clean at resume preflight.
 Master [IMPLEMENTATION_PLAN](plan/IMPLEMENTATION_PLAN.md); R1 review plan
 [DATA_FOUNDATION](plan/DATA_FOUNDATION.md). Current independent slice
-[WARDROBE_NAVIGATION](plan/WARDROBE_NAVIGATION.md), P4-H01 complete awaiting push.
+[WIKI_SOURCE_VERIFICATION](plan/WIKI_SOURCE_VERIFICATION.md), P1-D01 complete awaiting push.
 
 ## Completed implementation checkpoints
 - `199bdd5`: identity/FK/revision/crosswalk/alias/tombstone contracts.
@@ -50,7 +50,13 @@ completed then, so full quota drill NOT PASS. Resumed2026-10-05 with usage allow
 95% short/83% weekly remaining. No exact context percentage exposed.
 
 ## Exact next action
-Finish docs/diff checks, commit/push P4-H01 and verify remote SHA. Then inspect
-P1-D01 source verification (oldest independent source task) via sky-wiki-source
-and existing KB evidence before any network call. R1 review remains pending.
-Do not stop the master run after this checkpoint or label whole roadmap DONE.
+P4-H01 pushed at3e0b1be, remote SHA verified. P1-D01 K01 source verification done:
+two direct public HTTP200 responses, revision-pinned Lua samples, field mapping,
+missing-price/type typo limits, siteinfo/CORS evidence.18/18 parser/media tests,
+JSON parsing/scaffold/diff PASS. No runtime code changed since full226 tests/build.
+Current intentional changes: K01 profile, knowledge/evidence/k01-item-module-contract-
+2026-10-05.json, WIKI_SOURCE_VERIFICATION plan, master and handoff. Raw responses
+only at E:/SkyGuideAssets/research/k01-2026-10-05; no images/corpus publication.
+Commit/push this milestone then verify K02 Regular Spirits + one concrete tree
+through a bounded API page/source sample. Do not infer edges/currency grammar.
+Continue independent tasks while R1 review waits; do not claim roadmap complete.

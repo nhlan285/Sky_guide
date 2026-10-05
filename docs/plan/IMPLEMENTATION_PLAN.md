@@ -94,7 +94,7 @@ Phụ thuộc phase là điều kiện nền; cột phụ thuộc bổ sung quan
 
 | ID | Việc / đầu ra cụ thể | Nghiệm thu | Phụ thuộc | Độ phức tạp | Gate |
 |---|---|---|---|---|---|
-| P1-D01 | Xác minh host/API/module item Wiki; lưu mẫu response và revision cho K01 | Ghi endpoint thật, action/format thực, field có/không; không giả module là JSON | P0-D02 | Trung bình | DATA K01 |
+| P1-D01 | **DONE 2026-10-05** — K01 endpoint/Lua modules/revision và mẫu field có provenance | Ghi endpoint thật, action/format thực, field có/không; không giả module là JSON | P0-D02 | Trung bình | DATA K01 |
 | P1-D02 | Xác minh URL/format Regular Spirits và mẫu cây cho K02 | Một tree có node/cạnh/cost được đối chiếu thủ công; ghi field thiếu | P0-D02 | Trung bình | DATA K02 |
 | P1-D03 | Xác minh trang Traveling Spirits, quy ước ngày và mẫu lịch sử K03 | Có khoảng ngày gốc, precision/timezone nếu biết và source revision | P0-D02 | Trung bình | DATA K03 |
 | P1-D04 | Xác minh link sheet ln.cookie, tab/cột và cách lấy K04 | Ghi tác giả, cột thực, quyền truy cập/export thực tế; fallback nhập tay nếu không export | P0-D02 | Trung bình | DATA K04 |
