@@ -416,7 +416,7 @@ Binary **images, posters, video, honk/call audio-video, emote video, music sampl
 | P9-D04 | Sync | Generic source sync → reviewed canonical + projection | Snapshot/hash/diff/normalization/quarantine, idempotent stable IDs, retry/backoff/source health, transactional promotion và Last Known Good (LKG); upstream fail không empty-overwrite. Reuse requirements P2-D10/P1-I01, không đợi mọi legacy adapter; foundation nghiệm thu synthetic trước, integration từng adapter sau verify. Scheduler/worker/cron chỉ sau task/quota approval; manual dry-run fallback | P9-D02, P9-D03, P9-I02 | Cao | DATA từng real adapter; task/quota nếu scheduler |
 | P9-V01 | Validation | Foundation/API/storage/migration contract checks và restore rehearsal | Synthetic FK/alias/tombstone/duplicate/revision/private export tests; API provider-swap parity và cache invalidation; schema up/down/backup restore rehearsal, revoked asset không hồi sinh từ rollback; không gọi live DB DONE chỉ bằng fixture | P9-D04, P9-I01, P9-I02 | Cao | Review; môi trường/quota approved |
 
-**Exact next implementation slice:** P9-D01–P9-D03 + P9-I01, contract/schema/API/storage/migration review và nhỏ synthetic fixtures. Sau review mới tới P9-I02 provider/provisioning; không khởi động item crawling, Event hoặc Music trước foundation dependency.
+**Exact next R1 action:** review P9-D01–P9-D03/P9-I01 contracts đã triển khai và bounded synthetic P9-D04/P9-V01 subset trong [DATA_FOUNDATION](DATA_FOUNDATION.md); không triển khai lại các slice đã xong. Maintainer schema/API/storage review còn pending; sau review mới lựa chọn provider/quota/task approval cho P9-I02. Live integration/foundation DoD chưa DONE; không khởi động Event/Music trước dependency.
 
 ### R2 — dataset/item media reconciliation pilot
 

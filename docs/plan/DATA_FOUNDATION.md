@@ -38,7 +38,7 @@ No binary files or credentials in domain data. Public export is allowlisted.
   public evidence allowlist and revocation overlay; preserve existing R2 paths.
 - [x] I01: backup/restore/migration/rollback/quota runbook and review checklist.
 - [x] Focused tests, lint/typecheck/catalog/build and docs checks; inspect diff.
-  Contract milestones passed; latest master-run full269 PASS at588bb31. This is
+  Contract milestones passed; latest master-run full274 PASS atc53a111. This is
   local validation, not provider/schema review or live migration acceptance.
 - [x] Checkpoint drill commit/push/remote verification; continue next safe slice.
 - [x] D04/V01 local contract subset: synthetic staging/quarantine/review digest,
@@ -69,14 +69,24 @@ approval. Contract tests cannot establish live DB completion.
 
 P9-I02 requires maintainer schema/API review, provider selection and quota/task
 approval. No provider chosen. P9-D04/P9-V01 real integration depends on I02;
-R2–R6 retain their foundation/checkpoint dependencies. Build the above local
-contract slice first, then present concrete review artifacts. Exact next action:
-checkpoint the validated D01 slice, then implement D02/D03 contracts.
+R2–R6 retain their foundation/checkpoint dependencies. D01–D03/I01 local contracts
+and the bounded synthetic D04/V01 subset above are already implemented and
+checkpointed; do not restart them. Exact next action: maintainer reviews
+[relational/API/storage contracts](../architecture/data-foundation.md), domain
+interfaces and tests. After review, compare approved provider options and quotas;
+obtain provider/task approval before provisioning I02. The pending review question
+has no answer. No live DB/migration/integration acceptance can be claimed.
 
 ## Handoff / compact
 
-Read CURRENT_STATE for latest commit/checks. Baseline scaffold: PASS, 173 unique
-tasks; lockfile install with pnpm 10.30.3 completed. No runtime source changes yet.
+Read [CURRENT_STATE](../CURRENT_STATE.md) for latest commit/checks and gates.
+Branch `codex/master-plan-execution`; checkpoint60cdc36 was verified pushed before
+this documentation correction. Scaffold:71 Markdown files/173 unique tasks PASS;
+pnpm10.30.3. Domain implementations remain unmounted from production consumers;
+no provider resource is provisioned. Latest full274 tests/lint/typecheck/catalog/
+build PASS atc53a111; this docs-only correction does not rerun runtime checks.
 Checkpoint drill: PASS — `199bdd58c37b848b6b550b1adfdb7e7e70a5f791` committed,
-pushed and verified with ls-remote; work continued with D02/D03. Their focused
-tests bring the total to 18 PASS. Compaction continuity test: NOT TRIGGERED.
+pushed and verified with ls-remote; work continued with D02/D03 and later slices.
+Native compaction has since resumed from verified checkpoints; no agent-invokable
+manual compaction or quota restoration is claimed. Q12/K04/rights remain separate
+gates; the roadmap is OPEN.
