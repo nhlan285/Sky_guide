@@ -1,21 +1,11 @@
 /**
  * Vercel Function: private Cloudflare R2 manifest proxy
  *
- * Route:
- *   GET /api/manifest/<name>.json
+ * Public route:
+ *   GET /assets/items/manifests/<name>.json
  *
- * Allowed:
- *   index
- *   items-00 ... items-29
- *
- * Flow:
- *   browser
- *     -> Vercel Function
- *     -> fetch private manifest from R2
- *     -> return JSON from the same origin
- *
- * Keeping manifest bytes on the Vercel response avoids browser CORS
- * failures while image bytes still redirect directly to private R2.
+ * Internal route:
+ *   GET /api/manifest/<name>
  *
  * R2 credentials remain server-side only.
  */
@@ -26,12 +16,11 @@ import {
   S3Client,
 } from '@aws-sdk/client-s3'
 
-const ALLOWED_NAMES = new Set<string>(['index'])
+const MANIFEST_RE =
+  /^(?:\/api\/manifest\/|\/assets\/items\/manifests\/)(index|items-(?:[0-2]\d))(?:\.json)?$/
 
-for (let i = 0; i <= 29; i++) {
-  ALLOWED_NAMES.add(
-    `items-${String(i).padStart(2, '0')}`,
-  )
+function manifestName(pathname: string): string | null {
+  return MANIFEST_RE.exec(pathname)?.[1] ?? null
 }
 
 function getR2Client(): S3Client | null {
@@ -53,7 +42,7 @@ function getR2Client(): S3Client | null {
   })
 }
 
-export default async function handler(
+async function handler(
   req: Request,
 ): Promise<Response> {
   if (req.method !== 'GET' && req.method !== 'HEAD') {
@@ -69,18 +58,19 @@ export default async function handler(
   const client = getR2Client()
 
   if (!bucket || !client) {
+    console.error('[manifest-r2] storage not configured')
     return new Response('Storage not configured', {
       status: 503,
     })
   }
 
   const url = new URL(req.url)
+  // Explicit routes target the function artifact, carrying the logical name.
+  const raw = url.pathname === '/api/manifest/[name]'
+    ? manifestName(`/api/manifest/${url.searchParams.get('name') ?? ''}`)
+    : manifestName(url.pathname)
 
-  const raw = url.pathname
-    .replace(/^\/api\/manifest\//, '')
-    .replace(/\.json$/, '')
-
-  if (!ALLOWED_NAMES.has(raw)) {
+  if (!raw) {
     return new Response('Not Found', {
       status: 404,
     })
@@ -152,3 +142,6 @@ export default async function handler(
     )
   }
 }
+
+// A default function is a Node (req, res) handler on Vercel. Opt into Web APIs.
+export default { fetch: handler }

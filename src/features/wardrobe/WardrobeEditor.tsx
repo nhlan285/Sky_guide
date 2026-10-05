@@ -1,5 +1,6 @@
 import { useEffect, useMemo, useReducer, useRef, useState } from 'react'
 import type { CSSProperties } from 'react'
+import { useLocation } from 'react-router-dom'
 import type { LocalizedText } from '../../data/catalog/types'
 import { SLOTS } from '../../data/wardrobe/index'
 import type { Slot } from '../../data/wardrobe/index'
@@ -10,18 +11,33 @@ import { createWardrobeState, wardrobeReducer } from './engine'
 import { deriveRenderModel } from './model'
 import { ItemThumbnail, PaperDoll } from './PaperDoll'
 import { wardrobeCopy } from './copy'
+import { createOutfitStorage } from './persistence'
+import { SavedOutfits } from './SavedOutfits'
+import { OutfitShare } from './OutfitShare'
+import { wardrobeDraft } from './draft'
+import { WardrobeItemIntent } from './WardrobeItemIntent'
 
 const reduce = (state: ReturnType<typeof createWardrobeState>, action: Parameters<typeof wardrobeReducer>[1]) => wardrobeReducer(state, action, demoPackage)
 
 export function WardrobeEditor() {
+  const { search } = useLocation()
   const { locale } = useLocale()
   const title = useRef<HTMLHeadingElement>(null)
   useEffect(() => { title.current?.focus({ preventScroll: true }) }, [])
   const copy = wardrobeCopy[locale]
-  const [state, dispatch] = useReducer(reduce, null, () => createWardrobeState(demoPackage, demoDefaultSize))
+  const [outfitStorage] = useState(() => createOutfitStorage(demoPackage, () => window.localStorage))
+  const [state, dispatch] = useReducer(reduce, null, () => {
+    const initial = createWardrobeState(demoPackage, demoDefaultSize)
+    const draft = wardrobeDraft.read(demoPackage)
+    if (draft) return wardrobeReducer(initial, { type: 'restore_outfit', snapshot: draft }, demoPackage)
+    const library = outfitStorage.read().value
+    const last = library.outfits.find(outfit => outfit.id === library.lastOutfitId)
+    return last ? wardrobeReducer(initial, { type: 'restore_outfit', snapshot: last }, demoPackage) : initial
+  })
   const [slot, setSlot] = useState<Slot>('cape')
   const [panel, setPanel] = useState<'picker' | 'outfit'>('picker')
   const { selection } = state
+  useEffect(() => { wardrobeDraft.write(selection, demoPackage) }, [selection])
   const model = useMemo(() => deriveRenderModel(demoPackage, selection, state.effectiveSizeCode), [selection, state.effectiveSizeCode])
   const name = (text: LocalizedText) => text.translations[locale] ?? text.default
   const options = demoPackage.items.filter(item => item.slot === slot)
@@ -35,6 +51,8 @@ export function WardrobeEditor() {
       <div><h1 ref={title} id="page-title" tabIndex={-1}>{copy.title}</h1><p>{copy.subtitle}</p></div>
       <div className="wardrobe-disclosure"><StatusBadge tone="info">{copy.demo}</StatusBadge><p>{copy.disclosure}</p></div>
     </div>
+    <WardrobeItemIntent search={search} />
+    <OutfitShare selection={selection} onLoad={snapshot => dispatch({ type: 'restore_outfit', snapshot })} />
     <div className="wardrobe-workspace" data-panel={panel}>
       <section className="wardrobe-preview" aria-labelledby="preview-title">
         <div className="preview-caption"><h2 id="preview-title">{copy.preview}</h2><span>{equipped.length} / {SLOTS.length}</span></div>
@@ -111,6 +129,7 @@ export function WardrobeEditor() {
           <Button className="button--quiet" onClick={() => dispatch({ type: 'reset_outfit' })}>{copy.resetOutfit}</Button>
         </div>
         <p className="wardrobe-small">{copy.session}</p>
+        <SavedOutfits storage={outfitStorage} selection={selection} onLoad={snapshot => dispatch({ type: 'restore_outfit', snapshot })} />
       </section>
     </div>
   </div>

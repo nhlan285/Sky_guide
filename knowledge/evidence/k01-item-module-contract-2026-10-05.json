@@ -1,0 +1,160 @@
+{
+  "schemaVersion": 1,
+  "purpose": "research-only; no catalog publication or asset permission",
+  "retrievedAt": "2026-10-05T00:11:17.425Z",
+  "endpoint": "https://sky-children-of-the-light.fandom.com/api.php",
+  "request": {
+    "action": "query",
+    "format": "json",
+    "formatversion": "2",
+    "prop": "revisions",
+    "rvprop": "ids|timestamp|content",
+    "rvslots": "main",
+    "titles": "Module:Cosmetics/data|Module:Spirit Item/data"
+  },
+  "responseSha256": "63b3977fbe19d248d192c2c4155ccf5d744cf43bf1c32c50985cc8a26b94126e",
+  "responseBytes": 41479,
+  "modules": [
+    {
+      "title": "Module:Spirit Item/data",
+      "pageId": 12251,
+      "revision": 98798,
+      "editedAt": "2025-10-21T03:33:59Z",
+      "sourceUrl": "https://sky-children-of-the-light.fandom.com/wiki/Module%3ASpirit_Item%2Fdata?oldid=98798",
+      "contentModel": "Scribunto",
+      "format": "JSON envelope containing literal Lua table; not a JSON module",
+      "recordCount": 40,
+      "fields": [
+        "alt_name",
+        "cost",
+        "icon",
+        "icon_type",
+        "name",
+        "ult_name"
+      ],
+      "samples": [
+        {
+          "sourceRecordKey": "hair",
+          "observed": {
+            "name": "Hair"
+          }
+        },
+        {
+          "sourceRecordKey": "season_heart",
+          "observed": {
+            "cost": "3 SC SP"
+          }
+        }
+      ],
+      "diagnostics": []
+    },
+    {
+      "title": "Module:Cosmetics/data",
+      "pageId": 17822,
+      "revision": 100805,
+      "editedAt": "2026-01-01T17:14:39Z",
+      "sourceUrl": "https://sky-children-of-the-light.fandom.com/wiki/Module%3ACosmetics%2Fdata?oldid=100805",
+      "contentModel": "Scribunto",
+      "format": "JSON envelope containing literal Lua table; not a JSON module",
+      "recordCount": 100,
+      "fields": [
+        "alt_name",
+        "back",
+        "elder",
+        "exterior",
+        "front",
+        "held",
+        "icon",
+        "interior",
+        "item_type",
+        "music_id",
+        "music_tag",
+        "name",
+        "order",
+        "price",
+        "real",
+        "side",
+        "spirit"
+      ],
+      "samples": [
+        {
+          "sourceRecordKey": "basic_hair",
+          "observed": {
+            "name": "Base Hair",
+            "item_type": "hair",
+            "price": "free"
+          }
+        },
+        {
+          "sourceRecordKey": "pointing_candlemaker_outfit",
+          "observed": {
+            "name": "Pointing Candlemaker Outfit",
+            "item_type": "outfit",
+            "spirit": "Pointing Candlemaker",
+            "price": "4 H"
+          }
+        },
+        {
+          "sourceRecordKey": "isle_elder",
+          "observed": {
+            "name": "Elder of the Isle"
+          }
+        },
+        {
+          "sourceRecordKey": "basic_outfit",
+          "observed": {
+            "name": "Base Outfit",
+            "item_type": "outift",
+            "price": "free"
+          }
+        }
+      ],
+      "diagnostics": [
+        {
+          "kind": "duplicate-literal-key",
+          "key": "name",
+          "previous": "Bird Whisperer Music",
+          "replacement": "Bird Whisperer",
+          "offset": 4507
+        },
+        {
+          "kind": "duplicate-literal-key",
+          "key": "exterior",
+          "previous": "",
+          "replacement": "",
+          "offset": 10317
+        }
+      ]
+    }
+  ],
+  "siteInfo": {
+    "retrievedAt": "2026-10-05T00:11:41.815Z",
+    "request": {
+      "action": "query",
+      "format": "json",
+      "formatversion": "2",
+      "meta": "siteinfo",
+      "siprop": "general|rightsinfo",
+      "origin": "*"
+    },
+    "responseSha256": "abe65c97e81e6e330dcd011dca6f2c9a6dc4e4a1d1f61c1b0f80b5733b10e890",
+    "rights": {
+      "url": "https://www.fandom.com/licensing",
+      "text": "CC-BY-SA"
+    },
+    "cors": {
+      "requestOrigin": "http://localhost:4173",
+      "allowOrigin": "*",
+      "note": "HTTP observation only, not browser integration acceptance"
+    },
+    "licenseVersion": null
+  },
+  "limitations": [
+    "Cosmetics sample is 100 module rows, not complete game catalogue.",
+    "Spirit Item rows are generic type definitions; default cost is not an individual item price.",
+    "Currency abbreviation semantics and multi-token cost grammar remain unverified in this slice.",
+    "No zero-to-free conversion or current availability inference.",
+    "Text license label is not image permission; attribution/version details remain separate review.",
+    "Server rate limit policy not verified; two sequential small requests only."
+  ]
+}

@@ -1,5 +1,11 @@
 # Knowledge Base — sổ nguồn
 
+Xác minh bổ sung 2026-10-04: [ảnh và giá item theo mùa/TS/shop/IAP](16-image-price-sources.md),
+[evidence nhỏ có version/revision](evidence/image-price-sources-2026-10-04.json).
+Bao gồm ứng viên SkyGame-Data/Sky Planner và USD/VND tách iOS/Android.
+Đây là nghiên cứu cho crawler tương lai; bảng scaffold lịch sử bên dưới không
+được coi là trạng thái mới nhất. Chưa import/publish nguồn mới hoặc đóng mọi gate.
+
 Cơ sở scaffold: [mục 3 của brief](../docs/PROJECT_BRIEF.md). K01–K14 bên dưới là hồ sơ gốc; trạng thái scaffold không phải bằng chứng kết nối. **K15 bổ sung được user duyệt cho Real Hub Feature V1:** [ThatSkyApplication public utility](15-thatskyapplication.md), đã kiểm tra revision/giấy phép và import catalogue; không thay đổi gate của các nguồn gốc.
 
 “Đã sẵn sàng dùng” bên dưới mô tả hướng triển khai text theo brief; **không** có nghĩa endpoint, schema response, giấy phép hoặc dữ liệu hiện tại đã được kiểm chứng. Mọi adapter phải qua bước xác minh ở Phase 1. Với đường dẫn không có trong brief, giữ `sourceUrl=null` cho tới khi xác minh; không bịa URL. Các link tên miền chỉ được chuẩn hóa từ tên miền ghi trong brief, chưa xác nhận đường dẫn chi tiết.
@@ -21,7 +27,7 @@ Cơ sở scaffold: [mục 3 của brief](../docs/PROJECT_BRIEF.md). K01–K14 b�
 | K13 | [Asset TGC](13-tgc-assets.md) | Model/icon đầy đủ | Đã nhận phản hồi Support (Ray); permission scope chưa rõ, full assets pending legal confirmation; cần placeholder |
 | K14 | [Discord có kiểm duyệt](14-discord-editorial.md) | Tin leak | Cần cấu hình quy trình; chưa có nguồn cụ thể |
 
-K01–K13 bao phủ từng nguồn riêng trong 9 hàng của bảng mục 3; hàng có nhiều nguồn được tách riêng. K14 là nguồn bổ sung **đã có ở mục 2.2 và 8 của brief**, không phải nguồn mới tự thêm. Season/event chưa có nguồn chuyên biệt trong bảng: không gán mặc nhiên ThatSkyAPI cung cấp nội dung season. Chỉ sử dụng thông tin kiểm chứng từ các nguồn đã liệt kê; nếu thiếu thì giữ trạng thái chưa có dữ liệu.
+K01–K13 bao phủ từng nguồn riêng trong 9 hàng của bảng mục 3; hàng có nhiều nguồn được tách riêng. K14 đã có trong brief, không là nguồn mới tự thêm. **Evolution 2026-10-04:** [roadmap Q23/P9-D07](../docs/plan/IMPLEMENTATION_PLAN.md) duyệt multi-source Event Service: TGC announcements/patch notes, SkyGame-Data/Planner, ThatSkyApplication, SkyCOTL.tools, Wiki enrichment và shard prediction source/logic là candidates theo scope. K15 catalogue và dossier SkyGame-Data không chứng minh event adapter verified; SkyCOTL.tools/shard source chưa có K-ID/evidence được xác nhận ở đây. P9-D07 verify/document source/contract và cấp ID không collision trước integration, không tự giả verified hoặc gán K05 là feed season. Thiếu evidence giữ DATA-gated; calculated/prediction không hiển thị official.
 
 ## Bảng phân công kiểm tra K01–K14 và thông tin đang thiếu (P0-D02)
 

@@ -1,10 +1,18 @@
 # Implementation Plan — task breakdown
 
-Nguồn sự thật: [PROJECT_BRIEF](../PROJECT_BRIEF.md). Các quyết định triển khai là **đề xuất** cụ thể để chuyển thành task, không thêm nguồn dữ liệu hoặc thông tin game ngoài brief. Đọc kèm [PRD](../PRD.md), [Architecture](../ARCHITECTURE.md), [Schema](../DATA_SCHEMA.md), [UX](../UX_GUIDELINES.md), [Legal](../LEGAL_STATUS.md) và [Knowledge Base](../../knowledge/README.md).
+Baseline sản phẩm: [PROJECT_BRIEF](../PROJECT_BRIEF.md), cùng các quyết định maintainer đã duyệt ngày **2026-10-04** (Q20–Q23 bên dưới). Phần đề xuất/OPEN không phải implementation hoặc nguồn game đã xác minh. Đọc kèm [PRD](../PRD.md), [Architecture](../ARCHITECTURE.md), [Schema](../DATA_SCHEMA.md), [UX](../UX_GUIDELINES.md), [Legal](../LEGAL_STATUS.md) và [Knowledge Base](../../knowledge/README.md).
 
-Real Hub Feature V1 (2026-10-03): user duyệt riêng [K15 ThatSkyApplication](../../knowledge/15-thatskyapplication.md). Source verification + mapping + adapter K15 đã triển khai, ghim revision và MIT notice; không đánh dấu các task nguồn Wiki K01–K12 hoặc P1-D13 toàn bộ DONE. Catalogue Item Lookup có 1.808 records và route `/items`, `/items/:id`. P2-H01 đã có manifest/normalized loader cho Item Lookup; task tổng thể và P2-D12 vẫn OPEN (chưa có loader/pipeline đầy đủ cho các module khác). Wardrobe hiện có giữ nguyên; không triển khai thêm tính năng Wardrobe.
+Real Hub Feature V1 (2026-10-03): user duyệt riêng [K15 ThatSkyApplication](../../knowledge/15-thatskyapplication.md). Source verification + mapping + adapter K15 đã triển khai, ghim revision và MIT notice; không đánh dấu các task nguồn Wiki K01–K12 hoặc P1-D13 toàn bộ DONE. Catalogue Item Lookup có 1.808 records và route `/items`, `/items/:id`. P2-H01 đã có manifest/normalized loader cho Item Lookup; task tổng thể và P2-D12 vẫn OPEN (chưa có loader/pipeline đầy đủ cho các module khác). Giới hạn giữ nguyên Wardrobe áp dụng cho scope K15 lịch sử; master run 2026-10-04 tiếp tục các task demo độc lập đủ dependency.
 
 ## Cách dùng task list
+
+Scoped infrastructure repair (2026-10-04): [R2 runtime debugging](R2_RUNTIME_DEBUG.md).
+This task preserves the asset corpus, catalog, UI and storage architecture; it does
+not change completion status of unrelated product phases. See [current handoff](../CURRENT_STATE.md).
+
+Completed scoped follow-up (2026-10-04): [item image sizing and source verification](ITEM_IMAGES_PRICE_SOURCES.md), merged as **PR #10**, `origin/main` **c0c0ee0**. Research prepares future reconciliation; it does not publish new catalog prices or complete all source coverage.
+
+Current checkpoint: **R1 — data/storage contracts IN PROGRESS**, [active task plan](DATA_FOUNDATION.md). R0 baseline `8b371de` is committed and pushed; R1 contracts and local sync checks are implemented, awaiting maintainer/provider review, not live DB completion. Independent P2-U01 local storage is DONE; P2-D03 schemas are DONE; P4-W09 local outfit persistence is DONE; P4-W10 share codec and P4-H01 navigation continuity are DONE. The additive Phase 9 track is the next execution order; Phase 0–8 IDs and historical dependencies remain traceable. Living Sky / responsive atlas and Hub shell are production; K15 Item Lookup has ~1.808 records on `/items` and `/items/:id`. Wardrobe is an interactive self-created/fixture demo. R2 runtime routing and Item/Wardrobe CSS collision are fixed on main. These scoped results do not satisfy every Phase 7 release flow or K01–K12/full generic pipeline DoD.
 
 Mỗi hàng là một task độc lập để copy: **ID + module + việc/đầu ra + nghiệm thu + phụ thuộc + độ phức tạp + gate**. Không có ước lượng thời gian. Task chưa có trạng thái nghiệm thu cụ thể vẫn là **chưa làm**; các hàng DONE ghi ngày và phạm vi bằng chứng. Không đánh dấu API, calibration, asset, UI hoặc deploy đã sẵn sàng chỉ vì có tài liệu.
 
@@ -14,6 +22,7 @@ Mỗi hàng là một task độc lập để copy: **ID + module + việc/đầ
 - **Gate `DATA Kxx`:** thiếu URL/contract/dữ liệu thật; có thể dùng fixture tự tạo gắn nhãn để phát triển, nhưng không gọi integration là hoàn thành.
 - **Gate `TGC`:** **pending legal confirmation**, phụ thuộc phản hồi TGC đúng phạm vi; phương án tạm nêu riêng. Không tự bỏ gate.
 - **Gate `RIGHTS`:** cần xác minh quyền asset bên thứ ba (ví dụ map), không mặc định TGC có thể cho phép thay tác giả.
+- **DONE:** đã nghiệm thu đúng phạm vi/bằng chứng; **OPEN:** chưa đạt DoD; **APPROVED/DESIGNED:** đã duyệt hướng/contract, chưa implemented; **BLOCKED:** không thể hoàn thành slice vì dependency cụ thể. **DATA-gated / RIGHTS-gated / TGC-gated** chỉ rõ phần bị chặn; fixture có thể tiếp tục nhưng không được gọi integration/publishing DONE. Task không ghi DONE mặc định OPEN.
 
 Phụ thuộc phase là điều kiện nền; cột phụ thuộc bổ sung quan hệ task cụ thể. `P0`/`P1`… trong cột này nghĩa DoD của phase tương ứng. Nhánh DATA/TGC chưa xong không ngăn scaffold, fixture test, UI placeholder hoặc module có dữ liệu khác tiến lên. Để phát hành một module có dữ liệu thật, các task nguồn/contract của chính module đó phải đạt DoD. Không dùng “defer” để tuyên bố toàn bộ sản phẩm hoàn tất.
 
@@ -29,16 +38,16 @@ Phụ thuộc phase là điều kiện nền; cột phụ thuộc bổ sung quan
 
 | ID | Việc / đầu ra cụ thể | Nghiệm thu | Phụ thuộc | Độ phức tạp | Gate |
 |---|---|---|---|---|---|
-| P0-I01 | Ghi quyết định React/TypeScript/Vite, router, package manager và phiên bản hỗ trợ vào Architecture | Có lựa chọn/phiên bản được kiểm tra lúc code, lý do và build command; không cài framework thứ hai không cần thiết | — | Thấp | — |
-| P0-I02 | Khởi tạo manifest dependency, TypeScript và entry app rỗng trong khung `src` | Install/build chạy tái lập với lockfile; không chứa demo dữ liệu thật giả | P0-I01 | Thấp | — |
-| P0-I03 | Tạo quy tắc lint/typecheck và script build | Lệnh được mô tả, lỗi type thực sự làm build gate fail | P0-I02 | Thấp | — |
+| P0-I01 | **DONE 2026-10-04 — existing implementation/evidence verified:** Ghi quyết định React/TypeScript/Vite, router, package manager và phiên bản hỗ trợ vào Architecture | Có lựa chọn/phiên bản được kiểm tra lúc code, lý do và build command; không cài framework thứ hai không cần thiết | — | Thấp | — |
+| P0-I02 | **DONE 2026-10-04 — existing implementation/evidence verified:** Khởi tạo manifest dependency, TypeScript và entry app rỗng trong khung `src` | Install/build chạy tái lập với lockfile; không chứa demo dữ liệu thật giả | P0-I01 | Thấp | — |
+| P0-I03 | **DONE 2026-10-04 — existing implementation/evidence verified:** Tạo quy tắc lint/typecheck và script build | Lệnh được mô tả, lỗi type thực sự làm build gate fail | P0-I02 | Thấp | — |
 | P0-I04 | Thiết lập Vercel project/preview, output và routing fallback | Root và deep link mở đúng bản preview; ghi cách rollback; chưa bật tài nguyên trả phí | P0-I03 | Trung bình | — |
 
 ### Data pipeline
 
 | ID | Việc / đầu ra cụ thể | Nghiệm thu | Phụ thuộc | Độ phức tạp | Gate |
 |---|---|---|---|---|---|
-| P0-D01 | **DONE 2026-10-01** — Chốt kho JSON versioned và ranh giới public/raw/draft (Q01) | Contract trong Architecture/DATA_SCHEMA: `data/public/<catalogVersion>/`, manifest/version/provenance/FK/alias; raw/draft/reviewed/evidence ở workspace private ngoài repo; ignore/upload boundaries được kiểm tra; chưa implement nguồn thật/export pipeline | — | Trung bình | — |
+| P0-D01 | **DONE 2026-10-01** — Chốt kho JSON versioned và ranh giới public/raw/draft (Q01, historical) | Contract projection/manifest/provenance/FK/alias và private boundaries giữ nguyên; canonical ownership evolved sang Q20 ngày 2026-10-04, không reopen nghiệm thu lịch sử; central DB chưa provisioned | — | Trung bình | — |
 | P0-D02 | **DONE 2026-10-01** — Lập bảng owner kiểm tra từng K01–K14 và thông tin đang thiếu | Ma trận 14/14 nguồn trong Knowledge Base có role owner, trạng thái hiện tại, thông tin thiếu cần xác minh, việc tiếp theo bám roadmap Phase 1 và gate/phụ thuộc; không điền URL/endpoint phỏng đoán | P0-D01 | Thấp | — |
 | P0-D03 | **DONE 2026-10-02** — Chốt owner/evidence handling (Q16 CLOSED) | [Legal contract](../TGC_FOLLOW_UP.md#ownership-và-evidence-boundary--q16): Maintainer / repository owner, nơi logic Sky Guide private workspace → Legal → TGC ngoài repo, trách nhiệm update và public allowlist; chưa provisioning storage/nhận raw evidence; full asset gate pending | — | Thấp | — |
 
@@ -61,7 +70,7 @@ Phụ thuộc phase là điều kiện nền; cột phụ thuộc bổ sung quan
 
 | ID | Việc / đầu ra cụ thể | Nghiệm thu | Phụ thuộc | Độ phức tạp | Gate |
 |---|---|---|---|---|---|
-| P0-H01 | Chốt market/platform và cách trình bày ước lượng IAP | Phân biệt giá niêm yết, proportional và checkout; chưa thêm ngoại hối | Q10 | Trung bình | Q10 |
+| P0-H01 | **OPEN tổng thể; market choice đã duyệt PR #10:** IAP USD/US + VND/VN riêng iOS/Android | Giữ market quyết định cũ; finish proportional/checkout/mixed/heart mapping theo Q10 và DATA coverage; không FX tự động, missing khác free | Q10 phần mapping còn mở | Trung bình | Q10 phần mapping |
 | P0-H02 | Chốt owner/reviewer/tool cho leak và trạng thái chuyển duyệt | Có người duyệt, điều kiện approve/reject/withdraw; không auto-publish | Q02 | Trung bình | Q02 |
 | P0-H03 | Ghi tiêu chí chấp nhận phương pháp dự đoán TS | Nhãn, dữ liệu đầu vào, phạm vi suy luận và trường hợp không đủ dữ liệu rõ | Q09 | Trung bình | Q09 |
 
@@ -85,7 +94,7 @@ Phụ thuộc phase là điều kiện nền; cột phụ thuộc bổ sung quan
 
 | ID | Việc / đầu ra cụ thể | Nghiệm thu | Phụ thuộc | Độ phức tạp | Gate |
 |---|---|---|---|---|---|
-| P1-D01 | Xác minh host/API/module item Wiki; lưu mẫu response và revision cho K01 | Ghi endpoint thật, action/format thực, field có/không; không giả module là JSON | P0-D02 | Trung bình | DATA K01 |
+| P1-D01 | **DONE 2026-10-05** — K01 endpoint/Lua modules/revision và mẫu field có provenance | Ghi endpoint thật, action/format thực, field có/không; không giả module là JSON | P0-D02 | Trung bình | DATA K01 |
 | P1-D02 | Xác minh URL/format Regular Spirits và mẫu cây cho K02 | Một tree có node/cạnh/cost được đối chiếu thủ công; ghi field thiếu | P0-D02 | Trung bình | DATA K02 |
 | P1-D03 | Xác minh trang Traveling Spirits, quy ước ngày và mẫu lịch sử K03 | Có khoảng ngày gốc, precision/timezone nếu biết và source revision | P0-D02 | Trung bình | DATA K03 |
 | P1-D04 | Xác minh link sheet ln.cookie, tab/cột và cách lấy K04 | Ghi tác giả, cột thực, quyền truy cập/export thực tế; fallback nhập tay nếu không export | P0-D02 | Trung bình | DATA K04 |
@@ -104,7 +113,7 @@ Phụ thuộc phase là điều kiện nền; cột phụ thuộc bổ sung quan
 | ID | Việc / đầu ra cụ thể | Nghiệm thu | Phụ thuộc | Độ phức tạp | Gate |
 |---|---|---|---|---|---|
 | P1-W01 | **DONE 2026-10-03** — Package demo hình học mới và metadata quyền | [Demo riêng](../../src/features/wardrobe/demo/README.md), 12 item / 6 slot, assets self_created_placeholder + fixture; không tái dùng SVG Phase 0 hoặc nhập public catalog thật | P0-W01 | Thấp | — |
-| P1-W02 | Liệt kê riêng dữ liệu cần TGC: model/layer/rig/dye/calibration | K13 và Legal có danh sách thiếu; toàn bộ full asset giữ pending legal confirmation | P0-D03 | Thấp | — |
+| P1-W02 | **DONE 2026-10-04 — existing implementation/evidence verified:** Liệt kê riêng dữ liệu cần TGC: model/layer/rig/dye/calibration | K13 và Legal có danh sách thiếu; toàn bộ full asset giữ pending legal confirmation | P0-D03 | Thấp | — |
 
 ### Legal / TGC permission execution
 
@@ -120,7 +129,7 @@ Phụ thuộc phase là điều kiện nền; cột phụ thuộc bổ sung quan
 
 | ID | Việc / đầu ra cụ thể | Nghiệm thu | Phụ thuộc | Độ phức tạp | Gate |
 |---|---|---|---|---|---|
-| P1-H01 | Xác định nguồn chứng cứ season/event trong K01/K06 | Mỗi mốc có source; thiếu thì ghi unavailable, không lấy ThatSkyAPI làm feed nếu chưa chứng minh | P1-D01, P1-D06 | Trung bình | Q14, DATA K01/K06 |
+| P1-H01 | **OPEN — evolved Q23:** xác định chứng cứ season/event qua source registry đa nguồn | Giữ nhánh Wiki/official cũ; P9-D07 verify từng source/field/schedule, không gán ThatSkyAPI là feed hoặc K15 item approval là event verification | P0-D02, P1-D01/P1-D06 cho nhánh cũ; P9-D07 cho Event Service | Trung bình | DATA theo source/module |
 | P1-H02 | Ghi quy tắc nhập tin Discord và thông tin nguồn được phép dẫn | Chưa có channel/source thì để inactive; không thu thập tự động | P0-H02 | Trung bình | Q02, DATA K14 |
 | P1-H03 | Xác minh protocol QR profile và phạm vi dữ liệu có thể hiển thị | Có mẫu an toàn/đã cho phép, field schema và cách decode; không suy payload thành danh tính thật | Q11 | Cao | Q11 |
 
@@ -145,16 +154,16 @@ Phụ thuộc phase là điều kiện nền; cột phụ thuộc bổ sung quan
 |---|---|---|---|---|---|
 | P2-D01 | **DONE 2026-10-02** — Core types/validators provenance, money và PartialTime | [src/data/core](../../src/data/core/README.md): nullable unknown giữ nguyên, amount thiếu không thành 0, source enum + supplied registry/reference/duplicate checks, instant bắt buộc offset và calendar validation; errors có path/code, 17 behavioral tests qua node:test (`pnpm test`), lint/typecheck/build PASS; chưa adapter/export gate | P0-D01 | Trung bình | — |
 | P2-D02 | **DONE 2026-10-02** — Item/Spirit, FriendshipTree/Node, Season/Event và TS schemas | [src/data/catalog](../../src/data/catalog/README.md): explicit FK context, membership + acyclic graph validation, unknown/free và date precision giữ nguyên, TS Visit/Prediction tách type/collection; 21 behavioral tests mới (38 tổng) qua node:test, lint/typecheck/test/build PASS; chưa adapter, Dye/Wardrobe schema hoặc export gate | P2-D01 | Trung bình | — |
-| P2-D03 | Viết schema Map/Marker/Route và price mapping | Chặn coordinate ngoài [0,1], map revision lệch, giá âm/mixed market | P2-D01 | Trung bình | — |
+| P2-D03 | **DONE 2026-10-04:** [schema phase](GUIDE_PRICE_SCHEMAS.md), 9 focused/209 total tests + lint/typecheck/build; Viết schema Map/Marker/Route và price mapping | Chặn coordinate ngoài [0,1], map revision lệch, giá âm/mixed market | P2-D01 | Trung bình | — |
 | P2-D04 | **DONE 2026-10-03** — Asset/Config/Policy/Anchor/Size/Binding/Rule/Dye/Outfit validators | [src/data/wardrobe](../../src/data/wardrobe/index.ts): FK/revision/duplicates/scale/color/missing-anchor/coactive conflict; full asset default pending, confirmed cần evidence; chưa export gate/persistence/share | P2-D01, P0-W02 | Trung bình | — |
 | P2-D05 | Tạo adapter item Wiki đúng module thực tế | Mapping đối chiếu mẫu; parser lỗi không xuất catalog rỗng ghi đè bản tốt | P1-D01, P1-D13, P2-D02 | Cao | DATA K01 |
 | P2-D06 | Tạo adapter/biểu nhập spirit-tree | Node/cost giữ nguồn; total path không cộng node chung hai lần | P1-D02, P2-D02 | Trung bình | DATA K02 |
 | P2-D07 | Tạo adapter TS Wiki và sheet độc lập, báo cáo đối chiếu | Không gộp hai lần ghé khác nhau; bất đồng ngày đưa vào review | P1-D03, P1-D04, P2-D02 | Trung bình | DATA K03/K04 |
 | P2-D08 | Tạo form/file nhập tay news/season/map/route theo schema | Có source field và check required; không sao chép walkthrough nguyên văn | P2-D02, P2-D03, P1-H01 | Trung bình | DATA nguồn tương ứng |
 | P2-D09 | Tạo importer price observations K10/K11/K12 | Mỗi quan sát có platform/market/currency/time; thiếu SKU không tự ghép | P1-D10–P1-D12, P2-D03 | Cao | DATA K10/K11/K12 |
-| P2-D10 | Tạo snapshot/normalize/diff/quarantine pipeline | Import cùng input không đổi ID; báo added/changed/removed; record lỗi không xóa bản public tốt | P2-D05–P2-D09 theo adapter bật | Cao | — |
+| P2-D10 | **OPEN — scope generic:** snapshot/normalize/diff/quarantine pipeline | K15 scoped import giữ nguyên; pipeline đa nguồn P9-D04 cần snapshot/hash/diff/retry/source health/LKG, lỗi không xóa bản public tốt | P2-D05–P2-D09 theo adapter bật; P9-D01/P9-D02 cho central sink | Cao | DATA theo adapter |
 | P2-D11 | Tạo public export projection và asset rights gate | Fixture, draft, private evidence, pending full asset không xuất; negative fixture chứng minh gate chặn đúng | P2-D04, P2-D10 | Cao | — |
-| P2-D12 | Tạo version manifest, alias/tombstone và rollback bundle | Code/data/asset version tương thích; restore bundle trước không mất mapping ID | P2-D11 | Trung bình | — |
+| P2-D12 | **OPEN — scope generic:** version manifest, alias/tombstone và rollback projection | K15 manifest scoped đã có; central DB revision/export và restore được kiểm chứng thêm ở P9-I01/P9-V01; không hồi sinh nội dung bị thu hồi | P2-D11; P9-I01 cho central migration | Trung bình | — |
 
 ### Infra
 
@@ -167,9 +176,9 @@ Phụ thuộc phase là điều kiện nền; cột phụ thuộc bổ sung quan
 
 | ID | Module | Việc / đầu ra cụ thể | Nghiệm thu | Phụ thuộc | Độ phức tạp | Gate |
 |---|---|---|---|---|---|---|
-| P2-U01 | UX | Tạo storage wrapper có parse/version/migration/memory fallback | Reload round-trip; corrupted/quota-denied vẫn mở app; thông báo không lưu được rõ | P0-I02 | Trung bình | — |
+| P2-U01 | UX | **DONE 2026-10-04:** [local-state plan](LOCAL_STATE_FOUNDATION.md), 7 focused tests + 200 total, lint/typecheck/build PASS; Tạo storage wrapper có parse/version/migration/memory fallback | Reload round-trip; corrupted/quota-denied vẫn mở app; thông báo không lưu được rõ | P0-I02 | Trung bình | — |
 | P2-W01 | Wardrobe | **DONE 2026-10-03** — Reducer thuần và state dẫn xuất | Equip/replace/unequip/reset/size/dye/random được validate; base không đổi do rule, tháo trigger derive về base; ID/revision sai giữ selection; behavioral tests | P2-D04 | Trung bình | — |
-| P2-H01 | Hub | Tạo data access đọc manifest/normalized JSON | Module thiếu dataset hiển thị unavailable; không fetch raw/draft từ client | P2-D12 | Trung bình | — |
+| P2-H01 | Hub | **OPEN tổng thể; K15 loader đã có** — data access cho public projection | Giữ loader Item Lookup; evolve qua P9-D02 API abstraction, JSON là snapshot/fallback/export; frontend không gọi provider DB; không fetch raw/draft | P2-D12; P9-D02 cho API evolution | Trung bình | — |
 
 ## Phase 3 — Hub nền tảng và UI dùng chung
 
@@ -197,7 +206,7 @@ Phụ thuộc phase là điều kiện nền; cột phụ thuộc bổ sung quan
 | P3-H03 | Xây spirit/tree view và tổng đường unlock | Node keyboard reachable; tổng incomplete nếu thiếu cost; không cộng trùng node | P2-D06, P3-H02 | Cao | DATA K02 |
 | P3-H04 | Xây TS history table/timeline và filter | Nhiều lần ghé cùng spirit được giữ; disputed được gắn nhãn | P2-D07, P3-U02 | Trung bình | DATA K03/K04 |
 | P3-H05 | Tạo prediction view với methodology và empty state | Không có method/input đáng tin thì không có dự đoán giả; chưa xác nhận không hiện như lịch chắc chắn | P0-H03, P3-H04 | Trung bình | Q09 |
-| P3-H06 | Xây season/event card và detail liên kết item/spirit | Chỉ mốc confirmed mới có countdown chính xác; thiếu nguồn có unavailable | P1-H01, P2-D08, P3-U02 | Trung bình | DATA K01/K06 |
+| P3-H06 | **OPEN — evolved Q23:** season/event card/detail liên kết item/spirit | Qua live schedule P9-H01 và UI P9-U01; official/community/calculated có nhãn, missing/stale/unavailable rõ | P1-H01, P3-U02, P9-H01; P2-D08 cho nội dung biên tập | Trung bình | DATA source schedule đã verify |
 | P3-H07 | Xây official news feed/detail | Có link nguồn, ngày/version khi biết, tóm tắt riêng; không trộn leak | P1-D06, P2-D08 | Trung bình | DATA K06 |
 | P3-H08 | Ghép widget trang chủ theo thứ tự UX | Season, TS, official feed, quick links và lookup có đường đến detail; không card trống lớn | P3-H01, P3-H04, P3-H06, P3-H07 | Trung bình | — |
 
@@ -205,10 +214,10 @@ Phụ thuộc phase là điều kiện nền; cột phụ thuộc bổ sung quan
 
 | ID | Module | Việc / đầu ra cụ thể | Nghiệm thu | Phụ thuộc | Độ phức tạp | Gate |
 |---|---|---|---|---|---|---|
-| P3-D01 | Data pipeline | Viết TimeReference adapter và đồng bộ từ K05 | Đúng unit/semantics; lỗi nguồn giữ last-sync/stale, không tự dựng reset LA | P1-D05, P2-D01 | Cao | DATA K05 |
-| P3-D02 | Data pipeline | Viết countdown bằng mốc nguồn và elapsed time | Qua sleep/wake/tab background/DST fixture không lệch vì offset hardcode; mốc hết hạn báo stale | P3-D01, P3-H06 | Cao | DATA K05 |
+| P3-D01 | Data pipeline | **OPEN — evolved Q23:** TimeReference từ server/generated time của live API; K05 optional adapter | EventRule đã verify được resolve theo IANA timezone, không dựng lịch từ offset; K05 cần P1-D05 nếu dùng; lỗi giữ LKG/last-sync/stale | P2-D01, P9-H01; P1-D05 nếu bật K05 | Cao | DATA theo time source được chọn |
+| P3-D02 | Data pipeline | **OPEN:** countdown local bằng mốc EventOccurrence và elapsed time | Qua sleep/wake/background/DST; không poll backend mỗi giây; hết validity báo stale; prediction không như official | P3-D01, P3-H06, P9-V03 | Cao | DATA schedule đã verify |
 | P3-I01 | Infra | Nếu cần, thêm proxy time hẹp trên Vercel sau kiểm tra CORS | Chỉ host/endpoint allowlisted, cache/rate theo contract; không open proxy; nếu gọi trực tiếp được thì ghi không cần | P1-D05, P0-I04 | Trung bình | Q04 |
-| P3-W01 | Wardrobe | Thêm widget mở editor hoặc outfit local gần nhất | Không cần full asset; trước khi editor sẵn sàng có trạng thái demo rõ | P2-U01, P3-U02 | Thấp | — |
+| P3-W01 | Wardrobe | **DONE 2026-10-04** — Hub demo widget mở editor; P4-W09 khôi phục outfit local gần nhất | Không cần full asset; trước khi editor sẵn sàng có trạng thái demo rõ | P2-U01, P3-U02 | Thấp | — |
 
 ## Phase 4 — Wardrobe 2D placeholder đủ hành vi
 
@@ -230,8 +239,8 @@ Phụ thuộc phase là điều kiện nền; cột phụ thuộc bổ sung quan
 | P4-W06 | Xử lý rule xung đột và calibration thiếu | Xung đột cùng priority bị validator báo; runtime ổn định và hiển thị cảnh báo, không chọn ngẫu nhiên | P4-W05 | Trung bình | — |
 | P4-W07 | **DONE 2026-10-03** — Fabric/panel dye palette và reset | Chỉ path/region + mask khai báo đổi màu; thiếu mask giữ fill gốc, item unsupported có nhãn; reset region/item, behavioral tests | P4-W02, P4-W03 | Cao | — |
 | P4-W08 | Nối AssetRegistry với fallback theo từng layer | Thiếu file/quyền thì hình học placeholder có nhãn; không fetch URL tùy ý từ outfit link | P2-D11, P4-W02 | Trung bình | — |
-| P4-W09 | Tạo lưu/đổi tên/xóa outfit local và restore khi reload | Selection/dye/base size round-trip; quota lỗi vẫn giữ phiên hiện tại; xóa không ảnh hưởng outfit khác | P2-U01, P4-W07 | Trung bình | — |
-| P4-W10 | Viết codec outfit share versioned và copy/open link | Mở ở phiên trống khôi phục đúng; payload quá lớn/sai version/ID bị xử lý an toàn | P4-W09 | Cao | — |
+| P4-W09 | **DONE 2026-10-04** — Lưu/đổi tên/xóa demo outfit local và restore khi reload | Selection/dye/base size round-trip; quota lỗi vẫn giữ phiên hiện tại; xóa không ảnh hưởng outfit khác | P2-U01, P4-W07 | Trung bình | — |
+| P4-W10 | **DONE 2026-10-04** — Codec gzip/base64url versioned và copy/open link demo | Mở ở phiên trống khôi phục đúng; payload quá lớn/sai version/ID bị xử lý an toàn | P4-W09 | Cao | — |
 | P4-W11 | Thêm migration item alias/tombstone khi mở outfit cũ | Báo item thiếu, không thay bằng món khác âm thầm; phần hợp lệ vẫn mở | P2-D12, P4-W10 | Trung bình | — |
 | P4-W12 | Kiểm thử reducer/transform/rule/codec với chuỗi thao tác | Equip → đổi base size → override → tháo → dye → share → reload giữ đúng state; test không chỉ snapshot cấu trúc code | P4-W05–P4-W11 | Cao | — |
 
@@ -241,7 +250,7 @@ Phụ thuộc phase là điều kiện nền; cột phụ thuộc bổ sung quan
 |---|---|---|---|---|---|---|
 | P4-U01 | UX | **OPEN — V1 đã có editor 3 vùng desktop + segmented panel mobile** | Picker/size/dye dùng native keyboard controls, preview không overlay; theme/locale giữ state. Share và luồng override hiển thị chưa triển khai theo scope V1; MANUAL VISUAL CHECK REQUIRED, chưa đủ toàn bộ nghiệm thu để DONE | P4-W03, P4-W07, P3-U01 | Trung bình | — |
 | P4-D01 | Data pipeline | Kiểm tra liên kết item → asset/binding/dye/rule | Fixture và pending full asset không lọt production; demo package được nhận diện riêng | P4-W08, P2-D11 | Trung bình | — |
-| P4-H01 | Hub | Nối “thử item” từ catalog và mở outfit gần nhất | Item chưa render được mở placeholder có giải thích; nav không reset outfit đang sửa | P3-H02, P3-W01, P4-W09 | Thấp | — |
+| P4-H01 | Hub | **DONE 2026-10-05** — Catalog → demo explanation và giữ draft khi chuyển trang | Item chưa render được mở placeholder có giải thích; nav không reset outfit đang sửa | P3-H02, P3-W01, P4-W09 | Thấp | — |
 | P4-I01 | Infra | Smoke editor trên Vercel preview qua link trực tiếp | Refresh/deep link/share không 404, asset demo tải đúng, không cần login | P0-I04, P4-W10, P4-U01 | Trung bình | — |
 
 ## Phase 5 — Hub chuyên sâu, kiểm duyệt và QR profile
@@ -287,7 +296,7 @@ Phụ thuộc phase là điều kiện nền; cột phụ thuộc bổ sung quan
 
 **Mục tiêu:** web-app cài được khi hỗ trợ, dữ liệu public offline có nhãn, thông báo opt-in đúng capability; không native giai đoạn đầu.
 
-**Phụ thuộc:** shell/UI Phase 3, version/export Phase 2; notification cần P0-U02 và K05 thật nếu dùng mốc thời gian game.
+**Phụ thuộc:** shell/UI Phase 3, version/export Phase 2; notification cần P0-U02 và schedule/time contract đã verify qua Event Service. K05 chỉ cần nếu adapter đó được chọn, không là dependency bắt buộc của mọi event.
 
 **DoD:** manifest/service worker được kiểm tra trên môi trường mục tiêu; update không làm mất state; cache không chứa draft/QR; giới hạn thông báo app đóng được nói rõ. Web Push nền không thuộc DoD mặc định.
 
@@ -312,9 +321,9 @@ Phụ thuộc phase là điều kiện nền; cột phụ thuộc bổ sung quan
 
 | ID | Module | Việc / đầu ra cụ thể | Nghiệm thu | Phụ thuộc | Độ phức tạp | Gate |
 |---|---|---|---|---|---|---|
-| P6-H01 | Hub | Tạo reminder in-app từ mốc verified và lựa chọn local | Không tự tạo lịch, không nhắc trùng trong phiên/khung sự kiện đã đánh dấu | P3-D02, P6-U02 | Trung bình | DATA K05 |
+| P6-H01 | Hub | Tạo reminder in-app từ mốc verified và lựa chọn local | Không tự tạo lịch, không nhắc trùng trong phiên/khung sự kiện đã đánh dấu | P3-D02, P6-U02 | Trung bình | DATA schedule/time source |
 | P6-H02 | Hub | Thêm notification khi app đang hoạt động nếu browser hỗ trợ | Denied/unsupported quay về in-app; thông báo không claim delivery khi app đóng | P6-H01 | Trung bình | — |
-| P6-D01 | Data pipeline | Thêm policy fresh/stale cho time/content/cache theo contract | Offline countdown không gắn nhãn live; expired time dừng khẳng định chính xác | P1-I01, P3-D01, P6-I02 | Trung bình | DATA K05 |
+| P6-D01 | Data pipeline | Thêm policy fresh/stale cho time/content/cache theo contract | Item/spirit TTL dài, live schedule TTL ngắn qua P9-D02/P9-H01; offline không gắn live; expired time dừng khẳng định chính xác | P1-I01, P3-D01, P6-I02, P9-D02 | Trung bình | DATA theo module |
 | P6-W01 | Wardrobe | Kiểm tra editor/offline/share với catalog đang cache | Item mới chưa cache báo thiếu, outfit đang sửa không mất khi service worker cập nhật | P4-W11, P6-I03 | Trung bình | — |
 
 ### Research tách biệt, không tự đưa vào release
@@ -367,13 +376,126 @@ Phụ thuộc phase là điều kiện nền; cột phụ thuộc bổ sung quan
 | P8-I02 | Infra | Chạy gate quyền, regression outfit link và rollback placeholder | Old outfit mở đúng item; manifest không chứa asset ngoài phạm vi quyền; rollback gỡ asset/cache được | P8-W03, P8-U01, P8-H01 nếu bật | Cao | TGC; giữ release cũ |
 | P8-W04 | Wardrobe | Viết đánh giá 3D từ format/quyền thực, rồi lập scope riêng | Chưa tự triển khai 3D nếu không có quyền/dữ liệu/quyết định; không thêm nguồn ngoài brief | P8-I01, P8-D01, Q19 | Cao | TGC, Q19; duy trì 2D |
 
+## Phase 9 — data, event và media refresh (APPROVED/DESIGNED 2026-10-04)
+
+Đây là track bổ sung sau current Item Lookup/source research, **không** đòi toàn bộ Phase 8/full Wardrobe xong trước. R0–R6 là checkpoint execution; task IDs dùng namespace P9 chưa dùng, không renumber/reuse P0–P8. Q20–Q23 chốt direction, mọi implementation bên dưới vẫn **OPEN** trừ R0 docs. Không chọn provider hoặc provision service trong R0.
+
+| Checkpoint | Scope / dependency để bắt đầu | Definition of Done / trạng thái |
+|---|---|---|
+| R0 — Roadmap reconciliation | main c0c0ee0 / PR #10; docs-only | P9-R01: docs nhất quán, kiểm tra IDs/links/status, commit và dừng |
+| R1 — Data/storage contracts | R0; giữ ID/projection/rights contracts cũ | P9-D01–P9-D03, P9-I01 contracts/schema/API/migration được review trước provisioning; P9-D04/P9-I02/P9-V01 triển khai foundation có scope/quota approved trước production consumers |
+| R2 — Item media reconciliation pilot | R1 foundation đã validate; P9-D05 role/crosswalk | P9-D06/P9-V02: Warrior of Love Hair + một season, coverage/manual-review report và gate quyền; chưa mass crawl |
+| R3 — Event sources + Event Engine | R1 foundation; R2 checkpoint đã review | P9-D07–P9-D09, P9-H01/P9-U01/P9-V03/P9-V04; source verified theo field, resolver/override/live API/UI đạt nghiệm thu |
+| R4 — Animated preview pipeline | R1 asset registry/object-storage contract, R3 checkpoint | P9-D10/P9-H02/P9-H03/P9-V05; Emote/Call/Honk bằng media đủ quyền hoặc fixture ghi nhãn, binary/object storage đúng gate |
+| R5 — Music Playground V1 | R1 foundation, R4 reusable pipeline checkpoint; sample rights | P9-M01–P9-M03/P9-V06: playable instruments, item ID/deep-link, chỉ tải active instrument; không account/Sheets/Compose vào V1 |
+| R6 — Expansion | R5 V1 DoD; gate từng nhánh | P9-M04/P9-M05/P9-U02/P9-R02/P9-V07; Sheets V1.1, Compose local V1.2; V2 community/cloud/login là scope riêng |
+
+Chi tiết phase sau được refine khi bắt đầu dựa trên state thật; bảng này là roadmap/dependency, không phê duyệt bulk acquisition hoặc provisioning. Nếu một season chưa đủ rights, R2 ghi BLOCKED/RIGHTS-gated cho publication; fixture validation không được giả thành pilot production DONE. Maintainer review checkpoint trước mở rộng scope.
+
+### R0 — tài liệu hiện tại
+
+| ID | Module | Việc / đầu ra cụ thể | Nghiệm thu | Phụ thuộc | Độ phức tạp | Gate |
+|---|---|---|---|---|---|---|
+| P9-R01 | Docs | **DONE 2026-10-04 — docs-only:** reconcile roadmap + direct contracts/handoff | [Phase plan](ROADMAP_RECONCILIATION.md), Q01 historical/Q15 evolved, Q20–Q23, R1–R6, coverage matrix; table/ID/reference/link/status checks và docs-only diff pass; không feature/provision/crawl | PR #10 merged main c0c0ee0 | Trung bình | — |
+
+### R1 — central data/storage foundation
+
+**Canonical ownership:** maintainer quản lý canonical domain metadata/relationships và approvals trong relational DB PostgreSQL-compatible, sau normalization/review; upstream là nguồn evidence, không được ghi thẳng vào canonical. Frontend chỉ đọc public projection qua data/API abstraction. User outfit/preferences/Compose V1.2 vẫn local; central domain DB không mở account/cloud save V1.
+
+DB cover **Item, Spirit, Season, Event, EventRule, EventOverride, Location, Cosmetic metadata, Music metadata, Emote metadata, Honk/Call metadata và Media/provenance records**. Stable IDs hiện có được reuse, source-scoped IDs qua crosswalk; không dùng provider-specific schema. JSON versioned giữ vai trò public projection/export/static snapshot/rollback/fixture, không canonical long-term source of truth.
+
+Binary **images, posters, video, honk/call audio-video, emote video, music samples** nằm object storage; preferred direction **Cloudflare R2 / S3-compatible**. DB giữ stable ID, storage key, URL khi cần, role/source/provenance/rights status/revision/timestamps/relation IDs. URL signed/temporary không là identity. Vercel giữ frontend SPA/PWA delivery, functions/API facade khi cần, CDN/cache-facing layer; repository JSON/deployment storage không là database. Existing R2 runtime routing tiếp tục dùng, central DB chưa provisioned.
+
+| ID | Module | Việc / đầu ra cụ thể | Nghiệm thu | Phụ thuộc | Độ phức tạp | Gate |
+|---|---|---|---|---|---|---|
+| P9-D01 | Data | **OPEN; architecture APPROVED/DESIGNED:** relational domain/schema mapping và migration contract | Map entities trên, FK/join cardinality, stable ID/source crosswalk, provenance theo field, record revision/schema version, soft deletion/tombstone/alias; migration/backfill plan bảo toàn K15 IDs/unknown/free và public/private boundaries; schema review trước provision | P9-R01, P2-D01, P2-D02, P2-D04 | Cao | Schema/contract review |
+| P9-D02 | API | Public data access abstraction + API contract/implementation | `/api/items`, `/api/items/:id`, `/api/events/*`, `/api/spirits/*`; pagination/filter/unknown/error/version/source freshness có fixture; frontend không direct provider DB; item/spirit TTL dài, live events TTL ngắn theo source/quota đo được, không đặt TTL giả; snapshot/LKG/invalidation rõ | P9-D01; P9-I02 trước live DB adapter | Cao | Contract review; DATA theo module |
+| P9-D03 | Storage | Evolve AssetRegistry/media metadata và object-storage interface | DB metadata không binary; stable keys/hash/revision, role/rights/evidence allowlist, relation IDs, URL delivery/cache/revocation; reuse R2 adapter/route contract; provider có thể thay qua interface, private credentials chỉ server | P9-D01, P2-D04 | Trung bình | Contract review; RIGHTS theo asset |
+| P9-I01 | Infra | Migration/scaling strategy và quota/rollback runbook | Theo dõi DB size, query latency, connections, CPU/RAM, egress, cache hit ratio, API latency; thresholds sau đo. Trước migrate: backup/export + restore test + rollback + quota audit request/operation, egress, CPU/RAM/IOPS. Target larger managed PostgreSQL hoặc PostgreSQL trên Sky Guide cloud server, API contract giữ nguyên | P9-D01, P9-D03 | Trung bình | Review; chưa migration/provision |
+| P9-I02 | Infra | Chọn provider bằng quota audit rồi triển khai DB migrations/adapters khi được duyệt | So sánh free-tier relational options theo contract, storage/quota/operations/egress/compute và rollback; không mặc định Supabase/Neon/Cloudflare DB là final. Chỉ provision task approved, không tự tạo paid resource; migration rehearsal/seed fixture rồi reviewed data | P9-D01, P9-D03, P9-I01, review contracts | Cao | Provider/task approval + quota; Q15 |
+| P9-D04 | Sync | Generic source sync → reviewed canonical + projection | Snapshot/hash/diff/normalization/quarantine, idempotent stable IDs, retry/backoff/source health, transactional promotion và Last Known Good (LKG); upstream fail không empty-overwrite. Reuse requirements P2-D10/P1-I01, không đợi mọi legacy adapter; foundation nghiệm thu synthetic trước, integration từng adapter sau verify. Scheduler/worker/cron chỉ sau task/quota approval; manual dry-run fallback | P9-D02, P9-D03, P9-I02 | Cao | DATA từng real adapter; task/quota nếu scheduler |
+| P9-V01 | Validation | Foundation/API/storage/migration contract checks và restore rehearsal | Synthetic FK/alias/tombstone/duplicate/revision/private export tests; API provider-swap parity và cache invalidation; schema up/down/backup restore rehearsal, revoked asset không hồi sinh từ rollback; không gọi live DB DONE chỉ bằng fixture | P9-D04, P9-I01, P9-I02 | Cao | Review; môi trường/quota approved |
+
+**Exact next implementation slice:** P9-D01–P9-D03 + P9-I01, contract/schema/API/storage/migration review và nhỏ synthetic fixtures. Sau review mới tới P9-I02 provider/provisioning; không khởi động item crawling, Event hoặc Music trước foundation dependency.
+
+### R2 — dataset/item media reconciliation pilot
+
+Contract **`itemImage`** tối đa một canonical image (`null` nếu chưa đủ evidence); **`referenceImages[]`** 0..N; sau dedupe itemImage không xuất hiện lại trong referenceImages. Role mapping ưu tiên **Sky Wiki structured role metadata** có field/label icon/item image, front/back, real, interior/exterior, reference/gallery. Không suy role từ kích thước, aspect ratio, DOM order hoặc ảnh đầu tiên. Kích thước chỉ validate chất lượng, không xác định role.
+
+Fallback: **official Sky/TGC → official social posts → community/player screenshots có provenance rõ**. Source priority không bỏ rights gate: unclear rights fail closed, giữ discovery riêng khỏi publish eligibility. Existing corpus/current media là input audit; không batch swap mù. Flow: collect current media → collect verified source media → map source role → dedupe → reconcile → validate → manual review ambiguous → mirror **asset hợp lệ** sang object storage. Local working data giữ E: và capacity guards theo [asset docs](../ITEM_ASSETS.md).
+
+Media metadata tối thiểu: `storageKey/url`, `role`, `sourceUrl`, `sourceType`, `sourceRole`, `rightsStatus`, `fetchedAt`, stable `itemId`, optional `seasonId`/`spiritId`; thêm hash/revision/attribution/evidence khi có. Reconciliation giữ source crosswalk, không nối TSA numeric ID với Planner numeric ID. Phân biệt verified metadata và rights; không rewrite giá/offer khi chỉ sửa ảnh.
+
+| ID | Module | Việc / đầu ra cụ thể | Nghiệm thu | Phụ thuộc | Độ phức tạp | Gate |
+|---|---|---|---|---|---|---|
+| P9-D05 | Media | Role contract/crosswalk/dedupe và bounded source evidence mapping | Audit current primary/gallery vs itemImage/referenceImages; source field/label evidence ghim revision, ambiguous quarantine/manual review; exact hash và reviewed visual duplicates không mất provenance; không auto role theo geometry/order | P9-D03, P9-V01, PR #10 dossier | Cao | DATA role evidence; RIGHTS |
+| P9-D06 | Media | Pilot một season + reconcile/mirror đủ rights | Maintainer chọn season từ coverage/evidence; Warrior of Love Hair bắt buộc regression case main/reference bị đảo (cross-season fixture riêng nếu pilot khác season); report coverage + manual-review rate + unmapped/conflict/rights-blocked, diff/review/rollback trước full catalogue; no mass crawl | P9-D05 | Cao | Pilot scope + DATA/RIGHTS; TGC nếu cần |
+| P9-V02 | Validation | Item dataset/media pilot acceptance | Warrior of Love Hair source role đúng, itemImage không lặp references sau dedupe, tối đa 1 primary; stable ID/FK/offer không drift, unresolved neutral fallback; rights-fail-closed và rollback/invalidation; ghi số đo pilot để quyết định full run | P9-D06 | Trung bình | DATA/RIGHTS cho public media |
+
+### R3 — Event Service / Event Engine
+
+Source priority: **official TGC → manually verified official override → verified structured community → cross-checked community → prediction/calculated**. Manual official override cần link/evidence official, reviewer/revision/effective range; không làm community thành official. Prediction/calculated luôn nhãn riêng, không hiển thị như official kể cả priority winner. Priority giải quyết nguồn trên field/occurrence, không tự cấp verification; ambiguous/conflict đưa review, không silently mutate history.
+
+Candidates: **TGC announcements/patch notes, SkyGame-Data/Sky Planner structured data, ThatSkyApplication, SkyCOTL.tools, Sky Wiki enrichment, shard prediction source/logic**. K06/K15/K01 và [dossier](../../knowledge/16-image-price-sources.md) chỉ chứng minh scope đã ghi; K15 Item Lookup approval không là event adapter verification. SkyGame-Data dossier đã có bounded samples nhưng chưa event source contract/adapter approval; SkyCOTL.tools và shard source chưa có K-ID/evidence entry được xác nhận trong KB. P9-D07 phải verify/document và cấp source registry/K-ID không collision trước integration; không bịa K-ID, endpoint hoặc verified status.
+
+Domain tối thiểu **Event, EventRule, EventOverride, EventOccurrence, SourceSnapshot, SourceHealth**. Types: **fixed date, recurring, calculated, temporary/live override**. Canonical schedule timezone **`America/Los_Angeles`**, dùng IANA resolve DST; không lưu UTC-7/UTC-8 hay giờ Việt Nam làm source of truth. Recurrence: **anchor, offset, interval, effectiveFrom, effectiveUntil**; không hard-code recurring activities vào UI. EventOverride có effective range + priority, giữ base/permanent rule nguyên khi publisher đổi tạm. Materialized occurrences giữ UTC instants + rule/source revision + canonical timezone; UI localize user timezone, ngày chưa rõ giờ giữ precision/unknown.
+
+`GET /api/events/live` có **server/generated time, schedule version, active events, upcoming events, startsAt, endsAt, source type/confidence**, source freshness/validity/LKG khi cần; frontend tự countdown, không poll mỗi giây. Upstream fail giữ **Last Known Good schedule**, SourceHealth **healthy/delayed/stale/offline**; UI vẫn dùng nội dung có nhãn độ mới, không chết theo upstream. Không có LKG/verified dates thì unavailable; TTL live ngắn hơn item/spirit nhưng refresh theo contract/quota, wake/resume revalidate có giới hạn.
+
+| ID | Module | Việc / đầu ra cụ thể | Nghiệm thu | Phụ thuộc | Độ phức tạp | Gate |
+|---|---|---|---|---|---|---|
+| P9-D07 | Event sources | Verify/document candidate sources, source registry và contracts | Per-source URLs/revisions/sample fields/time semantics/terms/quota/rights/cadence/coverage; nguồn mới KB entry/K-ID không collision; cross-check official/community/shard logic, known gaps giữ DATA-gated; không crawl một site duy nhất; cung cấp evidence cho P1-H01 evolved | P9-V01, P9-V02 checkpoint | Cao | DATA từng source; Q12/RIGHTS nếu media |
+| P9-D08 | Event domain | Schema + adapters cho Event/Rule/Override/Occurrence/Snapshot/Health | Stable IDs/FKs/snapshot hash/field provenance/source confidence, ingestion/review/LKG theo P9-D04; nguồn thiếu contract giữ inactive; registry priority và manual verified official override có evidence | P9-D07, P9-D01, P9-D04 | Cao | DATA source đã verify |
+| P9-D09 | Event engine | Resolver fixed/recurring/calculated/temporary rules + effective overrides | IANA LA DST, anchor/offset/interval/effective bounds; UTC occurrence generation deterministic theo version; overlapping priority/conflict có review; override expiry về base, không mutate permanent rule; calculated luôn nhãn | P9-D08 | Cao | Rule/logic evidence; DATA |
+| P9-H01 | Event API | GET /api/events/live qua provider abstraction/cache | Response contract trên, active/upcoming boundary, generated/server time/version/validity, source type/confidence/health; LKG khi upstream fail; short TTL/retry/rate theo verified quota, không client direct source/provider | P9-D09, P9-D02 | Cao | DATA; quota trước live schedule |
+| P9-U01 | Event UI | Live radar/card/detail + local countdown/localized timezone | Kết nối P3-H06/P3-D02; official/community/prediction labels; loading/empty/error/stale/offline/no LKG; sleep/wake và DST, keyboard/focus/mobile; không per-second API poll hoặc recurring logic trong UI | P9-H01, P3-U01, P9-V03 | Trung bình | DATA live; chưa implemented |
+| P9-V03 | Validation | Event engine/API/source-failure verification | DST spring/fall LA, date-only/no fabricated instant, intervals/effective ranges/temporary override expiry, priority conflict, calculated label, stale/offline/LKG and quota bounded refresh; checksum/version mismatch fail closed | P9-H01 | Cao | Verified source/rule fixtures |
+| P9-V04 | Validation | Event live UI/radar/countdown acceptance | Server skew/sleep/wake/user timezone, empty/no LKG, long title/mobile/a11y; request-count check không poll mỗi giây, upstream loss không crash; evidence theo candidate field, không promote prediction | P9-U01, P9-V03 | Trung bình | DATA public schedule |
+
+### R4 — Emote / Call / Honk animated preview
+
+Một pipeline reusable cho Emote và Call/Honk; sau này stance, spell animation và interaction preview có thể reuse. Target V1 **3–5 giây, ~480p, 24/30 fps, ~0.3–0.6 MB/clip**, planning average **0.5 MB/clip**: 500 clips ~250 MB video; poster/metadata/headroom **~350 MB**. Đây là budget planning, chưa có clips/coverage được nghiệm thu.
+
+Poster trước → video lazy-load → chỉ play khi hover/tap/open preview; không autoplay/preload toàn gallery. Emote có thể muted; Call/Honk giữ audio nếu audio nhận diện, audio playback sau thao tác rõ và capability check. DB chỉ metadata/storage keys, binary object storage. Không cắt/re-host video bên khác khi rights chưa rõ; ưu tiên permission/license hoặc gameplay tự ghi phù hợp [legal policy](../LEGAL_STATUS.md), vẫn review scope/credit. Reduced-motion, keyboard/open preview và unavailable poster/media phải có fallback.
+
+| ID | Module | Việc / đầu ra cụ thể | Nghiệm thu | Phụ thuộc | Độ phức tạp | Gate |
+|---|---|---|---|---|---|---|
+| P9-D10 | Preview pipeline | Poster/video/audio profile, transform/manifest/storage và rights review | Reuse P9-D03, encode/sample đo target budget thật, poster/video/audio relation + checksum/revision/provenance; bounded rights-approved pilot; reusable stance/spell/interaction không implement thêm scope | P9-V01, P9-V04 checkpoint | Cao | RIGHTS/TGC theo clip; acquisition task approval |
+| P9-H02 | Emote | Emote metadata + animated preview integration | Stable item/emote relations, poster-first/lazy/hover/tap/open, muted option; không load gallery toàn bộ; thiếu data/media dùng nhãn/fallback | P9-D10 | Trung bình | DATA Emote; RIGHTS/TGC media |
+| P9-H03 | Call/Honk | Call/Honk metadata + preview cùng pipeline | Audio identity giữ nguyên, audio không bật tự động khi mở gallery; gesture/tap/open và user controls, keyboard/focus; metadata/storage keys không binary DB | P9-D10 | Trung bình | DATA Call/Honk; RIGHTS/TGC media |
+| P9-V05 | Validation | Animated preview rights/behavior/budget acceptance | Đo 500-clip planning estimate vs pilot bytes/posters; request counts/lazy/no gallery preload, Emote mute/Call audio/reduced motion/unavailable; rights revoked gỡ/cache invalidate, fixture không thành real assets | P9-H02, P9-H03 | Trung bình | RIGHTS/TGC public clips |
+
+### R5 — Music Playground V1
+
+Plan từ Notion được maintainer cung cấp/duyệt lại ngày 2026-10-04 qua task này; ghi contract trong Git, không tuyên bố đã sync/read Notion hoặc có implementation. **`/music`**, deep link **`/music?instrument=<itemId>`** reuse stable Item Lookup ID; instrument detail CTA **“Thử nhạc cụ” / “Mở trong Music Playground”**. Không tạo music catalogue độc lập drift khỏi Item Lookup.
+
+V1 **playable instruments**: **15-note grid 3 × 5**, mouse/touch/keyboard, **Web Audio API + AudioBuffer**, no autoplay. `InstrumentDefinition: itemId → sampleSetId`; nhiều item variant reuse cùng sampleSetId, không duplicate audio vô ích. Samples ở R2/object storage, target **30–80 KB/sample**. Worst-case reference **100 sample sets × 15 notes × 80 KB ≈ 120 MB**; chỉ preload/decode active instrument, không load toàn library khi mở route. Browser audio unlock cần user gesture, loading/error/unsupported/dispose/active-instrument switch có state rõ.
+
+| ID | Module | Việc / đầu ra cụ thể | Nghiệm thu | Phụ thuộc | Độ phức tạp | Gate |
+|---|---|---|---|---|---|---|
+| P9-M01 | Music data | InstrumentDefinition/sample set metadata và asset contract | Item FK/crosswalk stable, itemId→sampleSetId, 15 notes mapping, variants reuse, sample revision/provenance/rights/storage key, budget/format đo pilot; không clone Item Lookup | P9-D03, P9-V01, P9-V05 checkpoint | Trung bình | DATA instrument mapping; RIGHTS samples |
+| P9-M02 | Music engine | Web Audio/AudioBuffer engine + active instrument lifecycle | User gesture unlock/no autoplay, active samples only preload/decode, bounded concurrent voices/touch/key release, switch/dispose không stuck notes; error/unsupported/retry giữ selection | P9-M01 | Cao | RIGHTS cho sample thật; fixture ghi nhãn |
+| P9-M03 | Music UI | `/music`, 3×5 grid, picker, item CTA/deep-link | Mouse/touch/keyboard/focus/mobile, itemId URL parse/unknown/missing instrument fallback, no library-wide load; CTA instrument đúng stable ID và context navigation | P9-M02, P3-H02, P3-U01 | Trung bình | DATA/RIGHTS active instrument |
+| P9-V06 | Validation | Playable Music V1 acceptance | Note mapping/variant sample reuse/invalid item deep-link, gesture/no autoplay, stuck-note cleanup, touch/keyboard/mobile, active-only request/decode counts và measured sample budget; sample rights/export/cache audit | P9-M03 | Cao | DATA/RIGHTS samples |
+
+### R6 — expansion theo scope riêng
+
+| ID | Module | Việc / đầu ra cụ thể | Nghiệm thu | Phụ thuộc | Độ phức tạp | Gate |
+|---|---|---|---|---|---|---|
+| P9-M04 | Music Sheets V1.1 | Sheets contract/UI liên kết instrument/item, không duplicate catalogue | Sheet IDs/provenance/notation/attribution và rights scope; copyrighted content RIGHTS-gated, missing/withdrawn fallback; không import thư viện bản quyền mặc định | P9-V06 | Cao | DATA sheets; RIGHTS copyrighted content |
+| P9-M05 | Music Compose V1.2 | Compose/local save/export contract và UI | Local trước, versioned parse/migration/quota/memory fallback, note/timing round-trip; không cloud/login vào V1.2 | P9-V06, P2-U01 | Cao | Local compose contract review |
+| P9-U02 | Event UI | Broader event/radar UI polish theo live contract | Reuse P9-U01 states/provenance, perf/a11y và mobile metrics; không thay verified base rules vì convenience UI | P9-V04, P9-V06 checkpoint | Trung bình | DATA theo event module |
+| P9-R02 | V2 research | Community/cloud/login-dependent scope và quyết định riêng | Đánh giá auth/privacy/moderation/storage/quota/provider abstraction; maintainer duyệt product/security/architecture trước implementation, không mở account trong V1 | P9-V06 | Trung bình | V2 scope approval; Q15 |
+| P9-V07 | Validation | Expansion acceptance theo nhánh thực sự bật | Sheets copyright/withdrawal/source validation; Compose local round-trip/error; event UI provenance/regression; V2 design không gọi implementation DONE | P9-M04/P9-M05/P9-U02 theo nhánh bật | Cao | DATA/RIGHTS theo nhánh |
+
 ## Đường phụ thuộc và xử lý blocker
 
 - **TGC permission track:** P0-L01–P0-L03 chuẩn bị scope/request/evidence; P1-L01–P1-L05 gửi, lưu bằng chứng, review phạm vi và quyết định gate. Track này chạy song song, **không chặn** Hub hoặc Wardrobe placeholder. Chỉ Phase 8 full asset phụ thuộc kết quả approved/restricted tương ứng.
 
 - Nền: P0 → P1 theo từng nguồn → P2 → P3/4/5 theo module → P6 → P7.
+- Thứ tự hiện tại sau Item Lookup/PR #10: **R0 → R1 → R2 → R3 → R4 → R5 → R6**, với dependency task cụ thể ở Phase 9. Contract review trước DB provision; provider/quota approval trước resource; foundation validation trước consumer. Phase 8 giữ TGC/RIGHTS độc lập; không dùng thiếu full asset để reopen DONE text/demo.
 - P4 không chờ dataset giá/route hoặc full asset. P5 map ảnh có thể chờ quyền trong khi route text/price tiếp tục. P8 tách nhánh, không nằm trên đường găng release placeholder.
-- ThatSkyAPI chưa có contract: hoàn thiện UI/adapter interface bằng fixture, disable countdown live và notification theo lịch chưa biết. Không tính lại LA từ hardcode để “bỏ chặn”.
+- ThatSkyAPI chưa có contract: K05 adapter vẫn DATA-gated nếu chọn. Event Service đa nguồn không phụ thuộc riêng K05; chỉ resolve rule/mốc đã verify bằng IANA LA, giữ prediction/calculated label; lịch chưa verify vẫn unavailable, không dựng lịch hardcode để bỏ gate.
 - AppPricingLab không có integration: giữ liên kết/thao tác nhập tay khi hợp lệ; K10/K11 vẫn dùng độc lập. Thiếu giá/SKU thì unavailable.
 - Sheet thiếu link: Wiki history tiếp tục với attribution, đối chiếu sheet giữ task mở.
 - QR protocol chưa rõ: chuẩn bị UI trạng thái unsupported, giữ decode/display thật chưa hoàn thành; không tạo profile giả.
@@ -381,25 +503,34 @@ Phụ thuộc phase là điều kiện nền; cột phụ thuộc bổ sung quan
 
 ## Ma trận bao phủ feature
 
-| PRD | Task triển khai chính | Task kiểm chứng |
-|---|---|---|
-| W01 layer | P4-W01–P4-W03, P4-W08 | P4-W12, P7-W01 |
-| W02 size | P4-W04 | P4-W12 |
-| W03 override | P4-W05–P4-W06 | P4-W12, P8-W03 khi đủ quyền |
-| W04 dye | P4-W07 | P4-W12 |
-| W05 local/share | P4-W09–P4-W11 | P7-W01 |
-| H01 items/spirit | P2-D05/D06, P3-H01–P3-H03 | P7-H01 |
-| H02 TS history/prediction | P2-D07, P3-H04/H05 | P7-H01 |
-| H03 season/countdown | P1-H01, P3-H06, P3-D01/D02 | P7-H01, P6-D01 |
-| H04 official news | P3-H07 | P7-H01 |
-| H05 moderated leak | P5-H09/H10, P5-D01 | P7-H02 |
-| H06 maps/shrines | P5-H01/H02 | P7-H01 |
-| H07 routes/Eden | P5-H03–P5-H05 | P7-H01 |
-| H08 IAP cost | P2-D09, P5-H06–P5-H08 | P5-H07, P7-H01 |
-| U01 QR profile | P1-H03, P5-U01–P5-U03 | P7-U02 |
-| U02 local state | P2-U01, P3-U04, P6-U03 | P7-W01, P6-I04 |
-| U03 compact UX | P0-U01, P3-U01/U02, P4-U01 | P7-U01 |
-| U04 PWA/notification | P6-I01–P6-I04, P6-U02, P6-H01/H02 | P7-U02 |
+| PRD / feature | Task triển khai chính | Task kiểm chứng | Gate / dependency |
+|---|---|---|---|
+| W01 layer | P4-W01–P4-W03, P4-W08 | P4-W12, P7-W01 | Demo giữ DONE từng task; full asset TGC |
+| W02 size | P4-W04 | P4-W12 | Config/anchor; DATA calibration thật |
+| W03 override | P4-W05–P4-W06 | P4-W12, P8-W03 khi đủ quyền | DATA rule thật; TGC full asset |
+| W04 dye | P4-W07 | P4-W12 | Demo DONE; DATA/TGC vùng thật |
+| W05 local/share | P4-W09–P4-W11 | P7-W01 | P2-U01, manifest/alias |
+| H01 items/spirit | P2-D05/D06, P3-H01–P3-H03 | P7-H01 | K15 lookup DONE; DATA K01/K02 generic |
+| H02 TS history/prediction | P2-D07, P3-H04/H05 | P7-H01 | DATA K03/K04, Q09 prediction |
+| H03 season/countdown | P1-H01, P3-H06, P3-D01/D02, P9-H01 | P7-H01, P6-D01, P9-V03 | Event source contracts verified, R1 foundation |
+| H04 official news | P3-H07 | P7-H01 | DATA K06 |
+| H05 moderated leak | P5-H09/H10, P5-D01 | P7-H02 | Q02, DATA K14 |
+| H06 maps/shrines | P5-H01/H02 | P7-H01 | DATA K07, RIGHTS ảnh |
+| H07 routes/Eden | P5-H03–P5-H05 | P7-H01 | DATA K08/K09 |
+| H08 IAP cost | P2-D09, P5-H06–P5-H08 | P5-H07, P7-H01 | DATA K10/K11/K12, Q10 còn mapping |
+| U01 QR profile | P1-H03, P5-U01–P5-U03 | P7-U02 | Q11 protocol |
+| U02 local state | P2-U01, P3-U04, P6-U03 | P7-W01, P6-I04 | Storage/codec contracts |
+| U03 compact UX | P0-U01, P3-U01/U02, P4-U01 | P7-U01 | Shell DONE; module state acceptance |
+| U04 PWA/notification | P6-I01–P6-I04, P6-U02, P6-H01/H02 | P7-U02 | Verified schedule; foreground Q07 |
+| Central DB/data API — APPROVED/DESIGNED, OPEN implementation | P9-D01–P9-D04, P9-I01/P9-I02 | P9-V01 | Contract review → provider/task/quota approval; no DB provisioned claim |
+| Item media reconciliation — OPEN | P9-D05/P9-D06 | P9-V02 | R1, source role evidence, RIGHTS/TGC; one-season pilot before full |
+| Event engine — APPROVED/DESIGNED, OPEN implementation | P9-D07–P9-D09, P9-H01 | P9-V03 | R1, candidate verification/KB entry, source/rule provenance |
+| Event UI/live radar — OPEN | P9-U01, P9-U02, P3-H06/P3-D02 | P9-V04, P9-V07 expansion | Live API/verified schedule; prediction labels |
+| Emote preview — APPROVED/DESIGNED, OPEN implementation | P9-D10/P9-H02 | P9-V05 | R1/R4, DATA Emote + RIGHTS/TGC clips |
+| Call/Honk preview — APPROVED/DESIGNED, OPEN implementation | P9-D10/P9-H03 | P9-V05 | Shared pipeline, DATA + RIGHTS/TGC/audio identity |
+| Music V1 — APPROVED/DESIGNED, OPEN implementation | P9-M01–P9-M03 | P9-V06 | R1/R4, stable item IDs, DATA/RIGHTS samples |
+| Music Sheets V1.1 — OPEN | P9-M04 | P9-V07 | Music V1 DoD, DATA/RIGHTS copyrighted content |
+| Music Compose V1.2 — OPEN | P9-M05 | P9-V07 | Music V1 DoD, local/versioned storage; no V2 account |
 
 ## Decisions & open questions — trạng thái quyết định
 
@@ -414,7 +545,7 @@ Nhóm A đã được **chốt ngày 2026-09-29** để mở khóa Phase 0. Đâ
 | Q06 | Stack chốt: **React + TypeScript + Vite**, **React Router**, **pnpm**, **Node LTS**, client-side và không SSR. Phiên bản cụ thể được kiểm tra/pin khi thực hiện P0-I01. | P0-I01 → P0-I02 → P0-I03 |
 | Q07 | Mức đầu chỉ có **in-app reminder + notification khi app đang mở**; chỉ xin quyền sau thao tác bật của người dùng. Web Push nền chỉ là research vì cần lưu subscription phía server; không hứa delivery khi app đóng. | P0-U02, P6-U02, P6-H02, P6-R01 |
 | Q13 | State local dùng `localStorage` qua wrapper versioned + parse/validate + memory fallback; IndexedDB chỉ thêm khi đo thực tế cho thấy cần. Outfit share dùng URL fragment, payload JSON gọn → nén → base64url, có `schemaVersion` + `catalogVersion`; mục tiêu ban đầu dưới khoảng 2 KB nhưng ngưỡng cuối chốt sau round-trip test. Migration dùng alias/tombstone; không chứa QR/profile/dữ liệu cá nhân. | P2-U01, P4-W10, P6-U03 |
-| Q15 | Repo triển khai là **`nhlan285/Sky_guide`**. Dùng Vercel giai đoạn đầu với preview từ repo, domain `*.vercel.app`; maintainer chính là chủ repo; không tạo cron/DB/KV/tài nguyên trả phí mặc định. Trước production phải kiểm tra lại điều khoản/gói Vercel hiện hành. | P0-I04, P7-I03 |
+| Q15 | **EVOLVED 2026-10-04** — Repo **`nhlan285/Sky_guide`**, Vercel frontend/SPA/PWA/functions/API facade/CDN; maintainer chủ repo. Hard constraint **không tự tạo tài nguyên trả phí** giữ nguyên. Free-tier managed relational DB và R2/S3-compatible object storage được phép trong architecture; scheduler/worker/cron chỉ khi task approved và quota đã kiểm tra. Không provision trong R0; Supabase/Neon/Cloudflare DB không mặc định final, provider sau API/data abstraction. Trước resource/production kiểm tra quota/điều khoản/gói thực tế. | P0-I04, P7-I03; P9-I01/P9-I02 theo review/quota |
 | Q17 | UI mặc định **tiếng Việt**; tên item/spirit/season giữ tên gốc tiếng Anh từ nguồn, không tự dịch tên riêng; giữ `LocalizedText` để mở rộng ngôn ngữ sau; ID nội bộ không phụ thuộc tên hiển thị. | P0-U03, P3-U01 |
 | Q18 | Browser mục tiêu: Chrome/Edge desktop bản mới, Chrome Android và Safari iOS bản gần đây. Mục tiêu đo ban đầu: thiết bị tầm trung, LCP ≤ 2,5 s trên mạng di động điển hình; budget JS cụ thể chốt sau build đầu. Accessibility hướng tới WCAG 2.2 AA; không hứa PWA/notification đồng nhất giữa nền tảng. | P6-I01, P7-U01, P7-I02 |
 
@@ -424,7 +555,7 @@ Nhóm A đã được **chốt ngày 2026-09-29** để mở khóa Phase 0. Đâ
 |---|---|---|---|
 | Q04 | ThatSkyAPI/apppricinglab truy xuất kiểu nào, có endpoint/export/CORS/giới hạn gì? | Verify trước; ThatSkyAPI direct khi khả thi, proxy hẹp nếu cần; AppPricingLab manual nếu không có contract | P1-D05/D12/P3-I01; data + infra |
 | Q12 | Phiên bản CC-BY-SA và credit cụ thể cho text/Wiki/sheet/map là gì? | Ghi theo nguồn đã kiểm chứng; tách attribution text và quyền media, không gán license dự án thay source | P1-U01/P7-D01; maintainer |
-| Q14 | Nguồn nào trong danh sách có đủ season/event dates và cập nhật thường xuyên? | K01/K06 nếu có bằng chứng; thiếu thì inactive/unavailable; không tự thêm feed | P1-H01/P3-H06; data/editor |
+| Q14 | **EVOLVED theo Q23:** source hierarchy/event architecture đã duyệt; verification từng source/date/rule vẫn mở | P9-D07 multi-source verification, không giới hạn K01/K06/K05; thiếu evidence giữ DATA-gated/inactive, candidate không tự verified | P1-H01/P9-D07 trước adapter; data/editor |
 
 ### C. Còn mở — chốt khi tới nhánh Phase 5–8
 
@@ -432,7 +563,7 @@ Nhóm A đã được **chốt ngày 2026-09-29** để mở khóa Phase 0. Đâ
 |---|---|---|---|
 | Q02 | Ai duyệt leak, quy trình nào, dùng tool nào, nguồn Discord nào được phép? | Intake riêng tư + review theo revision + export public approved; không auto-publish/bot ingest mặc định | P0-H02/P1-H02; maintainer/editor |
 | Q09 | Dự đoán TS bằng phương pháp nào, trình bày mức chắc chắn ra sao? | Nhãn dự đoán + method/input version; chưa có phương pháp được chốt thì để unavailable | P0-H03/P3-H05; product + data |
-| Q10 | Market/currency/platform nào trước? Quy đổi candle/heart và gói mixed theo chứng cứ nào? | Chọn thị trường sau xác nhận; tách proportional/checkout, heart thiếu mapping không tính; không tự thêm FX source | P0-H01/P5-H07; product + data |
+| Q10 | **PARTIALLY RESOLVED 2026-10-04:** USD/US và VND/VN, iOS/Android riêng đã duyệt trong PR #10; candle/heart/mixed-bundle mapping vẫn mở | Không reopen market choice; giữ proportional/checkout, heart unknown không tính, không FX tự động. Android/VND per-SKU và quantity/ownership source coverage còn thiếu | P0-H01/P5-H07; product + data |
 | Q11 | QR Sky encode gì, protocol nào, dữ liệu public nào có thể đọc không tài khoản? | Xác minh với nguồn tham khảo trong brief/mẫu được phép; decode local và fail closed với payload lạ | P1-H03/P5-U01; lead + UX |
 | Q19 | Sau khi đủ quyền, 2D đầy đủ có đủ không hay cần 3D/native ở scope mới? | Giữ 2D; 3D/native nghiên cứu sau, không tự mở rộng phase đầu | P8-W04; product + lead |
 
@@ -440,7 +571,7 @@ Nhóm A đã được **chốt ngày 2026-09-29** để mở khóa Phase 0. Đâ
 
 | ID | Quyết định đã chốt | Nghiệm thu / phần còn lại |
 |---|---|---|
-| Q01 | **CLOSED** — Release 1 dùng JSON normalized versioned trong Git, không DB server. Public projection tại `data/public/<catalogVersion>/`; manifest ghim schema/dataset/provenance/alias/tombstone/asset version. Raw, draft, reviewed, quarantine và evidence chỉ ở workspace riêng tư ngoài repo/client/build. Export allowlist, published + non-fixture + FK public + approval đúng revision + rights gates. Contract chi tiết trong [Architecture](../ARCHITECTURE.md#kho-dữ-liệu-đã-chốt--p0-d01--q01-2026-10-01) và [DATA_SCHEMA](../DATA_SCHEMA.md#public-catalog-contract--q01). | P0-D01 DONE; P2-D01–D12/P2-I01/P2-H01 vẫn chưa triển khai. Nguồn/mapping thật vẫn DATA-gated; Q02/Q12/Q16/TGC/RIGHTS không được gỡ bởi quyết định này. |
+| Q01 | **HISTORICAL CLOSED 2026-10-01; SUPERSEDED / EVOLVED 2026-10-04 bởi Q20 về canonical ownership.** Quyết định cũ: Release 1 JSON normalized versioned trong Git, không DB server. Public projection `data/public/<catalogVersion>/`, manifest/provenance/alias/tombstone/asset version và private raw/draft/review/quarantine/evidence/export allowlist/rights gates **vẫn giữ**. JSON nay projection/export/cacheable snapshot/rollback/fixture, không canonical dài hạn. [Historical contract](../ARCHITECTURE.md#kho-dữ-liệu-đã-chốt--p0-d01--q01-2026-10-01), [projection schema](../DATA_SCHEMA.md#public-catalog-contract--q01). | P0-D01 giữ DONE; P2-D01/P2-D02/P2-D04 DONE theo scoped validators, K15 loader/manifest/import có scope riêng. Generic pipeline P2-D10–P2-D12/P2-I01/P2-H01 chưa đủ DoD; Q20/Phase 9 không auto đóng DATA/Q02/Q12/TGC/RIGHTS. |
 
 ### E. Đã chốt bổ sung — 2026-10-02
 
@@ -448,3 +579,14 @@ Nhóm A đã được **chốt ngày 2026-09-29** để mở khóa Phase 0. Đâ
 |---|---|---|
 | Q08 | **CLOSED** — Configurable project contract / fixture behavior, không phải verified Sky game behavior. SlotPolicy.maxItems hỗ trợ single/multiple, fixture mặc định 1 cho sáu slot; equippedBySlot giữ ID[]. Một item nhiều binding; zIndex tăng dần rồi binding ID ổn định. Anchor key ghim model/revision + effective size + slot/anchor + asset/binding revisions; missing/revision mismatch có trạng thái rõ, scale nhân vật/viewport mỗi tầng đúng một lần. Applicable rules sort priority giảm dần; cùng priority ghi khác target value là validator error, runtime ID tie-break chỉ preview tạm. Override derive từ base không mutate/persist effective state; tháo trigger derive lại. Ví dụ chỉ ID/code fixture. Chi tiết [Architecture](../ARCHITECTURE.md#contract-wardrobe-2d-đã-chốt--p0-w01--p0-w02--q08-2026-10-02) / [Schema](../DATA_SCHEMA.md#contract-q08--configurable-project--fixture-behavior-2026-10-02). | P0-W01/P0-W02 DONE; SVG Phase 0 vẫn chỉ là test evidence. Wardrobe V1 có manifest/schema/reducer/renderer/picker/dye mới; chưa visible override, save/share, full asset pipeline. Q08 không thay đổi; behavior/calibration game thật cần evidence, full assets pending legal confirmation. |
 | Q16 | **CLOSED** — Maintainer / repository owner theo dõi TGC; Legal / Rights review theo KB. Evidence ở nơi logic **Sky Guide private workspace → Legal → TGC** ngoài repo; owner lưu/review đúng revision và update public allowlist status/evidenceRef/scope summary/follow-up state. Ledger template và draft chưa gửi tại [TGC follow-up contract](../TGC_FOLLOW_UP.md); chưa tạo storage hoặc lưu raw evidence. **Q16 closure does not imply asset permission.** | P0-D03/P0-L01–L03 DONE về quy trình; K13 pending_clarification / full assets pending legal confirmation, Full AssetRegistry path đóng. Phase 1 cần evidence/gửi follow-up/review thật; TGC/RIGHTS và Phase 8 giữ gate. |
+
+### F. Đã duyệt / designed — 2026-10-04, chưa implemented
+
+Kiểm tra toàn file: Q01–Q19 là IDs cũ; Q20–Q23 là IDs bổ sung, không collision. Các quyết định do maintainer cung cấp trong task reconciliation, không phải kết quả live source/cloud verification.
+
+| ID | Quyết định đã duyệt | Implementation / gates còn lại |
+|---|---|---|
+| Q20 | **APPROVED/DESIGNED** — canonical domain metadata/relationships trong central PostgreSQL-compatible relational DB, provider-neutral: Item/Spirit/Season/Event/EventRule/EventOverride/Location/Cosmetic/Music/Emote/Honk-Call/Media-provenance. Maintainer review/promote dữ liệu; JSON versioned là public projection/export/cacheable static snapshot/rollback/fixture, không source of truth dài hạn. Binary images/posters/video/honk-call audio-video/emote video/music samples ở object storage, preferred R2/S3-compatible. DB chỉ stable ID/key/URL khi cần/role/source/provenance/rights/revision/timestamps/relation IDs. Vercel frontend/SPA/PWA/functions/API facade/CDN; deployment storage/repo JSON không DB. Q01 canonical decision superseded, projection/private/rights contracts giữ. | P9-D01–P9-D04/P9-I01/P9-I02/P9-V01 OPEN; chưa provision central DB, provider/quota/contract review trước resource; không đổi React/Vite/SSR |
+| Q21 | **APPROVED/DESIGNED** — itemImage tối đa 1, referenceImages 0..N, dedupe primary khỏi references. Wiki structured roles trước; official Sky/TGC → official social → provenance community fallback; không size/aspect/DOM/first-image role inference. Current/verified media audit → role/dedupe/reconcile/validate/manual ambiguous review → rights-approved mirror. Warrior of Love Hair regression và một season pilot trước full. | P9-D05/P9-D06/P9-V02 OPEN, DATA/RIGHTS/TGC theo asset; PR #10 research không là catalogue reconciliation DONE |
+| Q22 | **APPROVED/DESIGNED** — shared animated preview poster/lazy/gesture pipeline cho Emote/Call-Honk, giữ Call audio identity; object storage budgets 0.5 MB/clip/~350 MB cho 500 clips. Music `/music?instrument=<itemId>` reuse item ID; 15 notes 3×5, Web Audio/AudioBuffer, active-only samples và sampleSet reuse; V1 playable, V1.1 Sheets, V1.2 Compose local, V2 community/cloud/login scope riêng. | P9-D10/P9-H02/P9-H03/P9-M01–P9-M05/P9-V05–P9-V07 OPEN; chưa có clips/samples hoặc Music implementation; RIGHTS gate không đổi |
+| Q23 | **APPROVED/DESIGNED** — Event Service đa nguồn theo hierarchy official → verified official override → verified structured community → cross-checked community → prediction/calculated. Event/Rule/Override/Occurrence/Snapshot/Health; IANA America/Los_Angeles/DST; recurring anchor/offset/interval/effective range, temporary overrides không mutate base. GET /api/events/live version/time/active/upcoming/start/end/source-confidence, local countdown; LKG + healthy/delayed/stale/offline, short live TTL không per-second poll. Q14 architecture resolved, source verification vẫn mở. | P9-D07–P9-D09/P9-H01/P9-U01/P9-V03/P9-V04 OPEN; KB/source contracts chưa complete; K05 optional, không invent K-ID hoặc promote prediction |

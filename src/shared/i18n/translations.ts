@@ -1,5 +1,8 @@
 export type Locale = 'vi' | 'en'
 const vi = {
+  'storage.sessionOnly': 'Chưa lưu được ngôn ngữ. Lựa chọn hiện tại chỉ dùng trong phiên này.',
+  'storage.future': 'Thiết lập ngôn ngữ được lưu bởi phiên bản mới hơn. Lựa chọn hiện tại chỉ dùng trong phiên này.',
+  'storage.retry': 'Thử lưu lại', 'storage.resetLocale': 'Đặt lại ngôn ngữ trên thiết bị',
   'nav.home': 'Trang chủ', 'nav.hub': 'Khám phá', 'nav.itemLookup': 'Tra cứu item',
   'nav.wardrobe': 'Wardrobe', 'nav.about': 'Giới thiệu', 'nav.menu': 'Menu', 'nav.close': 'Đóng',
   'landing.title': 'Sky Guide', 'landing.subtitle': 'Một bầu trời, những hành trình mới.',
@@ -40,13 +43,16 @@ const vi = {
   'about.data': 'Nguồn và ghi công', 'about.data.text': 'Dữ liệu danh mục được tổng hợp từ các nguồn cộng đồng công khai và chuẩn hóa cho Sky Guide. Phần nguồn bên dưới ghi revision, ngày nhập, phạm vi và giấy phép. Lịch live và tin chính thức chưa được kết nối.',
   'about.rights': 'Pháp lý và tài nguyên', 'about.rights.text': 'Sky Guide là dự án cộng đồng độc lập. Bầu trời này được tạo bằng mã, không sử dụng artwork hoặc tài nguyên game.',
   'about.rights.pending': 'Quyền sử dụng bộ tài nguyên game đầy đủ vẫn đang chờ xác nhận pháp lý (pending legal confirmation).',
-  'about.device': 'Thiết lập trên thiết bị', 'about.device.text': 'Lựa chọn bầu trời và ngôn ngữ được lưu trên thiết bị khi trình duyệt cho phép. Lưu outfit và nhắc nhở chưa được triển khai.',
+  'about.device': 'Thiết lập trên thiết bị', 'about.device.text': 'Lựa chọn bầu trời, ngôn ngữ và bản phối demo bạn chủ động lưu được giữ trên thiết bị khi trình duyệt cho phép. Nhắc nhở chưa được triển khai.',
   'about.device.note': 'Khi có tính năng nhắc, bạn sẽ chủ động bật; nhắc chỉ hoạt động khi ứng dụng đang mở.',
   'footer.description': 'Cẩm nang cộng đồng đang được xây dựng.', 'footer.nav': 'Thông tin và thiết lập',
   'notFound.title': 'Không tìm thấy trang', 'notFound.text': 'Đường dẫn này không có trong Sky Guide.',
 } as const
 export type TranslationKey = keyof typeof vi
 const en: Record<TranslationKey, string> = {
+  'storage.sessionOnly': 'Language could not be saved. Your current choice applies only to this session.',
+  'storage.future': 'Language settings were saved by a newer version. Your current choice applies only to this session.',
+  'storage.retry': 'Try saving again', 'storage.resetLocale': 'Reset language on this device',
   'nav.home': 'Home', 'nav.hub': 'Explore', 'nav.itemLookup': 'Item lookup', 'nav.wardrobe': 'Wardrobe',
   'nav.about': 'About', 'nav.menu': 'Menu', 'nav.close': 'Close',
   'landing.title': 'Sky Guide', 'landing.subtitle': 'One sky. New journeys.', 'landing.enter': 'Enter the guide',
@@ -83,7 +89,7 @@ const en: Record<TranslationKey, string> = {
   'about.data': 'Sources and credits', 'about.data.text': 'Catalogue information is compiled from public community sources and normalized for Sky Guide. The source section below records the revision, import date, scope and license. Live schedules and official news are not connected yet.',
   'about.rights': 'Legal and assets', 'about.rights.text': 'Sky Guide is an independent community project. This sky is created with code, without game artwork or assets.',
   'about.rights.pending': 'Permission to use the full game asset collection is still pending legal confirmation.',
-  'about.device': 'Device settings', 'about.device.text': 'Sky and language selections are saved on this device when the browser allows it. Outfit storage and reminders are not implemented yet.',
+  'about.device': 'Device settings', 'about.device.text': 'Sky and language selections, plus demo outfits you explicitly save, are kept on this device when the browser allows it. Reminders are not implemented yet.',
   'about.device.note': 'When reminders become available, you will enable them yourself; they only work while the app is open.',
   'footer.description': 'A community guide in development.', 'footer.nav': 'Information and settings',
   'notFound.title': 'Page not found', 'notFound.text': 'This address is not part of Sky Guide.',

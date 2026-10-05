@@ -83,5 +83,5 @@ test('Wardrobe navigation reaches the editor directly; SPA fallback covers reloa
   assert.match(app, /path="\/wardrobe" element=/)
   assert.match(app, /<WardrobeEditor \/>/)
   assert.match(hub, /<Link to="\/wardrobe"/)
-  assert.ok(config.rewrites.some(rule => rule.source === '/(.*)' && rule.destination === '/index.html'))
+  assert.ok(config.routes.some(rule => rule.src === '/(.*)' && rule.dest === '/index.html'))
 })
