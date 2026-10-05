@@ -50,6 +50,13 @@ unknown cost produces complete=false; currency groups separated; no mutation;
 invalid input/overflow cannot produce a numeric estimate or public data.
 
 ## State / next / handoff
-PLANNED2026-10-06, no implementation claimed. Branch codex/master-plan-execution,
-latest pushed implementationfa99dd9; mapping/fetch checkpoint precedes code.
-Exact next: implement the pure validator/calculator and focused tests.
+DONE2026-10-06. Mapping/fetch checkpoint e4f27dc was pushed/verified before code.
+Implemented pure file-envelope validator/calculator; no live parser, UI or DB.
+Nine new tests/30 catalog-focused and235 full data tests PASS; lint/typecheck/
+catalog1808/build PASS. Empty manual input rejected; no recursive closure/spread
+of arbitrary parent arrays. Initial test lint missed structuredClone global;
+fixed by explicit globalThis access, lint passed without rule/config changes.
+Existing router directives/large catalog warnings persist, not introduced here.
+Manual records retain explicit provenance; fake real-source completion not claimed.
+Exact next: inspect P2-D05 K01 staged adapter dependencies/source mapping, then
+write its scoped plan before implementation. K04/Q12/R1/provider/rights gates hold.

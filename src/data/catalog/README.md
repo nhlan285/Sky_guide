@@ -13,3 +13,22 @@ Known costs require explicit numeric amounts; free status rejects unknown or pos
 Visit and Prediction have separate validators and collection APIs. Opposite-contract fields are rejected, including hybrid records; distinct visit IDs for the same spirit are retained. Prediction requires non-blank methodDescription and inputDataVersion and resolved candidate IDs. It does not infer a method, confidence, probability or publication approval. Q09 and source/rights/export gates remain outside this module.
 
 `pnpm test` runs synthetic behavioral fixtures through the production TypeScript modules using Node 24's built-in test runner. `pnpm lint`, `pnpm typecheck` and `pnpm build` cover the shared project checks. No React, external adapter, live data or new package is involved.
+
+P2-D06 manual file input: parse JSON at the caller and pass
+`{schemaVersion:1, graph:{trees:[...], nodes:[...]}}` to `validateFriendshipInput`
+with explicit canonical/provenance registries. Use existing full Tree/Node fields,
+including nullable unknowns, supplied IDs, source provenance and `recordStatus=draft`.
+Validation never generates IDs/edges, executes Lua, fills missing prices, writes a
+file or approves publication. Unknown envelope fields are projected away; invalid
+version/graph/FK/status fails. Real source crosswalks require a separate review.
+
+`calculateFriendshipPath(graph, context, {treeId, nodeIds})` validates a complete
+graph and nonempty selection, then includes each selected node and its prerequisite
+ancestors once. Optional siblings are not added. Returned IDs/totals are stable;
+duplicates in a selection do not duplicate costs. `knownSubtotal` groups exact
+currency plus raw label (no unreviewed label aliases or C/AC merging). Unknown
+cost status or nullable amounts produce `complete=false` and `missingCostNodeIds`;
+even a matching aggregate elsewhere never fills missing cost. Explicit known zero
+and free remain different node facts. Overflow/invalid input fails without a numeric
+estimate. Neither function mutates input or persists anything. A future UI must
+label incomplete results as partial and keep source revision/provenance available.

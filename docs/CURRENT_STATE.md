@@ -1,92 +1,67 @@
 # Current handoff — 2026-10-06
 
 ## Task / branch / checkpoint
-Autonomous approved master roadmap: continue safe unblocked tasks, no merge/deploy.
-Branch `codex/master-plan-execution`. Verified pushed implementation HEAD:
-`fa99dd9c06effcabf062c26a5a1d150851e247c3`. This handoff is the next checkpoint
-commit; identify its SHA with `git log -1` and verify the remote branch before resuming.
-Session resumed from7cea424; P1-D02/D03/D05–D12 source/capability reviews completed.
-Master [IMPLEMENTATION_PLAN](plan/IMPLEMENTATION_PLAN.md); R1 review plan
-[DATA_FOUNDATION](plan/DATA_FOUNDATION.md); active slice
-[WIKI_SOURCE_VERIFICATION](plan/WIKI_SOURCE_VERIFICATION.md), next implementation
-[SPIRIT_TREE_INPUT](plan/SPIRIT_TREE_INPUT.md).
+Autonomous master run: execute safe unblocked roadmap tasks, checkpoint/push;
+no merge/production deployment. Branch `codex/master-plan-execution`.
+Last verified pushed HEAD `e4f27dcc68bb3005fed8a63798ba68d5f222d9d7`.
+This P2-D06 milestone becomes next checkpoint; resolve SHA via `git log -1` and
+verify remote branch before resuming. Resumed from7cea424, branch/remote matched.
+Master [IMPLEMENTATION_PLAN](plan/IMPLEMENTATION_PLAN.md); active completed slice
+[SPIRIT_TREE_INPUT](plan/SPIRIT_TREE_INPUT.md); source record
+[WIKI_SOURCE_VERIFICATION](plan/WIKI_SOURCE_VERIFICATION.md); R1
+[DATA_FOUNDATION](plan/DATA_FOUNDATION.md).
 
-## Completed implementation checkpoints
-- `199bdd5`: identity/FK/revision/crosswalk/alias/tombstone contracts.
-- `533243c`: unmounted snapshot API and fail-closed media delivery contracts.
-- `518eebe`: reviewed sync/CAS/LKG contracts with fixture in-memory store.
-- `4639c0c`: versioned local storage/locale and recovery UI (P2-U01).
-- `f0348ab`: geography/price mapping validators (P2-D03).
-- `8173045`: explicit local demo outfit library/reload (P4-W09).
-- `22a29aa`: bounded gzip/base64url share with explicit apply (P4-W10).
-- `3e0b1be`: memory-only SPA outfit draft and stable-ID catalog navigation (P4-H01).
-- `f1d32e5`: revision-pinned K01 item module/source contract (P1-D01).
-P3-W01 existing Hub demo widget now restores last saved outfit.
+## Completed work / checkpoints
+-199bdd5/533243c/518eebe: portable identity, unmounted snapshot/media API,
+reviewed sync/CAS/LKG fixture contracts; no live DB.
+-4639c0c/f0348ab: versioned local storage/recovery and geography/price validators.
+-8173045/22a29aa/3e0b1be: demo saved outfits/share/navigation draft (P4-W09/W10/H01).
+-f1d32e5: K01 source verification.2e6d110: K02 ten-node/nine-edge manual sample,
+root price unknown.00d9de6: K03 repeated visit dates, ends/timezones missing.
+-f278c8c: K04 public sheet403 blocker + K05 live time/epoch-ms/IANA sample.
+-12087cd/4003ca0: K06 news/K07 map metadata and K08 guide/K09 video metadata.
+-fa99dd9: K10/K11 dated store coverage + K12 actual Sky manual pricing sample/terms.
+-e4f27dc: per-source field map (K04 blocked) and fetch/cache/recovery contract.
+P1-D13 PARTIAL, P1-I01 scoped contract DONE; source verification != integration.
 
-K02 completed/pushed2e6d110:10 reviewed nodes/9 edges; root cost stays unknown.
-K03 completed/pushed00d9de6:3 pinned responses,2 distinct historical visit starts,
-missing end/timezone retained; SV/upcoming/never-returned rows kept distinct.
+## Current intentional changes
+P2-D06 pure domain input/calculator DONE. Version1 parsed manual JSON contains
+complete graph and supplied canonical/provenance IDs. Draft-only/nonempty input;
+no generated IDs/edges/cost defaults or IO. Unique ancestor closure counts shared
+parents once; groups exact currency/raw labels; unknown cost remains partial;
+free/known zero preserved; overflow/invalid graph/selection rejects estimate.
+Files: catalog friendshipInput.ts/index.ts/README, friendshipInput tests,
+SPIRIT_TREE_INPUT plan, master and this handoff. No UI/public catalog/provider
+change. K15 remains runtime lookup. Raw/source working scripts only E: research.
 
-## Active work / intentionally modified areas
-K04 directory111722 confirms ln.cookie OneDrive embed, GET403; actual columns/
-export unavailable. K05 observed /skytime GET200/JSON: epoch milliseconds,
-America/Los_Angeles fields match, HTTP ACAO*. Notice discourages repeat calls;
-numeric quota/TTL/license unknown, no schedule fields verified.
-K04/K05 pushedf278c8c; K06/K07 pushed12087cd; K08/K09 pushed4003ca0.
-Current K10/K11 acceptance reuses2026-10-04 evidence without fresh price claim.
-K12 actual Sky Apple/Google pages checked: iOS10 rows/one2026-03-29 snapshot,
-Android SKU prices absent; SKU/market/currency/contents unknown. Terms permit
-research/backlink, prohibit systematic scrape/bulk/competing redistribution.
-K10–K12 pushedfa99dd9. Current mapping/fetch contracts documented: P1-D13 PARTIAL
-(K04 missing columns), P1-I01 source/manual fallback DONE. P1-U01 remains Q12
-license-version gated, no guessed CC-BY-SA version. Intentional files: source field
-mapping, fetch contracts, master/source plan/handoff and next spirit-tree plan.
-No runtime/public price import, binary download or provider integration.
-No upstream Lua was executed, no assets downloaded or rights inferred.
+## Validation / limitations
+Nine new tests/30 focused and235 full data tests PASS. Full lint/typecheck,
+catalog1808/build PASS after final code guards. Initial test lint structuredClone
+failure fixed via globalThis, no config/rule disabled. Scaffold60 Markdown/173
+unique tasks + diff check PASS before milestone. Existing build warnings remain:
+React Router use-client directives and large catalog chunk. No browser needed
+for pure functions; earlier UI baseline remains226-test/navigation checkpoint.
+Real canonical K02 crosswalk, live parser, tree UI and import/export not claimed.
 
-## Validation
-Product baseline at `3e0b1be`: full226/226 tests, lint/typecheck/catalog/build PASS.
-Browser checks passed for draft/item roundtrip, canonical unsupported-item message,
-filter return, unknown-item recovery and mobile390x844 overflow/focus.
-K01 at `f1d32e5`:18/18 parser/media tests, evidence JSON, scaffold and diff PASS.
-No runtime changes since those checks. K0218/18 parser/media tests PASS; exact
-page node values, pinned defaults, acyclic graph and unique path totals PASS.
-Checkpoint docs: scaffold57 Markdown/173 tasks and `git diff --check` PASS.
-K03 source hashes/revisions/date crosschecks and missing-field isolation PASS.
-K05 checksum/epoch/LA fields +6 synthetic IANA/DST mappings PASS. K04 missing
-access/columns retained. Synthetic DST cases do not claim live historic responses.
-K06 manual source heading/date/platform/link PASS; K07 three envelopes/hash/map
-revision/location/rights assertions PASS. JSON parse/scaffold/diff checked before commit.
-K08 article title/date/correction reviewed; K09 Wiki ID/oEmbed hash/title/channel
-and unseen-footage limits PASS. JSON/scaffold/diff checked before checkpoint.
-K10–K12 four content hashes + historical platform/market/missing-field guards PASS.
-Current docs-only mapping checkpoint uses scaffold/local-link/diff validation;
-code suite not rerun without code changes. New P2-D06 plan is not implementation.
-Existing build warnings: React Router directives and large catalog chunk.
-Old dev-server handle1951 is no longer available after session recovery; server
-liveness is unverified. Start a fresh server only when later UI verification needs it.
+## Blockers / decisions
+R1 maintainer schema/API/storage review pending; provider/quota approval required
+before provisioning. Live DB/migration/backup restore and R2–R6 foundation gated.
+K04 actual OneDrive workbook columns/export blocked403; needs accessible public
+sample/export. K12 terms prohibit systematic scrape/bulk/competing redistribution;
+manual reference/backlink only, not automatic SKU feed. Q12 license-version/
+credit finalization pending. Full TGC/community media rights still fail closed.
+P4-W11 depends generic P2-D12. Demo visible rules empty; full P4-U01/override flow
+not DONE. No paid resource, destructive Git, mass crawl or implicit disk autosave.
 
-## Gates / decisions
-R1 schema/API/storage review pending; provider/quota approval before resources.
-K04 BLOCKED by public embed403; needs accessible public sample/export from source.
-Live DB/migration/backup restore NOT implemented. R2-R6 retain dependency gates.
-No paid resources, bulk crawl, rights assumptions, destructive Git or main merge.
-Working data on E:. No full game assets, cloud/account or implicit disk save.
-P4-W11 depends P2-D12. Visible demo rules remain empty; override UI/full P4-U01
-is NOT DONE. Synthetic engine tests alone do not prove visible override flows.
-K15 remains runtime source; source research is not an import/publishing approval.
-
-## Continuity evidence
-Checkpoint drill PASS at199bdd5 then continued. Earlier compaction/quota drills
-remain NOT PASS because pre-trigger handoffs were incomplete. Native compaction
-also occurred during this requested checkpoint before the commit; recovery is
-recorded honestly, not claimed as a successful pre-compaction drill.
-No manual compaction tool exists; never run `/compact` as a shell command.
+## Continuity
+Checkpoint drill PASS at199bdd5. Earlier pre-trigger compaction/quota drills NOT
+PASS; no manual compaction tool or invented context percentage. Current run uses
+milestone commits/push verification and native compaction only when it occurs.
 
 ## Exact next action
-After verifying pushed mapping checkpoint, implement P2-D06 under SPIRIT_TREE_INPUT:
-versioned manual draft graph input with supplied IDs/provenance, unique ancestor
-closure/subtotals, unknown/free/zero and raw-currency separation, overflow guards.
-Focused tests then full data/lint/typecheck/catalog/build once stable. No provider
-provisioning, public data mutation or DB sink. K04 mapping stays blocked.
-R1 gates unchanged; research does not approve public import/assets.
+After verifying P2-D06 pushed checkpoint/clean tree, inspect K01 field mapping,
+existing literal Lua parser, Item schema and source callers. Plan P2-D05 staged
+Wiki item adapter with explicit reviewed crosswalk/provenance, unknown fields,
+quarantine/parse-error report and no accepted-catalog overwrite. Implement/test
+only that contract; do not switch K15 runtime or provision a sink. Continue next
+unblocked roadmap task, never mark roadmap DONE just because checkpoint survived.

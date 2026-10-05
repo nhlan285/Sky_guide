@@ -8,6 +8,8 @@ export { validateAcquisitionOption, validateItem, validateItems } from './items.
 export { validateSpirit, validateSpirits } from './spirits.ts'
 export { validateFriendshipGraph, validateFriendshipNode, validateFriendshipTree } from './friendship.ts'
 export type { FriendshipGraph } from './friendship.ts'
+export { validateFriendshipInput, calculateFriendshipPath } from './friendshipInput.ts'
+export type { FriendshipInput, FriendshipPathCost } from './friendshipInput.ts'
 export { validateEvent, validateSeason, validateSeasonEvent, validateSeasonEvents } from './seasons.ts'
 export {
   validateTravelingSpiritPrediction, validateTravelingSpiritPredictions,
