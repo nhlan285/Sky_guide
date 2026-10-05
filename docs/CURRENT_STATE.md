@@ -3,11 +3,11 @@
 ## Task / branch / checkpoint
 Autonomous master run: safe unblocked roadmap tasks, checkpoint/push;
 no merge/production deployment. Branch `codex/master-plan-execution`.
-Last verified pushed HEAD `588bb316510bb4540e277006e7e9f7597aebce02`.
-This existing-preview audit milestone becomes next checkpoint; resolve SHA via `git log -1`
+Last verified pushed HEAD `68d35b959e3098647962fbf511ce770c597296da`.
+This local UX/contrast milestone becomes next checkpoint; resolve SHA via `git log -1`
 and verify remote branch before resuming. Started from7cea424.
 Master [IMPLEMENTATION_PLAN](plan/IMPLEMENTATION_PLAN.md); current completed slice
-[PREVIEW_AUDIT](plan/PREVIEW_AUDIT.md); source record
+[PWA_WARDROBE_QA](plan/PWA_WARDROBE_QA.md); source record
 [WIKI_SOURCE_VERIFICATION](plan/WIKI_SOURCE_VERIFICATION.md); R1
 [DATA_FOUNDATION](plan/DATA_FOUNDATION.md).
 
@@ -28,14 +28,15 @@ P1-D13 PARTIAL, P1-I01 scoped contract DONE; verification != integration.
 -7698d0e: P6-R01/R02 Web Push/native research only; Q07 unchanged.
 -c27308a: PWA manifest/icon audit and scoped Wardrobe local UI QA.
 -588bb31: bounded lookup filter preferences;269 tests + full checks/local smoke.
+-68d35b9: existing Git Preview verified; protected content403; P0-I04 scaffold
+reconciled, P3-I01 no proxy currently required from K05 sample.
 
 ## Current intentional changes
-P0-I04 historical scaffold acceptance reconciled with current Git preview588bb31
-READY/source git/exact branch+SHA. Protected-content fetch403: connector project/team
-access missing; P4-I01 remote smoke BLOCKED, auth-page HTTP200 not app success.
-P3-I01 conditional no-proxy decision based on K05 single anonymous CORS* sample;
-actual schedule/time browser consumer remains OPEN. Changed preview audit, master,
-README historical/current distinction, handoff. No deploy/protection/prod changes.
+P7-U01 current demo QA: Daylight/English/Night retain selected items/dye/base/rule;
+80-char synthetic name/320px no overflow. Found small disclosure contrast below
+target; changed only wardrobe.css disclosure color to existing primary token.
+Fresh background samples4.67–5.61 after fix; not whole-page contrast certification.
+Changed CSS, QA evidence/master/handoff. No branding/layout/OS settings changes.
 
 ## Validation / limitations
 269 full tests, full lint/typecheck, final build/catalog1808 PASS. Missing import
@@ -45,6 +46,10 @@ PASS; width390/document375, no console errors. E: local QA screenshots remain
 untracked. Earlier outfit download still NOT VERIFIED (in-app event timeouts).
 Broader theme/locale/reduced-motion/long-text/target devices remain NOT RUN.
 P4-U01/P7-U01 not fully closed; Router/large chunk warnings unchanged.
+After CSS fix: full lint and final build/catalog/typecheck PASS;269 behavior tests
+retained, not repeated for CSS-only change. Fresh computed Daylight/Night colors
+verified. Theme/locale and80-char/320px local checks now PASS. Reduced-motion OS
+runtime/full focus/contrast certification and target devices still NOT RUN.
 
 ## Blockers / decisions
 R1 maintainer schema/API/storage review pending; provider/quota approval required
@@ -68,10 +73,12 @@ Last exposed usage:50% short-window remaining and61% weekly remaining; account
 ordinary usage allowed. No context percentage exposed; goal remains active.
 
 ## Exact next action
-After verifying preview-audit pushed checkpoint/clean tree, continue local P7-U01
-current-demo theme/locale/long-text/keyboard checks using isolated synthetic origin.
-No target native install/protected Preview smoke claim. No invented market/spoiler
-active UI. Local Vite preview
+After verifying UX pushed checkpoint/clean tree, inspect P2-D08 independent manual
+official-news draft file contract against DATA_SCHEMA and K06 evidence. No public
+promotion, leak workflow, season/event schedules, provider or UI integration.
+Use sky-normalize-data skill; leave overall D08 PARTIAL if only official news input
+can be safely completed. Close owned local QA browser/preview before next code slice.
+Local Vite preview
 session74189 at6194 is owned by this run; browser tab1/browser2, viewport reset.
 Close owned preview/tab after QA use; no unrelated sessions should be killed.
 R1 review question pending asynchronously; no answer means no approval. P6-U02

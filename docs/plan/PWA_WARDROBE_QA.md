@@ -49,3 +49,30 @@ P6-I01 and P4-U01 remain PARTIAL/OPEN for listed acceptance gaps. Generic P4-W12
 alias/tombstone sequence still depends P2-D12/P4-W11; tested demo sequence does not
 close that gate. Audit independent P3-U04 filter preference slice using existing
 storage wrapper and URL contracts; market/spoiler UI still depends data/owner gates.
+
+## P7-U01 follow-up — current local acceptance slice
+Theme Daylight + English retain two items, rose dye, Tall base/Small override.
+Rename synthetic record to80 unbroken characters;320x800 mobile document width305,
+no overflowing main elements observed. Target OS reduced-motion/native devices
+remain separate; no sensitive browser preferences inspected.
+Found real disclosure contrast issue: computed text RGB68/95/112 at12.8px on
+transparent Daylight intro. Neighboring rendered JPEG background samples at
+1366x900 yield about3.43–4.35 contrast, below project normal-text4.5 target.
+Evidence on E: wardrobe-day-before.jpg and read-only measure-contrast.mjs; JPEG
+samples approximate, not whole-page accessibility certification. Plan: use existing
+primary --text token for this disclosure only (RGB22/52/72 measured day), retaining
+layout/branding. Matching samples predict6.61–8.37. Build/lint then verify actual
+computed color + screenshots; no new implementation-mirroring CSS tests needed.
+
+Completed follow-up: CSS uses primary token with adequate specificity to override
+intro muted text. Full lint and final catalog1808/typecheck/build PASS;269 behavior
+tests from588bb31 retained (CSS-only fix, not rerun). Fresh Daylight screenshot's
+background changed with ambient scene; actual RGB22/52/72 gives about4.67–5.61 at
+same neighboring sample points. Night computed text RGB236/243/248; fixture items,
+rose dye/Tall base/Small override and80-character saved name remain after theme,
+locale and reload. No new geometry/styles beyond disclosure color. Both images
+remain E: wardrobe-day-before.jpg / wardrobe-day-after.jpg, not Git.
+Reduced-motion source guards exist in AmbientCanvas/useSkyNavigation/atmosphere CSS,
+but OS preference runtime test NOT RUN; do not change OS/browser preferences to
+manufacture a pass. Full contrast audit/focus trap/screen reader and real target
+devices still OPEN; these samples are not whole-page WCAG certification.
