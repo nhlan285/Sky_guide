@@ -3,9 +3,9 @@
 ## Task / branch / checkpoint
 Autonomous approved master roadmap: continue safe unblocked tasks, no merge/deploy.
 Branch `codex/master-plan-execution`. Verified pushed implementation HEAD:
-`7cea4245da7b9c6a1b6951bb360d540c84bdfaff`. This handoff is the next checkpoint
+`2e6d110879fb7a26b2db1c3faa438ca936bf8b26`. This handoff is the next checkpoint
 commit; identify its SHA with `git log -1` and verify the remote branch before resuming.
-Session resumed deterministically from7cea424; current P1-D02 milestone completed.
+Session resumed deterministically from7cea424; P1-D02 and P1-D03 completed.
 Master [IMPLEMENTATION_PLAN](plan/IMPLEMENTATION_PLAN.md); R1 review plan
 [DATA_FOUNDATION](plan/DATA_FOUNDATION.md); active slice
 [WIKI_SOURCE_VERIFICATION](plan/WIKI_SOURCE_VERIFICATION.md).
@@ -22,13 +22,17 @@ Master [IMPLEMENTATION_PLAN](plan/IMPLEMENTATION_PLAN.md); R1 review plan
 - `f1d32e5`: revision-pinned K01 item module/source contract (P1-D01).
 P3-W01 existing Hub demo widget now restores last saved outfit.
 
+K02 completed/pushed2e6d110:10 reviewed nodes/9 edges; root cost stays unknown.
+K03 current milestone:3 pinned responses,2 distinct historical visit starts,
+missing end/timezone retained; SV/upcoming/never-returned rows kept distinct.
+
 ## Active work / intentionally modified areas
 P1-D02 K02 manual sample DONE. Four bounded public API requests succeeded HTTP200
 without API warnings/errors. Raw JSON, extracted Lua and verification script at
 `E:/SkyGuideAssets/research/k02-2026-10-05/`; do not refetch or commit raw data.
-Phase plan records revisions/checksums and unfinished reconciliation.
-K02 profile/evidence, master task row, handoff and active plan changed intentionally.
-Ten nodes/nine edges acyclic; root emote cost unknown, so path totals incomplete.
+K03 raw samples at E:/SkyGuideAssets/research/k03-2026-10-05; cached files reused.
+Current intentional files: K03 profile/evidence, master task row, handoff and plan.
+K02 committed already; no runtime/public data or schema changes in either slice.
 No upstream Lua was executed, no assets downloaded or rights inferred.
 
 ## Validation
@@ -39,6 +43,7 @@ K01 at `f1d32e5`:18/18 parser/media tests, evidence JSON, scaffold and diff PASS
 No runtime changes since those checks. K0218/18 parser/media tests PASS; exact
 page node values, pinned defaults, acyclic graph and unique path totals PASS.
 Checkpoint docs: scaffold57 Markdown/173 tasks and `git diff --check` PASS.
+K03 source hashes/revisions/date crosschecks and missing-field isolation PASS.
 Existing build warnings: React Router directives and large catalog chunk.
 Old dev-server handle1951 is no longer available after session recovery; server
 liveness is unverified. Start a fresh server only when later UI verification needs it.
@@ -60,8 +65,8 @@ recorded honestly, not claimed as a successful pre-compaction drill.
 No manual compaction tool exists; never run `/compact` as a shell command.
 
 ## Exact next action
-After verifying pushed milestone, continue P1-D03 K03 Traveling Spirits with a
-bounded URL/revision/date sample under sky-wiki-source. Date-only remains
-date-only; unknown timezone stays null; separate history from prediction.
-Record source field mapping/evidence, validate, checkpoint and proceed to next
-unblocked task. R1 gates unchanged; research does not approve public import/assets.
+After verifying pushed milestone, attempt P1-D04 K04 public ln.cookie sheet
+discovery/structure. Brief supplies no URL; do not invent ID/export route or
+inspect private Drive. If no attributable public source, record precise blocker
+and continue independent P1-D05 ThatSkyAPI endpoint/units/semantics verification.
+R1 gates unchanged; research does not approve public import/assets.

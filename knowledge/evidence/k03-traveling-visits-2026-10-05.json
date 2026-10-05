@@ -1,0 +1,42 @@
+{
+  "schemaVersion": 1,
+  "purpose": "research-only source contract, no public history import/event rule/media permission",
+  "endpoint": "https://sky-children-of-the-light.fandom.com/api.php",
+  "request": {"action":"query","format":"json","formatversion":2,"prop":"revisions","rvprop":"ids|timestamp|content","rvslots":"main","redirects":1},
+  "responses": [
+    {"title":"Traveling Spirits","revision":111680,"pageId":2914,"editedAt":"2026-10-02T21:27:50Z","retrievedAt":"2026-10-05T16:53:55.019Z","bytes":16728,"sha256":"02650586e87d3c0901776b02df9a7141f7c000be29b7c6a9413635a129e0537c","sourceUrl":"https://sky-children-of-the-light.fandom.com/wiki/Traveling_Spirits?oldid=111680"},
+    {"title":"Spirit Visits","revision":111650,"pageId":14281,"editedAt":"2026-10-02T02:39:35Z","retrievedAt":"2026-10-05T16:54:37.119Z","bytes":93624,"sha256":"e78fc7777a13a3de948f2dfc0d4d6a839d5f0cff8a7aca404240c7f863790bea","sourceUrl":"https://sky-children-of-the-light.fandom.com/wiki/Spirit_Visits?oldid=111650"},
+    {"title":"Leaping Dancer","revision":110664,"pageId":11351,"editedAt":"2026-09-01T17:04:44Z","retrievedAt":"2026-10-05T16:54:59.845Z","bytes":10240,"sha256":"8808e552591dbf23960e0d1cb621b0826d515690af221a06d21072e9dd15b2ef","sourceUrl":"https://sky-children-of-the-light.fandom.com/wiki/Leaping_Dancer?oldid=110664"}
+  ],
+  "format": "JSON response envelope containing wikitext, not normalized visit objects",
+  "historyColumns": ["Season","Spirit","Expression","Visits","Visit#","Date","Delta"],
+  "samples": [
+    {"sourceVisitKey":"TS#115","spiritName":"Leaping Dancer","canonicalSpiritId":null,"kind":"traveling","rawDateLabels":["June 6, 2024","Jun 6, 2024"],"startsAt":{"value":"2024-06-06","precision":"date","timezone":null},"endsAt":null,"status":"confirmed","confirmationScope":"two Wiki history sources agree, not independent official confirmation","treeId":null},
+    {"sourceVisitKey":"TS#12","spiritName":"Leaping Dancer","canonicalSpiritId":null,"kind":"traveling","rawDateLabels":["June 25, 2020","Jun 25, 2020"],"startsAt":{"value":"2020-06-25","precision":"date","timezone":null},"endsAt":null,"status":"confirmed","confirmationScope":"two Wiki history sources agree, not independent official confirmation","treeId":null}
+  ],
+  "excludedSamples": [
+    {"sourceVisitKey":"SV#3","rawDate":"July 3, 2023","reason":"special Returning Spirit visit, not Traveling Spirit history"},
+    {"spiritName":"Nodding Muralist","rawRange":"October 8 to October 11, 2026","startDate":"2026-10-08","endDate":"2026-10-11","precision":"date","timezone":null,"reason":"upcoming relative to2026-10-05, not completed historical visit or approved prediction"}
+  ],
+  "mapping": {
+    "spirit":"Spirit ID requires reviewed crosswalk; display name not canonical ID",
+    "Visit#":"TS source number scoped with spirit/range; preserve separate repeat visits",
+    "Date":"start date, date-only; missing end remains null, no invented instant",
+    "sortValue":"may represent first visit or most recent date; not whole-row identifier",
+    "rowKinds":"SV/Error appearances and never-returned season-end rows classified before import",
+    "treeId":"unknown pending version/variant mapping",
+    "prediction":"randomness/hints/upcoming stay separate; no method or probability invented"
+  },
+  "scheduleObservation": {
+    "rawTimezoneLabels":["PST/UTC-8","PDT/UTC-7"],
+    "arrivalLabel":"Thursday00:00",
+    "departureLabel":"Sunday23:59",
+    "durationLabel":"96 hours",
+    "boundaryStatus":"23:59 display vs exact96h not silently reconciled",
+    "exception":"first two visits Friday noon60h; historical cadence differed",
+    "normalizedRule":null,
+    "note":"Do not derive historical end instants from modern generic rule. IANA Event Rule verification is separate."
+  },
+  "attribution": {"source":"Sky: Children of the Light Wiki contributors","licenseNote":"K01 observed CC-BY-SA label, version unverified; no image rights","transformNote":"Manual source comparison; raw dates normalized without a clock; revision links above"},
+  "limitations": ["Two past visits for one spirit, not full parser/coverage","No official per-visit instant/timezone/end recovered","K04 reconciliation not done","No runtime/public import, current countdown or prediction"]
+}

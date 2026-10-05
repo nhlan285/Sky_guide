@@ -71,3 +71,22 @@ Validation: exact page values/pinned default costs, response envelopes, nine-edg
 DAG, unique closure/subtotals checked. Exact next: P1-D03 K03 bounded revision
 sample; date-only remains date-only, history separated from prediction. Continue
 independent source tasks while R1 provider/review gate waits.
+
+## Current slice — P1-D03 K03 (2026-10-05)
+MEDIUM source verification after P0-D02. K02 completed/pushed2e6d110. Scope:
+Traveling Spirits page contract and one historical visit with raw range,
+precision/timezone/provenance. Source plan, K03 profile/evidence and master/handoff
+only; no event feed/parser/runtime/public data, prediction or scheduled resource.
+Acceptance: actual revision/content shape and a past date-range sample; unknown
+clock/timezone preserved, no invented instant or merged repeat visits.
+Next: bounded MediaWiki revision request, inspect observed history references only.
+
+### P1-D03 completion — 2026-10-05
+Traveling Spirits111680 → Spirit Visits111650; Leaping Dancer110664 corroborates
+TS#115/2024-06-06 and TS#12/2020-06-25. Date means arrival; end/timezone unknown
+retained, no96h extrapolation. Repeated visits separate; SV/Error/never-returned
+rows/upcoming not silently treated as completed TS history. Modern schedule has
+boundary ambiguity and historical exceptions. No runtime/public data changed.
+Exact next: P1-D04 K04 find actual ln.cookie sheet link/structure from public
+source; never invent spreadsheet ID/export/API. If unavailable record blocker
+and proceed P1-D05 independently.
