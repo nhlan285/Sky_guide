@@ -138,3 +138,14 @@ link but no explicit version. It is source-declared metadata, not resolved Q12 o
 image permission. Maintainer must verify exact version and applicable credit
 requirements before finalizing Wiki adaptation credits. K04 access, route QA and
 per-asset permissions remain separate dependencies.
+
+### Q12 evidence follow-up
+2026-10-06 [review metadata](../knowledge/evidence/wiki-license-review-2026-10-06.json):
+the licensing endpoint returned402. An indexed extraction of Fandom's
+[Help:Licensing](https://community.fandom.com/wiki/Help%3ALicensing) reports a default
+CC-BY-SA3.0 Unported for text unless otherwise noted, source/article or author
+credit, license links, identified changes and applicable share-alike terms. It
+separates image/video licenses. The index reports a three-month-old crawl and
+direct access is robots-blocked. This provides a version lead; it does not confirm
+exceptions or the applicable version for each pinned Sky Wiki record. Q12 stays
+OPEN; no repeated blocked fetch or rights approval.

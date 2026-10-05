@@ -40,3 +40,13 @@ Raw cached license metadata stays on E:, no raw corpus copied into the repo.
 Exact next: resolve Q12 using applicable source/license evidence, then review
 credits for actual published records. Until then audit other tasks by their
 recorded dependencies; do not start source publication or media reuse.
+
+## Source-version follow-up
+After template checkpoint065c96e, bounded primary-source lookup: licensing402,
+indexed Fandom help default3.0 Unported (three-month-old crawl), direct domains
+robots-blocked. [Metadata](../../knowledge/evidence/wiki-license-review-2026-10-06.json)
+records access and limitations. Sky-specific exceptions/applicable version not
+confirmed; Q12 unchanged. No further blocked network retries.
+JSON parse,71-document scaffold/link validation and diff checks PASS. Quota
+remaining6% short window/54% weekly triggers durable checkpoint; no runtime rerun
+or model switch. Resume from CURRENT_STATE, not another full repository scan.
