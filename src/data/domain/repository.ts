@@ -3,6 +3,7 @@ import type { ItemCatalog } from '../itemLookup/release.ts'
 export type SourceHealth = 'healthy' | 'delayed' | 'stale' | 'offline'
 export interface Freshness {
   health: SourceHealth
+  // Compatibility name: latest successful reviewed snapshot acceptance, not fetch.
   lastSuccessAt: string
   validUntil: string | null
 }

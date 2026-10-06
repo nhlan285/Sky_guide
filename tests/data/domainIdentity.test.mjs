@@ -90,3 +90,19 @@ test('identity parser strips operational fields and rejects malformed input', ()
   assert.equal('privateEvidence' in validate(value).value.identities[0], false)
   for (const bad of [null, {}, [], { ...value, identities: [null] }]) assert.equal(validate(bad).valid, false)
 })
+
+test('occurrence selected rule agrees with its override rule even within the same event', () => {
+  const value = graph()
+  for (const [kind, id] of [['event', 'event-a'], ['eventRule', 'rule-1'], ['eventRule', 'rule-2'], ['eventOverride', 'override-x'], ['eventOccurrence', 'occurrence-a']]) value.identities.push(identity(kind, id))
+  value.relations.push(
+    { type: 'ruleEvent', fromId: 'rule-1', toId: 'event-a' }, { type: 'ruleEvent', fromId: 'rule-2', toId: 'event-a' },
+    { type: 'overrideEvent', fromId: 'override-x', toId: 'event-a' }, { type: 'overrideRule', fromId: 'override-x', toId: 'rule-2' },
+    { type: 'occurrenceEvent', fromId: 'occurrence-a', toId: 'event-a' }, { type: 'occurrenceRule', fromId: 'occurrence-a', toId: 'rule-1' },
+    { type: 'occurrenceOverride', fromId: 'occurrence-a', toId: 'override-x' },
+  )
+  assert.equal(validate(value).valid, false)
+  value.relations.find(edge => edge.type === 'overrideRule').toId = 'rule-1'
+  assert.equal(validate(value).valid, true)
+  value.relations = value.relations.filter(edge => edge.type !== 'overrideRule')
+  assert.equal(validate(value).valid, true)
+})

@@ -59,6 +59,13 @@ Slice4a DONE: required configurable raw/normalized bytes, total record and relat
 limits checked before parsing and after canonicalization; sanitized quarantine.
 11 sync tests PASS; ordinary K15 fixture and tiny-source expansion/limits covered.
 Exact next: audit timestamps and two-source health isolation; full suite still pending.
+Slice4b/5 DONE locally: fetched/staged/reviewed/server promotion lifecycle,
+candidate review digest binds audit metadata and base; unchanged branch requires
+review, old retry is read-only, stale/future events cannot regress health/global
+clock. Event occurrence rule/override agreement and materialized read-model intent
+documented. Two-source deterministic health/retry/CAS/recovery tests implemented.
+Exact next: inspect diff, run full applicable validation, reconcile R1 review-ready
+status without self-approval, checkpoint, then audit independent roadmap tasks.
 R1 re-review/provider/quota/legal/data gates remain intact.
 Raw corpora/private evidence stay outside Git on E:. Full checks last274 PASS at
 c53a111; NOT RUN yet for this remediation. No live provider workflow exists.

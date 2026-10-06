@@ -4,7 +4,7 @@ import { validateIdentityGraph } from '../data/domain/identity.ts'
 import type { IdentityGraph } from '../data/domain/identity.ts'
 import type { Freshness } from '../data/domain/repository.ts'
 import { validateAcquisitionOptionKeys } from '../data/domain/migration.ts'
-import { canonicalizeSnapshotFiles, createSnapshotRepository } from './domainSnapshot.ts'
+import { canonicalizeSnapshotFiles, canonicalJson, createSnapshotRepository } from './domainSnapshot.ts'
 import type { SnapshotFiles } from './domainSnapshot.ts'
 
 export interface NormalizedCandidate {
@@ -15,10 +15,12 @@ export interface NormalizedCandidate {
 export interface SyncCandidate extends NormalizedCandidate {
   sourceId: string; sourceHash: string; normalizationVersion: string
   baseRevision: number; contentHash: string
+  fetchedAt: string; stagedAt: string
 }
 export interface SyncState {
   revision: number
   lastKnownGood: SyncCandidate | null
+  lastPromotedAt: string | null
   freshness: Freshness | null
   lastAttemptAt: string | null
   failures: number
@@ -26,7 +28,7 @@ export interface SyncState {
   approval: ReviewApproval | null
 }
 export interface SyncStore {
-  // Revision and LKG are GLOBAL across sources. Health/attempt/retry fields refer
+  // Revision, LKG, lastPromotedAt and approval are GLOBAL. Health/attempt/retry refer
   // to sourceId. A per-source CAS alone is unsafe for shared canonical data.
   read(sourceId: string): Promise<SyncState>
   // MUST atomically persist canonical data, projection pointer, source state and
@@ -42,8 +44,19 @@ export interface SyncContract {
   // Explicit verified policy; [] disables automatic retries. No guessed delays.
   retryDelaysMs: readonly number[]
 }
-export interface ReviewApproval { contentHash: string; baseRevision: number; reviewerRef: string; reviewedAt: string }
+export interface ReviewApproval { contentHash: string; candidateHash: string; baseRevision: number; reviewerRef: string; reviewedAt: string }
+export interface PromotionOptions { validUntil: string | null; now?: () => number }
 const digest = (text: string) => createHash('sha256').update(text).digest('hex')
+function serverInstant(now: () => number): string {
+  const epoch = now()
+  if (!Number.isSafeInteger(epoch)) throw new Error('Invalid server clock')
+  const instant = new Date(epoch).toISOString()
+  if (!validateDateTime(instant).valid) throw new Error('Invalid server clock')
+  return instant
+}
+export function candidateReviewHash(candidate: SyncCandidate): string {
+  return digest(JSON.stringify([candidate.contentHash, candidate.baseRevision, candidate.fetchedAt, candidate.stagedAt]))
+}
 function contentHash(candidate: Omit<SyncCandidate, 'contentHash'>): string {
   // Exact normalization output is reviewed. Ordering changes require new review.
   return digest(JSON.stringify({ sourceId: candidate.sourceId, sourceHash: candidate.sourceHash,
@@ -104,59 +117,66 @@ async function validateProjection(candidate: NormalizedCandidate, contract: Sync
 export async function stageSourceSnapshot(options: {
   sourceId: string; raw: string; normalizationVersion: string; base: SyncState; contract: SyncContract
   normalize: (raw: string) => Promise<NormalizedCandidate>
+  fetchedAt: string; now?: () => number
 }): Promise<{ status: 'staged'; candidate: SyncCandidate } | { status: 'quarantined'; code: 'invalid_candidate' }> {
   try {
-    const { sourceId, raw, normalizationVersion, base, contract, normalize } = options
+    const { sourceId, raw, normalizationVersion, base, contract, normalize, fetchedAt, now = Date.now } = options
     validateContract(contract)
     if (!contract.sourceIds.has(sourceId) || !validateId(sourceId).valid || !normalizationVersion.trim() || !raw.trim() || Buffer.byteLength(raw, 'utf8') > contract.maxSnapshotBytes || !Number.isSafeInteger(base.revision) || base.revision < 0) throw new Error('Invalid source snapshot')
     const normalized = await normalize(raw)
     const canonical = await validateProjection(normalized, contract, base.lastKnownGood?.identities)
-    const value = { ...canonical, sourceId, sourceHash: digest(raw), normalizationVersion, baseRevision: base.revision }
-    return { status: 'staged', candidate: { ...value, contentHash: contentHash(value) } }
+    const stagedAt = serverInstant(now)
+    if (!validateDateTime(fetchedAt).valid || Date.parse(fetchedAt) > Date.parse(stagedAt) || base.lastAttemptAt && Date.parse(fetchedAt) < Date.parse(base.lastAttemptAt) || base.lastPromotedAt && Date.parse(stagedAt) < Date.parse(base.lastPromotedAt)) throw new Error('Invalid source lifecycle')
+    const value = { ...canonical, sourceId, sourceHash: digest(raw), normalizationVersion, baseRevision: base.revision, fetchedAt, stagedAt }
+    const candidate = { ...value, contentHash: contentHash(value) }
+    enforceNormalizedLimits(candidate, contract)
+    return { status: 'staged', candidate }
   } catch {
     // Quarantine report excludes raw upstream/private exception content.
     return { status: 'quarantined', code: 'invalid_candidate' }
   }
 }
 
-export async function promoteReviewedSnapshot(store: SyncStore, candidate: SyncCandidate, approval: ReviewApproval, contract: SyncContract, freshness: Freshness): Promise<'promoted' | 'unchanged' | 'conflict' | 'rejected'> {
+export async function promoteReviewedSnapshot(store: SyncStore, candidate: SyncCandidate, approval: ReviewApproval, contract: SyncContract, options: PromotionOptions): Promise<'promoted' | 'unchanged' | 'conflict' | 'rejected'> {
   try {
     candidate = structuredClone(candidate)
-    approval = structuredClone(approval)
-    freshness = structuredClone(freshness)
+    approval = { contentHash: approval.contentHash, candidateHash: approval.candidateHash, baseRevision: approval.baseRevision, reviewerRef: approval.reviewerRef, reviewedAt: approval.reviewedAt }
     validateContract(contract)
     if (!contract.sourceIds.has(candidate.sourceId) || contentHash(candidate) !== candidate.contentHash) return 'rejected'
     const current = await store.read(candidate.sourceId)
     const canonical = await validateProjection(candidate, contract, current.lastKnownGood?.identities)
     candidate = { ...canonical, sourceId: candidate.sourceId, sourceHash: candidate.sourceHash,
-      normalizationVersion: candidate.normalizationVersion, baseRevision: candidate.baseRevision, contentHash: candidate.contentHash }
+      normalizationVersion: candidate.normalizationVersion, baseRevision: candidate.baseRevision, contentHash: candidate.contentHash,
+      fetchedAt: candidate.fetchedAt, stagedAt: candidate.stagedAt }
     if (contentHash(candidate) !== candidate.contentHash) return 'rejected'
-    createSnapshotRepository(candidate.publicFiles, freshness)
-    if (current.lastAttemptAt && Date.parse(freshness.lastSuccessAt) < Date.parse(current.lastAttemptAt)) return 'rejected'
-    if (current.lastKnownGood?.contentHash === candidate.contentHash) {
-      if (JSON.stringify(current.freshness) === JSON.stringify(freshness) && current.failures === 0) return 'unchanged'
-      const recovered = { ...current, revision: current.revision + 1, freshness: structuredClone(freshness), lastAttemptAt: freshness.lastSuccessAt, failures: 0, nextRetryAt: null }
-      return await store.compareAndSwap(candidate.sourceId, current.revision, recovered) ? 'unchanged' : 'conflict'
+    const promotedAt = serverInstant(options.now ?? Date.now)
+    if (![candidate.fetchedAt, candidate.stagedAt, approval.reviewedAt].every(time => validateDateTime(time).valid) ||
+      Date.parse(candidate.fetchedAt) > Date.parse(candidate.stagedAt) || Date.parse(candidate.stagedAt) > Date.parse(approval.reviewedAt) || Date.parse(approval.reviewedAt) > Date.parse(promotedAt)) return 'rejected'
+    if (approval.contentHash !== candidate.contentHash || approval.candidateHash !== candidateReviewHash(candidate) || approval.baseRevision !== candidate.baseRevision || !approval.reviewerRef.trim()) return 'rejected'
+    if (current.revision !== candidate.baseRevision) {
+      // Retry an already accepted transaction without changing health/audit. A
+      // fresh stage/review is required to recover a failed newer source attempt.
+      return current.lastKnownGood && candidateReviewHash(current.lastKnownGood) === candidateReviewHash(candidate) && canonicalJson(current.approval) === canonicalJson(approval) ? 'unchanged' : 'conflict'
     }
-    if (current.revision !== candidate.baseRevision) return 'conflict'
-    if (approval.contentHash !== candidate.contentHash || approval.baseRevision !== current.revision || !approval.reviewerRef.trim() || !validateDateTime(approval.reviewedAt).valid) return 'rejected'
-    if (Date.parse(approval.reviewedAt) > Date.parse(freshness.lastSuccessAt)) return 'rejected'
-    if (current.lastAttemptAt && Date.parse(freshness.lastSuccessAt) < Date.parse(current.lastAttemptAt)) return 'rejected'
+    if (current.lastAttemptAt && Date.parse(candidate.fetchedAt) < Date.parse(current.lastAttemptAt) || current.lastPromotedAt && Date.parse(promotedAt) < Date.parse(current.lastPromotedAt) || current.freshness && Date.parse(promotedAt) < Date.parse(current.freshness.lastSuccessAt) || current.revision >= Number.MAX_SAFE_INTEGER) return 'rejected'
+    const freshness: Freshness = { health: 'healthy', lastSuccessAt: promotedAt, validUntil: options.validUntil }
+    createSnapshotRepository(candidate.publicFiles, freshness)
+    const unchanged = current.lastKnownGood?.contentHash === candidate.contentHash
     const next: SyncState = { revision: current.revision + 1, lastKnownGood: structuredClone(candidate), freshness: structuredClone(freshness),
-      lastAttemptAt: freshness.lastSuccessAt, failures: 0, nextRetryAt: null, approval: structuredClone(approval) }
-    return await store.compareAndSwap(candidate.sourceId, current.revision, next) ? 'promoted' : 'conflict'
+      lastPromotedAt: promotedAt, lastAttemptAt: candidate.fetchedAt, failures: 0, nextRetryAt: null, approval: structuredClone(approval) }
+    return await store.compareAndSwap(candidate.sourceId, current.revision, next) ? unchanged ? 'unchanged' : 'promoted' : 'conflict'
   } catch { return 'rejected' }
 }
 
-export async function recordSourceFailure(store: SyncStore, sourceId: string, attemptedAt: string, contract: SyncContract): Promise<'recorded' | 'conflict' | 'rejected'> {
+export async function recordSourceFailure(store: SyncStore, sourceId: string, completedAt: string, contract: SyncContract, now: () => number = Date.now): Promise<'recorded' | 'conflict' | 'rejected'> {
   try {
     validateContract(contract)
-    if (!contract.sourceIds.has(sourceId) || !validateDateTime(attemptedAt).valid) return 'rejected'
+    if (!contract.sourceIds.has(sourceId) || !validateDateTime(completedAt).valid || Date.parse(completedAt) > Date.parse(serverInstant(now))) return 'rejected'
     const current = await store.read(sourceId)
-    if (current.lastAttemptAt && Date.parse(attemptedAt) < Date.parse(current.lastAttemptAt)) return 'rejected'
+    if (current.lastAttemptAt && Date.parse(completedAt) <= Date.parse(current.lastAttemptAt) || current.freshness && Date.parse(completedAt) < Date.parse(current.freshness.lastSuccessAt) || current.revision >= Number.MAX_SAFE_INTEGER) return 'rejected'
     const delay = contract.retryDelaysMs[current.failures]
     const next: SyncState = { ...current, revision: current.revision + 1, failures: current.failures + 1,
-      lastAttemptAt: attemptedAt, nextRetryAt: delay === undefined ? null : new Date(Date.parse(attemptedAt) + delay).toISOString(),
+      lastAttemptAt: completedAt, nextRetryAt: delay === undefined ? null : new Date(Date.parse(completedAt) + delay).toISOString(),
       freshness: current.freshness ? { ...current.freshness, health: 'offline' } : null }
     return await store.compareAndSwap(sourceId, current.revision, next) ? 'recorded' : 'conflict'
   } catch { return 'rejected' }

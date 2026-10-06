@@ -26,8 +26,8 @@ relations, never the canonical payload or a substitute for entity validation.
 | event (id) | Typed event metadata and confidence; future R3 payload validation | Q23 |
 | event_rule (id) | Required event_id FK; revisioned IANA timezone/anchor/offset/interval/effective bounds, calculated method/input versions | R3; not implemented in R1 |
 | event_override (id) | Required event_id; optional rule_id must belong to same event; private reviewer/evidence separate; effective bounds/priority | R3 |
-| event_occurrence (id) | event/rule/override must agree; pinned revisions, absolute instants and schedule version | R3 |
-| source_snapshot (id), source_health (source_id) | Hash, normalized version, private raw reference; separate last_attempt/last_success/validity/LKG; never public raw data | R1 sync / R3 pending |
+| event_occurrence (id) | event/rule/override must agree; if both rule and override selected, override's optional rule must match selected rule; pinned revisions/time/version | R3 |
+| source_snapshot (id), canonical_generation, source_health (source_id) | Content/candidate audit hashes and fetched/staged/reviewed/promoted times; global revision/LKG/lastPromotedAt; separate source attempt/success/health/retry/validity; private reviewer/raw refs | R1 local sync / live adapter pending |
 | media (id) | storage key/hash/bytes/MIME, revision/source/provenance/rights; no owner/semantic role or binary/blob/base64 | MediaRecord |
 | item_media, emote_media, call_media, sample_media | Explicit typed joins; role part of binding, partial unique primary item image; role evidence before publication | R2/R4/R5 |
 | sample_set (id), instrument (id) | Instrument unique item_id; sample_set_id required; variants share set | R5; no second Item catalogue |
@@ -163,6 +163,14 @@ Sky Guide PostgreSQL server; preserve repository/API contracts and export format
 ### Read API and snapshot adapter
 
 `DomainRepository.readCatalog()` returns one validated public snapshot or null.
+The current ~1.8k-item K15 snapshot supports in-memory filtering/pagination.
+A future PostgreSQL adapter should serve a materialized/versioned public read
+model or cached equivalent, not rebuild/query the entire relational graph for
+every HTTP request. Cache by committed catalog version, atomically replace the
+read-model pointer after reviewed promotion, retain LKG/rollback and enforce
+pagination version pins. Preserve the interface/API until measured query needs
+justify another adapter contract; no speculative SQL pagination or new cache
+service is introduced. Production invalidation/quota measurements remain gated.
 `createSnapshotRepository` verifies the supplied manifest's dataset bytes before
 using existing K15 parsers. It rejects draft/fixture/unverified provenance and
 returns detached copies. This compatibility adapter supports the existing K15
@@ -252,11 +260,34 @@ revocation/signing-race tests pass; this is local compatibility, not live rollou
 
 ### Local sync contract subset (P9-D04/P9-V01)
 
+Audit remediation decision: fetchedAt is successful source retrieval completion
+supplied by the trusted backend; stagedAt is normalization/validation completion
+from the server clock. Approval reviewedAt must follow stagedAt. Promotion time
+comes from the server clock and must follow review. Public Freshness.lastSuccessAt
+retains its API name but means the latest successful reviewed snapshot acceptance
+(including same-content reconfirmation), not fetch time. lastAttemptAt is the
+latest completed source-attempt event: fetchedAt on success, failure completion
+time on error. Source health/retry state is independent of the global generation.
+Global lastPromotedAt records the latest reviewed acceptance across all sources;
+source failures retain it. It prevents a different source/clock from regressing
+canonical audit time. Source Freshness.lastSuccessAt remains independently scoped.
+Ordering: fetchedAt <= stagedAt <= reviewedAt <= promotion time. Stale attempts
+or a clock behind previously accepted success cannot regress state.
+
+ReviewApproval binds contentHash/baseRevision plus candidateHash over content,
+base and fetched/staged timestamps; changing audit instants also invalidates
+review. An exact already-accepted retry is read-only/idempotent. New same-content
+reconfirmation needs a valid new review and CAS; it updates health/audit without
+changing public bytes. ReviewerRef/approval remain private. Future admin adapters
+must obtain authenticated reviewer identity and event times server-side; these
+library contracts do not authorize client-supplied review/clock values. Injected
+clocks are for deterministic tests, not an HTTP timestamp override.
+
 `stageSourceSnapshot` enforces an explicit byte budget, hashes source and normalized
 content, validates graph/projection consistency and quarantines invalid output.
 Local acceptance budgets are required configuration: maxSnapshotBytes (raw UTF-8),
-maxNormalizedBytes (entire normalized JSON with file Map encoded as entries,
-including graph/manifest/file contents), maxRecords (graph identities/crosswalks/
+maxNormalizedBytes (entire accepted candidate JSON with file Map encoded as entries,
+including graph/manifest/file contents and stage metadata), maxRecords (graph identities/crosswalks/
 aliases/tombstones/provenance IDs plus public-envelope records), maxRelations
 (graph edges). Check cheap counts and public bytes before parsing, then full size
 before and after canonicalization; promotion rechecks the same bounds. These are
@@ -266,7 +297,8 @@ future live workers require separately bounded execution/task approval.
 It does not fetch, schedule, persist raw data or publish. `ReviewApproval` binds
 the exact content digest and base generation; edits invalidate approval.
 `promoteReviewedSnapshot` validates again and uses an injected atomic CAS store.
-Generation/LKG must be global across sources, with separate source health; a
+Generation/LKG/lastPromotedAt/last canonical approval must be global across sources,
+with separate source health/attempt/success/retry; a
 per-source CAS cannot safely protect shared canonical data. The DB adapter must
 persist canonical payload, projection pointer and audit metadata in one transaction.
 That adapter is still gated; only an in-memory test double has run.
@@ -277,6 +309,14 @@ recovers health without re-promoting content. Source freshness and review metada
 remain separate. Local export/restore revalidates checksums and preserves API
 payloads; this is not a SQL migration or DB backup-restore rehearsal. Current
 revocation overlay remains mandatory at delivery after any restore.
+
+Synthetic two-source tests cover independent retry budgets/health, global CAS
+conflicts, loser restaging, one source's recovery leaving another offline, and
+global promotion-clock regression. K01 is a synthetic trigger over the supported
+K15 compatibility projection; this does not implement a Wiki adapter, scheduler
+or actual multi-source PostgreSQL sync. Future DB transactions must retain an
+append-only private audit history, not merely the latest pointer/approval tested
+by the in-memory store.
 
 No full generic canonical payload/storage adapter or live upstream integration is
 claimed. K15 snapshot compatibility remains scoped; unsupported migration manifests

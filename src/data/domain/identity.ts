@@ -101,6 +101,8 @@ export function validateIdentityGraph(input: unknown, provenanceIds: ReadonlySet
     if (ruleId && targetOf('ruleEvent', ruleId) !== eventId) return invalid('Rule belongs to another event.')
     const overrideId = node.kind === 'eventOccurrence' ? targetOf('occurrenceOverride', node.id) : undefined
     if (overrideId && targetOf('overrideEvent', overrideId) !== eventId) return invalid('Override belongs to another event.')
+    const overrideRuleId = overrideId ? targetOf('overrideRule', overrideId) : undefined
+    if (ruleId && overrideRuleId && ruleId !== overrideRuleId) return invalid('Occurrence and override select different rules.')
   }
   const tombstones = new Map(graph.tombstones.map(entry => [key(entry.target), entry]))
   if (tombstones.size !== graph.tombstones.length) return failure('duplicate_id', 'Duplicate tombstone.')
