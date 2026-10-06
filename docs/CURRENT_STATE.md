@@ -3,7 +3,7 @@
 ## Task / branch / checkpoint
 Autonomous master run: safe unblocked roadmap tasks, checkpoint/push;
 no merge/production deployment. Branch `codex/master-plan-execution`.
-Last verified pushed HEAD `e802c36f5ccd9bf4708f22f582c649fcde369ac2`.
+Last verified pushed HEAD `55bf8f6ccf55187565c551a66849ff7b536f906a`.
 This R1 remediation slice becomes next checkpoint; resolve SHA via `git log -1`
 and verify remote branch before resuming. Started from7cea424.
 Master [IMPLEMENTATION_PLAN](plan/IMPLEMENTATION_PLAN.md); current completed slice
@@ -46,15 +46,20 @@ Slice1: domainSnapshot/sourceSync + sync tests structurally canonicalize stored
 public files; explicit dataset/file allowlist, sanitized validated records,
 deterministic bytes and regenerated hashes; promotion revalidates. K15 every-field
 parity preserved; no production consumer/data release changed. Remediation plan,
-DATA_FOUNDATION/architecture/handoff updated. Media/key/limit/audit/event/multi-source
+DATA_FOUNDATION/architecture/handoff updated. Limit/audit/event/multi-source
 findings still OPEN. Attribution/license follow-up already preserved at60cdc36.
 Slice2: media.ts + media tests separate binary/owner-role binding with role evidence,
 explicit poster owners and hash/cardinality checks. R2 deployed modules unchanged.
+Slice3: migration key/geography helpers and full current K15 field inventory/matrix;
+manifest now validates/preserves public source/importReport, including Git source
+paths and typed counters. Deferred module IDs never dropped; no DDL/migration.
 
 ## Validation / limitations
 Current slice16 focused sync/API tests PASS; full remediation suite NOT RUN yet.
 Slice2:18 media/R2 tests, focused lint/full typecheck PASS. No downloaded media,
 live provider, changed signer or production revocation acceptance claimed.
+Slice3:36 migration/sync/API/lookup tests, focused lint/full typecheck PASS. Initial
+missing manifest-source owner caught by coverage test and fixed; tests not weakened.
 Full typecheck and focused lint PASS; initial unused binding lint failure fixed
 without disabling rules. New plan scaffold/link check PASS:72 Markdown files.
 Attribution docs scaffold/link checks PASS:71 Markdown files/14 source profiles/
@@ -91,8 +96,9 @@ consumed, no invented context percentage or manual compaction. Resumed autonomou
 task preserves master objective and all remaining gates.
 
 ## Exact next action
-Verify this pushed remediation checkpoint, then implement item-scoped acquisition
-keys/deferred refs and explicit geography mapping/preservation contracts/tests.
+Verify this pushed remediation checkpoint, then add explicit normalized byte/record/
+relation budgets and stage/review/promotion audit ordering, followed by event and
+multi-source isolation invariants. Use R1_CONTRACT_REMEDIATION; no new DDL/provider.
 Follow R1_CONTRACT_REMEDIATION findings in order, full applicable checks, checkpoint,
 then audit independent roadmap tasks. No SQL migration/provisioning/production/merge.
 After all findings pass, mark LOCAL CONTRACT REVIEW READY; maintainer re-review

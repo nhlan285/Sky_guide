@@ -3,6 +3,7 @@ import { validateDateTime, validateId } from '../data/core/index.ts'
 import { validateIdentityGraph } from '../data/domain/identity.ts'
 import type { IdentityGraph } from '../data/domain/identity.ts'
 import type { Freshness } from '../data/domain/repository.ts'
+import { validateAcquisitionOptionKeys } from '../data/domain/migration.ts'
 import { canonicalizeSnapshotFiles, createSnapshotRepository } from './domainSnapshot.ts'
 import type { SnapshotFiles } from './domainSnapshot.ts'
 
@@ -56,6 +57,7 @@ async function validateProjection(candidate: NormalizedCandidate, contract: Sync
   const publicFiles = canonicalizeSnapshotFiles(candidate.publicFiles)
   const repository = createSnapshotRepository(publicFiles, { health: 'stale', lastSuccessAt: '1970-01-01T00:00:00Z', validUntil: null })
   const snapshot = (await repository.readCatalog())!
+  if (!validateAcquisitionOptionKeys(snapshot.catalog.entries.map(entry => entry.item)).valid) throw new Error('Invalid acquisition identity')
   for (const [kind, records] of [['item', snapshot.catalog.entries.map(entry => entry.item)], ['spirit', snapshot.catalog.spirits], ['season', snapshot.catalog.seasons]] as const) {
     for (const record of records) {
       const identity = identities.value.identities.find(node => node.kind === kind && node.id === record.id)

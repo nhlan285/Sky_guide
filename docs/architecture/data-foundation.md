@@ -19,8 +19,8 @@ relations, never the canonical payload or a substitute for entity validation.
 | field_provenance (kind, id, field, provenance_id) | Field allowlist from entity schema; source evidence may differ per field | Existing FieldProvenance validators |
 | source_crosswalk (source_id, kind, source_key) | Unique scoped external key → identity FK; immutable mapping; source numeric IDs never joined across providers | Crosswalk |
 | item (id) | Preserve tsa-cosmetic-N; source_keys mapped into crosswalk; typed name/slot/raw_slot/dye state | Item |
-| acquisition_option (id) / acquisition_cost (option_id, position) | item FK; nullable integer amount, explicit known/unknown/free, currency label; never collapse missing to zero | AcquisitionOption/CurrencyAmount |
-| spirit (id), season (id), location (id) | Spirit optional location FK; unknown date uses precision/timezone fields without fabricated instant | Spirit/Season/Map/Realm |
+| acquisition_option (item_id, option_id) / acquisition_cost (item_id, option_id, position) | Item-scoped identity, item FK; preserve optional node/product references, nullable amount, known/unknown/free and raw currency | AcquisitionOption/CurrencyAmount |
+| spirit (id), season (id), location (id), realm (id FK location) | Realm is typed Location subtype with unchanged ID; spirit.realm_id targets Realm, graph spiritLocation targets same Location ID | Spirit/Season/Realm; GuideMap separately owned |
 | item_season, item_spirit, spirit_season | Composite join PKs, active FK targets in published projection | Existing arrays |
 | cosmetic (id) | Unique item_id FK, metadata only; wardrobe bindings remain separately revisioned | Item cosmetic metadata |
 | event (id) | Typed event metadata and confidence; future R3 payload validation | Q23 |
@@ -42,6 +42,75 @@ tests the provider-neutral rules; PostgreSQL constraints/up/down are not yet run
 Record content changes must increment revision, including changed relations and
 field provenance. The graph checks identity metadata changes; payload checks and
 transaction CAS belong to the repository adapter and must be tested in P9-I02.
+
+## Ownership decisions and field preservation inventory
+
+**Acquisition identity: Option B.** `(item_id, option_id)` is the relational key;
+option IDs may repeat across items, never within one item. Costs, evidence, offer
+metadata and future joins carry both key columns. Keep the current public option
+ID verbatim; `validateAcquisitionOptionKeys` checks this choice during staging.
+The current K15 naming convention is not evidence of a global uniqueness rule.
+
+`friendshipNodeId` and `iapProductId` remain exact nullable domain-ID columns with
+deferred FK enforcement until their canonical typed modules exist. Do not drop,
+guess, rename or null a supplied value because no table is provisioned. Keep
+target-kind semantics explicit; future backfill resolves reviewed IDs before
+activating FKs/public module support. Existing validators still require supplied
+node/product registries; an unresolved candidate stays private/quarantined rather
+than being published with a fabricated reference. Local tests preserve nonnull
+IDs with synthetic supplied registries; no module or live DB is implied.
+
+**Geography:** Realm is a Location subtype, not a renamed map or arbitrary area.
+`location.location_type=realm`, with `realm.id` PK/FK to the same unchanged
+Location ID. Spirit keeps public `realmId` and canonical `realm_id` targeting the
+typed Realm; `realmLocationRef` maps only registered Realm IDs to the identity
+graph's `spiritLocation`. Null remains null. An area Location cannot be substituted
+silently. GuideMap has its own ID/table/realm FK; TypeScript shape inheritance is
+not domain identity inheritance. Realm/map modules absent in current K15 retain
+exact deferred references and remain gated until actual typed entities are reviewed.
+
+[Executable ownership inventory](../../src/data/domain/migration.ts) covers every
+actual K15 field, nested cost/time/offer/source fields and envelope/manifest metadata.
+These are explicit future typed owners, not EAV persistence, DDL or an implemented
+DB exporter. Field-coverage tests fail when a real payload adds an unmapped field;
+canonical projection tests compare all current public values, including nulls.
+
+| Public fields | Status / typed owner / preservation rule |
+| --- | --- |
+| Every item/spirit/season `id, updatedAt, fixture` | Columns: unchanged typed entity ID + domain_identity update/fixture |
+| `recordStatus` | Column on typed entity; retain status, public only published |
+| `provenanceIds, fieldProvenance` | Identity/field provenance joins with original ordered arrays, per-field evidence and absent-vs-present semantics |
+| Every `name.default, name.translations` | Entity name_default + typed translation(locale,text) table; retain language keys, empty strings/maps |
+| Item `sourceKeys` | item_source_key(label,value); registered Kxx keys also source-scoped crosswalk; tsaIdentifier is a retained label, not a new SourceId |
+| Item `slot, rawSlot, accessoryAnchor, dyeStatus` | Typed item columns; null/unknown/unsupported distinct |
+| Item `seasonIds, spiritIds` | Ordered item_season/item_spirit joins; do not conflate independent upstream arrays |
+| Item `acquisitionOptions` and each option `id, kind, costStatus` | Composite option key, typed columns + original position |
+| Option `costs`; each `currency, sourceCurrencyLabel, amount` | Composite-key cost rows/position; nullable integer amount, raw label, unknown != free != explicit zero |
+| Option `friendshipNodeId, iapProductId` | Preserved deferred typed domain refs as above |
+| Option `validFrom, validTo`; time `value, precision, timezone, rawLabel` | Typed nullable time columns; absent time distinguished from a present PartialTime with unknown precision/null members |
+| Option `provenanceIds` | acquisition_provenance with both option key columns and position |
+| Item `assetIds, dyeRegions, ruleIds, compatibility` | Future typed module fields, retained exactly; currently empty/null. Nonempty unsupported payload requires its reviewed validator/owner, never silently dropped or serialized as generic EAV |
+| Lookup `id, upstreamId, identifier, category, categoryEvidence` | Item FK + typed item_k15 columns; metadata category independent of wearable slot |
+| Lookup `offers`; offer `id, acquisition, seasonPass, bundle, money, sourceUrl` | acquisition_source_offer by composite option key; retain order/flags/link/raw money; unknown currency/market not invented or converted to CurrencyAmount |
+| Lookup optional `image, images` | Future typed item_media/public compatibility projection; preserve optional/null distinction; no current K15 images claimed |
+| Spirit `category, realmId` | spirit.category column; exact nullable/deferred Realm subtype ref |
+| Spirit `seasonIds, treeIds` | Ordered spirit_season joins; future typed spirit_tree references retained |
+| Season `kind, startsAt, endsAt, timeStatus, summary` | Typed season columns/time precision; kind retained, no inferred instant/schedule |
+| Season `spiritIds, itemIds` | Ordered season_spirit/season_item joins; preserve source arrays independently of reverse item/spirit arrays |
+| Season `realmIds, mapIds, officialArticleIds` | Future typed realm/map/article joins; exact ordered IDs retained, module support gated |
+| Provenance `id, sourceId, sourceUrl, sourceRecordKey, sourceRevision` | Typed provenance/source-registry columns/FK; nullable public key/revision kept, no private evidence |
+| Provenance `retrievedAt, observedAt, attribution, licenseNote, transformNote, verificationStatus` | Typed provenance columns; actual observation distinct from retrieval, original credit/risk notes preserved |
+| Envelope `schemaVersion, dataVersion, generatedAt, sourceIds, fixture` | public_release columns + ordered release_source; fixture false for public |
+| Envelope `records` | Derived typed projection in preserved source order; no generic canonical document store |
+| Manifest `schemaVersion, catalogVersion, generatedAt, datasets, provenance` | public_release + release_dataset(path,dataVersion,exact-byte sha256); regenerated checksums after canonical serialization |
+| Manifest `aliases, tombstones, assetManifestVersion` | Future reviewed release projection/media pin; current null kept, migration-bearing manifests still rejected by compatibility adapter |
+| Manifest `source`; `repository, revision, normalizationVersion, sourcePaths, transport, status` | release_source_snapshot + ordered release_source_path(path,gitBlobSha), explicit public source schema |
+| Manifest `importReport`; `accepted, rejected, excluded, unknownCategory, unknownCost` | Typed public import counters; current rejected=[] retained. Nonempty raw rejection report is private and needs a separate reviewed public schema |
+
+Nothing in the current legitimate K15 payload is intentionally excluded. Unknown
+operational/private fields are outside that schema and stripped. Join positions,
+explicit nulls, optional field presence and PartialTime precision are round-trip
+requirements for future DDL and DB export acceptance; no SQL rehearsal occurred.
 
 ## Migration sequence and preservation
 

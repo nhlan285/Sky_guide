@@ -48,8 +48,13 @@ envelopes/records, regenerated exact-byte hashes, canonical review/promotion.
 unknown dataset/file quarantine, every K15 field and hash parity. Other findings
 OPEN. Slice2 DONE: binary/binding separation, explicit role/owner/MIME/evidence,
 duplicate/hash/primary/reference constraints and legacy paths.18 media/R2 tests,
-focused lint and full typecheck PASS. Exact next: item-scoped acquisition keys,
-deferred references, geography mapping and migrated field preservation matrix.
+focused lint and full typecheck PASS. Slice3 DONE: Option B composite item/option
+identity, Realm Location subtype mapping, deferred node/product/realm refs and
+executable every-field preservation inventory + matrix. Coverage test found
+previously undeclared public manifest source/importReport; explicit schemas now
+preserve both while stripping nested operational fields.36 migration/sync/API/
+lookup tests, focused lint/full typecheck PASS. Exact next: configurable normalized
+output budgets and explicit timestamp lifecycle; event agreement/isolation next.
 R1 re-review/provider/quota/legal/data gates remain intact.
 Raw corpora/private evidence stay outside Git on E:. Full checks last274 PASS at
 c53a111; NOT RUN yet for this remediation. No live provider workflow exists.

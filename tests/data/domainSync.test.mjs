@@ -56,6 +56,9 @@ test('promoted public bytes structurally exclude top-level and nested operationa
     envelope.records.find(item => item.acquisitionOptions.length).acquisitionOptions[0].internalReview = 'PRIVATE_SENTINEL'
   })
   value.publicFiles.manifest.privateEvidence = 'PRIVATE_SENTINEL'
+  value.publicFiles.manifest.source.privateEvidence = 'PRIVATE_SENTINEL'
+  value.publicFiles.manifest.source.sourcePaths[0].reviewerRef = 'PRIVATE_SENTINEL'
+  value.publicFiles.manifest.importReport.privateEvidence = 'PRIVATE_SENTINEL'
   const result = await stage(empty(), 'fixture', async () => value)
   assert.equal(result.status, 'staged')
   const store = memoryStore()
@@ -97,6 +100,10 @@ test('canonical public payload preserves every legitimate K15 field and exact ha
     assert.equal(createHash('sha256').update(text).digest('hex'), entry.sha256)
   }
   assert.deepEqual(canonicalizeSnapshotFiles(canonical), canonical)
+  const expectedManifest = globalThis.structuredClone(manifest)
+  for (const [name, entry] of Object.entries(canonical.manifest.datasets)) expectedManifest.datasets[name].sha256 = entry.sha256
+  expectedManifest.provenance.sha256 = canonical.manifest.provenance.sha256
+  assert.deepEqual(canonical.manifest, expectedManifest)
   const parsed = await createSnapshotRepository(canonical, freshness).readCatalog()
   assert.deepEqual(parsed.catalog.entries, catalog.entries)
 })

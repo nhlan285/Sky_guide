@@ -7,6 +7,12 @@ import { natural, validateLookupEntry, validateLookupMetadataList } from './mode
 import type { LookupEntry, LookupMetadata } from './model.ts'
 
 export interface DatasetEntry { path: string; dataVersion: string; sha256: string }
+export interface SnapshotSource {
+  repository: string; revision: string; normalizationVersion: string
+  sourcePaths: { path: string; gitBlobSha: string }[]
+  transport: 'public-repository'; status: 'pinned-snapshot'
+}
+export interface PublicImportReport extends ImportSummary { rejected: never[] }
 export interface CatalogManifest {
   schemaVersion: number
   catalogVersion: string
@@ -16,14 +22,34 @@ export interface CatalogManifest {
   aliases: DatasetEntry | null
   tombstones: DatasetEntry | null
   assetManifestVersion: string | null
+  source?: SnapshotSource
+  importReport?: PublicImportReport
 }
 const supportedVersion = (value: unknown) => value === 1 ? success(1) : failure('invalid_value', 'Unsupported catalogue schema version.')
 const relativePath: Validator<string> = value => typeof value === 'string' && /^[a-z][a-z0-9-]*\.json$/.test(value) ? success(value) : failure('invalid_value', 'Expected a release-local JSON filename.')
 const sha: Validator<string> = value => typeof value === 'string' && /^[a-f0-9]{64}$/.test(value) ? success(value) : failure('invalid_value', 'Expected SHA-256.')
 const datasetEntry: Validator<DatasetEntry> = value => object(value, { path: relativePath, dataVersion: nonBlank, sha256: sha })
+const gitSha: Validator<string> = value => typeof value === 'string' && /^[a-f0-9]{40}$/.test(value) ? success(value) : failure('invalid_value', 'Expected Git revision.')
+const snapshotSource: Validator<SnapshotSource> = value => object(value, {
+  repository: value => value === 'thatskyapplication/thatskyapplication' ? success(value) : failure('invalid_value', 'Unsupported snapshot repository.'),
+  revision: gitSha, normalizationVersion: nonBlank,
+  sourcePaths: array(value => object(value, {
+    path: value => typeof value === 'string' && /^packages\/utility\/[a-zA-Z0-9._/-]+$/.test(value) && !value.split('/').some(part => !part || part === '.' || part === '..') ? success(value) : failure('invalid_value', 'Expected public utility source path.'),
+    gitBlobSha: gitSha,
+  })),
+  transport: enumeration(['public-repository']), status: enumeration(['pinned-snapshot']),
+})
+const publicImportReport: Validator<PublicImportReport> = value => object(value, {
+  accepted: natural, excluded: natural, unknownCategory: natural, unknownCost: natural,
+  // Existing successful K15 release has no rejected rows. Raw rejection reports
+  // remain private; a future nonempty public report needs an explicit schema.
+  rejected: value => Array.isArray(value) && value.length === 0 ? success([]) : failure('invalid_value', 'Public rejected-row reports are unsupported.'),
+})
 export function validateManifest(input: unknown): ValidationResult<CatalogManifest> {
   return object<CatalogManifest>(input, { schemaVersion: supportedVersion, catalogVersion: nonBlank, generatedAt: validateDateTime,
-    datasets: record(datasetEntry), provenance: datasetEntry, aliases: nullable(datasetEntry), tombstones: nullable(datasetEntry), assetManifestVersion: nullable(validateString) })
+    datasets: record(datasetEntry), provenance: datasetEntry, aliases: nullable(datasetEntry), tombstones: nullable(datasetEntry), assetManifestVersion: nullable(validateString),
+    source: value => value === undefined ? success(undefined) : snapshotSource(value),
+    importReport: value => value === undefined ? success(undefined) : publicImportReport(value) })
 }
 export function hasDataset(manifest: CatalogManifest, id: string): boolean { return Object.hasOwn(manifest.datasets, id) }
 export function validateEnvelope(input: unknown, version: string): ValidationResult<unknown[]> {
