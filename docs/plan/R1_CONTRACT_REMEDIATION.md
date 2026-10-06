@@ -63,11 +63,13 @@ review, old retry is read-only, stale/future events cannot regress health/global
 clock. Event occurrence rule/override agreement and materialized read-model intent
 documented. Two-source deterministic health/retry/CAS/recovery tests implemented.
 Final validation:46 domain/296 full tests, pnpm lint/typecheck/build PASS atc5804c6.
-Status: **LOCAL CONTRACT REVIEW READY**; maintainer re-review pending before P9-I02.
-Exact safe next: audit independent roadmap tasks; existing Wardrobe sequence tests
-can advance a bounded W12 subset without implementing W11 alias migration.
-Exact gated next: maintainer re-review, then provider/task/quota approval.
-R1 re-review/provider/quota/legal/data gates remain intact.
+Status: **R1 LOCAL CONTRACT APPROVED** by user2026-10-06: `phê duyệt, tự tiếp tục`.
+Historical local readiness achieved; human approval closes maintainer re-review
+gate for this package, not live DB/SQL/restore acceptance.
+Exact next: [provider selection/quota audit](POSTGRES_PROVIDER_SELECTION.md),
+then account-specific preflight and approved development environment. Independent
+W12 sequence/focus QA completed; generic alias migration remains OPEN.
+R1 re-review is approved; provider/quota/legal/data/production gates remain.
 Raw corpora/private evidence stay outside Git on E:. No live provider workflow.
 
 ## Finding-by-finding local acceptance evidence

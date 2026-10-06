@@ -2,21 +2,23 @@
 
 ## Task / branch / checkpoint
 Autonomous master run resumed from7cea424: remediate maintainer R1 REQUEST
-CHANGES, then continue safe independent roadmap work. No merge/production or
-provisioning. Branch `codex/master-plan-execution`.
-Last verified pushed HEAD `39caf2fda263b42310ac12bb7b7526adbcef9990`.
-This handoff accompanies the saved-outfit keyboard focus checkpoint; resolve SHA using
+CHANGES, then continue safe independent roadmap work. Production changes and
+merges remain outside scope. Branch `codex/master-plan-execution`.
+Last verified pushed HEAD `b2fc0cbde34c9785ebff698bbad31ab9743f8ebf`.
+This handoff accompanies R1 human approval/provider-selection checkpoint; resolve SHA using
 `git log -1` and compare remote branch with `git ls-remote` before resuming.
 Master [IMPLEMENTATION_PLAN](plan/IMPLEMENTATION_PLAN.md); completed R1 slice
 [R1_CONTRACT_REMEDIATION](plan/R1_CONTRACT_REMEDIATION.md); latest independent
 sequence [WARDROBE_SEQUENCE_QA](plan/WARDROBE_SEQUENCE_QA.md); current local focus
 QA [PWA_WARDROBE_QA](plan/PWA_WARDROBE_QA.md). Source continuity
 [WIKI_SOURCE_VERIFICATION](plan/WIKI_SOURCE_VERIFICATION.md); R1 foundation
-[DATA_FOUNDATION](plan/DATA_FOUNDATION.md).
+[DATA_FOUNDATION](plan/DATA_FOUNDATION.md). Active next phase:
+[POSTGRES_PROVIDER_SELECTION](plan/POSTGRES_PROVIDER_SELECTION.md).
 
 ## Completed / intentionally modified areas
-R1: **LOCAL CONTRACT REVIEW READY**, maintainer re-review pending before P9-I02.
-Architecture accepted; no contract self-approval or live provider claim.
+R1: **LOCAL CONTRACT APPROVED** by user2026-10-06: `phê duyệt, tự tiếp tục`.
+Re-review gate CLOSED for the remediated local package; do not ask approval again.
+Provider choice/account/region still missing; no live provider acceptance claimed.
 - e802c36: structurally allowlisted canonical public bytes, deterministic hashes,
   manifest consistency, nested/private stripping and restored re-promotion.
 - 55bf8f6: binary media identity separated from owner/role/evidence bindings;
@@ -43,6 +45,18 @@ inline confirmation/native control/storage contracts preserved. P4-U01/P7-U01
 still PARTIAL. Latest changed areas: SavedOutfits.tsx, PWA_WARDROBE_QA plan,
 master status and this handoff; unrelated changes absent at slice start.
 
+Latest continuation: P9-I02 public quota audit/proposal DONE. Neon Free currently
+1 GB/project,100 CU-hours/month,5 GB transfer,10 branches; Supabase Free500 MB,
+5 GB egress,2 active projects, low-activity pause/no automatic backup. Proposed
+Neon Free isolated `sky-guide-dev` rehearsal; actual provider/account/region not
+selected. Official dated evidence/alternatives/rollback and implementation steps
+in active phase plan. Existing K15 files measured3,104,820 bytes; records1808 items,
+1808 lookup,213 spirits,30 seasons,244 provenance. Not a SQL footprint estimate.
+No account connector/credential read, creation, DDL, migration or adapter change.
+Raw vendor docs/measurement stay on E:, only comparison/approval/plans tracked.
+Latest intentional files: provider phase + foundation/remediation/master approval
+status + current handoff. No application behavior changed in this docs slice.
+
 Earlier accepted source/demo work is retained: K02/P1-D02 ten nodes/nine edges,
 unknown root and partial costs; K01/K03 staged adapters; K04 inaccessible workbook;
 K15 loader; saved/share/backup/local preferences; bounded manual news drafts;
@@ -60,14 +74,17 @@ No target-device install/offline/reduced-motion/full accessibility,
 live DB/DDL/provider/restore, actual media rollout or production validation claimed.
 Earlier local 320/390/1366 theme/locale/long-text smoke remains scoped evidence;
 actual file download and protected Preview content remain unverified.
+Provider selection docs: scaffold/links/task IDs and diff checks before checkpoint;
+runtime suite not rerun for docs-only change. Earlier test results retain scope.
 
 ## Remaining gates / dependency audit
 After R1, W12 subset and independent focus QA/fix, no further dependency-ready
 implementation slice identified within current approved scopes. The keyboard
 follow-up could proceed without blocked data contracts; its demonstrated bugs
 are now fixed. Remaining broader QA needs actual target capabilities/evidence:
-- P9-I02/live SQL/durable audit/restore: maintainer R1 re-review, explicit provider/
-  task/quota approval. R2–R6 full modules are not closed by synthetic R1 tests.
+- P9-I02/live SQL/durable audit/restore: R1 approved; exact provider/dev account/
+  region and account-specific cost/quota preflight remain. R2–R6 full modules
+  are not closed by approval or synthetic R1 tests.
 - Generic P2-D10/D11/D12 export/alias, P4-W08/W11 and offline/SW/release depend
   on their upstream integration/data contracts; do not substitute scoped fixtures.
 - Real tree/TS/news/map/route UI: reviewed canonical/source crosswalks and source
@@ -85,14 +102,15 @@ are now fixed. Remaining broader QA needs actual target capabilities/evidence:
 These are gates for the indicated paths, not declarations that the master is DONE.
 
 ## Exact next safe / gated action
-Safe: maintainer re-review the R1 finding table and latest sequence tests; apply
-any concrete local contract correction, validate and checkpoint. If new approved
-source/rights/access evidence arrives, resume the matching task from its phase
-plan instead of rescanning/replanning the whole repo.
-Gated: obtain R1 contract approval first, then explicit provider/task/quota approval
-before P9-I02. Source/legal/QA gates remain separate even after R1 approval.
-No DB/resource/scheduler/paid service/secrets/credential/production/merge action
-authorized. Do not mark master DONE or start R2/R3 to manufacture progress.
+Exact next: maintainer choose Neon Free (proposed) or Supabase Free and intended
+dev account/organization; then inspect actual plan/remaining slots/creation cost
+and confirm region before creating the concrete development resource. Scope/
+rollback/proposal already reviewable in POSTGRES_PROVIDER_SELECTION. Preserve
+R1 approval across sessions; do not restart remediation or request it again.
+After chosen environment: portable migration/fixture transactional adapter and
+isolated backup/restore rehearsal per active plan. No production/paid resources,
+scheduler, credentials in chat, source publication or merges authorized. Source/
+legal/QA gates remain separate. Do not mark master/R1 live foundation DONE.
 
 ## Continuity
 Normal milestone commits/pushes verified; no reset/rebase/force-push. Raw corpora,

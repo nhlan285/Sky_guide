@@ -2,12 +2,15 @@
 
 ## Goal / scope
 
-Maintainer verdict2026-10-06: **REQUEST CHANGES — architecture direction accepted,
+Historical maintainer verdict2026-10-06: **REQUEST CHANGES — architecture direction accepted,
 contract not yet approved for P9-I02**. Active work is
 [R1 contract remediation](R1_CONTRACT_REMEDIATION.md), preserving completed slices.
 Remediation2026-10-06: **LOCAL CONTRACT REVIEW READY**. All requested local findings
-addressed;46 domain/296 full tests, pnpm lint/typecheck/build PASS. Maintainer
-re-review pending before P9-I02; no contract/provider/resource self-approval.
+addressed;46 domain/296 full tests, pnpm lint/typecheck/build PASS.
+User approval2026-10-06: `phê duyệt, tự tiếp tục`. **R1 LOCAL CONTRACT APPROVED**;
+re-review gate closed by human approval, not self-approval. Active next slice is
+[provider selection](POSTGRES_PROVIDER_SELECTION.md). Exact provider/account/
+region and resource/task quota preflight remain required before creating a DB.
 
 LARGE/ARCHITECTURAL master run; current slice P9-D01–D03 + P9-I01.
 Turn Q20 into reviewable relational mapping, executable identity/relationship
@@ -54,7 +57,7 @@ No binary files or credentials in domain data. Public export is allowlisted.
   contracts/tests while provisioning is gated. It does not satisfy I02 dependencies
   for real integration, nor mark D04/V01 DONE; no scheduler or source fetch.
 - [x] Record provider/review gates and audit remaining independent work.
-  Maintainer REQUEST CHANGES addressed locally; re-review remains pending.
+  Maintainer REQUEST CHANGES addressed locally; user subsequently approved R1.
 
 ## Risks / UX / security
 
@@ -74,18 +77,17 @@ approval. Contract tests cannot establish live DB completion.
 
 ## Blockers / decisions / exact next step
 
-P9-I02 requires maintainer schema/API review, provider selection and quota/task
-approval. No provider chosen. P9-D04/P9-V01 real integration depends on I02;
+P9-I02 contract review now approved; provider selection and quota/task preflight
+remain. Neon Free is proposed after current official quota audit; no provider
+selected or account/region identified. P9-D04/P9-V01 real integration depends on I02;
 R2–R6 retain their foundation/checkpoint dependencies. D01–D03/I01 local contracts
 and the bounded synthetic D04/V01 subset above are already implemented and
-checkpointed and locally remediated; do not restart them. Exact gated action:
-maintainer re-reviews
-[relational/API/storage contracts](../architecture/data-foundation.md), domain
-interfaces and tests. After review, compare approved provider options and quotas;
-obtain provider/task approval before provisioning I02. No contract self-approval
-or live DB/migration/integration acceptance. Exact safe action: audit independent
-master tasks; a bounded existing Wardrobe sequence-test subset can proceed without
-generic alias/media/DB work. Keep P4-W12 overall PARTIAL until W11 dependencies.
+checkpointed and locally remediated; do not restart them or ask for R1 approval
+again. Public quota comparison and proposal now in POSTGRES_PROVIDER_SELECTION;
+exact next: choose provider/dev account, then inspect account-specific remaining
+quota/cost/region before provisioning I02. No live DB/migration/integration
+acceptance. Independent W12 sequence and focus QA completed; full W12 remains
+PARTIAL until W11 dependencies.
 
 ## Handoff / compact
 
