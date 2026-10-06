@@ -46,7 +46,10 @@ Slice1 DONE: explicit four-dataset + provenance/file allowlist, canonical valida
 envelopes/records, regenerated exact-byte hashes, canonical review/promotion.
 16 sync/API tests PASS, including private fields in stored/restored snapshots,
 unknown dataset/file quarantine, every K15 field and hash parity. Other findings
-OPEN. Exact next: MediaRecord/MediaBinding separation and collection cardinality.
+OPEN. Slice2 DONE: binary/binding separation, explicit role/owner/MIME/evidence,
+duplicate/hash/primary/reference constraints and legacy paths.18 media/R2 tests,
+focused lint and full typecheck PASS. Exact next: item-scoped acquisition keys,
+deferred references, geography mapping and migrated field preservation matrix.
 R1 re-review/provider/quota/legal/data gates remain intact.
 Raw corpora/private evidence stay outside Git on E:. Full checks last274 PASS at
 c53a111; NOT RUN yet for this remediation. No live provider workflow exists.

@@ -28,7 +28,7 @@ relations, never the canonical payload or a substitute for entity validation.
 | event_override (id) | Required event_id; optional rule_id must belong to same event; private reviewer/evidence separate; effective bounds/priority | R3 |
 | event_occurrence (id) | event/rule/override must agree; pinned revisions, absolute instants and schedule version | R3 |
 | source_snapshot (id), source_health (source_id) | Hash, normalized version, private raw reference; separate last_attempt/last_success/validity/LKG; never public raw data | R1 sync / R3 pending |
-| media (id) | storage key/hash/bytes/MIME, revision, role/provenance/rights; no binary/blob/base64 | AssetRegistry |
+| media (id) | storage key/hash/bytes/MIME, revision/source/provenance/rights; no owner/semantic role or binary/blob/base64 | MediaRecord |
 | item_media, emote_media, call_media, sample_media | Explicit typed joins; role part of binding, partial unique primary item image; role evidence before publication | R2/R4/R5 |
 | sample_set (id), instrument (id) | Instrument unique item_id; sample_set_id required; variants share set | R5; no second Item catalogue |
 | emote (id), call (id) | Unique item_id; preview relation points to media with poster/video/audio metadata | R4 |
@@ -137,14 +137,27 @@ R1 does not fabricate occurrences. Frontend migration/routes remain gated.
 
 ### Media metadata and delivery
 
-`validateMediaRecord` validates hash/key/MIME/role/revision/source/provenance and
-typed relation IDs. New immutable keys use media/<sha256>.<extension>; legacy keys
+Remediation decision: binary MediaRecord has no owner or semantic role.
+MediaBinding uses `(ownerKind, ownerId, mediaId, role)` and nonempty role evidence
+`provenanceIds`. Valid owners: itemImage/referenceImage→item, emoteVideo→emote,
+callVideo/callAudio→call, musicSample→sampleSet. Poster explicitly permits only
+item/emote/call; instrument artwork binds through its item, not an unrestricted
+domain relation. The collection rejects duplicate bindings, two item primaries,
+duplicate reference hashes, and one item's primary hash appearing as a reference.
+One binary can serve different valid roles/owners. Binary rights remain separate.
+This refines the already accepted typed joins; no live schema migration occurs.
+
+`validateMediaRecord` validates hash/key/MIME/revision/source/provenance/rights;
+`validateMediaBindings` validates role evidence, active owner/media references and
+collection cardinality. Graph media edges represent deduplicated owner/media
+topology; role/evidence live in the binding joins. New immutable keys use
+media/<sha256>.<extension>; legacy keys
 items/{thumbnails,cards,detail}/<sha256>.webp retain current /assets/items delivery
 paths. Identity never uses a signed URL. Real binaries remain in object storage.
 
 Verified publication requires approval of the current revision, public evidence
 URL, public credit/provenance and fixture=false. Private evidence is excluded.
-Caller supplies validated active relation IDs and reviewed public evidence URLs;
+Caller supplies validated active owner IDs and reviewed public evidence URLs;
 the validator cannot establish legal permission from the URL itself.
 `publicMedia` applies the current revoked ID/hash overlay even on older snapshots.
 `ObjectStorage.resolveDelivery` hides signing/provider SDKs and credentials;
@@ -157,6 +170,14 @@ bounded expiry and a tested purge/deny mechanism before rights-sensitive rollout
 R1 no-store applies to its response contract; actual provider caches and old
 clients require deployment acceptance in P9-I02/P9-V01. Audio identity is retained
 for Call; media playback/transcoding belongs to R4, not this contract slice.
+
+Compatibility: no deployed R2 consumer uses the unmounted R1 MediaRecord shape.
+Existing item object keys and `/assets/items/...` routes remain unchanged. If a
+future old role/relations reader is migrated, project one owner-specific binding
+into `{role, relations:[{kind:ownerKind,id:ownerId}]}` at its compatibility boundary;
+never persist one global binary role or reinterpret a signed URL as identity.
+Binary IDs/hashes/keys are unchanged by binding migration. Legacy path and
+revocation/signing-race tests pass; this is local compatibility, not live rollout.
 
 ### Review checklist
 

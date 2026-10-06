@@ -3,7 +3,7 @@
 ## Task / branch / checkpoint
 Autonomous master run: safe unblocked roadmap tasks, checkpoint/push;
 no merge/production deployment. Branch `codex/master-plan-execution`.
-Last verified pushed HEAD `93c110d446ce5e689f0083d12ce28a1c41951be6`.
+Last verified pushed HEAD `e802c36f5ccd9bf4708f22f582c649fcde369ac2`.
 This R1 remediation slice becomes next checkpoint; resolve SHA via `git log -1`
 and verify remote branch before resuming. Started from7cea424.
 Master [IMPLEMENTATION_PLAN](plan/IMPLEMENTATION_PLAN.md); current completed slice
@@ -48,9 +48,13 @@ deterministic bytes and regenerated hashes; promotion revalidates. K15 every-fie
 parity preserved; no production consumer/data release changed. Remediation plan,
 DATA_FOUNDATION/architecture/handoff updated. Media/key/limit/audit/event/multi-source
 findings still OPEN. Attribution/license follow-up already preserved at60cdc36.
+Slice2: media.ts + media tests separate binary/owner-role binding with role evidence,
+explicit poster owners and hash/cardinality checks. R2 deployed modules unchanged.
 
 ## Validation / limitations
 Current slice16 focused sync/API tests PASS; full remediation suite NOT RUN yet.
+Slice2:18 media/R2 tests, focused lint/full typecheck PASS. No downloaded media,
+live provider, changed signer or production revocation acceptance claimed.
 Full typecheck and focused lint PASS; initial unused binding lint failure fixed
 without disabling rules. New plan scaffold/link check PASS:72 Markdown files.
 Attribution docs scaffold/link checks PASS:71 Markdown files/14 source profiles/
@@ -87,8 +91,8 @@ consumed, no invented context percentage or manual compaction. Resumed autonomou
 task preserves master objective and all remaining gates.
 
 ## Exact next action
-Verify this pushed remediation checkpoint, then implement MediaRecord/MediaBinding
-separation with role/owner/MIME/cardinality/evidence tests and legacy R2 compatibility.
+Verify this pushed remediation checkpoint, then implement item-scoped acquisition
+keys/deferred refs and explicit geography mapping/preservation contracts/tests.
 Follow R1_CONTRACT_REMEDIATION findings in order, full applicable checks, checkpoint,
 then audit independent roadmap tasks. No SQL migration/provisioning/production/merge.
 After all findings pass, mark LOCAL CONTRACT REVIEW READY; maintainer re-review
