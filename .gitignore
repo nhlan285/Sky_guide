@@ -6,6 +6,7 @@ dist/
 build/
 .cache/
 .pnpm-store/
+supabase/.temp/
 data/wiki-assets/raw/
 .catalogue-stage/
 .vite/

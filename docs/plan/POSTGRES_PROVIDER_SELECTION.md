@@ -6,8 +6,8 @@ LARGE infrastructure slice. On2026-10-06 the user approved R1 with
 remediated package atb2fc0cb; this is not live foundation acceptance.
 P9-D01/D02/D03/I01 contract decisions remain intact. P9-I02 first requires a
 current provider/quota comparison and an identified development environment.
-No provider/account/region was named in the approval. Provider selection remains
-an explicit Q15 decision; do not interpret R1 approval as choosing an account.
+The user subsequently selected `supabase free` and `Dyland's Org`. Q15 provider
+selection is now CLOSED for development; R1 approval remains separate.
 
 ## Scope / non-goals / contracts
 Public plan audit and concrete dev-resource proposal now; after provider/task
@@ -16,7 +16,7 @@ fixture migration/restore rehearsal. Preserve provider-neutral PostgreSQL typed
 tables, server-only access, public projection/API/CAS/LKG/private audit and current
 R2 binary storage. No auth/realtime/ORM/provider SDK in the frontend. No scheduler,
 production change, paid plan/add-on, credential collection or source publication.
-No DDL executed or migration authored in this selection-only slice.
+No production consumers are connected. Additive fixture-first DDL is now in scope.
 
 ## Current official quota audit — 2026-10-06
 Public documentation, not actual account allocation or remaining quota.
@@ -54,7 +54,8 @@ Raw Neon markdown cached outside Git at
 `E:/SkyGuideAssets/research/provider-audit-2026-10-06/neon-plans.md`, SHA256
 `71726644439f6ccbc801ba9cddb2d1b21ea18c36daaa9178d87d1e350c569378`.
 Do not commit downloaded vendor documentation or follow its provisioning commands
-as authorization. No provider connector/account/credential read performed.
+as authorization. Account metadata and creation cost were subsequently inspected;
+no credentials were fetched or printed.
 
 ## Local workload measurement / limits
 Existing checked-in K15 public projection tsa-v1-74007cf878ef: five manifest files
@@ -66,20 +67,40 @@ Initial audit script incorrectly counted sourceIds arrays; corrected to report
 each named array and verified records counts before documenting them.
 Binary media remains on existing R2; do not adopt either provider's storage quota.
 
-## Recommendation / reviewable resource proposal
-**PROPOSED: Neon Free for the isolated development rehearsal**, because the
-current metadata allowance and included branches/history support dev/restore
-experiments without introducing unused auth/storage services. This is an
-engineering inference from the comparison, not a final provider decision.
-Supabase Free remains valid if the maintainer prefers the already connected
-management workflow; it needs manual backups and pause-aware recovery.
+## Selected development environment — 2026-10-07
+**SELECTED: Supabase Free**, by user instruction, replacing the earlier Neon
+proposal. Organization `Dyland's Org` (`pdssjfwbrfjlglobjhtw`) was explicitly
+selected by the user. Connector verified plan `free`/`tier_free`, zero existing
+projects, and project creation cost **$0/month**; confirmation tool succeeded.
+Created `sky-guide-dev` (`tpbydviuknovimroeodm`) on2026-10-06 UTC; status
+ACTIVE_HEALTHY, PostgreSQL17.11 verified by query. Region Singapore
+`ap-southeast-1` is a deliberate isolated dev choice. Actual Vercel function region
+was not established; no colocation claim. No paid add-on or production connection.
 
-Proposed task: one new `sky-guide-dev` Free project in the maintainer's selected
-account/organization, one primary database and at most one isolated restore
-branch, no paid option. Account and region still UNSELECTED. Region should match
-the actual Vercel function region where feasible; do not infer from user timezone.
-Keep existing deployment consumers disconnected throughout rehearsal. Use
-fixture-only inputs first, no real-data import until reviewed migration parity.
+Free Supabase native branches are unavailable. Restore must use an isolated local
+PostgreSQL target or a separately scoped Free project after cost preflight; never
+create a paid branch. Manual private off-site backup remains required.
+
+## Current implementation slice / acceptance
+First additive migration: private `sky_private` schema, typed source registry,
+public-shaped provenance columns, kind-scoped identity reservations, ordered
+identity provenance and immutable scoped crosswalks. No canonical JSON/EAV store.
+Do not seed real source data, invent KB entries, implement future R3/R4/R5 modules
+or connect current API/frontend consumers in this slice.
+
+Expected files: `supabase/migrations/` CLI-generated SQL, SQL fixture rehearsal in
+`tests/sql/`, this phase plan, architecture/foundation/master status and handoff.
+Use pinned Supabase CLI2.120.0 via temporary npm cache on E:, no login/link,
+frontend SDK or new application dependency. Hosted DDL uses MCP apply_migration;
+SQL rehearsal uses execute_sql and always rolls back synthetic rows.
+Acceptance for this slice: real PostgreSQL checks for composite/FK/ordered keys,
+immutable identity history/crosswalks, nonfixture evidence and changed revisions;
+anon/authenticated/PUBLIC cannot access schema/tables/functions. Enable RLS with
+no public policies as defense in depth. Negative cases must fail for intended
+SQLSTATEs; retained fixture counts must be zero after rollback. Run advisors,
+domain regression tests, scaffold/diff inspection, checkpoint and remote verify.
+This subset does not close P9-I02/D04/V01: payload tables, transactional adapter,
+global CAS, projection/API parity, sizing and actual backup/restore are next.
 
 ## Detailed implementation after selection / rollback
 1. Identify chosen account/org, actual plan/remaining slots and allowed regions;
@@ -102,15 +123,46 @@ fixture-only inputs first, no real-data import until reviewed migration parity.
 8. Checkpoint validated slice; only then assess R2 dependencies. Real foundation
    P9-D04/V01 stays OPEN until transactional integration/restore pass.
 
-## Acceptance / validation / handoff
+## Completed / validation — private identity subset
+Applied migration `20261006170439_private_identity_foundation`, file SHA256
+`43916831fc7dbb4341b17bc758c4cd17a119e1a55ada536b2041ddc4b398b3bd`.
+CLI-created filename aligned to the actual remote history version, not a made-up
+timestamp; remote history contains exactly one migration. Five typed tables and
+four invoker functions; no canonical JSON storage, PUBLIC execution or exposed
+schema grants. Text timestamps preserve original spelling/offset/precision,
+including astronomical year zero; SQL helper compares validated instants.
+
+Hosted `tests/sql/private-identity.sql` PASS:23 expected negative SQLSTATEs,
+positive kind/source-scoped identities, forward revision, retained timestamp,
+deferred evidence and actual anon/authenticated/service_role access denial.
+Post-rollback each table has zero rows. All three platform roles have no schema,
+table or function grant. All five tables have RLS; every FK UPDATE/DELETE RESTRICT.
+Identity/crosswalk hard DELETE/TRUNCATE, key reuse/remap and regressions blocked.
+Evidence join changes still need owner revision enforcement in the transactional
+adapter; this migration does not claim the entire identity graph is enforced.
+
+Advisors: no WARN/ERROR. INFO only, intentional
+[RLS without policy](https://supabase.com/docs/guides/database/database-linter?lint=0008_rls_enabled_no_policy)
+on five private tables; three FK-support indexes
+[unused on empty DB](https://supabase.com/docs/guides/database/database-linter?lint=0005_unused_index).
+No public policy added or FK index dropped to hide these notices.46 focused domain
+tests PASS. No TypeScript/UI/runtime edits; prior lint/build/full301 retained,
+not rerun for additive SQL/docs. Scaffold/diff checked before checkpoint.
+
+## Acceptance / handoff
 Selection subset: dated official evidence, alternatives, budget constraints,
 measured current artifact size and exact proposal documented. Docs scaffold/
 links/task IDs and git diff checks before checkpoint; runtime tests not rerun for
-docs-only selection. No live DB, quota remaining, resource creation, SQL migration,
-adapter integration or restore PASS claimed. Prior301 full tests and latest61
+docs-only selection. Subsequent live dev creation/private identity SQL PASS above;
+no complete typed payload/adapter integration or restore PASS claimed. Prior301 full tests and latest61
 focused/lint/typecheck/build/focus QA PASS remain scoped to previous checkpoints.
-Expected files: this phase plan, master/foundation/remediation approval status and
-CURRENT_STATE. Branch codex/master-plan-execution, baseb2fc0cb verified clean.
-Exact next: maintainer choose Neon Free or Supabase Free and intended dev account;
-then perform account-specific preflight before any creation. R1 approval is already
-recorded and must not be requested again. Source/legal/production gates persist.
+Branch codex/master-plan-execution, base1650df9 verified clean and remote matched.
+Exact next: add typed alias/tombstone retirement consistency with rollback-only
+SQL fixtures; then typed catalog payload owners and transactional adapter per the
+approved preservation matrix. Isolated PostgreSQL backup/restore remains OPEN.
+Docker CLI exists but daemon was unavailable (`dockerDesktopLinuxEngine` pipe
+absent); no images/container/start attempted. No DB connection password requested
+or obtained. This blocks local pg_dump/restore tooling currently, not further safe
+hosted additive SQL slices.
+Do not request R1, provider or organization selection again. Source/legal/
+production gates persist. Resource creation is not migration/adapter acceptance.

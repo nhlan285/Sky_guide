@@ -1,10 +1,10 @@
 # R1 data foundation — contract review package
 
-Status2026-10-06: **LOCAL CONTRACT REVIEW READY** for P9-D01–D03/P9-I01 after
-maintainer REQUEST CHANGES remediation.46 domain/296 full tests and lint/typecheck/
-build PASS locally. Q20 approves the direction; maintainer re-review still required
-before P9-I02. This document
-does not select a provider, provision PostgreSQL, or certify a migration.
+Status2026-10-07: **LOCAL CONTRACT APPROVED** by user2026-10-06 after maintainer
+REQUEST CHANGES remediation.46 domain/296 full tests and lint/typecheck/build PASS
+locally. Re-review gate closed. Supabase Free development project is created;
+current SQL scope/status lives in [provider phase](../plan/POSTGRES_PROVIDER_SELECTION.md).
+Resource creation alone does not certify migration or foundation acceptance.
 
 ## Relational mapping
 

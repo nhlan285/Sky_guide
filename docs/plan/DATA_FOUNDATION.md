@@ -10,7 +10,9 @@ addressed;46 domain/296 full tests, pnpm lint/typecheck/build PASS.
 User approval2026-10-06: `phê duyệt, tự tiếp tục`. **R1 LOCAL CONTRACT APPROVED**;
 re-review gate closed by human approval, not self-approval. Active next slice is
 [provider selection](POSTGRES_PROVIDER_SELECTION.md). Exact provider/account/
-region and resource/task quota preflight remain required before creating a DB.
+region and resource/task quota preflight were subsequently completed: Supabase
+Free/Dyland's Org/isolated Singapore `sky-guide-dev`; private identity SQL subset
+applied/fixture-tested. Full payload/adapter/restore acceptance remains OPEN.
 
 LARGE/ARCHITECTURAL master run; current slice P9-D01–D03 + P9-I01.
 Turn Q20 into reviewable relational mapping, executable identity/relationship
@@ -77,15 +79,16 @@ approval. Contract tests cannot establish live DB completion.
 
 ## Blockers / decisions / exact next step
 
-P9-I02 contract review now approved; provider selection and quota/task preflight
-remain. Neon Free is proposed after current official quota audit; no provider
-selected or account/region identified. P9-D04/P9-V01 real integration depends on I02;
+P9-I02 contract review/provider selection/preflight now approved/completed.
+Supabase Free dev project created; first private identity/provenance/crosswalk
+migration and hosted fixture validation PASS; details in POSTGRES_PROVIDER_SELECTION.
+P9-D04/P9-V01 real integration depends on remaining I02 payload/adapter/restore;
 R2–R6 retain their foundation/checkpoint dependencies. D01–D03/I01 local contracts
 and the bounded synthetic D04/V01 subset above are already implemented and
 checkpointed and locally remediated; do not restart them or ask for R1 approval
 again. Public quota comparison and proposal now in POSTGRES_PROVIDER_SELECTION;
-exact next: choose provider/dev account, then inspect account-specific remaining
-quota/cost/region before provisioning I02. No live DB/migration/integration
+exact next: typed alias/tombstone SQL consistency, then catalog payload owners,
+transactional adapter and actual backup/restore. No complete live foundation
 acceptance. Independent W12 sequence and focus QA completed; full W12 remains
 PARTIAL until W11 dependencies.
 
