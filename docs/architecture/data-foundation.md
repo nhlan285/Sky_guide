@@ -254,6 +254,15 @@ revocation/signing-race tests pass; this is local compatibility, not live rollou
 
 `stageSourceSnapshot` enforces an explicit byte budget, hashes source and normalized
 content, validates graph/projection consistency and quarantines invalid output.
+Local acceptance budgets are required configuration: maxSnapshotBytes (raw UTF-8),
+maxNormalizedBytes (entire normalized JSON with file Map encoded as entries,
+including graph/manifest/file contents), maxRecords (graph identities/crosswalks/
+aliases/tombstones/provenance IDs plus public-envelope records), maxRelations
+(graph edges). Check cheap counts and public bytes before parsing, then full size
+before and after canonicalization; promotion rechecks the same bounds. These are
+local safeguards, not measured production capacity or provider quota. Fixture
+values are test-only. They cannot prevent allocation/CPU inside a normalizer;
+future live workers require separately bounded execution/task approval.
 It does not fetch, schedule, persist raw data or publish. `ReviewApproval` binds
 the exact content digest and base generation; edits invalidate approval.
 `promoteReviewedSnapshot` validates again and uses an injected atomic CAS store.

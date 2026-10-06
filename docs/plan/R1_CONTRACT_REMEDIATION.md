@@ -55,6 +55,10 @@ previously undeclared public manifest source/importReport; explicit schemas now
 preserve both while stripping nested operational fields.36 migration/sync/API/
 lookup tests, focused lint/full typecheck PASS. Exact next: configurable normalized
 output budgets and explicit timestamp lifecycle; event agreement/isolation next.
+Slice4a DONE: required configurable raw/normalized bytes, total record and relation
+limits checked before parsing and after canonicalization; sanitized quarantine.
+11 sync tests PASS; ordinary K15 fixture and tiny-source expansion/limits covered.
+Exact next: audit timestamps and two-source health isolation; full suite still pending.
 R1 re-review/provider/quota/legal/data gates remain intact.
 Raw corpora/private evidence stay outside Git on E:. Full checks last274 PASS at
 c53a111; NOT RUN yet for this remediation. No live provider workflow exists.

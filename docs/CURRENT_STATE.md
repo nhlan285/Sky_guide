@@ -3,7 +3,7 @@
 ## Task / branch / checkpoint
 Autonomous master run: safe unblocked roadmap tasks, checkpoint/push;
 no merge/production deployment. Branch `codex/master-plan-execution`.
-Last verified pushed HEAD `55bf8f6ccf55187565c551a66849ff7b536f906a`.
+Last verified pushed HEAD `e4d0de5ee634f8f86ad3cf52e51054e775555ccd`.
 This R1 remediation slice becomes next checkpoint; resolve SHA via `git log -1`
 and verify remote branch before resuming. Started from7cea424.
 Master [IMPLEMENTATION_PLAN](plan/IMPLEMENTATION_PLAN.md); current completed slice
@@ -53,6 +53,8 @@ explicit poster owners and hash/cardinality checks. R2 deployed modules unchange
 Slice3: migration key/geography helpers and full current K15 field inventory/matrix;
 manifest now validates/preserves public source/importReport, including Git source
 paths and typed counters. Deferred module IDs never dropped; no DDL/migration.
+Slice4a: raw/normalized bytes/record/relation budgets and sanitized quarantine;
+configured fixture limits are not provider capacity. Audit/event/isolation remain.
 
 ## Validation / limitations
 Current slice16 focused sync/API tests PASS; full remediation suite NOT RUN yet.
@@ -60,6 +62,7 @@ Slice2:18 media/R2 tests, focused lint/full typecheck PASS. No downloaded media,
 live provider, changed signer or production revocation acceptance claimed.
 Slice3:36 migration/sync/API/lookup tests, focused lint/full typecheck PASS. Initial
 missing manifest-source owner caught by coverage test and fixed; tests not weakened.
+Slice4a:11 sync tests, focused lint/full typecheck PASS; no disabled checks.
 Full typecheck and focused lint PASS; initial unused binding lint failure fixed
 without disabling rules. New plan scaffold/link check PASS:72 Markdown files.
 Attribution docs scaffold/link checks PASS:71 Markdown files/14 source profiles/
@@ -96,8 +99,8 @@ consumed, no invented context percentage or manual compaction. Resumed autonomou
 task preserves master objective and all remaining gates.
 
 ## Exact next action
-Verify this pushed remediation checkpoint, then add explicit normalized byte/record/
-relation budgets and stage/review/promotion audit ordering, followed by event and
+Verify this pushed remediation checkpoint, then add stage/review/promotion audit
+ordering, followed by event and
 multi-source isolation invariants. Use R1_CONTRACT_REMEDIATION; no new DDL/provider.
 Follow R1_CONTRACT_REMEDIATION findings in order, full applicable checks, checkpoint,
 then audit independent roadmap tasks. No SQL migration/provisioning/production/merge.

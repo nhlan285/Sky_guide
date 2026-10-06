@@ -3,6 +3,7 @@ import test from 'node:test'
 import { readFileSync } from 'node:fs'
 import { URL } from 'node:url'
 import { createHash } from 'node:crypto'
+import { Buffer } from 'node:buffer'
 import { stageSourceSnapshot, promoteReviewedSnapshot, recordSourceFailure } from '../../src/server/sourceSync.ts'
 import { canonicalizeSnapshotFiles, createSnapshotRepository } from '../../src/server/domainSnapshot.ts'
 import { createDomainApi } from '../../src/server/domainApi.ts'
@@ -25,7 +26,8 @@ for (const [kind, records] of [['item', catalog.entries.map(entry => entry.item)
   }
 }
 const normalized = () => ({ publicFiles: { manifest, files }, provenanceIds: catalog.provenance.map(source => source.id), identities: { identities, relations, crosswalks: [], aliases: [], tombstones: [] } })
-const contract = { sourceIds: new Set(['K15']), maxSnapshotBytes: 1024, retryDelaysMs: [1000, 5000] }
+// Synthetic local acceptance budgets, not production capacity/provider quota.
+const contract = { sourceIds: new Set(['K15']), maxSnapshotBytes: 1024, maxNormalizedBytes: 8_000_000, maxRecords: 10_000, maxRelations: 20_000, retryDelaysMs: [1000, 5000] }
 const empty = () => ({ revision: 0, lastKnownGood: null, freshness: null, lastAttemptAt: null, failures: 0, nextRetryAt: null, approval: null })
 function memoryStore(initial = empty()) {
   let state = globalThis.structuredClone(initial)
@@ -130,6 +132,23 @@ test('invalid/empty/oversized/parser-failed candidates quarantine without leakin
   assert.equal(missingIdentity.status, 'quarantined')
   const missingJoin = await stage(empty(), 'source', async () => ({ ...normalized(), identities: { ...normalized().identities, relations: [] } }))
   assert.equal(missingJoin.status, 'quarantined')
+})
+
+test('small raw input cannot expand beyond configurable normalized byte/record/relation budgets', async () => {
+  const bytes = Buffer.byteLength(JSON.stringify(normalized(), (_key, value) => value instanceof Map ? [...value] : value))
+  const expanded = mutatePublic('items', envelope => { envelope.records[0].name.default = 'PRIVATE_SENTINEL'.repeat(1000) })
+  const bounded = { ...contract, maxNormalizedBytes: bytes + 100 }
+  assert.equal((await stageSourceSnapshot({ sourceId: 'K15', raw: 'tiny', normalizationVersion: 'fixture-v1', base: empty(), contract: bounded, normalize: async () => normalized() })).status, 'staged')
+  for (const [policy, normalize] of [
+    [bounded, async () => expanded],
+    [{ ...contract, maxRecords: 100 }, async () => normalized()],
+    [{ ...contract, maxRelations: 1 }, async () => normalized()],
+  ]) {
+    const result = await stageSourceSnapshot({ sourceId: 'K15', raw: 'tiny', normalizationVersion: 'fixture-v1', base: empty(), contract: policy, normalize })
+    assert.deepEqual(result, { status: 'quarantined', code: 'invalid_candidate' })
+    assert.equal(JSON.stringify(result).includes('PRIVATE_SENTINEL'), false)
+  }
+  assert.equal((await stage(empty(), 'x'.repeat(contract.maxSnapshotBytes + 1))).status, 'quarantined')
 })
 
 test('review binds exact content and base generation; edited candidates cannot promote', async () => {

@@ -36,6 +36,9 @@ export interface SyncStore {
 export interface SyncContract {
   sourceIds: ReadonlySet<string>
   maxSnapshotBytes: number
+  maxNormalizedBytes: number
+  maxRecords: number
+  maxRelations: number
   // Explicit verified policy; [] disables automatic retries. No guessed delays.
   retryDelaysMs: readonly number[]
 }
@@ -49,9 +52,29 @@ function contentHash(candidate: Omit<SyncCandidate, 'contentHash'>): string {
     files: [...candidate.publicFiles.files].sort(([a], [b]) => a < b ? -1 : a > b ? 1 : 0) }))
 }
 function validateContract(contract: SyncContract) {
-  if (!Number.isSafeInteger(contract.maxSnapshotBytes) || contract.maxSnapshotBytes <= 0 || contract.retryDelaysMs.some(delay => !Number.isSafeInteger(delay) || delay <= 0)) throw new Error('Invalid sync contract')
+  if ([contract.maxSnapshotBytes, contract.maxNormalizedBytes, contract.maxRecords, contract.maxRelations].some(limit => !Number.isSafeInteger(limit) || limit <= 0) || contract.retryDelaysMs.some(delay => !Number.isSafeInteger(delay) || delay <= 0)) throw new Error('Invalid sync contract')
+}
+function enforceNormalizedLimits(candidate: NormalizedCandidate, contract: SyncContract) {
+  // Bound all returned metadata/graph/serialized files before parsing records.
+  // This guards output acceptance, not CPU/memory allocation inside a normalizer.
+  const graph = candidate.identities
+  if (graph.relations.length > contract.maxRelations) throw new Error('Normalized relationship limit exceeded')
+  let count = graph.identities.length + graph.crosswalks.length + graph.aliases.length + graph.tombstones.length + candidate.provenanceIds.length
+  if (count > contract.maxRecords) throw new Error('Normalized record limit exceeded')
+  let publicBytes = 0
+  for (const text of candidate.publicFiles.files.values()) {
+    publicBytes += Buffer.byteLength(text, 'utf8')
+    if (publicBytes > contract.maxNormalizedBytes) throw new Error('Normalized public byte limit exceeded')
+    const envelope = JSON.parse(text)
+    if (!Array.isArray(envelope.records)) throw new Error('Invalid public record envelope')
+    count += envelope.records.length
+    if (count > contract.maxRecords) throw new Error('Normalized record limit exceeded')
+  }
+  const text = JSON.stringify(candidate, (_key, value) => value instanceof Map ? [...value] : value)
+  if (Buffer.byteLength(text, 'utf8') > contract.maxNormalizedBytes) throw new Error('Normalized snapshot byte limit exceeded')
 }
 async function validateProjection(candidate: NormalizedCandidate, contract: SyncContract, previous?: IdentityGraph) {
+  enforceNormalizedLimits(candidate, contract)
   const identities = validateIdentityGraph(candidate.identities, new Set(candidate.provenanceIds), contract.sourceIds, previous)
   if (!identities.valid) throw new Error('Invalid canonical identity candidate')
   const publicFiles = canonicalizeSnapshotFiles(candidate.publicFiles)
@@ -73,7 +96,9 @@ async function validateProjection(candidate: NormalizedCandidate, contract: Sync
     sameJoin('itemSpirit', entry.id, entry.item.spiritIds)
   }
   for (const spirit of snapshot.catalog.spirits) sameJoin('spiritSeason', spirit.id, spirit.seasonIds)
-  return { identities: identities.value, publicFiles, provenanceIds: [...candidate.provenanceIds] }
+  const canonical = { identities: identities.value, publicFiles, provenanceIds: [...candidate.provenanceIds] }
+  enforceNormalizedLimits(canonical, contract)
+  return canonical
 }
 
 export async function stageSourceSnapshot(options: {
