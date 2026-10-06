@@ -2,8 +2,9 @@
 
 ## Task / branch / checkpoint
 Autonomous master run on `codex/master-plan-execution`. Base/last verified remote
-HEAD `1650df941be1ed06e757d979dd8ce00360eb84f1`; this file accompanies the Supabase
-identity SQL checkpoint. Resolve its SHA with `git log -1` and verify remote.
+HEAD `6c766f5ee55cf33dfd39a978e5dd36960df091fa`; this file accompanies the Supabase
+retirement/evidence follow-up checkpoint. Resolve its SHA with `git log -1` and
+verify remote; first dev identity checkpoint6c766f5 already pushed/verified clean.
 Master [IMPLEMENTATION_PLAN](plan/IMPLEMENTATION_PLAN.md); active detailed phase
 [POSTGRES_PROVIDER_SELECTION](plan/POSTGRES_PROVIDER_SELECTION.md).
 
@@ -25,7 +26,12 @@ deferred nonfixture evidence. Timestamp spelling retained. Private schema, RLS,
 no public policies/grants; four invoker functions, PUBLIC execute revoked.
 No canonical JSON/EAV or source seed. CLI2.120.0 created migration; fresh filename
 aligned to actual MCP migration history before commit. Cache E:, CLI temp ignored.
-Files: supabase SQL/README, tests/sql/private-identity.sql, .gitignore and current
+Follow-up migrations20261006171406/20261006171612 add typed alias/tombstone graph,
+chain/cycle/active-target/immutable-history checks and statement-level evidence
+TRUNCATE protection. Bypass reproduced with two synthetic proofless identities
+inside rolled-back probe; fixed additively, no old migration/history rewrite.
+Unknown alias-source IDs preserved; identity-or-alias FKs retain original targets.
+Files: supabase SQL/README, tests/sql/private-identity.sql/private-retirement.sql, .gitignore and current
 phase/foundation/architecture/master/handoff status. No application/UI edits.
 
 R1 e802c36/55bf8f6/e4d0de5/071d5a2/c5804c6/a565652 retain allowlist/parity,
@@ -38,11 +44,15 @@ K15 loader and local saved/share/backup/preferences retained. Evidence in
 [PWA_WARDROBE_QA](plan/PWA_WARDROBE_QA.md).
 
 ## Validation / limitations
-Hosted SQL PASS:23 intended negative SQLSTATEs, positive/deferred evidence,
-source/kind scoping, timestamp preservation and actual role denial. Five tables
+Hosted final SQL PASS:24 identity +22 retirement intended negative SQLSTATEs,
+positive/deferred evidence/chains/atomic retirement/no-op history updates,
+source/kind scoping, timestamp preservation and actual role denial. Seven tables
 zero rows after rollback; anon/authenticated/service_role no schema/table/function
-grants; five RLS; every FK UPDATE/DELETE RESTRICT. Advisors no WARN/ERROR, INFO
-only intentional no-policy RLS/fresh unused FK indexes.46 domain tests PASS.
+grants; seven RLS/functions, every FK UPDATE/DELETE RESTRICT, no SECURITY DEFINER.
+Advisors no WARN/ERROR, INFO7 no-policy RLS/5 unused FK indexes.46 domain tests PASS
+before retirement addition;7 identity tests PASS afterwards. Both SQL suites
+rechecked on final schema. Two-session races/stronger isolation/production-scale
+full-scan graph validation NOT RUN; READ COMMITTED is demonstrated fixture scope.
 Scaffold/diff checks before checkpoint. No runtime source edits: earlier lint/
 build/catalog1808/full301 results retain scope, not rerun for SQL/docs. Full typed
 payload/API adapter/CAS/sizing/backup/restore acceptance remains OPEN.
@@ -58,8 +68,7 @@ P4-W12 PARTIAL/P4-W11 OPEN; canonical integration/offline/SW/source UI gated.
 No master or R2–R6 completion claim.
 
 ## Exact next action / continuity
-Add typed alias/tombstone consistency and rollback-only SQL fixtures, preserving
-alias chains/unknown retired alias-source IDs/immutable history. Then typed catalog
+Private identity/retirement SQL subsets complete. Next refine/implement typed catalog
 payload owners per approved field matrix, transactional repository/global CAS,
 public projection/API parity, isolated backup/restore and bounded measurement.
 Join/evidence changes still need owner revision enforcement in adapter. P9-I02/

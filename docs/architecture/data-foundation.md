@@ -40,10 +40,21 @@ All FK updates/deletes use RESTRICT. Retire through a reviewed transaction; do n
 cascade-delete history. Use composite kind FKs/check constraints for subtype
 identity, unique constraints for one-to-one extensions and join keys. SQL adapter
 must enforce these constraints plus transaction revision checks. Graph validation
-tests the provider-neutral rules; PostgreSQL constraints/up/down are not yet run.
+tests the provider-neutral rules. Private identity/provenance/crosswalk and
+alias/tombstone SQL up/rollback-only fixtures PASS on Supabase Free dev; full
+typed schema/up/down/backup restore and production-sized graph validation OPEN.
 Record content changes must increment revision, including changed relations and
 field provenance. The graph checks identity metadata changes; payload checks and
 transaction CAS belong to the repository adapter and must be tested in P9-I02.
+
+Alias SQL preserves unknown alias-source IDs without fabricated identity metadata.
+Targets have exactly one explicit same-kind identity or alias FK; generated to_id
+retains the original alias target. Deferred graph validation checks chains/cycles,
+active final identities and matching tombstones. Current full-scan advisory-lock
+validation is rehearsed at READ COMMITTED only. Two-session races and stronger
+isolation levels are NOT RUN; the adapter must establish/validate its isolation
+contract and measured cost before live acceptance. RLS/private schema remain
+closed to browser/platform roles; no least-privilege runtime role provisioned yet.
 
 ## Ownership decisions and field preservation inventory
 

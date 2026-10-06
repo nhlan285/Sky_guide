@@ -17,6 +17,15 @@ insert into sky_private.identity_provenance values ('item','sql-fixture-real-sha
 insert into sky_private.source_crosswalk values
   ('K15','item','1','sql-fixture-item'), ('K01','item','1','sql-fixture-real-shaped'),
   ('K15','spirit','1','sql-fixture-item');
+-- Keep this first-slice rehearsal reusable after the retirement slice is applied.
+do $$
+begin
+  if to_regclass('sky_private.tombstone') is not null then
+    execute $sql$insert into sky_private.tombstone values
+      ('item','sql-fixture-retired','2026-10-07T00:00:00Z',null)$sql$;
+  end if;
+end;
+$$;
 set constraints all immediate;
 
 do $$
@@ -44,6 +53,7 @@ begin
     ('changed identity key', $sql$update sky_private.domain_identity set revision=2,id='sql-fixture-reused' where kind='item' and id='sql-fixture-retired'$sql$, '23514'),
     ('evidence missing', $sql$insert into sky_private.domain_identity values ('item','sql-fixture-no-proof',1,1,'2026-10-07T00:00:00Z',null,false)$sql$, '23514'),
     ('evidence removal', $sql$delete from sky_private.identity_provenance where id='sql-fixture-real-shaped'$sql$, '23514'),
+    ('evidence truncate', $sql$truncate sky_private.identity_provenance$sql$, '23514'),
     ('evidence moved away', $sql$update sky_private.identity_provenance set id='sql-fixture-item' where id='sql-fixture-real-shaped'$sql$, '23514'),
     ('dangling provenance', $sql$insert into sky_private.identity_provenance values ('item','sql-fixture-item','sql-fixture-missing',0)$sql$, '23503'),
     ('duplicate provenance', $sql$insert into sky_private.identity_provenance values ('item','sql-fixture-real-shaped','sql-fixture-proof',1)$sql$, '23505'),
@@ -62,7 +72,7 @@ begin
     end if;
     passed := passed + 1;
   end loop;
-  if passed <> 23 then raise exception 'Unexpected case count'; end if;
+  if passed <> 24 then raise exception 'Unexpected case count'; end if;
 
   update sky_private.domain_identity set revision=2,updated_at='2026-10-07T01:00:00Z'
     where kind='item' and id='sql-fixture-item';
@@ -102,5 +112,5 @@ begin
 end;
 $$;
 
-select 'private identity rehearsal: 23 negative cases + positive/deferred cases + role access denial PASS' as result;
+select 'private identity rehearsal: 24 negative cases + positive/deferred cases + role access denial PASS' as result;
 rollback;

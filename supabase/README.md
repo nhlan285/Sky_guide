@@ -20,8 +20,16 @@ back. No helper functions/data persist. Recheck row counts and role privileges
 after running; a successful SQL call alone is not the full acceptance criteria.
 Never run destructive reset/down operations against this project or production.
 
-This migration contains identity/provenance/crosswalk reservations only. Alias/
-tombstone consistency, revision checks for changed entity relations/provenance,
+Three applied migrations cover identity/provenance/crosswalk reservations,
+alias/tombstone consistency and the evidence-TRUNCATE bypass. Newer files were
+CLI-created as20261006171156/20261006171555 and aligned to actual hosted versions
+20261006171406/20261006171612. Run both
+[identity](../tests/sql/private-identity.sql) and
+[retirement](../tests/sql/private-retirement.sql) fixtures on the final schema.
+Unknown alias-source IDs are retained without inventing identity rows; targets
+use explicit identity-or-alias FKs, preserving original to_id as a generated column.
+
+Revision checks for changed entity relations/provenance,
 typed entity payloads, canonical promotion/CAS, projection read adapter and actual
 PostgreSQL backup/restore are subsequent slices. The existing TypeScript domain
 validators remain required; database constraints supplement them.

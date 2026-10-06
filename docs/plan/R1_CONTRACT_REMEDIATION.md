@@ -66,11 +66,13 @@ Final validation:46 domain/296 full tests, pnpm lint/typecheck/build PASS atc580
 Status: **R1 LOCAL CONTRACT APPROVED** by user2026-10-06: `phê duyệt, tự tiếp tục`.
 Historical local readiness achieved; human approval closes maintainer re-review
 gate for this package, not live DB/SQL/restore acceptance.
-Exact next: [provider selection/quota audit](POSTGRES_PROVIDER_SELECTION.md),
-then account-specific preflight and approved development environment. Independent
-W12 sequence/focus QA completed; generic alias migration remains OPEN.
-R1 re-review is approved; provider/quota/legal/data/production gates remain.
-Raw corpora/private evidence stay outside Git on E:. No live provider workflow.
+Continuation: Supabase Free/Dyland's Org selected and dev created after $0 preflight;
+private identity/provenance/crosswalk/alias/tombstone SQL subsets PASS. Exact next
+typed catalog payload/transactional adapter/restore in
+[provider phase](POSTGRES_PROVIDER_SELECTION.md). Independent W12 sequence/focus
+QA retained; generic public-release alias migration remains OPEN.
+R1 re-review approved; legal/data/production gates remain. Raw/private evidence
+outside Git on E:. Live foundation acceptance remains OPEN beyond SQL subsets.
 
 ## Finding-by-finding local acceptance evidence
 

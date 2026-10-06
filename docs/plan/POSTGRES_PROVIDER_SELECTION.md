@@ -150,6 +150,38 @@ tests PASS. No TypeScript/UI/runtime edits; prior lint/build/full301 retained,
 not rerun for additive SQL/docs. Scaffold/diff checked before checkpoint.
 
 ## Acceptance / handoff
+Completed next subset: typed `alias`/`tombstone`. Alias sources may be absent from the
+identity graph in the existing validator; do not fabricate identities to satisfy
+a new FK. Alias targets use one of two explicit same-kind FKs (identity or alias),
+with generated `to_id` retaining the original contract. Deferred validation walks
+chains, rejects cycles/active source reuse and requires active final identity;
+tombstones match retirement and immutable optional same-kind replacement.
+Serialize graph validation using a transaction advisory lock; preserve RESTRICT
+FKs/immutable history/private RLS. No generic relation/EAV table. Full graph scan
+is limited to this fixture rehearsal; measure/refine before production-sized
+integration. New CLI migrations + tests/sql/private-retirement.sql and compatibility
+update to the earlier fixture are applied/tested against the final schema.
+Acceptance PASS: ordered retirement+tombstone atomicity, unknown alias-source IDs,
+alias chains/cycles/dangling/cross-kind/active/retired target cases, immutable
+history and rollback zero rows; privileges/advisors and domain regressions checked.
+
+Applied `20261006171406_private_retirement_graph`, SHA256
+`9ee7c876239ad28dfcac461cf52be374d924c4d754e6d34c676f36d3ad60266a`.
+SQL22 negative cases + chain/unknown source/no-op/atomic retirement PASS.
+Evidence bypass reproduced: TRUNCATE ignored row triggers and left two synthetic
+nonfixture identities without evidence inside a rolled-back probe. Minimal additive
+fix `20261006171612_protect_identity_evidence_truncate`, SHA256
+`96e2c4cb6a2c8e16f73971002e013762f6fee1b88a5d478e8c04942739d3dc1e`.
+Final identity fixture now24 negative cases PASS, including evidence TRUNCATE.
+Both scripts pass together after all three migrations; seven tables zero rows,
+seven RLS, all FKs RESTRICT, seven invoker functions, platform roles no grants.
+Final advisors no WARN/ERROR: INFO7 no-policy RLS,5 unused indexes. Seven identity
+TypeScript regressions PASS after retirement addition; earlier46-domain PASS
+retained. Two-session races/stronger isolation/production-scale full graph scan
+NOT RUN; READ COMMITTED fixture is the demonstrated scope. No adapter/promotion
+or actual backup/restore acceptance. Checkpoint6c766f5 pushed and SHA verified
+before this coherent follow-up; new checkpoint required at this milestone.
+
 Selection subset: dated official evidence, alternatives, budget constraints,
 measured current artifact size and exact proposal documented. Docs scaffold/
 links/task IDs and git diff checks before checkpoint; runtime tests not rerun for
@@ -157,8 +189,7 @@ docs-only selection. Subsequent live dev creation/private identity SQL PASS abov
 no complete typed payload/adapter integration or restore PASS claimed. Prior301 full tests and latest61
 focused/lint/typecheck/build/focus QA PASS remain scoped to previous checkpoints.
 Branch codex/master-plan-execution, base1650df9 verified clean and remote matched.
-Exact next: add typed alias/tombstone retirement consistency with rollback-only
-SQL fixtures; then typed catalog payload owners and transactional adapter per the
+Exact next: refine/implement typed catalog payload owners and transactional adapter per the
 approved preservation matrix. Isolated PostgreSQL backup/restore remains OPEN.
 Docker CLI exists but daemon was unavailable (`dockerDesktopLinuxEngine` pipe
 absent); no images/container/start attempted. No DB connection password requested
