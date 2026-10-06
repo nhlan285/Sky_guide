@@ -76,3 +76,46 @@ Reduced-motion source guards exist in AmbientCanvas/useSkyNavigation/atmosphere 
 but OS preference runtime test NOT RUN; do not change OS/browser preferences to
 manufacture a pass. Full contrast audit/focus trap/screen reader and real target
 devices still OPEN; these samples are not whole-page WCAG certification.
+
+## Completed follow-up — saved-outfit keyboard recovery
+MEDIUM bounded P4-U01/P7-U01 slice, resumed at39caf2f. Check local saved-outfit
+rename/delete and backup/reset confirmation focus, using synthetic outfits only.
+Inspect SavedOutfits/OutfitBackup callers; reproduce any failure in an isolated
+local preview before editing. Preserve native inline confirmation UX, tokens,
+storage contracts and all data/legal/provider gates. No OS preference, personal
+browser state, cloud or target-device inspection. If a disappearing confirmation
+leaves focus on body, apply a minimal ref/effect fix in the owning component.
+Acceptance: cancel returns to the invoking control; confirmed deletion focuses
+the surviving save input; unrelated outfit/state remains unchanged. Run focused
+checks and lint/typecheck/build only if a runtime fix is needed. Record actual
+browser evidence and remaining gaps, then checkpoint/push/verify SHA.
+
+Observed before edit at39caf2f, localhost6197 isolated synthetic library: pressing
+Enter on deletion Cancel unmounts the focused button and leaves activeElement
+BODY. Pressing Enter on Save clears name/disables the focused submit button,
+also leaving BODY. Exact source: SavedOutfitRow cancel lacks focus restoration;
+SavedOutfits successful save only clears name. Minimal fix: retain row delete
+button ref and focus it on cancel; focus persistent name input on successful save.
+No storage/confirmation/persistence semantics change. Rename and successful
+delete already have explicit focus handling. Verify those adjacent paths too.
+
+After rebuilt local production preview: Save via Enter focuses the persistent
+name INPUT; delete Cancel via Enter focuses BUTTON aria-label `Xóa: QA focus C`.
+Rename opening focuses its input, cancel/submit return to its rename button;
+successful delete returns to save input and leaves the other two outfits intact.
+Reset cancel preserves library; confirmed reset clears only the temporary QA
+library and focuses its reset button. All actions used synthetic outfits in
+isolated localhost6197 origin. Viewport556x659, document width541; no override
+or OS preference changes. No error-level console logs captured. Screenshot
+`E:/SkyGuideAssets/research/local-qa-2026-10-06/wardrobe-delete-cancel-focus.png`
+shows restored focus ring; not tracked in Git. Tab and owned preview process
+closed afterwards. Existing Button class/type/aria semantics preserved using
+the same native-ref pattern as rename/reset controls.
+
+61 focused Wardrobe tests, pnpm lint and pnpm build (catalog1808 + typecheck)
+PASS. Existing Router directive/large-chunk warnings unchanged. Prior full301
+tests PASS at39caf2f; not rerun for localized focus-only edit. No implementation-
+mirroring tests or dependency added; actual keyboard browser behavior verifies
+the focus fix. P4-U01/P7-U01 remain PARTIAL for device/screen-reader/reduced-motion,
+full accessibility and actual download acceptance. Exact next: checkpoint,
+maintainer R1 re-review or supplied evidence for the remaining gated paths.

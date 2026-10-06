@@ -248,7 +248,7 @@ Phụ thuộc phase là điều kiện nền; cột phụ thuộc bổ sung quan
 
 | ID | Module | Việc / đầu ra cụ thể | Nghiệm thu | Phụ thuộc | Độ phức tạp | Gate |
 |---|---|---|---|---|---|---|
-| P4-U01 | UX | **PARTIAL 2026-10-06 — local desktop/mobile demo QA:** [evidence](PWA_WARDROBE_QA.md) | 390/1366 layout, native size keyboard, override/remove, dye/share/save/reload, backup import/cancel/reset PASS; actual download/target devices/theme/locale/long-text/reduced motion remain OPEN | P4-W03, P4-W07, P3-U01 | Trung bình | — |
+| P4-U01 | UX | **PARTIAL 2026-10-06 — local desktop/mobile demo QA:** [evidence](PWA_WARDROBE_QA.md) | Layout, native size keyboard, override/remove, dye/share/save/reload, backup import/cancel/reset, theme/locale/long text scoped PASS. Save/delete-cancel focus loss fixed and actual keyboard rename/delete/reset verified. Download/target devices/reduced motion/full accessibility OPEN | P4-W03, P4-W07, P3-U01 | Trung bình | — |
 | P4-D01 | Data pipeline | Kiểm tra liên kết item → asset/binding/dye/rule | Fixture và pending full asset không lọt production; demo package được nhận diện riêng | P4-W08, P2-D11 | Trung bình | — |
 | P4-H01 | Hub | **DONE 2026-10-05** — Catalog → demo explanation và giữ draft khi chuyển trang | Item chưa render được mở placeholder có giải thích; nav không reset outfit đang sửa | P3-H02, P3-W01, P4-W09 | Thấp | — |
 | P4-I01 | Infra | **BLOCKED2026-10-06 protected content:** current Git Preview588bb31 READY; [audit](PREVIEW_AUDIT.md) | Connector metadata allowed but protected fetch403; remote deep-link/share/render not verified. Local demo QA separate; do not disable protection | P0-I04, P4-W10, P4-U01 | Trung bình | Vercel project/team content access |
