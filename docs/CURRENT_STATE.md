@@ -1,139 +1,93 @@
 # Current handoff — 2026-10-06
 
 ## Task / branch / checkpoint
-Autonomous master run: safe unblocked roadmap tasks, checkpoint/push;
-no merge/production deployment. Branch `codex/master-plan-execution`.
-Last verified pushed HEAD `c5804c6d69f933fc14838120f0a2c451c5bef5b5`.
-This R1 remediation slice becomes next checkpoint; resolve SHA via `git log -1`
-and verify remote branch before resuming. Started from7cea424.
-Master [IMPLEMENTATION_PLAN](plan/IMPLEMENTATION_PLAN.md); current completed slice
-[R1_CONTRACT_REMEDIATION](plan/R1_CONTRACT_REMEDIATION.md); source record
-[WIKI_SOURCE_VERIFICATION](plan/WIKI_SOURCE_VERIFICATION.md); R1
+Autonomous master run resumed from7cea424: remediate maintainer R1 REQUEST
+CHANGES, then continue safe independent roadmap work. No merge/production or
+provisioning. Branch `codex/master-plan-execution`.
+Last verified pushed HEAD `a5656526511d8f5627d15f60b9668fd412fcaa10`.
+This handoff accompanies the Wardrobe sequence checkpoint; resolve its SHA using
+`git log -1` and compare remote branch with `git ls-remote` before resuming.
+Master [IMPLEMENTATION_PLAN](plan/IMPLEMENTATION_PLAN.md); completed R1 slice
+[R1_CONTRACT_REMEDIATION](plan/R1_CONTRACT_REMEDIATION.md); latest independent
+slice [WARDROBE_SEQUENCE_QA](plan/WARDROBE_SEQUENCE_QA.md). Source continuity
+[WIKI_SOURCE_VERIFICATION](plan/WIKI_SOURCE_VERIFICATION.md); R1 foundation
 [DATA_FOUNDATION](plan/DATA_FOUNDATION.md).
 
-## Completed work / checkpoints
--199bdd5/533243c/518eebe: portable identity, unmounted snapshot/media API,
-reviewed sync/CAS/LKG fixture contracts; no live DB.
--4639c0c/f0348ab: versioned local storage/recovery and geography/price validators.
--8173045/22a29aa/3e0b1be: demo saved outfits/share/navigation (P4-W09/W10/H01).
--f1d32e5/2e6d110/00d9de6: K01/K02/K03 samples; unknown root and date-only visits.
--f278c8c/12087cd/4003ca0/fa99dd9: K04–K12 access/rights/price capabilities.
--e4f27dc: per-source mapping/fetch recovery contract (K04 blocked).
-P1-D13 PARTIAL, P1-I01 scoped contract DONE; verification != integration.
--8899195: P2-D06 manual spirit-tree input + unique path subtotal/unknown handling.
--08a80f1: P2-D05 staged Wiki items; source100805 duplicates quarantine correctly.
--548db41: P4-W04–W06 visible fictional scale rule + exact demo r1/r2 continuity.
--c9609c9: independent K03 staged repeated visits; K04/reconciliation blocked403.
--c44a40e: scoped outfit library backup/import/reset;264 tests/full checks PASS.
--7698d0e: P6-R01/R02 Web Push/native research only; Q07 unchanged.
--c27308a: PWA manifest/icon audit and scoped Wardrobe local UI QA.
--588bb31: bounded lookup filter preferences;269 tests + full checks/local smoke.
--68d35b9: existing Git Preview verified; protected content403; P0-I04 scaffold
-reconciled, P3-I01 no proxy currently required from K05 sample.
--e40d48c: disclosure contrast fix + local theme/locale/80-char/320px QA.
--c53a111: manual official-news draft file contract;274 full checks/pinned K06
-fixture-only dry-run PASS, no publication.
--5538243: remaining dependency-gates handoff. Next docs slice: P1-U01 reusable
-text/sheet/route/asset attribution drafts; Q12 and media rights remain pending.
--065c96e: draft templates/scaffold PASS, push SHA verified; bounded primary-source
-license follow-up recorded separately. Default-version lead does not close Q12.
+## Completed / intentionally modified areas
+R1: **LOCAL CONTRACT REVIEW READY**, maintainer re-review pending before P9-I02.
+Architecture accepted; no contract self-approval or live provider claim.
+- e802c36: structurally allowlisted canonical public bytes, deterministic hashes,
+  manifest consistency, nested/private stripping and restored re-promotion.
+- 55bf8f6: binary media identity separated from owner/role/evidence bindings;
+  cardinality/hash/dedupe/owner checks, rights/revocation and legacy R2 preserved.
+- e4d0de5: composite item/option keys, Realm as Location subtype, preserved
+  deferred refs, every-field K15 matrix and executable full public-field parity.
+  Typed public manifest source/importReport preserved; operational fields stripped.
+- 071d5a2: configurable raw/normalized bytes, record and relation limits.
+- c5804c6: trusted fetched/staged/reviewed/promotion lifecycle, exact approval,
+  private audit, unchanged retry semantics, global CAS/per-source health isolation,
+  event selected-rule/override consistency and materialized read-model intent.
+- a565652: finding-by-finding evidence/re-review package and plans reconciled.
 
-## Current intentional changes
-R1 local contract remediation complete: **LOCAL CONTRACT REVIEW READY**;
-maintainer re-review pending before P9-I02, no contract self-approval.
-User supplied maintainer REQUEST CHANGES2026-10-06: architecture accepted,
-contract not approved for P9-I02. Autonomous local remediation explicitly allowed.
-Fetch preflight: remote unchanged93c110d, clean branch, no unrelated changes.
-Slice1: domainSnapshot/sourceSync + sync tests structurally canonicalize stored
-public files; explicit dataset/file allowlist, sanitized validated records,
-deterministic bytes and regenerated hashes; promotion revalidates. K15 every-field
-parity preserved; no production consumer/data release changed. Remediation plan,
-DATA_FOUNDATION/architecture/master/handoff reconciled. All requested local findings
-addressed; live acceptance remains OPEN. Attribution/license follow-up at60cdc36.
-Slice2: media.ts + media tests separate binary/owner-role binding with role evidence,
-explicit poster owners and hash/cardinality checks. R2 deployed modules unchanged.
-Slice3: migration key/geography helpers and full current K15 field inventory/matrix;
-manifest now validates/preserves public source/importReport, including Git source
-paths and typed counters. Deferred module IDs never dropped; no DDL/migration.
-Slice4a: raw/normalized bytes/record/relation budgets and sanitized quarantine;
-configured fixture limits are not provider capacity.
-Slice4b/5: sourceSync/repository/identity + tests: explicit fetched/staged/reviewed/
-server promotion lifecycle, private candidate review hash/base; unchanged branch
-requires approval; global clock and per-source retry/health isolation. Event
-occurrence selected rule must agree with override's optional rule. Cached public
-read-model intent documented; no interface/provider/cache service redesign.
+Latest P4-W12 subset: five integrated workflow tests using actual demo r2,
+all four sizes, render geometry, rejected action, override removal, dye, real gzip
+share, explicit save/fresh-store reload and unsaved edits/second save/continued
+editing. **P4-W12 PARTIAL**; generic P4-W11 remains OPEN. No runtime/UI edit.
+Latest changed files: tests/data/wardrobeSequence.test.mjs, its phase plan,
+master status and this handoff. No unrelated working-tree changes at slice start.
+
+Earlier accepted source/demo work is retained: K02/P1-D02 ten nodes/nine edges,
+unknown root and partial costs; K01/K03 staged adapters; K04 inaccessible workbook;
+K15 loader; saved/share/backup/local preferences; bounded manual news drafts;
+local fixture QA and attribution drafts. Detailed evidence stays in linked plans;
+no new publication or legal permission inferred.
 
 ## Validation / limitations
-Final remediation validation atc5804c6:46 domain/296 full tests, pnpm lint,
-pnpm typecheck, pnpm build PASS (catalog1808). Existing Router use-client/chunk
-warnings remain. Full checks actually run; no live provider/DB or browser UI claim.
-Slice1:16 focused sync/API tests PASS.
-Slice2:18 media/R2 tests, focused lint/full typecheck PASS. No downloaded media,
-live provider, changed signer or production revocation acceptance claimed.
-Slice3:36 migration/sync/API/lookup tests, focused lint/full typecheck PASS. Initial
-missing manifest-source owner caught by coverage test and fixed; tests not weakened.
-Slice4a:11 sync tests, focused lint/full typecheck PASS; no disabled checks.
-Slice4b/5:24 sync/identity tests, focused lint/full typecheck PASS. Complete
-remediation full suite subsequently PASS as recorded above.
-Full typecheck and focused lint PASS; initial unused binding lint failure fixed
-without disabling rules. New plan scaffold/link check PASS:72 Markdown files.
-Attribution docs scaffold/link checks PASS:71 Markdown files/14 source profiles/
-173 unique tasks; diff check PASS. Runtime suite not rerun for docs-only changes.
-Historical pre-remediation274 full tests/lint/typecheck/catalog1808/build PASS. Dry-run
-PASS with one fixture draft; no browser needed. Initial lint issues fixed, checks
-not disabled. Earlier local query/wardrobe/theme/locale/80-char/320px smoke PASS;
-actual download NOT VERIFIED (in-app event timeouts). Reduced-motion OS runtime,
-full focus/contrast certification and target devices still NOT RUN. P4-U01/P7-U01
-not fully closed; Router/large chunk warnings unchanged.
+R1 final atc5804c6:46 domain/296 full tests, pnpm lint/typecheck/build PASS,
+catalog1808. Existing Router use-client/large-chunk warnings unchanged.
+Latest test-only subset:61 focused Wardrobe tests,301 full tests and pnpm lint
+PASS. No typecheck/build rerun for test/docs-only change; previous results
+above remain accurately scoped. Scaffold/diff inspected before checkpoint.
+No browser, target-device install/offline/reduced-motion/full accessibility,
+live DB/DDL/provider/restore, actual media rollout or production validation claimed.
+Earlier local 320/390/1366 theme/locale/long-text smoke remains scoped evidence;
+actual file download and protected Preview content remain unverified.
 
-## Blockers / decisions
-R1 REQUEST CHANGES received; local remediation then maintainer re-review pending.
-Provider/quota approval required
-before provisioning. Live DB/migration/backup restore and R2–R6 foundation gated.
-K04 actual OneDrive workbook columns/export blocked403; needs accessible public
-sample/export. K12 terms prohibit systematic scrape/bulk/competing redistribution;
-manual reference/backlink only, not automatic SKU feed. Q12 license-version/
-credit finalization pending. Full TGC/community media rights still fail closed.
-P4-W11 depends generic P2-D12; demo r1/r2 compatibility is only bounded continuity.
-P4-U01 has scoped QA but broader acceptance remains. No paid resource, destructive Git, mass crawl
-or implicit disk autosave.
-Vercel metadata reads allowed; protected Preview content fetch403. Grant/refresh
-project/team connector access or maintainer manual smoke before claiming P4-I01.
+## Remaining gates / dependency audit
+After R1 remediation and independent W12 subset, no further dependency-ready
+implementation slice identified within current approved scopes:
+- P9-I02/live SQL/durable audit/restore: maintainer R1 re-review, explicit provider/
+  task/quota approval. R2–R6 full modules are not closed by synthetic R1 tests.
+- Generic P2-D10/D11/D12 export/alias, P4-W08/W11 and offline/SW/release depend
+  on their upstream integration/data contracts; do not substitute scoped fixtures.
+- Real tree/TS/news/map/route UI: reviewed canonical/source crosswalks and source
+  coverage. K04 OneDrive403 blocks columns/export/reconciliation; K10/K11 SKU/
+  contents/per-market observations missing. K12 bulk/competing reuse prohibited;
+  manual reference only. No recrawl of cached E: evidence to bypass these.
+- Q02 leak owner/channels, Q09 prediction method, Q10 quantities/heart/mixed
+  mapping and Q11 QR protocol remain missing decisions/data.
+- Q12 exact license/credit review and TGC/community media rights remain pending;
+  full assets fail closed. Draft follow-up has not been sent.
+- P4-I01 protected Vercel content403 needs maintainer access/manual smoke;
+  P6-I01 icon provenance/native install and P7 device/full accessibility evidence
+  remain unverified. No protection changes or unsupported device claims.
+
+These are gates for the indicated paths, not declarations that the master is DONE.
+
+## Exact next safe / gated action
+Safe: maintainer re-review the R1 finding table and latest sequence tests; apply
+any concrete local contract correction, validate and checkpoint. If new approved
+source/rights/access evidence arrives, resume the matching task from its phase
+plan instead of rescanning/replanning the whole repo.
+Gated: obtain R1 contract approval first, then explicit provider/task/quota approval
+before P9-I02. Source/legal/QA gates remain separate even after R1 approval.
+No DB/resource/scheduler/paid service/secrets/credential/production/merge action
+authorized. Do not mark master DONE or start R2/R3 to manufacture progress.
 
 ## Continuity
-Checkpoint drill PASS at199bdd5. Earlier pre-trigger compaction/quota drills NOT
-PASS; no manual compaction tool or invented context percentage. Native compaction
-resumed after8899195 with branch/remote matched and only planned P2-D05 untracked.
-Current run uses milestone commits/push verification and native compaction.
-Latest exposed usage:93% short-window remaining/52% weekly remaining; ordinary
-usage allowed. Earlier6% was a prior window, not current quota. No reset credit
-consumed, no invented context percentage or manual compaction. Resumed autonomous
-task preserves master objective and all remaining gates.
-
-## Exact next action
-Verify this pushed clean R1 review-ready checkpoint, then inspect bounded demo
-Wardrobe action→render→codec→saved storage/reload sequence coverage. This is an
-independent regression subset over already approved modules; generic P4-W11 alias
-migration and full P4-W12 remain gated. No R2/R3 expansion, DDL/provider or production.
-Follow R1_CONTRACT_REMEDIATION findings in order, full applicable checks, checkpoint,
-then audit independent roadmap tasks. No SQL migration/provisioning/production/merge.
-After all findings pass, mark LOCAL CONTRACT REVIEW READY; maintainer re-review
-still required before P9-I02. Q12/source/rights gates remain separate.
-
-Remaining dependency roots: K04 inaccessible workbook (P1-D04/D13/P2-D07/TS full
-history); reviewed canonical/source crosswalk + source coverage for real tree/news/
-map/route/SKU import (K10 titles/ranges do not prove SKU/quantity); Q02 leak owner/
-channels, Q09 prediction methodology, Q10 quantities/heart/mixed mapping, Q11 QR
-protocol, Q12 license/credit finalization; TGC/community rights and scoped pilot
-approval. Generic export/alias/cache/SW/release modules retain their upstream
-foundation/data dependencies. P4-I01 requires protected Vercel content access;
-P6-I01 icon provenance/native install and P7 target-device/full accessibility checks
-remain unverified. No mass acquisition, public promotion or production deployment
-to manufacture these facts. Downstream OPEN tasks are not arbitrarily marked DONE.
-Local browser tab1 and owned Vite session74189 closed; viewport reset. No running
-owned QA server. Working raw/dry-run/screenshot artifacts stay untracked on E:.
-Earlier R1 review question is superseded by maintainer REQUEST CHANGES; this is
-permission to remediate locally, not self-approval of R1/P9-I02. P6-U02
-active settings still schedule-gated; central and K04/rights gates preserved.
-Then audit next safe task by dependency;
-never mark roadmap DONE just because a checkpoint survived.
+Normal milestone commits/pushes verified; no reset/rebase/force-push. Raw corpora,
+private evidence, screenshots/logs/build output remain outside task commits on E:.
+No owned QA server/browser or test process remains running after validation.
+Latest exposed usage at R1 checkpoint:93% short-window/52% weekly remaining;
+not a live usage guarantee. No reset credit consumed or context percentage
+invented. Use native compaction; no manual compaction claimed.

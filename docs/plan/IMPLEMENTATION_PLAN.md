@@ -242,7 +242,7 @@ Phụ thuộc phase là điều kiện nền; cột phụ thuộc bổ sung quan
 | P4-W09 | **DONE 2026-10-04** — Lưu/đổi tên/xóa demo outfit local và restore khi reload | Selection/dye/base size round-trip; quota lỗi vẫn giữ phiên hiện tại; xóa không ảnh hưởng outfit khác | P2-U01, P4-W07 | Trung bình | — |
 | P4-W10 | **DONE 2026-10-04** — Codec gzip/base64url versioned và copy/open link demo | Mở ở phiên trống khôi phục đúng; payload quá lớn/sai version/ID bị xử lý an toàn | P4-W09 | Cao | — |
 | P4-W11 | Thêm migration item alias/tombstone khi mở outfit cũ | Báo item thiếu, không thay bằng món khác âm thầm; phần hợp lệ vẫn mở | P2-D12, P4-W10 | Trung bình | — |
-| P4-W12 | Kiểm thử reducer/transform/rule/codec với chuỗi thao tác | Equip → đổi base size → override → tháo → dye → share → reload giữ đúng state; test không chỉ snapshot cấu trúc code | P4-W05–P4-W11 | Cao | — |
+| P4-W12 | **PARTIAL 2026-10-06 — demo workflow subset DONE:** [sequence QA](WARDROBE_SEQUENCE_QA.md) | Four-size action/render/gzip/save/fresh-store reload and unsaved-edit/continued-edit regressions PASS; generic alias/assets/offline dependencies remain OPEN, no full W12 completion | P4-W05–P4-W11 | Cao | Generic P4-W11/P2-D12 |
 
 ### UX / Data pipeline / Hub / Infra
 
@@ -416,7 +416,7 @@ Binary **images, posters, video, honk/call audio-video, emote video, music sampl
 | P9-D04 | Sync | Generic source sync → reviewed canonical + projection | Snapshot/hash/diff/normalization/quarantine, idempotent stable IDs, retry/backoff/source health, transactional promotion và Last Known Good (LKG); upstream fail không empty-overwrite. Reuse requirements P2-D10/P1-I01, không đợi mọi legacy adapter; foundation nghiệm thu synthetic trước, integration từng adapter sau verify. Scheduler/worker/cron chỉ sau task/quota approval; manual dry-run fallback | P9-D02, P9-D03, P9-I02 | Cao | DATA từng real adapter; task/quota nếu scheduler |
 | P9-V01 | Validation | Foundation/API/storage/migration contract checks và restore rehearsal | Synthetic FK/alias/tombstone/duplicate/revision/private export tests; API provider-swap parity và cache invalidation; schema up/down/backup restore rehearsal, revoked asset không hồi sinh từ rollback; không gọi live DB DONE chỉ bằng fixture | P9-D04, P9-I01, P9-I02 | Cao | Review; môi trường/quota approved |
 
-**R1 remediation status:** LOCAL CONTRACT REVIEW READY;46 domain/296 full tests + pnpm lint/typecheck/build PASS locally, [findings/evidence](R1_CONTRACT_REMEDIATION.md). Maintainer re-review pending before P9-I02; no self-approval, provider/provisioning/live integration/SQL restore or R2–R6 completion. Continue only independent safe master tasks; bounded existing Wardrobe sequence tests can advance a W12 subset while generic alias dependencies remain OPEN.
+**R1 remediation status:** LOCAL CONTRACT REVIEW READY;46 domain/296 full tests + pnpm lint/typecheck/build PASS locally, [findings/evidence](R1_CONTRACT_REMEDIATION.md). Maintainer re-review pending before P9-I02; no self-approval, provider/provisioning/live integration/SQL restore or R2–R6 completion. Independent P4-W12 demo sequence subset subsequently DONE with61 focused/301 full tests + lint PASS; full W12 remains PARTIAL while generic alias dependencies remain OPEN. Next: maintainer re-review or supplied source/rights/access evidence; see CURRENT_STATE for dependency audit.
 
 ### R2 — dataset/item media reconciliation pilot
 
