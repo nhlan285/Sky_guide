@@ -3,8 +3,8 @@
 ## Task / branch / checkpoint
 Autonomous Sky Guide master run on `codex/master-plan-execution`; goal active,
 master roadmap still OPEN. Last verified pushed checkpoint/base
-`dd7fb11a79e4e3dc1649fa7660a3cf8b4f3d7b08`. This file accompanies the typed release
-metadata/membership milestone; resolve latest SHA with git log -1 and verify
+`f85a6cb88e69a1a7bec8136bce3229d0d40c40e9`. This file accompanies the immutable
+projection milestone; resolve latest SHA with git log -1 and verify
 remote before resuming. Master [IMPLEMENTATION_PLAN](plan/IMPLEMENTATION_PLAN.md);
 active detailed [POSTGRES_PROVIDER_SELECTION](plan/POSTGRES_PROVIDER_SELECTION.md).
 No merge, production deployment, paid resources or destructive Git operations.
@@ -38,12 +38,21 @@ preserved. Architecture/field-ownership matrix refined without public contract c
 Nullable assetManifestVersion retained verbatim; no media usability implied.
 Aliases/tombstones nonnull remain reviewed canonical adapter gated.
 
-Important limit: SQL rows are private candidate metadata. Root version reservations
-are permanent; child metadata is not yet sealed by promotion. No publication
-pointer, immutable historical payload owner or SQL checksum computation implemented.
-Files: src/server/releaseRows.ts, src/data/domain/migration.ts, additive migration,
-focused tests/shared fixture/SQL builder/body/two verifiers, existing architecture/
-master/phase/foundation/handoff and supabase README. No UI/runtime consumer change.
+New20261006181325_immutable_release_projection, SHA256
+7c1e20a72bc0f5f950680848816d5387e8761d8b2f494e96f272ed4c0df28804:
+two private derived-byte tables (46 total), exact UTF8 hash checks, five-file
+completeness/path/hash parity and immutable/sealed metadata/history guards.
+Files precede header using deferred FK; header seals metadata. projectionRows
+codec/version-pinned repository reads old stored bytes independently of mutable
+current payloads. Existing publication/canonical boundary strips private input,
+rejects noncanonical/fixture/unverified caches and returns detached read models.
+Important limit: materialization/sealing is not reviewed pointer publication.
+No global CAS/pointer/SQL audit/health driver or canonical entity-version history
+implemented. Typed canonical tables stay authoritative; projection text is a derived
+cache, not canonical JSON/EAV. No SQL extension, SDK, UI/runtime consumer change.
+Files: src/server/projectionRows.ts, new migration, focused tests, SQL builder/body/
+response+schema verifiers, existing architecture/master/phase/foundation/handoff/
+supabase README. Prior metadata codec/field ownership preserved.
 
 ## Validation / evidence
 Local full K15 manifest/envelopes/canonical files+hashes round-trip PASS:1808 items/
@@ -57,16 +66,22 @@ INFO intentional RLS no policies and unused indexes in empty dev schema.
 Raw SQL/actual response/schema evidence remain outside Git at
 E:/SkyGuideAssets/research/postgres-rehearsal-2026-10-07.
 
-4 focused release tests +310 full tests, pnpm lint/typecheck/build/catalog1808 PASS.
-Initial test-only lint import omissions fixed; lint PASS. After ownership refinement/
-schema verifier addition:9 focused migration/release tests, lint/typecheck/scaffold/
-diff rechecked before checkpoint. Existing Router use-client/large-chunk warnings.
+Projection:4 focused tests/314 full tests, typecheck/build/catalog1808 PASS; complete
+K15 bytes/public repository plus representative filter/list/existing detail/404/
+event503 API parity.24 native projection negatives PASS. Actual SQL current payload
+name/revision advanced while old stored bytes/revision pins remained intact; fetched
+history -> complete fixture byte/repository parity PASS. Metadata38 negatives and
+absent-optional fixture rechecked after seal guards. Fixtures rollback.46 tables0
+rows/RLS, projection columns match SQL;0 unvalidated constraints/SECURITY DEFINER/
+platform schema/table/function grants. Advisors INFO same categories, no WARN/ERROR.
+Initial SQL helper setup ordering corrected before any cases counted as PASS.
+Test-only Request lint declaration corrected;4 focused tests/lint rechecked PASS.
+Scaffold/diff checked before checkpoint. Existing Router/chunk warnings retained.
 No full real K15 SQL import, live adapter/global SQL CAS/two-session race/stronger
 isolation/historical restore/scaling/production foundation PASS claimed.
 
 ## Exact next action / gates
-Define and implement immutable historical public projection owner/version-bound
-read contract, then trusted transactional adapter/global CAS, owner revisions,
+Implement approved SyncStore trusted transactional adapter/global CAS, owner revisions,
 private audit/per-source health and atomic reviewed promotion using existing
 repository/ingestion contracts. Preserve LKG, checksums and revocation overlays.
 P9-I02/D04/V01 remain PARTIAL/OPEN. Actual isolated backup/restore and measurements

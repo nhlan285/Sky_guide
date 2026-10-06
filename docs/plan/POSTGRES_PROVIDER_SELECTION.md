@@ -360,3 +360,75 @@ owner revisions, private audit/source health and atomic reviewed promotion. Reje
 drift and preserve LKG. Use existing ingestion/repository contracts; no SDK/consumer
 mount or connection-secret read assumed. Isolated restore tooling remains blocked
 by unavailable Docker daemon; independent safe foundation work can continue.
+
+## Active immutable projection slice — 2026-10-07
+MEDIUM approved R1 implementation after pushed f85a6cb. Goal: store immutable,
+version-bound derived public manifest/dataset bytes and seal candidate metadata,
+so an old release remains readable after canonical payload owners change.
+Typed canonical tables remain authoritative; explicit projection text is a derived
+cache only, never an arbitrary canonical JSON document/EAV owner. SQL checks UTF8
+hashes using PostgreSQL17 built-in sha256 (no extension). Reader validates the
+existing publication boundary and canonical bytes before serving detached copies.
+Scope: two private projection tables, completeness/hash/immutability constraints,
+candidate metadata seal guards, provider-neutral row codec/version-pinned reader,
+local full K15/API parity and hosted rollback-only history/corruption rehearsal.
+Dependencies: approved R1, Free dev, six SQL migrations/typed metadata parity PASS.
+Out of scope: global publication pointer, lifecycle/CAS/audit/source health writers,
+real source import, driver credentials/SDK, consumer mounting, media modules, restore.
+Expected files: CLI-created additive migration; server projection rows codec;
+focused tests; bounded SQL builder/body; architecture/master/phase/handoff/README.
+Steps: encode validated canonical projection, exact decode and version-bound read;
+SQL deferred file/header FK and five-dataset completeness/hash/path checks; immutable
+history/metadata guards; tests that mutable current payloads change while stored
+old bytes/API remain exact; native SQL corruption/bypass tests and schema/grants;
+lint/typecheck/build/full tests; checkpoint/push verified SHA.
+Acceptance: no current-row fallback, no orphan/partial/edited/unverified/fixture or
+noncanonical bytes served, all projection/metadata mutation/TRUNCATE bypass denied
+once materialized. Materialization/sealing is not reviewed promotion: pointer/CAS
+and rights revocation overlay remain explicit follow-up owners.
+Risks: hashes prove byte integrity, not source rights/review. Metadata/root lock is
+necessary for sealing races; two-session proof remains with actual transactional
+adapter. Derived cache storage doubles public bytes; quota/sizing is not inferred.
+Exact next: transactional adapter/global CAS/private audit/source health and atomic
+reviewed pointer promotion, isolated backup/restore and measurements.
+
+### Immutable projection milestone / evidence
+Applied20261006181325_immutable_release_projection; CLI timestamp20261006181110
+aligned to actual hosted history. File SHA256
+7c1e20a72bc0f5f950680848816d5387e8761d8b2f494e96f272ed4c0df28804.
+Two private derived-cache tables (46 total); exact UTF8 manifest/file checksums,
+five-file completeness/path/hash parity, deferred header FK, sealed child metadata
+and immutable bytes/root history/TRUNCATE guards. Files inserted before header;
+header means materialized/sealed, not reviewed/promoted. Canonical entity payloads
+remain typed/current; this is public projection history, not full entity-versioning.
+Source rights/latest revocation and lifecycle approval remain separate owners.
+
+4 focused tests preserve full current K15 canonical bytes/complete public repository
+and representative list/filter/existing item+spirit detail/404/event503 API parity.
+Wrong version/missing/extra/edited/rehash-private/fixture/draft/noncanonical bytes
+fail closed. Unicode UTF8 sizing and optional metadata absence retained. Read model
+is detached from caller/consumer mutation and current canonical owners.
+
+Hosted24 negative SQLSTATE cases PASS for byte hashes, completeness/FKs/path/hash
+mismatch and immutable/sealed mutation/bypass. Native current payload name/revision
+advanced while stored old bytes/revision pins remained intact. Actual fetched row
+response -> historical canonical bytes/repository parity PASS. Initial fixture helper
+assembled candidate metadata with constraints immediate, rejecting setup before
+target operation; fixed helper to assemble deferred, then validate complete metadata
+before each negative test. No initial false-positive cases counted as PASS.
+Prior38 release metadata cases and absent-optional hosted fixture rechecked PASS
+after seal guards. All fixtures rollback, no real records imported.
+
+46 tables verified0 rows/RLS; two writable projection column contracts match actual
+SQL. All FKs RESTRICT,0 unvalidated constraints/SECURITY DEFINER/platform schema,
+table or function grants. Advisors no WARN/ERROR; INFO intentional
+[RLS no policies](https://supabase.com/docs/guides/database/database-linter?lint=0008_rls_enabled_no_policy)
+and [unused indexes](https://supabase.com/docs/guides/database/database-linter?lint=0005_unused_index)
+retained. SQL/actual rows/schema evidence outside Git on E:.
+314 full tests/typecheck/build/catalog1808 PASS; initial test-only lint Request
+global declaration corrected to globalThis.Request, then4 focused tests/lint PASS.
+Scaffold/diff before checkpoint. No runtime driver/global CAS/public pointer,
+two-session race proof, actual backup/restore or production consumer acceptance.
+Exact next: implement approved SyncStore transactional contract with global CAS,
+durable private lifecycle/audit/source health and atomic reviewed projection pointer;
+validate SQL role boundaries/revisions/concurrency, then restore/measurements.

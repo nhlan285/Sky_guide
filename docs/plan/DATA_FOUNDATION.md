@@ -88,9 +88,10 @@ and the bounded synthetic D04/V01 subset above are already implemented and
 checkpointed and locally remediated; do not restart them or ask for R1 approval
 again. Public quota comparison and proposal now in POSTGRES_PROVIDER_SELECTION;
 Typed release/source metadata and ordered membership now PASS locally on full K15
-canonical bytes and hosted rollback-only fixtures. Exact next: immutable historical
-projection owner, transactional adapter/global CAS, private audit, then actual
-backup/restore. Candidate SQL metadata alone does not seal/publish a release.
+canonical bytes and hosted rollback-only fixtures. Immutable derived byte projection
+now retains historical public release after current payload mutation and seals child
+metadata; no public pointer/reviewed promotion. Exact next: transactional adapter/
+global CAS/private audit/source health, then actual backup/restore.
 No complete live foundation
 acceptance. Independent W12 sequence and focus QA completed; full W12 remains
 PARTIAL until W11 dependencies.
@@ -100,10 +101,11 @@ PARTIAL until W11 dependencies.
 Read [CURRENT_STATE](../CURRENT_STATE.md) for latest commit/checks and gates.
 Branch `codex/master-plan-execution`; checkpointdd7fb11 verified pushed before the
 release metadata slice. Supabase Free dev in Dyland's Org is provisioned;44 private
-tables with no platform grants. Domain implementations remain unmounted from
-production consumers. Latest310 full tests/lint/typecheck/build PASS;4 focused
-release tests plus38 native release negatives and two synthetic byte-parity fixtures
-PASS. Existing Router/large chunk warnings unchanged. See current handoff for exact
+tables at that milestone; now46 private tables with no platform grants. Domain
+implementations remain unmounted from production consumers. Latest314 full tests/
+lint/typecheck/build PASS;4 projection tests/24 native negatives and actual hosted
+historical-byte parity PASS. Prior38 metadata cases/optional fixture rechecked after
+sealing migration. Existing Router/chunk warnings unchanged. See handoff for exact
 latest checkpoint, migration hashes and open live adapter/restore gates.
 Checkpoint drill: PASS — `199bdd58c37b848b6b550b1adfdb7e7e70a5f791` committed,
 pushed and verified with ls-remote; work continued with D02/D03 and later slices.

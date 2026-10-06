@@ -90,7 +90,8 @@ This inventory originally defined future typed owners, not EAV persistence. K15
 payload owners now have SQL tables and row codec, with full local K15 field/byte
 parity and hosted synthetic DB-row reconstruction. Private release metadata and
 ordered membership now preserve full canonical K15 files/manifest; live
-transactional exporter and immutable historical projection remain pending.
+transactional exporter remains pending. Immutable derived public byte projection
+now preserves stored history after current payload mutation.
 Field-coverage tests fail when a real payload adds an unmapped field;
 canonical projection tests compare all current public values, including nulls.
 
@@ -141,11 +142,29 @@ source/import-report presence. This refines field ownership without changing the
 public contract. Five subtype membership tables preserve independent record orders
 and item/spirit/season revision pins. SQL metadata is a private candidate; root
 version reservations cannot be rewritten/deleted, but child metadata is not yet
-sealed by promotion. No public pointer or immutable historical payload owner exists.
-The codec binds metadata to supplied typed payloads using original canonical hashes
+sealed until a projection header is inserted (implementation below). No public
+pointer or immutable canonical entity payload history exists.
+The release codec binds metadata to supplied typed payloads using original canonical hashes
 and revision checks. It fails closed on drift rather than reading the latest rows
 as an old release. Nonnull aliases/tombstones remain reviewed-adapter gated; nullable
 assetManifestVersion is preserved verbatim without implying a usable media module.
+
+Immutable projection implementation (2026-10-07): release_projection stores the
+canonical public manifest text/hash/materializedAt; release_projection_file stores
+the exact five canonical dataset texts/path/hash. These are derived caches, not
+canonical JSON payload owners. PostgreSQL17 built-in
+[sha256/UTF8 conversion](https://www.postgresql.org/docs/17/functions-binarystring.html)
+checks exact bytes without an extension. Files precede header in one transaction
+using a deferred header FK; completion verifies all five hashes/paths against typed
+dataset metadata. Header insertion seals child metadata; insert/update/delete and
+TRUNCATE guards preserve materialized history. Canonical payload owners may advance.
+Version-pinned projectionRows decoding uses only stored public bytes, validates the
+existing publication/canonical boundary and rejects edited/noncanonical/private
+fields even after rehashing. Detached repository reads do not reconstruct the
+current relational graph. Root lock coordinates materialization/metadata writes;
+two-session isolation acceptance remains with the actual transactional adapter.
+Materialization is not reviewed publication: global pointer/CAS/audit/source-health
+and latest revocation overlay are follow-up owners. No production consumer mounted.
 
 ## Migration sequence and preservation
 

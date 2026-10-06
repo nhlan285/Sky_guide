@@ -20,9 +20,10 @@ back. No helper functions/data persist. Recheck row counts and role privileges
 after running; a successful SQL call alone is not the full acceptance criteria.
 Never run destructive reset/down operations against this project or production.
 
-Six applied migrations cover identity/provenance/crosswalk reservations,
+Seven applied migrations cover identity/provenance/crosswalk reservations,
 alias/tombstone consistency, evidence-TRUNCATE protection and typed K15 payloads/
-fraction-precision correction plus private release metadata/membership.
+fraction-precision correction plus private release metadata/membership and immutable
+derived public projection.
 Identity/retirement files were
 CLI-created as20261006171156/20261006171555 and aligned to actual hosted versions
 20261006171406/20261006171612. Run both
@@ -56,11 +57,25 @@ with tests/sql/verify-release-rehearsal.mjs (matching optional flag) and fetched
 schema metadata with tests/sql/verify-release-schema.mjs. Keep outputs outside Git.
 Full local K15 canonical metadata/bytes and hosted synthetic parity PASS; no full
 real K15 SQL import. Checksums/revisions reject drift. Private candidate metadata
-is not sealed/promoted history: root reservations immutable, child editing still
-requires the future promotion contract. SQL does not itself calculate checksums.
+is not reviewed/promoted history: root reservations immutable; the following
+projection migration seals child metadata once its header exists. Metadata SQL
+alone does not calculate checksums.
 
-Revision checks for changed entity relations/provenance, immutable historical
-projection and canonical promotion/CAS, projection read adapter and actual
+Projection migration20261006181325 adds2 private tables (46 total); derived
+canonical public bytes are checksummed with PostgreSQL17 sha256/UTF8, immutable
+and version-bound. Files precede header in a single transaction; the deferred FK
+permits this order, and header insertion seals metadata. Completion verifies all
+five file hashes/paths. Decode validates publication/canonical bytes independently
+of mutable current payloads. Materialization is not reviewed pointer publication.
+Build `node tests/sql/build-projection-rehearsal.mjs E:/SkyGuideAssets/research/postgres-rehearsal-2026-10-07/projection-fixture.sql`.
+The [body](../tests/sql/private-projection.sql) checks24 native negatives and changes
+current payload/revision while retaining old projection. Verify fetched JSON with
+tests/sql/verify-projection-rehearsal.mjs and schema with verify-projection-schema.mjs.
+Always rollback fixtures; no real imports or production use. Canonical SQL owners
+remain typed; projection text is a derived cache, not generic canonical JSON/EAV.
+
+Revision checks for changed entity relations/provenance, canonical promotion/CAS,
+durable audit/health/global pointer, actual transactional driver and
 PostgreSQL backup/restore are subsequent slices. The existing TypeScript domain
 validators remain required; database constraints supplement them.
 
