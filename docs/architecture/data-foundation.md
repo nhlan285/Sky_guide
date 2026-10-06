@@ -4,7 +4,9 @@ Status2026-10-07: **LOCAL CONTRACT APPROVED** by user2026-10-06 after maintainer
 REQUEST CHANGES remediation.46 domain/296 full tests and lint/typecheck/build PASS
 locally. Re-review gate closed. Supabase Free development project is created;
 current SQL scope/status lives in [provider phase](../plan/POSTGRES_PROVIDER_SELECTION.md).
-Resource creation alone does not certify migration or foundation acceptance.
+K15 typed payload SQL/row-codec local full-field parity and hosted synthetic
+rehearsal PASS; release metadata/transactional adapter/restore still OPEN. Resource
+creation or fixture SQL alone does not certify complete foundation acceptance.
 
 ## Relational mapping
 
@@ -40,8 +42,8 @@ All FK updates/deletes use RESTRICT. Retire through a reviewed transaction; do n
 cascade-delete history. Use composite kind FKs/check constraints for subtype
 identity, unique constraints for one-to-one extensions and join keys. SQL adapter
 must enforce these constraints plus transaction revision checks. Graph validation
-tests the provider-neutral rules. Private identity/provenance/crosswalk and
-alias/tombstone SQL up/rollback-only fixtures PASS on Supabase Free dev; full
+tests the provider-neutral rules. Private identity/provenance/crosswalk,
+alias/tombstone and K15 typed payload SQL up/rollback-only fixtures PASS; full
 typed schema/up/down/backup restore and production-sized graph validation OPEN.
 Record content changes must increment revision, including changed relations and
 field provenance. The graph checks identity metadata changes; payload checks and
@@ -84,8 +86,10 @@ exact deferred references and remain gated until actual typed entities are revie
 
 [Executable ownership inventory](../../src/data/domain/migration.ts) covers every
 actual K15 field, nested cost/time/offer/source fields and envelope/manifest metadata.
-These are explicit future typed owners, not EAV persistence, DDL or an implemented
-DB exporter. Field-coverage tests fail when a real payload adds an unmapped field;
+This inventory originally defined future typed owners, not EAV persistence. K15
+payload owners now have SQL tables and row codec, with full local K15 field/byte
+parity and hosted synthetic DB-row reconstruction; envelope/release metadata and
+live transactional exporter remain pending. Field-coverage tests fail when a real payload adds an unmapped field;
 canonical projection tests compare all current public values, including nulls.
 
 | Public fields | Status / typed owner / preservation rule |
@@ -123,7 +127,8 @@ canonical projection tests compare all current public values, including nulls.
 Nothing in the current legitimate K15 payload is intentionally excluded. Unknown
 operational/private fields are outside that schema and stripped. Join positions,
 explicit nulls, optional field presence and PartialTime precision are round-trip
-requirements for future DDL and DB export acceptance; no SQL rehearsal occurred.
+requirements for full DB export acceptance. K15 payload typed rows preserve these;
+release metadata/public projection/provider-swap acceptance remains OPEN.
 
 ## Migration sequence and preservation
 

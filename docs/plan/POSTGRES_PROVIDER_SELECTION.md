@@ -189,7 +189,92 @@ docs-only selection. Subsequent live dev creation/private identity SQL PASS abov
 no complete typed payload/adapter integration or restore PASS claimed. Prior301 full tests and latest61
 focused/lint/typecheck/build/focus QA PASS remain scoped to previous checkpoints.
 Branch codex/master-plan-execution, base1650df9 verified clean and remote matched.
-Exact next: refine/implement typed catalog payload owners and transactional adapter per the
+## Active typed catalog slice — 2026-10-07
+Goal: implement every current K15 item/lookup/spirit/season/provenance field as
+explicit typed rows, preserving original order, null/presence, strings/translations,
+PartialTime precision/offset/raw label, composite option keys and unknown/free
+prices. R1 field ownership and existing validators are authoritative. The completed
+identity/retirement constraints remain intact; no generic canonical JSON/EAV.
+
+Scope: private additive catalog SQL tables, translation/source-key/ordered joins,
+field-provenance field-presence rows (empty maps allowed, each field array requires
+nonempty evidence per existing validators), acquisition costs/evidence/source offers,
+future typed-ID references preserved with documented deferred target FKs. Codec
+maps validated domain payloads to explicit row columns and back. Item/Spirit
+optional fieldProvenance and Lookup optional null image/images retain presence
+flags. Nonempty deferred dye/compatibility/media payloads require their reviewed
+typed modules; fail explicitly before writing, never drop or infer them. Current
+K15 has no such payloads. Canonical publication still uses existing validators.
+
+Out of scope: source crawl, real provider import/publication, R3 events, R2 media,
+new dependency/SDK, deployment/UI, connection secrets, scheduler, snapshot-release
+metadata/CAS/promote and backup/restore completion (next slices).
+Expected files: next CLI-created additive migration, src/server/catalogRows.ts,
+tests/data/catalogRows.test.mjs, tests/sql/private-catalog.sql, active phase and
+existing architecture/master/handoff. Dependencies: R1 approved, actual dev Free
+resource, migrations20261006170439/171406/171612 applied and fixture PASS.
+
+Steps: typed DDL and row codec; local every-field K15 encode/decode parity;
+negative corruption/optional/time/price/composite-key tests; hosted synthetic row
+rehearsal and domain projection reconstruction; compare schema columns with codec;
+private privileges/RLS/FK/index/advisor checks; lint/typecheck/build/focused suite;
+update handoff and push SHA-verified checkpoint. Hosted fixtures always rollback.
+Do not claim full PostgreSQL K15 import from local row parity or fixture SQL alone.
+Acceptance: all current legitimate fields preserved including empty evidence maps,
+translations and independent forward/reverse source arrays; no private fields leak;
+typed acquisition/FK/cardinality constraints reject intended cases; rollback leaves
+zero rows; schemas/platform roles remain private. Runtime DB isolation/two-session
+concurrency/relation revision CAS still need the actual transactional adapter.
+
+### Typed catalog milestone / evidence
+Applied `20261006173438_private_catalog_payloads`, SHA256
+`a9dbfd085fa4f81f727db36fe69b9385fdf7bd8044b30775f87699f1de76d8dd`:
+26 new private typed tables (33 total), explicit column codec for30 payload-owner
+tables (four reused from identity foundation), no JSON canonical columns. Initial
+reserved parameter name `precision` caused a transactional parse rejection;
+verified item table absent/history still3 before fixing/reapplying. No partial DDL
+or failed migration history entry retained. Files aligned to authoritative hosted
+versions after CLI generation.
+
+Local full current K15 every-field row round-trip PASS:1808 items/lookup,213 spirits,
+30 seasons,244 provenance; canonical public bytes + hashes identical after export.
+Synthetic deferred node/IAP/asset/rule/tree/realm/map/article IDs, null/presence,
+translations including literal __proto__, independent ordered arrays, empty
+fieldProvenance maps, exact source strings and scoped repeated option IDs retained.
+Unsupported valid nonnull media fails explicitly before write; private payload
+fields stripped, malformed/missing/orphan/wrong-type rows rejected.
+
+Hosted codec-generated fixture -> actual SQL rows -> complete domain payload parity
+PASS.32 negative SQLSTATE cases + positive known/free zero, deferred evidence/time,
+FK/scoped key/cardinality/range/bypass checks PASS. No real K15 records imported.
+Raw bounded SQL/actual fixture response/schema metadata stay outside Git on E:
+`research/postgres-rehearsal-2026-10-07`; private schema has0 rows after rollback.
+All30 codec column contracts match actual schema; all33 tables RLS, all FKs
+RESTRICT, platform roles no schema/table/function grant and0 SECURITY DEFINER.
+No unvalidated constraints. Advisor INFO33 intentional no-policy RLS/15 unused
+indexes; no WARN/ERROR. Keep least-privilege runtime grant/policy design deferred.
+
+Probe found valid500-digit tiny instant rejected by helper float underflow. Added
+`20261006174420_preserve_instant_fraction_precision`, SHA256
+`cc9755060b337115eb33ca1684a3d03c6f83b1d68c455d8a7584a987ea0ff7b0`.
+Helper retains source text and bounds only computational microseconds; range
+comparison uses whole seconds + padded fractional text, avoiding numeric scale
+limits.500/17000-digit precision checks PASS.11 affected immutable-function CHECKs
+recreated and revalidated in the same transaction, per
+[PostgreSQL constraint guidance](https://www.postgresql.org/docs/17/ddl-constraints.html).
+Legacy numeric key is no longer used by canonical CHECKs. Prior24 identity +22
+retirement SQL cases rechecked PASS after helper change.
+
+Validation:51 focused domain/codec tests +306 full tests, pnpm lint/typecheck/build
+PASS; catalog1808. Added valid future-media and native known/free-zero assertions
+then rechecked5 codec tests/native catalog rehearsal PASS. Existing Router/chunk
+warnings retained. Docs scaffold/diff before checkpoint. Provider quota/publication/
+API/production/SQL backup/restore acceptance NOT inferred from this milestone.
+P9-I02 remains PARTIAL; snapshots/release metadata, durable audit, transactional
+adapter/owner revision/global CAS, isolated restore and measurements remain OPEN.
+
+Exact next: typed public-release/source metadata and ordered membership projection;
+then transactional adapter/global CAS/private audit per the
 approved preservation matrix. Isolated PostgreSQL backup/restore remains OPEN.
 Docker CLI exists but daemon was unavailable (`dockerDesktopLinuxEngine` pipe
 absent); no images/container/start attempted. No DB connection password requested

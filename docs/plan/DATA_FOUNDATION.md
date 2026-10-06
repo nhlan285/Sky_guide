@@ -87,8 +87,9 @@ R2–R6 retain their foundation/checkpoint dependencies. D01–D03/I01 local con
 and the bounded synthetic D04/V01 subset above are already implemented and
 checkpointed and locally remediated; do not restart them or ask for R1 approval
 again. Public quota comparison and proposal now in POSTGRES_PROVIDER_SELECTION;
-exact next: catalog payload owners after private alias/tombstone SQL consistency PASS,
-transactional adapter and actual backup/restore. No complete live foundation
+exact next: release/source metadata and ordered projection membership after K15
+typed payload SQL/codec PASS; then transactional adapter and actual backup/restore.
+No complete live foundation
 acceptance. Independent W12 sequence and focus QA completed; full W12 remains
 PARTIAL until W11 dependencies.
 
