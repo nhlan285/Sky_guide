@@ -2,8 +2,9 @@ import assert from 'node:assert/strict'
 import test from 'node:test'
 import { readFileSync } from 'node:fs'
 import { URL } from 'node:url'
+import { createHash } from 'node:crypto'
 import { stageSourceSnapshot, promoteReviewedSnapshot, recordSourceFailure } from '../../src/server/sourceSync.ts'
-import { createSnapshotRepository } from '../../src/server/domainSnapshot.ts'
+import { canonicalizeSnapshotFiles, createSnapshotRepository } from '../../src/server/domainSnapshot.ts'
 import { createDomainApi } from '../../src/server/domainApi.ts'
 
 const root = new URL('../../data/public/tsa-v1-74007cf878ef/', import.meta.url)
@@ -36,6 +37,69 @@ function memoryStore(initial = empty()) {
 }
 const stage = (base, raw = 'synthetic upstream envelope', normalize = async () => normalized()) => stageSourceSnapshot({ sourceId: 'K15', raw, normalizationVersion: 'fixture-normalizer-v1', base, contract, normalize })
 const approve = candidate => ({ contentHash: candidate.contentHash, baseRevision: candidate.baseRevision, reviewerRef: 'private-fixture-reviewer', reviewedAt: '2026-10-04T00:00:00Z' })
+function mutatePublic(name, mutate) {
+  const value = globalThis.structuredClone(normalized())
+  const entry = name === 'provenance' ? value.publicFiles.manifest.provenance : value.publicFiles.manifest.datasets[name]
+  const envelope = JSON.parse(value.publicFiles.files.get(entry.path))
+  mutate(envelope)
+  const text = JSON.stringify(envelope)
+  value.publicFiles.files.set(entry.path, text)
+  entry.sha256 = createHash('sha256').update(text).digest('hex')
+  return value
+}
+
+test('promoted public bytes structurally exclude top-level and nested operational fields', async () => {
+  const value = mutatePublic('items', envelope => {
+    envelope.privateAudit = 'PRIVATE_SENTINEL'
+    envelope.records[0].privateEvidence = 'PRIVATE_SENTINEL'
+    envelope.records[0].name.reviewerRef = 'PRIVATE_SENTINEL'
+    envelope.records.find(item => item.acquisitionOptions.length).acquisitionOptions[0].internalReview = 'PRIVATE_SENTINEL'
+  })
+  value.publicFiles.manifest.privateEvidence = 'PRIVATE_SENTINEL'
+  const result = await stage(empty(), 'fixture', async () => value)
+  assert.equal(result.status, 'staged')
+  const store = memoryStore()
+  assert.equal(await promoteReviewedSnapshot(store, result.candidate, approve(result.candidate), contract, freshness), 'promoted')
+  const stored = (await store.read('K15')).lastKnownGood.publicFiles
+  assert.equal([...stored.files.values()].join('').includes('PRIVATE_SENTINEL'), false)
+  assert.equal(JSON.stringify(stored.manifest).includes('PRIVATE_SENTINEL'), false)
+  const serialized = JSON.stringify({ manifest: stored.manifest, files: [...stored.files] })
+  const restored = JSON.parse(serialized); restored.files = new Map(restored.files)
+  const canonical = canonicalizeSnapshotFiles(restored)
+  assert.deepEqual(canonical, stored)
+  assert.equal([...canonical.files.values()].join('').includes('PRIVATE_SENTINEL'), false)
+})
+
+test('undeclared record properties in another dataset cannot survive canonicalization', async () => {
+  const value = mutatePublic('spirits', envelope => { envelope.records[0].privateEvidence = { reviewer: 'PRIVATE_SENTINEL' } })
+  const result = await stage(empty(), 'fixture', async () => value)
+  assert.equal(result.status, 'staged')
+  assert.equal([...result.candidate.publicFiles.files.values()].join('').includes('PRIVATE_SENTINEL'), false)
+})
+
+test('unknown public datasets and extra files quarantine rather than entering a release', async () => {
+  for (const asDataset of [true, false]) {
+    const value = globalThis.structuredClone(normalized())
+    const text = JSON.stringify({ privateEvidence: 'PRIVATE_SENTINEL' })
+    value.publicFiles.files.set('private.json', text)
+    if (asDataset) value.publicFiles.manifest.datasets.private = { path: 'private.json', dataVersion: manifest.catalogVersion, sha256: createHash('sha256').update(text).digest('hex') }
+    assert.deepEqual(await stage(empty(), 'fixture', async () => value), { status: 'quarantined', code: 'invalid_candidate' })
+  }
+})
+
+test('canonical public payload preserves every legitimate K15 field and exact hash/manifest bytes', async () => {
+  const result = await stage(empty())
+  assert.equal(result.status, 'staged')
+  const canonical = result.candidate.publicFiles
+  for (const entry of Object.values({ ...canonical.manifest.datasets, provenance: canonical.manifest.provenance })) {
+    const text = canonical.files.get(entry.path)
+    assert.deepEqual(JSON.parse(text), JSON.parse(files.get(entry.path)))
+    assert.equal(createHash('sha256').update(text).digest('hex'), entry.sha256)
+  }
+  assert.deepEqual(canonicalizeSnapshotFiles(canonical), canonical)
+  const parsed = await createSnapshotRepository(canonical, freshness).readCatalog()
+  assert.deepEqual(parsed.catalog.entries, catalog.entries)
+})
 
 test('staging validates without publishing; reviewed promotion is atomic and idempotent', async () => {
   const store = memoryStore()

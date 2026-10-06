@@ -2,6 +2,10 @@
 
 ## Goal / scope
 
+Maintainer verdict2026-10-06: **REQUEST CHANGES — architecture direction accepted,
+contract not yet approved for P9-I02**. Active work is
+[R1 contract remediation](R1_CONTRACT_REMEDIATION.md), preserving completed slices.
+
 LARGE/ARCHITECTURAL master run; current slice P9-D01–D03 + P9-I01.
 Turn Q20 into reviewable relational mapping, executable identity/relationship
 validation, provider-neutral read API and media delivery contracts. Preserve K15

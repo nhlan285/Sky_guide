@@ -3,7 +3,7 @@ import { validateDateTime, validateId } from '../data/core/index.ts'
 import { validateIdentityGraph } from '../data/domain/identity.ts'
 import type { IdentityGraph } from '../data/domain/identity.ts'
 import type { Freshness } from '../data/domain/repository.ts'
-import { createSnapshotRepository } from './domainSnapshot.ts'
+import { canonicalizeSnapshotFiles, createSnapshotRepository } from './domainSnapshot.ts'
 import type { SnapshotFiles } from './domainSnapshot.ts'
 
 export interface NormalizedCandidate {
@@ -53,7 +53,8 @@ function validateContract(contract: SyncContract) {
 async function validateProjection(candidate: NormalizedCandidate, contract: SyncContract, previous?: IdentityGraph) {
   const identities = validateIdentityGraph(candidate.identities, new Set(candidate.provenanceIds), contract.sourceIds, previous)
   if (!identities.valid) throw new Error('Invalid canonical identity candidate')
-  const repository = createSnapshotRepository(candidate.publicFiles, { health: 'stale', lastSuccessAt: '1970-01-01T00:00:00Z', validUntil: null })
+  const publicFiles = canonicalizeSnapshotFiles(candidate.publicFiles)
+  const repository = createSnapshotRepository(publicFiles, { health: 'stale', lastSuccessAt: '1970-01-01T00:00:00Z', validUntil: null })
   const snapshot = (await repository.readCatalog())!
   for (const [kind, records] of [['item', snapshot.catalog.entries.map(entry => entry.item)], ['spirit', snapshot.catalog.spirits], ['season', snapshot.catalog.seasons]] as const) {
     for (const record of records) {
@@ -70,6 +71,7 @@ async function validateProjection(candidate: NormalizedCandidate, contract: Sync
     sameJoin('itemSpirit', entry.id, entry.item.spiritIds)
   }
   for (const spirit of snapshot.catalog.spirits) sameJoin('spiritSeason', spirit.id, spirit.seasonIds)
+  return { identities: identities.value, publicFiles, provenanceIds: [...candidate.provenanceIds] }
 }
 
 export async function stageSourceSnapshot(options: {
@@ -81,8 +83,8 @@ export async function stageSourceSnapshot(options: {
     validateContract(contract)
     if (!contract.sourceIds.has(sourceId) || !validateId(sourceId).valid || !normalizationVersion.trim() || !raw.trim() || Buffer.byteLength(raw, 'utf8') > contract.maxSnapshotBytes || !Number.isSafeInteger(base.revision) || base.revision < 0) throw new Error('Invalid source snapshot')
     const normalized = await normalize(raw)
-    await validateProjection(normalized, contract, base.lastKnownGood?.identities)
-    const value = { ...structuredClone(normalized), sourceId, sourceHash: digest(raw), normalizationVersion, baseRevision: base.revision }
+    const canonical = await validateProjection(normalized, contract, base.lastKnownGood?.identities)
+    const value = { ...canonical, sourceId, sourceHash: digest(raw), normalizationVersion, baseRevision: base.revision }
     return { status: 'staged', candidate: { ...value, contentHash: contentHash(value) } }
   } catch {
     // Quarantine report excludes raw upstream/private exception content.
@@ -98,6 +100,10 @@ export async function promoteReviewedSnapshot(store: SyncStore, candidate: SyncC
     validateContract(contract)
     if (!contract.sourceIds.has(candidate.sourceId) || contentHash(candidate) !== candidate.contentHash) return 'rejected'
     const current = await store.read(candidate.sourceId)
+    const canonical = await validateProjection(candidate, contract, current.lastKnownGood?.identities)
+    candidate = { ...canonical, sourceId: candidate.sourceId, sourceHash: candidate.sourceHash,
+      normalizationVersion: candidate.normalizationVersion, baseRevision: candidate.baseRevision, contentHash: candidate.contentHash }
+    if (contentHash(candidate) !== candidate.contentHash) return 'rejected'
     createSnapshotRepository(candidate.publicFiles, freshness)
     if (current.lastAttemptAt && Date.parse(freshness.lastSuccessAt) < Date.parse(current.lastAttemptAt)) return 'rejected'
     if (current.lastKnownGood?.contentHash === candidate.contentHash) {
@@ -107,7 +113,6 @@ export async function promoteReviewedSnapshot(store: SyncStore, candidate: SyncC
     }
     if (current.revision !== candidate.baseRevision) return 'conflict'
     if (approval.contentHash !== candidate.contentHash || approval.baseRevision !== current.revision || !approval.reviewerRef.trim() || !validateDateTime(approval.reviewedAt).valid) return 'rejected'
-    await validateProjection(candidate, contract, current.lastKnownGood?.identities)
     if (Date.parse(approval.reviewedAt) > Date.parse(freshness.lastSuccessAt)) return 'rejected'
     if (current.lastAttemptAt && Date.parse(freshness.lastSuccessAt) < Date.parse(current.lastAttemptAt)) return 'rejected'
     const next: SyncState = { revision: current.revision + 1, lastKnownGood: structuredClone(candidate), freshness: structuredClone(freshness),

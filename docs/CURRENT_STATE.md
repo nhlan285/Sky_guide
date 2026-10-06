@@ -3,11 +3,11 @@
 ## Task / branch / checkpoint
 Autonomous master run: safe unblocked roadmap tasks, checkpoint/push;
 no merge/production deployment. Branch `codex/master-plan-execution`.
-Last verified pushed HEAD `60cdc36bc5332186b2544ce4bddbb1f5b4cddfc4`.
-This R1 continuity correction becomes next checkpoint; resolve SHA via `git log -1`
+Last verified pushed HEAD `93c110d446ce5e689f0083d12ce28a1c41951be6`.
+This R1 remediation slice becomes next checkpoint; resolve SHA via `git log -1`
 and verify remote branch before resuming. Started from7cea424.
 Master [IMPLEMENTATION_PLAN](plan/IMPLEMENTATION_PLAN.md); current completed slice
-[ATTRIBUTION_TEMPLATE_REVIEW](plan/ATTRIBUTION_TEMPLATE_REVIEW.md); source record
+[R1_CONTRACT_REMEDIATION](plan/R1_CONTRACT_REMEDIATION.md); source record
 [WIKI_SOURCE_VERIFICATION](plan/WIKI_SOURCE_VERIFICATION.md); R1
 [DATA_FOUNDATION](plan/DATA_FOUNDATION.md).
 
@@ -39,19 +39,20 @@ text/sheet/route/asset attribution drafts; Q12 and media rights remain pending.
 license follow-up recorded separately. Default-version lead does not close Q12.
 
 ## Current intentional changes
-No runtime changes after c53a111. Attribution templates/license metadata already
-committed at60cdc36. Current docs-only change corrects stale R1 next-action/handoff
-text in DATA_FOUNDATION/master and this handoff. SourceRecord/public
-privacy boundaries and existing K15 credit/notice preserved. Cached Wiki siteinfo
-declares CC-BY-SA without a version; no new license approval or asset permission.
-Fandom licensing402; indexed Help:Licensing reports default3.0 Unported, but index
-is three months old, direct domains robots-blocked and Sky exceptions unverified.
-No repeat blocked requests. Remaining tasks re-audited by dependency; real SKU
-import cannot use ambiguous labels/missing contents or K12 scraping restrictions.
-Full roadmap is OPEN. Contract/local fixture work does not satisfy live canonical,
-editorial approval, full-source coverage or target-device DoD.
+User supplied maintainer REQUEST CHANGES2026-10-06: architecture accepted,
+contract not approved for P9-I02. Autonomous local remediation explicitly allowed.
+Fetch preflight: remote unchanged93c110d, clean branch, no unrelated changes.
+Slice1: domainSnapshot/sourceSync + sync tests structurally canonicalize stored
+public files; explicit dataset/file allowlist, sanitized validated records,
+deterministic bytes and regenerated hashes; promotion revalidates. K15 every-field
+parity preserved; no production consumer/data release changed. Remediation plan,
+DATA_FOUNDATION/architecture/handoff updated. Media/key/limit/audit/event/multi-source
+findings still OPEN. Attribution/license follow-up already preserved at60cdc36.
 
 ## Validation / limitations
+Current slice16 focused sync/API tests PASS; full remediation suite NOT RUN yet.
+Full typecheck and focused lint PASS; initial unused binding lint failure fixed
+without disabling rules. New plan scaffold/link check PASS:72 Markdown files.
 Attribution docs scaffold/link checks PASS:71 Markdown files/14 source profiles/
 173 unique tasks; diff check PASS. Runtime suite not rerun for docs-only changes.
 274 full tests, full lint/typecheck/catalog1808/build PASS. Pure validator dry-run
@@ -62,7 +63,8 @@ full focus/contrast certification and target devices still NOT RUN. P4-U01/P7-U0
 not fully closed; Router/large chunk warnings unchanged.
 
 ## Blockers / decisions
-R1 maintainer schema/API/storage review pending; provider/quota approval required
+R1 REQUEST CHANGES received; local remediation then maintainer re-review pending.
+Provider/quota approval required
 before provisioning. Live DB/migration/backup restore and R2–R6 foundation gated.
 K04 actual OneDrive workbook columns/export blocked403; needs accessible public
 sample/export. K12 terms prohibit systematic scrape/bulk/competing redistribution;
@@ -79,21 +81,18 @@ Checkpoint drill PASS at199bdd5. Earlier pre-trigger compaction/quota drills NOT
 PASS; no manual compaction tool or invented context percentage. Native compaction
 resumed after8899195 with branch/remote matched and only planned P2-D05 untracked.
 Current run uses milestone commits/push verification and native compaction.
-Last exposed usage:6% short-window remaining and54% weekly remaining; account
-ordinary usage allowed. Rule41 quota threshold reached: preserve this checkpoint
-and verify push before ending this turn. Compaction does not restore quota; no
-reset credit available and none consumed. No context percentage exposed;
-goal remains active, roadmap not DONE, no implicit approval from missing reply.
+Latest exposed usage:93% short-window remaining/52% weekly remaining; ordinary
+usage allowed. Earlier6% was a prior window, not current quota. No reset credit
+consumed, no invented context percentage or manual compaction. Resumed autonomous
+task preserves master objective and all remaining gates.
 
 ## Exact next action
-Verify this pushed attribution checkpoint/clean branch, then resolve Q12 using
-applicable source/license evidence before finalizing or publishing credits.
-Templates alone do not grant rights. Resolve the pending R1 review before
-provider selection/quota audit or live foundation work. Concrete review artifacts:
-DATA_FOUNDATION, docs/architecture/data-foundation.md, src/data/domain contracts
-and domain tests. The asynchronous review question has no answer; no approval.
-If approved, compare permitted free-tier providers/actual quota and obtain explicit
-provider/task approval before resources. Do not start R2–R6 before foundation DoD.
+Verify this pushed remediation checkpoint, then implement MediaRecord/MediaBinding
+separation with role/owner/MIME/cardinality/evidence tests and legacy R2 compatibility.
+Follow R1_CONTRACT_REMEDIATION findings in order, full applicable checks, checkpoint,
+then audit independent roadmap tasks. No SQL migration/provisioning/production/merge.
+After all findings pass, mark LOCAL CONTRACT REVIEW READY; maintainer re-review
+still required before P9-I02. Q12/source/rights gates remain separate.
 
 Remaining dependency roots: K04 inaccessible workbook (P1-D04/D13/P2-D07/TS full
 history); reviewed canonical/source crosswalk + source coverage for real tree/news/
@@ -107,7 +106,8 @@ remain unverified. No mass acquisition, public promotion or production deploymen
 to manufacture these facts. Downstream OPEN tasks are not arbitrarily marked DONE.
 Local browser tab1 and owned Vite session74189 closed; viewport reset. No running
 owned QA server. Working raw/dry-run/screenshot artifacts stay untracked on E:.
-R1 review question pending asynchronously; no answer means no approval. P6-U02
+Earlier R1 review question is superseded by maintainer REQUEST CHANGES; this is
+permission to remediate locally, not self-approval of R1/P9-I02. P6-U02
 active settings still schedule-gated; central and K04/rights gates preserved.
 Then audit next safe task by dependency;
 never mark roadmap DONE just because a checkpoint survived.

@@ -100,6 +100,16 @@ returns detached copies. This compatibility adapter supports the existing K15
 release only; migration-bearing manifests require a reviewed canonical adapter.
 It performs no filesystem/network reads. Callers supply approved manifest files.
 
+Remediation: only items/lookup/spirits/seasons plus provenance are accepted; unknown
+datasets, unreferenced files and colliding dataset paths fail closed.
+`canonicalizeSnapshotFiles` serializes explicit envelopes and validator-returned
+records with stable object keys, retaining original record order and legitimate
+K15 fields. Hashes are regenerated from those exact bytes. Staging stores this
+canonical projection; promotion revalidates and rejects a noncanonical/edited
+projection even if parsing would strip the extra fields. Original caller JSON is
+never promoted. Source/record verification still cannot prove arbitrary strings
+inside declared public fields are safe; reviewed public provenance remains required.
+
 `createDomainApi` is an unmounted Web Request/Response handler:
 
 | Endpoint | Contract |
