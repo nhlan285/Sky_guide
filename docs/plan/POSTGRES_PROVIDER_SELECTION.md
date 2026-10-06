@@ -282,3 +282,81 @@ or obtained. This blocks local pg_dump/restore tooling currently, not further sa
 hosted additive SQL slices.
 Do not request R1, provider or organization selection again. Source/legal/
 production gates persist. Resource creation is not migration/adapter acceptance.
+
+## Active release metadata slice — 2026-10-07
+MEDIUM implementation inside the approved R1 PostgreSQL subsystem, following
+verified pushed catalog checkpoint dd7fb11. Goal: preserve manifest source paths,
+optional source/import-summary presence, nullable future pins, every dataset's own
+envelope timestamp/source order, canonical checksum and independent record order.
+Scope: additive private typed release/dataset/source/snapshot/import-summary tables,
+five explicit ordered membership tables, provider-neutral codec, corruption/parity
+tests and rollback-only hosted synthetic rehearsal. Existing catalog/identity SQL,
+validators and public reader remain authoritative and unchanged.
+Out of scope: real import, publication pointer, immutable historical payload store,
+connection SDK/credentials, auth/UI/deployment, global CAS and restore completion.
+Membership records pin identity revisions; without a historical projection owner,
+changed current rows must fail checksum/revision checks instead of reconstructing
+an old release from new payloads. This does not complete versioned SQL history.
+Expected files: CLI-created migration, src/server/releaseRows.ts, focused tests and
+SQL fixture builder/body, existing architecture/phase/master/handoff/README.
+Steps: encode canonical validated K15 -> rows; reconstruct using typed payload
+rows and ordered membership; verify original canonical hashes/bytes; test optional
+absence, private-field stripping, distinct envelope times, corruption, revision
+drift and unsupported migration/media modules; hosted scalar-row parity, native
+constraints/FK/RLS/grants and rollback; lint/build/full tests; checkpoint/push.
+Acceptance: every legitimate current manifest/envelope field survives; forged
+hashes, missing/extra/duplicate rows, wrong owner/revision/order, fixture/draft or
+unverified publication fail closed. Dataset timestamps need not equal manifest
+timestamp. No generic JSON canonical store, generic relation/EAV or new service.
+Risks: FK IDs alone do not prove historical bytes; checksums and revision guards
+are mandatory. SQL structure is necessary but cannot replace publication boundary
+validation. Independent SQL concurrent mutation/canonical revisions remain next.
+Exact next after this slice: transactional adapter/global CAS, durable private
+audit and immutable public projection history; actual isolated backup/restore.
+
+### Release metadata milestone / evidence
+Applied20261006180131_private_release_metadata (CLI-created20261006175728, aligned
+to authoritative hosted history); file SHA256
+71877b82c4723b9b3f207ff37999cbd028fb20b44c9d8a7ef4cb3ae44ccc9b74.
+11 typed private tables added (44 total); explicit subtype membership and revision
+pins, dataset path/version/hash/schema/instant/source/fixture, manifest metadata,
+optional source/import-summary flags, typed counters/rejected-empty and ordered
+source path/blob SHA. Repeated source paths are valid and retained by position;
+empty/nonempty/null assetManifestVersion preserved without assuming media validity.
+Nonnull migration-bearing aliases/tombstones remain reviewed-adapter gated.
+No public pointers, canonical JSON columns, real imported data or grants added.
+
+Local full current K15 manifest/envelopes + canonical public bytes/hashes PASS:
+1808 items/lookup,213 spirits,30 seasons,244 provenance. Codec strips undeclared
+input fields through existing validators, detects missing/extra/duplicate rows,
+wrong owner/revision/order/hash/version/fixture and refuses latest-payload fallback.
+Distinct dataset generatedAt values preserved, not replaced by manifest timestamp.
+Architecture/preservation matrix refined accordingly without public contract change.
+
+Hosted synthetic catalog/release actual scalar rows -> complete canonical fixture
+bytes/manifest PASS;38 negative SQLSTATE assertions PASS. Second hosted positive
+fixture without source/importReport and null media pin reconstructed exactly.
+Both ROLLBACK; all44 tables verified0 rows.11 writable release column contracts
+match actual PostgreSQL schema;44 RLS, all FKs RESTRICT,0 unvalidated constraints/
+SECURITY DEFINER/platform schema-table-function grants. Root version reservations
+permanent; child candidate metadata remains editable until future reviewed seal/
+promotion. No historical payload reconstruction or SQL checksum computation claim.
+Advisors no WARN/ERROR: intentional
+[RLS without policies](https://supabase.com/docs/guides/database/database-linter?lint=0008_rls_enabled_no_policy)
+and empty-schema [unused indexes](https://supabase.com/docs/guides/database/database-linter?lint=0005_unused_index)
+INFO retained. Actual rehearsal SQL/responses/schema JSON remain outside Git on E:.
+
+4 focused release tests +310 full tests, lint/typecheck/build/catalog1808 PASS.
+Initial lint failed four missing node:url imports in test-only modules; added imports
+and rechecked PASS. After field-ownership documentation refinement and schema
+verifier addition, focused migration/release tests, lint/typecheck/scaffold rechecked
+before checkpoint. Existing Router/large chunk warnings unchanged. P9-I02/D04/V01
+remain PARTIAL/OPEN; real K15 SQL import, historical projection sealing, canonical
+transactional adapter/global CAS/private audit/race/restore/measurement NOT RUN.
+
+Exact next: define/implement immutable historical public projection owner and its
+version-bound read contract, then trusted transactional adapter with global CAS,
+owner revisions, private audit/source health and atomic reviewed promotion. Reject
+drift and preserve LKG. Use existing ingestion/repository contracts; no SDK/consumer
+mount or connection-secret read assumed. Isolated restore tooling remains blocked
+by unavailable Docker daemon; independent safe foundation work can continue.

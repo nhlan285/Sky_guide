@@ -74,8 +74,8 @@ Event response shape is reserved; schedule generation belongs to R3.
 
 `node --test tests/data/domain*.test.mjs`; `pnpm lint`; `pnpm typecheck`;
 `pnpm test`; `pnpm build`; `.commands/Check-Scaffold.ps1`; `git diff --check`.
-DB up/down/restore against real PostgreSQL is NOT RUN until provider/environment
-approval. Contract tests cannot establish live DB completion.
+Approved dev SQL up and rollback-only native fixtures PASS. Actual down/backup/
+isolated restore remain OPEN; contract tests cannot establish full live completion.
 
 ## Blockers / decisions / exact next step
 
@@ -87,8 +87,10 @@ R2–R6 retain their foundation/checkpoint dependencies. D01–D03/I01 local con
 and the bounded synthetic D04/V01 subset above are already implemented and
 checkpointed and locally remediated; do not restart them or ask for R1 approval
 again. Public quota comparison and proposal now in POSTGRES_PROVIDER_SELECTION;
-exact next: release/source metadata and ordered projection membership after K15
-typed payload SQL/codec PASS; then transactional adapter and actual backup/restore.
+Typed release/source metadata and ordered membership now PASS locally on full K15
+canonical bytes and hosted rollback-only fixtures. Exact next: immutable historical
+projection owner, transactional adapter/global CAS, private audit, then actual
+backup/restore. Candidate SQL metadata alone does not seal/publish a release.
 No complete live foundation
 acceptance. Independent W12 sequence and focus QA completed; full W12 remains
 PARTIAL until W11 dependencies.
@@ -96,11 +98,13 @@ PARTIAL until W11 dependencies.
 ## Handoff / compact
 
 Read [CURRENT_STATE](../CURRENT_STATE.md) for latest commit/checks and gates.
-Branch `codex/master-plan-execution`; checkpointc5804c6 verified pushed before this
-review reconciliation. Scaffold:72 Markdown files/173 unique tasks PASS;
-pnpm10.30.3. Domain implementations remain unmounted from production consumers;
-no provider resource is provisioned. Latest46 domain/296 full tests and pnpm lint/
-typecheck/build PASS atc5804c6. Existing Router/large chunk warnings unchanged.
+Branch `codex/master-plan-execution`; checkpointdd7fb11 verified pushed before the
+release metadata slice. Supabase Free dev in Dyland's Org is provisioned;44 private
+tables with no platform grants. Domain implementations remain unmounted from
+production consumers. Latest310 full tests/lint/typecheck/build PASS;4 focused
+release tests plus38 native release negatives and two synthetic byte-parity fixtures
+PASS. Existing Router/large chunk warnings unchanged. See current handoff for exact
+latest checkpoint, migration hashes and open live adapter/restore gates.
 Checkpoint drill: PASS — `199bdd58c37b848b6b550b1adfdb7e7e70a5f791` committed,
 pushed and verified with ls-remote; work continued with D02/D03 and later slices.
 Native compaction has since resumed from verified checkpoints; no agent-invokable

@@ -88,8 +88,10 @@ exact deferred references and remain gated until actual typed entities are revie
 actual K15 field, nested cost/time/offer/source fields and envelope/manifest metadata.
 This inventory originally defined future typed owners, not EAV persistence. K15
 payload owners now have SQL tables and row codec, with full local K15 field/byte
-parity and hosted synthetic DB-row reconstruction; envelope/release metadata and
-live transactional exporter remain pending. Field-coverage tests fail when a real payload adds an unmapped field;
+parity and hosted synthetic DB-row reconstruction. Private release metadata and
+ordered membership now preserve full canonical K15 files/manifest; live
+transactional exporter and immutable historical projection remain pending.
+Field-coverage tests fail when a real payload adds an unmapped field;
 canonical projection tests compare all current public values, including nulls.
 
 | Public fields | Status / typed owner / preservation rule |
@@ -117,7 +119,7 @@ canonical projection tests compare all current public values, including nulls.
 | Season `realmIds, mapIds, officialArticleIds` | Future typed realm/map/article joins; exact ordered IDs retained, module support gated |
 | Provenance `id, sourceId, sourceUrl, sourceRecordKey, sourceRevision` | Typed provenance/source-registry columns/FK; nullable public key/revision kept, no private evidence |
 | Provenance `retrievedAt, observedAt, attribution, licenseNote, transformNote, verificationStatus` | Typed provenance columns; actual observation distinct from retrieval, original credit/risk notes preserved |
-| Envelope `schemaVersion, dataVersion, generatedAt, sourceIds, fixture` | public_release columns + ordered release_source; fixture false for public |
+| Envelope `schemaVersion, dataVersion, generatedAt, sourceIds, fixture` | release_dataset columns + release_source by dataset/position; fixture false for public; each generatedAt retained independently |
 | Envelope `records` | Derived typed projection in preserved source order; no generic canonical document store |
 | Manifest `schemaVersion, catalogVersion, generatedAt, datasets, provenance` | public_release + release_dataset(path,dataVersion,exact-byte sha256); regenerated checksums after canonical serialization |
 | Manifest `aliases, tombstones, assetManifestVersion` | Future reviewed release projection/media pin; current null kept, migration-bearing manifests still rejected by compatibility adapter |
@@ -128,7 +130,22 @@ Nothing in the current legitimate K15 payload is intentionally excluded. Unknown
 operational/private fields are outside that schema and stripped. Join positions,
 explicit nulls, optional field presence and PartialTime precision are round-trip
 requirements for full DB export acceptance. K15 payload typed rows preserve these;
-release metadata/public projection/provider-swap acceptance remains OPEN.
+release metadata byte parity now PASS; live projection/provider-swap acceptance
+remains OPEN.
+
+Release metadata decision (2026-10-07): the existing envelope validator permits
+dataset timestamps to differ from manifest.generatedAt, so putting every timestamp
+on public_release would lose valid source information. Explicit release_dataset
+columns own envelope metadata; public_release retains manifest fields and optional
+source/import-report presence. This refines field ownership without changing the
+public contract. Five subtype membership tables preserve independent record orders
+and item/spirit/season revision pins. SQL metadata is a private candidate; root
+version reservations cannot be rewritten/deleted, but child metadata is not yet
+sealed by promotion. No public pointer or immutable historical payload owner exists.
+The codec binds metadata to supplied typed payloads using original canonical hashes
+and revision checks. It fails closed on drift rather than reading the latest rows
+as an old release. Nonnull aliases/tombstones remain reviewed-adapter gated; nullable
+assetManifestVersion is preserved verbatim without implying a usable media module.
 
 ## Migration sequence and preservation
 

@@ -20,9 +20,10 @@ back. No helper functions/data persist. Recheck row counts and role privileges
 after running; a successful SQL call alone is not the full acceptance criteria.
 Never run destructive reset/down operations against this project or production.
 
-Five applied migrations cover identity/provenance/crosswalk reservations,
+Six applied migrations cover identity/provenance/crosswalk reservations,
 alias/tombstone consistency, evidence-TRUNCATE protection and typed K15 payloads/
-fraction-precision correction. Identity/retirement files were
+fraction-precision correction plus private release metadata/membership.
+Identity/retirement files were
 CLI-created as20261006171156/20261006171555 and aligned to actual hosted versions
 20261006171406/20261006171612. Run both
 [identity](../tests/sql/private-identity.sql) and
@@ -44,8 +45,22 @@ inserts and a derived actual-row response for codec verification, then ROLLBACK.
 JSON response is transport, never canonical JSON persistence. Do not commit its
 output or treat its temporary fixtures as reviewed source data.
 
-Revision checks for changed entity relations/provenance, public-release/source
-metadata and membership, canonical promotion/CAS, projection read adapter and actual
+Release metadata migration20261006180131 adds11 private tables (44 total),
+preserving manifest optional source/import report and each dataset's own envelope
+timestamp/hash/source plus five ordered subtype membership tables. Build with
+`node tests/sql/build-release-rehearsal.mjs E:/SkyGuideAssets/research/postgres-rehearsal-2026-10-07/release-fixture.sql`.
+The [body](../tests/sql/private-release.sql) checks38 negative SQLSTATE cases;
+`--without-optional` builds a second positive fixture without source/importReport
+and with null media pin. Both scripts end ROLLBACK. Verify actual response JSON
+with tests/sql/verify-release-rehearsal.mjs (matching optional flag) and fetched
+schema metadata with tests/sql/verify-release-schema.mjs. Keep outputs outside Git.
+Full local K15 canonical metadata/bytes and hosted synthetic parity PASS; no full
+real K15 SQL import. Checksums/revisions reject drift. Private candidate metadata
+is not sealed/promoted history: root reservations immutable, child editing still
+requires the future promotion contract. SQL does not itself calculate checksums.
+
+Revision checks for changed entity relations/provenance, immutable historical
+projection and canonical promotion/CAS, projection read adapter and actual
 PostgreSQL backup/restore are subsequent slices. The existing TypeScript domain
 validators remain required; database constraints supplement them.
 
