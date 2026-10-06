@@ -5,6 +5,9 @@
 Maintainer verdict2026-10-06: **REQUEST CHANGES — architecture direction accepted,
 contract not yet approved for P9-I02**. Active work is
 [R1 contract remediation](R1_CONTRACT_REMEDIATION.md), preserving completed slices.
+Remediation2026-10-06: **LOCAL CONTRACT REVIEW READY**. All requested local findings
+addressed;46 domain/296 full tests, pnpm lint/typecheck/build PASS. Maintainer
+re-review pending before P9-I02; no contract/provider/resource self-approval.
 
 LARGE/ARCHITECTURAL master run; current slice P9-D01–D03 + P9-I01.
 Turn Q20 into reviewable relational mapping, executable identity/relationship
@@ -42,7 +45,7 @@ No binary files or credentials in domain data. Public export is allowlisted.
   public evidence allowlist and revocation overlay; preserve existing R2 paths.
 - [x] I01: backup/restore/migration/rollback/quota runbook and review checklist.
 - [x] Focused tests, lint/typecheck/catalog/build and docs checks; inspect diff.
-  Contract milestones passed; latest master-run full274 PASS atc53a111. This is
+  Remediated contracts passed; latest master-run full296 PASS atc5804c6. This is
   local validation, not provider/schema review or live migration acceptance.
 - [x] Checkpoint drill commit/push/remote verification; continue next safe slice.
 - [x] D04/V01 local contract subset: synthetic staging/quarantine/review digest,
@@ -51,7 +54,7 @@ No binary files or credentials in domain data. Public export is allowlisted.
   contracts/tests while provisioning is gated. It does not satisfy I02 dependencies
   for real integration, nor mark D04/V01 DONE; no scheduler or source fetch.
 - [x] Record provider/review gates and audit remaining independent work.
-  Concrete contracts delivered; maintainer review question remains pending.
+  Maintainer REQUEST CHANGES addressed locally; re-review remains pending.
 
 ## Risks / UX / security
 
@@ -75,20 +78,23 @@ P9-I02 requires maintainer schema/API review, provider selection and quota/task
 approval. No provider chosen. P9-D04/P9-V01 real integration depends on I02;
 R2–R6 retain their foundation/checkpoint dependencies. D01–D03/I01 local contracts
 and the bounded synthetic D04/V01 subset above are already implemented and
-checkpointed; do not restart them. Exact next action: maintainer reviews
+checkpointed and locally remediated; do not restart them. Exact gated action:
+maintainer re-reviews
 [relational/API/storage contracts](../architecture/data-foundation.md), domain
 interfaces and tests. After review, compare approved provider options and quotas;
-obtain provider/task approval before provisioning I02. The pending review question
-has no answer. No live DB/migration/integration acceptance can be claimed.
+obtain provider/task approval before provisioning I02. No contract self-approval
+or live DB/migration/integration acceptance. Exact safe action: audit independent
+master tasks; a bounded existing Wardrobe sequence-test subset can proceed without
+generic alias/media/DB work. Keep P4-W12 overall PARTIAL until W11 dependencies.
 
 ## Handoff / compact
 
 Read [CURRENT_STATE](../CURRENT_STATE.md) for latest commit/checks and gates.
-Branch `codex/master-plan-execution`; checkpoint60cdc36 was verified pushed before
-this documentation correction. Scaffold:71 Markdown files/173 unique tasks PASS;
+Branch `codex/master-plan-execution`; checkpointc5804c6 verified pushed before this
+review reconciliation. Scaffold:72 Markdown files/173 unique tasks PASS;
 pnpm10.30.3. Domain implementations remain unmounted from production consumers;
-no provider resource is provisioned. Latest full274 tests/lint/typecheck/catalog/
-build PASS atc53a111; this docs-only correction does not rerun runtime checks.
+no provider resource is provisioned. Latest46 domain/296 full tests and pnpm lint/
+typecheck/build PASS atc5804c6. Existing Router/large chunk warnings unchanged.
 Checkpoint drill: PASS — `199bdd58c37b848b6b550b1adfdb7e7e70a5f791` committed,
 pushed and verified with ls-remote; work continued with D02/D03 and later slices.
 Native compaction has since resumed from verified checkpoints; no agent-invokable

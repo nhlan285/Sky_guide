@@ -45,27 +45,42 @@ Preflight PASS: remote unchanged93c110d; no unrelated work. No source fetch need
 Slice1 DONE: explicit four-dataset + provenance/file allowlist, canonical validated
 envelopes/records, regenerated exact-byte hashes, canonical review/promotion.
 16 sync/API tests PASS, including private fields in stored/restored snapshots,
-unknown dataset/file quarantine, every K15 field and hash parity. Other findings
-OPEN. Slice2 DONE: binary/binding separation, explicit role/owner/MIME/evidence,
+unknown dataset/file quarantine, every K15 field and hash parity. Slice2 DONE:
+binary/binding separation, explicit role/owner/MIME/evidence,
 duplicate/hash/primary/reference constraints and legacy paths.18 media/R2 tests,
 focused lint and full typecheck PASS. Slice3 DONE: Option B composite item/option
 identity, Realm Location subtype mapping, deferred node/product/realm refs and
 executable every-field preservation inventory + matrix. Coverage test found
 previously undeclared public manifest source/importReport; explicit schemas now
 preserve both while stripping nested operational fields.36 migration/sync/API/
-lookup tests, focused lint/full typecheck PASS. Exact next: configurable normalized
-output budgets and explicit timestamp lifecycle; event agreement/isolation next.
+lookup tests, focused lint/full typecheck PASS.
 Slice4a DONE: required configurable raw/normalized bytes, total record and relation
 limits checked before parsing and after canonicalization; sanitized quarantine.
 11 sync tests PASS; ordinary K15 fixture and tiny-source expansion/limits covered.
-Exact next: audit timestamps and two-source health isolation; full suite still pending.
 Slice4b/5 DONE locally: fetched/staged/reviewed/server promotion lifecycle,
 candidate review digest binds audit metadata and base; unchanged branch requires
 review, old retry is read-only, stale/future events cannot regress health/global
 clock. Event occurrence rule/override agreement and materialized read-model intent
 documented. Two-source deterministic health/retry/CAS/recovery tests implemented.
-Exact next: inspect diff, run full applicable validation, reconcile R1 review-ready
-status without self-approval, checkpoint, then audit independent roadmap tasks.
+Final validation:46 domain/296 full tests, pnpm lint/typecheck/build PASS atc5804c6.
+Status: **LOCAL CONTRACT REVIEW READY**; maintainer re-review pending before P9-I02.
+Exact safe next: audit independent roadmap tasks; existing Wardrobe sequence tests
+can advance a bounded W12 subset without implementing W11 alias migration.
+Exact gated next: maintainer re-review, then provider/task/quota approval.
 R1 re-review/provider/quota/legal/data gates remain intact.
-Raw corpora/private evidence stay outside Git on E:. Full checks last274 PASS at
-c53a111; NOT RUN yet for this remediation. No live provider workflow exists.
+Raw corpora/private evidence stay outside Git on E:. No live provider workflow.
+
+## Finding-by-finding local acceptance evidence
+
+| Finding | Local evidence / result |
+| --- | --- |
+| Structural stored projection, private fields, unknown datasets, hashes/restore | domainSync four canonicalization regressions + restored re-promotion; domainApi parity. PASS |
+| Binary identity vs role/owner binding/cardinality/rights/legacy paths | domainMedia eleven tests + existing r2Runtime seven tests. PASS |
+| Composite acquisition key, deferred refs, geography, full field inventory | domainMigration five tests; all actual K15 fields and nested metadata mapped. PASS |
+| Raw and normalized byte/record/relation budgets | domainSync tiny-source expansion + existing raw-limit/quarantine tests. PASS |
+| Trusted-clock lifecycle, exact approval, no stale/unauthorized reconfirmation | domainSync non-equal lifecycle, recovery, stale/future/global-clock tests. PASS |
+| Occurrence/override selected-rule agreement | domainIdentity regression, same event/two rules. PASS |
+| Materialized/versioned read model intent | architecture expectation; DomainRepository/API preserved. DONE contract; live cache unimplemented |
+| Two-source isolation/global CAS/recovery | domainSync K15/K01 synthetic trigger tests. PASS; not a real K01 importer |
+| Signed URL expiry/purge/revocation rollout gate | Existing delivery expiry/revocation tests; null expiry allowed only at local contract stage. Gate preserved |
+| Full applicable validation / docs / no provider claim |46 domain/296 full, lint/typecheck/build PASS; scaffold/diff before checkpoint. Live DB/DDL/provider/production NOT RUN |

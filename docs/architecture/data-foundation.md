@@ -1,7 +1,9 @@
 # R1 data foundation — contract review package
 
-Status: implementation contract candidate for P9-D01–D03/P9-I01. Q20 approves
-the direction; maintainer review is still required before P9-I02. This document
+Status2026-10-06: **LOCAL CONTRACT REVIEW READY** for P9-D01–D03/P9-I01 after
+maintainer REQUEST CHANGES remediation.46 domain/296 full tests and lint/typecheck/
+build PASS locally. Q20 approves the direction; maintainer re-review still required
+before P9-I02. This document
 does not select a provider, provision PostgreSQL, or certify a migration.
 
 ## Relational mapping

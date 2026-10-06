@@ -3,7 +3,7 @@
 ## Task / branch / checkpoint
 Autonomous master run: safe unblocked roadmap tasks, checkpoint/push;
 no merge/production deployment. Branch `codex/master-plan-execution`.
-Last verified pushed HEAD `071d5a256ba10f765c5138493807196aeaa9a728`.
+Last verified pushed HEAD `c5804c6d69f933fc14838120f0a2c451c5bef5b5`.
 This R1 remediation slice becomes next checkpoint; resolve SHA via `git log -1`
 and verify remote branch before resuming. Started from7cea424.
 Master [IMPLEMENTATION_PLAN](plan/IMPLEMENTATION_PLAN.md); current completed slice
@@ -39,6 +39,8 @@ text/sheet/route/asset attribution drafts; Q12 and media rights remain pending.
 license follow-up recorded separately. Default-version lead does not close Q12.
 
 ## Current intentional changes
+R1 local contract remediation complete: **LOCAL CONTRACT REVIEW READY**;
+maintainer re-review pending before P9-I02, no contract self-approval.
 User supplied maintainer REQUEST CHANGES2026-10-06: architecture accepted,
 contract not approved for P9-I02. Autonomous local remediation explicitly allowed.
 Fetch preflight: remote unchanged93c110d, clean branch, no unrelated changes.
@@ -46,8 +48,8 @@ Slice1: domainSnapshot/sourceSync + sync tests structurally canonicalize stored
 public files; explicit dataset/file allowlist, sanitized validated records,
 deterministic bytes and regenerated hashes; promotion revalidates. K15 every-field
 parity preserved; no production consumer/data release changed. Remediation plan,
-DATA_FOUNDATION/architecture/handoff updated. Limit/audit/event/multi-source
-findings still OPEN. Attribution/license follow-up already preserved at60cdc36.
+DATA_FOUNDATION/architecture/master/handoff reconciled. All requested local findings
+addressed; live acceptance remains OPEN. Attribution/license follow-up at60cdc36.
 Slice2: media.ts + media tests separate binary/owner-role binding with role evidence,
 explicit poster owners and hash/cardinality checks. R2 deployed modules unchanged.
 Slice3: migration key/geography helpers and full current K15 field inventory/matrix;
@@ -62,19 +64,22 @@ occurrence selected rule must agree with override's optional rule. Cached public
 read-model intent documented; no interface/provider/cache service redesign.
 
 ## Validation / limitations
-Current slice16 focused sync/API tests PASS; full remediation suite NOT RUN yet.
+Final remediation validation atc5804c6:46 domain/296 full tests, pnpm lint,
+pnpm typecheck, pnpm build PASS (catalog1808). Existing Router use-client/chunk
+warnings remain. Full checks actually run; no live provider/DB or browser UI claim.
+Slice1:16 focused sync/API tests PASS.
 Slice2:18 media/R2 tests, focused lint/full typecheck PASS. No downloaded media,
 live provider, changed signer or production revocation acceptance claimed.
 Slice3:36 migration/sync/API/lookup tests, focused lint/full typecheck PASS. Initial
 missing manifest-source owner caught by coverage test and fixed; tests not weakened.
 Slice4a:11 sync tests, focused lint/full typecheck PASS; no disabled checks.
 Slice4b/5:24 sync/identity tests, focused lint/full typecheck PASS. Complete
-remediation full suite still NOT RUN at this checkpoint; not review-ready yet.
+remediation full suite subsequently PASS as recorded above.
 Full typecheck and focused lint PASS; initial unused binding lint failure fixed
 without disabling rules. New plan scaffold/link check PASS:72 Markdown files.
 Attribution docs scaffold/link checks PASS:71 Markdown files/14 source profiles/
 173 unique tasks; diff check PASS. Runtime suite not rerun for docs-only changes.
-274 full tests, full lint/typecheck/catalog1808/build PASS. Pure validator dry-run
+Historical pre-remediation274 full tests/lint/typecheck/catalog1808/build PASS. Dry-run
 PASS with one fixture draft; no browser needed. Initial lint issues fixed, checks
 not disabled. Earlier local query/wardrobe/theme/locale/80-char/320px smoke PASS;
 actual download NOT VERIFIED (in-app event timeouts). Reduced-motion OS runtime,
@@ -106,9 +111,10 @@ consumed, no invented context percentage or manual compaction. Resumed autonomou
 task preserves master objective and all remaining gates.
 
 ## Exact next action
-Verify this pushed remediation checkpoint, then run full applicable validation,
-reconcile LOCAL CONTRACT REVIEW READY only if all findings pass, and audit next
-safe independent roadmap task. Use R1_CONTRACT_REMEDIATION; no DDL/provider.
+Verify this pushed clean R1 review-ready checkpoint, then inspect bounded demo
+Wardrobe action→render→codec→saved storage/reload sequence coverage. This is an
+independent regression subset over already approved modules; generic P4-W11 alias
+migration and full P4-W12 remain gated. No R2/R3 expansion, DDL/provider or production.
 Follow R1_CONTRACT_REMEDIATION findings in order, full applicable checks, checkpoint,
 then audit independent roadmap tasks. No SQL migration/provisioning/production/merge.
 After all findings pass, mark LOCAL CONTRACT REVIEW READY; maintainer re-review
