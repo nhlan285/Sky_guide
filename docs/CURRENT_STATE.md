@@ -3,8 +3,8 @@
 ## Task / branch / checkpoint
 Autonomous Sky Guide master run on codex/master-plan-execution; goal active,
 master roadmap OPEN. Last verified pushed checkpoint/base
-ac17a74ba757b2c88dca66412a9861f560d9f89a (verified local/remote before this slice).
-This file accompanies portable transaction kernel work; resolve
+eb28378578261ca5d519c0966fb98f3fce746860 (verified local/remote before this slice).
+This file accompanies outward commit fence/witness work; resolve
 latest checkpoint SHA with git log -1 and verify remote.
 Master [IMPLEMENTATION_PLAN](plan/IMPLEMENTATION_PLAN.md); active detailed phase
 [POSTGRES_PROVIDER_SELECTION](plan/POSTGRES_PROVIDER_SELECTION.md).
@@ -143,11 +143,29 @@ Validation:14 kernel tests included in376 full tests; lint/typecheck/build/
 catalog1808/scaffold75 Markdown/14 profiles/173 tasks/diff PASS. Existing Router/
 chunk warnings unchanged. Test log on E: postgres-rehearsal-2026-10-07/
 postgres-kernel-tests.log outside Git. No owned live QA handles remain.
-Exact next while pending: outward uncertainty fence + durable intent/quarantine/
-fresh immutable audit/review witness reconciliation. Existing SourceSync catches
-Store errors as rejected; kernel alone is not that fence or restart durability.
-Before implementing, refine current active slice/contracts, preserve public API
-and define absent/mismatched witness/concurrent successor/uncertain failure writes.
+Outward syncCommitFence/syncCommitIntent/postgresCommitWitness now implemented.
+Bounded private intent/digest/full expected audit/review tuple precedes CAS through
+global atomic durable-journal PORT. Underlying SourceSync API unchanged; swallowed
+unknown CAS/journal errors surface as quarantined, no auto retry/failure write.
+Witness uses fresh safe READ COMMITTED/read-write lease, locked head FIRST then
+original target audit/acceptance; exact tuple resolves publication despite newer
+head, valid competing slot resolves conflict. Inline kernel indeterminate + barrier
+can resolve absence. Restart/generic unknown absence stays quarantined: old worker
+may still be pre-BEGIN. Exact failure audit lacks immutable count/backoff state;
+lost-ACK failure stays quarantined. Journal errors/malformed ACKs never authorize
+SQL/success. load requires linearizable settlement barrier; terminal receipts retained.
+Journal model/controller recreation is NOT durable storage/crash/multiworker proof.
+No new native SQL/session/role acceptance; synthetic protocol fixtures do not execute
+DML. Current modified areas:3 server modules/14 tests/existing planning+architecture
+and README. Original kernel/Store/read/native receipts remain separate evidence.
+Validation:390 full PASS; final fractional-time refinement14 focused/lint/typecheck/
+build/catalog1808 PASS; scaffold75 Markdown/14 profiles/173 tasks/diff PASS. Existing
+Router/chunk warnings unchanged. E: sync-commit-fence-tests.log outside Git.
+Exact next while pending: design concrete private durable journal/execution-token
+and full failure witness package; token must be checked inside original Store
+transaction AFTER global lock to reject old pre-BEGIN workers after recovery.
+Review local additive schema/rollback/ACL impact before any hosted application.
+Actual backend durability/role/SDK/Auth/session races/restore still OPEN; no mount.
 If explicitly approved, pinned CLI migration for reviewed
 NOLOGIN role/RLS package and actual role/5-phase SQL/lock-only update/platform denial/
 effective column-helper grants/rollback evidence before driver mounts. SDK/credential/

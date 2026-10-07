@@ -117,6 +117,24 @@ witness reconciliation. Existing SourceSync catches Store errors as rejected;
 kernel exceptions alone cannot enforce the required outward policy or survive
 restart. No public result contract/provider/Auth/credential/grant change here.
 
+**Outward fence/witness —2026-10-07:** syncCommitFence wraps unchanged SourceSync
+and exposes quarantined rather than swallowed rejected on unknown CAS/journal
+outcomes. syncCommitIntent records bounded private expected audit/full acceptance
+tuple/state digest before CAS. Journal port requires a global atomic durable claim,
+linearizable load barrier, ID-scoped settlement and retained terminal receipts.
+No concrete durable backend or crash/multiworker acceptance exists yet.
+postgresCommitWitness uses a fresh safe READ COMMITTED/read-write transaction and
+locks global head FIRST, then reads original target audit/acceptance. Exact tuple
+can confirm publication even after successors; a valid different target confirms
+conflict. Absence clears only inline kernel indeterminate outcomes with old client
+disposal/COMMIT-dispatch guarantee. After restart/generic errors, a worker may still
+be pre-BEGIN and write later; absence remains quarantined until an execution token
+is validated inside original Store transaction after global lock. Failure audit
+lacks immutable failure-count/backoff state; unknown failure remains quarantined.
+No automatic retry/source-failure recording. Existing metadata SQL/native receipts
+and synthetic protocol/controller tests are separate from actual driver/role/
+durability/independent-session proof. This is not a live foundation mount.
+
 ## Ownership decisions and field preservation inventory
 
 **Acquisition identity: Option B.** `(item_id, option_id)` is the relational key;

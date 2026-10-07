@@ -1152,3 +1152,66 @@ Monotonic CPU-overrun test proves no late COMMIT dispatch, not CPU preemption.
 Test log: E:/SkyGuideAssets/research/postgres-rehearsal-2026-10-07/postgres-kernel-tests.log
 (outside Git). Exact next remains outward uncertainty fence/durable intent/exact
 witness contract. No provider changes while the scoped role approval is pending.
+
+## Active slice — outward commit fence and immutable witness
+
+MEDIUM portable implementation within approved R1 contracts, base eb28378.
+Goal: preserve a durable global intent before Store CAS; surface quarantine above
+unchanged SourceSync catch/rejected API; reconcile original revision even after
+successor promotions/failures. Dependencies: atomic Store locks global head FIRST,
+immutable audit/acceptance owners, kernel noncommit/indeterminate classification,
+safe exclusive lease eviction. No SDK/role/Auth/credential/migration/endpoint.
+
+Provider-neutral journal port requires atomic global exclusive claim and durable
+acknowledgement, immutable intent, load across restart and ID-scoped durable settle.
+Load must be a linearizable journal settlement barrier waiting out earlier claim/
+settle calls, not a stale/replica read. Retain terminal ID/resolution receipts and
+bound raw bytes before parsing; codec checks bounded acceptance, not allocation.
+No in-memory implementation is a production journal. Actual backend storage/ACL,
+crash durability and multiworker acceptance remain OPEN before mount. Persist only
+bounded private digest/audit/review intent, not corpora/credentials/whole candidate.
+Claim/settle/load errors fail closed; unanswered role approval remains pending.
+
+Fresh witness transaction uses READ COMMITTED/read-write, locks global head before
+reading the original target audit/acceptance. A mere absent row/stale snapshot is
+not rollback proof. This lock waits out original Store transaction; port eviction
+must prevent any later dispatch on its old client. Under that contract, a target
+slot absent after barrier means not committed ONLY for inline kernel indeterminate
+errors proving original COMMIT dispatch/disposal. Restart recovery or a generic
+Store error may leave an old worker waiting pre-BEGIN; head lock alone cannot
+prevent its later CAS. Absence stays quarantined until a concrete execution-token
+fence is checked inside original Store transaction after global lock. Exact occupied
+slot (matching or competing) is safe even then: any late original CAS must be stale.
+Another complete immutable audit
+in target slot proves conflict; exact audit plus full acceptance tuple proves
+publication committed even with newer head. Failure audit lacks immutable retry/
+failure-count payload: exact failure audit alone cannot prove all requested state,
+so lost-ACK failures remain quarantined pending stronger durable witness schema.
+No automatic retry, source-failure write or silent uncertain-to-rejected conversion.
+
+Expected files: commit intent/codec, fresh PostgreSQL witness reader, outward
+controller, tests using current5-phase frames/kernel and durable-journal contract
+fixture; existing docs only. Validate promotion/reconfirmation/own and independent
+failure, swallowed exceptions, unknown claim/settle/read, restart pending intent,
+successor/competing/malformed/absent witnesses, exact review/time/validity mismatch,
+bounded immutable records and connection/barrier order. Run focused/full tests,
+lint/typecheck/build/scaffold/diff then checkpoint/push. Next: concrete approved
+durable journal backend and stronger failure witness before runtime mount, then
+authorized SDK/role/Auth/actual sessions/restore. Do not call ports durable proof.
+
+Portable fence milestone:390 full tests PASS; final exact fractional-time refinement
+then14 focused fence tests/lint/typecheck/build/catalog1808 PASS. Scaffold75 Markdown/
+14 profiles/173 tasks and diff PASS. Existing Router/chunk warnings unchanged.
+Tests explicitly cover pre-BEGIN recovery race: absence cannot settle journal;
+generic errors do not attest original disposal. Complete5-phase controller/kernel
+sequence and fresh lease/locked head/original revision query order PASS in protocol
+model only. Shared journal model survives controller recreation, not process crash
+or actual durable backend; no new native/concurrent SQL proof. Final codec uses
+existing exact rangeErrors, not millisecond Date.parse comparison, for review times.
+Evidence outside Git: E:/SkyGuideAssets/research/postgres-rehearsal-2026-10-07/
+sync-commit-fence-tests.log (390 full), final focused test command output.
+No migration/dependency/provider/credential/Auth/grant/route change. Next: concrete
+private durable journal + immutable full failure witness + execution token checked
+after original global lock. Review additive schema/rollback/helper/ACL effect before
+any hosted application; old79-owner privilege proposal must not be applied unchanged
+if that schema changes. Pending dev role/RLS approval is still unanswered.

@@ -114,8 +114,13 @@ Portable transaction kernel/static statement gate now implemented over an exclus
 text protocol lease: explicit isolation/timeouts, tainted-query and deadline
 checks, cleanup and confirmed-vs-indeterminate COMMIT classification. Synthetic
 5-phase Store/control/error tests do not execute DML or prove real cancellation/
-pool/concurrency/roles. Next independent task: outward uncertainty fence and durable
-intent/quarantine/exact witness reconciliation before unchanged SourceSync mounts.
+pool/concurrency/roles. Outward fence/bounded intent/fresh immutable witness now
+implemented over durable-journal port; exact publication tuple confirms despite
+successors, uncertain swallowed errors remain quarantined. No actual journal backend.
+Restart/generic absence cannot fence a pre-BEGIN worker; failure audit cannot prove
+full count/backoff state. Next: concrete journal/execution token checked inside
+original transaction/full failure witness schema and rollback/ACL proposal before
+scoped hosted application. Actual durable/crash/race acceptance remains OPEN.
 Role/RLS application still needs the pending specific development authorization.
 No complete live foundation
 acceptance. Independent W12 sequence and focus QA completed; full W12 remains
@@ -127,8 +132,8 @@ Read [CURRENT_STATE](../CURRENT_STATE.md) for latest commit/checks and gates.
 Branch `codex/master-plan-execution`; checkpointdd7fb11 verified pushed before the
 release metadata slice. Supabase Free dev in Dyland's Org is provisioned;44 private
 tables at that milestone; now79 private tables with no platform grants. Domain
-implementations remain unmounted from production consumers. Latest376 full tests/
-lint/typecheck/build PASS;7 read composition tests/11 native negatives plus5 graph history tests/141 native
+implementations remain unmounted from production consumers. Latest390 full tests
+plus14 focused final fractional-time refinement/lint/typecheck/build PASS;7 read composition tests/11 native negatives plus5 graph history tests/141 native
 negatives/actual two-frame parity PASS; prior lifecycle metadata/source isolation/
 projection byte checks retained. Intentional revision0 control baseline, other tables empty. Existing
 Router/chunk warnings unchanged. See handoff for exact

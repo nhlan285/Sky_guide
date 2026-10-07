@@ -214,3 +214,17 @@ as rejected; outward fence/durable intent/quarantine/fresh immutable-witness
 reconciliation must precede mount. See active phase for exact next action.
 14 kernel tests included in376 full tests/lint/typecheck/build/catalog1808/scaffold
 PASS; existing Router/chunk warnings unchanged. Test log retained on E: only.
+
+Portable outward syncCommitFence/syncCommitIntent/postgresCommitWitness now available.
+Bounded intent before CAS, global durable-journal contract and fresh locked-head
+original audit/full acceptance matching prevent unknown Store errors from becoming
+outward rejected. No actual journal backend/new SQL/native-session proof or mount.
+Exact publication resolves despite successors; valid competing slot is conflict.
+Inline kernel indeterminate + disposal/barrier can resolve absence; restart/generic
+absence cannot stop a pre-BEGIN old worker and stays quarantined. Exact failure
+audit lacks immutable count/backoff payload and stays quarantined. Next package
+must add durable journal/execution token checked after original global lock and
+full failure witness, with additive schema/rollback/ACL review before application.
+SDK/roles/Auth/crash/race/restore acceptance remains OPEN. See phase/handoff.
+390 full tests PASS;14 focused final exact-time refinement/lint/typecheck/build/
+catalog1808/scaffold/diff PASS. Existing Router/chunk warnings unchanged; log on E:.
