@@ -6,11 +6,13 @@ import { Buffer } from 'node:buffer'
 import process from 'node:process'
 import { prepareRuntimeJournalPrivilegeProposal } from '../../src/server/runtimeJournalPrivilegePlan.ts'
 import { journalSchemaSha256,runtimeJournalPrivilegeBaseline,runtimeJournalColumnBaseline } from '../../src/server/runtimeJournalPrivilegeBaseline.ts'
+import { journalStructureAuditQuery,installedStructure,reviewedJournalStructure } from '../../src/server/runtimeJournalStructure.ts'
+import { runtimeRoleExecutor } from './runtime-role-executor.mjs'
 
 // Pre-install REVIEW preparation only. No synthetic catalog is a native inventory.
 // Native37-function/155-trigger83-owner preflight must pass after authorized schema
 // application and before grant; current installed79-owner catalog will reject it.
-export function buildRuntimeJournalPrivilegeProposal() {
+export function buildRuntimeJournalPrivilegeProposal({executor='superuser'}={}) {
  const up=readFileSync(new URL('../../supabase/proposals/sync_commit_journal_up.sql',import.meta.url))
  if(createHash('sha256').update(up).digest('hex')!==journalSchemaSha256)throw new Error('Pinned journal schema proposal changed')
  const p=prepareRuntimeJournalPrivilegeProposal()
@@ -26,18 +28,20 @@ export function buildRuntimeJournalPrivilegeProposal() {
   [writer,'update sky_private.sync_commit_control set singleton=1 where singleton=1;',['42501']],
  ]
  const denialSql=['-- PREPARED/NOT RUN. Requires approved roles/schema, quiesced consumers; all checks under outer ROLLBACK.',
-  'begin isolation level read committed read write;',"set local statement_timeout='30s';",...denied.flatMap(([role,sql,codes],n)=>[
+  'begin isolation level read committed read write;',"set local statement_timeout='30s';",
+  runtimeRoleExecutor(executor),...denied.flatMap(([role,sql,codes],n)=>[
    `set local role ${role};`,
    `do $denied$ begin begin ${sql} raise exception 'Denied operation ${n+1} unexpectedly allowed' using errcode='P0999';exception when ${codes.map(c=>`sqlstate '${c}'`).join(' or ')} then null;end;end;$denied$;`,
   ]),'reset role;',`select ${denied.length} as denied_checks;`,'rollback;'].join('\n')+'\n'
  const files={
   'runtime-journal-preflight.sql':p.preflight+'\n',
+  'runtime-journal-structure-audit.sql':'-- READ ONLY. Collect after authorized installation; explicitly review definitions against pinned up SQL before updating any structural fingerprints. Never auto-adopt.\n'+journalStructureAuditQuery()+'\n',
   'runtime-journal-grant-proposal.sql':p.grant,
   'runtime-journal-rollback-proposal.sql':p.rollback,
   'runtime-journal-role-check.sql':'-- PREPARED/NOT RUN. Read-only ACL/policy introspection AFTER authorized grants; not actual runtime allow/deny proof.\n'+p.roleCheck+'\n',
   'runtime-journal-denial-fixture.sql':denialSql,
   'runtime-journal-manifest.json':JSON.stringify({status:'PREPARED/NOT APPLIED/NOT NATIVE VERIFIED',schemaSha256:journalSchemaSha256,
-   tables:p.tables,helpers:p.helpers,expectedCatalog:runtimeJournalPrivilegeBaseline,expectedJournalColumns:runtimeJournalColumnBaseline},null,2)+'\n',
+   installedStructure,reviewedJournalStructure,tables:p.tables,helpers:p.helpers,expectedCatalog:runtimeJournalPrivilegeBaseline,expectedJournalColumns:runtimeJournalColumnBaseline},null,2)+'\n',
  }
  if(Object.values(files).some(v=>Buffer.byteLength(v)>200000))throw new Error('Review file budget exceeded')
  return {files,tables:p.tables.length,helpers:p.helpers.length,policies:(p.grant.match(/create policy /g)||[]).length}

@@ -1,5 +1,5 @@
 import { createHash } from 'node:crypto'
-import { validateDateTime } from '../data/core/index.ts'
+import { compareInstants, validateDateTime } from '../data/core/index.ts'
 import { readCatalog, validateManifest } from '../data/itemLookup/release.ts'
 import type { DomainRepository, Freshness, PublicSnapshot } from '../data/domain/repository.ts'
 import type { ItemCatalog } from '../data/itemLookup/release.ts'
@@ -74,7 +74,7 @@ export function canonicalizeSnapshotFiles(input: SnapshotFiles): SnapshotFiles {
 export function createSnapshotRepository(input: SnapshotFiles, freshness: Freshness): DomainRepository {
   const { catalog } = readSnapshot(input)
   if (!['healthy', 'delayed', 'stale', 'offline'].includes(freshness.health) || !validateDateTime(freshness.lastSuccessAt).valid ||
-    freshness.validUntil !== null && (!validateDateTime(freshness.validUntil).valid || Date.parse(freshness.validUntil) < Date.parse(freshness.lastSuccessAt))) throw new Error('Invalid source freshness')
+    freshness.validUntil !== null && (!validateDateTime(freshness.validUntil).valid || compareInstants(freshness.validUntil, freshness.lastSuccessAt) < 0)) throw new Error('Invalid source freshness')
   const snapshot: PublicSnapshot = { catalog, freshness: { health: freshness.health, lastSuccessAt: freshness.lastSuccessAt, validUntil: freshness.validUntil } }
   // A consumer cannot mutate the adapter's last known validated release.
   return { readCatalog: async () => structuredClone(snapshot) }

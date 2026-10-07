@@ -4,7 +4,7 @@ import { readFileSync } from 'node:fs'
 import { URL } from 'node:url'
 import { createHash } from 'node:crypto'
 import { Buffer } from 'node:buffer'
-import { candidateReviewHash, stageSourceSnapshot, promoteReviewedSnapshot, recordSourceFailure } from '../../src/server/sourceSync.ts'
+import { candidateReviewHash, stageSourceSnapshot, promoteReviewedSnapshot, recordSourceFailure, validateStoredSyncCandidate } from '../../src/server/sourceSync.ts'
 import { canonicalizeSnapshotFiles, createSnapshotRepository } from '../../src/server/domainSnapshot.ts'
 import { createDomainApi } from '../../src/server/domainApi.ts'
 
@@ -44,6 +44,31 @@ const timing = base => {
 const stage = (base, raw = 'synthetic upstream envelope', normalize = async () => normalized()) => stageSourceSnapshot({ sourceId: 'K15', raw, normalizationVersion: 'fixture-normalizer-v1', base, contract, normalize, ...timing(base) })
 const approve = candidate => ({ contentHash: candidate.contentHash, candidateHash: candidateReviewHash(candidate), baseRevision: candidate.baseRevision, reviewerRef: 'private-fixture-reviewer', reviewedAt: new Date(Date.parse(candidate.stagedAt) + 1000).toISOString() })
 const promotion = candidate => ({ validUntil: null, now: () => Date.parse(candidate.stagedAt) + 2000 })
+
+test('future review fractions and comma instants cannot publish or poison source attempts', async () => {
+  const {candidate} = await stage(empty())
+  const at = new Date(promotion(candidate).now()).toISOString()
+  await assert.rejects(()=>validateStoredSyncCandidate({...candidate,fetchedAt:'2099-10-07T00:00:00,1Z'},contract))
+  for (const reviewedAt of [at.replace('.000Z',',0001Z'), at.replace('.000Z','.0001Z'), '2099-10-07T00:00:00,1Z']) {
+    const store=memoryStore()
+    assert.equal(await promoteReviewedSnapshot(store,candidate,{...approve(candidate),reviewedAt},contract,promotion(candidate)),'rejected')
+    assert.equal((await store.read('K15')).revision,0)
+    assert.equal(await recordSourceFailure(store,'K15',reviewedAt,{...contract,retryDelaysMs:[]},promotion(candidate).now),'rejected')
+    assert.equal((await store.read('K15')).lastAttemptAt,null)
+  }
+  const store=memoryStore()
+  assert.equal(await recordSourceFailure(store,'K15','2026-10-04T00:00:00,9999Z',{...contract,retryDelaysMs:[1]},()=>Date.parse('2026-10-04T00:00:01Z')),'recorded')
+  assert.equal((await store.read('K15')).nextRetryAt,'2026-10-04T00:00:01.0009Z')
+  assert.equal(await recordSourceFailure(store,'K15','2026-10-04T01:00:00.9998+01',contract,()=>Date.parse('2026-10-04T00:00:01Z')),'rejected')
+  assert.throws(()=>createSnapshotRepository({manifest,files},{health:'healthy',lastSuccessAt:at.replace('.000Z','.0001Z'),validUntil:at}))
+})
+
+test('source staging rejects a future comma or sub-millisecond fetch', async () => {
+  for(const fetchedAt of ['2099-10-07T00:00:00,1Z','2026-10-04T00:00:00.0001Z']) {
+    const result=await stageSourceSnapshot({sourceId:'K15',raw:'fixture',normalizationVersion:'fixture',base:empty(),contract,normalize:async()=>normalized(),fetchedAt,now:()=>Date.parse('2026-10-04T00:00:00Z')})
+    assert.equal(result.status,'quarantined')
+  }
+})
 function mutatePublic(name, mutate) {
   const value = globalThis.structuredClone(normalized())
   const entry = name === 'provenance' ? value.publicFiles.manifest.provenance : value.publicFiles.manifest.datasets[name]

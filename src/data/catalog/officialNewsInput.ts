@@ -1,4 +1,4 @@
-import { enumeration, failure, nullable, object, validateDateTime, validateId, validatePartialTime, validateProvenanceIds, validateSourceRecord } from '../core/index.ts'
+import { enumeration, failure, nullable, object, validateDateTime, validateId, validatePartialTime, validateProvenanceIds, validateSourceRecord, compareInstants } from '../core/index.ts'
 import type { DateTime, ID, PartialTime, SourceRecord, SourceRegistry, ValidationError, ValidationResult } from '../core/index.ts'
 import { boolean, nonBlank } from './shared.ts'
 
@@ -65,7 +65,7 @@ export function stageManualOfficialNews(text: unknown, context: ManualOfficialNe
       usedSources.set(id,source.value)
     }
     let matchedInstant = false
-    const supportedInstants = new Set<number>()
+    const supportedInstants: string[] = []
     for (const id of article.officialEvidenceIds) {
       const evidence = context.officialEvidence.get(id)!
       if (!evidence || !article.sourceProvenanceIds.includes(evidence.provenanceId) || !usedSources.has(evidence.provenanceId)) { add('invalid_relationship','officialEvidenceIds'); continue }
@@ -73,13 +73,16 @@ export function stageManualOfficialNews(text: unknown, context: ManualOfficialNe
         const time = validatePartialTime(evidence.publicationTime)
         if (!time.valid) { add('invalid_relationship','officialEvidenceIds'); continue }
         if (time.value.precision === 'instant') {
-          const instant = Date.parse(time.value.value)
-          if (instant > Date.parse(usedSources.get(evidence.provenanceId)!.retrievedAt)) add('invalid_relationship','officialEvidenceIds')
-          else { supportedInstants.add(instant); if (article.publishedAt !== null && instant === Date.parse(article.publishedAt)) matchedInstant = true }
+          const instant = time.value.value
+          if (compareInstants(instant, usedSources.get(evidence.provenanceId)!.retrievedAt) > 0) add('invalid_relationship','officialEvidenceIds')
+          else {
+            if (!supportedInstants.some(value=>compareInstants(value,instant)===0)) supportedInstants.push(instant)
+            if (article.publishedAt !== null && compareInstants(instant,article.publishedAt)===0) matchedInstant = true
+          }
         }
       }
     }
-    if (supportedInstants.size > 1) add('invalid_relationship','officialEvidenceIds')
+    if (supportedInstants.length > 1) add('invalid_relationship','officialEvidenceIds')
     if (article.publishedAt !== null && !matchedInstant) add('invalid_relationship','publishedAt')
     candidates.push(article)
   }

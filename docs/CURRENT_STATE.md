@@ -1,15 +1,61 @@
 # Current handoff — 2026-10-07
 
 ## Task / branch / checkpoint
-Autonomous Sky Guide master run BLOCKED awaiting scoped journal application
-authorization; roadmap OPEN, not complete. Same approval gate persisted through
-three consecutive goal turns; safe preparation and read-only baseline audit are
-complete. Resume on the user's answer to the existing83-owner package question.
-Branch: codex/master-plan-execution. Last verified pushed base before this slice:
-ceb799d06b581f6e01a80e5693697e53fd884ded. This handoff records the blocked audit;
-resolve latest checkpoint with git log -1 and verify remote SHA.
+Maintainer repository remediation COMPLETE; autonomous master roadmap remains
+OPEN at the scoped hosted journal application gate. User2026-10-07 authorized repo
+fixes after REQUEST CHANGES; no hosted migration/grants executed by this repair.
+Branch: codex/master-plan-execution. Verified local/remote HEAD at repair start:
+1bdfc5cafb3cb63877e786c19d75314898dd9270. Resolve the new repair checkpoint with
+git log -1 and verify remote SHA; no protected branch/merge/deploy involved.
 Master: [IMPLEMENTATION_PLAN](plan/IMPLEMENTATION_PLAN.md); active detailed phase:
 [POSTGRES_PROVIDER_SELECTION](plan/POSTGRES_PROVIDER_SELECTION.md), latest section.
+
+## Latest maintainer repair / exact continuation
+[Current package and hashes](plan/JOURNAL_NATIVE_REVIEW.md) supersede historical
+prepared ACL hashes below. Shared exact instant comparator/retry arithmetic fixes
+all source lifecycle checks, stored candidate, identity/media, freshness/API,
+delivery expiry and manual official evidence. Canonical server-clock replay cannot
+truncate source precision. Payload evidence mapping now names payload_provenance;
+encoder/decoder regression retains its separate canonical superset and order.
+Current83 guards cover enabled custom/internal triggers, origin replication mode,
+function execution settings,443 installed columns/503 CHECK/FK/PK/UNIQUE
+constraints/233 index definitions and validity. Native79 structure was collected
+read-only;11 migrations unchanged/no disabled triggers. This did not refresh empty
+row counts. Membership guards inspect both directions and ADMIN/INHERIT/SET;
+optional current creator ADMIN-only edge is the sole documented exception.
+PG17's automatic edge is granted by bootstrap superuser(OID10), not the creator;
+read-only inspection confirms API postgres is CREATEROLE/non-superuser and
+bootstrap supabase_admin is OID10. Default role fixtures now refuse that executor
+before DML. Optional creator variant prepares temporary SET-only self-membership
+under outer ROLLBACK, no new login/principal/durable membership; it requires its
+own explicit privilege scope before execution. See current package for exact
+SQL/hashes and rollback baseline checks. No such memberships were granted here.
+Old79 proposal bytes and applied migrations are unchanged; old proposal is
+historical and must not be applied after expansion.
+
+New four-table constraint/index fingerprints remain NULL, deliberately blocking
+grant until an explicit native structural review. No native83 receipt exists.
+After scoped schema/rehearsal authorization: revalidate baseline; create/apply
+the additive CLI migration; run runtime-journal-structure-audit.sql, compare full
+new definitions with pinned up SQL, intentionally pin reviewedJournalStructure,
+regenerate/review artifacts, then apply ACL only within authorization. Run native
+owner/role/denial fixtures and full-K15 cost rehearsal; verify receipts and
+authoritative rollback/empty baseline. No automatic adoption of fetched hashes.
+Full-K15 fixture includes46,341 canonical/4,367 release rows (2,051 identity and
+4,103 membership events), forces deferred checks under ROLLBACK/30-second cap.
+Quadratic validation cost remains OPEN until native measurement; timeout requires
+reviewed additive optimization, not rewritten history/disabled enforcement.
+Artifacts/expanded native79 receipt are in existing E-drive rehearsal directory.
+No raw receipts/corpus/build output is committed.
+
+Validation:425 full tests PASS; final10 Store/6 ACL tests PASS, lint/typecheck/build/
+catalog1808/scaffold76 Markdown/14 profiles/173 tasks/diff PASS. Existing Router
+and chunk warnings persist. Scope modified: time consumers/evidence mapping,
+current83 privilege guards, bounded K15 builder/verifier/regressions and existing
+plans/handoff/README. Hosted/native83 timings/SQL/roles/down/durability/sessions/
+crash/restore/SDK/Auth/credentials/principal membership/consumer mount NOT RUN.
+Master goal is not complete. Local repair is ready for the next Codex session;
+do not restart R1 or ask again for approved R1/provider/org.
 
 ## Authority / constraints
 R1 LOCAL CONTRACT APPROVED by user2026-10-06; Supabase Free/Dyland's Org approved.

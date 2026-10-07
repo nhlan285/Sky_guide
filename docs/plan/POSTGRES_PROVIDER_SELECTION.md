@@ -1419,3 +1419,71 @@ This verifies only installed79 state; proposed83 native parsing/roles/rehearsal
 and durability acceptance remain NOT RUN. Concrete83-owner authorization question
 is pending. Exact next: answer that question; if approved recheck baseline before
 CLI migration creation/application. No additional approval inferred from continuation.
+
+## Maintainer remediation — repository fixes COMPLETE, native evidence OPEN (2026-10-07)
+
+User authorized fixes after maintainer REQUEST CHANGES. Scope: exact timestamp
+lifecycle/precision, enforcement metadata and role-membership drift, preservation
+ownership and full-scale validation cost. No hosted migrations/grants by this task;
+preserve11 applied migrations, historical79 proposal and approved R1/provider/org.
+Dependencies: current installed79 receipt and pinned unapplied83 up/down contract.
+Acceptance: focused/full local checks and refreshed review artifacts/handoff; native
+SQL/durability/role/restore/scale acceptance must remain explicit, not inferred.
+
+Completed implementation: core compareInstants/addInstantMilliseconds replace
+Date.parse lifecycle/range coercion, keeping arbitrary fractions/source spelling.
+SourceSync staging/read/review/promotion/failure, identity and snapshot/API freshness
+are covered; nearby media/delivery and official evidence shared the same parser
+bug and now use the exact comparator too. Store replay verifies exact canonical
+millisecond server spelling. Payload evidence matrix now matches actual ordered
+payload_provenance and its separate canonical identity superset.
+
+Current83 preflight and rollback add enabled custom/internal-FK trigger checks,
+origin session mode, function execution settings and pinned installed column/
+constraint/index definitions/validity. Expanded native79 collection was read-only:
+443 columns/503 non-trigger constraints(all validated)/233 indexes(valid/ready/live),
+no disabled triggers/11 migration versions unchanged. Body/trigger fingerprints
+remain independently pinned. Receipt provenance/hash in current package; row counts
+were not refreshed. Membership guard checks both role directions and ADMIN/INHERIT/
+SET; only current actor member with PostgreSQL17 bootstrap grantor(OID10),
+ADMIN-only creator edge with INHERIT/SET false is
+accepted. No memberships are created by this package's grants.
+Read-only executor audit confirms API postgres is non-superuser/CREATEROLE;
+bootstrap grantor is supabase_admin(OID10), matching PG17 documentation. Default
+role fixtures now require an authorized superuser before DML/SET ROLE. Prepared
+creator variant requires its own explicit scoped approval: current existing actor
+gets temporary SET-only self-edges after exact bootstrap ADMIN-only membership
+preflight, all inside outer ROLLBACK. No durable membership/new principal/login or
+credential; NOT EXECUTED. Without that scope/authorized superuser, role proof is
+BLOCKED. Detailed rationale, fingerprints and commands in current package.
+
+Decision: do not invent native83 CHECK/FK/index spellings. New structural hashes
+are NULL and executable grant refuses. After authorized installation, collector
+returns FULL definitions; maintainer explicitly compares with pinned up SQL before
+changing reviewedJournalStructure and regenerating artifacts. No fresh metadata
+auto-adoption. This is a post-install/pre-grant native verification gate, not a
+reopening of the approved portable R1 architecture.
+
+Decision on cost: preserve deferred integrity/applied history. Prepare full-K15
+canonical/release fragment under generation lock, empty-baseline refusal,
+30-second dev cap and outer ROLLBACK.46,341 canonical/4,367 release rows include
+2,051 identity/4,103 membership events. Receipt separates canonical/release/deferred
+durations. Cost remains OPEN until native measurement; timeout/unacceptable cost
+requires additive reviewed optimization and metadata repinning. Fixture generation
+does not fix quadratic cost or prove a production capacity. No temp/session flag
+suppresses validations, no accepted data/history is committed by rehearsal.
+
+Validation PASS425 full tests, final10 Store/6 ACL refinements, lint/typecheck/build/
+catalog1808/scaffold76 Markdown/14 profiles/173 tasks/diff. Existing Router/chunk
+warnings unchanged. Old79 grant/rollback/up/down/owner adapter transcript hashes unchanged;
+role/denial fixtures now preflight executor capability;
+current83 ACL hashes and K15 fixture listed in [current package](JOURNAL_NATIVE_REVIEW.md).
+New test receipts are synthetic, NOT native SQL/role/performance evidence.
+
+Exact next: verify new checkpoint SHA; obtain scoped dev schema/rehearsal
+authorization, revalidate baseline, create/apply additive CLI migration. Collect
+and explicitly review new constraints/indexes, intentionally pin/regenerate before
+ACL application within authorization. Run owner/role/denial/K15 cost fixtures,
+verify full receipts and authoritative rollback/empty baseline. Actual native83
+parsing/roles/down/cost/durable commits/sessions/crash/restore/SDK/Auth/credentials/
+principal membership/consumer mount remain NOT RUN; master roadmap remains OPEN.

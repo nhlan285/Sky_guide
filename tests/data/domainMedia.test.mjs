@@ -32,6 +32,8 @@ test('invalid key, MIME, revision, evidence and relation inputs fail closed', ()
     { bytes: -1 }, { sha256: 'not-a-hash' }, { provenanceIds: ['missing'] },
     { sourceUrl: 'https://user:secret@fixture.invalid/source' },
     { fetchedAt: '2026-10-06T00:00:00Z' },
+    { fetchedAt: '2099-10-06T00:00:00,1Z' },
+    { fetchedAt: '2026-10-04T00:00:00.0001Z' },
   ]) assert.equal(validate({ ...media(), ...change }).valid, false)
 })
 
@@ -120,9 +122,10 @@ test('provider swap keeps identity stable and denies expired/unsafe delivery', a
   assert.deepEqual(first.media, second.media)
   assert.notEqual(first.delivery.url, second.delivery.url)
   assert.equal(first.cacheControl, 'no-store')
-  for (const delivery of [{ url: 'javascript:alert(1)', expiresAt: null }, { url: 'https://fixture.invalid/file', expiresAt: '2026-10-04T00:00:00Z' }, { url: 'https://fixture.invalid/file', expiresAt: 'bad' }]) {
+  for (const delivery of [{ url: 'javascript:alert(1)', expiresAt: null }, { url: 'https://fixture.invalid/file', expiresAt: '2026-10-04T00:00:00Z' }, { url: 'https://fixture.invalid/file', expiresAt: 'bad' }, { url: 'https://fixture.invalid/file', expiresAt: '2026-10-04T00:00:00,1Z' }]) {
     assert.equal(await resolveMediaDelivery(value, { resolveDelivery: async () => delivery }, registry, now), null)
   }
+  assert.ok(await resolveMediaDelivery(value,{resolveDelivery:async()=>({url:'https://fixture.invalid/file',expiresAt:'2026-10-04T01:00:00.0001Z'})},registry,now))
 })
 
 test('latest revocation overlay prevents rollback resurrection and signing races', async () => {

@@ -12,4 +12,11 @@ CurrencyAmount accepts non-negative **safe integer numbers** and null; numeric s
 
 Calendar dates use `YYYY-MM-DD` with Gregorian leap/day checks. Instants use extended calendar date plus `T` clock `HH:mm[:ss[.fraction]]` and explicit `Z` or numeric offset (`±HH`, `±HHmm`, `±HH:mm`); comma fractions are also accepted. Clock components must be within 00–23/00–59/00–59; numeric offsets within 00–23 hours and 00–59 minutes. Leap seconds, 24:00 and other ISO representations are not parsed by this module. Values are preserved, never passed through permissive Date.parse normalization. A timezone metadata string alone cannot make an offset-less instant valid. Date precision can retain timezone=null; unknown precision preserves source text without making it an instant. No timezone from locale, LA offset, event schedule or countdown is inferred.
 
+Use `compareInstants` for lifecycle/range/expiry ordering; it rejects invalid input
+and preserves arbitrary fraction precision across all accepted offset spellings.
+`addInstantMilliseconds` returns UTC retry time while retaining sub-millisecond
+digits, checks integer delay/overflow, and refuses results outside the four-digit
+calendar contract. Source spellings are otherwise preserved. Server promotion
+clock replay separately requires its exact canonical integer-millisecond spelling.
+
 Run `pnpm test` (`node --test tests/data/*.test.mjs`) on the pinned Node 24 runtime. Node natively strips erasable TypeScript for the production modules; test files use `node:test`/`node:assert` with synthetic fixture labels only. TypeScript separately checks source modules with `pnpm typecheck`. Explicit `.ts` imports and `allowImportingTsExtensions` keep Node tests and Vite/noEmit checking compatible without another package.

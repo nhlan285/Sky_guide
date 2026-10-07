@@ -12,6 +12,7 @@ import { postgresSyncSequence } from '../fixtures/postgresSyncSequence.mjs'
 import { journalPool } from '../fixtures/postgresJournalPort.mjs'
 import { kernelLimits } from '../fixtures/postgresProtocolPort.mjs'
 import { storeOptions,contract,decodeTables,expectedFailure } from '../fixtures/postgresSyncStore.mjs'
+import { runtimeRoleExecutor } from './runtime-role-executor.mjs'
 
 // Actual v2 adapter+kernel-emitted statements, captured on a synthetic protocol
 // port against independently expected SourceSync frames. PREPARED/NOT RUN.
@@ -24,7 +25,7 @@ const callback=s=>/^(?:select |with __sg_rows|insert |update |delete |set constr
 const jsonRows=r=>r.rows.map(row=>Object.fromEntries(r.fields.map((f,n)=>[f.name,row[n]===null?null:
  f.dataTypeID===16?row[n]==='t':[20,21,23,701].includes(f.dataTypeID)?Number(row[n]):row[n]])))
 
-export async function buildSyncCommitAdapterRehearsal({roles=false}={}) {
+export async function buildSyncCommitAdapterRehearsal({roles=false,executor='superuser'}={}) {
  const {initial,phases}=await postgresSyncSequence()
  const pool=journalPool(initial,{nextTables:r=>phases.find(p=>p.next.revision===r)?.tables,
   afterQuery:async(s,_signal,l,r)=>{l.responses??=[];l.responses.push({statement:structuredClone(s),result:structuredClone(r)});return r}})
@@ -50,6 +51,7 @@ export async function buildSyncCommitAdapterRehearsal({roles=false}={}) {
  catch(error){if(error.sqlState!=='23514')throw error;negativeLeases.add(pool.leases.at(-1))}
 
  const parts=['begin isolation level read committed read write;',"set local statement_timeout='30s';","set local standard_conforming_strings=on;"],queryChecks={value:0}
+ if(roles)parts.push(runtimeRoleExecutor(executor))
  for(const t of ['source_registry','provenance','provenance_order'])parts.push(`insert into sky_private.${t}(${privateSyncColumns[t].join(',')}) values ${initial[t].map(r=>`(${privateSyncColumns[t].map(c=>scalar(r[c])).join(',')})`).join(',')};`)
  for(const [n,l] of pool.leases.entries()) {
   const statements=l.queries.filter(callback)
@@ -82,6 +84,6 @@ export async function buildSyncCommitAdapterRehearsal({roles=false}={}) {
 }
 if(process.argv[1]&&resolve(process.argv[1])===fileURLToPath(import.meta.url)) {
  if(!process.argv[2])throw new Error('Provide E-drive output path outside Git')
- const r=await buildSyncCommitAdapterRehearsal({roles:process.argv[3]==='--roles'});writeFileSync(process.argv[2],r.sql,'utf8')
+ const r=await buildSyncCommitAdapterRehearsal({roles:process.argv.includes('--roles'),executor:process.argv.includes('--creator-set-rehearsal')?'creator':'superuser'});writeFileSync(process.argv[2],r.sql,'utf8')
  process.stdout.write(`PREPARED/NOT RUN:5 phases/${r.callbacks} callbacks/${r.queryChecks} query assertions/${r.negativeChecks} token negatives; ${Buffer.byteLength(r.sql)} bytes\n`)
 }

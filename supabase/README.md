@@ -263,3 +263,16 @@ auto-approved metadata.31 focused + final6 focused/416 full tests/lint/typecheck
 build/scaffold PASS. Native parsing/roles/rollback/durability/crash/SDK NOT RUN.
 Do not apply old grant after expansion; refreshed dev-only authorization precedes
 CLI migration creation/application. No hosted/schema/role/credential operation here.
+
+Maintainer repair2026-10-07: repository fixes PASS425 tests/lint/typecheck/build;
+see the current [native package](../docs/plan/JOURNAL_NATIVE_REVIEW.md) for refreshed
+hashes. Current83 preflight now covers enabled custom/internal triggers, function
+settings, installed physical columns/constraints/indexes and membership direction/
+options. The new four-table structural hashes are intentionally NULL until native
+definitions have been compared with the reviewed up SQL; grants refuse meanwhile.
+Collect with runtime-journal-structure-audit.sql after authorized schema application,
+explicitly review/pin, then regenerate. Do not auto-adopt fresh metadata. Applied
+migrations and historical79 proposal bytes remain unchanged. Full-K15 cost fixture
+is prepared on E:,46,341 canonical/4,367 release rows, forced deferred checks under
+ROLLBACK/30-second cap. Native cost/83 parsing/roles/down/restore remain NOT RUN;
+repeated full validation cost is OPEN, requiring measured evidence before import.

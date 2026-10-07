@@ -50,6 +50,17 @@ test('publication instant requires explicit evidence; date-only midnight inferen
   assert.equal(stage([article()],ctx).status,'quarantined')
 })
 
+test('official evidence compares supported instant precision without NaN or millisecond collapse',()=>{
+ const ctx=context(),proof=value=>({provenanceId:'fixture-source',publicationTime:{value,precision:'instant',timezone:null,rawLabel:null}})
+ ctx.officialEvidence.set('fixture-evidence',proof('2099-10-04T00:00:00,1Z'))
+ assert.equal(stage([article()],ctx).status,'quarantined')
+ ctx.officialEvidence.set('fixture-evidence',proof('2026-08-10T00:00:00,0001Z'))
+ assert.equal(stage([{...article(),publishedAt:'2026-08-10T00:00:00.000Z'}],ctx).status,'quarantined')
+ assert.equal(stage([{...article(),publishedAt:'2026-08-10T01:00:00.0001+01'}],ctx).status,'staged')
+ ctx.officialEvidence.set('fixture-conflict',proof('2026-08-10T00:00:00.0002Z'))
+ assert.equal(stage([{...article(),officialEvidenceIds:['fixture-evidence','fixture-conflict']}],ctx).status,'quarantined')
+})
+
 test('malformed/unsupported/empty/bounded file failures disclose only sanitized code and path', () => {
   for(const text of ['private-sentinel()',JSON.stringify({schemaVersion:2,articles:[article()]}),JSON.stringify({schemaVersion:1,articles:[]}),JSON.stringify({schemaVersion:1,articles:Array.from({length:51},article)}),'x'.repeat(MAX_MANUAL_NEWS_BYTES+1),'😀'.repeat(MAX_MANUAL_NEWS_BYTES/3)]) {
     const result=stageManualOfficialNews(text,context()); assert.equal(result.status,'quarantined'); assert.equal(result.candidateArticles,null)

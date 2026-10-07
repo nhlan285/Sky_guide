@@ -2,6 +2,8 @@ import { runtimeFunctions,runtimeTablePrivileges,preparePrivilegeProposal,assert
 import type { RuntimePrivilegeCatalog,RuntimeTablePrivilege } from './runtimePrivilegePlan.ts'
 import { runtimeJournalPrivilegeBaseline,runtimeJournalColumnBaseline } from './runtimeJournalPrivilegeBaseline.ts'
 import { commitProposalColumns } from './syncCommitProposalRows.ts'
+import { journalStructurePreflight, installedStructure, expectedFunctionSettings } from './runtimeJournalStructure.ts'
+import { canonicalJson } from './domainSnapshot.ts'
 
 export const runtimeJournalFunctions=[...runtimeFunctions,'lock_sync_commit_control()',
  'activate_sync_commit_intent(uuid)','require_sync_commit_intent(uuid,text)','apply_sync_commit_cas(uuid,text)','settle_sync_commit_intent(uuid,text)'] as const
@@ -13,12 +15,35 @@ export function runtimeJournalTablePrivileges():RuntimeTablePrivilege[] {
   {table:'sync_commit_receipt',insert:[...commitProposalColumns.sync_commit_receipt],update:[],delete:false,lockOnly:false},
  ]
 }
-export function assertRuntimeJournalPrivilegeCatalog(catalog:RuntimePrivilegeCatalog):void {
+export interface RuntimeJournalPrivilegeCatalog extends RuntimePrivilegeCatalog {
+ functionSettings:ReturnType<typeof expectedFunctionSettings>
+ triggerStates:{table:string;name:string;enabled:string}[]
+ internalTriggersDisabled:number
+ installedStructure:typeof installedStructure
+}
+export function assertRuntimeJournalPrivilegeCatalog(catalog:RuntimeJournalPrivilegeCatalog):void {
  assertPrivilegeCatalog(catalog,runtimeJournalTablePrivileges(),runtimeJournalPrivilegeBaseline)
+ const expected=runtimeJournalPrivilegeBaseline.triggers.map(t=>({table:t.table,name:t.name,enabled:'O'}))
+ const sorted=(xs:typeof expected)=>[...xs].sort((a,b)=>`${a.table}/${a.name}`<`${b.table}/${b.name}`?-1:1)
+ if(canonicalJson(catalog.functionSettings)!==canonicalJson(expectedFunctionSettings(runtimeJournalPrivilegeBaseline.functions.map(f=>f.name)))
+  ||JSON.stringify(sorted(catalog.triggerStates))!==JSON.stringify(sorted(expected))||catalog.internalTriggersDisabled!==0
+  ||Object.entries(installedStructure).some(([key,value])=>catalog.installedStructure?.[key as keyof typeof installedStructure]!==value))
+  throw new Error('Runtime journal enforcement metadata changed')
+ // This local catalog check does not attest the uninstalled four-table structure.
+ // The generated SQL's explicit native structural-review gate remains mandatory.
 }
 export function prepareRuntimeJournalPrivilegeProposal() {
  const p=preparePrivilegeProposal(runtimeJournalTablePrivileges(),runtimeJournalPrivilegeBaseline,runtimeJournalFunctions)
  const reader='sky_guide_sync_reader',writer='sky_guide_sync_writer',quote=(s:string)=>"'"+s.replaceAll("'","''")+"'"
+ const structurePreflight=journalStructurePreflight(runtimeJournalPrivilegeBaseline.functions.map(f=>f.name))
+ // PG17 may give a non-superuser creator an ADMIN-only membership. Accept only
+ // that current actor edge granted by PG17's bootstrap superuser (OID10),
+ // ADMIN-only with INHERIT/SET false, in no other direction. Do not assume its name.
+ const membershipCheck=`do $runtime_memberships$ begin
+if exists(select 1 from pg_auth_members m join pg_roles parent on parent.oid=m.roleid join pg_roles member_role on member_role.oid=m.member join pg_roles grantor on grantor.oid=m.grantor
+where (parent.rolname in(${quote(reader)},${quote(writer)}) or member_role.rolname in(${quote(reader)},${quote(writer)}))
+and not(parent.rolname in(${quote(reader)},${quote(writer)}) and member_role.rolname=current_user and m.grantor=10 and grantor.rolsuper and m.admin_option and not m.inherit_option and not m.set_option)) then raise exception 'Runtime memberships require scoped rollback/review';end if;
+end;$runtime_memberships$;`
  const columnPreflight=`do $runtime_journal_columns$ begin
 if (select jsonb_agg(jsonb_build_object('table',c.relname,'position',a.attnum,'name',a.attname,'type',format_type(a.atttypid,a.atttypmod),'notNull',a.attnotnull,'generated',a.attgenerated,'defaultExpression',pg_get_expr(d.adbin,d.adrelid)) order by c.relname collate pg_catalog."C",a.attnum)
 from pg_attribute a join pg_class c on c.oid=a.attrelid join pg_namespace n on n.oid=c.relnamespace left join pg_attrdef d on d.adrelid=a.attrelid and d.adnum=a.attnum
@@ -34,7 +59,7 @@ end;$runtime_journal_columns$;`
  const sorted=policies.sort((a,b)=>`${a.tablename}/${a.policyname}`<`${b.tablename}/${b.policyname}`?-1:1)
  const tables=p.tables.map(t=>({...t,columns:runtimeJournalPrivilegeBaseline.tables.find(b=>b.name===t.table)!.columns}))
  const signatures=runtimeJournalPrivilegeBaseline.functions.map(f=>`${f.name}(${f.args?f.args.split(', ').map(a=>a.slice(a.indexOf(' ')+1)).join(','):''})`)
- const roleCheck=`do $runtime_journal_acl$ declare v_role text;v_table jsonb;v_col text;v_priv text;v_func text;v_expected boolean;begin
+ const roleCheck=membershipCheck+`\ndo $runtime_journal_acl$ declare v_role text;v_table jsonb;v_col text;v_priv text;v_func text;v_expected boolean;begin
 foreach v_role in array array[${quote(reader)},${quote(writer)}] loop
  if not exists(select 1 from pg_roles where rolname=v_role and not rolcanlogin and not rolinherit and not rolsuper and not rolcreatedb and not rolcreaterole and not rolreplication and not rolbypassrls) then raise exception 'Runtime role attributes changed';end if;
  if has_schema_privilege(v_role,'sky_private','USAGE') is distinct from true or has_schema_privilege(v_role,'sky_private','CREATE') is distinct from false then raise exception 'Runtime schema ACL changed';end if;
@@ -69,7 +94,8 @@ end;$runtime_journal_acl$;`
  const marker='if (select jsonb_agg(jsonb_build_object',start=p.preflight.indexOf(marker),end=p.preflight.lastIndexOf('end $runtime_preflight$;')
  if(start<0||end<start)throw new Error('Missing pinned definition preflight')
  const definitionCheck=`do $runtime_journal_definitions$ begin\n${p.preflight.slice(start,end)}end;$runtime_journal_definitions$;`
- return {...p,preflight:p.preflight+'\n'+columnPreflight,grant:p.grant.replace(p.preflight,p.preflight+'\n'+columnPreflight).replace('-- REVIEW PROPOSAL ONLY: requires scoped dev runtime-role authorization. No credentials.',
+ const checks=p.preflight+'\n'+columnPreflight+'\n'+structurePreflight
+ return {...p,preflight:checks,grant:p.grant.replace(p.preflight,checks+"\nset local createrole_self_grant='';").replace('commit;',membershipCheck+'\ncommit;').replace('-- REVIEW PROPOSAL ONLY: requires scoped dev runtime-role authorization. No credentials.',
   '-- REVIEW PROPOSAL ONLY: proposed83-owner v2 journal schema must first pass native preflight; requires refreshed scoped dev authorization. NOT APPLIED/NOT NATIVE VERIFIED. No credentials.'),
-  rollback:p.rollback.replace('begin;','begin;\n'+definitionCheck+'\n'+columnPreflight+'\n'+roleCheck),roleCheck:definitionCheck+'\n'+columnPreflight+'\n'+roleCheck,policies:sorted}
+  rollback:p.rollback.replace('begin;','begin;\n'+definitionCheck+'\n'+columnPreflight+'\n'+structurePreflight+'\n'+roleCheck),roleCheck:definitionCheck+'\n'+columnPreflight+'\n'+structurePreflight+'\n'+roleCheck,policies:sorted}
 }

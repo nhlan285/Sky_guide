@@ -2,7 +2,7 @@ export type { ValidationCode, ValidationError, ValidationPath, ValidationResult,
 export { enumeration, failure, nullable, object, success, validateString } from './validation.ts'
 export { SOURCE_IDS, validateId, validateSourceId } from './primitives.ts'
 export type { DateTime, ID, SourceId, SourceRegistry } from './primitives.ts'
-export { validateDateTime, validatePartialTime } from './time.ts'
+export { validateDateTime, validatePartialTime, compareInstants, addInstantMilliseconds } from './time.ts'
 export type { PartialTime } from './time.ts'
 export { validateCurrencyAmount } from './money.ts'
 export type { CurrencyAmount } from './money.ts'

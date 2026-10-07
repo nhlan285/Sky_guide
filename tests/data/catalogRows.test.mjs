@@ -4,6 +4,7 @@ import { readFileSync } from 'node:fs'
 import { URL } from 'node:url'
 import test from 'node:test'
 import { catalogColumns, decodeCatalogRows, encodeCatalogRows } from '../../src/server/catalogRows.ts'
+import { migrationFieldOwnership } from '../../src/data/domain/migration.ts'
 import { canonicalJson, canonicalizeSnapshotFiles } from '../../src/server/domainSnapshot.ts'
 import { catalogFixture as fixture, catalogFixtureContext as options } from '../fixtures/catalogRows.mjs'
 
@@ -86,4 +87,16 @@ test('authoritative identity revisions and retirement cannot be guessed or misma
   assert.deepEqual(decodeCatalogRows(encodeCatalogRows(retired,{...options,identities}),options),retired)
   identities[0].updatedAt='2026-10-08T00:00:00Z'
   assert.throws(() => encodeCatalogRows(retired,{...options,identities}))
+})
+
+test('preservation matrix names payload evidence owner independently of canonical superset',()=>{
+  const input=fixture()
+  for(const records of [input.items,input.spirits,input.seasons])for(const record of records)record.provenanceIds=[]
+  const identities=[...input.items.map(p=>['item',p]),...input.spirits.map(p=>['spirit',p]),...input.seasons.map(p=>['season',p])]
+    .map(([kind,p])=>({kind,id:p.id,revision:1,schemaVersion:1,updatedAt:p.updatedAt,fixture:p.fixture,provenanceIds:['fixture-proof'],retiredAt:null}))
+  const rows=encodeCatalogRows(input,{...options,identities})
+  assert.equal(rows.payload_provenance.length,0)
+  assert.equal(rows.identity_provenance.length,identities.length)
+  assert.deepEqual(decodeCatalogRows(rows,{...options,identities}),input)
+  for(const kind of ['item','spirit','season'])assert.equal(migrationFieldOwnership[kind].provenanceIds,'join:payload_provenance(kind,id,position)')
 })

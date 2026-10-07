@@ -10,6 +10,16 @@ const graph = () => ({ identities: [identity('item', 'tsa-cosmetic-1'), identity
 ], crosswalks: [{ sourceId: 'K15', sourceKey: '1', target: { kind: 'item', id: 'tsa-cosmetic-1' } }], aliases: [], tombstones: [] })
 const validate = (value, previous) => validateIdentityGraph(value, new Set(['fixture-provenance']), new Set(['K15', 'K01']), previous)
 
+test('identity update regression and future retirement retain exact instant precision', () => {
+  const old=graph(); old.identities[0].updatedAt='2026-10-04T00:00:00,0001Z'
+  const current=globalThis.structuredClone(old); current.identities[0].revision++
+  current.identities[0].updatedAt='2026-10-04T00:00:00Z'
+  assert.equal(validate(current,old).valid,false)
+  const retired=graph(); retired.identities[0].retiredAt='2099-10-04T00:00:00,1Z'
+  retired.tombstones=[{target:{kind:'item',id:retired.identities[0].id},retiredAt:retired.identities[0].retiredAt,replacement:null}]
+  assert.equal(validate(retired).valid,false)
+})
+
 test('portable identities retain stable K15 IDs and deduplicate shared sample sets', () => {
   const value = graph()
   value.identities.push(identity('item', 'fixture-variant'), identity('instrument', 'fixture-variant-instrument'))

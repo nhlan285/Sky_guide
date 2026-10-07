@@ -1,5 +1,5 @@
 import { Buffer } from 'node:buffer'
-import { SOURCE_IDS } from '../data/core/index.ts'
+import { SOURCE_IDS, compareInstants, validateDateTime } from '../data/core/index.ts'
 import type { CatalogRow, CatalogRowContext, SqlScalar } from './catalogRows.ts'
 import { prepareCanonicalPayloadWrite } from './canonicalPayloadWrite.ts'
 import type { CanonicalWriteLimits, SqlStatement } from './canonicalPayloadWrite.ts'
@@ -43,9 +43,14 @@ async function transition(current:SyncState,next:SyncState,sourceId:string,contr
     if(source!==sourceId||expected!==current.revision) return false
     captured=structuredClone(value);return true
   }}
+  // Promotion clocks originate as integral epoch milliseconds. Replaying a
+  // source spelling with precision beyond that clock would lose reviewed data.
+  const promotionEpoch = next.lastPromotedAt === null ? NaN : Date.parse(next.lastPromotedAt)
   if(next.lastKnownGood&&next.approval&&next.lastPromotedAt&&next.freshness&&next.lastKnownGood.sourceId===sourceId
-    &&Date.parse(next.lastPromotedAt)<=epoch) {
-    await promoteReviewedSnapshot(replay,next.lastKnownGood,next.approval,contract,{validUntil:next.freshness.validUntil,now:()=>Date.parse(next.lastPromotedAt!)})
+    &&validateDateTime(next.lastPromotedAt).valid&&Number.isSafeInteger(promotionEpoch)
+    &&new Date(promotionEpoch).toISOString()===next.lastPromotedAt
+    &&compareInstants(next.lastPromotedAt,new Date(epoch).toISOString())<=0) {
+    await promoteReviewedSnapshot(replay,next.lastKnownGood,next.approval,contract,{validUntil:next.freshness.validUntil,now:()=>promotionEpoch})
     if(captured&&stateKey(captured)===stateKey(next)) return current.lastKnownGood?.contentHash===next.lastKnownGood.contentHash?'reconfirmed':'promoted'
   }
   captured=null

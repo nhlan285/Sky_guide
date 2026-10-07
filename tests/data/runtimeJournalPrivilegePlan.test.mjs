@@ -8,10 +8,12 @@ import { runtimeJournalTablePrivileges,runtimeJournalFunctions,prepareRuntimeJou
 import { runtimeJournalPrivilegeBaseline,journalTriggerDefinitions,journalSchemaSha256 } from '../../src/server/runtimeJournalPrivilegeBaseline.ts'
 import { prepareRuntimePrivilegeProposal } from '../../src/server/runtimePrivilegePlan.ts'
 import { runtimePrivilegeBaseline } from '../../src/server/runtimePrivilegeBaseline.ts'
+import { installedStructure, expectedFunctionSettings, reviewedJournalStructure } from '../../src/server/runtimeJournalStructure.ts'
 import { nativePrivilegeTriggers } from '../fixtures/runtimePrivilegeTriggers.mjs'
 import { buildRuntimeJournalPrivilegeProposal } from '../sql/build-runtime-journal-privilege-proposal.mjs'
 import { buildSyncCommitAdapterRehearsal } from '../sql/build-sync-commit-adapter-rehearsal.mjs'
 import { verifySyncCommitAdapterRehearsal } from '../sql/verify-sync-commit-adapter-rehearsal.mjs'
+import { runtimeRoleExecutor } from '../sql/runtime-role-executor.mjs'
 
 const clone=globalThis.structuredClone,hash=(s,algorithm='sha256')=>createHash(algorithm).update(s).digest('hex')
 const up=readFileSync(new URL('../../supabase/proposals/sync_commit_journal_up.sql',import.meta.url),'utf8')
@@ -50,6 +52,17 @@ test('pinned proposed37 functions/155 trigger fingerprints cover complete invoke
  const funcs=bodies(),baseline=runtimeJournalPrivilegeBaseline
  assert.equal(funcs.size,37);assert.equal(baseline.functions.length,37);assert.equal(baseline.triggers.length,155)
  for(const f of baseline.functions)assert.equal(hash(funcs.get(f.name),'md5'),f.bodyMd5,f.name)
+ const declarations=new Map()
+ for(const text of [...readdirSync(new URL('../../supabase/migrations/',import.meta.url)).sort().map(n=>readFileSync(new URL('../../supabase/migrations/'+n,import.meta.url),'utf8')),up])
+  for(const match of text.matchAll(/create(?: or replace)? function sky_private\.([a-z_0-9]+)\([\s\S]*?\bas \$\$/gi))declarations.set(match[1],match[0].toLowerCase())
+ for(const setting of expectedFunctionSettings(baseline.functions.map(f=>f.name))) {
+  const declaration=declarations.get(setting.name)
+  assert.match(declaration,new RegExp('language\\s+'+setting.language+'\\b'),setting.name)
+  assert.match(declaration,/security invoker/)
+  assert.match(declaration,/set search_path\s*=\s*''/)
+  assert.equal(/\bstrict\b/.test(declaration),setting.strict,setting.name)
+  assert.equal(/\bimmutable\b/.test(declaration)?'i':/\bstable\b/.test(declaration)?'s':'v',setting.volatile,setting.name)
+ }
  const reachable=new Set(baseline.triggers.map(t=>t.function)),helpers=new Set(runtimeJournalFunctions.map(f=>f.split('(')[0]))
  for(const n of helpers)reachable.add(n)
  let changed=true
@@ -65,11 +78,17 @@ test('pinned proposed37 functions/155 trigger fingerprints cover complete invoke
 
 test('expected83-owner catalog guard rejects future objects/security/body/trigger/physical generated-column drift',()=>{
  const b=runtimeJournalPrivilegeBaseline,funcs=bodies(),catalog={tables:clone(b.tables),functions:b.functions.map(f=>({...f,body:funcs.get(f.name),security_definer:false})),
-  triggers:[...nativePrivilegeTriggers(),...journalTriggerDefinitions],policies:[]}
+  triggers:[...nativePrivilegeTriggers(),...journalTriggerDefinitions],policies:[],
+  functionSettings:expectedFunctionSettings(b.functions.map(f=>f.name)),triggerStates:b.triggers.map(t=>({table:t.table,name:t.name,enabled:'O'})),internalTriggersDisabled:0,installedStructure:clone(installedStructure)}
  assert.doesNotThrow(()=>assertRuntimeJournalPrivilegeCatalog(catalog))
+ const reordered=clone(catalog);reordered.functionSettings=reordered.functionSettings.map(s=>Object.fromEntries(Object.entries(s).reverse()))
+ assert.doesNotThrow(()=>assertRuntimeJournalPrivilegeCatalog(reordered))
  for(const change of [c=>c.tables.pop(),c=>c.tables[0].columns.push('extra'),c=>c.tables.find(t=>t.name==='sync_commit_intent').columns.reverse(),
   c=>c.functions.at(-1).body+='changed',c=>c.functions.at(-1).security_definer=true,c=>c.triggers.at(-1).definition+='changed',
-  c=>c.policies.push({name:'unexpected'}),c=>c.tables.push({name:'future',columns:['id'],rls:true})]) {
+  c=>c.policies.push({name:'unexpected'}),c=>c.tables.push({name:'future',columns:['id'],rls:true}),
+  c=>c.triggerStates.find(t=>t.name==='sync_commit_generation').enabled='D',c=>c.internalTriggersDisabled=1,
+  c=>c.functionSettings[0].config=null,c=>c.functionSettings[0].volatile='i',c=>c.functionSettings[0].strict=true,
+  c=>c.functionSettings[0].language='sql',c=>c.installedStructure.constraints='changed',c=>c.installedStructure.indexes='changed',c=>c.installedStructure.columns='changed']) {
   const bad=clone(catalog);change(bad);assert.throws(()=>assertRuntimeJournalPrivilegeCatalog(bad))
  }
  assert.throws(()=>assertRuntimeJournalPrivilegeCatalog({tables:clone(runtimePrivilegeBaseline.tables),functions:[],triggers:[],policies:[]}))
@@ -81,6 +100,8 @@ test('review grant/preflight/rollback guard are bounded and conditional on exact
  for(const text of Object.values(packageFiles.files))assert.ok(Buffer.byteLength(text)<=200000)
  const deny=packageFiles.files['runtime-journal-denial-fixture.sql']
  assert.ok(deny.includes('select 8 as denied_checks;'));assert.ok(deny.endsWith('rollback;\n'))
+ assert.ok(deny.includes('Role rehearsal requires an authorized superuser executor'))
+ assert.ok(deny.indexOf('Role rehearsal requires')<deny.indexOf('set local role'))
  assert.doesNotMatch(deny,/truncate|create role|grant |commit;/i)
  assert.ok(p.preflight.includes('Private helper definitions changed'))
  assert.ok(p.preflight.includes('Journal physical column definitions changed'))
@@ -93,6 +114,25 @@ test('review grant/preflight/rollback guard are bounded and conditional on exact
  assert.ok(p.roleCheck.includes('Private trigger definitions changed'))
  assert.ok(p.rollback.indexOf('Runtime policy definitions changed')<p.rollback.indexOf('drop policy '))
  assert.ok(p.rollback.includes('Runtime memberships require scoped rollback'))
+ assert.ok(p.preflight.includes('t.tgenabled'))
+ assert.ok(p.preflight.includes('k.convalidated'))
+ assert.ok(p.preflight.includes('pg_get_constraintdef'))
+ assert.ok(p.preflight.includes('x.indisvalid'))
+ assert.ok(p.preflight.includes('p.proconfig'))
+ assert.ok(p.preflight.includes('session_replication_role'))
+ assert.ok(p.preflight.includes('Journal structural receipt requires explicit maintainer review before grants'))
+ assert.deepEqual(reviewedJournalStructure,{constraints:null,indexes:null})
+ assert.ok(p.roleCheck.includes('or member_role.rolname in('))
+ assert.ok(p.roleCheck.includes('not m.inherit_option and not m.set_option'))
+ assert.ok(p.roleCheck.includes('m.grantor=10 and grantor.rolsuper and m.admin_option'))
+ assert.ok(p.grant.includes("set local createrole_self_grant='';"))
+ const creator=buildRuntimeJournalPrivilegeProposal({executor:'creator'}).files['runtime-journal-denial-fixture.sql']
+ assert.ok(creator.includes('ADDITIONAL APPROVAL REQUIRED'))
+ assert.ok(creator.includes('Creator membership baseline changed'))
+ assert.ok(creator.includes('with admin false,inherit false,set true granted by %I'))
+ assert.ok(creator.endsWith('rollback;\n'))
+ assert.doesNotMatch(creator,/\bcommit;|create role|password/i)
+ assert.throws(()=>runtimeRoleExecutor('unknown'))
 })
 
 test('actual v2 kernel transcript retains bounded lowering/claim/token/finalizer/receipt, no substituted legacy CAS',async()=>{
@@ -111,6 +151,12 @@ test('actual v2 kernel transcript retains bounded lowering/claim/token/finalizer
  assert.equal((role.sql.match(/set local role sky_guide_sync_reader;/g)||[]).length,5)
  assert.equal((role.sql.match(/set local role sky_guide_sync_writer;/g)||[]).length,34)
  assert.ok(role.sql.includes('reset role;'))
+ assert.ok(role.sql.includes('Role rehearsal requires an authorized superuser executor'))
+ assert.ok(role.sql.indexOf('Role rehearsal requires')<role.sql.indexOf('insert into sky_private'))
+ const creator=await buildSyncCommitAdapterRehearsal({roles:true,executor:'creator'})
+ assert.deepEqual(creator.rows,role.rows);assert.equal(creator.queryChecks,role.queryChecks)
+ assert.ok(creator.sql.includes('ADDITIONAL APPROVAL REQUIRED'))
+ assert.ok(creator.sql.endsWith('rollback;\n'))
 })
 
 test('prepared native-output verifier checks whole intents/witness/receipts and rejects incomplete evidence (synthetic only)',async()=>{

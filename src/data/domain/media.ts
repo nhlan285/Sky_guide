@@ -1,4 +1,4 @@
-import { enumeration, failure, nullable, object, success, validateDateTime, validateId } from '../core/index.ts'
+import { enumeration, failure, nullable, object, success, validateDateTime, validateId, compareInstants } from '../core/index.ts'
 import type { ValidationResult } from '../core/index.ts'
 import { array, boolean, nonBlank } from '../catalog/shared.ts'
 import type { EntityRef } from './identity.ts'
@@ -50,7 +50,7 @@ export function validateMediaRecord(input: unknown, provenanceIds: ReadonlySet<s
   const legacy = media.mimeType === 'image/webp' && ['thumbnails', 'cards', 'detail'].some(variant => media.storageKey === `items/${variant}/${media.sha256}.webp`)
   if (media.storageKey !== newKey && !legacy) return failure('invalid_value', 'Storage key must identify exact immutable content.')
   if (!media.provenanceIds.length || new Set(media.provenanceIds).size !== media.provenanceIds.length || media.provenanceIds.some(id => !provenanceIds.has(id))) return failure('unknown_provenance', 'Media provenance must resolve.')
-  if (Date.parse(media.fetchedAt) > Date.parse(media.updatedAt)) return failure('invalid_value', 'Media update precedes acquisition.')
+  if (compareInstants(media.fetchedAt, media.updatedAt) > 0) return failure('invalid_value', 'Media update precedes acquisition.')
   if (media.rightsStatus === 'verified' && (media.approvedRevision !== media.revision || !media.publicEvidenceUrl)) return failure('invalid_value', 'Verified rights require evidence and approval for this revision.')
   return result
 }

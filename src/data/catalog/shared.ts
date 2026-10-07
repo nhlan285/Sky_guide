@@ -1,3 +1,4 @@
+import { compareInstants } from '../core/time.ts'
 import {
   enumeration, failure, object, success, validateDateTime, validateId,
   validateProvenanceIds, validateString,
@@ -124,29 +125,12 @@ export function costsConsistent<T extends { costs: { amount: number | null }[]; 
   return result
 }
 
-// Inputs are already calendar/clock validated; compare without Date.parse coercion.
-function instantParts(value: string): { seconds: number; fraction: string } {
-  const [date, time] = value.toUpperCase().split('T')
-  const [year, month, day] = date.split('-').map(Number)
-  const match = /^(\d{2}):(\d{2})(?::(\d{2})(?:[.,](\d+))?)?(Z|[+-]\d{2}(?::?\d{2})?)$/.exec(time)
-  if (!match) throw new Error('Internal error: expected a previously validated instant.')
-  const [, hour, minute, second, fraction = '', offset] = match
-  const dt = new Date(0)
-  dt.setUTCFullYear(year, month - 1, day)
-  dt.setUTCHours(Number(hour), Number(minute), Number(second ?? '0'), 0)
-  const digits = offset.slice(1).replace(':', '')
-  const offsetMinutes = offset === 'Z' ? 0 : (Number(digits.slice(0, 2)) * 60 + Number(digits.slice(2) || '0')) * (offset[0] === '-' ? -1 : 1)
-  return { seconds: dt.getTime() / 1000 - offsetMinutes * 60, fraction }
-}
 export function rangeErrors(start: PartialTime | null, end: PartialTime | null, path: readonly string[]): ValidationError[] {
   if (!start || !end || start.precision !== end.precision || start.precision === 'unknown') return []
   let reversed: boolean
   if (start.precision === 'date') reversed = end.value < start.value
   else {
-    const a = instantParts(start.value)
-    const b = instantParts(end.value)
-    const length = Math.max(a.fraction.length, b.fraction.length)
-    reversed = b.seconds < a.seconds || (b.seconds === a.seconds && b.fraction.padEnd(length, '0') < a.fraction.padEnd(length, '0'))
+    reversed = compareInstants(end.value, start.value) < 0
   }
   return reversed ? [{ path, code: 'invalid_value', message: 'End must not precede start when precision is comparable.' }] : []
 }

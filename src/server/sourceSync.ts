@@ -1,5 +1,5 @@
 import { createHash } from 'node:crypto'
-import { validateDateTime, validateId } from '../data/core/index.ts'
+import { validateDateTime, validateId, compareInstants, addInstantMilliseconds } from '../data/core/index.ts'
 import { validateIdentityGraph } from '../data/domain/identity.ts'
 import type { IdentityGraph } from '../data/domain/identity.ts'
 import type { Freshness } from '../data/domain/repository.ts'
@@ -127,7 +127,7 @@ export async function stageSourceSnapshot(options: {
     const normalized = await normalize(raw)
     const canonical = await validateProjection(normalized, contract, base.lastKnownGood?.identities)
     const stagedAt = serverInstant(now)
-    if (!validateDateTime(fetchedAt).valid || Date.parse(fetchedAt) > Date.parse(stagedAt) || base.lastAttemptAt && Date.parse(fetchedAt) < Date.parse(base.lastAttemptAt) || base.lastPromotedAt && Date.parse(stagedAt) < Date.parse(base.lastPromotedAt)) throw new Error('Invalid source lifecycle')
+    if (!validateDateTime(fetchedAt).valid || compareInstants(fetchedAt, stagedAt) > 0 || base.lastAttemptAt && compareInstants(fetchedAt, base.lastAttemptAt) < 0 || base.lastPromotedAt && compareInstants(stagedAt, base.lastPromotedAt) < 0) throw new Error('Invalid source lifecycle')
     const value = { ...canonical, sourceId, sourceHash: digest(raw), normalizationVersion, baseRevision: base.revision, fetchedAt, stagedAt }
     const candidate = { ...value, contentHash: contentHash(value) }
     enforceNormalizedLimits(candidate, contract)
@@ -147,7 +147,7 @@ export async function validateStoredSyncCandidate(input: SyncCandidate,contract:
   const candidate=structuredClone(input)
   if(!contract.sourceIds.has(candidate.sourceId)||!validateId(candidate.sourceId).valid||!/^[a-f0-9]{64}$/.test(candidate.sourceHash)
     ||!candidate.normalizationVersion.trim()||!Number.isSafeInteger(candidate.baseRevision)||candidate.baseRevision<0
-    ||![candidate.fetchedAt,candidate.stagedAt].every(t=>validateDateTime(t).valid)||Date.parse(candidate.fetchedAt)>Date.parse(candidate.stagedAt)
+    ||![candidate.fetchedAt,candidate.stagedAt].every(t=>validateDateTime(t).valid)||compareInstants(candidate.fetchedAt,candidate.stagedAt)>0
     ||contentHash(candidate)!==candidate.contentHash) throw new Error('Invalid stored sync candidate')
   const canonical=await validateProjection(candidate,contract)
   const result={...canonical,sourceId:candidate.sourceId,sourceHash:candidate.sourceHash,normalizationVersion:candidate.normalizationVersion,
@@ -171,14 +171,14 @@ export async function promoteReviewedSnapshot(store: SyncStore, candidate: SyncC
     if (contentHash(candidate) !== candidate.contentHash) return 'rejected'
     const promotedAt = serverInstant(options.now ?? Date.now)
     if (![candidate.fetchedAt, candidate.stagedAt, approval.reviewedAt].every(time => validateDateTime(time).valid) ||
-      Date.parse(candidate.fetchedAt) > Date.parse(candidate.stagedAt) || Date.parse(candidate.stagedAt) > Date.parse(approval.reviewedAt) || Date.parse(approval.reviewedAt) > Date.parse(promotedAt)) return 'rejected'
+      compareInstants(candidate.fetchedAt, candidate.stagedAt) > 0 || compareInstants(candidate.stagedAt, approval.reviewedAt) > 0 || compareInstants(approval.reviewedAt, promotedAt) > 0) return 'rejected'
     if (approval.contentHash !== candidate.contentHash || approval.candidateHash !== candidateReviewHash(candidate) || approval.baseRevision !== candidate.baseRevision || !approval.reviewerRef.trim()) return 'rejected'
     if (current.revision !== candidate.baseRevision) {
       // Retry an already accepted transaction without changing health/audit. A
       // fresh stage/review is required to recover a failed newer source attempt.
       return current.lastKnownGood && candidateReviewHash(current.lastKnownGood) === candidateReviewHash(candidate) && canonicalJson(current.approval) === canonicalJson(approval) ? 'unchanged' : 'conflict'
     }
-    if (current.lastAttemptAt && Date.parse(candidate.fetchedAt) < Date.parse(current.lastAttemptAt) || current.lastPromotedAt && Date.parse(promotedAt) < Date.parse(current.lastPromotedAt) || current.freshness && Date.parse(promotedAt) < Date.parse(current.freshness.lastSuccessAt) || current.revision >= Number.MAX_SAFE_INTEGER) return 'rejected'
+    if (current.lastAttemptAt && compareInstants(candidate.fetchedAt, current.lastAttemptAt) < 0 || current.lastPromotedAt && compareInstants(promotedAt, current.lastPromotedAt) < 0 || current.freshness && compareInstants(promotedAt, current.freshness.lastSuccessAt) < 0 || current.revision >= Number.MAX_SAFE_INTEGER) return 'rejected'
     const freshness: Freshness = { health: 'healthy', lastSuccessAt: promotedAt, validUntil: options.validUntil }
     createSnapshotRepository(candidate.publicFiles, freshness)
     const unchanged = current.lastKnownGood?.contentHash === candidate.contentHash
@@ -191,12 +191,12 @@ export async function promoteReviewedSnapshot(store: SyncStore, candidate: SyncC
 export async function recordSourceFailure(store: SyncStore, sourceId: string, completedAt: string, contract: SyncContract, now: () => number = Date.now): Promise<'recorded' | 'conflict' | 'rejected'> {
   try {
     validateContract(contract)
-    if (!contract.sourceIds.has(sourceId) || !validateDateTime(completedAt).valid || Date.parse(completedAt) > Date.parse(serverInstant(now))) return 'rejected'
+    if (!contract.sourceIds.has(sourceId) || !validateDateTime(completedAt).valid || compareInstants(completedAt, serverInstant(now)) > 0) return 'rejected'
     const current = await store.read(sourceId)
-    if (current.lastAttemptAt && Date.parse(completedAt) <= Date.parse(current.lastAttemptAt) || current.freshness && Date.parse(completedAt) < Date.parse(current.freshness.lastSuccessAt) || current.revision >= Number.MAX_SAFE_INTEGER) return 'rejected'
+    if (current.lastAttemptAt && compareInstants(completedAt, current.lastAttemptAt) <= 0 || current.freshness && compareInstants(completedAt, current.freshness.lastSuccessAt) < 0 || current.revision >= Number.MAX_SAFE_INTEGER) return 'rejected'
     const delay = contract.retryDelaysMs[current.failures]
     const next: SyncState = { ...current, revision: current.revision + 1, failures: current.failures + 1,
-      lastAttemptAt: completedAt, nextRetryAt: delay === undefined ? null : new Date(Date.parse(completedAt) + delay).toISOString(),
+      lastAttemptAt: completedAt, nextRetryAt: delay === undefined ? null : addInstantMilliseconds(completedAt, delay),
       freshness: current.freshness ? { ...current.freshness, health: 'offline' } : null }
     return await store.compareAndSwap(sourceId, current.revision, next) ? 'recorded' : 'conflict'
   } catch { return 'rejected' }

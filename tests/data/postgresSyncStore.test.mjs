@@ -97,6 +97,11 @@ test('forged next file bytes/review/health/retry/extra state/future clock fail e
  }
  const db=scriptedDatabase(emptyTables()),store=createPostgresSyncStore(db,contract,{...storeOptions,now:()=>Date.parse('2026-10-06T00:00:00Z')})
  await assert.rejects(()=>store.compareAndSwap('K15',0,f.state));assert.equal(db.transactions[0].writes.length,0)
+ for(const clock of ['2026-10-07T00:03:00.0001Z','2026-10-07T00:03:00,000Z']) {
+  const next=globalThis.structuredClone(f.state);next.lastPromotedAt=clock;next.freshness.lastSuccessAt=clock
+  const port=scriptedDatabase(emptyTables()),adapter=createPostgresSyncStore(port,contract,storeOptions)
+  await assert.rejects(()=>adapter.compareAndSwap('K15',0,next));assert.equal(port.transactions[0].writes.length,0)
+ }
 })
 
 test('transport/row/write byte budgets and malformed driver rows fail closed without partial commit',async()=>{

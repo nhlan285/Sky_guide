@@ -34,6 +34,9 @@ type Preservation = `${'column' | 'join' | 'derived' | 'deferred' | 'future' | '
 // Review inventory, not dynamic persistence/EAV. Future DDL must implement these
 // explicit owners and preserve nulls/order/source labels. Tests cover actual K15
 // field coverage and canonical round-trip parity; no SQL execution is claimed.
+// Public record evidence is an ordered subset of canonical identity evidence.
+// payload_provenance preserves that subset/order; identity_provenance retains
+// the independent canonical superset across publication and retirement.
 export const migrationFieldOwnership: Record<string, Record<string, Preservation>> = {
   item: {
     id: 'column:item.id', sourceKeys: 'join:item_source_key + source_crosswalk',
@@ -42,7 +45,7 @@ export const migrationFieldOwnership: Record<string, Record<string, Preservation
     acquisitionOptions: 'join:acquisition_option(item_id,option_id,position)', assetIds: 'future:item_asset(position)',
     dyeRegions: 'future:item_dye_region(position,typed-schema)', dyeStatus: 'column:item.dye_status',
     ruleIds: 'future:item_compatibility_rule(position)', compatibility: 'future:item_compatibility(typed-schema)',
-    provenanceIds: 'join:identity_provenance(position)', fieldProvenance: 'join:field_provenance(position)',
+    provenanceIds: 'join:payload_provenance(kind,id,position)', fieldProvenance: 'join:field_provenance(position)',
     updatedAt: 'column:domain_identity.updated_at', recordStatus: 'column:item.record_status', fixture: 'column:domain_identity.fixture',
   },
   acquisitionOption: {
@@ -66,7 +69,7 @@ export const migrationFieldOwnership: Record<string, Record<string, Preservation
   spirit: {
     id: 'column:spirit.id', name: 'column:spirit.name_default + spirit_translation', category: 'column:spirit.category',
     realmId: 'deferred:spirit.realm_id exact Realm subtype ID', seasonIds: 'join:spirit_season(position)', treeIds: 'future:spirit_tree(position)',
-    provenanceIds: 'join:identity_provenance(position)', fieldProvenance: 'join:field_provenance(position)',
+    provenanceIds: 'join:payload_provenance(kind,id,position)', fieldProvenance: 'join:field_provenance(position)',
     updatedAt: 'column:domain_identity.updated_at', recordStatus: 'column:spirit.record_status', fixture: 'column:domain_identity.fixture',
   },
   season: {
@@ -75,7 +78,7 @@ export const migrationFieldOwnership: Record<string, Record<string, Preservation
     timeStatus: 'column:season.time_status', summary: 'column:season.summary',
     spiritIds: 'join:season_spirit(position)', itemIds: 'join:season_item(position)', realmIds: 'future:season_realm(position)',
     mapIds: 'future:season_map(position)', officialArticleIds: 'future:season_article(position)',
-    provenanceIds: 'join:identity_provenance(position)', fieldProvenance: 'join:field_provenance(position)',
+    provenanceIds: 'join:payload_provenance(kind,id,position)', fieldProvenance: 'join:field_provenance(position)',
     updatedAt: 'column:domain_identity.updated_at', recordStatus: 'column:season.record_status', fixture: 'column:domain_identity.fixture',
   },
   provenance: {
