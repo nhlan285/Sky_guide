@@ -166,6 +166,27 @@ two-session isolation acceptance remains with the actual transactional adapter.
 Materialization is not reviewed publication: global pointer/CAS/audit/source-health
 and latest revocation overlay are follow-up owners. No production consumer mounted.
 
+## Canonical graph history
+
+Canonical graph history (2026-10-07): each acceptance may carry an immutable typed
+frame in acceptance_graph plus six ordered identity/evidence/crosswalk/alias/
+tombstone owners and20 explicit relation tables. Historical identity revisions,
+nonpublic/fixture/retired nodes and unknown alias-source IDs remain independent of
+mutable current rows/public membership. Global relation position preserves mixed
+array ordering required by SourceSync hashes. Generated declared endpoint kinds and
+typed historical FKs enforce owner boundaries. Children precede sealing header;
+count/order/evidence/required/cardinality/retirement/alias/event-parent checks apply.
+Immutable parent acceptance lock coordinates inserts/header; global generation lock
+must precede this in the full writer. Orphan child frames cannot commit. Registered
+provenance references preserve IDs, not a claim of historical provenance payloads.
+graphHistoryRows revalidates the domain graph and exact ordered byte digest; SQL
+checks structure and hash spelling rather than recreating JS JSON.stringify bytes.
+Previous-frame monotonic identity/alias/crosswalk/tombstone continuity remains the
+normalizer/transaction validator's responsibility. Metadata-only acceptances remain
+supported; future full SyncStore must require graph, canonical payload, projection,
+acceptance/source state/audit together. No generic JSON/EAV canonical owners, full
+future module payloads, authenticated reviewer or mounted provider driver inferred.
+
 ## Migration sequence and preservation
 
 1. Inventory immutable catalog manifest/version/hash and existing K15 validators.

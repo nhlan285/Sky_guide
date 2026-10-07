@@ -89,7 +89,22 @@ null pointer/promotion, all49 other tables empty; no real source/review imported
 Metadata codec returns private lifecycle facts, not SyncState/SyncStore. Historical
 canonical graph/payload transaction writer and authenticated reviewer remain OPEN.
 
-Revision checks for changed entity relations/provenance, historical canonical graph,
+Graph history migration20261007020927 adds27 immutable typed owners (77 total):
+complete IdentityGraph plus ordered candidate provenance IDs by acceptance revision,
+including private/fixture/retired identities, alias chains and all20 relation kinds.
+Build `node tests/sql/build-graph-history-rehearsal.mjs E:/SkyGuideAssets/research/postgres-rehearsal-2026-10-07/graph-history-fixture.sql`.
+Use verify-graph-history-rehearsal.mjs and verify-graph-history-schema.mjs for
+actual fetched rows/schema: two historical frames/141 native negatives PASS.
+Only revision0 control remains after ROLLBACK; all76 other tables empty. Writable
+columns exclude generated endpoint kinds. Insert acceptance -> child graph rows ->
+sealing header; enforce deferred constraints before commit. Header counts/order and
+domain relationship/retirement checks supplement the existing TypeScript validator.
+SQL does not reconstruct the JS digest: pinned decoder validates that on reads.
+Metadata-only acceptances remain allowed; full driver must require archived graph
+and validate previous-frame revision/crosswalk/alias/tombstone continuity. Graph
+metadata is not future module/provenance payload history or authenticated review.
+
+Revision checks for changed current entity relations/provenance, full payload history,
 complete transactional SyncStore/driver and
 PostgreSQL backup/restore are subsequent slices. The existing TypeScript domain
 validators remain required; database constraints supplement them.

@@ -506,5 +506,81 @@ constraints before commit and rollback on any false/error. Then real two-session
 conflicts/rollback/provider parity/restore/measurement and least-privilege runtime
 role/authenticated review. No SDK/credential/consumer mount approved by implication.
 P9-I02/D04/V01 remain PARTIAL/OPEN; metadata SQL is not full foundation completion.
-Exact next: complete canonical historical graph/transaction writer and provider-
-neutral SyncStore driver, then real races/restore/measurement in approved isolation.
+
+## Active canonical graph history slice — 2026-10-07
+MEDIUM approved R1 subsystem work after verified pushed53498f6. Preserve complete
+IdentityGraph and ordered candidate.provenanceIds by acceptance revision, including
+retired/nonpublic identities, crosswalks, unknown-source aliases, tombstones and all
+20 declared typed relation kinds. Do not infer archive from latest canonical rows
+or from the public subset: those lose historical revisions/private canonical nodes.
+Scope: server row codec with immutable header/count/hash and ordered explicit rows;
+seven snapshot owners plus20 explicit typed relation tables (no generic relation/
+EAV/document canonical owner). SQL reviewed/applied/rehearsed after full field/order
+parity; acceptances and domain validators remain authoritative. Snapshot header seals
+rows, validates FK/cardinality/retirement/event-parent consistency and array order.
+Out of scope: full domain payload history beyond current published projection,
+new module game data/UI, runtime SDK/credentials, full SyncStore writer/driver,
+actual races, production/publication and isolated restore. These remain required.
+Dependencies: existing sourceSync validateIdentityGraph/current/previous semantics,
+eight approved dev migrations, immutable projection and private acceptance metadata.
+Expected files: server graph history codec, focused all-kind/K15/corruption tests,
+CLI migration and native fixture builder/body/verifiers, existing architecture/
+master/phase/handoff. Existing candidateReviewHash/contentHash ordering must survive
+reconstruction. Arrays preserve order across different typed relation tables.
+Steps: explicit row vocabulary -> domain validator -> encode/decode -> every-field
+full K15 graph and synthetic all-kind/alias/retirement/event tests -> typed SQL and
+hosted actual-row parity/negative constraints/immutability -> roles/lint/build/tests
+-> durable checkpoint. No automatic DONE for whole source/infrastructure roadmap.
+Acceptance: private/nonpublic canonical nodes and field evidence IDs retained;
+zero unsupported relation drops; exact kind-qualified IDs and arrays; future payload
+module not claimed from identity graph metadata. Full graph hash/counts and existing
+validator reject changed/cyclic/cross-kind/orphan/retired/required/event-parent rows.
+Exact next: typed canonical payload transaction writer + provider-neutral SyncStore,
+locking generation before mutation and committing graph/projection/acceptance/audit
+atomically; then actual concurrency/provider/restore/measurements.
+
+Completed graph history milestone: migration20261007020927_private_acceptance_graph,
+SHA2561113dd8d404cad0731d5573b08928d93cf74602d0d3ba2cc789593fbbbc498bea,
+applied to the approved isolated Free development project.27 new private tables:
+acceptance header, ordered candidate/identity evidence, independent identity revision
+metadata, crosswalk, alias, tombstone and20 explicit relation owners. Fixed endpoint
+kinds are generated SQL columns; never a generic relation/document canonical owner.
+Historical metadata has no FK to mutable current identity revision. References to
+registered provenance preserve IDs; provenance payload history is a separate gate.
+Children precede header; deferred header/evidence/typed target FKs reject unfinished
+frames. Parent acceptance lock serializes header sealing vs inserts; no insert,
+update, delete or TRUNCATE after seal. Global lock must precede all future driver
+writes. Required/to-one/one-to-one, mixed relation order, exact retirement, alias
+cycles/terminal/replacement and event parent checks enforced. Previous-frame revision/
+crosswalk/alias/tombstone continuity still requires validateIdentityGraph(previous).
+SQL validates hash vocabulary/structure/counts/order; graphHistoryRows reconstructs
+and checks the exact JS byte digest. No claim SQL proves the reviewed content hash.
+Existing metadata acceptances may omit a graph; the future full adapter must require
+graph + reviewed projection + typed canonical payload in the same transaction.
+
+Five focused tests PASS: all14 kinds/20 relation arrays, every field/order, unknown
+alias sources, cross-kind shared IDs, fixture/private and retired identities; full
+K15 graph2051 identities preserves actual SourceSync contentHash/candidateReviewHash
+after physical row reordering; corruption fails closed; prior revision continuity.
+Hosted rollback-only fixture stages two independent frames with owner revision/edge
+change; readback matches codec after mutable catalog change.141 SQLSTATE negatives
+PASS, including32 malformed frames,108 per-owner update/delete/TRUNCATE/sealed-insert
+guards and missing acceptance. Initial migration syntax failed on unquoted position
+in function output; fixed before successful application/history verification.
+Initial builder missing-header count adjustment fixed before native PASS. No failed
+attempt counted as success. Evidence SQL/actual rows/schema on E: outside Git.
+
+77 private tables all RLS; exact27 writable column contracts, RESTRICT FKs,
+0 unvalidated constraints/SECURITY DEFINER/platform schema-table-function grants.
+One revision0 control row remains; all76 other tables empty. Advisors no WARN/ERROR;
+same intentional no-policy RLS and unused-index INFO. Schema audit exceeded the
+100-argument JSON function limit initially; split bounded objects and verified.
+323 full tests/lint/typecheck/build/catalog1808 PASS; scaffold/diff before checkpoint.
+No real import/SDK/credentials/consumer/rights change.
+This completes the graph metadata slice, not full canonical payload history,
+transactional SyncStore/provider driver, authenticated review, races or restore.
+Exact next: typed canonical payload transaction writer + provider-neutral SyncStore;
+lock global generation before mutation, decode immutable graph/projection alongside
+sync metadata, validate complete candidate, write acceptance/audit atomically, force
+deferred constraints before commit and roll back ALL writes on false/error. Then
+real two-session conflicts/provider parity/restore/measurement/runtime role review.
