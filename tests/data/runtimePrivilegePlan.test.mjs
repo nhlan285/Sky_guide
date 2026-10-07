@@ -12,7 +12,12 @@ import { scriptedDatabase,storeOptions,contract } from '../fixtures/postgresSync
 
 function migrationFunctions() {
  const functions=new Map()
- for(const name of readdirSync(new URL('../../supabase/migrations/',import.meta.url)).sort()) {
+ // Historical79-owner proposal is pinned to the first11 applied migrations.
+ // Journal/ACL and future migrations have their separate83-owner guard/tests;
+ // never silently expand this historical snapshot to the latest schema.
+ const files=readdirSync(new URL('../../supabase/migrations/',import.meta.url)).filter(name=>name.endsWith('.sql')&&name.slice(0,14)<='20261007023752').sort()
+ assert.equal(files.length,11)
+ for(const name of files) {
   const sql=readFileSync(new URL('../../supabase/migrations/'+name,import.meta.url),'utf8')
   for(const m of sql.matchAll(/create(?: or replace)? function sky_private\.([a-z_0-9]+)\([\s\S]*?\bas \$\$([\s\S]*?)\$\$;/gi)) functions.set(m[1],m[2])
  }
@@ -51,7 +56,7 @@ test('proposal grants scoped column writes/RLS, no passwords/platform/future/def
  assert.ok(p.rollback.includes('Runtime memberships require scoped rollback'))
 })
 
-test('pinned27 body hashes match last local migrations; only5 reachable invoker helpers get EXECUTE',()=>{
+test('pinned27 body hashes match first11 baseline migrations; only5 reachable invoker helpers get EXECUTE',()=>{
  const functions=migrationFunctions()
  assert.equal(functions.size,27);assert.equal(runtimePrivilegeBaseline.triggers.length,143)
  for(const f of runtimePrivilegeBaseline.functions) assert.equal(createHash('md5').update(functions.get(f.name)).digest('hex'),f.bodyMd5,f.name)

@@ -2,7 +2,7 @@
 
 ## Task / branch / checkpoint
 Sky Guide autonomous master run ACTIVE; roadmap OPEN, not complete.
-Branch codex/master-plan-execution; pushed base77a7756a4b0d6bdd0797234e2ba8355c0b69aefc.
+Branch codex/master-plan-execution; pushed based3e5b6439890285d19352548772f7c8971dbc1c2.
 Resolve this checkpoint with git log -1 and verify remote SHA. Master:
 [IMPLEMENTATION_PLAN](plan/IMPLEMENTATION_PLAN.md); active detailed phase:
 [POSTGRES_PROVIDER_SELECTION](plan/POSTGRES_PROVIDER_SELECTION.md), latest section;
@@ -71,19 +71,41 @@ retained. Only the two bootstrap ADMIN-only creator edges remain. E receipts:
 journal-native-{owner,creator}-receipt.json and post-{owner,creator,denial}-baseline.json.
 These are native single-connection SQL/role proofs; not SDK/race/durable/crash proof.
 
-Next: full-K15 cost fixture (46,341 canonical/4,367 release rows) under ROLLBACK/30s;
+Full-K15 cost fixture (46,341 canonical/4,367 release rows) was attempted under ROLLBACK/30s.
 Direct4.53MB request was rejected by connector BEFORE SQL execution (not a native
 timeout); authoritative baseline remained identical. Transport-only dictionary
 packer reconstructs EXACT original DO SQL on PostgreSQL and checks SHA256 BEFORE
 EXECUTE; same statements/data/timing boundaries/deferred checks/transaction/cap.
 No batching or new extension/function/principal. Packed request1,397,697 bytes;
-3 focused preparation/packing tests PASS. Exact next: execute the packed fixture,
-verify native full-K15 receipt if returned and authoritative after baseline.
-verify complete receipt and authoritative rollback. STOP on schema/ACL/membership/data
+3 focused preparation/packing tests PASS. Native packed run reached original
+SET CONSTRAINTS ALL IMMEDIATE and failed57014/statement timeout in
+validate_release_metadata, the full membership→domain_identity query (line29).
+Authoritative after-timeout baseline matched exactly: no fixture data or temporary
+SET membership retained. NO complete internal phase timing receipt was returned;
+do not label request rejection or45-second API wall clock as canonical cost.
+Benchmark gate OPEN. E: journal-native-k15-timeout-receipt.json contains bounded
+diagnostic + full after baseline; packed SQL SHA256
+9b1492072ce09e0dd9b2cb323c159495384a21a7d8aeabbc51c030c9f95eaed7.
+Exact next: prepare an additive reviewed optimization for repeated deferred full
+release scans, preserve every integrity invariant, repin deliberately and re-run
+the EXACT K15 benchmark only after that new migration scope is reviewed/authorized.
+No optimization DDL prepared/applied yet. STOP on schema/ACL/membership/data
 drift; any timeout leaves benchmark gate OPEN. Do not disable deferred integrity,
 rewrite applied history or infer production sizing from fixture preparation.
-K15 timings/down/durable/concurrent/crash/restore proof NOT RUN at this checkpoint.
+K15 attempted/TIMEOUT; complete timings missing. Down/durable/concurrent/crash/
+restore proof NOT RUN at this checkpoint.
 Portable tests are not native runtime proof. No P9-I02/D04/V01 or master DONE.
+
+Final local validation:427 full tests/13 focused/lint/typecheck/build/catalog1808/
+scaffold76 Markdown/14 source profiles/173 tasks/diff PASS; existing Router/chunk
+warnings unchanged. Initial full suite426/427 exposed historical79 test reading
+future journal migration; fixture now explicitly pins first11 migrations and its
+27-function scope, while native83 tests remain separate; final full427 PASS.
+Supabase security advisors returned no lints. E: journal-native-final-tests.log
+and journal-native-final-build.log. Intentionally changed: two CLI migrations,
+CASE syntax/source body hash, deliberate journal structural pins, transport-only
+benchmark packer/tests, historical fixture cutoff and existing plans/README/handoff.
+No production/public data/SDK/Auth/credentials/new login/consumer operation.
 
 ## Remaining gates / local operations
 K04 OneDrive403; K10/K11 SKU/market; K12 bulk reuse prohibited; Q02/Q09/Q10/Q11/Q12,

@@ -1553,3 +1553,34 @@ DO cost statement unchanged including every INSERT and deferred/timing boundary.
 No new DB object/extension or batching optimization. Local3 focused tests PASS;
 packed fixture1,397,651 bytes/wire1,397,697. Native cost remains NOT RUN until
 packed fixture executes and complete timing/row receipt passes verifier.
+
+Native full-K15 packed run reached original SET CONSTRAINTS ALL IMMEDIATE and
+failed57014/30s statement timeout in validate_release_metadata line29 (full release
+membership UNION joined to domain_identity). No complete phase timing receipt;
+45-second API wall clock includes transport/unpacking/parsing and is not canonical
+cost. Hash guard reconstructed exact original DO body before execution. After
+timeout full authoritative baseline identical: no data/temporary SET edges retained.
+E: journal-native-k15-timeout-receipt.json; benchmark gate OPEN, not performance PASS.
+
+Exact next local slice: design an additive optimization preserving every deferred
+release invariant. Inspect final-state row trigger behavior for INSERT/UPDATE/DELETE,
+version movement, item/lookup equality, contiguous unique positions, current owner
+revision/fixture/retirement/publication and provenance constraints. Compare options
+(retain full sweeps versus indexed affected-row validation); do not choose a cache
+or session flag that can suppress a later invalid mutation. Check definition and
+dependent trigger/caller scope before changing completed decisions; document impact
+and migration/rollback, prepare a concrete reviewable proposal and focused invariant
+counterexamples. Native application/repinning requires NEW scoped migration review;
+no optimization authorization inferred from this creator-only rehearsal package.
+Re-run EXACT full-K15 fixture under original30s cap and authoritative rollback
+after approved optimization; complete receipt required. Do not raise timeout to
+claim the original gate passed, publish/import real source data, or mark R1 DONE.
+
+Final validation PASS427 full/13 focused tests, lint/typecheck/build/catalog1808,
+scaffold76 Markdown/14 profiles/173 tasks/diff; unchanged Router/chunk warnings.
+Initial full suite426/427 exposed legacy79 body collector including newly installed
+journal functions. Fixture now pins the exact first11 historical migrations with
+count assertion; separate83 tests retain new-native coverage. No old baseline/
+generator/migration weakening. Supabase security advisors lints=[] after DDL.
+Logs E: journal-native-final-{tests,build}.log. Native K15 gate stays OPEN despite
+local green checks. No optimization DDL/SDK/Auth/credentials/consumer/production.

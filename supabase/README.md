@@ -287,3 +287,13 @@ has automatic bootstrap ADMIN-only edges; transient SET-only rehearsal is approv
 solely under the same ROLLBACK transaction as fixture data. No temporary SET edge
 executed yet. Next: owner/creator/denial fixtures and K15 benchmark with authoritative
 before/after baseline checks; do not infer runtime/durability/SDK acceptance.
+
+Native owner/approved creator SQL now PASS:39 callbacks/978 query checks/6 token
+negatives each, full returned rows verified;8 forbidden operations rejected.
+Every transaction rolled back memberships+data together; full baseline matched
+after each, no temporary SET edges retained. Full-K15 raw request exceeded connector
+body limit; transport-only packer reconstructs identical DO SQL and verifies server
+SHA256 before execution, preserving statements/deferred checks/30s budget. Native
+packed benchmark timed out57014 at deferred validate_release_metadata; after-error
+baseline identical. Performance gate OPEN; no full internal timing receipt. Do not
+import real data until reviewed additive optimization passes exact benchmark.

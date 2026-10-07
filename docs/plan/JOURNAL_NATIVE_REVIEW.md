@@ -1,6 +1,6 @@
 # P9-I02 — v2 journal development review package
 
-Status: **DEV SCHEMA/ACL APPLIED / NATIVE METADATA AND OWNER/CREATOR/DENIAL PASS / K15 NOT RUN** (2026-10-07).
+Status: **DEV SCHEMA/ACL APPLIED / NATIVE METADATA AND OWNER/CREATOR/DENIAL PASS / K15 TIMEOUT, BENCHMARK OPEN** (2026-10-07).
 This package replaces the old79-owner runtime-role proposal for future application;
 it does not replace the current installed-schema baseline. User approval of R1,
 Supabase Free and Dyland's Org persists. The earlier runtime-role question remains
@@ -74,7 +74,7 @@ Default role/denial fixtures require an authorized superuser executor before any
 DML/SET ROLE; they cannot run through that hosted API actor as-is. No superuser,
 credentials or principal are provisioned to solve this.
 
-A separate optional creator rehearsal is PREPARED/NOT RUN: existing postgres
+A separate creator rehearsal is AUTHORIZED/NATIVE PASS: existing postgres
 creator only, require exactly two bootstrap ADMIN-only edges/no other membership,
 temporarily self-grant SET TRUE/INHERIT FALSE/ADMIN FALSE under the same outer
 ROLLBACK as ALL test data. No durable membership/login/new principal. This is an
@@ -89,8 +89,8 @@ Full K15 cost rehearsal prepares46,341 canonical/4,367 release rows, including
 2,051 identity and4,103 membership events. It locks the global head, refuses a
 populated baseline, measures canonical/release/deferred durations separately and
 forces ALL deferred checks under outer ROLLBACK with a30-second statement cap.
-The cap is a dev rehearsal budget, not production capacity. SQL execution and
-timings NOT RUN. Before real import: run this authorized rehearsal, verify its
+The cap is a dev rehearsal budget, not production capacity. Native packed execution
+timed out during deferred checks; complete timings missing. Before real import: pass this rehearsal, verify its
 complete receipt and authoritative empty-baseline rollback receipt; if timeout or
 unacceptable measured cost, prepare/review an additive optimization and repin
 metadata. Do not rewrite applied migrations, disable triggers or suppress later
@@ -157,7 +157,7 @@ Source down:1623 bytes,
 SHA256 `0483b6c4c16ae2075c54d7df55d9f766aa5e2ff297e358637079cb2ea4c0a9c7`.
 Qualified receipt audit/acceptance column references remove a static variable-name
 collision; [PostgreSQL variable substitution rules](https://www.postgresql.org/docs/17/plpgsql-implementation.html)
-explain the ambiguity. No native execution of that repair is claimed.
+explain the ambiguity. Owner and approved creator native execution now PASS.
 
 Initial native up failed42601 at unparenthesized CASE in the applied-witness IF;
 after-error baseline was identical to before. Constant native reproducer proved
@@ -167,7 +167,8 @@ migrations unchanged. CLI filenames aligned with server-assigned versions. Grant
 migration omits proposal BEGIN/COMMIT only; migration tool owns transaction.
 Post-grant baseline:83 tables,201 policies,2 NOLOGIN roles, global revision0 and
 no fixture data; two bootstrap creator ADMIN-only edges, INHERIT/SET FALSE. No
-temporary membership granted yet. Native runtime/K15/down/durability remain NOT RUN.
+temporary SET membership retained. Native owner/creator/denial PASS; K15 timed out
+at deferred checks. Down/durability remain NOT RUN.
 
 Prepared outputs live outside Git in
 `E:/SkyGuideAssets/research/postgres-rehearsal-2026-10-07/`:
@@ -194,7 +195,8 @@ remains a distinct prepared control fixture. Role variant sets reader for5 read
 callbacks/writer for34 callbacks. Do not represent the outer-ROLLBACK ordering as
 physical concurrency/durability. `verify-sync-commit-adapter-rehearsal.mjs` compares
 actual full intent/control/applied/receipt output; its synthetic tests are not
-native receipts. No actual native output exists for this package yet.
+native receipts. Current native owner/creator receipts were independently verified;
+full baseline matched after each rollback. K15 timing acceptance remains OPEN.
 
 Local validation after remediation:425 full tests plus final10 Store/6 ACL tests,
 lint/typecheck/build/catalog1808 PASS. Existing Router/chunk warnings unchanged.
@@ -205,6 +207,12 @@ guards, disabled triggers/internal FK enforcement, function settings, exact cloc
 precision and evidence ownership, actual v2 grammar and native-output verifier
 rejection. Full-K15 receipt verifier tests are synthetic; no measured PASS claimed.
 
+After authorized native execution:427 full tests/13 focused/lint/typecheck/build/
+catalog1808/scaffold/diff PASS, Supabase security advisors no lints. Historical79
+fixture explicitly retains first11 migrations; new83 guard/coverage is separate.
+These checks do not close the native benchmark:57014 timeout and missing complete
+timing receipt remain OPEN. Native one-connection role proof is not SDK/race/crash.
+
 ## Exact next
 
 Native owner and approved creator adapter PASS:39 callbacks/978 query checks/6
@@ -213,5 +221,15 @@ denial checks PASS. Each rehearsal used one outer ROLLBACK for membership and da
 after EACH run the full authoritative after-grants baseline matched exactly, with
 no retained temporary SET edges/data. Two bootstrap ADMIN-only creator edges remain.
 Receipts on E: journal-native-{owner,creator}-receipt.json and post-{owner,creator,denial}-baseline.json.
-Next: native full-K15 benchmark under ROLLBACK/30s and authoritative empty-baseline
-verification. Benchmark/down/durable/session/crash/restore/SDK remain separate gates.
+Full-K15 native packed run failed57014 at SET CONSTRAINTS ALL IMMEDIATE inside
+validate_release_metadata line29, scanning full release membership against current
+domain_identity. No complete timing receipt returned. After-timeout authoritative
+baseline identical; no data or SET membership retained. Benchmark remains OPEN.
+Raw4.53MB connector request was rejected before execution; packed1.397MB transport
+reconstructed EXACT original SQL and checked SHA256 before executing the same DO,
+statements, deferred checks and timing boundaries. No batching/new DB object.
+E: journal-native-k15-timeout-receipt.json (bounded error + full after baseline),
+SHA256bf90932b48890f9e4c67d86329b0f78a17002a461120b50cc17c4568d2b82bfb.
+Next: prepare/review additive optimization and repin intentionally BEFORE new
+authorized DDL; preserve enforcement and re-run exact K15 benchmark. No native
+optimization applied. Down/durable/session/crash/restore/SDK remain separate gates.

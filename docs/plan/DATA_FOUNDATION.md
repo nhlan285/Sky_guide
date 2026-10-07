@@ -135,10 +135,14 @@ PARTIAL until W11 dependencies.
 Read [CURRENT_STATE](../CURRENT_STATE.md) for latest commit/checks and gates.
 Branch `codex/master-plan-execution`; checkpointdd7fb11 verified pushed before the
 release metadata slice. Supabase Free dev in Dyland's Org is provisioned;44 private
-tables at that milestone; now79 private tables with no platform grants. Domain
-implementations remain unmounted from production consumers. Latest416 full tests/
-31 focused v2 review + final6 focused/lint/typecheck/build PASS; [83-owner native review](JOURNAL_NATIVE_REVIEW.md)
-is PREPARED/NOT APPLIED/NOT RUN. Local protocol model is not native
+tables at that milestone; now83 private tables with scoped NOLOGIN roles and no
+platform grants. Domain implementations remain unmounted from production consumers.
+[83-owner native review](JOURNAL_NATIVE_REVIEW.md) schema/ACL/owner/approved creator/
+denial checks PASS; full authoritative baseline matched after each data+membership
+ROLLBACK. Full-K15 native deferred validation hit30s cap (57014); benchmark OPEN.
+Next is a reviewed additive optimization preserving integrity, not a longer timeout
+or skipped enforcement. Actual SDK/consumer/concurrent/durable/restore remain OPEN.
+Local protocol model is not native
 parse/execution/durability acceptance.7 read composition tests/11 native negatives plus5 graph history tests/141 native
 negatives/actual two-frame parity PASS; prior lifecycle metadata/source isolation/
 projection byte checks retained. Intentional revision0 control baseline, other tables empty. Existing
