@@ -1,6 +1,6 @@
 # P9-I02 — v2 journal development review package
 
-Status: **DEV SCHEMA/ACL APPLIED / NATIVE METADATA PASS / RUNTIME AND K15 NOT RUN** (2026-10-07).
+Status: **DEV SCHEMA/ACL APPLIED / NATIVE METADATA AND OWNER/CREATOR/DENIAL PASS / K15 NOT RUN** (2026-10-07).
 This package replaces the old79-owner runtime-role proposal for future application;
 it does not replace the current installed-schema baseline. User approval of R1,
 Supabase Free and Dyland's Org persists. The earlier runtime-role question remains
@@ -207,13 +207,11 @@ rejection. Full-K15 receipt verifier tests are synthetic; no measured PASS claim
 
 ## Exact next
 
-Verify latest checkpoint SHA; obtain dev-only schema/rehearsal authorization, then
-revalidate native baseline and create the CLI migration. Collect the new structural
-receipt, compare full definitions against the up SQL, intentionally pin its hashes
-and regenerate artifacts BEFORE grants; apply scoped ACL only within authorization.
-Run owner/role/deny and full-K15 cost fixtures, confirm rollback and empty baseline.
-For hosted postgres role proof, obtain the explicit transient creator SET
-rehearsal scope described above or use an independently authorized superuser
-executor. Current creator ADMIN-only membership cannot SET ROLE by itself.
-No role/schema application before scoped authorization. SDK/Auth/credentials/principal memberships/consumer mount,
-durable commits, parallel sessions/crash and restore remain separate gates.
+Native owner and approved creator adapter PASS:39 callbacks/978 query checks/6
+token negatives each; complete returned rows verified independently.8 creator-role
+denial checks PASS. Each rehearsal used one outer ROLLBACK for membership and data;
+after EACH run the full authoritative after-grants baseline matched exactly, with
+no retained temporary SET edges/data. Two bootstrap ADMIN-only creator edges remain.
+Receipts on E: journal-native-{owner,creator}-receipt.json and post-{owner,creator,denial}-baseline.json.
+Next: native full-K15 benchmark under ROLLBACK/30s and authoritative empty-baseline
+verification. Benchmark/down/durable/session/crash/restore/SDK remain separate gates.

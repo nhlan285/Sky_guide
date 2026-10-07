@@ -1533,3 +1533,13 @@ no SET membership. E receipts: authorized-journal-{before,structure,after-grants
 Exact next: native owner/authorized creator/denial, EACH with same-transaction
 membership+data ROLLBACK and identical authoritative after baseline; then full-K15
 benchmark. Native runtime fixtures/K15 timing/down/durability/concurrency NOT RUN.
+
+Native owner AND authorized creator adapter PASS:5 phases/39 callbacks/978 query
+checks/6 token negatives each; independent verifier matched complete intent/control/
+applied/receipt rows.8 actual forbidden operations rejected under creator SET
+rehearsal. ALL temporary memberships and data shared each outer ROLLBACK; exact
+authoritative after-grants baseline matched after EACH owner/creator/denial run.
+No retained temporary SET edges/data; bootstrap ADMIN-only edges unchanged.
+E: journal-native-{owner,creator}-receipt.json and post-{owner,creator,denial}-baseline.json.
+Single-connection SQL/role proof only, not durable COMMIT/SDK/concurrent/crash proof.
+Exact next: bounded native full-K15 benchmark and authoritative rollback baseline.

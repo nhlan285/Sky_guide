@@ -2,7 +2,7 @@
 
 ## Task / branch / checkpoint
 Sky Guide autonomous master run ACTIVE; roadmap OPEN, not complete.
-Branch codex/master-plan-execution; pushed base abd87123cd56c8fbb63df08f64b5aedc60fd0f3e.
+Branch codex/master-plan-execution; pushed base77a7756a4b0d6bdd0797234e2ba8355c0b69aefc.
 Resolve this checkpoint with git log -1 and verify remote SHA. Master:
 [IMPLEMENTATION_PLAN](plan/IMPLEMENTATION_PLAN.md); active detailed phase:
 [POSTGRES_PROVIDER_SELECTION](plan/POSTGRES_PROVIDER_SELECTION.md), latest section;
@@ -62,14 +62,20 @@ Raw receipts, SQL fixture corpus and caches stay outside Git on E:
 SkyGuideAssets/research/postgres-rehearsal-2026-10-07/.
 
 ## Exact next
-Run prepared owner adapter and authorized creator adapter/8 denial fixtures under
-ROLLBACK; verify complete returned rows and compare authoritative baseline after EACH.
-Then full-K15 cost fixture (46,341 canonical/4,367 release rows) under ROLLBACK/30s;
+Native owner AND authorized creator adapter PASS:5 phases/39 callbacks/978 query
+checks/6 token negatives each; complete intent/control/applied/receipt rows verified
+independently.8 actual creator-role forbidden operations rejected as expected.
+After EACH outer ROLLBACK authoritative schema/ACL/membership/data baseline matched
+the after-grants baseline exactly: no fixture data or temporary SET membership
+retained. Only the two bootstrap ADMIN-only creator edges remain. E receipts:
+journal-native-{owner,creator}-receipt.json and post-{owner,creator,denial}-baseline.json.
+These are native single-connection SQL/role proofs; not SDK/race/durable/crash proof.
+
+Next: full-K15 cost fixture (46,341 canonical/4,367 release rows) under ROLLBACK/30s;
 verify complete receipt and authoritative rollback. STOP on schema/ACL/membership/data
 drift; any timeout leaves benchmark gate OPEN. Do not disable deferred integrity,
 rewrite applied history or infer production sizing from fixture preparation.
-Native adapter/creator/denial/K15 timings/down/durable/concurrent/crash/restore proof
-NOT RUN at this checkpoint. No fixture or temporary SET membership executed yet.
+K15 timings/down/durable/concurrent/crash/restore proof NOT RUN at this checkpoint.
 Portable tests are not native runtime proof. No P9-I02/D04/V01 or master DONE.
 
 ## Remaining gates / local operations
