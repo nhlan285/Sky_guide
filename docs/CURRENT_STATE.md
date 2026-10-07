@@ -3,7 +3,7 @@
 ## Task / branch / checkpoint
 Sky Guide autonomous master run ACTIVE; roadmap OPEN, not complete.
 Branch codex/master-plan-execution; checkpoint parent
-558f7a6c078d9de6bc251f9d8af73e30ff73faf7 verified on origin.
+1d95d953c05387f60a3c95c7468e0df2dc76d3a9 verified on origin.
 Resolve latest checkpoint with git log -1 and verify remote SHA.
 Master: [IMPLEMENTATION_PLAN](plan/IMPLEMENTATION_PLAN.md).
 Active phase: [POSTGRES_PROVIDER_SELECTION](plan/POSTGRES_PROVIDER_SELECTION.md),
@@ -114,6 +114,18 @@ and metadata checker hashes unchanged. First checkpoint558f7a6 is superseded by
 this formatting-repair checkpoint; approve the latest verified HEAD, not old hashes.
 Modified: current model/tests, bracket proposal/fixture builders and verifier,
 two proposal SQL files, active phase/master/handoff. Logs/artifacts remain on E:.
+
+Preapproval guard correction: an extra allowlisted-name trigger calling a helper
+outside sky_private could be invisible to both old/new trigger comparisons. New
+comparison includes every matching-name private-table trigger and pins its function
+namespace; actual-row verifier rejects extra/changed-schema hooks. A corruption
+test reproduces the former omission.4 focused proposal tests PASS; original DDL/
+helper bodies/permissions/counts unchanged. Regenerated up/down and E fixtures;
+active plan hashes supersede1d95d95. Before83 checker unchanged; no connector/hosted
+DDL/new native proof this turn.439 full tests remain previous evidence, not rerun.
+Current guard slice:4 focused tests/lint/typecheck PASS; no app build rerun.
+Master dependencies confirm R2–R6 and live sync consumers require R1 acceptance;
+they cannot be opened while native foundation/benchmark approval remains pending.
 
 ## Exact next / remaining gates
 Push SHA-verified review checkpoint and obtain scoped85-owner/3-definer/168-hook

@@ -4,6 +4,7 @@ import { URL,fileURLToPath } from 'node:url'
 import { resolve,join } from 'node:path'
 import { Buffer } from 'node:buffer'
 import process from 'node:process'
+import assert from 'node:assert/strict'
 import { runtimeJournalPrivilegeBaseline } from '../../src/server/runtimeJournalPrivilegeBaseline.ts'
 import { prepareRuntimeJournalPrivilegeProposal } from '../../src/server/runtimeJournalPrivilegePlan.ts'
 import { expectedFunctionSettings } from '../../src/server/runtimeJournalStructure.ts'
@@ -137,7 +138,7 @@ end;$$;\n`
   {table,name:hookNames[0],function:helperNames[0],type:30},
   {table,name:hookNames[1],function:helperNames[1],type:28},
  ]),...internal.map(table=>({table,name:hookNames[2],function:'guard_evidence_truncate',type:34}))]
-  .map(h=>({...h,enabled:'O',deferrable:false,deferred:false,args:0,argBytes:'',columns:'',condition:null,oldTransition:null,newTransition:null,constraint:false}))
+  .map(h=>({...h,functionSchema:'sky_private',enabled:'O',deferrable:false,deferred:false,args:0,argBytes:'',columns:'',condition:null,oldTransition:null,newTransition:null,constraint:false}))
   .sort((a,b)=>`${a.table}/${a.name}`<`${b.table}/${b.name}`?-1:1)
  const indexes=internal.map(table=>({table,name:table+'_pkey',definition:`CREATE UNIQUE INDEX ${table}_pkey ON sky_private.${table} USING btree (${table==='release_validation_clock'?'singleton':'catalog_version'})`,valid:true,ready:true,live:true,unique:true,primary:true,immediate:true,replicaIdentity:false}))
  const newFunctions=functions.slice(0,3).map(({name,args,result,definer,bodyMd5})=>({name,args,result,definer,bodyMd5,owner:'postgres'})).sort((a,b)=>a.name<b.name?-1:1)
@@ -148,7 +149,7 @@ end;$$;\n`
  if (select count(*) from pg_class c join pg_namespace n on n.oid=c.relnamespace join pg_roles r on r.oid=c.relowner where n.nspname='sky_private' and c.relname in(${names(internal)}) and c.relkind='r' and c.relrowsecurity and not c.relforcerowsecurity and r.rolname='postgres')<>2 then raise exception 'Internal validation owner/RLS changed';end if;
  if (select jsonb_agg(jsonb_build_object('table',c.relname,'name',k.conname,'type',k.contype,'definition',pg_get_constraintdef(k.oid),'validated',k.convalidated,'deferrable',k.condeferrable,'deferred',k.condeferred) order by c.relname collate pg_catalog."C",k.conname collate pg_catalog."C") from pg_constraint k join pg_class c on c.oid=k.conrelid join pg_namespace n on n.oid=c.relnamespace where n.nspname='sky_private' and c.relname in(${names(internal)}) and k.contype<>'t') is distinct from ${json(constraints)} then raise exception 'Internal validation constraints require source review';end if;
  if (select jsonb_agg(jsonb_build_object('table',c.relname,'name',i.relname,'definition',pg_get_indexdef(x.indexrelid),'valid',x.indisvalid,'ready',x.indisready,'live',x.indislive,'unique',x.indisunique,'primary',x.indisprimary,'immediate',x.indimmediate,'replicaIdentity',x.indisreplident) order by c.relname collate pg_catalog."C",i.relname collate pg_catalog."C") from pg_index x join pg_class c on c.oid=x.indrelid join pg_class i on i.oid=x.indexrelid join pg_namespace n on n.oid=c.relnamespace where n.nspname='sky_private' and c.relname in(${names(internal)})) is distinct from ${json(indexes)} then raise exception 'Internal validation indexes require source review';end if;
- if (select jsonb_agg(jsonb_build_object('table',c.relname,'name',t.tgname,'function',p.proname,'type',t.tgtype,'enabled',t.tgenabled,'deferrable',t.tgdeferrable,'deferred',t.tginitdeferred,'args',t.tgnargs,'argBytes',encode(t.tgargs,'hex'),'columns',t.tgattr::text,'condition',pg_get_expr(t.tgqual,t.tgrelid),'oldTransition',t.tgoldtable,'newTransition',t.tgnewtable,'constraint',t.tgconstraint<>0) order by c.relname collate pg_catalog."C",t.tgname collate pg_catalog."C") from pg_trigger t join pg_class c on c.oid=t.tgrelid join pg_namespace n on n.oid=c.relnamespace join pg_proc p on p.oid=t.tgfoid join pg_namespace fn on fn.oid=p.pronamespace where n.nspname='sky_private' and fn.nspname='sky_private' and not t.tgisinternal and t.tgname in(${names(hookNames)})) is distinct from ${json(hooks)} then raise exception 'Private write bracket coverage changed';end if;
+ if (select jsonb_agg(jsonb_build_object('table',c.relname,'name',t.tgname,'function',p.proname,'functionSchema',fn.nspname,'type',t.tgtype,'enabled',t.tgenabled,'deferrable',t.tgdeferrable,'deferred',t.tginitdeferred,'args',t.tgnargs,'argBytes',encode(t.tgargs,'hex'),'columns',t.tgattr::text,'condition',pg_get_expr(t.tgqual,t.tgrelid),'oldTransition',t.tgoldtable,'newTransition',t.tgnewtable,'constraint',t.tgconstraint<>0) order by c.relname collate pg_catalog."C",t.tgname collate pg_catalog."C") from pg_trigger t join pg_class c on c.oid=t.tgrelid join pg_namespace n on n.oid=c.relnamespace join pg_proc p on p.oid=t.tgfoid join pg_namespace fn on fn.oid=p.pronamespace where n.nspname='sky_private' and not t.tgisinternal and t.tgname in(${names(hookNames)})) is distinct from ${json(hooks)} then raise exception 'Private write bracket coverage changed';end if;
  if exists(select 1 from pg_policies where schemaname='sky_private' and tablename in(${names(internal)})) then raise exception 'Internal validation policy must remain closed';end if;
  foreach role_name in array array['sky_guide_sync_reader','sky_guide_sync_writer'] loop
   foreach table_name in array array[${names(internal)}] loop
@@ -213,6 +214,12 @@ drop table sky_private.release_validation_clock;\n`+before+emptyGuard(false,true
  const files={'release-validation-bracket-up.sql':up,'release-validation-bracket-down.sql':down,'release-validation-bracket-before-check.sql':before,'release-validation-bracket-after-check.sql':after}
  if(Object.values(files).some(s=>Buffer.byteLength(s)>450000))throw new Error('Bracket proposal exceeds transport/review bound')
  return {files,emptyBeforeGuard:emptyGuard(),emptyAfterGuard:emptyGuard(true),originalChecks:checks,functions,columns,constraints,indexes,hooks,tables,wrapperMd5,oldBodyMd5,counts:{tables:85,functions:40,triggers:323,definers:3},hashes:Object.fromEntries(Object.entries(files).map(([name,text])=>[name,{bytes:Buffer.byteLength(text),sha256:sha(text)}]))}
+}
+// Check actual catalog rows against prepared source; never filter foreign helpers.
+export function verifyReleaseValidationBracketHooks(actual,prepared){
+ const ordered=actual.toSorted((a,b)=>`${a.table}/${a.name}`<`${b.table}/${b.name}`?-1:1)
+ assert.deepEqual(ordered,prepared.hooks,'Private write bracket coverage changed')
+ return {hooks:ordered.length}
 }
 if(process.argv[1]&&resolve(process.argv[1])===fileURLToPath(import.meta.url)){
  if(!process.argv[2])throw new Error('Provide E-drive proposal directory')

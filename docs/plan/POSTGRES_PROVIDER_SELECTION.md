@@ -1847,10 +1847,10 @@ only decision needs this narrowly reviewed exception; current app/source83 basel
 and hosted schema remain unchanged until authorized application. No performance claim.
 
 Review identifiers:
-- Up336218 bytes SHA2562352b464d36b4c3f1d1b1711d2b3319033a2cbc448b7f8e0eb310eb604e8697b.
-- Down328098 bytes SHA2561b88705a1493d8b2d52893ec644c4d78207ebd3fcf2aa7a01fdc7631214be417.
+- Up341425 bytes SHA256d518e0e751b6c8ab0321f3b66b17a6dfa22f176e02294fc0b70e87124325d8bf.
+- Down333305 bytes SHA25664add0eee994e8d5d079fe36e2362e9585b4837c7452a870520d6aae17711b41.
 - Before126618 bytes SHA2567438a57afff26546c90d2975de5f6f264f66fdb828ffd63374df2c9e784e87b6.
-- After187224 bytes SHA256249e815f31b44445b3b3c1be916076350d4c69f023bd6c051cd75b092893d932.
+- After192431 bytes SHA2561e6139ef1ddc4fa77ce43e0aa311d768b1ed6b7c753f0693fbc9d396229c483d.
 - Enter body MD5f92de9bd429a275a5a30375b039f9646;
   leave96eb095de72565cb95f3350bfa863a91;
   full-check/cache6dd871de7f44b50b31fc5f62718abff2;
@@ -1860,14 +1860,14 @@ source, not fetched/adopted metadata. Any native formatting/compilation mismatch
 must fail atomically and be investigated; never repin to silence drift.
 
 Prepared native adversarial fixtures on E: (NOT RUN):
-- release-validation-bracket-owner-fixture.sql249488 bytes SHA256
-  6c61d779e16a4c15a125c37c4d3249b9837109b551b767e35f30828228c66ebf:
+- release-validation-bracket-owner-fixture.sql254695 bytes SHA256
+  70713d4303d09147e6e8bbf52b6d88e476f9d4e898af307f6fafd1bd938432ff:
   7 target-validator rejections,5 positive cases (direct mid-write calls, zero-row
   invalidation, UPSERT balancing, failed subtransaction and explicit savepoint).
   Whole touched canonical/release/clock/witness frames must survive negative rollback;
   final release rows/tx/epoch/depth independently verified from prepared source.
-- release-validation-bracket-creator-denial-fixture.sql200441 bytes SHA256
-  69af57122e9e19409fd2d95153d65615d99b15d1344b32096f3a30d19a5c464b:
+- release-validation-bracket-creator-denial-fixture.sql205648 bytes SHA256
+  babc7b253ab69be21ea9dede8bb8cb60c5f9b36fd38617c1551f84f27a335911:
   25 actual permission denials across both runtime groups/internal owners/helpers.
   Existing postgres creator temporary SET TRUE/INHERIT FALSE/ADMIN FALSE only, all
   temporary membership and fixture operations share outer ROLLBACK; no new actor.
@@ -1894,8 +1894,22 @@ Staged diff caught4 whitespace-only guard lines after the first review checkpoin
 generator now emits empty lines without spaces, source function/checker hashes
 unchanged. Regenerated up/down/fixtures with updated hashes above;3 focused
 proposal tests PASS. No native/DML/schema behavior changed by this formatting repair.
-Exact next: complete local checks, update/push SHA-verified review checkpoint, request
-ONE scoped approval for this85-owner/3-definer/168-hook dev up/down and rollback
+
+Preapproval review found a separate checker hole: both the legacy trigger comparison
+and new comparison could omit an extra allowlisted-name trigger on an internal table
+calling a function outside sky_private. The new comparison formerly filtered the
+function namespace; it now observes ALL allowlisted-name hooks on private tables and
+pins functionSchema as well as function name. Added an actual-row verifier against
+prepared hook metadata and a corruption test demonstrating that the old filter hides
+an extra public-schema hook while the corrected verifier rejects it. Wrong namespace
+on an existing hook also rejects; observed order may vary.4 focused proposal tests
+PASS. Original DDL/helper bodies/permissions/counts/down scope are unchanged; only
+guards and fixture-embedded guards changed. Hashes above supersede1d95d95. Existing
+83 before-check is byte-identical; no connector/hosted DDL or new native proof this
+turn.439 full tests are previous evidence; full suite not rerun for this guard slice.
+Current guard slice:4 focused tests/lint/typecheck PASS; no app build rerun.
+Exact next: verify/push corrected review checkpoint and obtain the pending scoped
+approval for this85-owner/3-definer/168-hook dev up/down and rollback
 rehearsals. After approval revalidate full83 baseline, create CLI migration/apply via
 migration tool, review new structure against source, deliberately introduce a separate
 85-owner executable baseline (preserve historical79/83), then run prepared native

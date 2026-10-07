@@ -2,7 +2,7 @@ import assert from 'node:assert/strict'
 import test from 'node:test'
 import { readFileSync } from 'node:fs'
 import { URL } from 'node:url'
-import { buildReleaseValidationBracketProposal } from '../sql/build-release-validation-bracket-proposal.mjs'
+import { buildReleaseValidationBracketProposal,verifyReleaseValidationBracketHooks } from '../sql/build-release-validation-bracket-proposal.mjs'
 import { prepareRuntimeJournalPrivilegeProposal } from '../../src/server/runtimeJournalPrivilegePlan.ts'
 import { runtimeJournalPrivilegeBaseline } from '../../src/server/runtimeJournalPrivilegeBaseline.ts'
 import { buildReleaseValidationBracketRehearsal,verifyReleaseValidationBracketReceipt } from '../sql/build-release-validation-bracket-rehearsal.mjs'
@@ -51,6 +51,20 @@ test('native fixture preparation covers mid-write calls,canonical later changes,
   const bad=globalThis.structuredClone(receipt);change(bad);assert.throws(()=>verifyReleaseValidationBracketReceipt(bad,p))
  }
  // Synthetic verifier corruption checks never become actual native receipts.
+})
+
+test('foreign helper triggers cannot disappear from source-pinned bracket metadata',()=>{
+ const p=buildReleaseValidationBracketProposal(),extra={...p.hooks.find(h=>h.name==='release_validation_write_enter'),table:'release_validation_clock',functionSchema:'public'}
+ const actual=[...globalThis.structuredClone(p.hooks),extra]
+ // The former namespace filter hid an extra allowlisted-name trigger entirely.
+ assert.deepEqual(actual.filter(h=>h.functionSchema==='sky_private'),p.hooks)
+ assert.throws(()=>verifyReleaseValidationBracketHooks(actual,p),/Private write bracket coverage changed/)
+ const changed=globalThis.structuredClone(p.hooks);changed[0].functionSchema='public'
+ assert.throws(()=>verifyReleaseValidationBracketHooks(changed,p),/Private write bracket coverage changed/)
+ assert.deepEqual(verifyReleaseValidationBracketHooks(p.hooks.toReversed(),p),{hooks:168})
+ const checker=p.files['release-validation-bracket-after-check.sql']
+ assert.ok(checker.includes("'functionSchema',fn.nspname"))
+ assert.doesNotMatch(checker,/and fn\.nspname='sky_private'/)
 })
 
 test('complete review guards old83 metadata plus exact2 owners/3 definers/168 hooks; grants one helper only',()=>{
