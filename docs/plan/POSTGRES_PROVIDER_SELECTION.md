@@ -653,3 +653,84 @@ atomic CAS, persist order with graph/projection/acceptance/source/audit; preserv
 previous graph continuity and lock global generation before any writes; force all
 deferred checks before commit/rollback every false/error. Then actual multi-session
 race/provider/restore/measurements and runtime-role/authenticated-review gates.
+
+## Active transactional SyncStore slice — 2026-10-07
+MEDIUM approved R1 continuation from verified e275df6; complete portable read/CAS
+orchestration for the existing SourceSync candidate contract. Runtime connection
+driver/SDK/credentials/grants, authenticated reviewer, actual two-session races,
+backup/restore and real source consumer mount remain separate gates.
+In scope: parameterized PostgreSQL transaction interface, consistent pinned read
+frames; global FOR UPDATE before ANY write; reproduce existing promotion/failure
+transition validation; typed full current K15 payload writer + identity reservations/
+crosswalk/alias/tombstone + archive/projection/order/acceptance/source/audit atomics.
+Current SourceSync carries full public K15 and complete private identity graph
+metadata; it does not carry future module/private fact payloads. Preserve all graph
+kinds/edges, require unknown nonpublic evidence to be previously registered, never
+fabricate provenance facts. No arbitrary canonical JSON/EAV/drop-and-reseed strategy.
+Dependencies: ten applied private migrations, existing row codecs and SourceSync
+validators/budgets/transition clocks. Previous graph history remains authoritative.
+Affected: server SQL transaction/read/write modules, focused actual K15/retention/
+revision/binding/conflict/rollback tests, bounded native SQL emitted by same writer,
+existing architecture/master/phase/handoff. No new package/provider API/production.
+Steps: retain typed owner payloads, enforce all changed entity/lookup payload fields
+require higher owner revision -> bounded static parameterized SQL -> compose read/
+CAS with exact existing SourceSync transition -> native generated DML parity,
+stale generation no writes, failures LKG, injected rollback, old release independent
+of current mutation -> focused/full checks -> pushed durable checkpoint.
+Canonical arrays: incoming published records first, retained old records afterwards
+in old order. Explicit retirement changes retained record_status/identity metadata;
+other retained fields stay last known, not inferred new private facts. Public
+membership/order lives in immutable release rows and does not equal canonical row
+position. Positions may be relocated to a temporary disjoint positive range then
+compacted within the locked transaction; no immediate UNIQUE constraint rewrite.
+Replace mutable child rows only for current typed payload owners, never identity
+reservations/historical release/projection/acceptance. Register sources, upsert
+provenance/identities before typed owners/children and graph FKs. Missing proof or
+unsupported typed module rejects/rolls back, not silent drop. Existing current
+private evidence stays registered and ordered. Retained typed retired payload fields
+represent last-known facts; live graph edges require active nodes separately.
+Acceptance: current K15 every field/unknown/free/order preserved; exact next state
+matches approved SourceSync behavior; global lock/CAS precedes mutation; partial
+publication impossible under transaction interface; defer then force constraints
+before COMMIT; every error/false after mutation throws to rollback the WHOLE tx.
+Validate schema/FKs/projection pinning/history and all native fixture mutations in
+ROLLBACK; real connected driver/concurrency/restore are NOT proven by statement
+replay. Do not mark whole P9/R1 or future payload modules DONE from this slice.
+Exact next after portable writer: actual provider transaction driver/least-privilege
+role approval boundary, multi-session/provider failures and isolated restore/scale.
+
+Verified writer prerequisite: SourceSync validateProjection deliberately permits
+public record.provenanceIds to be an ordered subset of canonical identity evidence.
+catalogRows currently assumes exact equality and reconstructs record evidence from
+identity_provenance. This cannot preserve a valid reviewed public subset while
+retaining extra private canonical evidence. Do not reject this valid contract or
+expand the public record by guessing/filtering graph order. Before writer DML,
+add one typed payload_provenance binding owner for item/spirit/season; keep full
+identity_provenance canonical graph evidence distinct. Payload evidence references
+canonical identity evidence by FK, preserves independent order and requires evidence
+for nonfixture payloads. Upgrade encode/decode explicitly; rows without declared
+payload evidence are invalid, not a legacy fallback. Additive development migration;
+baseline has no real payload seed. New native codec fixture/projection subset
+parity plus missing/non-subset/immutable-key/evidence/order checks, full current K15
+byte parity and current private schema/count/role audit before checkpoint. This is
+necessary to the full writer and preserves SourceSync/public/hash/rights contracts;
+not evidence of complete SyncStore/provider driver or new private game facts.
+
+Completed writer prerequisite: migration20261007023752_private_payload_evidence,
+SHA256334631deae66e5e026bf3a2d3d6f68c6df64f9260fab5fe54b71c9b8f3f19ead;
+79 private RLS tables, no platform grants, revision0 control/other78 empty verified
+after rollback-only rehearsals. Independent typed payload evidence owner/ordering,
+composite RESTRICT binding, deferred root/completeness/order guards and truncate
+protection; old actual owners backfilled exact old evidence without new facts.
+Three new local tests +333 full tests/lint/typecheck/build/catalog1808 PASS.
+Actual hosted private graph plus exact public subset preserves reviewed candidate,
+content/review hash and every public byte;13 native SQLSTATE negatives and correctly
+ordered evidence replacement PASS. Rebuilt catalog32/read composition11 native
+negatives and actual decoded parity PASS. Advisors no WARN/ERROR; intentional INFO.
+Evidence retained outside Git on E:. No real imports/role/SDK/consumer mounts.
+Full transaction writer still OPEN. Exact next: typed payload retention/revision
+plan and static parameterized DML, then provider-neutral locked atomic SyncStore
+orchestration/rollback proof. Delete payload evidence before replacing canonical
+identity evidence; derive explicit scoped public row frame from reviewed files
+for release metadata, persist full canonical evidence separately. Unknown private
+proof requires an existing registered SourceRecord; no implicit facts/public filter.

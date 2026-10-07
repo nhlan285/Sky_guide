@@ -115,7 +115,7 @@ consistent transaction with bounded transport, not independent provider calls.
 Build `node tests/sql/build-sync-read-rehearsal.mjs E:/SkyGuideAssets/research/postgres-rehearsal-2026-10-07/sync-read-fixture.sql`.
 Use verify-sync-read-rehearsal.mjs/verify-sync-read-schema.mjs on actual rows/schema.
 Two-source failure/LKG after canonical mutation plus11 native negatives PASS.
-Current baseline: revision0 singleton, all77 other tables empty; all78 RLS/no grants.
+Current baseline: revision0 singleton, all78 other tables empty; all79 RLS/no grants.
 
 Revision checks for changed current entity relations/provenance, full payload history,
 complete transactional SyncStore/driver and
@@ -127,3 +127,14 @@ are server-only and no runtime DB role has been provisioned. The table owner run
 the rehearsal. The future least-privilege server role needs a separate reviewed
 grant/policy contract. Do not grant a browser/platform role access to silence the
 advisor's INFO notice. FK indexes retained despite unused-index INFO on empty DB.
+
+Payload evidence migration20261007023752 adds one typed mutable owner (79 total).
+Canonical identity_provenance retains full private graph evidence; payload_provenance
+retains each item/spirit/season record''s exact independently ordered subset.
+Composite RESTRICT FK/deferred completeness/order/root guards prevent dangling
+proofs and unowned or nonfixture-empty payloads. Replace payload bindings BEFORE
+identity bindings. Existing roots backfilled exact old codec evidence; no real seeds.
+Build/verify payload-evidence-rehearsal.mjs and verify-payload-evidence-schema.mjs
+on actual hosted rollback-only output.13 native negatives + rebuilt catalog32/read11
+and every-field/public reviewed byte parity PASS;333 tests/lint/typecheck/build.
+Full transaction writer/runtime role/provider driver and restore still OPEN.

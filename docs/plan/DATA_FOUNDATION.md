@@ -97,7 +97,7 @@ history owners/all20 relations, full K15 content/review hash parity and141 nativ
 negative cases. Historical graph metadata does not imply full module/provenance
 payload history. Full SyncState row read composition now PASS with explicit
 historical manifest dataset key order; existing content/review hash unchanged.
-Exact next: typed payload transaction writer/provider-neutral SyncStore driver,
+Typed payload evidence prerequisite PASS: canonical identity evidence and exact public record subset/order have distinct typed owners;13 native negatives/actual review byte parity. Exact next: typed payload transaction writer/provider-neutral SyncStore driver,
 then real races/provider parity/backup restore.
 No complete live foundation
 acceptance. Independent W12 sequence and focus QA completed; full W12 remains
@@ -108,8 +108,8 @@ PARTIAL until W11 dependencies.
 Read [CURRENT_STATE](../CURRENT_STATE.md) for latest commit/checks and gates.
 Branch `codex/master-plan-execution`; checkpointdd7fb11 verified pushed before the
 release metadata slice. Supabase Free dev in Dyland's Org is provisioned;44 private
-tables at that milestone; now78 private tables with no platform grants. Domain
-implementations remain unmounted from production consumers. Latest330 full tests/
+tables at that milestone; now79 private tables with no platform grants. Domain
+implementations remain unmounted from production consumers. Latest333 full tests/
 lint/typecheck/build PASS;7 read composition tests/11 native negatives plus5 graph history tests/141 native
 negatives/actual two-frame parity PASS; prior lifecycle metadata/source isolation/
 projection byte checks retained. Intentional revision0 control baseline, other tables empty. Existing

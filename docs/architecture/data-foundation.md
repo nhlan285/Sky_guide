@@ -189,6 +189,19 @@ future module payloads, authenticated reviewer or mounted provider driver inferr
 
 ## Migration sequence and preservation
 
+Payload evidence ownership decision (2026-10-07): SourceSync allows public record
+evidence to be an ordered subset of identity graph evidence. The initial typed
+catalog codec's equality assumption cannot encode that valid boundary. Introduce
+typed payload_provenance for Item/Spirit/Season record metadata; identity_provenance
+keeps full canonical graph evidence, including private evidence. A composite FK
+enforces payload evidence belongs to that identity; each ordered list remains
+independent. Codec must preserve both exactly and reject missing/non-subset rows,
+never fall back to copying/filtering canonical evidence into public records.
+Existing DB baseline has no payload data; migration must explicitly preserve any
+existing owner evidence rather than change publication/hash definitions. Future
+writer replaces payload evidence before canonical identity evidence under global
+lock and restores both before deferred validation; old public bytes stay immutable.
+
 Review ordering decision (2026-10-07): immutable public projection uses sorted-key
 canonical JSON, whereas existing SourceSync contentHash includes the validator's
 ordered manifest.datasets Record. A real composition test exposed this distinction.

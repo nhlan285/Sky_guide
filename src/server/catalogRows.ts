@@ -16,6 +16,7 @@ export const catalogColumns = {
   provenance_order: ['provenance_id','position'],
   domain_identity: ['kind','id','revision','schema_version','updated_at','retired_at','fixture'],
   identity_provenance: ['kind','id','provenance_id','position'],
+  payload_provenance: ['kind','id','provenance_id','position'],
   item: ['id','position','record_status','name_default','slot','raw_slot','accessory_anchor','dye_status','field_provenance_present'],
   spirit: ['id','position','record_status','name_default','category','realm_id','field_provenance_present'],
   season: ['id','position','record_status','name_default','kind',...timeColumns('starts_at'),...timeColumns('ends_at'),'time_status','summary'],
@@ -77,17 +78,21 @@ export function encodeCatalogRows(input: CatalogPayloads,options: CatalogRowCont
   const rows=Object.fromEntries(tables.map(table => [table,[]])) as unknown as CatalogRows
   const add=(table: CatalogTable,row: CatalogRow) => { rows[table].push(row) }
   const identities=new Map((options.identities??[]).map(node => [refKey(node.kind,node.id),node]))
+  const registeredProofs=new Set(payload.provenance.map(p=>p.id))
   if (identities.size!==options.identities?.length && options.identities) return invalid()
   const metadata=(kind: 'item'|'spirit'|'season',entry: DomainMetadata & {id:string;fieldProvenance?:FieldProvenance}) => {
     const old=identities.get(refKey(kind,entry.id))
     if (options.identities && !old) return invalid()
-    if (old && (old.updatedAt!==entry.updatedAt || old.fixture!==entry.fixture || JSON.stringify(old.provenanceIds)!==JSON.stringify(entry.provenanceIds)
+    if (old && (old.updatedAt!==entry.updatedAt || old.fixture!==entry.fixture || entry.provenanceIds.some(id=>!old.provenanceIds.includes(id))
+      || new Set(old.provenanceIds).size!==old.provenanceIds.length || old.provenanceIds.some(id=>!registeredProofs.has(id)) || !old.fixture&&!old.provenanceIds.length
       || !Number.isSafeInteger(old.revision) || old.revision<1 || old.schemaVersion!==1)) return invalid()
     if (old?.retiredAt && (entry.recordStatus!=='retired' || !validateDateTime(old.retiredAt).valid
       || rangeErrors({value:old.retiredAt,precision:'instant',timezone:null,rawLabel:null},{value:entry.updatedAt,precision:'instant',timezone:null,rawLabel:null},[]).length)) return invalid()
     if (entry.recordStatus==='retired' && !old?.retiredAt) throw new Error('Retired payload requires its authoritative identity history')
     add('domain_identity',{kind,id:entry.id,revision:old?.revision??1,schema_version:1,updated_at:entry.updatedAt,retired_at:old?.retiredAt??null,fixture:entry.fixture})
-    entry.provenanceIds.forEach((id,position) => add('identity_provenance',{kind,id:entry.id,provenance_id:id,position}))
+    const canonicalProof=old?.provenanceIds??entry.provenanceIds
+    canonicalProof.forEach((id,position) => add('identity_provenance',{kind,id:entry.id,provenance_id:id,position}))
+    entry.provenanceIds.forEach((id,position) => add('payload_provenance',{kind,id:entry.id,provenance_id:id,position}))
     for (const [field,ids] of Object.entries(entry.fieldProvenance??{})) {
       add('field_provenance_field',{kind,id:entry.id,field})
       ids.forEach((id,position) => add('field_provenance',{kind,id:entry.id,field,provenance_id:id,position}))
@@ -162,6 +167,8 @@ export function decodeCatalogRows(rows: CatalogRows,options: CatalogRowContext={
     return Object.fromEntries(entries)
   }
   const name=(kind:'item'|'spirit'|'season',row:CatalogRow) => ({default:str(row.name_default),translations:dictionary(select(`${kind}_translation`,{[`${kind}_id`]:row.id}),'locale','text')})
+  const registeredProofs=new Set(rows.provenance.map(p=>str(p.id)))
+  const authoritativeIdentities=new Map((options.identities??[]).map(n=>[refKey(n.kind,n.id),n]))
   const metadata=(kind:'item'|'spirit'|'season',row:CatalogRow) => {
     const identity=one('domain_identity',{kind,id:row.id})
     if (!num(identity.revision) || num(identity.schema_version)!==1) return invalid()
@@ -172,8 +179,12 @@ export function decodeCatalogRows(rows: CatalogRows,options: CatalogRowContext={
     if (new Set(fields.map(p => p.field)).size!==fields.length) return invalid()
     if (kind!=='season' && !flag(row.field_provenance_present) && fields.length) return invalid()
     const fieldProvenance=Object.fromEntries(fields.map(p => [str(p.field),ids('field_provenance',{kind,id:row.id,field:p.field},'provenance_id')]))
+    const canonicalProof=ids('identity_provenance',{kind,id:row.id},'provenance_id'),payloadProof=ids('payload_provenance',{kind,id:row.id},'provenance_id')
+    const authoritative=authoritativeIdentities.get(refKey(kind,str(row.id)))
+    if(new Set(canonicalProof).size!==canonicalProof.length||canonicalProof.some(id=>!registeredProofs.has(id))||!flag(identity.fixture)&&!canonicalProof.length
+      ||payloadProof.some(id=>!canonicalProof.includes(id))||authoritative&&JSON.stringify(authoritative.provenanceIds)!==JSON.stringify(canonicalProof)) return invalid()
     return {updatedAt:str(identity.updated_at),fixture:flag(identity.fixture),recordStatus:row.record_status,
-      provenanceIds:ids('identity_provenance',{kind,id:row.id},'provenance_id'),
+      provenanceIds:payloadProof,
       ...(kind==='season'||flag(row.field_provenance_present)?{fieldProvenance}:{}),}
   }
   const time=(prefix:string,row:CatalogRow):PartialTime|null => {
