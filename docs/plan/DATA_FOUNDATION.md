@@ -120,7 +120,11 @@ successors, uncertain swallowed errors remain quarantined. No actual journal bac
 Restart/generic absence cannot fence a pre-BEGIN worker; failure audit cannot prove
 full count/backoff state. Next: concrete journal/execution token checked inside
 original transaction/full failure witness schema and rollback/ACL proposal before
-scoped hosted application. Actual durable/crash/race acceptance remains OPEN.
+scoped hosted application. That local4-owner/10-helper SQL proposal is now prepared,
+not applied;5-phase native transcript/result verifier ready, SQL native NOT RUN.
+Next: v2 local journal/Store/controller/transport integration and refreshed privilege
+package before authorized schema/native/crash/race acceptance. Global TTL and own
+freshness remain separate; no source/data/public contract or new service change.
 Role/RLS application still needs the pending specific development authorization.
 No complete live foundation
 acceptance. Independent W12 sequence and focus QA completed; full W12 remains
@@ -132,8 +136,9 @@ Read [CURRENT_STATE](../CURRENT_STATE.md) for latest commit/checks and gates.
 Branch `codex/master-plan-execution`; checkpointdd7fb11 verified pushed before the
 release metadata slice. Supabase Free dev in Dyland's Org is provisioned;44 private
 tables at that milestone; now79 private tables with no platform grants. Domain
-implementations remain unmounted from production consumers. Latest390 full tests
-plus14 focused final fractional-time refinement/lint/typecheck/build PASS;7 read composition tests/11 native negatives plus5 graph history tests/141 native
+implementations remain unmounted from production consumers. Latest396 full tests/
+6 focused proposal/lint/typecheck/build PASS; SQL proposal preparation is not native
+parse/execution/durability acceptance.7 read composition tests/11 native negatives plus5 graph history tests/141 native
 negatives/actual two-frame parity PASS; prior lifecycle metadata/source isolation/
 projection byte checks retained. Intentional revision0 control baseline, other tables empty. Existing
 Router/chunk warnings unchanged. See handoff for exact

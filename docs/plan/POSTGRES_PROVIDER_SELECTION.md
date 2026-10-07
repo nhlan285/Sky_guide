@@ -1215,3 +1215,64 @@ private durable journal + immutable full failure witness + execution token check
 after original global lock. Review additive schema/rollback/helper/ACL effect before
 any hosted application; old79-owner privilege proposal must not be applied unchanged
 if that schema changes. Pending dev role/RLS approval is still unanswered.
+
+## Active slice — durable PostgreSQL journal proposal
+
+LARGE/ARCHITECTURAL local proposal within current R1; base6006542. Reuse isolated
+private PostgreSQL provider, no additional service/cost. Need four typed owners:
+immutable intent (version2 typed next source/global state), singleton active control,
+immutable applied witness tied to exact target audit/digest, terminal ID/resolution
+receipt. No opaque candidate JSON, raw corpus or credential. Current v1 codec/Store
+and mounted consumers remain unchanged until v2 adapter integration.
+
+Every helper uses READ COMMITTED/read-write and locks global head then journal
+control. Durable claim is a separate acknowledged transaction before original CAS.
+Writer checks active ID+digest after head lock before canonical mutation; finalizer
+uses stored intent fields for metadata CAS, compares actual complete own/global
+state, inserts applied witness before forced checks. New generation guard requires
+an applied witness, so old unfenced metadata-only writer cannot commit on new schema.
+Recovery settlement derives resolution under same locks; clearing absence invalidates
+late pre-BEGIN token. Receipt/intent/applied immutable, no expiry or blind retry.
+
+Scope now: reviewable up/down SQL outside migration discovery, typed proposal rows,
+five-phase SQL rehearsal + negative cases prepared on E:, local tests/checks. No
+hosted DDL/grant, migration history, SDK/Auth/password or endpoint. Native SQL
+execution/actual independent sessions/crash durability NOT RUN. Down refuses any
+pending or forensic intent/receipt/applied history rather than erase it; empty-only
+scoped drops, no CASCADE. Old79-owner privilege proposal becomes insufficient;
+new owner/trigger/helper/column inventory/ACL review required before application.
+
+Expected: supabase/proposals/sync_commit_journal_{up,down}.sql, typed row helper,
+tests/sql proposal rehearsal builder and focused tests, existing docs. Verify exact
+current5-phase source/global rows, statement token-before-DML/finalizer placement,
+wrong token/digest/count/retry/global tuple, stale token after recovery/receipt and
+missing applied guard. Tests/generator are not PostgreSQL acceptance. Before hosted
+application: integrate v2 journal/Store/controller/statement gate, regenerate scoped
+privilege package, verify local SQL on approved environment and migration/rollback
+authorization. Keep pending role approval distinct; do not apply its old SQL now.
+
+LOCAL PREPARATION milestone PASS:4-table/10-function up19236 bytes SHA256
+672ea42a654a10fa81af857712cdcc6d5d2741f3f51860a97de62f46da16e0c2;
+empty-only down1623 bytes SHA2560483b6c4c16ae2075c54d7df55d9f766aa5e2ff297e358637079cb2ea4c0a9c7.
+Native transcript877746 bytes SHA256e76e2f77bc2d616862fa6374bc723741e40819df639df1392f2fb5863587246d:
+5 phases/526 prepared positive query assertions/26 negative cases (wrong digest,
+clear without receipt, bad count/retry/global TTL, immutable mutation, missing
+generation marker, settled stale token/terminal rewrite). Builder uses existing
+validated Store transcript, finalizer before forced checks. Requires proposal
+installation first; contains no DDL itself, no source/publication proof inferred.
+Native-result verifier compares all intent/control/applied/receipt rows, not count
+alone; synthetic verification tests are explicitly NOT native receipts. No actual
+SQL parsing/execution/independent sessions/durable commits/crash/down test run.
+6 focused/396 full tests/lint/typecheck/build/catalog1808/scaffold75 Markdown/
+14 profiles/173 tasks/diff PASS. Existing Router/chunk warnings unchanged.
+Evidence on E: sync-commit-proposal-{fixture.sql,tests.log}; raw changelog also E:.
+Current v1 prototype unchanged; new v2 adapter/transport/static gate still required.
+Once forensic intent exists, down deliberately refuses; stop ingestion/preserve
+LKG+schema/history and fix forward, rather than run old unfenced writer or erase
+recovery evidence. Authorized isolated restore remains a separate acceptance gate.
+
+Primary design basis: [PG17 locks/waiting and order](https://www.postgresql.org/docs/17/explicit-locking.html),
+[typed CHECK/FK constraints](https://www.postgresql.org/docs/17/ddl-constraints.html).
+Supabase changelog checked2026-10-07; [PG17.11 minor-release changes](https://supabase.com/changelog/postgres-15-19-17-11-breaking-changes)
+concern extensions/custom operators absent from this proposal; no provider extension
+audit or upgrade performed. Relevant cached docs retained, no connector polling.

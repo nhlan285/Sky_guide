@@ -228,3 +228,19 @@ full failure witness, with additive schema/rollback/ACL review before applicatio
 SDK/roles/Auth/crash/race/restore acceptance remains OPEN. See phase/handoff.
 390 full tests PASS;14 focused final exact-time refinement/lint/typecheck/build/
 catalog1808/scaffold/diff PASS. Existing Router/chunk warnings unchanged; log on E:.
+
+Durable journal proposal is in proposals/sync_commit_journal_{up,down}.sql,
+outside migration discovery; NOT APPLIED.4 typed owners/10 invoker functions; no
+roles/grants/policies/extension. Intent v2 records own full health/count/retry and
+separate global review tuple/validity; applied marker binds audit/digest to actual
+state, terminal receipt invalidates execution token, new generation needs witness.
+Down is empty-only, writer-barrier protected; refuses any pending/forensic records.
+Native transcript is prepared using:
+`node tests/sql/build-sync-commit-proposal-rehearsal.mjs E:/SkyGuideAssets/research/postgres-rehearsal-2026-10-07/sync-commit-proposal-fixture.sql`.
+5 phases/526 query assertions/26 negatives/877746 bytes; SQL execution NOT RUN.
+`verify-sync-commit-proposal-rehearsal.mjs <actual-native-json>` is ready; synthetic
+verifier tests are not native receipts. Current v1 Store/controller unmounted;
+next v2 journal/token integration and updated83-owner ACL package before authorized
+installation/native rollback/durable/concurrent acceptance. See phase/handoff.
+6 focused/396 full preparation tests/lint/typecheck/build/catalog1808/scaffold PASS.
+No actual native SQL receipt. Existing Router/chunk warnings unchanged.

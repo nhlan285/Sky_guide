@@ -63,7 +63,7 @@ export function decodeSyncCommitIntent(input:unknown):SyncCommitIntent {
  if(Buffer.byteLength(JSON.stringify(i))>32768) return fail()
  return structuredClone(i)
 }
-export function prepareSyncCommitIntent(sourceId:string,current:SyncState,next:SyncState,id=randomUUID()):SyncCommitIntent {
+export function prepareSyncCommitIntent(sourceId:string,current:SyncState,next:SyncState,id:string=randomUUID()):SyncCommitIntent {
  const promotion=Boolean(next.lastKnownGood&&next.approval&&next.lastKnownGood.sourceId===sourceId&&next.lastKnownGood.baseRevision===current.revision&&next.failures===0)
  const c=next.lastKnownGood,a=next.approval,outcome=promotion?current.lastKnownGood?.contentHash===c!.contentHash?'reconfirmed':'promoted':'failure'
  const acceptance=promotion?{revision:next.revision,source_id:sourceId,catalog_version:(c!.publicFiles.manifest as {catalogVersion:string}).catalogVersion,

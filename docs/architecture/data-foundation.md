@@ -135,6 +135,22 @@ No automatic retry/source-failure recording. Existing metadata SQL/native receip
 and synthetic protocol/controller tests are separate from actual driver/role/
 durability/independent-session proof. This is not a live foundation mount.
 
+**Durable journal proposal —2026-10-07:** reuse the private PostgreSQL provider;
+proposed4 owners: immutable typed v2 intent, active singleton, immutable applied
+witness and terminal receipt. Own health/count/retry/success/validity and global
+acceptance tuple/validity are separate; failure preparation needs pinned global
+metadata because SyncState own freshness cannot supply global TTL. No JSON candidate
+document/raw corpus. Helpers serialize READ COMMITTED through head then control;
+execution token is checked after head lock, applied marker compares full actual
+own/global state, generation requires marker, recovery receipt invalidates old
+token. This closes the design gap for pre-BEGIN workers/unknown failure outcomes;
+actual v2 adapter/SDK/native/concurrent/durable acceptance is still OPEN.
+Review SQL lives outside migration discovery in supabase/proposals, NOT APPLIED.
+Empty-only down holds writer barrier and refuses pending/forensic history rather
+than erasing it; quiesce consumers/inspect unchanged definitions before rollback.
+Old79-owner privilege baseline must be refreshed for proposed83-owner schema.
+Primary lock behavior/order basis: [PostgreSQL17 explicit locking](https://www.postgresql.org/docs/17/explicit-locking.html).
+
 ## Ownership decisions and field preservation inventory
 
 **Acquisition identity: Option B.** `(item_id, option_id)` is the relational key;
