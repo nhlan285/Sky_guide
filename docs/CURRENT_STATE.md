@@ -2,7 +2,8 @@
 
 ## Task / branch / checkpoint
 Sky Guide autonomous master run ACTIVE; roadmap OPEN, not complete.
-Branch codex/master-plan-execution; pushed based3e5b6439890285d19352548772f7c8971dbc1c2.
+Branch codex/master-plan-execution; checkpoint parent2925996a89ac317dc09ae7f67492e0b761011912
+verified on origin. This checkpoint preserves the local release-scan proposal.
 Resolve this checkpoint with git log -1 and verify remote SHA. Master:
 [IMPLEMENTATION_PLAN](plan/IMPLEMENTATION_PLAN.md); active detailed phase:
 [POSTGRES_PROVIDER_SELECTION](plan/POSTGRES_PROVIDER_SELECTION.md), latest section;
@@ -86,10 +87,10 @@ do not label request rejection or45-second API wall clock as canonical cost.
 Benchmark gate OPEN. E: journal-native-k15-timeout-receipt.json contains bounded
 diagnostic + full after baseline; packed SQL SHA256
 9b1492072ce09e0dd9b2cb323c159495384a21a7d8aeabbc51c030c9f95eaed7.
-Exact next: prepare an additive reviewed optimization for repeated deferred full
-release scans, preserve every integrity invariant, repin deliberately and re-run
-the EXACT K15 benchmark only after that new migration scope is reviewed/authorized.
-No optimization DDL prepared/applied yet. STOP on schema/ACL/membership/data
+Exact next: review the prepared single-function optimization package in the active
+phase's “Prepared package / resume” section and obtain scoped dev migration approval
+before applying/repinning. Re-run EXACT K15 only after approved application.
+Optimization SQL is PREPARED, NOT APPLIED. STOP on schema/ACL/membership/data
 drift; any timeout leaves benchmark gate OPEN. Do not disable deferred integrity,
 rewrite applied history or infer production sizing from fixture preparation.
 K15 attempted/TIMEOUT; complete timings missing. Down/durable/concurrent/crash/
@@ -106,6 +107,28 @@ and journal-native-final-build.log. Intentionally changed: two CLI migrations,
 CASE syntax/source body hash, deliberate journal structural pins, transport-only
 benchmark packer/tests, historical fixture cutoff and existing plans/README/handoff.
 No production/public data/SDK/Auth/credentials/new login/consumer operation.
+
+## Local proposal checkpoint — 2026-10-07
+Prepared guarded up/down for validate_release_metadata only: every deferred row
+event and global invariant retained, six membership branches share one materialized
+scope per event. No new table/role/grant/event cache. Complexity remains quadratic;
+no claim that this fixes the K15 timeout. Applied migrations and historical79/current83
+baselines unchanged. Hosted proposal DDL/full trigger compilation/down/performance
+NOT RUN. Existing creator rehearsal authorization is unchanged; new function-body
+migration requires separate scoped approval under user rule22.
+
+Read-only PostgreSQL predicate comparison:128 synthetic cases,0 mismatches; full
+legacy/proposed observations independently verified against model (112 flagged,
+16 unflagged). NULL/dangling-owner cases test predicate semantics only, not accepted
+schema states. E: release-metadata-scan-equivalence-receipt.json. Pure SELECT parsing
+on empty native schema also passed; neither proves complete trigger execution.
+Intentionally modified: active phase, this handoff, two supabase/proposals SQL files,
+function template, proposal/corpus builders, receipt verifier, synthetic fixture and
+two tests. Raw receipts/generated checkers/logs remain on E: outside Git.
+Validation: lint/2 focused tests and checkpoint full429 tests PASS; independent
+128-case receipt verifier/scaffold76 Markdown14 profiles173 tasks/diff PASS.
+Checkpoint log on E: release-scan-checkpoint-tests.log.
+App typecheck/build previously PASS at2925996; not rerun for this proposal-only slice.
 
 ## Remaining gates / local operations
 K04 OneDrive403; K10/K11 SKU/market; K12 bulk reuse prohibited; Q02/Q09/Q10/Q11/Q12,
