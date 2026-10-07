@@ -1,202 +1,81 @@
 # Current handoff — 2026-10-07
 
 ## Task / branch / checkpoint
-Maintainer repository remediation COMPLETE; autonomous master roadmap remains
-OPEN at the scoped hosted journal application gate. User2026-10-07 authorized repo
-fixes after REQUEST CHANGES; no hosted migration/grants executed by this repair.
-Branch: codex/master-plan-execution. Verified local/remote HEAD at repair start:
-1bdfc5cafb3cb63877e786c19d75314898dd9270. Resolve the new repair checkpoint with
-git log -1 and verify remote SHA; no protected branch/merge/deploy involved.
-Master: [IMPLEMENTATION_PLAN](plan/IMPLEMENTATION_PLAN.md); active detailed phase:
-[POSTGRES_PROVIDER_SELECTION](plan/POSTGRES_PROVIDER_SELECTION.md), latest section.
+Sky Guide autonomous master run ACTIVE; roadmap OPEN, not complete.
+Branch codex/master-plan-execution; pushed base abd87123cd56c8fbb63df08f64b5aedc60fd0f3e.
+Resolve this checkpoint with git log -1 and verify remote SHA. Master:
+[IMPLEMENTATION_PLAN](plan/IMPLEMENTATION_PLAN.md); active detailed phase:
+[POSTGRES_PROVIDER_SELECTION](plan/POSTGRES_PROVIDER_SELECTION.md), latest section;
+current package: [JOURNAL_NATIVE_REVIEW](plan/JOURNAL_NATIVE_REVIEW.md).
 
-## Latest maintainer repair / exact continuation
-[Current package and hashes](plan/JOURNAL_NATIVE_REVIEW.md) supersede historical
-prepared ACL hashes below. Shared exact instant comparator/retry arithmetic fixes
-all source lifecycle checks, stored candidate, identity/media, freshness/API,
-delivery expiry and manual official evidence. Canonical server-clock replay cannot
-truncate source precision. Payload evidence mapping now names payload_provenance;
-encoder/decoder regression retains its separate canonical superset and order.
-Current83 guards cover enabled custom/internal triggers, origin replication mode,
-function execution settings,443 installed columns/503 CHECK/FK/PK/UNIQUE
-constraints/233 index definitions and validity. Native79 structure was collected
-read-only;11 migrations unchanged/no disabled triggers. This did not refresh empty
-row counts. Membership guards inspect both directions and ADMIN/INHERIT/SET;
-optional current creator ADMIN-only edge is the sole documented exception.
-PG17's automatic edge is granted by bootstrap superuser(OID10), not the creator;
-read-only inspection confirms API postgres is CREATEROLE/non-superuser and
-bootstrap supabase_admin is OID10. Default role fixtures now refuse that executor
-before DML. Optional creator variant prepares temporary SET-only self-membership
-under outer ROLLBACK, no new login/principal/durable membership; it requires its
-own explicit privilege scope before execution. See current package for exact
-SQL/hashes and rollback baseline checks. No such memberships were granted here.
-Old79 proposal bytes and applied migrations are unchanged; old proposal is
-historical and must not be applied after expansion.
+## Authority / boundaries
+R1 local contracts, Supabase Free and Dyland's Org remain approved. User2026-10-07
+explicitly approved abd8712 dev native package INCLUDING creator postgres transient
+SET TRUE / INHERIT FALSE / ADMIN FALSE rehearsal. ALL temporary memberships and
+fixture data MUST share one outer ROLLBACK transaction per rehearsal. Check baseline
+before/after; STOP on drift. No new principal/credentials or retained SET membership.
+Schema structural and full-K15 benchmark gates remain mandatory. Dev only
+sky-guide-dev tpbydviuknovimroeodm; hard $0. Never merge/deploy production or perform
+destructive Git. SDK/Auth/credentials/consumer mount/durable commits/independent
+sessions/crash/restore/scheduler and source rights remain distinct gates.
+No need to re-ask R1/provider/org or the now approved creator rehearsal scope.
 
-New four-table constraint/index fingerprints remain NULL, deliberately blocking
-grant until an explicit native structural review. No native83 receipt exists.
-After scoped schema/rehearsal authorization: revalidate baseline; create/apply
-the additive CLI migration; run runtime-journal-structure-audit.sql, compare full
-new definitions with pinned up SQL, intentionally pin reviewedJournalStructure,
-regenerate/review artifacts, then apply ACL only within authorization. Run native
-owner/role/denial fixtures and full-K15 cost rehearsal; verify receipts and
-authoritative rollback/empty baseline. No automatic adoption of fetched hashes.
-Full-K15 fixture includes46,341 canonical/4,367 release rows (2,051 identity and
-4,103 membership events), forces deferred checks under ROLLBACK/30-second cap.
-Quadratic validation cost remains OPEN until native measurement; timeout requires
-reviewed additive optimization, not rewritten history/disabled enforcement.
-Artifacts/expanded native79 receipt are in existing E-drive rehearsal directory.
-No raw receipts/corpus/build output is committed.
+## Completed through current native milestone
+K02/P1-D02 sample DONE at2e6d110:10 nodes/9 edges; root price unknown, totals partial.
+Earlier local data/domain/API/media/sync contracts and unmounted v2 journal/fence/
+Store/kernel retain their evidence boundaries; full native/concurrent/SDK acceptance
+is not implied. Maintainer repair abd8712: exact instant lifecycle/retry arithmetic,
+canonical server clock, payload_provenance ownership and stronger structure/ACL/
+membership guards;425 tests plus final10 Store/6 ACL, lint/typecheck/build/catalog1808
+and scaffold PASS. Existing Router/chunk warnings unchanged.
 
-Validation:425 full tests PASS; final10 Store/6 ACL tests PASS, lint/typecheck/build/
-catalog1808/scaffold76 Markdown/14 profiles/173 tasks/diff PASS. Existing Router
-and chunk warnings persist. Scope modified: time consumers/evidence mapping,
-current83 privilege guards, bounded K15 builder/verifier/regressions and existing
-plans/handoff/README. Hosted/native83 timings/SQL/roles/down/durability/sessions/
-crash/restore/SDK/Auth/credentials/principal membership/consumer mount NOT RUN.
-Master goal is not complete. Local repair is ready for the next Codex session;
-do not restart R1 or ask again for approved R1/provider/org.
+Native pre-migration baseline PASS:79 tables/11 migrations/revision0,78 noncontrol
+owners empty; pinned columns/constraints/indexes/functions/triggers/settings and
+ACLs unchanged; postgres CREATEROLE/non-superuser/self_grant empty; no runtime roles/
+memberships. E: authorized-journal-before-receipt.json.
+First up attempt failed42601 at CASE in validate_sync_commit_applied; authoritative
+after-error baseline identical, no partial schema/history/grants. Native reproducer
+confirmed parenthesized CASE compiles; minimal2-character fix in UNAPPLIED SQL.
+Old11 applied migrations unchanged. Source up19250 bytes SHA256
+4ad16e6200129114098936f1b0408fd78050e6a3413f299d0b857ec6ee5eeb7e;
+applied function body MD5b713a6b3c837b058e785dae849bf879a. Down unchanged.
 
-## Authority / constraints
-R1 LOCAL CONTRACT APPROVED by user2026-10-06; Supabase Free/Dyland's Org approved.
-Do not re-request R1/provider/org. Dev sky-guide-dev tpbydviuknovimroeodm,
-org pdssjfwbrfjlglobjhtw; $0/month creation confirmed, PostgreSQL17.11/Singapore.
-No production/merge/paid services/destructive Git, SDK/credentials/Auth/principal
-membership/consumer/scheduler or rights expansion by implication.
-Existing dev-only runtime role/RLS question is UNANSWERED, not approval. Its old
-79-owner proposal cannot cover the future83-owner journal schema. New migration/
-ACL application requires concrete package review; no role/grant/policy applied.
-Node24/pnpm10.30.3 via E:/Code/corepack.cmd; CLI2.120.0/cache on E:. Docker daemon
-was unavailable; actual restore remains OPEN. Do not start/install/pull by implication.
+APPLIED via migration tool:
+20261007132330_private_sync_commit_journal (4 tables/10 invoker functions/12 triggers);
+20261007132621_private_journal_runtime_privileges (2 NOLOGIN groups/201 policies).
+CLI created files then local filenames aligned to actual server-assigned versions.
+Grant migration omits generator's outer BEGIN/COMMIT; migration tool owns transaction.
+Native83/37-function/155-trigger preflight PASS; installed structure unchanged.
+Explicitly reviewed52 new validated/immediate constraints and7 valid/ready/live
+indexes against pinned source; reviewedJournalStructure intentionally pinned
+constraints797ac2761349e5eedc6a282bf8084911/indexesbc5a8dcaeaa5f63abf24a536b071059a.
+E: authorized-journal-structure-receipt.json contains full definitions; no auto-adoption.
+Regenerated artifacts,6 ACL tests PASS. Effective column/helper/role/policy ACL
+metadata check PASS. No platform/public/default/future-object grant.
 
-## Completed / evidence boundaries
-K02/P1-D02 source sample DONE at pushed2e6d110:10 nodes/9 edges reconciled;
-root cost unknown, totals partial. Live adapter/coverage separate. K01/K03 staged
-adapters/K15 loader preserved; [source verification](plan/WIKI_SOURCE_VERIFICATION.md).
-Prior SQL milestones:11 applied private migrations/79 tables, identity/evidence,
-K15 every-field payload/exact fractions, immutable releases/public projection,
-global metadata CAS/source-health/LKG/audit, full historical graph/manifest order,
-ordered payload evidence and canonical writer. Latest applied migration:
-20261007023752_private_payload_evidence, SHA256
-334631deae66e5e026bf3a2d3d6f68c6df64f9260fab5fe54b71c9b8f3f19ead.
-Full prior hashes/native receipts are in active phase; no repeat migrations.
-Native Store5-phase866 query checks/two whole publication rollback cases and bounded
-read90 assertions PASS at prior milestones; outer ROLLBACK verified revision0 and
-all78 noncontrol owners empty. These are single-connection SQL proof, not SDK/
-parallel-session/crash/restore acceptance. Prior metadata/ACL read-only preflight
-PASS:79 owners/27 invoker functions/143 triggers, no platform/private grants.
-Runtime privilege generator proposal:2 NOLOGIN groups,193 policies, scoped columns/
-5 helper EXECUTE/4 lock-only key UPDATE columns. Actual role/RLS proof NOT RUN.
-Portable Store/read lowering/kernel/static gate PASS; eb28378 had376 tests.
-Outward fence/intent/fresh locked-head original audit/full review witness PASS;
-6006542 had390 full +14 focused final refinement/lint/typecheck/build.
-Unknown CAS/journal errors surface quarantined above unchanged SourceSync API;
-no automatic retry/source-failure write. Exact occupied target can settle despite
-successors. Restart/generic absence stays quarantined: pre-BEGIN worker may dispatch
-later. Failure audit alone lacks immutable count/backoff witness. Journal port and
-controller-recreation fixtures do not prove actual durable backend or crash safety.
+After-grants baseline PASS:83 owners, two singleton control rows, all other owners
+empty; global revision0/current acceptance NULL/active intent NULL. Creator has only
+two automatic bootstrap ADMIN TRUE/INHERIT FALSE/SET FALSE edges, no SET grant.
+E: authorized-journal-after-grants-receipt.json. This is the comparison baseline for
+EVERY rehearsal; transient memberships/data MUST disappear after ROLLBACK.
+Raw receipts, SQL fixture corpus and caches stay outside Git on E:
+SkyGuideAssets/research/postgres-rehearsal-2026-10-07/.
 
-## Proposed schema — NOT APPLIED
-supabase/proposals/sync_commit_journal_{up,down}.sql:4 typed owners/10 invoker
-functions, immutable v2 intent/applied witness/terminal receipt and active singleton.
-Own complete health/count/retry/success/validity and GLOBAL acceptance tuple/TTL
-are independent. Failure requires pinned global metadata; never infer global TTL
-from selected source freshness. No opaque candidate JSON/raw corpus/credential.
-Helpers lock global head then control; token is checked before canonical DML,
-actual full state is compared before marker; generation guard rejects unfenced
-metadata writer. Receipt derives resolution under locks and invalidates late token.
-Down holds writer barrier, requires quiesced consumers/unchanged definitions and
-REFUSES any pending or forensic history; no CASCADE/history deletion.
-Typed preparation: syncCommitProposalRows. Existing v1 public contracts preserved.
-Native builder/verifier ready; SQL parse/execution/native roles/separate durable
-commits/concurrent sessions/empty rollback NOT RUN. Current installed schema stays79;
-no migration file/history/provider/role/grant/Auth/SDK/dependency/public-data change.
-Prepared E:/SkyGuideAssets/research/postgres-rehearsal-2026-10-07/
-sync-commit-proposal-fixture.sql:5 phases/526 query assertions/26 negatives,
-877746 bytes, SHA256e76e2f77bc2d616862fa6374bc723741e40819df639df1392f2fb5863587246d.
-Up now19248 bytes SHA256b9644820e9746e8333e53f19d426b5515636e6f24367f24c9d97b4342e62e200;
-down SHA2560483b6c4c16ae2075c54d7df55d9f766aa5e2ff297e358637079cb2ea4c0a9c7.
-Validation:6 focused/396 full tests/lint/typecheck/build/catalog1808/scaffold/diff
-PASS. Existing Router/chunk warnings unchanged; E: sync-commit-proposal-tests.log.
-These check preparation/expected-row verification, NOT SQL parsing/execution.
+## Exact next
+Run prepared owner adapter and authorized creator adapter/8 denial fixtures under
+ROLLBACK; verify complete returned rows and compare authoritative baseline after EACH.
+Then full-K15 cost fixture (46,341 canonical/4,367 release rows) under ROLLBACK/30s;
+verify complete receipt and authoritative rollback. STOP on schema/ACL/membership/data
+drift; any timeout leaves benchmark gate OPEN. Do not disable deferred integrity,
+rewrite applied history or infer production sizing from fixture preparation.
+Native adapter/creator/denial/K15 timings/down/durable/concurrent/crash/restore proof
+NOT RUN at this checkpoint. No fixture or temporary SET membership executed yet.
+Portable tests are not native runtime proof. No P9-I02/D04/V01 or master DONE.
 
-## Completed local v2 integration — UNMOUNTED
-createPostgresIntentSyncStore exposes read/claim/execute only, no unfenced CAS.
-Separate claim transaction locks head→control, replays business transition and
-pins GLOBAL TTL; false activation rolls back intent. Executor shares existing
-canonical writer, requires token as SECOND callback SQL after head lock/before
-any canonical DML, compares full prepared desired row and uses applied finalizer.
-postgresCommitJournal load/resolve/receipt use fresh head→control barriers.
-Atomic settlement invalidates token; pre-BEGIN late execution is denied. Every
-occupied target needs its immutable marker/owner/audit/full acceptance, including
-failure; audit alone stays unresolved. SourceSync API unchanged, new private
-syncCommitJournalFence tracks lost claim/settlement ACK IDs and surfaces quarantine;
-complete evidence determines success, no retries or follow-up failure writes.
-Separate4-owner finite read/insert/helper vocabulary, exact UUID v4/OID2950/text
-and bounded transport. Installed79-owner ACL generator remains unchanged.
-Modified: Store/gate/transport, journal/row codec/v2 fence, synthetic protocol
-fixtures/focused tests, existing phase/master/foundation/handoff/README.
-14 focused/410 full tests/lint/typecheck/build/catalog1808/scaffold/diff PASS.
-E: sync-commit-journal-tests.log. Existing Router/chunk warnings unchanged.
-Separate transaction/ACK/token tests use an explicitly synthetic protocol model;
-they do NOT prove PostgreSQL execution, server locks/triggers/RLS, SDK cancellation,
-actual durability, concurrent sessions, crash or restore. New schema NOT APPLIED;
-no provider/role/SDK/Auth/credentials/public data or consumer mount changed.
-
-## Current slice — PREPARED v2 NATIVE REVIEW, NOT APPLIED/NOT RUN
-[Concrete scope/rollback/artifact hashes](plan/JOURNAL_NATIVE_REVIEW.md) is ready.
-Shared pure renderer preserves old79-owner grant/rollback byte-for-byte. Separate
-proposed83-owner/37-function/155-trigger baseline includes physical journal column
-types/nullability/generated target. Writer additions: intent25-column INSERT,
-applied/receipt INSERT, active control UPDATE only,10 transitive helper EXECUTE;
-201 scoped policies. New fingerprints are predicted; native preflight must verify.
-Grant/rollback/preflight/role metadata check and8 actual-denial fixture prepared
-on E:. Rollback now refuses schema/column/function/trigger/ACL/policy/role drift
-before removing only its package. No platform/login/principal membership grants.
-Source review found3 ambiguous receipt revision predicates; qualified columns,
-repinned up19248-byte SHA. This is static review/fix, not native execution proof.
-Actual v2 adapter/kernel transcript:39 callbacks/978 query assertions/6 token
-negatives; owner1727377 bytes and reader/writer variant1728871 bytes. No legacy CAS
-substitution; outer ROLLBACK cannot prove separate durable commits or races.
-Verifier checks full intent/control/applied/receipt; synthetic tests not receipts.
-31 focused + final6 focused/416 full tests/lint/typecheck/build/catalog1808/scaffold
-76 Markdown/14 profiles/173 tasks/diff PASS. Existing warnings unchanged. Evidence:
-E:/SkyGuideAssets/research/postgres-rehearsal-2026-10-07/runtime-journal-package-tests.log.
-Modified: shared renderer/new journal baseline/ACL module, up proposal qualification,
-builders/verifier/tests and existing handoff/phase/master/foundation/README plus
-concrete review document. No hosted operation/new migration/dependency/credential/
-SDK/Auth/consumer/public data change. Native parse/schema/roles/rollback NOT RUN.
-
-## Exact next / gates
-Read-only native baseline refreshed 2026-10-07 06:09:52 UTC: PASS. All three pinned
-table/function/trigger hashes match the installed79-owner baseline; PostgreSQL17.11,
-11 migration versions unchanged, revision0/singleton1/no current acceptance or
-promotion, all78 noncontrol owners empty, no runtime roles/policies or nonowner
-schema/table/column/function ACLs. Receipt/query on E: journal-preapproval-baseline-receipt.json,
-SHA256a7f01ea831fd761a5d3a679eff0f0a2c7c1d580f04f079d236a9c0936878fd07,
-under research/postgres-rehearsal-2026-10-07. This is installed-schema evidence,
-not proposed journal SQL/role/durability proof. No hosted mutation was performed.
-Docs-only validation: scaffold76 Markdown/14 profiles/173 tasks and diff PASS;
-runtime suite NOT RERUN, prior416-test checkpoint evidence remains unchanged.
-Roadmap dependency review found no next executable slice before R1/provider gates;
-notification activation requires verified schedule, price import requires SKU/market
-identity. Do not invent missing source facts or skip dependencies to proceed.
-
-Obtain refreshed dev-only [83-owner package authorization](plan/JOURNAL_NATIVE_REVIEW.md)
-before application; the concrete83-owner question is pending, do not repeat it.
-Old unanswered79-owner question cannot cover it. Revalidate
-native79-owner/no-role/empty baseline, then create CLI additive migration and apply
-via migration tool; verify83-owner metadata before grants/native fixtures/empty
-rollback. No durable forensic commits/SDK/credential/Auth/principal memberships/
-consumer mount by implication. Never apply old79-owner grant SQL unchanged
-AFTER schema expansion. Actual SDK/credential/Auth/membership remain distinct gates.
-No foundation/P9-I02/D04/V01/R2–R6/master DONE from ports or prepared fixtures.
-K04 OneDrive403; K10/K11 market/SKU; K12 bulk reuse prohibited; Q02/Q09/Q10/Q11;
-Q12/TGC/media rights; Vercel403; native device/install/icon/accessibility; future
-nonempty dye/compatibility/media typed owners and full historical payloads OPEN.
-W12 PARTIAL/W11 OPEN. No recrawl/source publication from synthetic fixtures.
-
-## Checkpoint discipline
-Stage intentional files only; commit/push/verify matching SHA. Raw/corpora/cache/
-secrets/build outputs stay outside Git (evidence on E:). No owned QA browser/server.
-Native compaction only; never shell /compact or invent context/usage percentages.
+## Remaining gates / local operations
+K04 OneDrive403; K10/K11 SKU/market; K12 bulk reuse prohibited; Q02/Q09/Q10/Q11/Q12,
+TGC/media rights, Vercel403, native devices/install/icon/accessibility and future
+typed media/dye/compatibility/historical payloads OPEN. R2–R6 follow R1 dependencies.
+Node24/pnpm10.30.3 via E:/Code/corepack.cmd; CLI2.120.0/cache on E:. No Docker daemon
+started/pulled. No owned QA browser/server. Checkpoint only intentional files;
+push and verify SHA. Native compaction only; never shell /compact or invent quota.

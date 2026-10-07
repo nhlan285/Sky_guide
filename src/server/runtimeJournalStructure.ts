@@ -9,10 +9,16 @@ export const installedStructure = {
   indexes: '96c11328830473de69d5536969812063',
 } as const
 
-// No native83 receipt exists. An explicit maintainer comparison against the
-// pinned up SQL must fill this before grants. Null deliberately fails closed;
-// a generator must never bless freshly fetched CHECK/FK/UNIQUE/index metadata.
-export const reviewedJournalStructure: { constraints: string | null; indexes: string | null } = { constraints: null, indexes: null }
+// Native83 structure explicitly reviewed 2026-10-07 against up SHA256
+// 4ad16e6200129114098936f1b0408fd78050e6a3413f299d0b857ec6ee5eeb7e:
+// 52 immediate/validated constraints, 7 valid/ready/live indexes. Exact allowlist,
+// UUID/digest/revision/time/health/global-tuple checks, bounded row, restricted
+// FK actions, PK/UNIQUE key order and one nonunique active-control index match.
+// Receipt on E: authorized-journal-structure-receipt.json. Never auto-adopt drift;
+// future unreviewed structures must still use null and fail closed before grants.
+export const reviewedJournalStructure: { constraints: string | null; indexes: string | null } = {
+  constraints: '797ac2761349e5eedc6a282bf8084911', indexes: 'bc5a8dcaeaa5f63abf24a536b071059a',
+}
 
 export const expectedFunctionSettings = (names: readonly string[]) => names.map(name => ({
   name, language: ['instant_order_key', 'graph_edges'].includes(name) ? 'sql' : 'plpgsql',

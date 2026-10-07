@@ -276,3 +276,14 @@ migrations and historical79 proposal bytes remain unchanged. Full-K15 cost fixtu
 is prepared on E:,46,341 canonical/4,367 release rows, forced deferred checks under
 ROLLBACK/30-second cap. Native cost/83 parsing/roles/down/restore remain NOT RUN;
 repeated full validation cost is OPEN, requiring measured evidence before import.
+
+Authorized native development milestone2026-10-07: journal/schema and scoped ACL
+applied as20261007132330/20261007132621;83 private owners/37 invoker functions/155
+custom triggers/201 policies/2 NOLOGIN groups. Full native structure and effective
+ACL metadata PASS; old installed fingerprints unchanged. First failed migration
+rolled back exactly; parenthesized CASE corrected before installation. Native52
+constraints/7 indexes explicitly reviewed/pinned before grants. Creator postgres
+has automatic bootstrap ADMIN-only edges; transient SET-only rehearsal is approved
+solely under the same ROLLBACK transaction as fixture data. No temporary SET edge
+executed yet. Next: owner/creator/denial fixtures and K15 benchmark with authoritative
+before/after baseline checks; do not infer runtime/durability/SDK acceptance.

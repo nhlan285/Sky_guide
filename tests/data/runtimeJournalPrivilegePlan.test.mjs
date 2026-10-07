@@ -48,7 +48,7 @@ test('old79-owner grant/rollback remain byte-identical; separate83-owner journal
 })
 
 test('pinned proposed37 functions/155 trigger fingerprints cover complete invoker helper closure; qualification removes receipt variable ambiguity',()=>{
- assert.equal(hash(up),journalSchemaSha256);assert.equal(Buffer.byteLength(up),19248)
+ assert.equal(hash(up),journalSchemaSha256);assert.equal(Buffer.byteLength(up),19250)
  const funcs=bodies(),baseline=runtimeJournalPrivilegeBaseline
  assert.equal(funcs.size,37);assert.equal(baseline.functions.length,37);assert.equal(baseline.triggers.length,155)
  for(const f of baseline.functions)assert.equal(hash(funcs.get(f.name),'md5'),f.bodyMd5,f.name)
@@ -121,7 +121,8 @@ test('review grant/preflight/rollback guard are bounded and conditional on exact
  assert.ok(p.preflight.includes('p.proconfig'))
  assert.ok(p.preflight.includes('session_replication_role'))
  assert.ok(p.preflight.includes('Journal structural receipt requires explicit maintainer review before grants'))
- assert.deepEqual(reviewedJournalStructure,{constraints:null,indexes:null})
+ assert.deepEqual(reviewedJournalStructure,{constraints:'797ac2761349e5eedc6a282bf8084911',indexes:'bc5a8dcaeaa5f63abf24a536b071059a'})
+ assert.doesNotMatch(p.preflight,/if true then raise exception 'Journal structural receipt/)
  assert.ok(p.roleCheck.includes('or member_role.rolname in('))
  assert.ok(p.roleCheck.includes('not m.inherit_option and not m.set_option'))
  assert.ok(p.roleCheck.includes('m.grantor=10 and grantor.rolsuper and m.admin_option'))

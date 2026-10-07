@@ -6,12 +6,12 @@ import { runtimePrivilegeBaseline } from './runtimePrivilegeBaseline.ts'
 // trigger strings predict
 // pg_get_triggerdef formatting from the earlier native snapshot. Any difference
 // fails preflight; never auto-adopt a newly fetched catalog to make it pass.
-export const journalSchemaSha256='b9644820e9746e8333e53f19d426b5515636e6f24367f24c9d97b4342e62e200'
+export const journalSchemaSha256='4ad16e6200129114098936f1b0408fd78050e6a3413f299d0b857ec6ee5eeb7e'
 const functions=[
  {name:'lock_sync_commit_control',args:'',result:'void',bodyMd5:'5be330824b6d0433ebfc0ebffc546535'},
  {name:'activate_sync_commit_intent',args:'p_id uuid',result:'boolean',bodyMd5:'8ac9042beccb2a375fea981894f16858'},
  {name:'require_sync_commit_intent',args:'p_id uuid, p_digest text',result:'boolean',bodyMd5:'9c29849ec4863db7d7c7008a9f4adae1'},
- {name:'validate_sync_commit_applied',args:'',result:'trigger',bodyMd5:'1098259463bc72e43204aed23b1b0747'},
+ {name:'validate_sync_commit_applied',args:'',result:'trigger',bodyMd5:'b713a6b3c837b058e785dae849bf879a'},
  {name:'apply_sync_commit_cas',args:'p_id uuid, p_digest text',result:'boolean',bodyMd5:'56f86ce4cb9ae19086a03262cdebd818'},
  {name:'validate_sync_commit_receipt',args:'',result:'trigger',bodyMd5:'0d307e56ac221702db5a8a215639be93'},
  {name:'settle_sync_commit_intent',args:'p_id uuid, p_resolution text',result:'boolean',bodyMd5:'623932212a2f94c44b63f6bedba02df9'},

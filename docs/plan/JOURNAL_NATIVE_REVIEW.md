@@ -1,11 +1,14 @@
 # P9-I02 — v2 journal development review package
 
-Status: **REPOSITORY REMEDIATION COMPLETE / NOT APPLIED / NATIVE83 NOT RUN** (2026-10-07).
+Status: **DEV SCHEMA/ACL APPLIED / NATIVE METADATA PASS / RUNTIME AND K15 NOT RUN** (2026-10-07).
 This package replaces the old79-owner runtime-role proposal for future application;
 it does not replace the current installed-schema baseline. User approval of R1,
 Supabase Free and Dyland's Org persists. The earlier runtime-role question remains
-unanswered; neither that question nor automatic goal continuation authorizes this
-expanded schema/ACL package. No credentials, SDK, Auth or consumer mount included.
+superseded by user2026-10-07 explicit abd8712 package approval INCLUDING temporary
+creator postgres SET TRUE/INHERIT FALSE/ADMIN FALSE. ALL temporary membership and
+fixture data share the same ROLLBACK transaction; baseline before/after, STOP on
+drift. No new principal/credentials or retained temporary membership. Schema/K15
+gates remain mandatory. No SDK, Auth or consumer mount included.
 
 ## Maintainer remediation — 2026-10-07
 
@@ -45,12 +48,15 @@ runtime-structure-baseline-receipt.json, SHA256
 `b9104131a4b9654585dc97d7dc83d0fa76b220d0643def27dd499b0754f248d5`.
 This audit did not refresh row counts or grant native83 acceptance.
 
-Four-table structural fingerprints remain explicitly NULL: no native83 receipt
-exists to review. Generated grant/role-check/rollback deliberately REFUSE until
-`runtime-journal-structure-audit.sql` has returned full new constraints/indexes
-and a maintainer has compared them with the pinned up proposal. Record the receipt,
-then intentionally set reviewedJournalStructure in runtimeJournalStructure.ts and
-regenerate/review artifacts. Never substitute newly fetched hashes automatically.
+Native83 structural receipt has been explicitly reviewed against up SHA256
+4ad16e6200129114098936f1b0408fd78050e6a3413f299d0b857ec6ee5eeb7e:52 validated,
+immediate CHECK/FK/PK/UNIQUE constraints and7 valid/ready/live indexes match UUID,
+source/digest/revision/time/health/global-tuple/row-budget rules, restricted FK
+actions, PK/UNIQUE key order and active-control index. Installed fingerprints
+unchanged. Receipt E: authorized-journal-structure-receipt.json; intentionally
+pinned constraints797ac2761349e5eedc6a282bf8084911 and indexesbc5a8dcaeaa5f63abf24a536b071059a,
+then regenerated artifacts before grants. Never auto-adopt future drift; unreviewed
+definitions still require NULL and fail closed. Native83 preflight and ACL metadata PASS.
 
 Membership guard checks runtime roles as both parent and member, including ADMIN,
 INHERIT and SET options. Only optional PG17 creator edge is accepted: current
@@ -145,26 +151,36 @@ transaction needs authoritative rollback/baseline confirmation before retry.
 
 ## Pinned artifacts
 
-Source up: `supabase/proposals/sync_commit_journal_up.sql`,19248 bytes,
-SHA256 `b9644820e9746e8333e53f19d426b5515636e6f24367f24c9d97b4342e62e200`.
+Source up: `supabase/proposals/sync_commit_journal_up.sql`,19250 bytes,
+SHA256 `4ad16e6200129114098936f1b0408fd78050e6a3413f299d0b857ec6ee5eeb7e`.
 Source down:1623 bytes,
 SHA256 `0483b6c4c16ae2075c54d7df55d9f766aa5e2ff297e358637079cb2ea4c0a9c7`.
 Qualified receipt audit/acceptance column references remove a static variable-name
 collision; [PostgreSQL variable substitution rules](https://www.postgresql.org/docs/17/plpgsql-implementation.html)
 explain the ambiguity. No native execution of that repair is claimed.
 
+Initial native up failed42601 at unparenthesized CASE in the applied-witness IF;
+after-error baseline was identical to before. Constant native reproducer proved
+parentheses compile;2-character correction preserves expression semantics. Applied
+schema version20261007132330 and runtime privilege version20261007132621; old11
+migrations unchanged. CLI filenames aligned with server-assigned versions. Grant
+migration omits proposal BEGIN/COMMIT only; migration tool owns transaction.
+Post-grant baseline:83 tables,201 policies,2 NOLOGIN roles, global revision0 and
+no fixture data; two bootstrap creator ADMIN-only edges, INHERIT/SET FALSE. No
+temporary membership granted yet. Native runtime/K15/down/durability remain NOT RUN.
+
 Prepared outputs live outside Git in
 `E:/SkyGuideAssets/research/postgres-rehearsal-2026-10-07/`:
 
 | File | Bytes | SHA256 |
 | --- | ---: | --- |
-| runtime-journal-preflight.sql | 61335 | 888073ba0e1eb393532e1f5f3ad023025e2bf991532fe02fceeb295d9a8ce7b0 |
+| runtime-journal-preflight.sql | 61396 | 21b12a25fb5a8298e2f2928095f1633e56f73883b82d0a0aab2c12bb85e0e776 |
 | runtime-journal-structure-audit.sql | 7142 | 80d9ffa4db1121ec2555d293f33cf1dd5893b89cca1954c9e1764c1079eea08a |
-| runtime-journal-grant-proposal.sql | 112189 | 9f69bb63409121619b140f085dd36799a8d1fddf3353f74e3eccccd39edffc55 |
-| runtime-journal-rollback-proposal.sql | 162946 | 50aa2353eb964235ac232fa4e6cb31a3272b5edfa439bfb59000b1b84991e21b |
-| runtime-journal-role-check.sql | 126675 | 38290babb7fc6885f0ff44642f66f79bbf70e6982db042ca21cde031fcb528d8 |
+| runtime-journal-grant-proposal.sql | 112250 | 23d27981a44b9b09de1aa766151402442d50ac0fc195abd16b54a63c5313b47e |
+| runtime-journal-rollback-proposal.sql | 163007 | 43ab9a8702daa41e8c7e42280103867ede1c3686c9327d0b86c5c15dfeb4d2a9 |
+| runtime-journal-role-check.sql | 126736 | 8d73e1ddeae4bca8ce730cdf34431a140a1501e66b91f3ae80fcf2af6c01b7ce |
 | runtime-journal-denial-fixture.sql | 2898 | aa9d5f36a4d45a26cd6e421952ae9a1c2849e485224b1040a3f57c6538f41cb5 |
-| runtime-journal-manifest.json | 88723 | 61c3686fcbf017421bbedb4534a11b7460cd59df187e422ef4a88c4eed595579 |
+| runtime-journal-manifest.json | 88783 | 153515a4a47de455fe3676640721fa21d2f0cd3ed34903a1f1090594d6cd0e7d |
 | sync-commit-adapter-fixture.sql | 1727377 | 193edbd597d1663d5318c9ebb93ffa8aac1d32f3632a85537061e545118bd41c |
 | sync-commit-adapter-role-fixture.sql | 1729129 | bb3fa11015c6a914bfc078d38ab251b26bc9697544e861306c7689d3ef032834 |
 | full-k15-validation-fixture.sql | 4530701 | 24eb64bb37b73b958dfdcf83161fbc5daaa91685ae0c3474dbe4c295cde5911c |

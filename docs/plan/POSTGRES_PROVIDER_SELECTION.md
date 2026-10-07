@@ -1487,3 +1487,49 @@ ACL application within authorization. Run owner/role/denial/K15 cost fixtures,
 verify full receipts and authoritative rollback/empty baseline. Actual native83
 parsing/roles/down/cost/durable commits/sessions/crash/restore/SDK/Auth/credentials/
 principal membership/consumer mount remain NOT RUN; master roadmap remains OPEN.
+
+### Authorized native journal/creator rehearsal — 2026-10-07
+
+Goal: execute the reviewed abd8712 development schema/ACL package and native
+owner/creator/denial/full-K15 rehearsals, preserving empty canonical baseline.
+User explicitly approved creator postgres ONLY with transient SET TRUE/INHERIT
+FALSE/ADMIN FALSE; ALL fixture data and temporary membership in one ROLLBACK
+transaction per rehearsal. No new principal/credentials, retained SET membership,
+production/paid operation or consumer mount. STOP on any baseline/metadata drift.
+Dependencies: pinned abd8712 package; installed79/native27-function/143-trigger
+structure/ACL/membership baseline. Before-migration read-only check PASS and saved
+on E: authorized-journal-before-receipt.json. Hard $0 remains.
+
+Steps: CLI-create additive migration; apply through migration tool; collect full
+native83 structure and explicitly compare against pinned up SQL; deliberately
+pin reviewedJournalStructure and regenerate/review artifacts BEFORE grants. Apply
+scoped roles/ACL; inspect effective privileges/creator ADMIN-only baseline; run
+owner and authorized creator adapter/denial fixtures under ROLLBACK; verify full
+receipts and membership/data/schema baseline after EACH transaction. Run bounded
+full-K15 cost fixture under ROLLBACK/30s and verify timing + post-rollback baseline.
+Any timeout or unacceptable cost leaves benchmark gate OPEN; do not disable
+integrity, rewrite history, or bypass native structure review to continue.
+
+Files: CLI-generated migration, intentionally reviewed journal structure pins,
+existing phase/master/foundation/handoff/native review/README; SQL receipts/raw
+corpora stay on E:. Validation: native metadata/SQL/ACL/8 denied operations/full
+adapter output/empty rollback, focused ACL tests/lint/typecheck/build/scaffold/diff
+as needed. Backup/restore/concurrent sessions/crash/SDK/Auth/credentials/durable
+records remain separate gates. Exact next: authorized additive CLI migration.
+
+Native milestone: pre-migration baseline PASS; first up failed42601 because an IF
+expression contained an unparenthesized CASE. Exact after-error baseline matched;
+native constant reproducer proved the2-character parenthesis fix before retry.
+Old11 migrations unchanged. Up19250 bytes SHA2564ad16e6200129114098936f1b0408fd78050e6a3413f299d0b857ec6ee5eeb7e;
+new applied function body MD5b713a6b3c837b058e785dae849bf879a intentionally repinned.
+Applied versions20261007132330 journal and20261007132621 scoped runtime privileges;
+local CLI filenames aligned to server-assigned versions. Grant migration removes
+generator outer BEGIN/COMMIT only, retaining every guard; tool owns transaction.
+Reviewed52 new constraints/7 indexes against source; structure hashes pinned
+797ac2761349e5eedc6a282bf8084911/bc5a8dcaeaa5f63abf24a536b071059a. Native83
+preflight/effective ACL metadata PASS;6 ACL tests PASS. After-grants data is empty
+except two singleton controls/revision0; only bootstrap ADMIN-only creator edges,
+no SET membership. E receipts: authorized-journal-{before,structure,after-grants}-receipt.json.
+Exact next: native owner/authorized creator/denial, EACH with same-transaction
+membership+data ROLLBACK and identical authoritative after baseline; then full-K15
+benchmark. Native runtime fixtures/K15 timing/down/durability/concurrency NOT RUN.
