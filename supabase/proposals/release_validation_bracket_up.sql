@@ -71,13 +71,13 @@ do $validation_empty$ declare t text;n bigint;m_versions text[];m_names text[];b
   execute format('select count(*) from sky_private.%I',t) into n;
   if n<>(case when t in('sync_generation','sync_commit_control') then 1 else 0 end) then raise exception 'Nonempty private owner %',t;end if;
  end loop;
- 
+
  select array_agg(version order by version),array_agg(name order by version) into m_versions,m_names from supabase_migrations.schema_migrations;
  if m_versions[1:15] is distinct from array['20261006170439','20261006171406','20261006171612','20261006173438','20261006174420','20261006180131','20261006181325','20261007014843','20261007020927','20261007022023','20261007023752','20261007132330','20261007132621','20261007160926','20261007161625'] or m_names[1:15] is distinct from array['private_identity_foundation','private_retirement_graph','protect_identity_evidence_truncate','private_catalog_payloads','preserve_instant_fraction_precision','private_release_metadata','immutable_release_projection','private_sync_metadata_cas','private_acceptance_graph','private_acceptance_manifest_order','private_payload_evidence','private_sync_commit_journal','private_journal_runtime_privileges','private_release_metadata_scan','restore_release_metadata_scan'] then raise exception 'Original migration history changed';end if;
  -- The tool may record its own migration before or after executing supplied SQL.
  if cardinality(m_versions) not between 15 and 16
  or (cardinality(m_versions)>=16 and m_names[16] is distinct from 'private_release_validation_brackets')
- 
+
  then raise exception 'Unexpected extra migration history';end if;
 end;$validation_empty$;
 create table sky_private.release_validation_clock (
@@ -298,12 +298,12 @@ do $validation_empty$ declare t text;n bigint;m_versions text[];m_names text[];b
   execute format('select count(*) from sky_private.%I',t) into n;
   if n<>(case when t in('sync_generation','sync_commit_control','release_validation_clock') then 1 else 0 end) then raise exception 'Nonempty private owner %',t;end if;
  end loop;
- if exists(select 1 from sky_private.release_validation_clock where singleton<>1 or epoch<>0 or write_depth<>0 or writer_xid is not null) then raise exception 'Clock is not an empty rehearsal baseline';end if;
+if exists(select 1 from sky_private.release_validation_clock where singleton<>1 or epoch<>0 or write_depth<>0 or writer_xid is not null) then raise exception 'Clock is not an empty rehearsal baseline';end if;
  select array_agg(version order by version),array_agg(name order by version) into m_versions,m_names from supabase_migrations.schema_migrations;
  if m_versions[1:15] is distinct from array['20261006170439','20261006171406','20261006171612','20261006173438','20261006174420','20261006180131','20261006181325','20261007014843','20261007020927','20261007022023','20261007023752','20261007132330','20261007132621','20261007160926','20261007161625'] or m_names[1:15] is distinct from array['private_identity_foundation','private_retirement_graph','protect_identity_evidence_truncate','private_catalog_payloads','preserve_instant_fraction_precision','private_release_metadata','immutable_release_projection','private_sync_metadata_cas','private_acceptance_graph','private_acceptance_manifest_order','private_payload_evidence','private_sync_commit_journal','private_journal_runtime_privileges','private_release_metadata_scan','restore_release_metadata_scan'] then raise exception 'Original migration history changed';end if;
  -- The tool may record its own migration before or after executing supplied SQL.
  if cardinality(m_versions) not between 15 and 16
  or (cardinality(m_versions)>=16 and m_names[16] is distinct from 'private_release_validation_brackets')
- 
+
  then raise exception 'Unexpected extra migration history';end if;
 end;$validation_empty$;

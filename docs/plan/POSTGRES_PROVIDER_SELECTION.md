@@ -1847,8 +1847,8 @@ only decision needs this narrowly reviewed exception; current app/source83 basel
 and hosted schema remain unchanged until authorized application. No performance claim.
 
 Review identifiers:
-- Up336222 bytes SHA256121ca95be32bbb2a0a313c3ea78f94964ff7e057591ad8012682ebfaa22a3919.
-- Down328102 bytes SHA2564581876cec050d089126e7dcb5d2ae3e83679bd4c71df15f8e76c6fb014cfe66.
+- Up336218 bytes SHA2562352b464d36b4c3f1d1b1711d2b3319033a2cbc448b7f8e0eb310eb604e8697b.
+- Down328098 bytes SHA2561b88705a1493d8b2d52893ec644c4d78207ebd3fcf2aa7a01fdc7631214be417.
 - Before126618 bytes SHA2567438a57afff26546c90d2975de5f6f264f66fdb828ffd63374df2c9e784e87b6.
 - After187224 bytes SHA256249e815f31b44445b3b3c1be916076350d4c69f023bd6c051cd75b092893d932.
 - Enter body MD5f92de9bd429a275a5a30375b039f9646;
@@ -1860,14 +1860,14 @@ source, not fetched/adopted metadata. Any native formatting/compilation mismatch
 must fail atomically and be investigated; never repin to silence drift.
 
 Prepared native adversarial fixtures on E: (NOT RUN):
-- release-validation-bracket-owner-fixture.sql249490 bytes SHA256
-  b08236f51f4e653430b47ff40ad60776dbdf63b1f45b166a61f94128d9a75ab9:
+- release-validation-bracket-owner-fixture.sql249488 bytes SHA256
+  6c61d779e16a4c15a125c37c4d3249b9837109b551b767e35f30828228c66ebf:
   7 target-validator rejections,5 positive cases (direct mid-write calls, zero-row
   invalidation, UPSERT balancing, failed subtransaction and explicit savepoint).
   Whole touched canonical/release/clock/witness frames must survive negative rollback;
   final release rows/tx/epoch/depth independently verified from prepared source.
-- release-validation-bracket-creator-denial-fixture.sql200443 bytes SHA256
-  8fe04a285d7c9ed50c6a28091ff0e994a44842ffafe7e514b843be58528c50b7:
+- release-validation-bracket-creator-denial-fixture.sql200441 bytes SHA256
+  69af57122e9e19409fd2d95153d65615d99b15d1344b32096f3a30d19a5c464b:
   25 actual permission denials across both runtime groups/internal owners/helpers.
   Existing postgres creator temporary SET TRUE/INHERIT FALSE/ADMIN FALSE only, all
   temporary membership and fixture operations share outer ROLLBACK; no new actor.
@@ -1890,6 +1890,10 @@ Final local checks:439 full tests,10 focused, lint/typecheck PASS. Initial lint 
 unused CLI destructuring; removed binding, SQL review bytes unchanged. App build
 previous PASS at2925996, not rerun for proposal/test-only work. Scaffold76 Markdown/
 14 profiles/173 tasks and diff PASS. No live job remains.
+Staged diff caught4 whitespace-only guard lines after the first review checkpoint;
+generator now emits empty lines without spaces, source function/checker hashes
+unchanged. Regenerated up/down/fixtures with updated hashes above;3 focused
+proposal tests PASS. No native/DML/schema behavior changed by this formatting repair.
 Exact next: complete local checks, update/push SHA-verified review checkpoint, request
 ONE scoped approval for this85-owner/3-definer/168-hook dev up/down and rollback
 rehearsals. After approval revalidate full83 baseline, create CLI migration/apply via

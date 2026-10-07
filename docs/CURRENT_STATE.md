@@ -3,7 +3,7 @@
 ## Task / branch / checkpoint
 Sky Guide autonomous master run ACTIVE; roadmap OPEN, not complete.
 Branch codex/master-plan-execution; checkpoint parent
-95d560fc28b59530da92ed77eac4e0508602026d verified on origin.
+558f7a6c078d9de6bc251f9d8af73e30ff73faf7 verified on origin.
 Resolve latest checkpoint with git log -1 and verify remote SHA.
 Master: [IMPLEMENTATION_PLAN](plan/IMPLEMENTATION_PLAN.md).
 Active phase: [POSTGRES_PROVIDER_SELECTION](plan/POSTGRES_PROVIDER_SELECTION.md),
@@ -108,6 +108,10 @@ synthetic verifier/model outputs do not become native proof. Models7/proposal3
 focused/full439 tests/lint/typecheck/scaffold76 Markdown14 profiles173 tasks/diff PASS.
 Initial lint unused CLI binding fixed, SQL review bytes unchanged. App build remains
 previous PASS/not rerun; this packet changes only SQL proposals/planning/tests.
+Final staged diff caught guard-only trailing spaces; regenerated up/down/fixtures
+without them and updated exact review hashes;3 focused proposal tests PASS. Function
+and metadata checker hashes unchanged. First checkpoint558f7a6 is superseded by
+this formatting-repair checkpoint; approve the latest verified HEAD, not old hashes.
 Modified: current model/tests, bracket proposal/fixture builders and verifier,
 two proposal SQL files, active phase/master/handoff. Logs/artifacts remain on E:.
 

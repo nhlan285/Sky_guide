@@ -38,13 +38,13 @@ export function buildReleaseValidationBracketProposal(){
   execute format('select count(*) from sky_private.%I',t) into n;
   if n<>(case when t in('sync_generation','sync_commit_control'${after?",'release_validation_clock'":''}) then 1 else 0 end) then raise exception 'Nonempty private owner %',t;end if;
  end loop;
- ${after?"if exists(select 1 from sky_private.release_validation_clock where singleton<>1 or epoch<>0 or write_depth<>0 or writer_xid is not null) then raise exception 'Clock is not an empty rehearsal baseline';end if;":''}
+${after?"if exists(select 1 from sky_private.release_validation_clock where singleton<>1 or epoch<>0 or write_depth<>0 or writer_xid is not null) then raise exception 'Clock is not an empty rehearsal baseline';end if;":''}
  select array_agg(version order by version),array_agg(name order by version) into m_versions,m_names from supabase_migrations.schema_migrations;
  if m_versions[1:15] is distinct from array[${names(versions)}] or m_names[1:15] is distinct from array[${names(migrationNames)}] then raise exception 'Original migration history changed';end if;
  -- The tool may record its own migration before or after executing supplied SQL.
  if cardinality(m_versions) not between ${restoring?'16 and 17':'15 and 16'}
  or (cardinality(m_versions)>=16 and m_names[16] is distinct from 'private_release_validation_brackets')
- ${restoring?"or (cardinality(m_versions)=17 and m_names[17] is distinct from 'restore_private_release_validation_brackets')":''}
+${restoring?"or (cardinality(m_versions)=17 and m_names[17] is distinct from 'restore_private_release_validation_brackets')":''}
  then raise exception 'Unexpected extra migration history';end if;
 end;$validation_empty$;\n`
  const triggerGuard=(when)=>`if tg_table_schema<>'sky_private' or tg_level<>'STATEMENT' or tg_when<>${q(when)} or tg_op not in('INSERT','UPDATE','DELETE') or tg_table_name not in(${names(tables)}) then raise exception 'Unsupported private write trigger context';end if;`
