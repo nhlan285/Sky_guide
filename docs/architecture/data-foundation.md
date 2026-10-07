@@ -79,6 +79,22 @@ callback. Actual connected reconciliation/cancellation/races are OPEN. Concrete
 role/reviewer/credential and cleanup contract is in the active
 [provider phase](../plan/POSTGRES_PROVIDER_SELECTION.md#connected-runtime-contract--prepared-not-mounted).
 
+**Least-privilege refinement —2026-10-07:** prepareRuntimePrivilegeProposal emits
+review-only scoped grants/RLS/revokes against pinned79-owner/27-function/143-trigger
+metadata; invoker body hashes match latest local migrations.79 SELECT/78 column
+INSERT/9 mutable column UPDATE/23 child DELETE owners and5 helper EXECUTE only.
+Existing invoker triggers also lock public_release/sync_acceptance/acquisition_option/
+field_provenance_field; PostgreSQL row locks need UPDATE privilege. Preserve those
+serialization locks and propose minimum key-column UPDATE plus UPDATE USING(true)
+WITH CHECK(false) on these4 owners. This permits locking while disallowing actual
+updates according to the policy contract; actual role/RLS acceptance is still
+NOT RUN. Reader has no helper EXECUTE; obsolete instant_order_key/trigger entrypoints
+receive no direct grants. Role groups are NOLOGIN/NOBYPASSRLS and own no objects.
+No new grant/policy/role/credential has been applied; native preflight is read-only.
+Rollback must revoke column as well as table privileges; unknown dependencies make
+DROP ROLE fail, without CASCADE/data deletion. Inspect unchanged proposal baseline
+and memberships first; this is not an automatic rollback over later role changes.
+
 ## Ownership decisions and field preservation inventory
 
 **Acquisition identity: Option B.** `(item_id, option_id)` is the relational key;

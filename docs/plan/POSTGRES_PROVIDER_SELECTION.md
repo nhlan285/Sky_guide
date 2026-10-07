@@ -933,7 +933,9 @@ reservation, immutable release/graph/order/acceptance owners; UPDATE only curren
 canonical roots/proof registry/positions and sync_generation/sync_source_state;
 DELETE only replaceable typed child/proof joins. No root, identity, provenance,
 source, reservation, release/projection, acceptance/audit/history DELETE/TRUNCATE;
-no UPDATE immutable release/graph/audit. source_registry insert only. CAS helper
+no actual UPDATE immutable release/graph/audit. The four invoker-lock UPDATE-column
+privileges below use WITH CHECK(false); they grant locking, not accepted mutation.
+source_registry insert only. CAS helper
 EXECUTE only writer; no SECURITY DEFINER shortcut. Derive exact table/column/helper
 grant list from current emitted SQL and trigger/helper call graph, not ALL FUTURE
 TABLES/FUNCTIONS. Dedicated RLS policies per operation/role are required: existing
@@ -999,3 +1001,103 @@ SDK/credential/runtime-role/Auth authorization package concrete before dependent
 live steps. No production/paid changes; existing R1/provider/org approval stands.
 Actual driver/cancel/commit/races/restore/measurements remain OPEN. Current handoff
 is the compact resume entry; do not reread all historical fixture slices.
+
+## Active slice — explicit runtime privilege proposal
+
+MEDIUM within current database integration. Start f2e160e, clean verified remote.
+Goal: produce exact table/column/helper/RLS grant and revoke SQL for review before
+runtime authorization; derive permissions from both emitted DML and invoker trigger
+locks. Dependencies:79 typed owners and existing static Store/writer. Scope: typed
+privilege manifest, SQL proposal/preflight/rollback and focused coverage/drift tests;
+read-only native catalog snapshot. No roles/grants/policies/credentials installed,
+SDK/Auth/consumer integration or production. Transaction lifecycle follows this
+proposal; do not substitute a grants document for actual runtime acceptance.
+
+Native inventory:79 tables/143 application triggers/27 functions, no policies or
+SECURITY DEFINER. Invoker locks require UPDATE privileges beyond emitted DML:
+public_release, sync_acceptance, acquisition_option, field_provenance_field. Preserve
+existing serialization locks; proposal uses minimum key-column UPDATE for locking,
+dedicated UPDATE USING(true) WITH CHECK(false) policy to deny actual UPDATE on these
+four owners, plus existing immutable guards. Actual role/RLS proof remains NOT RUN
+until scoped dev authorization; proposal must not claim this assumption verified.
+Reader needs table SELECT only, no private helper EXECUTE; writer needs iso_instant,
+valid_partial_time, valid_time_range, graph_edges and apply_sync_metadata_cas.
+Existing trigger entrypoints are not directly callable runtime APIs; do not grant
+all functions or the obsolete/unreachable instant_order_key helper.
+
+Expected: src/server/runtimePrivilegePlan.ts, tests/data/runtimePrivilegePlan.test.mjs,
+tests/sql/build-runtime-privilege-proposal.mjs; phase/architecture/current/master.
+Steps: explicit manifest and paired grant/revoke policies; validate coverage of
+actual5-phase emitted SQL and native inventory/helper closure; baseline-sensitive
+preflight and column revoke (table revokes alone do not revoke column privileges);
+focused/full tests/lint/typecheck/build/scaffold/diff; checkpoint/push/verify.
+Acceptance: unknown table/column/helper/trigger drift in pinned permission contract
+fails closed (not a complete constraint/index/type audit); no blanket
+future grants, roles/passwords/membership/DDL executed, explicit allow/deny matrix
+and rollback preserve data/history/platform policies. Exact next after proposal:
+transaction lifecycle/commit-uncertainty implementation, then scoped authorization
+for actual role/RLS tests/SDK/credential/Auth choices. Risk: RLS policy behavior,
+inherited/PUBLIC privileges, ownership and real connection defaults need native
+acceptance; a static manifest or syntax proof is insufficient.
+
+### Completed proposal / native preflight / pending authorization
+
+runtimePrivilegePlan/runtimePrivilegeBaseline now produce exact preflight/grant/
+rollback and193 dedicated RLS policies.79 table SELECT/78 column INSERT/9 mutable
+column UPDATE/4 lock-only UPDATE/23 child DELETE;5 private helper EXECUTE to writer
+only, none to reader. Both roles NOLOGIN/NOINHERIT/NOSUPERUSER/NOBYPASSRLS/no object
+ownership. No credential/login/principal membership is part of this grant package.
+Baseline includes generated/default discriminator columns omitted by adapter's
+explicit SELECT vocabulary; their names are fingerprinted, never INSERT/UPDATE
+granted. All27 function bodies match local11 latest migration definitions;143
+native trigger fingerprints and a compact metadata fixture detect drift.
+
+5 focused/362 full tests/lint/typecheck/build/catalog1808 PASS. Actual5-phase Store
+emitted DML/ON CONFLICT updates are covered by the exact column manifest; local
+catalog guard accepts independently reconstructed current bodies/native triggers
+and rejects each table/column/RLS/policy/helper/trigger mutation from a valid frame.
+Read-only hosted preflight PASS; no roles/grants/policies created/applied. Unknown
+metadata/new policies/role-name collisions/SECURITY DEFINER fail before CREATE ROLE.
+No claim about real RLS/ACL denial/concurrency or connected SDK authentication.
+
+Review package outside Git at E:/SkyGuideAssets/research/postgres-rehearsal-2026-10-07/:
+runtime-privilege-{inventory.json,preflight.sql,preflight-result.json,grant-proposal.sql,
+rollback-proposal.sql,manifest.json,tests.log}. Build with
+`node tests/sql/build-runtime-privilege-proposal.mjs <inventory.json> <E-review-directory>`;
+this validates pinned inventory and only writes files, never executes SQL.
+Grant84451 bytes/SHA256a287cb55b2e778efeacd17710f1a837728e1760f4474d6a88cb7b3ac30d81bcf;
+rollback34115 bytes/SHA25649735785bf0715ced419058f2dd61ad9f434708e0ddb5e1ce3d7db3655c11749;
+preflight37193 bytes/SHA256a03a0d724bc91fe3e3f7fa64a8d14df0b8036c49f8b84e709418e6842a8a8e3f.
+Rollback revokes column INSERT/UPDATE separately from table grants, drops only
+dedicated policies/roles, refuses unrelated memberships except creator/current
+migration actor; role dependency errors abort transaction. Do not execute rollback
+blindly after later privilege/policy/membership changes. No CASCADE/data deletion.
+PUBLIC privileges are cumulative; a dedicated REVOKE CONNECT alone cannot deny
+PUBLIC CONNECT. NOLOGIN/no membership and revoked private schema/table/column/helper
+access remain mandatory; actual effective/inherited privileges must be inspected.
+Native preflight also proves current owner-only schema/table/column/function ACL
+baseline (no existing nonowner/PUBLIC grants); this does not change any ACL. Fixed
+ACL iteration handles NULL/zero-dimensional empty arrays via unnest then single-
+item aclexplode.4 synthetic ACL-value checks (NULL/empty/owner/PUBLIC) PASS read-only;
+no GRANT needed to demonstrate unexpected PUBLIC entries are detected. Final native
+receipt and acl-result.json outside Git; no credential data. MD5 fingerprints detect
+accidental catalog drift, not authenticated/security attestation or all type/index/
+constraint changes. Review package/SQL preflight is not native role acceptance.
+
+Explicit user request now pending for dev-only role/RLS application + native
+allow/deny/rollback tests. Gate source: AGENTS rule22 and existing handoff's no
+runtime grants by implication; R1/Supabase Free/org approval unchanged. No approval
+inferred from an unanswered question or native metadata preflight. Exact next:
+independent provider-neutral transaction lifecycle/uncertain-commit tests while
+approval is pending; after affirmative authorization, pinned CLI migration for
+this package and actual runtime-role checks before driver/credential/Auth mounts.
+Native role tests must cover all5-phase Store SQL/forced checks, lock-only UPDATE
+denial, helper call closure, reader/owner/history/DDL/column/platform-role denial,
+NOLOGIN/nonownership/role inheritance, then scoped rollback/all policies and table/
+column/helper effective grants cleared/data retained. Connected sessions/restore
+and actual authenticated maintainer remain OPEN, not granted by this role request.
+
+Primary policy support (not hosted permission proof): [SELECT FOR UPDATE privilege](https://www.postgresql.org/docs/17/ddl-priv.html),
+[column grants/cumulative rights](https://www.postgresql.org/docs/17/sql-grant.html),
+[UPDATE USING vs WITH CHECK and row locks](https://www.postgresql.org/docs/17/sql-createpolicy.html),
+[trigger creation privileges](https://www.postgresql.org/docs/17/sql-createtrigger.html).

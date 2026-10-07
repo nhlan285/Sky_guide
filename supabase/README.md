@@ -186,3 +186,15 @@ work/protocol metadata/SDK cancellation proof; bool text estimates are conservat
 Actual lost-COMMIT acknowledgement needs durable witness reconciliation, not a
 blanket rollback assumption; contract/privilege/Auth/rollback proposal in active
 phase remains unmounted. No actual parallel session/backup-restore acceptance.
+
+Runtime privilege review generator now available:
+`node tests/sql/build-runtime-privilege-proposal.mjs <native-inventory.json> <E-review-directory>`.
+It validates pinned79-table/27-function/143-trigger metadata against the11 current
+migrations and emits scoped grant/revoke/preflight, never executes SQL. Native
+read-only preflight PASS;5 focused/362 full tests/lint/typecheck/build PASS.
+Actual roles/policies/grants NOT APPLIED; dev-specific authorization requested.
+2 NOLOGIN role groups,193 RLS policies;5 helper EXECUTE only writer.4 invoker-lock
+columns get proposed UPDATE USING(true)/WITH CHECK(false), actual UPDATE rejected;
+effective ACL/RLS/lock/rollback proof must follow authorization. No SDK/password/
+membership/Auth/consumer change. Column revoke is required in addition to table
+revoke; no PUBLIC denial inferred from explicit role REVOKE. See phase/handoff.

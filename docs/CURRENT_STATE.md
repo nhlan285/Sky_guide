@@ -3,8 +3,8 @@
 ## Task / branch / checkpoint
 Autonomous Sky Guide master run on codex/master-plan-execution; goal active,
 master roadmap OPEN. Last verified pushed checkpoint/base
-3e21e8837f426774f24fcba9570692808cb770b3 (verified local/remote before this slice).
-This file accompanies bounded private transport/runtime contract work; resolve
+f2e160ecce7d39811d755327f3be3f9c20bcb4ab (verified local/remote before this slice).
+This file accompanies explicit runtime privilege proposal work; resolve
 latest checkpoint SHA with git log -1 and verify remote.
 Master [IMPLEMENTATION_PLAN](plan/IMPLEMENTATION_PLAN.md); active detailed phase
 [POSTGRES_PROVIDER_SELECTION](plan/POSTGRES_PROVIDER_SELECTION.md).
@@ -108,12 +108,33 @@ ROLLBACK attempt cannot prove noncommit; reconcile immutable exact audit/review
 witness using fresh connection, otherwise quarantine/no blind retry/recordFailure.
 This corrects comment/architecture wording only; SourceSync public API unchanged.
 
-Exact next: derive explicit runtime table/column/helper privilege manifest from
-emitted SQL and invoker trigger call graph; prepare denial/rollback checks and
-provider-neutral transaction lifecycle/uncertain-commit tests. Complete a reviewable
-scoped SDK/credential/runtime-role/Auth authorization package before dependent live
-steps. Do not fetch/collect secrets or apply grants/consumer mounts by implication.
-R1/provider/org already approved, not a re-review. Then authorized real driver/
+Explicit privilege proposal now implemented: runtimePrivilegePlan/Baseline and
+compact native trigger fixture.79 SELECT/78 column INSERT/9 mutable column UPDATE/
+4 invoker-lock UPDATE/23 child DELETE owners,5 writer helper EXECUTE;193 RLS policies.
+Both role groups NOLOGIN/nonowner/NOBYPASSRLS. Existing invoker locks need key-column
+UPDATE on public_release/sync_acceptance/acquisition_option/field_provenance_field;
+proposed USING(true)/WITH CHECK(false) preserves locking, denies actual UPDATE.
+No immutable-data mutation allowed. Trigger/helper/79-full-column fingerprints
+include omitted generated discriminators;27 bodies match local11 migrations.
+Pure generator emits reviewed preflight/grant/rollback, never executes SQL.
+Native read-only preflight PASS;5 focused/362 full tests/lint/typecheck/build/
+catalog1808/scaffold/diff PASS. Actual role/RLS proof NOT RUN;
+no roles/grants/policies/credentials/SDK/Auth/consumer applied. E: runtime-privilege-*
+review files/metadata/receipts/log; only curated fingerprints/tests/code tracked.
+Grant84451 bytes/SHA256a287cb55b2e778efeacd17710f1a837728e1760f4474d6a88cb7b3ac30d81bcf;
+rollback34115 bytes/SHA25649735785bf0715ced419058f2dd61ad9f434708e0ddb5e1ce3d7db3655c11749.
+Rollback revokes column and table privileges; no CASCADE/data deletion, refuses
+unrelated memberships; must inspect unchanged baseline before applying. Effective
+PUBLIC/inherited rights still need actual role checks, not just explicit ACLs.
+
+User dev-only role/RLS apply/allow-deny/rollback authorization question pending
+(AGENTS22 + existing no-grants-by-implication gate); unanswered is not approval.
+Exact next while pending: provider-neutral transaction lifecycle/uncertain-COMMIT
+implementation/tests. If explicitly approved, pinned CLI migration for reviewed
+NOLOGIN role/RLS package and actual role/5-phase SQL/lock-only update/platform denial/
+effective column-helper grants/rollback evidence before driver mounts. SDK/credential/
+Auth/principal membership remain distinct gates, not covered by that role approval.
+R1/provider/org already approved; do not re-request. Then authorized real driver/
 cancel/commit/parallel sessions, isolated restore/measurements and real adapters.
 P9-I02/D04/V01 PARTIAL/OPEN; Docker daemon absent, restore tooling OPEN.
 
