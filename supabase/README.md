@@ -138,3 +138,17 @@ Build/verify payload-evidence-rehearsal.mjs and verify-payload-evidence-schema.m
 on actual hosted rollback-only output.13 native negatives + rebuilt catalog32/read11
 and every-field/public reviewed byte parity PASS;333 tests/lint/typecheck/build.
 Full transaction writer/runtime role/provider driver and restore still OPEN.
+
+Canonical prepared SQL milestone: canonicalPayloadPlan/canonicalPayloadWrite retain
+typed unpublished roots/private evidence and enforce same-owner payload revisions.
+Statements use scalar parameters/static identifiers/explicit byte+row budgets;
+replace bindings/children in FK order and relocate/compact immediate UNIQUE root
+positions without deleting historical owners. Fragment requires global lock and
+whole SyncStore transaction before it can publish. No migration or runtime grant.
+Build tests/sql/build-canonical-write-rehearsal.mjs to an E: path; run
+verify-canonical-write-rehearsal.mjs on actual hosted returned rows. Native synthetic
+replay validates exact typed cost/offer/evidence/retirement/alias/reservation parity,
+old/new immutable bytes, repeated fragment and two injected rollback cases. Outer
+ROLLBACK leaves revision0 baseline/other78 empty.340 full tests/lint/typecheck/build
+PASS. Whole Store CAS/read/write/audit transaction and real connected concurrency/
+runtime role/review authentication/restore remain subsequent gates.

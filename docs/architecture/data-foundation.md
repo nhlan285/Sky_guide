@@ -189,6 +189,24 @@ future module payloads, authenticated reviewer or mounted provider driver inferr
 
 ## Migration sequence and preservation
 
+Canonical prepared-write boundary (2026-10-07): canonicalPayloadPlan revalidates
+candidate/public/hash and current typed payload + complete prior graph, retains
+unpublished typed roots/lookup/proofs for historical FK ownership, and requires
+higher same-owner revisions for changed entity/lookup facts. Explicit public scoped
+rows derive from reviewed bytes; they cannot replace full private canonical rows.
+canonicalPayloadWrite emits only static parameterized scalar statements, bounded
+by caller row/byte limits/100-row batches. It preserves full graph reservations,
+crosswalk/alias/tombstone history and uses positive disjoint position relocation
+before root upserts, with immediate UNIQUE constraints unchanged. Child evidence
+replacement follows FK dependency order. This is a prepared fragment, not an
+atomic transaction/publication API. Future SyncStore must lock global generation,
+load/validate bounded consistent current and archived frames, reproduce existing
+SourceSync transition, execute canonical fragment + all release/projection/graph/
+order/acceptance/source/audit changes atomically, then force constraints; any CAS
+false or error after mutations requires whole transaction rollback. A stale
+generation returns false before writes. Native statement replay proves DML/rollback
+semantics, not connected provider concurrency/authenticated reviewer/restore.
+
 Payload evidence ownership decision (2026-10-07): SourceSync allows public record
 evidence to be an ordered subset of identity graph evidence. The initial typed
 catalog codec's equality assumption cannot encode that valid boundary. Introduce

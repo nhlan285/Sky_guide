@@ -734,3 +734,39 @@ orchestration/rollback proof. Delete payload evidence before replacing canonical
 identity evidence; derive explicit scoped public row frame from reviewed files
 for release metadata, persist full canonical evidence separately. Unknown private
 proof requires an existing registered SourceRecord; no implicit facts/public filter.
+
+Completed canonical prepared-write milestone (base pushed f5b4a47):
+canonicalPayloadPlan validates candidate/hash/budgets, current typed payload and
+previous full graph; retains unpublished roots/lookup/proofs, applies only explicit
+retirement metadata and requires higher SAME owner revision for changed item/
+spirit/season/lookup facts. Public record order and independently ordered evidence
+stay exact; scoped public rows feed release metadata without overwriting private
+canonical graph evidence. Unknown private proof/missing current owner/corruption/
+guessed active retained joins reject the entire preparation. Detached results.
+canonicalPayloadWrite emits static parameterized scalar SQL with explicit caller
+row/byte budgets/100-row batches. Sources/proofs/full graph identity reservations
+before bindings; payload evidence deleted before canonical evidence; positive
+disjoint root position relocation/compact keeps immediate UNIQUE; typed mutable
+children replaced in FK order, stable roots/history retained. Canonical crosswalk/
+alias discriminator/chains/tombstones preserve prior validated reservations.
+Seven focused tests PASS; full actual local K15 every field/public byte and bound
+statement generation, retention/retirement/private proof/revision/wrong sibling/
+corrupt frame/unknown new private evidence/row+byte limits.340 full tests/lint/
+typecheck/build/catalog1808 PASS, latest strengthened full K15 target PASS.
+Actual prepared SQL replay on PostgreSQL17.11 PASS: new/retired/retained typed
+roots/evidence/positions, nested unknown/null -> known zero costs and decimal offer,
+crosswalk/alias chains/tombstone/future-kind reservation parity. Old public immutable
+projection and new version remain exact; repeated fragment idempotent. Two injected
+mid/end failures rollback all canonical writes. New release metadata must be
+deferred while its rows are inserted; first builder failure fixed, no DDL changes.
+No current real source rows: outer ROLLBACK, revision0 control/other78 empty verified.
+Native SQL/actual rows/schema retained outside Git on E:. Prepared fragment is NOT
+whole publication/CAS/Store/connected driver, and native replay is not concurrent
+session or authenticated review proof. No new migrations/provider/SDK/credentials.
+Exact next: provider-neutral transaction interface + bounded consistent frame reads,
+global FOR UPDATE before ANY mutation, reproduce exact SourceSync transitions,
+canonical fragment + release/projection/archive graph/order/acceptance/source/audit
+in ONE transaction. Validate frame/archive/current alignment; false/error after
+mutation must throw rollback, stale generation must return false before writes;
+force all deferred checks before commit. Then connected role/driver authorization,
+actual multi-session races/provider failures/restore/measurements gates.

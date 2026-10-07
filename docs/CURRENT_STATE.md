@@ -3,8 +3,8 @@
 ## Task / branch / checkpoint
 Autonomous Sky Guide master run on codex/master-plan-execution; goal active,
 master roadmap OPEN. Last verified pushed checkpoint/base
-e275df6520d7fbd2d77009181aad38329a8f1643. This file accompanies the typed payload
-evidence prerequisite; resolve latest SHA with git log -1 and verify remote.
+f5b4a4720210eed14dbf2fe9673a3e580bc0c8b9. This file accompanies the canonical
+payload plan/prepared SQL milestone; resolve latest SHA with git log -1 and verify remote.
 Master [IMPLEMENTATION_PLAN](plan/IMPLEMENTATION_PLAN.md); active detailed phase
 [POSTGRES_PROVIDER_SELECTION](plan/POSTGRES_PROVIDER_SELECTION.md).
 No merge/production/paid resources/destructive Git or unrelated edits.
@@ -47,8 +47,27 @@ Changed areas: codec/migration; shared synthetic payload fixture, focused tests,
 native rehearsal builder/row+schema verifiers; existing architecture/phase/master/
 foundation/handoff/supabase README. No dependency or production consumer changes.
 
+New canonicalPayloadPlan/canonicalPayloadWrite: revalidate reviewed candidate/hash/
+budgets, current typed payload/full graph and previous graph continuity. Incoming
+public record order stays exact; retain old unpublished item/lookup/spirit/season/
+proof facts for historical FK ownership. Retirement only applies explicit reviewed
+metadata; changed entity/lookup fields require higher SAME owner revision. Unknown
+private proof rejects; active retained relationships cannot be guessed. Explicit
+scoped public rows preserve reviewed release metadata while full canonical evidence
+stays private. Preparation is detached; no review authentication or revision allocation.
+Static parameterized SQL/scalar binds, explicit caller row/byte limits/100-row
+batches, full graph reservations/source/crosswalk/alias chain/tombstone ownership.
+Root UNIQUE positions move to disjoint positive band then compact; roots/history
+never deleted. Payload evidence deletes BEFORE identity evidence; acquisition
+children before options/field evidence before markers. Native repeat fragment
+is idempotent. This is a prepared canonical fragment, NOT complete SyncStore: MUST
+execute under global generation lock in one whole publication transaction.
+New intentionally changed areas: two server modules, seven focused tests/shared
+fixture helpers/native actual-statement builder/verifier plus existing plans.
+
 ## Validation / evidence
-333 full tests, pnpm lint/typecheck/build/catalog1808 PASS. Three new tests prove
+340 full tests, pnpm lint/typecheck/build/catalog1808 PASS. Seven writer tests and
+updated full K15 statement preparation/bounded bind test PASS. Earlier three tests prove
 private identity evidence plus exact public record subset/order and candidate/
 review/projection/release byte parity; malformed frames fail closed. Existing
 every-field full K15 codec and all24 manifest key orders remain PASS.
@@ -56,6 +75,14 @@ Native new fixture13 SQLSTATE negatives/deferred evidence replacement PASS;
 actual hosted rows reconstruct exact staged candidate and reviewer hash without
 private proof in any public file. Rebuilt old catalog32 negatives/actual every-field
 parity and composed SyncState11 negatives/two-source health/global LKG parity PASS.
+Actual prepared writer SQL -> exact typed payload/private evidence, new/retained/
+retired roots, aliases/chains/crosswalk/future-kind reservations and old/new immutable
+projection parity PASS. Nested acquisition unknown/null -> known zero plus decimal
+raw offer survives typed readback. Two injected mid/end fragment failures rollback
+all canonical changes; repeated fragment preserves positions/facts. Initial native
+builder forgot to defer newly inserted release metadata after forced checks; fixed
+before PASS, no migration/schema weakening. SQL fixture ROLLBACK; replay proves
+fragment/DML behavior, not full Store CAS/error policy or simultaneous sessions.
 All fixtures ROLLBACK. Current79 private tables/RLS, exact new writable columns,
 all FKs RESTRICT;0 unvalidated constraints/SECURITY DEFINER/platform schema-table-
 function grants. Revision0 sync_generation singleton; all78 other tables empty
@@ -63,12 +90,14 @@ verified after all fixtures. Advisors no WARN/ERROR; intentional no-policy RLS/
 unused-index INFO retained. SQL/actual rows/schema outside Git:
 E:/SkyGuideAssets/research/postgres-rehearsal-2026-10-07.
 Scaffold/diff before checkpoint; existing Router/chunk build warnings unchanged.
-No real import/full transaction writer/connected provider/authenticated review,
+No real import/full atomic SyncStore/connected provider/authenticated review,
 actual parallel race, future/provenance payload history or restore/scaling claim.
 
 ## Exact next action / gates
-Implement typed canonical payload transaction writer + provider-neutral SyncStore
-atomic CAS/driver using completed SyncState/LKG row decoder. Lock global generation
+Implement provider-neutral full SyncStore atomic transaction/CAS orchestration
+using completed SyncState/LKG decoder and canonicalPayloadWrite prepared fragment.
+Read bounded canonical/pinned frames from ONE transaction, verify actual current
+typed owner/evidence/reservations match authoritative archived graph. Lock global generation
 BEFORE writes; validate full candidate/previous graph continuity and reproduce
 existing SourceSync promotion/failure transition. Changed item/spirit/season/
 lookup payload fields require higher owner revision. Retain older typed payloads
