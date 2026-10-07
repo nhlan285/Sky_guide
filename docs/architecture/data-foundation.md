@@ -189,6 +189,21 @@ future module payloads, authenticated reviewer or mounted provider driver inferr
 
 ## Migration sequence and preservation
 
+Portable full SyncStore boundary (2026-10-07): createPostgresSyncStore implements
+atomic orchestration over SqlDatabase/SqlConnection interfaces. Read uses one
+repeatable-read readonly snapshot; CAS locks global generation as FIRST SQL in
+read-committed transaction and returns stale false before writes. Current typed
+facts/evidence/reservations must align with archived reviewed graph/public snapshot.
+Next state is replayed through existing SourceSync transitions, including exact
+file bytes/manifest Record order/nullability. Canonical fragment + new or exact
+reused release/projection + graph/order/acceptance/source/audit/CAS are one callback;
+late false/error throws rollback, force deferred checks/post-read parity before
+commit. Failure does not mutate canonical/LKG/review. Driver must enforce transport
+budgets while decoding, exact safe integer conversion, commit/rollback/cleanup and
+no implicit callback retry. Native emitted SQL/read assertions prove synthetic
+whole publication semantics; connected transport, separate commits/parallel-session
+races, runtime grants/review authentication/restore remain acceptance gates.
+
 Canonical prepared-write boundary (2026-10-07): canonicalPayloadPlan revalidates
 candidate/public/hash and current typed payload + complete prior graph, retains
 unpublished typed roots/lookup/proofs for historical FK ownership, and requires

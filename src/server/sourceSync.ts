@@ -67,6 +67,7 @@ function contentHash(candidate: Omit<SyncCandidate, 'contentHash'>): string {
 function validateContract(contract: SyncContract) {
   if ([contract.maxSnapshotBytes, contract.maxNormalizedBytes, contract.maxRecords, contract.maxRelations].some(limit => !Number.isSafeInteger(limit) || limit <= 0) || contract.retryDelaysMs.some(delay => !Number.isSafeInteger(delay) || delay <= 0)) throw new Error('Invalid sync contract')
 }
+export { validateContract as validateSyncContract }
 function enforceNormalizedLimits(candidate: NormalizedCandidate, contract: SyncContract) {
   // Bound all returned metadata/graph/serialized files before parsing records.
   // This guards output acceptance, not CPU/memory allocation inside a normalizer.

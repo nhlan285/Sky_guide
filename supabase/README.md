@@ -152,3 +152,20 @@ old/new immutable bytes, repeated fragment and two injected rollback cases. Oute
 ROLLBACK leaves revision0 baseline/other78 empty.340 full tests/lint/typecheck/build
 PASS. Whole Store CAS/read/write/audit transaction and real connected concurrency/
 runtime role/review authentication/restore remain subsequent gates.
+
+Portable full Store now implemented: postgresSyncRows/postgresSyncStore use explicit
+SqlDatabase transaction/SqlConnection transport interfaces. Read is repeatable-read
+readonly; CAS locks global generation FIRST, validates current facts/archived graph,
+replays exact SourceSync transition and runs whole canonical/public/archive/audit
+publication atomically with forced checks/post-read parity. Late false/error throws
+rollback; stale false does no writes; failure preserves canonical/LKG/review.
+Actual driver must enforce transport bounds, JS-safe bigint decoding and connection/
+commit/rollback/cleanup contract. No SDK/credentials/runtime grants or route mount.
+Build tests/sql/build-postgres-sync-rehearsal.mjs to E:; run
+verify-postgres-sync-rehearsal.mjs on hosted rows.5 synthetic phases/866 actual
+query-result assertions/two whole publication rollback cases PASS; actual Store
+read/canonical/private evidence/history/source health parity.350 full tests plus10
+focused/lint/typecheck/build PASS. Outer ROLLBACK restores revision0/other78 empty.
+Native single fixture connection is NOT real connected concurrent driver proof;
+runtime-role/review auth/isolated restore and future proof/module payload history
+remain OPEN. See phase/handoff for exact connected-contract next step.

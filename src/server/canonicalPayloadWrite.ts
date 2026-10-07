@@ -8,7 +8,7 @@ import type { SyncCandidate, SyncContract } from './sourceSync.ts'
 
 export interface SqlStatement { text:string; values:readonly SqlScalar[] }
 export interface CanonicalWriteLimits { maxRows:number; maxBytes:number }
-export interface CanonicalPayloadWrite { plan:CanonicalPayloadPlan; statements:SqlStatement[] }
+export interface CanonicalPayloadWrite { plan:CanonicalPayloadPlan; statements:SqlStatement[]; rowCount:number; byteCount:number }
 const fail=():never=>{throw new Error('Invalid or over-budget canonical payload write')}
 const batches=<T>(xs:readonly T[],size=100):T[][]=>Array.from({length:Math.ceil(xs.length/size)},(_,i)=>xs.slice(i*size,(i+1)*size))
 
@@ -85,5 +85,5 @@ export async function prepareCanonicalPayloadWrite(candidate:SyncCandidate,contr
     return {kind:a.from.kind,from_id:a.from.id,target_identity_id:targetIsIdentity?a.to.id:null,target_alias_id:targetIsIdentity?null:a.to.id}
   }),['kind','from_id'],true)
   insert('tombstone',['kind','id','retired_at','replacement_id'],graph.tombstones.map(t=>({kind:t.target.kind,id:t.target.id,retired_at:t.retiredAt,replacement_id:t.replacement?.id??null})),['kind','id'],true)
-  return {plan,statements}
+  return {plan,statements,rowCount:count,byteCount:bytes}
 }

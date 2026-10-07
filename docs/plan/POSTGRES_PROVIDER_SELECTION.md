@@ -770,3 +770,72 @@ in ONE transaction. Validate frame/archive/current alignment; false/error after
 mutation must throw rollback, stale generation must return false before writes;
 force all deferred checks before commit. Then connected role/driver authorization,
 actual multi-session races/provider failures/restore/measurements gates.
+
+Active full SyncStore slice (verified fd99b64): MEDIUM continuation inside approved
+R1 server foundation. Portable SQL transaction/query interfaces; repeatable-read
+readonly consistent pinned frame, read-committed CAS with global FOR UPDATE first.
+Driver transport must enforce explicit row/byte limits while decoding; SQL LIMIT
+and decoder checks are additional bounds, not transport guarantees by themselves.
+Validate current typed payload/evidence/reservations against archived global graph
+and latest public projection before mutation. Reproduce existing SourceSync
+promotion/failure using capturing store and compare whole proposed state, including
+Map file bytes and manifest Record order. Stale expected generation returns false
+before writes; any false/error after mutations throws to roll back the whole tx.
+Reuse prepared canonical fragment; materialize new release/projection once, verify
+exact immutable bytes for reused version; acceptance/graph/order then SQL metadata
+CAS/audit/source health and force deferred constraints before commit. Failure never
+changes canonical/LKG/publication/review. Test interface driver commit/rollback,
+full statement replay/native returned read parity; real connected concurrent driver
+and role/reviewer authentication/restore remain gates. No new SDK/grants/provider/
+migration/import, no production consumer or source/legal gate change.
+
+Completed portable full SyncStore orchestration (base fd99b64): postgresSyncRows
+uses static typed columns/scalar bindings/LIMIT and cumulative row/byte checks;
+SqlConnection requires limits enforced DURING transport/decoding, exact JS-safe
+bigint conversion and no successful truncation. SqlDatabase requires one connection/
+snapshot, commit only on callback success, rollback every callback/commit error,
+cleanup and no implicit callback retries. Read uses repeatable-read readonly;
+CAS uses read-committed with global FOR UPDATE as FIRST SQL operation. Stale
+returns false before further reads/writes. Whole next state is replayed through
+existing SourceSync promotion/failure with captured proposed state; every field,
+Map file byte and manifest Record order must match. Explicit nullable fields reject
+undefined; server clock/failures/retry/review/source rules preserved. Contract
+validator reused, no duplicated weakened state machine.
+Current canonical identity/evidence/crosswalk/alias/tombstone rows must equal pinned
+global archived graph. Typed payload/proof/order must be a no-op replay of latest
+reviewed public snapshot; direct mutable fact/rights/order drift rejects before
+mutation. Registered proof pool may exist before first acceptance, but no unreviewed
+typed roots/reservations. Prepared canonical writes + new release/immutable
+projection + acceptance/full graph/order + source/audit/global SQL CAS are one
+callback; reused version must match EXACT immutable bytes and gets no sealed row
+mutation. Full write budgets include archive parameter rows and bytes. CAS false/
+wrong result/error after mutation throws, forced deferred checks/post-read parity
+and canonical alignment must succeed before callback can commit. Failure only
+registers own source + metadata CAS; canonical/graph/projection/review remain intact.
+Ten focused tests PASS, including full pinned local K15 through Store promotion/
+read (1808 items/213 spirits/30 seasons/2051 identities), stale no writes, early/
+late/CAS false/constraint/post-read/commit rollback, independent initial/source
+failure, reviewed reconfirmation/reused version, forged files/review/retry/health,
+typed/proof/order/reservation drift, budgets/driver scalars/explicit nullability.
+Scripted driver tests prove interface behavior, not actual provider transport or
+multiple-session races. Actual PostgreSQL replay executes exact Store SQL queries/
+writes;866 positive result assertions match independently expected frames. Five
+phases: first publication, changed payload/retirement/new reserved kind/alias-chain,
+independent K01 failure, own K15 failure, same-content new review reconfirmation.
+Private proofs/cost null->known zero/decimal offer, historical public bytes and
+source-specific health/retry/global LKG/approval remain exact. Wrong late SQL CAS
+and forced deferred incomplete-release validation each roll back WHOLE publication,
+including canonical/release/projection/graph/order/acceptance/audit/control. Synthetic
+rehearsal793321 bytes/SQL SHA25698c9c0262cc0664a3083f1f71da07434f010c32132fb9fdabdb3f6d79944505e;
+evidence outside Git on E:. Strengthened nullable input checks leave generated SQL
+identical (SHA rechecked). No migration/role/grants/credentials/new dependency.
+Outer ROLLBACK/current schema audit confirms79 RLS/all RESTRICT FKs/0 unvalidated/
+SECURITY DEFINER/platform schema-table-function grants; revision0 singleton/other78
+empty. Native sequence is one fixture connection, NOT actual separate transaction
+commits/parallel sessions/connected runtime driver/authenticated reviewer/restore.
+Exact next: prepare concrete minimal connected driver/runtime least-privilege and
+authenticated-review contract + rollback/credential handling; check existing SDK
+capability before choosing a dependency. Do not collect secrets or apply grants/
+consumer mounts as implied permission. Then approved real provider transaction/
+transport/cancel/commit errors, simultaneous sessions, isolated restore/measurements
+and real adapter integration. P9-I02/D04/V01 remain PARTIAL/OPEN, R2–R6 gated.
