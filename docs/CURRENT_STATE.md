@@ -2,12 +2,13 @@
 
 ## Task / branch / checkpoint
 Sky Guide autonomous master run ACTIVE; roadmap OPEN, not complete.
-Branch codex/master-plan-execution; checkpoint parent2925996a89ac317dc09ae7f67492e0b761011912
-verified on origin. This checkpoint preserves the local release-scan proposal.
+Branch codex/master-plan-execution; checkpoint parentcb95d3ad0160276699196724ece597bf572a526f
+verified on origin. This checkpoint aligns roadmap/handoff with the prepared proposal.
 Resolve this checkpoint with git log -1 and verify remote SHA. Master:
 [IMPLEMENTATION_PLAN](plan/IMPLEMENTATION_PLAN.md); active detailed phase:
 [POSTGRES_PROVIDER_SELECTION](plan/POSTGRES_PROVIDER_SELECTION.md), latest section;
-current package: [JOURNAL_NATIVE_REVIEW](plan/JOURNAL_NATIVE_REVIEW.md).
+applied package: [JOURNAL_NATIVE_REVIEW](plan/JOURNAL_NATIVE_REVIEW.md);
+pending package: active phase “Prepared package / resume” section.
 
 ## Authority / boundaries
 R1 local contracts, Supabase Free and Dyland's Org remain approved. User2026-10-07
@@ -129,6 +130,10 @@ Validation: lint/2 focused tests and checkpoint full429 tests PASS; independent
 128-case receipt verifier/scaffold76 Markdown14 profiles173 tasks/diff PASS.
 Checkpoint log on E: release-scan-checkpoint-tests.log.
 App typecheck/build previously PASS at2925996; not rerun for this proposal-only slice.
+User approved cb95d3a single-function dev migration/guarded rollback and automatic
+continuation2026-10-07. Full current83 preflight and authoritative baseline comparison
+PASS immediately before application; no drift. Hosted optimization DDL pending.
+Roadmap R1 summary now reflects applied journal proofs and the OPEN K15 gate.
 
 ## Remaining gates / local operations
 K04 OneDrive403; K10/K11 SKU/market; K12 bulk reuse prohibited; Q02/Q09/Q10/Q11/Q12,

@@ -1585,7 +1585,7 @@ generator/migration weakening. Supabase security advisors lints=[] after DDL.
 Logs E: journal-native-final-{tests,build}.log. Native K15 gate stays OPEN despite
 local green checks. No optimization DDL/SDK/Auth/credentials/consumer/production.
 
-### Active local optimization proposal — no hosted authorization yet
+### Active release-scan optimization — scoped dev authorization received
 
 Goal: prepare a narrow additive replacement of validate_release_metadata, preserving
 every global check and EVERY deferred row event, with migration/rollback review.
@@ -1655,8 +1655,9 @@ cases preserve predicate behavior only; immediate FK/NOTNULL acceptance unchange
 Full proposed PL trigger compilation/runtime/down and benchmark remain NOT RUN.
 Scan fusion preserves all events and all global scans; quadratic cost remains.
 
-Exact next after this checkpoint: obtain ONE scoped approval for this one-function
-development migration and its guarded rollback under user rule22. After approval,
+User2026-10-07 approved cb95d3a one-function development migration and guarded rollback,
+with automatic continuation. Full before checker and authoritative baseline matched
+the previous after-grants baseline exactly; no drift. Exact next:
 verify full before baseline; create/apply a new CLI migration through migration tool;
 verify full after metadata with the deliberately proposed body hash, then update
 current83-only expected body override with regressions (historical79 immutable).
