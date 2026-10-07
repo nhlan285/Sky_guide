@@ -1,10 +1,13 @@
 # Current handoff — 2026-10-07
 
 ## Task / branch / checkpoint
-Autonomous Sky Guide master run remains ACTIVE; roadmap OPEN.
+Autonomous Sky Guide master run BLOCKED awaiting scoped journal application
+authorization; roadmap OPEN, not complete. Same approval gate persisted through
+three consecutive goal turns; safe preparation and read-only baseline audit are
+complete. Resume on the user's answer to the existing83-owner package question.
 Branch: codex/master-plan-execution. Last verified pushed base before this slice:
-dd03095023ae3d67f12df48ba64212cedf43e068. This handoff accompanies the read-only
-preapproval audit; resolve latest checkpoint with git log -1 and verify remote SHA.
+ceb799d06b581f6e01a80e5693697e53fd884ded. This handoff records the blocked audit;
+resolve latest checkpoint with git log -1 and verify remote SHA.
 Master: [IMPLEMENTATION_PLAN](plan/IMPLEMENTATION_PLAN.md); active detailed phase:
 [POSTGRES_PROVIDER_SELECTION](plan/POSTGRES_PROVIDER_SELECTION.md), latest section.
 
