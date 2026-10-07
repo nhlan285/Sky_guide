@@ -3,7 +3,7 @@
 ## Task / branch / checkpoint
 Sky Guide autonomous master run ACTIVE; roadmap OPEN, not complete.
 Branch codex/master-plan-execution; checkpoint parent
-1e97f60db8b646133a18283f2cc8fd3a25c732ae verified on origin.
+3e9e158ebb30b23994dfe1accefa28d113b9155d verified on origin.
 Resolve latest checkpoint with git log -1 and verify remote SHA.
 Master: [IMPLEMENTATION_PLAN](plan/IMPLEMENTATION_PLAN.md).
 Active phase: [POSTGRES_PROVIDER_SELECTION](plan/POSTGRES_PROVIDER_SELECTION.md),
@@ -80,13 +80,21 @@ release-scan-post-{owner,creator,denial}-baseline.json;
 release-scan-k15-timeout-receipt.json; release-scan-native-final-tests.log.
 Larger release-scan-k15-native-result.json has raw connector error/context;
 use bounded timeout receipt for resume. No live test/API job at this checkpoint.
+Local clock model added in tests/fixtures/releaseValidationClockModel.mjs and
+tests/data/releaseValidationClockModel.test.mjs.5 planning-model tests cover128
+predicate traces, canonical invalidation, savepoints/failed statements and release/
+transaction keys, including a counterexample that REJECTS BEFORE-statement-only
+clock caching: a helper can claim midway through a write, before a later invalid row.
+13 focused tests/lint/scaffold/diff PASS; full suite including new5 models NOT RUN.
+No proposed clock/cache SQL, owners, helpers or privileges applied.
 
 ## Exact next / remaining gates
 Prepare a local
 reviewable alternative that avoids full-scan repetition while preserving all final
 state checks and later invalidation after SET CONSTRAINTS/SAVEPOINT boundaries.
-Evaluate a protected transaction/statement validation clock + per-release witness
-against affected-row validation. Session flags, client-writable cache and validation
+Require protected row-level invalidation or an unforgeable final-state signature;
+statement-only invalidation has a demonstrated false acceptance and is rejected.
+Compare against affected-row validation. Session flags, client-writable cache and validation
 only at initial insert are unsafe. Any typed cache owner/definer helper/privilege/
 trigger expansion must be explicitly reviewed before hosted application; not covered
 by the now exhausted one-function scan approval. Do not raise timeout or disable

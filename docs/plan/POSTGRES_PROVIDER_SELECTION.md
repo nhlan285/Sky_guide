@@ -1727,3 +1727,41 @@ canonical writes, which could incorrectly freeze legitimate later owner revision
 Compare alternatives, prove invalidation/rollback semantics, prepare guarded up/down
 and complete source/metadata/ACL expectations BEFORE asking for scoped approval.
 No hosted implementation of this next alternative yet. Benchmark and roadmap OPEN.
+
+#### Local clock/witness safety model — planning scope
+Goal: test the invalidation argument before choosing or writing hosted SQL/privileges.
+Dependencies: restored83-owner baseline at3e9e158, original SQL predicates,128-case
+native differential receipt. In scope: local predicate/transaction trace model and
+counterexamples. Out of scope: hosted DDL, native cache/ACL/performance claims,
+SDK/provider-neutral API changes, new principals, production, consumer and real data.
+Files: tests/fixtures/releaseValidationClockModel.mjs and
+tests/data/releaseValidationClockModel.test.mjs; phase/handoff only.
+Model must include canonical AND metadata mutation invalidation, same-transaction
+later writes, failed statement rollback, nested savepoints, transaction identity,
+release-specific witness and successful-validation-only claims. Model tests are
+necessary safety evidence, not PostgreSQL trigger/locking/ACL equivalence proof.
+Acceptance here: compare every observed five-predicate result with independent
+reference for all128 cases; never cache a rejection or suppress a later invalid state.
+No acceptance of incomplete headers/position UNIQUE/FK states follows from this
+predicate-only model. Full original header checks, arbitrary DML/UPSERT/cascade,
+native ordering/locking/snapshot/clock overflow and role denials remain SQL gates.
+Primary docs: [constraint triggers](https://www.postgresql.org/docs/17/sql-createtrigger.html)
+require AFTER ROW; an immediate statement trigger alone cannot replace their deferred
+timing. [Function security](https://www.postgresql.org/docs/17/sql-createfunction.html)
+and [transaction IDs](https://www.postgresql.org/docs/17/functions-info.html) govern
+the candidate's separate security/transaction design. Prepare concrete guarded SQL
+and exact allowlisted definer/owner/ACL scope before requesting approval.
+
+Model outcome:128 predicate traces, subsequent canonical mutations, nested savepoint/
+failed statement and transaction/release keys covered. Found a decisive counterexample:
+a directly callable helper can validate midway through a mutation statement, then a
+later row changes under the SAME BEFORE-statement epoch. Deferred events could reuse
+that premature witness and accept an invalid final owner revision. Statement-level
+invalidation alone is therefore REJECTED, despite other traces matching. Do not build
+or authorize that design. A later AFTER STATEMENT marker alone cannot be assumed to
+run before every immediate AFTER ROW constraint event; ordering needs native proof.
+Exact next: design protected row-level invalidation or another unforgeable final-state
+signature; evaluate overhead under original K15 cap, preserve role/helper boundaries
+and full metadata predicates. Protected storage/caller restrictions alone do not
+solve the mid-statement claim. Local model is evidence of this counterexample only,
+not a security/native/performance acceptance result. No next SQL package prepared yet.
