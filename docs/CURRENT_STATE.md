@@ -2,7 +2,7 @@
 
 ## Task / branch / checkpoint
 Sky Guide autonomous master run ACTIVE; roadmap OPEN, not complete.
-Branch codex/master-plan-execution; checkpoint parent18f8e3e8e1f7bbf1c8951272c3e01a50b56db6fa
+Branch codex/master-plan-execution; checkpoint parent876a467701c20dfac50f8ae8232e927aa433b0b5
 verified on origin. This checkpoint preserves approved native scan application.
 Resolve this checkpoint with git log -1 and verify remote SHA. Master:
 [IMPLEMENTATION_PLAN](plan/IMPLEMENTATION_PLAN.md); active detailed phase:
@@ -148,8 +148,14 @@ Current83 baseline deliberately overrides ONLY validate_release_metadata body to
 5d499ac07a2d5a3ac590cc0dedb7cac6; historical79 and first13 migrations unchanged.
 Proposal builder preserves approved before/after checker bytes for both reviewed
 endpoints.8 focused tests PASS. E: release-scan-{before,after}-baseline.json.
-Owner/creator/denial/K15 on NEW body and native down remain NOT RUN at this milestone;
-previous K15 timeout stays OPEN. Exact next is the rollback rehearsals above.
+New-body owner AND authorized creator adapter PASS:5 phases/39 callbacks/978 query
+checks/6 token negatives each; independent returned-row verifiers PASS.8 actual
+creator-role forbidden operations rejected. After EACH owner/creator/denial ROLLBACK,
+complete authoritative baseline matched reviewed after-migration baseline exactly.
+No retained fixture data/temporary SET edges; two bootstrap ADMIN-only edges unchanged.
+E: release-scan-{owner,creator,denial}-receipt.json and release-scan-post-{owner,creator,denial}-baseline.json.
+Lint/typecheck PASS. K15 on NEW body and native down remain NOT RUN here;
+previous K15 timeout stays OPEN. Exact next: EXACT packed K15/30s then full baseline.
 
 ## Remaining gates / local operations
 K04 OneDrive403; K10/K11 SKU/market; K12 bulk reuse prohibited; Q02/Q09/Q10/Q11/Q12,

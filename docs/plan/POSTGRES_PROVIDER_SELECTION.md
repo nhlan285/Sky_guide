@@ -1685,3 +1685,11 @@ Deliberate current83-only body override; historical79 pins unchanged. Proposal b
 accepts only the two reviewed source endpoints and preserves original review bytes.
 8 focused tests PASS. Next: owner/creator/denial then EXACT packed K15/30s, authoritative
 baseline after EACH rollback. New-body runtime/down/cost still NOT RUN here.
+
+New-body owner/authorized creator adapter now PASS:5 phases/39 callbacks/978 query
+checks/6 token negatives each, independently verified returned rows.8 actual creator
+denials PASS. ALL fixture data/temporary SET grants shared outer ROLLBACK; complete
+after-migration baseline matched after EACH run. No retained SET membership/data.
+E: release-scan-{owner,creator,denial}-receipt.json and release-scan-post-{owner,creator,denial}-baseline.json.
+Lint/typecheck PASS. Exact next: unchanged packed full-K15 under30s, then baseline;
+new-body cost/down remain NOT RUN, previous timeout gate remains OPEN.
