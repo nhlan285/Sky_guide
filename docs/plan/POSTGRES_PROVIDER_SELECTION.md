@@ -1101,3 +1101,54 @@ Primary policy support (not hosted permission proof): [SELECT FOR UPDATE privile
 [column grants/cumulative rights](https://www.postgresql.org/docs/17/sql-grant.html),
 [UPDATE USING vs WITH CHECK and row locks](https://www.postgresql.org/docs/17/sql-createpolicy.html),
 [trigger creation privileges](https://www.postgresql.org/docs/17/sql-createtrigger.html).
+
+## Active slice — portable transaction kernel
+
+MEDIUM, starts at verified ac17a74; role/RLS authorization still pending. Goal:
+implement same-lease BEGIN/isolation/local deadlines/callback/COMMIT/ROLLBACK,
+bounded private text transport and static callback SQL, fail closed on swallowed
+query errors/pending background work, distinguish confirmed rollback from lost COMMIT ACK.
+Dependencies: existing SqlDatabase/Store, bounded read lowering, scoped privilege
+manifest. Scope: provider-neutral raw-text protocol port and lifecycle, focused
+failure-injection/whole Store sequence tests. No SDK/connect/credential/grant/Auth/
+endpoint mount, actual network cancellation/concurrent session or restore claim.
+
+Port must return acknowledged command tag/ReadyForQuery state on one
+exclusively leased connection, honor abort by preventing reuse/new writes,
+release/discard synchronously. Pool must not issue the same active physical client
+twice; real adapter must prove this contract, not just return matching key objects.
+Pool acquisition timeout must discard late leases; no callback retry. Driver owns
+transaction/configuration SQL; callback accepts existing static bound statements
+only. Reads retain server-budgeted CTE/OID decode; CAS has one exact bool result;
+DML/SET has no result rows. Explicit input-byte/output-row budgets before dispatch.
+Deadlines checked before/after awaits; JavaScript CPU is not preemptible.
+
+Acceptance: normal read/promotion/failure/reconfirm through complete existing Store;
+all begin/statement/callback/deferred/commit/rollback/release/acquire timeout errors,
+bad command/state, absorbed errors, unsafe callback SQL and late callback/query
+completion fail safely. Confirmed COMMIT remains committed despite release failure;
+COMMIT ROLLBACK command tag is rejection, not success; transport loss at COMMIT is
+indeterminate even if later ROLLBACK acknowledged. Sanitize private error details.
+Future controller/durable intent/quarantine/reconciliation/auth remains required
+before mounting unchanged SourceSync API (which catches store errors as rejected).
+Kernel alone is not that outward fence or cross-restart durability proof.
+
+Expected files: src/server/postgresStatementGate.ts,postgresTransactionKernel.ts,
+tests/data/postgresTransactionKernel.test.mjs, synthetic text-port fixture; existing
+phase/architecture/current/master/README. Steps: gate/protocol lifecycle, focused
+tests/5-phase Store parity, lint/typecheck/full suite/build/scaffold/diff, checkpoint
+and push. Exact next after kernel: outward uncertainty fence + durable witness/intent
+contract before real driver/provider integration; apply role/RLS only if approved.
+
+Kernel milestone PASS:14 lifecycle/control/error tests included in376 full tests;
+lint/typecheck/build/catalog1808/scaffold75 Markdown/14 profiles/173 tasks/diff PASS.
+Existing Router/chunk warnings unchanged. Tests cover actual existing Store callback
+SQL grammar and lowered read responses through a synthetic text port; frames are
+installed at CAS, not executed DML. Native SQL/read-budget receipts from earlier
+slices remain separate. SQL/scalar input byte bounds do not include protocol
+metadata/TLS/error/notice sizes. No SDK/socket/role/race/restore assertion. Pending
+background work is detected; this is not arbitrary application task supervision.
+Monotonic CPU-overrun test proves no late COMMIT dispatch, not CPU preemption.
+Test log: E:/SkyGuideAssets/research/postgres-rehearsal-2026-10-07/postgres-kernel-tests.log
+(outside Git). Exact next remains outward uncertainty fence/durable intent/exact
+witness contract. No provider changes while the scoped role approval is pending.

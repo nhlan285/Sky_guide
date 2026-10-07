@@ -3,8 +3,8 @@
 ## Task / branch / checkpoint
 Autonomous Sky Guide master run on codex/master-plan-execution; goal active,
 master roadmap OPEN. Last verified pushed checkpoint/base
-f2e160ecce7d39811d755327f3be3f9c20bcb4ab (verified local/remote before this slice).
-This file accompanies explicit runtime privilege proposal work; resolve
+ac17a74ba757b2c88dca66412a9861f560d9f89a (verified local/remote before this slice).
+This file accompanies portable transaction kernel work; resolve
 latest checkpoint SHA with git log -1 and verify remote.
 Master [IMPLEMENTATION_PLAN](plan/IMPLEMENTATION_PLAN.md); active detailed phase
 [POSTGRES_PROVIDER_SELECTION](plan/POSTGRES_PROVIDER_SELECTION.md).
@@ -32,7 +32,7 @@ Full phase/architecture contain prior migration hashes and native evidence.
 
 New postgresSyncRows/postgresSyncStore implement PORTABLE full atomic orchestration.
 SqlDatabase requires one connection/snapshot, callback success before commit,
-rollback every callback/commit error, cleanup/no implicit callback retry.
+rollback callback errors, distinguish uncertain COMMIT, cleanup/no implicit retry.
 SqlConnection enforces row/byte limits DURING transport/decoding, JS-safe integer
 conversion and no successful truncation. Static typed columns/binds/LIMIT +
 cumulative decoder budgets are additional checks, not driver transport proof.
@@ -129,8 +129,26 @@ PUBLIC/inherited rights still need actual role checks, not just explicit ACLs.
 
 User dev-only role/RLS apply/allow-deny/rollback authorization question pending
 (AGENTS22 + existing no-grants-by-implication gate); unanswered is not approval.
-Exact next while pending: provider-neutral transaction lifecycle/uncertain-COMMIT
-implementation/tests. If explicitly approved, pinned CLI migration for reviewed
+Portable transaction kernel/static statement gate now implemented over exclusive
+raw-text lease; explicit isolation/three SET LOCAL timeouts/input and read budgets,
+callback closure/taint/deadlines/COMMIT/ROLLBACK/release/discard. No retry. Confirmed
+COMMIT survives release failure; lost/malformed ACK stays indeterminate. Port must
+attest real ErrorResponse/ReadyForQuery, exclusive physical lease and safe eviction.
+Synthetic complete5-phase Store/control/fault tests do not execute SQL or prove
+actual SDK/network cancellation/races/roles; existing native receipts are separate.
+Current modified areas: two server modules, protocol fixture/kernel tests and
+existing handoff/phase/master/foundation/architecture/supabase README. No dependency,
+migration/provider/grant/Auth/credential/consumer changes in this slice.
+Validation:14 kernel tests included in376 full tests; lint/typecheck/build/
+catalog1808/scaffold75 Markdown/14 profiles/173 tasks/diff PASS. Existing Router/
+chunk warnings unchanged. Test log on E: postgres-rehearsal-2026-10-07/
+postgres-kernel-tests.log outside Git. No owned live QA handles remain.
+Exact next while pending: outward uncertainty fence + durable intent/quarantine/
+fresh immutable audit/review witness reconciliation. Existing SourceSync catches
+Store errors as rejected; kernel alone is not that fence or restart durability.
+Before implementing, refine current active slice/contracts, preserve public API
+and define absent/mismatched witness/concurrent successor/uncertain failure writes.
+If explicitly approved, pinned CLI migration for reviewed
 NOLOGIN role/RLS package and actual role/5-phase SQL/lock-only update/platform denial/
 effective column-helper grants/rollback evidence before driver mounts. SDK/credential/
 Auth/principal membership remain distinct gates, not covered by that role approval.
@@ -138,8 +156,9 @@ R1/provider/org already approved; do not re-request. Then authorized real driver
 cancel/commit/parallel sessions, isolated restore/measurements and real adapters.
 P9-I02/D04/V01 PARTIAL/OPEN; Docker daemon absent, restore tooling OPEN.
 
-K02/P1-D02 ten-node/nine-edge/root-cost uncertainty; K01/K03 staged adapters/K15
-loader preserved. [WIKI_SOURCE_VERIFICATION](plan/WIKI_SOURCE_VERIFICATION.md) and
+K02/P1-D02 source sample DONE at pushed2e6d110: ten nodes/nine edges reconciled;
+root cost remains unknown and totals partial. Live adapter/coverage is separate.
+K01/K03 staged adapters/K15 loader preserved. [WIKI_SOURCE_VERIFICATION](plan/WIKI_SOURCE_VERIFICATION.md) and
 [DATA_FOUNDATION](plan/DATA_FOUNDATION.md) authoritative. K04 OneDrive403; K10/K11
 market/SKU; K12 bulk reuse prohibited; Q02/Q09/Q10/Q11; Q12/TGC/media rights;
 Vercel403; native install/icon/device/accessibility; future nonempty dye/compatibility/

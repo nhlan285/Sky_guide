@@ -110,7 +110,13 @@ Explicit role/column/helper/RLS proposal now implemented and read-only native
 preflight PASS; actual role/grant/policy application/allow-deny tests remain pending
 specific dev authorization. Invoker trigger row locks require4 lock-only UPDATE
 columns with proposed false WITH CHECK; no weakening/removal of serialization locks.
-Next independent task: provider-neutral transaction lifecycle/unknown COMMIT tests.
+Portable transaction kernel/static statement gate now implemented over an exclusive
+text protocol lease: explicit isolation/timeouts, tainted-query and deadline
+checks, cleanup and confirmed-vs-indeterminate COMMIT classification. Synthetic
+5-phase Store/control/error tests do not execute DML or prove real cancellation/
+pool/concurrency/roles. Next independent task: outward uncertainty fence and durable
+intent/quarantine/exact witness reconciliation before unchanged SourceSync mounts.
+Role/RLS application still needs the pending specific development authorization.
 No complete live foundation
 acceptance. Independent W12 sequence and focus QA completed; full W12 remains
 PARTIAL until W11 dependencies.
@@ -121,7 +127,7 @@ Read [CURRENT_STATE](../CURRENT_STATE.md) for latest commit/checks and gates.
 Branch `codex/master-plan-execution`; checkpointdd7fb11 verified pushed before the
 release metadata slice. Supabase Free dev in Dyland's Org is provisioned;44 private
 tables at that milestone; now79 private tables with no platform grants. Domain
-implementations remain unmounted from production consumers. Latest362 full tests/
+implementations remain unmounted from production consumers. Latest376 full tests/
 lint/typecheck/build PASS;7 read composition tests/11 native negatives plus5 graph history tests/141 native
 negatives/actual two-frame parity PASS; prior lifecycle metadata/source isolation/
 projection byte checks retained. Intentional revision0 control baseline, other tables empty. Existing

@@ -95,6 +95,28 @@ Rollback must revoke column as well as table privileges; unknown dependencies ma
 DROP ROLE fail, without CASCADE/data deletion. Inspect unchanged proposal baseline
 and memberships first; this is not an automatic rollback over later role changes.
 
+**Portable transaction kernel —2026-10-07:** postgresTransactionKernel implements
+SqlDatabase over an exclusive raw-text protocol lease. It owns explicit BEGIN
+isolation, three local PostgreSQL timeouts, bounded callback work, COMMIT and
+ROLLBACK. postgresStatementGate admits only existing static bound Store grammar
+against the privilege manifest; lowered reads retain server budget/OID checks.
+Absorbed query errors or pending/overlapping queries taint the transaction; no
+callback retry or COMMIT follows. Late acquisition is discarded; escaped callback
+connections close. Monotonic checks catch CPU overruns but cannot preempt CPU work.
+Confirmed COMMIT survives release failure; lost/malformed COMMIT acknowledgement
+is indeterminate. Confirmed ErrorResponse/ReadyForQuery rejection or ROLLBACK tag
+is not successful COMMIT. Discarded physical identities cannot be reused by the
+kernel; actual pool exclusivity/abort/eviction still requires adapter proof.
+
+This is portable lifecycle behavior tested with a synthetic protocol port, not
+an installed SDK or connected cancellation/concurrency/role acceptance. The port
+fixture installs independently prepared table frames at CAS; it does not execute
+DML. Existing native Store SQL/read-guard proof remains separate. Before mounting,
+add an outward uncertainty fence and durable intent/quarantine/exact immutable
+witness reconciliation. Existing SourceSync catches Store errors as rejected;
+kernel exceptions alone cannot enforce the required outward policy or survive
+restart. No public result contract/provider/Auth/credential/grant change here.
+
 ## Ownership decisions and field preservation inventory
 
 **Acquisition identity: Option B.** `(item_id, option_id)` is the relational key;

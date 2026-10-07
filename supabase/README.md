@@ -198,3 +198,19 @@ columns get proposed UPDATE USING(true)/WITH CHECK(false), actual UPDATE rejecte
 effective ACL/RLS/lock/rollback proof must follow authorization. No SDK/password/
 membership/Auth/consumer change. Column revoke is required in addition to table
 revoke; no PUBLIC denial inferred from explicit role REVOKE. See phase/handoff.
+
+Portable postgresTransactionKernel now implements SqlDatabase lifecycle over a
+raw-text protocol port; no SDK/connect/credentials/role application. Driver-owned
+BEGIN/isolation/local timeouts/COMMIT/ROLLBACK and static callback statement gate
+retain read lowering, exact CAS bool, empty DML results and configured bounds.
+Absorbed errors/pending or overlapping queries forbid COMMIT; timed-out/uncertain
+leases are discarded and late work cannot reuse callback connections. Confirmed
+COMMIT survives failed release; unknown COMMIT ACK stays indeterminate. Synthetic
+protocol tests cover complete5-phase Store sequence and injected failure/deadline
+cases; fixture frames are installed at CAS, not actual DML execution. Prior native
+SQL receipts remain separate. Actual SDK/pool exclusivity/abort/drain/concurrent
+sessions/role/restore acceptance is OPEN. Unchanged SourceSync catches Store errors
+as rejected; outward fence/durable intent/quarantine/fresh immutable-witness
+reconciliation must precede mount. See active phase for exact next action.
+14 kernel tests included in376 full tests/lint/typecheck/build/catalog1808/scaffold
+PASS; existing Router/chunk warnings unchanged. Test log retained on E: only.
