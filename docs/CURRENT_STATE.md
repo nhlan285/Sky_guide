@@ -2,13 +2,13 @@
 
 ## Task / branch / checkpoint
 Sky Guide autonomous master run ACTIVE; roadmap OPEN, not complete.
-Branch codex/master-plan-execution; checkpoint parentcb95d3ad0160276699196724ece597bf572a526f
-verified on origin. This checkpoint aligns roadmap/handoff with the prepared proposal.
+Branch codex/master-plan-execution; checkpoint parent18f8e3e8e1f7bbf1c8951272c3e01a50b56db6fa
+verified on origin. This checkpoint preserves approved native scan application.
 Resolve this checkpoint with git log -1 and verify remote SHA. Master:
 [IMPLEMENTATION_PLAN](plan/IMPLEMENTATION_PLAN.md); active detailed phase:
 [POSTGRES_PROVIDER_SELECTION](plan/POSTGRES_PROVIDER_SELECTION.md), latest section;
 applied package: [JOURNAL_NATIVE_REVIEW](plan/JOURNAL_NATIVE_REVIEW.md);
-pending package: active phase “Prepared package / resume” section.
+scan package/evidence: active phase “Prepared package / resume” and latest section.
 
 ## Authority / boundaries
 R1 local contracts, Supabase Free and Dyland's Org remain approved. User2026-10-07
@@ -88,10 +88,10 @@ do not label request rejection or45-second API wall clock as canonical cost.
 Benchmark gate OPEN. E: journal-native-k15-timeout-receipt.json contains bounded
 diagnostic + full after baseline; packed SQL SHA256
 9b1492072ce09e0dd9b2cb323c159495384a21a7d8aeabbc51c030c9f95eaed7.
-Exact next: review the prepared single-function optimization package in the active
-phase's “Prepared package / resume” section and obtain scoped dev migration approval
-before applying/repinning. Re-run EXACT K15 only after approved application.
-Optimization SQL is PREPARED, NOT APPLIED. STOP on schema/ACL/membership/data
+Exact next: rerun owner/authorized creator/denial rehearsals and EXACT packed K15
+under original30s cap; full authoritative baseline after EACH rollback.
+Approved optimization APPLIED as20261007160926; verified one body change only.
+STOP on schema/ACL/membership/data
 drift; any timeout leaves benchmark gate OPEN. Do not disable deferred integrity,
 rewrite applied history or infer production sizing from fixture preparation.
 K15 attempted/TIMEOUT; complete timings missing. Down/durable/concurrent/crash/
@@ -134,6 +134,22 @@ User approved cb95d3a single-function dev migration/guarded rollback and automat
 continuation2026-10-07. Full current83 preflight and authoritative baseline comparison
 PASS immediately before application; no drift. Hosted optimization DDL pending.
 Roadmap R1 summary now reflects applied journal proofs and the OPEN K15 gate.
+
+## Native scan application — 2026-10-07
+User approved cb95d3a one-function dev migration/guarded rollback and continuation.
+Full before schema/ACL checker PASS; complete authoritative baseline matched earlier
+after-grants receipt. CLI-created migration aligned to actual version
+20261007160926_private_release_metadata_scan; exact approved up bytes unchanged.
+Full after checker PASS. Complete after baseline differs ONLY by appended migration
+and expected function aggregate hash, independently computed from reviewed source:
+34c8a4aa9e21a1ee3ad57a633778957d852f473a30feafa7bc5e4a1a79db4ca5.
+Every other schema/ACL/policy/setting/trigger/control/membership/data field identical.
+Current83 baseline deliberately overrides ONLY validate_release_metadata body to
+5d499ac07a2d5a3ac590cc0dedb7cac6; historical79 and first13 migrations unchanged.
+Proposal builder preserves approved before/after checker bytes for both reviewed
+endpoints.8 focused tests PASS. E: release-scan-{before,after}-baseline.json.
+Owner/creator/denial/K15 on NEW body and native down remain NOT RUN at this milestone;
+previous K15 timeout stays OPEN. Exact next is the rollback rehearsals above.
 
 ## Remaining gates / local operations
 K04 OneDrive403; K10/K11 SKU/market; K12 bulk reuse prohibited; Q02/Q09/Q10/Q11/Q12,

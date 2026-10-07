@@ -1673,3 +1673,15 @@ Schema/down, durable/concurrent/crash/restore, SDK and roadmap gates remain unch
 Validation: lint/2 focused/full429 tests and independent128-case receipt verifier PASS.
 App build/typecheck previously PASS at2925996, not rerun for SQL proposal-only work.
 Raw corpus/checkers/receipts/logs stay E:/SkyGuideAssets/research/postgres-rehearsal-2026-10-07/.
+
+#### Approved native application — 2026-10-07
+Applied exact cb95d3a up via migration tool as20261007160926_private_release_metadata_scan.
+CLI file aligned to actual server-assigned version; prior13 migration files untouched.
+Full schema/ACL checkers PASS before/after. Authoritative baseline differs ONLY by
+new migration and source-derived functions_hash
+34c8a4aa9e21a1ee3ad57a633778957d852f473a30feafa7bc5e4a1a79db4ca5;
+all other metadata/data/membership/settings identical. E: release-scan-{before,after}-baseline.json.
+Deliberate current83-only body override; historical79 pins unchanged. Proposal builder
+accepts only the two reviewed source endpoints and preserves original review bytes.
+8 focused tests PASS. Next: owner/creator/denial then EXACT packed K15/30s, authoritative
+baseline after EACH rollback. New-body runtime/down/cost still NOT RUN here.

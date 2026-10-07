@@ -37,7 +37,13 @@ export function buildReleaseMetadataScanProposal() {
  if (select count(*) from pg_trigger t join pg_class c on c.oid=t.tgrelid join pg_namespace n on n.oid=c.relnamespace
   where n.nspname='sky_private' and t.tgname='release_metadata_state' and not t.tgisinternal and t.tgenabled='O' and t.tgdeferrable and t.tginitdeferred)<>11 then raise exception 'Deferred release event coverage drift';end if;
 end;$release_scan_guard$;\n`
- const before=prepareRuntimeJournalPrivilegeProposal().roleCheck+'\n'
+ // Preserve the reviewed before/after package after authorized installation.
+ // Current83 may pin either reviewed endpoint; historical79 is immutable.
+ const current=prepareRuntimeJournalPrivilegeProposal().roleCheck+'\n'
+ const installed=runtimeJournalPrivilegeBaseline.functions.find(f=>f.name==='validate_release_metadata')?.bodyMd5
+ if(installed!==oldBodyMd5&&installed!==newBodyMd5)throw new Error('Current release body is outside the reviewed migration endpoints')
+ if(current.split(installed).length!==2)throw new Error('Expected exactly one current release body in ACL checker')
+ const before=current.replace(installed,oldBodyMd5)
  if(before.split(oldBodyMd5).length!==2)throw new Error('Expected exactly one pinned body in current83 ACL checker')
  const after=before.replace(oldBodyMd5,newBodyMd5)
  const files={
