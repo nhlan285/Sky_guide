@@ -95,8 +95,10 @@ now pass native fixtures; this is not complete reviewed canonical promotion/Sync
 Immutable full identity graph/ordered candidate evidence metadata now PASS:27 typed
 history owners/all20 relations, full K15 content/review hash parity and141 native
 negative cases. Historical graph metadata does not imply full module/provenance
-payload history. Exact next: typed payload transaction writer/provider-neutral
-SyncStore driver, then real races/provider parity/backup restore.
+payload history. Full SyncState row read composition now PASS with explicit
+historical manifest dataset key order; existing content/review hash unchanged.
+Exact next: typed payload transaction writer/provider-neutral SyncStore driver,
+then real races/provider parity/backup restore.
 No complete live foundation
 acceptance. Independent W12 sequence and focus QA completed; full W12 remains
 PARTIAL until W11 dependencies.
@@ -106,9 +108,9 @@ PARTIAL until W11 dependencies.
 Read [CURRENT_STATE](../CURRENT_STATE.md) for latest commit/checks and gates.
 Branch `codex/master-plan-execution`; checkpointdd7fb11 verified pushed before the
 release metadata slice. Supabase Free dev in Dyland's Org is provisioned;44 private
-tables at that milestone; now77 private tables with no platform grants. Domain
-implementations remain unmounted from production consumers. Latest323 full tests/
-lint/typecheck/build PASS.5 graph history tests/141 native
+tables at that milestone; now78 private tables with no platform grants. Domain
+implementations remain unmounted from production consumers. Latest330 full tests/
+lint/typecheck/build PASS;7 read composition tests/11 native negatives plus5 graph history tests/141 native
 negatives/actual two-frame parity PASS; prior lifecycle metadata/source isolation/
 projection byte checks retained. Intentional revision0 control baseline, other tables empty. Existing
 Router/chunk warnings unchanged. See handoff for exact

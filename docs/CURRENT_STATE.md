@@ -3,8 +3,8 @@
 ## Task / branch / checkpoint
 Autonomous Sky Guide master run on codex/master-plan-execution; goal active,
 master roadmap OPEN. Last verified pushed checkpoint/base
-53498f631128e62b4d9aa7700c088c1b03dc20d6. This file accompanies canonical graph
-history milestone; resolve latest SHA with git log -1 and verify remote on resume.
+2e81dc372b59773ccb7ae5c805391c0755535c76. This file accompanies full SyncState
+read composition milestone; resolve latest SHA with git log -1 and verify remote on resume.
 Master [IMPLEMENTATION_PLAN](plan/IMPLEMENTATION_PLAN.md); active detailed phase
 [POSTGRES_PROVIDER_SELECTION](plan/POSTGRES_PROVIDER_SELECTION.md).
 No merge/production/paid resources/destructive Git or unrelated edits.
@@ -27,7 +27,7 @@ canonical bytes/API parity retained. Metadata CAS is not complete SyncStore.
 
 New20261007020927_private_acceptance_graph; SHA256
 1113dd8d404cad0731d5573b08928d93cf74602d0d3ba2cc789593fbbbc498bea.
-27 additional private typed graph owners (77 total): acceptance header, ordered
+27 additional private typed graph owners (77 at that milestone): acceptance header, ordered
 candidate/identity evidence, identities with historical revisions, crosswalks,
 aliases (unknown source IDs/chain discriminator), tombstones and20 explicit
 relations. Preserve private/fixture/retired nodes; no reconstruction from current
@@ -42,8 +42,21 @@ Files: src/server/graphHistoryRows.ts, additive migration, focused tests/shared
 fixture, SQL builder/actual row+schema verifiers; existing architecture/master/
 phase/foundation/handoff/supabase README. No canonical JSON/EAV or new dependency.
 
+New20261007022023_private_acceptance_manifest_order; SHA256
+7de86899e856d31516039793d4e3dffe2e5ca0d1b9fec5a2db52b54984f95b3d.
+One private typed immutable owner (78 total), four dataset names/positions pinned
+to acceptance; parent lock/deferred completeness and mutation/TRUNCATE guards.
+Read composition exposed sorted public manifest keys vs reviewed manifest Record
+order. Preserve both existing contracts with explicit historical order; no earlier
+migration/review hash/public byte change. syncStateRows composes metadata + pinned
+graph/projection/order into detached SyncState; validateStoredSyncCandidate reuses
+SourceSync canonical graph/projection/budget/content hash checks and exact review
+digest. Provider must fetch ONE consistent frame with bounded row/byte transport.
+New files: manifestOrderRows/syncStateRows, sourceSync restoration helper, focused
+tests/shared read fixture/native builder/row+schema verifiers/additive migration.
+
 ## Validation / evidence
-5 focused graph +323 full tests, pnpm lint/typecheck/build/catalog1808 PASS.
+7 focused read +5 graph +330 full tests, pnpm lint/typecheck/build/catalog1808 PASS.
 Full K15 graph2051 identities retains SourceSync contentHash/candidateReviewHash
 after provider row reordering. All14 kinds/20 relations/every field/order, scoped
 same IDs, alias chains/null tombstones/fixture-private nodes and revisions tested.
@@ -51,10 +64,15 @@ Native two-frame synthetic history remains exact after owner revision/edge chang
 and mutable catalog mutation.141 SQLSTATE negatives PASS:32 malformed frames,
 108 per-table update/delete/TRUNCATE/sealed-insert guards, missing acceptance.
 Actual hosted rows -> expected graph parity PASS; fixture ROLLBACK.
+Full current K15 reconstructs exact accepted candidate/approval; all24 manifest
+key orders tested. Initial/first-failure/independent source LKG, existing promotion/
+failure parity, corruption and budgets pass. Actual hosted composed candidate
+remains exact after canonical mutation and two-source failures;11 new SQLSTATE
+negatives PASS for order immutability/completeness/orphan/duplicates/invalid fields.
 Initial SQL syntax/builder issues fixed before success; no failed attempt claimed.
-77 RLS; exact27 writable columns (generated endpoint kinds excluded); all FKs
+78 RLS; exact graph/order writable columns (generated endpoint kinds excluded); all FKs
 RESTRICT;0 unvalidated constraints/SECURITY DEFINER/platform schema-table-function
-grants. Baseline: one sync_generation revision0/null pointer row, all76 others empty.
+grants. Baseline: one sync_generation revision0/null pointer row, all77 others empty.
 Advisors no WARN/ERROR; intentional no-policy RLS/unused-index INFO. Evidence SQL/
 actual rows/schema outside Git on E:/SkyGuideAssets/research/postgres-rehearsal-2026-10-07.
 Scaffold/diff before checkpoint; existing Router/chunk build warnings unchanged.
@@ -62,14 +80,14 @@ No real source import, actual parallel race, full writer/driver/authenticated
 review, provenance/future module payload history, restore/scaling or production proof.
 
 ## Exact next action / gates
-Implement typed canonical payload transaction writer + provider-neutral SyncStore,
-compose immutable graph/projection + metadata read into validated SyncState/LKG.
+Implement typed canonical payload transaction writer + provider-neutral SyncStore
+atomic CAS/driver; reuse completed validated SyncState/LKG read composition.
 Lock global generation BEFORE canonical writes; validate candidate and previous
-graph continuity; require graph/projection/acceptance/source/audit in one atomic
+graph continuity; require graph/projection/dataset order/acceptance/source/audit in one atomic
 transaction; force deferred constraints before commit; rollback ALL writes on CAS
 false/error. SQL graph digest spelling/structure checks do not compute JS content
 hash or authenticate reviewer. Metadata-only acceptance remains allowed until full
-adapter requires graph. Graph evidence references retain IDs, not old proof payloads.
+adapter requires graph/order. Graph evidence references retain IDs, not old proof payloads.
 Then actual two-session conflict/rollback/provider parity, least-privilege runtime/
 authenticated review, isolated restore and measurements. P9-I02/D04/V01 PARTIAL/OPEN.
 No implicit SDK/credential/consumer permission. Docker CLI exists but daemon absent;

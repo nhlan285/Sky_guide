@@ -189,6 +189,16 @@ future module payloads, authenticated reviewer or mounted provider driver inferr
 
 ## Migration sequence and preservation
 
+Review ordering decision (2026-10-07): immutable public projection uses sorted-key
+canonical JSON, whereas existing SourceSync contentHash includes the validator's
+ordered manifest.datasets Record. A real composition test exposed this distinction.
+Preserve both contracts; add typed acceptance_manifest_dataset rows with exactly
+four declared dataset names/positions per acceptance, reconstruct that Record order
+before checking reviewed candidate hash. This is additive historical review metadata,
+not a projection byte/hash change. Existing accepted hashes/public bytes remain valid;
+metadata-only acceptances without order cannot be decoded as full SyncState. Future
+transaction writer must persist dataset order along with graph/projection/audit.
+
 1. Inventory immutable catalog manifest/version/hash and existing K15 validators.
    Export every source dataset plus aliases, tombstones and current revocation
    ledger; capture row counts and checksums. Raw/private evidence stays outside Git.

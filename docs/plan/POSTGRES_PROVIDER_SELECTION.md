@@ -584,3 +584,72 @@ lock global generation before mutation, decode immutable graph/projection alongs
 sync metadata, validate complete candidate, write acceptance/audit atomically, force
 deferred constraints before commit and roll back ALL writes on false/error. Then
 real two-session conflicts/provider parity/restore/measurement/runtime role review.
+
+## Active SyncState read composition — 2026-10-07
+MEDIUM approved R1 continuation from pushed2e81dc3. Compose pinned global acceptance
+metadata + historical graph + immutable public projection into validated SyncState.
+Reuse SourceSync's exact content hash/projection/domain/budget checks; preserve source
+health independently of global LKG and historical fetched/staged/review/promotion.
+In scope: provider-neutral row frame decoder, detached state, corruption/budget/
+cross-source/failure/initial and existing promotion/failure API tests. No runtime
+DB driver/SDK/credentials/grants/current payload writes/consumer mount. Read frame
+must come from one consistent provider transaction/snapshot, not independent fetches
+that can mix generations. Header hash alone is insufficient reviewed candidate proof.
+Expected: sourceSync restoration validator, syncStateRows, focused fixture tests,
+existing handoff/phase/master/architecture. Acceptance: exact current K15 candidate
+and review digest, whole frame rejection for missing/unpinned/tampered rows, no
+mutable canonical reads, unchanged LKG when selected source has no success/fails.
+Next after this slice: typed canonical payload transaction writer/full SyncStore CAS,
+then actual DB transaction/provider/concurrency/restore acceptance. No DONE inferred.
+
+Verified ordering dependency: first composition test fails existing contentHash
+because canonical public manifest bytes sort datasets keys, while SourceSync embeds
+the validated manifest with source-supplied Record key order (actual K15 uses
+items/lookup/spirits/seasons). Deep field/public byte parity does not establish
+JSON.stringify order parity. Preserve the approved hash/public byte contracts;
+do not alter existing reviews or guess order from current canonical data. Extend
+this slice with one typed acceptance_manifest_dataset owner (exact four names and
+positions), immutable/deferred complete at commit, pinned to acceptance. Decoder
+reorders validated manifest.datasets from those rows before existing SourceSync
+hash validation. Migration is additive; no completed projection/graph migration
+rewrite, payload/UI change or new provider dependency. Metadata-only acceptances
+still exist; full reader requires explicit order. Future writer must archive it
+with graph/projection/acceptance/audit. Validate all24 possible key orders locally
+and actual hosted rollback-only row composition after migration. This is explicit
+review byte metadata, not an arbitrary JSON/EAV/domain owner or a new game fact.
+
+Completed read composition milestone: migration20261007022023_private_acceptance_manifest_order,
+SHA2567de86899e856d31516039793d4e3dffe2e5ca0d1b9fec5a2db52b54984f95b3d,
+adds one private immutable typed acceptance dataset-order owner (78 tables total).
+Four names/positions, parent acceptance lock and deferred completeness enforce
+whole ordered frame at commit; update/delete/TRUNCATE and partial/orphan/extra/
+duplicate frames reject. SQL accepts metadata-only acceptance without order; full
+reader requires it. No previous migration/history/hash definition changed.
+syncStateRows composes pinned metadata/graph/projection/order into a detached
+SyncState; validateStoredSyncCandidate reuses existing SourceSync validators,
+public allowlist/budgets and exact content digest, then candidateReviewHash binding.
+Provider must fetch one consistent transaction/snapshot with bounded row/byte
+transport. Decoder budget rejection does not bound provider allocation/transport.
+Private reviewer reference is not authentication, and review hash is not rights.
+
+Seven focused read tests PASS: full actual K15 graph/public fields/content-review
+hash; all24 manifest dataset orders; initial/first failure; selected source with no
+success while global LKG exists; health/retry/promotion parity; detached state;
+self-consistent forged graph/projection/hash or mixed generation/extra/missing/
+bad-order/over-budget frames fail closed. First two tests exposed order loss, fixed
+through explicit historical metadata rather than weakening digest checks.
+Native rollback-only fixture uses actual staged synthetic candidate and exact
+approval hash; metadata + archived graph + projection + dataset order reconstruct
+that candidate after mutable catalog change and two-source failures.11 native
+SQLSTATE cases PASS; actual K15/K01 selected frames preserve independent health/
+retry with global LKG/approval. SQL/rows/schema evidence retained outside Git on E:.
+78 RLS; new writable columns/FKs exact;0 unvalidated/non-RESTRICT FK/SECURITY DEFINER/
+platform grants; one revision0 control baseline, other77 tables empty. Advisors
+same intentional INFO/no WARN/ERROR.330 full tests/lint/typecheck/build/catalog1808
+PASS; scaffold/diff before checkpoint. No real import/SDK/credentials/runtime role/consumer.
+This is complete read composition, NOT provider transaction driver/full SyncStore
+writer. Exact next: typed canonical payload transaction writer/provider-neutral
+atomic CAS, persist order with graph/projection/acceptance/source/audit; preserve
+previous graph continuity and lock global generation before any writes; force all
+deferred checks before commit/rollback every false/error. Then actual multi-session
+race/provider/restore/measurements and runtime-role/authenticated-review gates.

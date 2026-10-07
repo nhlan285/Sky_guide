@@ -104,6 +104,19 @@ Metadata-only acceptances remain allowed; full driver must require archived grap
 and validate previous-frame revision/crosswalk/alias/tombstone continuity. Graph
 metadata is not future module/provenance payload history or authenticated review.
 
+Acceptance manifest order migration20261007022023 adds one immutable typed owner
+(78 total). Existing public sorted JSON and SourceSync's manifest Record key order
+are distinct; four archived dataset names/positions preserve reviewed content hash
+without changing earlier hash/byte contracts. Metadata-only acceptance remains
+allowed, but syncStateRows full read decoder requires explicit order + graph +
+projection and revalidates existing source/content/review/projection/budget contracts.
+It is not a database driver/transaction writer. Read frame must come from ONE
+consistent transaction with bounded transport, not independent provider calls.
+Build `node tests/sql/build-sync-read-rehearsal.mjs E:/SkyGuideAssets/research/postgres-rehearsal-2026-10-07/sync-read-fixture.sql`.
+Use verify-sync-read-rehearsal.mjs/verify-sync-read-schema.mjs on actual rows/schema.
+Two-source failure/LKG after canonical mutation plus11 native negatives PASS.
+Current baseline: revision0 singleton, all77 other tables empty; all78 RLS/no grants.
+
 Revision checks for changed current entity relations/provenance, full payload history,
 complete transactional SyncStore/driver and
 PostgreSQL backup/restore are subsequent slices. The existing TypeScript domain

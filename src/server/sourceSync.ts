@@ -137,6 +137,25 @@ export async function stageSourceSnapshot(options: {
   }
 }
 
+// Restore an accepted historical candidate through the SAME canonical projection,
+// identity and budget boundary as staging. A SQL review tuple or graph checksum
+// alone cannot prove the public files/graph still match the reviewed content.
+// No current clock/previous graph is imposed: this is a pinned historical read.
+export async function validateStoredSyncCandidate(input: SyncCandidate,contract: SyncContract): Promise<SyncCandidate> {
+  validateContract(contract)
+  const candidate=structuredClone(input)
+  if(!contract.sourceIds.has(candidate.sourceId)||!validateId(candidate.sourceId).valid||!/^[a-f0-9]{64}$/.test(candidate.sourceHash)
+    ||!candidate.normalizationVersion.trim()||!Number.isSafeInteger(candidate.baseRevision)||candidate.baseRevision<0
+    ||![candidate.fetchedAt,candidate.stagedAt].every(t=>validateDateTime(t).valid)||Date.parse(candidate.fetchedAt)>Date.parse(candidate.stagedAt)
+    ||contentHash(candidate)!==candidate.contentHash) throw new Error('Invalid stored sync candidate')
+  const canonical=await validateProjection(candidate,contract)
+  const result={...canonical,sourceId:candidate.sourceId,sourceHash:candidate.sourceHash,normalizationVersion:candidate.normalizationVersion,
+    baseRevision:candidate.baseRevision,contentHash:candidate.contentHash,fetchedAt:candidate.fetchedAt,stagedAt:candidate.stagedAt}
+  if(contentHash(result)!==candidate.contentHash) throw new Error('Invalid stored sync candidate')
+  enforceNormalizedLimits(result,contract)
+  return result
+}
+
 export async function promoteReviewedSnapshot(store: SyncStore, candidate: SyncCandidate, approval: ReviewApproval, contract: SyncContract, options: PromotionOptions): Promise<'promoted' | 'unchanged' | 'conflict' | 'rejected'> {
   try {
     candidate = structuredClone(candidate)
