@@ -58,6 +58,27 @@ isolation levels are NOT RUN; the adapter must establish/validate its isolation
 contract and measured cost before live acceptance. RLS/private schema remain
 closed to browser/platform roles; no least-privilege runtime role provisioned yet.
 
+**Runtime transport/commit decision —2026-10-07:** the portable Store remains
+unchanged; a connected driver must lower static private reads through
+postgresSyncTransport before buffering results. Materialized CTEs retain the
+original limited/locked SELECT once; aggregate UTF-8 text/DataRow budget checks
+return only a fixed all-NULL guard row on overflow. Supported typed text/OID decode
+preserves exact safe integers and text timestamps; bool ::text accounting is
+conservative, not an exact wire byte estimate. Database work/protocol metadata/
+packets/SDK cancellation are separate bounded-runtime acceptance work. No SDK,
+credentials, privileges or consumer mounts were introduced by this slice.
+
+A connection failure after sending COMMIT can leave an unknown durable outcome;
+attempting ROLLBACK cannot prove that COMMIT did not happen. This corrects the
+earlier blanket rollback-on-commit-error wording, not SQL atomicity or public
+SourceSync result contracts. The runtime controller must reconcile immutable
+generation audit/review witnesses through a fresh connection before declaring
+publication failed/succeeded; absent confirmation, quarantine and stop retries.
+Never convert uncertainty into a source failure/retry or rerun the transaction
+callback. Actual connected reconciliation/cancellation/races are OPEN. Concrete
+role/reviewer/credential and cleanup contract is in the active
+[provider phase](../plan/POSTGRES_PROVIDER_SELECTION.md#connected-runtime-contract--prepared-not-mounted).
+
 ## Ownership decisions and field preservation inventory
 
 **Acquisition identity: Option B.** `(item_id, option_id)` is the relational key;

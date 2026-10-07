@@ -99,6 +99,13 @@ payload history. Full SyncState row read composition now PASS with explicit
 historical manifest dataset key order; existing content/review hash unchanged.
 Typed payload evidence prerequisite PASS: canonical identity evidence and exact public record subset/order have distinct typed owners;13 native negatives/actual review byte parity. Canonical payload preparation/static parameterized SQL now PASS; retention/own revisions/private evidence plus two native injected rollbacks/idempotence/history parity. Portable full SyncStore atomic orchestration now PASS; exact SourceSync transitions/current alignment/whole publication SQL and866 query results/two rollbacks. Exact next: connected driver/runtime least-privilege/review-auth contract,
 then real races/provider parity/backup restore.
+Bounded private read transport now PASS: static79-owner SELECT lowering/server
+UTF8/DataRow guard/strict OID-text decode;90 native assertions include Unicode,
+1.2 MB single-field overflow and original locked head. No actual SDK mount; lost
+COMMIT acknowledgement/reconciliation/runtime privileges/verified reviewer are
+concrete contracts, still OPEN implementation. Exact next: explicit runtime
+privilege/helper allowlist and transaction lifecycle/uncertain-commit tests before
+scoped SDK/credential/role/Auth authorization; see active phase/current handoff.
 No complete live foundation
 acceptance. Independent W12 sequence and focus QA completed; full W12 remains
 PARTIAL until W11 dependencies.
@@ -109,7 +116,7 @@ Read [CURRENT_STATE](../CURRENT_STATE.md) for latest commit/checks and gates.
 Branch `codex/master-plan-execution`; checkpointdd7fb11 verified pushed before the
 release metadata slice. Supabase Free dev in Dyland's Org is provisioned;44 private
 tables at that milestone; now79 private tables with no platform grants. Domain
-implementations remain unmounted from production consumers. Latest350 full tests/
+implementations remain unmounted from production consumers. Latest357 full tests/
 lint/typecheck/build PASS;7 read composition tests/11 native negatives plus5 graph history tests/141 native
 negatives/actual two-frame parity PASS; prior lifecycle metadata/source isolation/
 projection byte checks retained. Intentional revision0 control baseline, other tables empty. Existing

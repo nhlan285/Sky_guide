@@ -3,8 +3,9 @@
 ## Task / branch / checkpoint
 Autonomous Sky Guide master run on codex/master-plan-execution; goal active,
 master roadmap OPEN. Last verified pushed checkpoint/base
-fd99b642410e144d747517f6ca308e4e9e6e039b. This file accompanies portable full
-SyncStore orchestration; resolve latest SHA with git log -1 and verify remote.
+3e21e8837f426774f24fcba9570692808cb770b3 (verified local/remote before this slice).
+This file accompanies bounded private transport/runtime contract work; resolve
+latest checkpoint SHA with git log -1 and verify remote.
 Master [IMPLEMENTATION_PLAN](plan/IMPLEMENTATION_PLAN.md); active detailed phase
 [POSTGRES_PROVIDER_SELECTION](plan/POSTGRES_PROVIDER_SELECTION.md).
 No merge/production/paid resources/destructive Git or unrelated changes.
@@ -84,14 +85,37 @@ E:/SkyGuideAssets/research/postgres-rehearsal-2026-10-07/postgres-sync-{fixture.
 Scaffold/diff before checkpoint; existing Router/chunk warnings unchanged.
 
 ## Exact next action / gates
-Prepare concrete minimal connected driver/runtime least-privilege and authenticated
-review contract with rollback/credential handling. Inspect existing SDK capability
-before dependency choice; plan actual bounded transport, same connection isolation,
-lock/cancel/statement/commit errors and simultaneous-session tests. Do not fetch/
-collect secrets or apply grants/consumer mounts as implied authority. R1/provider/
-org approval already accepted, not a new contract re-review. Then approved provider
-integration/races/isolated restore/measurements and real adapters. P9-I02/D04/V01
-PARTIAL/OPEN. Docker daemon absent; restore tooling remains blocked, independent work continues.
+Bounded read transport now PASS: postgresSyncTransport lowers only existing static
+private SELECT vocabulary (all79 owners), keeps original FOR UPDATE once, performs
+server aggregate UTF8/DataRow budget checks BEFORE returning payload. Overflow
+returns fixed NULL/false guard; exact supported OID/text decode rejects unsafe int8,
+unsupported/binary/malformed/nonfinite values. Reader cumulative/LIMIT+1 checks
+remain intact. Bool ::text is conservative; DB work/metadata/network/error sizes
+and actual SDK transport/cancellation are separate gates. No driver mounted.
+90 actual native assertions PASS including Unicode/exact byte boundaries/oversized
+single1,200,000-byte field/locked head/MAX_SAFE_INTEGER/fraction/bool. Outer ROLLBACK
+verified revision0 and ALL78 noncontrol owners empty. Fixture135076 UTF8 bytes,
+SHA256539085dac77f5127ccc37eadea60bcc1a7a9ff03c44a835a74f243e5bc20f4e2;
+E:/SkyGuideAssets/research/postgres-rehearsal-2026-10-07/postgres-transport-{fixture.sql,result.json,tests.log}.
+7 focused/357 full tests/lint/typecheck/build/catalog1808/scaffold/diff PASS.
+Existing Router/chunk warnings unchanged.
+
+Concrete runtime contract is in active phase: provisional server-only pg candidate,
+one client/isolation/deadlines/cleanup, private dedicated least-privilege roles/RLS,
+verified maintainer principal, credential injection/rollback. No SDK installed or
+secrets/grants/auth/consumer changes. Lost COMMIT acknowledgement is indeterminate:
+ROLLBACK attempt cannot prove noncommit; reconcile immutable exact audit/review
+witness using fresh connection, otherwise quarantine/no blind retry/recordFailure.
+This corrects comment/architecture wording only; SourceSync public API unchanged.
+
+Exact next: derive explicit runtime table/column/helper privilege manifest from
+emitted SQL and invoker trigger call graph; prepare denial/rollback checks and
+provider-neutral transaction lifecycle/uncertain-commit tests. Complete a reviewable
+scoped SDK/credential/runtime-role/Auth authorization package before dependent live
+steps. Do not fetch/collect secrets or apply grants/consumer mounts by implication.
+R1/provider/org already approved, not a re-review. Then authorized real driver/
+cancel/commit/parallel sessions, isolated restore/measurements and real adapters.
+P9-I02/D04/V01 PARTIAL/OPEN; Docker daemon absent, restore tooling OPEN.
 
 K02/P1-D02 ten-node/nine-edge/root-cost uncertainty; K01/K03 staged adapters/K15
 loader preserved. [WIKI_SOURCE_VERIFICATION](plan/WIKI_SOURCE_VERIFICATION.md) and

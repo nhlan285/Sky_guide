@@ -24,9 +24,10 @@ export interface SqlConnection {
   query(statement:SqlStatement,limits:SqlReadLimits):Promise<CatalogRow[]>
 }
 export interface SqlDatabase {
-  // Same connection/snapshot for callback. Commit only on success; rollback every
-  // thrown error including commit/deferred-check failure; release connection in
-  // either case. Never retry callback implicitly or commit partial callback work.
+  // Same connection/snapshot for callback. Commit only on success; attempt rollback
+  // on callback/commit failure and always release or destroy connection. A lost
+  // COMMIT acknowledgement has unknown outcome, not proven rollback (see phase
+  // runtime contract); never retry callback implicitly or report partial success.
   transaction<T>(options:{isolation:'repeatable read'|'read committed';readOnly:boolean},work:(connection:SqlConnection)=>Promise<T>):Promise<T>
 }
 const reservationColumns={source_crosswalk:['source_id','kind','source_key','target_id'],alias:['kind','from_id','target_identity_id','target_alias_id'],tombstone:['kind','id','retired_at','replacement_id']} as const

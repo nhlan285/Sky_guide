@@ -169,3 +169,20 @@ focused/lint/typecheck/build PASS. Outer ROLLBACK restores revision0/other78 emp
 Native single fixture connection is NOT real connected concurrent driver proof;
 runtime-role/review auth/isolated restore and future proof/module payload history
 remain OPEN. See phase/handoff for exact connected-contract next step.
+
+Bounded read transport preparation now available in postgresSyncTransport. It
+lowers only existing static private SELECTs into materialized server-side byte/
+row guards before payload transport; retains the limited FOR UPDATE query and
+strict explicit text/OID decoding. No SDK/credential/runtime grant or route mount.
+Native90 assertions PASS (Unicode/exact boundary/1.2 MB single field/locked head/
+safe bigint/bool), followed by verified revision0/all78 noncontrol owners empty.
+Generate an E-drive fixture with:
+`node tests/sql/build-postgres-transport-rehearsal.mjs E:/SkyGuideAssets/research/postgres-rehearsal-2026-10-07/postgres-transport-fixture.sql`.
+Run only in approved isolated dev; it inserts synthetic rows within BEGIN/ROLLBACK,
+creates no objects/roles/grants.135076 bytes, SHA256
+539085dac77f5127ccc37eadea60bcc1a7a9ff03c44a835a74f243e5bc20f4e2.
+7 focused/357 full tests/lint/typecheck/build PASS. DataRow payload budget is not DB
+work/protocol metadata/SDK cancellation proof; bool text estimates are conservative.
+Actual lost-COMMIT acknowledgement needs durable witness reconciliation, not a
+blanket rollback assumption; contract/privilege/Auth/rollback proposal in active
+phase remains unmounted. No actual parallel session/backup-restore acceptance.

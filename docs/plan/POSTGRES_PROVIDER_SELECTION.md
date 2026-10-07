@@ -839,3 +839,163 @@ capability before choosing a dependency. Do not collect secrets or apply grants/
 consumer mounts as implied permission. Then approved real provider transaction/
 transport/cancel/commit errors, simultaneous sessions, isolated restore/measurements
 and real adapter integration. P9-I02/D04/V01 remain PARTIAL/OPEN, R2–R6 gated.
+
+## Active slice — bounded private read transport / runtime contract
+
+MEDIUM preparatory implementation within the approved PostgreSQL subsystem.
+Goal: lower existing static private SELECTs into server-budgeted results before a
+future SDK buffers fields; decode explicit text/OID results without lossy bigint
+or timestamp conversion. Dependencies: portable SyncStore and79 typed owners at
+3e21e88. No existing SQL client/auth adapter/environment connection is present.
+
+Scope: static SELECT allowlist, one materialized locked snapshot, row/UTF-8
+DataRow budget guard, scalar decoder, synthetic native SQL checks; concrete driver,
+runtime privilege, review-auth and uncertain-commit decisions below. Out of scope:
+install SDK, credential operations, roles/grants/policies, consumer routes, real
+imports, production, actual cancellation/commit/race/restore claims. Expected:
+src/server/postgresSyncTransport.ts, focused tests and native fixture builder,
+architecture/phase/master/current handoff. No UI behavior or public API changes.
+
+Steps: implement bound lowering and strict decode; verify input injection/type/
+Unicode/null/overflow boundaries; execute bounded synthetic reads on dev inside
+ROLLBACK, including locked head and oversized single field; run lint/typecheck/
+tests/build and scaffold; update handoff, checkpoint/push/verify. Acceptance:
+over-budget field values never appear in SQL result, no partial success; explicit
+supported OIDs only, exact safe integers; unchanged Store/public contracts. Risk:
+this bounds DataRow payload only, not database work, protocol metadata or network
+packets; actual SDK integration still needs connection/timeout/cancel proof.
+
+## Connected runtime contract — prepared, not mounted
+
+Existing SDK audit: package/lock/runtime contain AWS/React tooling, no PostgreSQL
+client or Auth adapter. No database connection environment variable names were
+present; no values/keys/passwords were inspected. Prefer a server-only low-level
+node-postgres driver for the existing parameterized SQL and per-query array/text
+type parsing; postgres.js is a plausible alternative but has no existing repo
+integration to preserve. Supabase HTTP/PostgREST RPC would require a new privileged
+RPC/schema exposure and cannot directly satisfy this callback/connection contract.
+No new SDK/version is installed or implicitly approved by this proposal.
+
+Driver boundaries and concrete initial configuration for the next dev slice:
+
+- One acquired client per transaction; explicit BEGIN REPEATABLE READ READ ONLY
+  for reads, BEGIN READ COMMITTED READ WRITE for CAS; no pool.query inside callbacks.
+  Driver owns BEGIN/COMMIT/ROLLBACK; callback cannot send transaction-control SQL,
+  DDL, multi-statements, arbitrary SELECTs or named prepared statements. Existing
+  SET CONSTRAINTS and emitted static scalar DML remain valid. New CTE lowering
+  applies to reader SELECTs; metadata CAS is a separately allowlisted one-bool
+  function result. Reject unexpected DML RETURNING/results. No callback retry.
+- Explicit host/database/user/port and secret injection; UTF8 server/client,
+  verified TLS/hostname/approved CA. Reject missing settings, SSL query-string
+  overrides and rejectUnauthorized:false; do not fall back to developer PG*
+  environment defaults. Pool maximum2 for isolated simultaneous-session testing
+  only after verifying actual provider connection quota. No autoscaling claim.
+  Proposed starting deadlines: connect5s, lock2s, statement15s, idle transaction10s,
+  callback wall30s, cleanup5s. Confirm measured full K15 transaction fits before
+  accepting them as runtime defaults; all deadlines must be explicit/bounded.
+- SDK rowMode=array with query-local identity text parsers (not global type-parser
+  changes). OID16/20/21/23/25/701/1043 only; timestamps stay text. Binary/JSON/date/
+  numeric/unknown types fail closed until explicitly mapped. Safe int8 only;
+  float8 represents an existing finite SQL double, not arbitrary decimal money.
+  preparePrivateReadTransport guards byte/row payload at the server; decode checks
+  flags/columns/types/UTF8 budget again. Existing reader adds its cumulative frame
+  and LIMIT+1 overflow check. Neither successful truncation nor payload leakage
+  on a rejected query is allowed. Statement/output budgets do not bound DB memory,
+  full-scan time, error/notice message sizes, RowDescription or TLS packets.
+- Before COMMIT, force deferred constraints/post-read validation. Callback error
+  or confirmed SQL commit rejection: rollback and release only after verified idle;
+  rollback/timeout/cancel/connection errors evict/destroy client. Client-side timeout
+  alone is not proof the server stopped: cancellation and drained/error state need
+  connected tests. No timeout implementation may send COMMIT while work continues.
+- Lost COMMIT acknowledgement is INDETERMINATE: evict, use a fresh readonly
+  connection and query immutable sync_audit at expectedRevision+1, its acceptance
+  (for promotion/reconfirmation), graph/order/projection plus source-specific state.
+  Match complete source/outcome/time/review/content witness, not merely current head
+  or contentHash; later generations may exist. Missing/unreachable witness is not
+  proof of rollback while the old backend remains unconfirmed. Quarantine operation,
+  stop automatic retry/recordFailure; reconcile/require operator action. Do not send
+  an outward definite rejected/not-published response just because SourceSync caught
+  a driver exception. Runtime must own this reconciliation boundary before mounting
+  the unchanged SourceSync result API. A confirmed commit followed by local release
+  error remains committed; evict/log sanitized cleanup failure without changing result.
+- Log only operation category, SQLSTATE (validated5 characters), safe witness/ref
+  and deadline reason. No provider error detail/message/SQL/params/cause/connection
+  URL/headers/private rows or secrets in responses/logs/checkpoints. No get API keys,
+  password reset, admin connection fallback or secret collection as an automatic step.
+
+Least-privilege development proposal (NOT APPLIED): dedicated runtime reader and
+writer, separate migration-owner connection; neither runtime role may own objects,
+be superuser/BYPASSRLS, create roles/databases/schemas, use service_role or grant
+membership to platform roles. Reuse private schema; do not expose it to PostgREST.
+Reader: CONNECT, schema USAGE, SELECT explicit79 owners and allowlisted invoker
+validation helpers. Writer: reader access plus static insert/upsert payload,
+reservation, immutable release/graph/order/acceptance owners; UPDATE only current
+canonical roots/proof registry/positions and sync_generation/sync_source_state;
+DELETE only replaceable typed child/proof joins. No root, identity, provenance,
+source, reservation, release/projection, acceptance/audit/history DELETE/TRUNCATE;
+no UPDATE immutable release/graph/audit. source_registry insert only. CAS helper
+EXECUTE only writer; no SECURITY DEFINER shortcut. Derive exact table/column/helper
+grant list from current emitted SQL and trigger/helper call graph, not ALL FUTURE
+TABLES/FUNCTIONS. Dedicated RLS policies per operation/role are required: existing
+no-policy RLS correctly denies runtime access even with grants. SELECT head FOR
+UPDATE also requires targeted UPDATE privilege/policy. Prove actual allowed and
+forbidden role operations natively before retaining any grants. PUBLIC/anon/
+authenticated/service_role remain denied; do not alter platform policies.
+
+Rollback/credential handling: role/grant/policy proposal first, separate scoped
+dev migration only after authorization; no tracked password/default-admin secret.
+Inject secret through an approved local/server secret store, never chat/Git. Stop
+runtime, drain/evict connections, revoke CONNECT/schema/table/function privileges
+and dedicated memberships/policies; retain schema/data/history and migration role.
+If a credential was introduced, revoke/rotate using the approved channel. Record
+rollback SQL and before/after catalog grants/RLS assertions in that future slice;
+do not delete committed data to roll back transport integration.
+
+Authenticated-review proposal (NOT IMPLEMENTED): provider-neutral server adapter
+verifies credential signature/issuer/audience/expiry and maintainer membership;
+returns a stable subject/maintainer principal. Build reviewerRef from that verified
+subject, never request-body reviewerRef, display name or DB writer credential.
+Candidate hash/base/source/time/content remain bound by existing review contract;
+require review authority again at promotion, reject revoked/expired/non-maintainer
+principals and use server clock. User/session-selected Auth provider is still an
+explicit choice; no browser auth, JWT secret or admin endpoint added here. A stored
+reviewerRef or maintainer-supplied fixture is not authentication proof. Rollback
+disables endpoint/access while keeping immutable review history and API contracts.
+
+Acceptance still OPEN: actual SDK transport and bounded cleanup/COMMIT uncertainty
+reconciliation; credential/runtime-role authorization + concrete catalog grant
+allowlist/RLS tests; chosen Auth adapter/revocation; independent simultaneous
+connections (not one fixture transaction), cancellation and separate commits;
+isolated dump/restore and Free-tier SQL/storage/compute measurements. Repo-local
+implementation/fixtures cannot substitute for any of those runtime proofs.
+
+Primary docs checked2026-10-07: [pg query/text/type configuration](https://node-postgres.com/apis/client),
+[one client per transaction](https://node-postgres.com/features/transactions),
+[default types/date precision](https://node-postgres.com/features/types),
+[pool cleanup](https://node-postgres.com/apis/pool),
+[TLS configuration override](https://node-postgres.com/features/ssl),
+[PostgreSQL DataRow format](https://www.postgresql.org/docs/current/protocol-message-formats.html#PROTOCOL-MESSAGE-FORMATS-DATAROW).
+CTE budget/role/reconciliation choices above are repository design decisions, not
+claims that these documentation pages implement the Sky Guide contract.
+
+### Completed slice / validation / exact next
+
+Bound lowering and strict decode implemented;7 focused tests and357 full tests,
+lint/typecheck/build/catalog1808/scaffold/diff PASS. Native90 assertions PASS on
+approved dev: all79 owner vocabularies/empty frames/locked head, exact UTF8 bytes,
+no partial result on overflow,1.2 MB field hidden, safe int8/fraction/bool retained.
+After outer ROLLBACK: revision0 and ALL78 noncontrol owners empty; no DDL/new grants.
+135076-byte fixture SHA256
+539085dac77f5127ccc37eadea60bcc1a7a9ff03c44a835a74f243e5bc20f4e2;
+fixture/result/test evidence in E:/SkyGuideAssets/research/postgres-rehearsal-2026-10-07/.
+Existing Router/chunk warnings unchanged. Runtime transport/unknown COMMIT contract
+clarified without altering SourceSync or any mounted consumer. Git checkpoint/push
+and SHA verification after final diff. No new dependency/credential/Auth provider.
+
+Exact next: derive explicit runtime table/column/helper privilege manifest from
+emitted SQL and invoker trigger call graph, denial/rollback checks and provider-
+neutral transaction lifecycle/uncertain-commit tests. This must make the scoped
+SDK/credential/runtime-role/Auth authorization package concrete before dependent
+live steps. No production/paid changes; existing R1/provider/org approval stands.
+Actual driver/cancel/commit/races/restore/measurements remain OPEN. Current handoff
+is the compact resume entry; do not reread all historical fixture slices.
