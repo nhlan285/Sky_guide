@@ -73,3 +73,39 @@ test('counterexample rejects BEFORE-statement-only design: a callable helper can
  // This intentionally demonstrates unsound acceptance, not a passing design.
  // Require actual row-level invalidation or an unforgeable final-state mechanism.
 })
+
+test('protected bracket ignores cache and never claims mid-write; later invalid rows reject before/after leave',()=>{
+ for(const c of releaseScanCases()){
+  const m=new ReleaseValidationClockModel(valid(),1n,{bracket:true});m.validate()
+  m.statement('release_lookup',s=>{
+   const claimedBefore=m.snapshot().witness
+   assert.deepEqual(m.validate(),expected(m));assert.deepEqual(m.snapshot().witness,claimedBefore)
+   Object.assign(s,clone(c.state))
+   assert.deepEqual(m.validate(),referenceReleaseScanFlags(c.state),c.name)
+   assert.deepEqual(m.snapshot().witness,claimedBefore)
+  })
+  assert.equal(m.snapshot().depth,0)
+  assert.deepEqual(m.validate(),referenceReleaseScanFlags(c.state),c.name)
+  assert.deepEqual(m.validate(),referenceReleaseScanFlags(c.state),c.name)
+ }
+})
+
+test('protected nested/zero-row statements balance, exceptions restore bracket and cannot preserve a premature claim',()=>{
+ const m=new ReleaseValidationClockModel(valid(),1n,{bracket:true});m.validate();m.savepoint('outer')
+ m.statement('item',()=>{
+  assert.equal(m.snapshot().depth,1);m.validate()
+  m.statement('release_lookup',s=>{
+   assert.equal(m.snapshot().depth,2);m.validate();s.release_lookup[0].owner_revision=2
+  })
+  assert.equal(m.snapshot().depth,1);assert.equal(m.validate().invalid_owner,true)
+ })
+ assert.equal(m.snapshot().depth,0);assert.equal(m.validate().invalid_owner,true)
+ m.rollbackTo('outer');assert.deepEqual(m.validate(),expected(m))
+ const before=m.snapshot()
+ assert.throws(()=>m.statement('item',()=>{
+  m.validate();m.statement('release_lookup',s=>{s.release_lookup[0].owner_revision=2;m.validate();throw new Error('nested failed')})
+ }))
+ assert.deepEqual(m.snapshot(),before);assert.deepEqual(m.validate(),expected(m))
+ m.statement('item',()=>{assert.throws(()=>m.nextTransaction(2n),/while writing/)})
+ assert.equal(m.snapshot().clock,before.clock+2n);assert.equal(m.snapshot().depth,0)
+})

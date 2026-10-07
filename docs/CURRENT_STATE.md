@@ -1,9 +1,9 @@
-# Current handoff — 2026-10-07
+# Current handoff — 2026-10-08
 
 ## Task / branch / checkpoint
 Sky Guide autonomous master run ACTIVE; roadmap OPEN, not complete.
 Branch codex/master-plan-execution; checkpoint parent
-3e9e158ebb30b23994dfe1accefa28d113b9155d verified on origin.
+95d560fc28b59530da92ed77eac4e0508602026d verified on origin.
 Resolve latest checkpoint with git log -1 and verify remote SHA.
 Master: [IMPLEMENTATION_PLAN](plan/IMPLEMENTATION_PLAN.md).
 Active phase: [POSTGRES_PROVIDER_SELECTION](plan/POSTGRES_PROVIDER_SELECTION.md),
@@ -88,17 +88,38 @@ clock caching: a helper can claim midway through a write, before a later invalid
 13 focused tests/lint/scaffold/diff PASS; full suite including new5 models NOT RUN.
 No proposed clock/cache SQL, owners, helpers or privileges applied.
 
+## New review packet — PREPARED / NOT APPLIED
+Active phase “Concrete bracket package” has exact source/hash/ACL/rollback details.
+Prepared source-derived up/down outside migration discovery:
+supabase/proposals/release_validation_bracket_{up,down}.sql.
+Candidate brackets every83-owner write with protected entry/exit invalidation; while
+depth>0 it ignores every cache hit and never records a witness. Original full global
+checks copied byte-for-byte into helper; wrapper remains invoker. Narrow NEW scope:
+2 private internal owners,3 allowlisted postgres-owned SECURITY DEFINER helpers,
+166 statement hooks +2 truncate guards;85 tables/40 functions/323 custom triggers.
+Clients get no internal-owner access; writer EXECUTE on full-check helper only.
+No new principal/credentials/SDK/consumer/production. New scoped approval required.
+Full before schema/ACL + original15-history/empty guard executed natively without
+DDL; complete baseline matched restored83 state. E:
+release-bracket-preparation-baseline.json. New85 helpers/guards/cost/down NOT RUN.
+Prepared E owner fixture7 negatives/5 positives, creator denial25 checks, all outer
+ROLLBACK. Existing creator authority unchanged. Actual-output verifier prepared;
+synthetic verifier/model outputs do not become native proof. Models7/proposal3
+focused/full439 tests/lint/typecheck/scaffold76 Markdown14 profiles173 tasks/diff PASS.
+Initial lint unused CLI binding fixed, SQL review bytes unchanged. App build remains
+previous PASS/not rerun; this packet changes only SQL proposals/planning/tests.
+Modified: current model/tests, bracket proposal/fixture builders and verifier,
+two proposal SQL files, active phase/master/handoff. Logs/artifacts remain on E:.
+
 ## Exact next / remaining gates
-Prepare a local
-reviewable alternative that avoids full-scan repetition while preserving all final
-state checks and later invalidation after SET CONSTRAINTS/SAVEPOINT boundaries.
-Require protected row-level invalidation or an unforgeable final-state signature;
-statement-only invalidation has a demonstrated false acceptance and is rejected.
-Compare against affected-row validation. Session flags, client-writable cache and validation
-only at initial insert are unsafe. Any typed cache owner/definer helper/privilege/
-trigger expansion must be explicitly reviewed before hosted application; not covered
-by the now exhausted one-function scan approval. Do not raise timeout or disable
-integrity. No repeat of the same failed candidate or real import/consumer before PASS.
+Push SHA-verified review checkpoint and obtain scoped85-owner/3-definer/168-hook
+up/down approval under user rule22. Before-only clock remains rejected; new entry/
+exit bracket with no cache during writes is a prepared candidate, not native PASS.
+After approval revalidate83 baseline, CLI migration/application, explicit new85
+structure/metadata/ACL source review, owner/creator/denial/adversarial/K15 rehearsals,
+full baseline after EACH ROLLBACK and empty-state down proof. Original30s cost gate
+and full schema/SDK/durable/concurrent/crash/restore remain. No one-function approval
+inferred for new helpers/owners. No real import/consumer before foundation acceptance.
 R2–R6 depend on R1. K04 OneDrive403; K10/K11 SKU/market; K12 bulk reuse prohibited;
 Q02/Q09/Q10/Q11/Q12, TGC/media rights, Vercel403 and native-device gates remain OPEN.
 Node24/pnpm10.30.3 via E:/Code/corepack.cmd; CLI2.120.0/cache E:. No Docker/browser/
