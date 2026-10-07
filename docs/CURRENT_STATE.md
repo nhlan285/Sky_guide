@@ -3,8 +3,8 @@
 ## Task / branch / checkpoint
 Autonomous Sky Guide master run remains ACTIVE; roadmap OPEN.
 Branch: codex/master-plan-execution. Last verified pushed base before this slice:
-cd873c2e8dcab77d81d1eaf9efd2d249adfa4fba. This handoff accompanies the v2 native
-review package; resolve latest checkpoint with git log -1 and verify remote SHA.
+dd03095023ae3d67f12df48ba64212cedf43e068. This handoff accompanies the read-only
+preapproval audit; resolve latest checkpoint with git log -1 and verify remote SHA.
 Master: [IMPLEMENTATION_PLAN](plan/IMPLEMENTATION_PLAN.md); active detailed phase:
 [POSTGRES_PROVIDER_SELECTION](plan/POSTGRES_PROVIDER_SELECTION.md), latest section.
 
@@ -119,8 +119,23 @@ concrete review document. No hosted operation/new migration/dependency/credentia
 SDK/Auth/consumer/public data change. Native parse/schema/roles/rollback NOT RUN.
 
 ## Exact next / gates
+Read-only native baseline refreshed 2026-10-07 06:09:52 UTC: PASS. All three pinned
+table/function/trigger hashes match the installed79-owner baseline; PostgreSQL17.11,
+11 migration versions unchanged, revision0/singleton1/no current acceptance or
+promotion, all78 noncontrol owners empty, no runtime roles/policies or nonowner
+schema/table/column/function ACLs. Receipt/query on E: journal-preapproval-baseline-receipt.json,
+SHA256a7f01ea831fd761a5d3a679eff0f0a2c7c1d580f04f079d236a9c0936878fd07,
+under research/postgres-rehearsal-2026-10-07. This is installed-schema evidence,
+not proposed journal SQL/role/durability proof. No hosted mutation was performed.
+Docs-only validation: scaffold76 Markdown/14 profiles/173 tasks and diff PASS;
+runtime suite NOT RERUN, prior416-test checkpoint evidence remains unchanged.
+Roadmap dependency review found no next executable slice before R1/provider gates;
+notification activation requires verified schedule, price import requires SKU/market
+identity. Do not invent missing source facts or skip dependencies to proceed.
+
 Obtain refreshed dev-only [83-owner package authorization](plan/JOURNAL_NATIVE_REVIEW.md)
-before application; old unanswered79-owner question cannot cover it. Revalidate
+before application; the concrete83-owner question is pending, do not repeat it.
+Old unanswered79-owner question cannot cover it. Revalidate
 native79-owner/no-role/empty baseline, then create CLI additive migration and apply
 via migration tool; verify83-owner metadata before grants/native fixtures/empty
 rollback. No durable forensic commits/SDK/credential/Auth/principal memberships/

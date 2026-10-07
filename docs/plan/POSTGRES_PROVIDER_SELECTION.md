@@ -1407,3 +1407,15 @@ runtime-journal-package-tests.log. No new migration/provider/role/policy/SDK/Aut
 credential/principal/consumer/public data operation. Native parse/execution/ACL/
 down/durable/crash/concurrent/restore NOT RUN. Exact next is refreshed package
 authorization and native baseline verification before CLI migration creation.
+
+Read-only preapproval audit at2026-10-07 06:09:52 UTC PASS against pushed dd03095:
+79 installed tables, pinned table/function/trigger SHA256 matches, PostgreSQL17.11,
+unchanged11 migration versions, revision0/singleton1 and78 empty noncontrol owners.
+Runtime groups/policies and nonowner schema/table/column/function ACL counts all0.
+One SELECT statement supplied a consistent statement snapshot; no hosted mutation.
+E: journal-preapproval-baseline-receipt.json includes exact query/expected hashes/
+actual counters, SHA256a7f01ea831fd761a5d3a679eff0f0a2c7c1d580f04f079d236a9c0936878fd07.
+This verifies only installed79 state; proposed83 native parsing/roles/rehearsal
+and durability acceptance remain NOT RUN. Concrete83-owner authorization question
+is pending. Exact next: answer that question; if approved recheck baseline before
+CLI migration creation/application. No additional approval inferred from continuation.
