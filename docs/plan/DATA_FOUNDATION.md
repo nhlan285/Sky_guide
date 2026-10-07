@@ -90,8 +90,10 @@ again. Public quota comparison and proposal now in POSTGRES_PROVIDER_SELECTION;
 Typed release/source metadata and ordered membership now PASS locally on full K15
 canonical bytes and hosted rollback-only fixtures. Immutable derived byte projection
 now retains historical public release after current payload mutation and seals child
-metadata; no public pointer/reviewed promotion. Exact next: transactional adapter/
-global CAS/private audit/source health, then actual backup/restore.
+metadata. SQL metadata CAS/private acceptance-audit/global pointer and source health
+now pass native fixtures; this is not complete reviewed canonical promotion/SyncStore.
+Exact next: canonical historical graph and typed payload transaction writer/driver,
+then real races/provider parity/backup restore.
 No complete live foundation
 acceptance. Independent W12 sequence and focus QA completed; full W12 remains
 PARTIAL until W11 dependencies.
@@ -101,11 +103,12 @@ PARTIAL until W11 dependencies.
 Read [CURRENT_STATE](../CURRENT_STATE.md) for latest commit/checks and gates.
 Branch `codex/master-plan-execution`; checkpointdd7fb11 verified pushed before the
 release metadata slice. Supabase Free dev in Dyland's Org is provisioned;44 private
-tables at that milestone; now46 private tables with no platform grants. Domain
-implementations remain unmounted from production consumers. Latest314 full tests/
-lint/typecheck/build PASS;4 projection tests/24 native negatives and actual hosted
-historical-byte parity PASS. Prior38 metadata cases/optional fixture rechecked after
-sealing migration. Existing Router/chunk warnings unchanged. See handoff for exact
+tables at that milestone; now50 private tables with no platform grants. Domain
+implementations remain unmounted from production consumers. Latest318 full tests/
+lint/typecheck/build PASS;4 lifecycle metadata tests/34 native negatives and actual
+hosted global-pointer/source-isolation frames PASS. Prior projection bytes/native
+checks retained. Intentional revision0 control baseline, other tables empty. Existing
+Router/chunk warnings unchanged. See handoff for exact
 latest checkpoint, migration hashes and open live adapter/restore gates.
 Checkpoint drill: PASS — `199bdd58c37b848b6b550b1adfdb7e7e70a5f791` committed,
 pushed and verified with ls-remote; work continued with D02/D03 and later slices.

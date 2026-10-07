@@ -432,3 +432,79 @@ two-session race proof, actual backup/restore or production consumer acceptance.
 Exact next: implement approved SyncStore transactional contract with global CAS,
 durable private lifecycle/audit/source health and atomic reviewed projection pointer;
 validate SQL role boundaries/revisions/concurrency, then restore/measurements.
+
+## Active SQL sync metadata/CAS slice — 2026-10-07
+MEDIUM within approved R1; pushed8214612 verified before work. Implement typed
+global generation/current acceptance, immutable private acceptance/audit and
+independent source health/attempt/failure/retry. Shared global CAS must reject stale
+generation before metadata writes, retain LKG on failure, bind acceptance to sealed
+projection and source identity, and preserve exact review/lifecycle timestamps.
+Scope: private additive SQL and rollback-only native promotion/reconfirmation/
+failure/two-source conflict tests plus metadata row codec/read projection pointer.
+Out of scope: claiming complete SyncStore, historical canonical identity graph,
+canonical payload transaction writer, runtime driver/credentials/new SDK,
+authenticated reviewer/admin endpoint, actual parallel sessions, consumer mount,
+production and isolated restore. No scope regression: these remain required next.
+Metadata CAS alone cannot atomically persist canonical payload; future adapter must
+lock global generation before canonical mutation and rollback every write on false.
+Expected files: CLI-created migration, focused lifecycle codec/SQL tests and builder,
+existing architecture/master/active phase/handoff/README. No generic canonical JSON.
+Steps: typed DDL/scalar CAS; exact review digest/timestamp/transition checks; complete
+global+per-source read metadata; native duplicate/stale/cross-source/time/FK/rollback
+and history/bypass cases; role/schema checks; lint/typecheck/build/tests; checkpoint.
+Acceptance: one global monotonic generation across all sources; immutable private
+review/audit, source isolation, pointer from sealed projection, failure does not
+replace LKG, exact accepted retry/reconfirmation policy remains existing SourceSync.
+One fixed singleton row seeds revision0; this is control state, not imported data.
+No grant/public policies. Source IDs still use existing K01–K15 registry.
+Risks: scalar metadata validates lifecycle integrity but not arbitrary candidate
+rights or full semantic contentHash. Existing reviewed ingestion validators and
+authenticated reviewer remain mandatory. Native sequential conflicts do not prove
+two-session concurrency or adapter rollback of canonical writes.
+
+### SQL sync metadata/CAS milestone / evidence
+Applied20261007014843_private_sync_metadata_cas (CLI-created20261007014619, aligned
+to actual hosted history). File SHA256
+faed341f276664e5c423fd64fb92073b253609c0bee0902e9f67e96c98fe25b6.
+Four private tables (50 total); shared monotonic generation/current acceptance,
+sealed projection FK, exact review tuple/lifecycle time checks, immutable private
+acceptance/audit and independently scoped source attempt/success/failure/retry.
+Deferred consistency checks pointer/audit continuity/source counters and health.
+Staged acceptance has a deferred audit FK; cannot commit orphaned after losing CAS.
+Scalar apply_sync_metadata_cas locks one global row; returns false before metadata
+writes on stale generation. Canonical writes are still outside this subset.
+
+Native bounded two-source synthetic sequence PASS: first reviewed acceptance,
+failure preserves LKG, second source failure/acceptance does not rewrite first source
+health, sequential stale CAS writes nothing, same-content reconfirmation and source
+recovery.34 negative SQLSTATE cases PASS including stale clocks/wrong review hash/
+source/outcome, orphan accepted staging after losing CAS, invalid health/counters,
+generation regression/skip and immutable delete/update/TRUNCATE bypasses.
+Actual SQL selected-source frames decode to expected global pointer/private audit
+and separate source freshness; candidateHash equals existing candidateReviewHash.
+Two initial fixture setup issues corrected: defer multi-table consistency until
+operation boundary; split mutating CAS calls from post-write condition assertions.
+No failed rehearsal counted as PASS. No actual multi-session race claimed.
+
+All native fixtures ROLLBACK: only the intentional singleton revision0/null pointer
+control row remains; all49 other tables empty.50 tables RLS; four writable metadata
+column contracts match actual SQL; all FKs RESTRICT,0 unvalidated constraints/
+SECURITY DEFINER/platform schema-table-function grants. Advisors no WARN/ERROR;
+intentional INFO
+[RLS without policies](https://supabase.com/docs/guides/database/database-linter?lint=0008_rls_enabled_no_policy)
+and [unused indexes](https://supabase.com/docs/guides/database/database-linter?lint=0005_unused_index)
+retained. Bounded fixture/schema/actual response JSON outside Git on E:.
+4 focused metadata +318 full tests, lint/typecheck/build/catalog1808 PASS; scaffold/
+diff before checkpoint. Added selected-source success-vs-current acceptance guard
+and rechecked4 focused tests/lint/typecheck PASS. Existing Router/chunk warnings unchanged.
+
+Exact next: archive canonical identity graph/ordered explicit relation owners and
+implement typed payload transaction writer/provider-neutral SyncStore read/CAS,
+using existing reviewed SourceSync contracts/budgets. Complete adapter must lock
+global generation before canonical mutation, use deferred consistency, force all
+constraints before commit and rollback on any false/error. Then real two-session
+conflicts/rollback/provider parity/restore/measurement and least-privilege runtime
+role/authenticated review. No SDK/credential/consumer mount approved by implication.
+P9-I02/D04/V01 remain PARTIAL/OPEN; metadata SQL is not full foundation completion.
+Exact next: complete canonical historical graph/transaction writer and provider-
+neutral SyncStore driver, then real races/restore/measurement in approved isolation.

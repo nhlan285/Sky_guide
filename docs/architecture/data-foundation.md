@@ -356,6 +356,26 @@ with separate source health/attempt/success/retry; a
 per-source CAS cannot safely protect shared canonical data. The DB adapter must
 persist canonical payload, projection pointer and audit metadata in one transaction.
 That adapter is still gated; only an in-memory test double has run.
+SQL metadata subset now has native rehearsal (2026-10-07), but the complete
+SyncStore/canonical payload transaction driver is still OPEN. sync_generation is
+one shared revision/current acceptance/lastPromotedAt; sync_acceptance binds private
+source/content/candidate hashes, exact fetch/stage/review/promotion instants and
+reviewer reference to sealed public projection. sync_source_state retains separate
+attempt/failure/retry/last success; sync_audit is immutable per global generation.
+apply_sync_metadata_cas locks the singleton, rejects stale generation before writes
+and atomically updates metadata/audit; failed source attempts keep LKG. The deferred
+acceptance-audit FK prevents an orphan staged acceptance from committing after a
+lost CAS. Multi-table writes require initially-deferred consistency constraints;
+validate them before transaction commit, not between internal mutations. Driver must
+lock generation before ANY canonical writes and rollback the whole transaction on
+CAS false; metadata CAS alone cannot establish atomic canonical persistence.
+Metadata row decoding uses one head/current audit, selected source and exactly its
+referenced immutable acceptance frames, preserving global vs source clocks. These
+are private metadata, not a complete SyncState: canonical historical identity graph
+and typed payload writer remain required. Exact review tuple hash supplements the
+existing normalizer/content review, not authenticated reviewer proof or rights.
+Sequential two-source native conflicts are not a real parallel-session race proof.
+Initial fixed singleton revision0 is control configuration, not imported data.
 
 Failure records leave LKG untouched, record offline health and use only explicitly
 supplied retry delays; exhausted policy disables retry. Identical reviewed data

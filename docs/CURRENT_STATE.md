@@ -1,106 +1,90 @@
 # Current handoff — 2026-10-07
 
 ## Task / branch / checkpoint
-Autonomous Sky Guide master run on `codex/master-plan-execution`; goal active,
-master roadmap still OPEN. Last verified pushed checkpoint/base
-`f85a6cb88e69a1a7bec8136bce3229d0d40c40e9`. This file accompanies the immutable
-projection milestone; resolve latest SHA with git log -1 and verify
-remote before resuming. Master [IMPLEMENTATION_PLAN](plan/IMPLEMENTATION_PLAN.md);
-active detailed [POSTGRES_PROVIDER_SELECTION](plan/POSTGRES_PROVIDER_SELECTION.md).
-No merge, production deployment, paid resources or destructive Git operations.
+Autonomous Sky Guide master run on codex/master-plan-execution; goal active,
+master roadmap OPEN. Last verified pushed checkpoint/base
+82146120963ea56fa04b4caa070d65439386aa28. This file accompanies SQL sync metadata/
+CAS milestone; resolve latest SHA with git log -1 and verify remote before resume.
+Master [IMPLEMENTATION_PLAN](plan/IMPLEMENTATION_PLAN.md); active detailed phase
+[POSTGRES_PROVIDER_SELECTION](plan/POSTGRES_PROVIDER_SELECTION.md).
+No merge/production/paid resources/destructive Git or unrelated edits.
 
 ## Authority / environment / constraints
 R1 LOCAL CONTRACT APPROVED: user `phê duyệt, tự tiếp tục`; `supabase free` and
-`Dyland's Org` explicitly selected. Do not ask again. Dev sky-guide-dev
-(tpbydviuknovimroeodm), org pdssjfwbrfjlglobjhtw, Free; creation $0/month confirmed,
-PostgreSQL17.11. Singapore is isolated dev choice, not verified Vercel colocation.
-Node24/pnpm10.30.3 (E:/Code/corepack.cmd), Supabase CLI2.120.0 pinned/cache E:.
-No login/link/new SDK, credential read, runtime DB role or consumer mount. No
-provider Auth/Storage/Realtime/scheduler/paid native branch. Existing R2 unchanged.
+`Dyland's Org` selected. Do not ask again. Dev sky-guide-dev tpbydviuknovimroeodm,
+org pdssjfwbrfjlglobjhtw, Free; creation $0/month confirmed. PostgreSQL17.11.
+Singapore is isolated dev choice, not verified Vercel colocation. Node24/
+pnpm10.30.3 via E:/Code/corepack.cmd; CLI2.120.0 pinned/cache E:.
+No login/link/new SDK/credentials/runtime DB role/consumer mount. No provider
+Auth/Storage/Realtime/scheduler/paid branch. Existing R2/UI contracts unchanged.
 
 ## Completed / intentionally modified areas
-Previous92025c1/dd7fb11: identity/provenance/crosswalk/alias/tombstone/evidence
-reservation and typed K15 payload SQL/codec; exact source order/null/presence,
-unknown/free prices, explicit deferred refs. Fraction precision correction retains
-raw source text; dependent immutable-function CHECKs recreated/revalidated. Prior
-24 identity/22 retirement/32 catalog negative SQL cases PASS; all tables empty.
+Earlier92025c1/dd7fb11/f85a6cb/8214612: private identity/provenance/crosswalk/alias/
+tombstone reservations; typed K15 every-field codec, exact time-fraction handling;
+release manifest/envelope/order metadata; immutable derived public projection.
+Full K15 canonical bytes/public repository and representative API parity PASS;
+old public bytes survive current payload mutation. Projection header seals metadata;
+materialization alone is not reviewed publication. Typed canonical owners retained.
 
-New migration20261006180131_private_release_metadata, SHA256
-71877b82c4723b9b3f207ff37999cbd028fb20b44c9d8a7ef4cb3ae44ccc9b74:
-11 explicit typed private tables added (44 total). Manifest optional source/report
-flags, typed import counts/rejected-empty, source snapshot/path/blob SHA, dataset
-path/version/hash/schema/timestamp/source/fixture and five ordered subtype
-memberships with identity revision pins. CLI timestamp aligned to hosted history.
-releaseRows codec validates canonical input/output against existing publication
-boundary, exact hashes and revisions. Changed payloads fail closed; no latest-row
-fallback or silent drop. Distinct per-dataset generatedAt and repeated source paths
-preserved. Architecture/field-ownership matrix refined without public contract change.
-Nullable assetManifestVersion retained verbatim; no media usability implied.
-Aliases/tombstones nonnull remain reviewed canonical adapter gated.
-
-New20261006181325_immutable_release_projection, SHA256
-7c1e20a72bc0f5f950680848816d5387e8761d8b2f494e96f272ed4c0df28804:
-two private derived-byte tables (46 total), exact UTF8 hash checks, five-file
-completeness/path/hash parity and immutable/sealed metadata/history guards.
-Files precede header using deferred FK; header seals metadata. projectionRows
-codec/version-pinned repository reads old stored bytes independently of mutable
-current payloads. Existing publication/canonical boundary strips private input,
-rejects noncanonical/fixture/unverified caches and returns detached read models.
-Important limit: materialization/sealing is not reviewed pointer publication.
-No global CAS/pointer/SQL audit/health driver or canonical entity-version history
-implemented. Typed canonical tables stay authoritative; projection text is a derived
-cache, not canonical JSON/EAV. No SQL extension, SDK, UI/runtime consumer change.
-Files: src/server/projectionRows.ts, new migration, focused tests, SQL builder/body/
-response+schema verifiers, existing architecture/master/phase/foundation/handoff/
-supabase README. Prior metadata codec/field ownership preserved.
+New20261007014843_private_sync_metadata_cas; SHA256
+faed341f276664e5c423fd64fb92073b253609c0bee0902e9f67e96c98fe25b6.
+Four private typed tables (50 total): global generation/current acceptance,
+immutable acceptance/private audit, independently scoped source attempt/success/
+health/failure/retry. Exact review tuple digest/timestamp ordering, sealed projection
+FK, audit continuity/pointer/counter checks and permanent control/history guards.
+Scalar apply_sync_metadata_cas locks global singleton, rejects stale generation
+before metadata writes, retains LKG on failure. Deferred acceptance-audit FK rejects
+orphan staging after a lost CAS. Multi-table writes use initially-deferred
+consistency constraints and must explicitly validate before transaction commit.
+syncMetadataRows decoder returns private metadata only, NOT SyncState/SyncStore.
+Loader selects global head/latest audit, one source and referenced acceptance frames.
+Files: src/server/syncMetadataRows.ts, additive migration, focused tests/shared
+fixture, SQL builder/body/row+schema verifiers, existing architecture/master/phase/
+foundation/handoff/supabase README. No generic canonical JSON/EAV or new service.
 
 ## Validation / evidence
-Local full K15 manifest/envelopes/canonical files+hashes round-trip PASS:1808 items/
-lookup,213 spirits,30 seasons,244 provenance. Hosted synthetic actual SQL scalar
-rows -> complete canonical fixture bytes/metadata PASS;38 negative SQLSTATE cases
-PASS. Second hosted positive fixture without source/importReport and null media pin
-parity PASS. Both rollback; all44 tables verified0 rows.11 release writable column
-contracts match actual PostgreSQL;44 RLS, all FKs RESTRICT,0 unvalidated constraints/
+4 focused metadata +318 full tests, pnpm lint/typecheck/build/catalog1808 PASS.
+Native two-source synthetic sequence PASS: acceptance, failure/LKG, sequential
+stale CAS with no writes, independent health, second-source acceptance, same-content
+reconfirmation, recovery.34 negative SQLSTATE cases PASS for review/clock/source/
+outcome/orphan-staging/counter/history/bypass errors. Actual SQL frames -> expected
+global pointer/private audit and independent source freshness parity PASS; digest
+matches existing candidateReviewHash. Initial fixture deferred-boundary/combined
+mutation-assertion ordering issues fixed before any PASS claim.
+Native fixtures ROLLBACK. Intentional baseline: one sync_generation row at revision0,
+null pointer/promotion; all49 other tables empty.50 RLS, four writable metadata
+column contracts match actual SQL; all FKs RESTRICT;0 unvalidated constraints/
 SECURITY DEFINER/platform schema-table-function grants. Advisors no WARN/ERROR;
-INFO intentional RLS no policies and unused indexes in empty dev schema.
-Raw SQL/actual response/schema evidence remain outside Git at
-E:/SkyGuideAssets/research/postgres-rehearsal-2026-10-07.
-
-Projection:4 focused tests/314 full tests, typecheck/build/catalog1808 PASS; complete
-K15 bytes/public repository plus representative filter/list/existing detail/404/
-event503 API parity.24 native projection negatives PASS. Actual SQL current payload
-name/revision advanced while old stored bytes/revision pins remained intact; fetched
-history -> complete fixture byte/repository parity PASS. Metadata38 negatives and
-absent-optional fixture rechecked after seal guards. Fixtures rollback.46 tables0
-rows/RLS, projection columns match SQL;0 unvalidated constraints/SECURITY DEFINER/
-platform schema/table/function grants. Advisors INFO same categories, no WARN/ERROR.
-Initial SQL helper setup ordering corrected before any cases counted as PASS.
-Test-only Request lint declaration corrected;4 focused tests/lint rechecked PASS.
-Scaffold/diff checked before checkpoint. Existing Router/chunk warnings retained.
-No full real K15 SQL import, live adapter/global SQL CAS/two-session race/stronger
-isolation/historical restore/scaling/production foundation PASS claimed.
+INFO intentional no-policy RLS/unused indexes. SQL/actual rows/schema evidence on E:
+SkyGuideAssets/research/postgres-rehearsal-2026-10-07, outside Git.
+After final selected-source success/audit guard:4 focused tests/lint/typecheck PASS.
+Scaffold/diff before checkpoint; existing Router/chunk warnings unchanged.
+No real source import, actual parallel-session race, full canonical transaction
+adapter, authenticated reviewer, restore/scaling or production acceptance claimed.
 
 ## Exact next action / gates
-Implement approved SyncStore trusted transactional adapter/global CAS, owner revisions,
-private audit/per-source health and atomic reviewed promotion using existing
-repository/ingestion contracts. Preserve LKG, checksums and revocation overlays.
-P9-I02/D04/V01 remain PARTIAL/OPEN. Actual isolated backup/restore and measurements
-remain OPEN. Docker CLI exists but daemon unavailable (dockerDesktopLinuxEngine
-pipe absent); no start/install/pull/container, psql or connection password obtained.
-This blocks local restore tooling, not further safe hosted additive SQL work.
+Archive canonical historical identity graph with explicit ordered typed relation/
+crosswalk/alias/tombstone owners; implement typed payload transaction writer and
+provider-neutral SyncStore read/CAS using approved SourceSync contracts/budgets.
+Lock global generation BEFORE canonical writes; defer then force consistency
+before commit; rollback ALL writes on CAS false/error. Metadata CAS alone cannot
+prove atomic canonical persistence. Then real two-session conflicts/rollback/provider
+parity, least-privilege runtime/authenticated review and isolated restore/measurement.
+P9-I02/D04/V01 remain PARTIAL/OPEN. No implicit SDK/credential/consumer permission.
+Docker CLI exists but daemon unavailable; no start/install/pull/container/psql or
+connection password obtained. Local restore tooling blocked; other safe work continues.
 
-K02/P1-D02 graph evidence/root-cost uncertainty and K01/K03 staged adapters/K15
-loader retained; [WIKI_SOURCE_VERIFICATION](plan/WIKI_SOURCE_VERIFICATION.md) and
-[DATA_FOUNDATION](plan/DATA_FOUNDATION.md) authoritative. Prior R1 remediations,
-Wardrobe sequence/focus checks remain scoped to their pushed checkpoints.
-Source/legal/QA gates: K04 OneDrive403, K10/K11 market/SKU observations, K12 bulk
-reuse prohibited, Q02/Q09/Q10/Q11 decisions, Q12/TGC/media rights, protected Vercel
-403, native install/icon/target-device/accessibility. Future dye/compatibility/media
-modules need reviewed typed owners. P4-W12 PARTIAL/W11 OPEN; no R2–R6/master DONE.
+K02/P1-D02 ten-node/nine-edge graph/root-cost uncertainty, K01/K03 staged adapters
+and K15 loader preserved. [WIKI_SOURCE_VERIFICATION](plan/WIKI_SOURCE_VERIFICATION.md)
+and [DATA_FOUNDATION](plan/DATA_FOUNDATION.md) authoritative. R1 remediations and
+Wardrobe sequence/focus QA retain their pushed evidence. Source/legal/QA gates:
+K04 OneDrive403; K10/K11 market/SKU; K12 bulk reuse prohibited; Q02/Q09/Q10/Q11;
+Q12/TGC/media rights; Vercel403; native install/icon/device/accessibility. Future
+nonempty dye/compatibility/media needs reviewed typed owners. W12 PARTIAL/W11 OPEN;
+no R2–R6/master DONE. No source recrawl or inferred rights/facts.
 
 ## Continuity
-Stage intentional files only; commit/push/verify SHA at meaningful milestones.
-Never stage corpora/secrets/cache/build output or overwrite unrelated work. No
-owned QA server/browser/test process remains. Use native automatic compaction,
-not shell /compact; do not invent context/usage percentage. Resume this exact next
-action from handoff/active plan, without a full repo reread or source recrawl.
+Stage intentional files only, checkpoint/push/verify SHA. Corpora/private evidence/
+secrets/cache/build output excluded. No owned QA server/browser/test process remains.
+Native automatic compaction, no shell /compact or invented context/usage percentage.
+Resume exact next action from these files instead of rereading the entire repository.

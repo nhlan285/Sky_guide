@@ -20,10 +20,10 @@ back. No helper functions/data persist. Recheck row counts and role privileges
 after running; a successful SQL call alone is not the full acceptance criteria.
 Never run destructive reset/down operations against this project or production.
 
-Seven applied migrations cover identity/provenance/crosswalk reservations,
+Eight applied migrations cover identity/provenance/crosswalk reservations,
 alias/tombstone consistency, evidence-TRUNCATE protection and typed K15 payloads/
 fraction-precision correction plus private release metadata/membership and immutable
-derived public projection.
+derived public projection and private sync metadata/CAS.
 Identity/retirement files were
 CLI-created as20261006171156/20261006171555 and aligned to actual hosted versions
 20261006171406/20261006171612. Run both
@@ -74,8 +74,23 @@ tests/sql/verify-projection-rehearsal.mjs and schema with verify-projection-sche
 Always rollback fixtures; no real imports or production use. Canonical SQL owners
 remain typed; projection text is a derived cache, not generic canonical JSON/EAV.
 
-Revision checks for changed entity relations/provenance, canonical promotion/CAS,
-durable audit/health/global pointer, actual transactional driver and
+Sync metadata migration20261007014843 adds4 tables (50 total): immutable acceptance/
+audit, global generation/acceptance pointer and independent source attempt/health/
+failure/retry. apply_sync_metadata_cas provides scalar metadata CAS, not complete
+canonical payload persistence. Writes run with initially-deferred consistency
+constraints; explicitly validate before commit. Future driver must lock global
+generation before canonical writes and rollback every write when CAS returns false.
+Build `node tests/sql/build-sync-metadata-rehearsal.mjs E:/SkyGuideAssets/research/postgres-rehearsal-2026-10-07/sync-metadata-fixture.sql`.
+The [body](../tests/sql/private-sync-metadata.sql) tests34 native negatives plus
+two-source conflicts/LKG/reconfirmation/recovery. Verify fetched JSON/schema with
+verify-sync-metadata-rehearsal.mjs and verify-sync-metadata-schema.mjs.
+All fixtures ROLLBACK. Expected baseline is now one sync_generation row at revision0,
+null pointer/promotion, all49 other tables empty; no real source/review imported.
+Metadata codec returns private lifecycle facts, not SyncState/SyncStore. Historical
+canonical graph/payload transaction writer and authenticated reviewer remain OPEN.
+
+Revision checks for changed entity relations/provenance, historical canonical graph,
+complete transactional SyncStore/driver and
 PostgreSQL backup/restore are subsequent slices. The existing TypeScript domain
 validators remain required; database constraints supplement them.
 
