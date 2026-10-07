@@ -13,6 +13,9 @@ import { canonicalJson } from './domainSnapshot.ts'
 import type { SnapshotFiles } from './domainSnapshot.ts'
 import { promoteReviewedSnapshot,recordSourceFailure,validateSyncContract } from './sourceSync.ts'
 import type { SyncContract,SyncState,SyncStore } from './sourceSync.ts'
+import { prepareSyncCommitProposalRow,commitProposalColumns } from './syncCommitProposalRows.ts'
+import { commitUuid,decodeCommitJournalRow } from './syncCommitJournalRows.ts'
+import { journalBool,journalRows } from './postgresCommitJournal.ts'
 
 export interface PostgresSyncOptions {
   readLimits:SqlReadLimits;writeLimits:CanonicalWriteLimits
@@ -54,6 +57,15 @@ async function transition(current:SyncState,next:SyncState,sourceId:string,contr
 // Portable orchestrator. No SDK, connection credentials, runtime grants or public
 // route mounts. Driver must honor transaction/transport contracts in SqlDatabase.
 export function createPostgresSyncStore(database:SqlDatabase,inputContract:SyncContract,options:PostgresSyncOptions):SyncStore {
+  const store=buildPostgresSyncStore(database,inputContract,options)
+  return {read:store.read,compareAndSwap:store.compareAndSwap}
+}
+// Private v2 executor intentionally has NO unfenced compareAndSwap method.
+export function createPostgresIntentSyncStore(database:SqlDatabase,inputContract:SyncContract,options:PostgresSyncOptions) {
+  const store=buildPostgresSyncStore(database,inputContract,options)
+  return {read:store.read,claim:store.claim,execute:store.executeIntent}
+}
+function buildPostgresSyncStore(database:SqlDatabase,inputContract:SyncContract,options:PostgresSyncOptions) {
   const contract={...inputContract,sourceIds:new Set(inputContract.sourceIds),retryDelaysMs:[...inputContract.retryDelaysMs]}
   validateSyncContract(contract)
   const readLimits={...options.readLimits},writeLimits={...options.writeLimits},deferred=structuredClone(options.deferred??{}),now=options.now??Date.now
@@ -62,25 +74,29 @@ export function createPostgresSyncStore(database:SqlDatabase,inputContract:SyncC
   // Validate read limits without invoking driver; reader has the authoritative check.
   privateSyncReader({query:async()=>reject()},readLimits)
   const source=(id:string)=>{if(!contract.sourceIds.has(id)) return reject()}
-  const store:SyncStore={
-    read:async(sourceId)=>{
+  const read=async(sourceId:string)=>{
       source(sourceId)
       return database.transaction({isolation:'repeatable read',readOnly:true},async connection=>{
         const reader=privateSyncReader(connection,readLimits)
         return decodeSyncStateRows(await reader.frame(sourceId),sourceId,contract)
       })
-    },
-    compareAndSwap:async(sourceId,expectedRevision,inputNext)=>{
+    }
+  const execute=async(sourceId:string,expectedRevision:number,inputNext:SyncState,intent:CatalogRow|null=null)=>{
       source(sourceId)
       if(!Number.isSafeInteger(expectedRevision)||expectedRevision<0||expectedRevision>=Number.MAX_SAFE_INTEGER) return reject()
       const next=structuredClone(inputNext)
       return database.transaction({isolation:'read committed',readOnly:false},async connection=>{
         const reader=privateSyncReader(connection,readLimits),head=await reader.head(true)
+        if(intent)await journalBool(connection,readLimits,'require_sync_commit_intent',[intent.id,intent.state_digest])
         // Global lock is FIRST SQL operation. Stale returns before canonical reads,
         // review replay, staging or ANY write. Never return false after mutations.
         if(head[0].revision!==expectedRevision) return false
-        const current=await decodeSyncStateRows(await reader.frame(sourceId,head),sourceId,contract)
+        const frame=await reader.frame(sourceId,head),current=await decodeSyncStateRows(frame,sourceId,contract)
         const outcome=await transition(current,next,sourceId,contract,now),statements:SqlStatement[]=[]
+        if(intent) {
+          const prepared=prepareSyncCommitProposalRow(sourceId,current,next,intent.id as string,frame.metadata.sync_acceptance.find(a=>a.revision===head[0].current_acceptance_revision)??null)
+          if(canonicalJson({...prepared,target_revision:expectedRevision+1})!==canonicalJson(intent))return reject()
+        }
         let rowCount=0,byteCount=0
         const append=(s:SqlStatement)=>{
           byteCount+=Buffer.byteLength(s.text)+Buffer.byteLength(JSON.stringify(s.values))
@@ -125,7 +141,8 @@ export function createPostgresSyncStore(database:SqlDatabase,inputContract:SyncC
           append({text:'insert into sky_private.source_registry(id) values($1) on conflict(id) do nothing',values:[sourceId]})
           rowCount++;if(rowCount>writeLimits.maxRows) return reject()
         }
-        append({text:'select sky_private.apply_sync_metadata_cas($1,$2,$3,$4,$5,$6) as applied',values:[sourceId,expectedRevision,outcome,acceptance,next.lastAttemptAt,next.nextRetryAt] as SqlScalar[]})
+        append(intent?{text:'select sky_private.apply_sync_commit_cas($1,$2) as applied',values:[intent.id,intent.state_digest]}:
+          {text:'select sky_private.apply_sync_metadata_cas($1,$2,$3,$4,$5,$6) as applied',values:[sourceId,expectedRevision,outcome,acceptance,next.lastAttemptAt,next.nextRetryAt] as SqlScalar[]})
         await run(connection,{text:'set constraints all deferred',values:[]},readLimits)
         for(let i=0;i<statements.length;i++) {
           const result=await run(connection,statements[i],readLimits)
@@ -139,9 +156,35 @@ export function createPostgresSyncStore(database:SqlDatabase,inputContract:SyncC
         if(outcome!=='failure') await reader.canonical(restored,contract,deferred)
         return true
       })
-    },
+    }
+  const claim=async(sourceId:string,expectedRevision:number,inputNext:SyncState,id:string):Promise<CatalogRow|null>=>{
+    source(sourceId)
+    if(!commitUuid(id)||!Number.isSafeInteger(expectedRevision)||expectedRevision<0||expectedRevision>=Number.MAX_SAFE_INTEGER)return reject()
+    const next=structuredClone(inputNext)
+    return database.transaction({isolation:'read committed',readOnly:false},async connection=>{
+      const reader=privateSyncReader(connection,readLimits),head=await reader.head(true)
+      const control=await journalRows(connection,readLimits,'sync_commit_control','singleton',1,true)
+      if(control.length!==1)return reject()
+      if(head[0].revision!==expectedRevision||control[0].active_intent_id!==null)return null
+      const frame=await reader.frame(sourceId,head),current=await decodeSyncStateRows(frame,sourceId,contract)
+      await transition(current,next,sourceId,contract,now)
+      const row=prepareSyncCommitProposalRow(sourceId,current,next,id,frame.metadata.sync_acceptance.find(a=>a.revision===head[0].current_acceptance_revision)??null)
+      const decoded=decodeCommitJournalRow('sync_commit_intent',{...row,target_revision:expectedRevision+1}),columns=commitProposalColumns.sync_commit_intent
+      const statement={text:`insert into sky_private.sync_commit_intent(${columns.join(',')}) values(${columns.map((_,i)=>`$${i+1}`).join(',')})`,values:columns.map(c=>row[c])}
+      if(writeLimits.maxRows<1||Buffer.byteLength(statement.text)+Buffer.byteLength(JSON.stringify(statement.values))>writeLimits.maxBytes)return reject()
+      await run(connection,{text:'set constraints all deferred',values:[]},readLimits)
+      if((await run(connection,statement,readLimits)).length)return reject()
+      // False activation throws: never COMMIT an orphan intent.
+      await journalBool(connection,readLimits,'activate_sync_commit_intent',[id])
+      await run(connection,{text:'set constraints all immediate',values:[]},readLimits)
+      return decoded
+    })
   }
-  return store
+  return {read,compareAndSwap:(s:string,e:number,n:SyncState)=>execute(s,e,n),claim,
+    executeIntent:(input:CatalogRow,next:SyncState)=>{
+      const intent=decodeCommitJournalRow('sync_commit_intent',input)
+      return execute(intent.source_id as string,intent.expected_revision as number,next,intent)
+    }}
 }
 
 async function run(connection:SqlConnection,statement:SqlStatement,limits:SqlReadLimits):Promise<CatalogRow[]> {

@@ -240,7 +240,15 @@ Native transcript is prepared using:
 5 phases/526 query assertions/26 negatives/877746 bytes; SQL execution NOT RUN.
 `verify-sync-commit-proposal-rehearsal.mjs <actual-native-json>` is ready; synthetic
 verifier tests are not native receipts. Current v1 Store/controller unmounted;
-next v2 journal/token integration and updated83-owner ACL package before authorized
+local v2 journal/token integration now exists; updated83-owner ACL package before authorized
 installation/native rollback/durable/concurrent acceptance. See phase/handoff.
 6 focused/396 full preparation tests/lint/typecheck/build/catalog1808/scaffold PASS.
 No actual native SQL receipt. Existing Router/chunk warnings unchanged.
+
+Private v2 Store/journal/fence and finite gate/UUID transport are now locally
+integrated, still UNMOUNTED and require the proposed schema. Separate claim,
+token before DML, complete applied witness and locked atomic receipt settlement
+are covered by14 focused/410 full tests/lint/typecheck/build/scaffold PASS. Protocol
+models do not prove SQL/locks/RLS/durability/SDK/crash/session/restore acceptance.
+Actual installed schema remains79; no new migration, roles, grants or provider
+operation. Next: refreshed83-owner ACL package/native transcript/concrete review.

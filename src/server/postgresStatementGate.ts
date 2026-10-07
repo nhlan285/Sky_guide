@@ -5,6 +5,8 @@ import type { PrivateReadTransport } from './postgresSyncTransport.ts'
 import type { SqlReadLimits } from './postgresSyncRows.ts'
 import { runtimeTablePrivileges } from './runtimePrivilegePlan.ts'
 import type { RuntimeTablePrivilege } from './runtimePrivilegePlan.ts'
+import { commitProposalColumns } from './syncCommitProposalRows.ts'
+import { commitUuid,commitDigest,decodeCommitJournalRow } from './syncCommitJournalRows.ts'
 
 export type PrivateStatement={kind:'read';transport:PrivateReadTransport}|{kind:'cas'|'INSERT'|'UPDATE'|'DELETE'|'SET';statement:SqlStatement}
 const privileges=new Map<string,RuntimeTablePrivilege>(runtimeTablePrivileges().map(p=>[p.table,p]))
@@ -44,9 +46,22 @@ export function gatePrivateStatement(input:SqlStatement,limits:SqlReadLimits,rea
   if(input.values.length!==6) return fail()
   return {kind:'cas',statement}
  }
+ if(/^select sky_private\.(activate_sync_commit_intent\(\$1\)|(?:require_sync_commit_intent|apply_sync_commit_cas|settle_sync_commit_intent)\(\$1,\$2\)) as applied$/.test(input.text)) {
+  if(!commitUuid(input.values[0]))return fail()
+  if(input.text.includes('settle_sync_commit_intent')) {
+   if(!['committed','not_committed','conflict'].includes(String(input.values[1])))return fail()
+  }else if(input.values.length===2&&!commitDigest(input.values[1]))return fail()
+  return {kind:'cas',statement}
+ }
  if(/^set constraints all (deferred|immediate)$/.test(input.text)&&!input.values.length) return {kind:'SET',statement}
  const insert=insertPattern.exec(input.text)
  if(insert) {
+  if(insert[1]==='sync_commit_intent') {
+   const columns=commitProposalColumns.sync_commit_intent
+   if(insert[2]!==columns.join(',')||insert[3]!==`(${columns.map((_,i)=>`$${i+1}`).join(',')})`||insert[4]||input.values.length!==columns.length)return fail()
+   decodeCommitJournalRow('sync_commit_intent',{...Object.fromEntries(columns.map((c,i)=>[c,input.values[i]])),target_revision:(input.values[3] as number)+1})
+   return {kind:'INSERT',statement}
+  }
   const p=privileges.get(insert[1]),columns=names(insert[2])
   if(!p||!columns.length||new Set(columns).size!==columns.length||columns.some(c=>!p.insert.includes(c))
    ||[...insert[3].matchAll(/\(([^)]+)\)/g)].some(m=>names(m[1]).length!==columns.length)) return fail()

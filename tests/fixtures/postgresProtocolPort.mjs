@@ -16,7 +16,9 @@ export function protocolPool(initial=emptyTables(),settings={}) {
     const empty=(command,status=lease.state)=>({command,status,fields:[],rows:[]})
     if(settings.beforeQuery) await settings.beforeQuery(s,signal,lease)
     let result
-    if(s.text.startsWith('begin ')) {lease.state='T';result=empty('BEGIN')}
+    const overridden=await settings.executeQuery?.(s,signal,lease)
+    if(overridden)result=overridden
+    else if(s.text.startsWith('begin ')) {lease.state='T';result=empty('BEGIN')}
     else if(s.text==='rollback') {lease.state='I';lease.local=globalThis.structuredClone(committed);result=empty('ROLLBACK')}
     else if(s.text==='commit') {
      if(settings.commitRollback){lease.state='I';result=empty('ROLLBACK')}
@@ -33,7 +35,7 @@ export function protocolPool(initial=emptyTables(),settings={}) {
       rows=rows.filter(r=>eq?r[eq[1]]===values[0]:values.slice(0,-1).includes(r.revision))
      }
      rows=rows.slice(0,values.at(-1))
-     const oids=columns.map(c=>{const v=rows.find(r=>r[c]!==null)?.[c];return typeof v==='boolean'?16:typeof v==='number'?c==='raw_money'||!Number.isInteger(v)?701:20:25})
+     const oids=columns.map(c=>{const v=rows.find(r=>r[c]!==null)?.[c];return table.startsWith('sync_commit_')&&['id','intent_id','active_intent_id'].includes(c)?2950:typeof v==='boolean'?16:typeof v==='number'?c==='raw_money'||!Number.isInteger(v)?701:20:25})
      const bytes=rows.reduce((sum,r)=>sum+17+4*columns.length+columns.reduce((n,c)=>n+(r[c]===null?0:Buffer.byteLength(String(r[c]))),0),0)
      const ok=rows.length<=s.values.at(-2)&&bytes<=s.values.at(-1)
      const wire=v=>v===null?null:typeof v==='boolean'?v?'t':'f':String(v)

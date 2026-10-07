@@ -1276,3 +1276,70 @@ Primary design basis: [PG17 locks/waiting and order](https://www.postgresql.org/
 Supabase changelog checked2026-10-07; [PG17.11 minor-release changes](https://supabase.com/changelog/postgres-15-19-17-11-breaking-changes)
 concern extensions/custom operators absent from this proposal; no provider extension
 audit or upgrade performed. Relevant cached docs retained, no connector polling.
+
+### Active local v2 integration — 2026-10-07
+Goal: connect the proposed typed journal to the portable Store/kernel and outward
+SourceSync fence without installing schema, roles, SDK or consumer mounts. This is
+LARGE/ARCHITECTURAL within approved R1; existing public SyncStore/SourceSync APIs
+and the old79-owner privilege package remain unchanged.
+
+Dependencies: pushed19b11ba proposal/codec, locked global Store replay, bounded
+transport/kernel, original review/graph/projection contracts. Implement a private
+v2 factory exposing only intent-bound execution; claim in a separate transaction
+under head→control locks; pin full global TTL from that frame; require token as
+second execution query before any canonical DML; use applied finalizer. Add finite
+four-owner read/intent-insert/helper grammar, UUID text decoding, atomic locked
+load/receipt lookup and evidence-derived terminal settlement. Recovery absence may
+settle only by atomically invalidating the original execution token. Failure uses
+immutable applied witness, never mutable later counts or the audit alone.
+
+Expected files: existing Store/proposal-row/transport/gate, private journal/fence,
+focused test fixtures/tests, this plan/current handoff. Acceptance: existing tests
+stay green; all5 phases retain state and query order; rejected token performs no
+canonical writes; claim failure cannot commit orphan intent; late writer after
+absence recovery is denied; receipt replay resolves lost ACK; complete failure
+witness survives successors. Model tests are NOT SQL/native durability evidence.
+Validate focused tests, full data suite, lint/typecheck/build/scaffold/diff once.
+Then refresh83-owner ACL/native transcript for concrete review. SDK/Auth/native
+application/crash/race/restore and production stay separate gates.
+
+LOCAL v2 integration implemented: private Store factory has read/claim/intent-only
+execute; original public factory retains its contract. Claim is a separate kernel
+transaction with head→control, business replay, pinned global acceptance/TTL,
+immutable typed insert/activation/forced checks; activation false throws/ROLLBACK.
+Execution first locks head, SECOND callback query requires UUID/digest token before
+any canonical staging/DML, checks complete desired row and calls applied finalizer.
+Canonical writer/graph/manifest-order/projection parity/post-checks remain shared.
+
+postgresCommitJournal exposes locked load, terminal lookup and atomic resolution/
+settlement. Every occupied target requires valid immutable applied marker plus
+its full typed owner/audit/promotion acceptance; no marker or drift stays unresolved,
+including failure audit alone. Committed failure uses original trigger's complete
+own count/retry/global TTL witness despite successors. Absence receipt and token
+clear occur together under head→control, denying late pre-BEGIN writer. Journal
+read limits bound rows/UTF-8 before decoding; UUID OID2950/text v4 and generated
+target are explicit. Static gate adds only4-owner exact read vocab, one immutable
+intent INSERT and4 bool helpers; no arbitrary SQL/control/receipt DML. It does
+not expand the installed79-owner runtime privilege generator.
+
+New syncCommitJournalFence preserves SourceSync public results/validation, uses
+evidence after normal or lost execution ACK, remembers uncertain IDs across a
+settlement ACK loss and quarantines new local work until recovery. Recovery can
+lookup terminal receipt by ID after active control clears. No callback retries,
+follow-up failure write, SDK/client endpoint or mount. Legacy v1 fence retained
+for its original portable contract; not promoted to durable acceptance.
+
+Validation PASS:14 focused/410 full tests/lint/typecheck/build/catalog1808/scaffold
+75 Markdown/14 profiles/173 tasks/diff. Test log: E: sync-commit-journal-tests.log;
+existing Router/chunk warnings unchanged. Cases cover all5 complete states and
+outward results, token query order, claim denial/orphan rollback, desired-state
+substitution, restart absence/late token, missing/wrong failure marker, execution/
+claim/settlement ACK loss, terminal lookup, complete rollback, malformed UUID/NULL
+OID/budget/closed grammar. Fixtures explicitly model protocol/table expectations,
+NOT PostgreSQL execution, physical locks, RLS/triggers, durable storage or crash/
+independent-session/SDK acceptance. Proposal SQL/hashes/native transcript unchanged;
+native SQL parse/execution/down NOT RUN; installed schema remains79 owners.
+
+Exact next: refresh83-owner scoped ACL/helper/trigger fingerprints and native
+transcript from actual v2 execution including lowered reads. Then present concrete
+schema/ACL application package; old unanswered79-owner approval is not coverage.
