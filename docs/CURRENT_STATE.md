@@ -72,6 +72,13 @@ journal-native-{owner,creator}-receipt.json and post-{owner,creator,denial}-base
 These are native single-connection SQL/role proofs; not SDK/race/durable/crash proof.
 
 Next: full-K15 cost fixture (46,341 canonical/4,367 release rows) under ROLLBACK/30s;
+Direct4.53MB request was rejected by connector BEFORE SQL execution (not a native
+timeout); authoritative baseline remained identical. Transport-only dictionary
+packer reconstructs EXACT original DO SQL on PostgreSQL and checks SHA256 BEFORE
+EXECUTE; same statements/data/timing boundaries/deferred checks/transaction/cap.
+No batching or new extension/function/principal. Packed request1,397,697 bytes;
+3 focused preparation/packing tests PASS. Exact next: execute the packed fixture,
+verify native full-K15 receipt if returned and authoritative after baseline.
 verify complete receipt and authoritative rollback. STOP on schema/ACL/membership/data
 drift; any timeout leaves benchmark gate OPEN. Do not disable deferred integrity,
 rewrite applied history or infer production sizing from fixture preparation.

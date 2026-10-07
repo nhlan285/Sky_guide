@@ -1543,3 +1543,13 @@ No retained temporary SET edges/data; bootstrap ADMIN-only edges unchanged.
 E: journal-native-{owner,creator}-receipt.json and post-{owner,creator,denial}-baseline.json.
 Single-connection SQL/role proof only, not durable COMMIT/SDK/concurrent/crash proof.
 Exact next: bounded native full-K15 benchmark and authoritative rollback baseline.
+
+Full-K15 raw4.53MB request rejected by connector before DB execution, NOT a measured
+timeout. After-error authoritative baseline identical. Added transport-only
+pack-full-k15-rehearsal: bounded16-bit dictionary codes, original Unicode SQL
+reconstructed byte-faithfully and SHA256 checked on server BEFORE EXECUTE. Prefix/
+suffix preserve original baseline guard/transaction/30s cap/ROLLBACK; complete
+DO cost statement unchanged including every INSERT and deferred/timing boundary.
+No new DB object/extension or batching optimization. Local3 focused tests PASS;
+packed fixture1,397,651 bytes/wire1,397,697. Native cost remains NOT RUN until
+packed fixture executes and complete timing/row receipt passes verifier.
