@@ -1693,3 +1693,37 @@ after-migration baseline matched after EACH run. No retained SET membership/data
 E: release-scan-{owner,creator,denial}-receipt.json and release-scan-post-{owner,creator,denial}-baseline.json.
 Lint/typecheck PASS. Exact next: unchanged packed full-K15 under30s, then baseline;
 new-body cost/down remain NOT RUN, previous timeout gate remains OPEN.
+
+#### Trial failed budget / original body restored — 2026-10-07
+EXACT packed K15 again timed out57014/30s at validate_release_metadata line19
+materialized-scope query during SET CONSTRAINTS ALL IMMEDIATE. No complete timing
+receipt; do not infer phase cost or success. Full after-timeout baseline unchanged.
+E: release-scan-k15-timeout-receipt.json (bounded diagnostic/full baseline).
+Scan fusion preserves semantics but does not satisfy this performance gate.
+
+Used approved guarded down through migration tool as
+20261007161625_restore_release_metadata_scan, exact source bytes unchanged.
+CLI filename aligned to actual native version; all15 migrations retained.
+Original body b2ecccd2deae57f41a2debe3cf806529 and aggregate functions_hash
+dbf5e0bacca3bfed036f314ec70a7a857ff246b0b5058895c5e231ab3938a1e1 restored.
+Full schema/ACL checker PASS; entire baseline matches pre-trial except two appended
+migration versions. E: release-scan-restored-baseline.json. Current83 original-owner
+function pins restored, historical79 unchanged.8 focused tests PASS after restore;
+full429 tests PASS on trial pin; after restore lint/typecheck/8 focused/scaffold/diff PASS.
+Security advisors lints=[]. Single-function down proof only, not complete schema down.
+
+Next local phase refinement: remove repeated global work, preserving acceptance
+for arbitrary later writes, failed statements and savepoint/constraint flushes.
+Affected-row checks alone cannot detect an unrelated member made stale earlier in
+the same transaction before the next metadata event. A candidate protected typed
+clock/witness would invalidate on EVERY private mutation statement and cache only
+after a full validation succeeds, scoped by transaction ID + clock + release.
+Clients must have no write access to clock/witness and cannot submit a claimed
+validated epoch. This may require narrow audited SECURITY DEFINER helpers and new
+private owners/triggers/ACL scope; it is a NEW architectural exception/proposal,
+not authorization. Existing invoker contracts and actor/principal boundaries remain
+until reviewed. Avoid extra automatic validation of historical sealed releases on
+canonical writes, which could incorrectly freeze legitimate later owner revisions.
+Compare alternatives, prove invalidation/rollback semantics, prepare guarded up/down
+and complete source/metadata/ACL expectations BEFORE asking for scoped approval.
+No hosted implementation of this next alternative yet. Benchmark and roadmap OPEN.

@@ -3,7 +3,8 @@ import { runtimePrivilegeBaseline } from './runtimePrivilegeBaseline.ts'
 
 // Native-verified83-owner catalog; historical79-owner baseline stays intact.
 // Function bodies pinned to reviewed source, never adopted from fetched metadata.
-// The approved additive release scan migration changes one current83 body only.
+// Approved release scan trial was restored after it still timed out at full K15.
+// Current83 again uses the original release body; both additive migrations remain.
 export const reviewedReleaseScanBodyMd5='5d499ac07a2d5a3ac590cc0dedb7cac6'
 // Journal function bodies retain qualified receipt columns;
 // trigger strings predict
@@ -42,7 +43,7 @@ export const runtimeJournalPrivilegeBaseline={
   {name:'sync_commit_applied',rls:true,columns:['intent_id','revision','state_digest']},
   {name:'sync_commit_receipt',rls:true,columns:['intent_id','resolution']},
  ],
- functions:[...runtimePrivilegeBaseline.functions.map(f=>f.name==='validate_release_metadata'?{...f,bodyMd5:reviewedReleaseScanBodyMd5}:f),...functions],
+ functions:[...runtimePrivilegeBaseline.functions,...functions],
  triggers:[...runtimePrivilegeBaseline.triggers,...journalTriggerDefinitions.map(({definition,...t})=>({...t,definitionMd5:createHash('md5').update(definition).digest('hex')}))],
 } as const
 // Additional proposed physical-column guard; names alone cannot attest generated

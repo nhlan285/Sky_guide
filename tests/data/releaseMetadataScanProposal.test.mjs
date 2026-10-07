@@ -7,7 +7,7 @@ import { buildReleaseScanEquivalence } from '../sql/build-release-scan-equivalen
 import { releaseScanCases,referenceReleaseScanFlags } from '../fixtures/releaseMetadataScanCases.mjs'
 import { verifyReleaseScanEquivalence } from '../sql/verify-release-scan-equivalence.mjs'
 import { runtimePrivilegeBaseline } from '../../src/server/runtimePrivilegeBaseline.ts'
-import { runtimeJournalPrivilegeBaseline } from '../../src/server/runtimeJournalPrivilegeBaseline.ts'
+import { runtimeJournalPrivilegeBaseline,reviewedReleaseScanBodyMd5 } from '../../src/server/runtimeJournalPrivilegeBaseline.ts'
 
 test('one function proposal retains every event/global predicate and guards exact empty up/down metadata',()=>{
  const p=buildReleaseMetadataScanProposal(),up=p.files['release-metadata-scan-up.sql'],down=p.files['release-metadata-scan-down.sql']
@@ -24,10 +24,10 @@ test('one function proposal retains every event/global predicate and guards exac
  assert.ok(p.files['release-metadata-scan-after-check.sql'].includes(p.newBodyMd5))
  assert.equal(p.files['release-metadata-scan-after-check.sql'],p.files['release-metadata-scan-before-check.sql'].replace(p.oldBodyMd5,p.newBodyMd5))
  assert.equal(runtimePrivilegeBaseline.functions.find(f=>f.name==='validate_release_metadata').bodyMd5,p.oldBodyMd5)
- assert.equal(runtimeJournalPrivilegeBaseline.functions.find(f=>f.name==='validate_release_metadata').bodyMd5,p.newBodyMd5)
- for(const f of runtimePrivilegeBaseline.functions)assert.deepEqual(runtimeJournalPrivilegeBaseline.functions.find(current=>current.name===f.name),
-  f.name==='validate_release_metadata'?{...f,bodyMd5:p.newBodyMd5}:f)
+ assert.equal(reviewedReleaseScanBodyMd5,p.newBodyMd5)
+ for(const f of runtimePrivilegeBaseline.functions)assert.deepEqual(runtimeJournalPrivilegeBaseline.functions.find(current=>current.name===f.name),f)
  assert.equal(readFileSync(new URL('../../supabase/migrations/20261007160926_private_release_metadata_scan.sql',import.meta.url),'utf8'),up)
+ assert.equal(readFileSync(new URL('../../supabase/migrations/20261007161625_restore_release_metadata_scan.sql',import.meta.url),'utf8'),down)
  assert.doesNotMatch(up+'\n'+down,/\b(?:disable trigger|set_config|create table|create role|grant |delete from|truncate|drop trigger|drop function)\b/i)
  assert.doesNotMatch(up,/if n<>case/i)
  const compact=s=>s.replace(/\s+/g,' ')
