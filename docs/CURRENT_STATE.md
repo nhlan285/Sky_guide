@@ -1,9 +1,12 @@
 # Current handoff — 2026-10-08
 
 ## Task / branch / checkpoint
-Sky Guide autonomous master run ACTIVE; roadmap OPEN, not complete.
+Sky Guide autonomous master run BLOCKED pending scoped write-bracket approval;
+roadmap OPEN, not complete. The same approval gate has persisted across at least
+three consecutive goal turns. Local review/fixture preparation is complete; no live
+job is pending and no dependency-ready roadmap action remains within current authority.
 Branch codex/master-plan-execution; checkpoint parent
-1d95d953c05387f60a3c95c7468e0df2dc76d3a9 verified on origin.
+5d9058eb5026a74fa25caeedcb308566d8774fd5 verified on origin.
 Resolve latest checkpoint with git log -1 and verify remote SHA.
 Master: [IMPLEMENTATION_PLAN](plan/IMPLEMENTATION_PLAN.md).
 Active phase: [POSTGRES_PROVIDER_SELECTION](plan/POSTGRES_PROVIDER_SELECTION.md),
@@ -128,8 +131,10 @@ Master dependencies confirm R2–R6 and live sync consumers require R1 acceptanc
 they cannot be opened while native foundation/benchmark approval remains pending.
 
 ## Exact next / remaining gates
-Push SHA-verified review checkpoint and obtain scoped85-owner/3-definer/168-hook
-up/down approval under user rule22. Before-only clock remains rejected; new entry/
+Review packet5d9058e is pushed and SHA-verified; obtain the pending scoped85-owner/
+3-definer/168-hook up/down approval under user rule22. No repeated migration request
+or new architecture inferred from automatic goal continuation. Before-only clock
+remains rejected; new entry/
 exit bracket with no cache during writes is a prepared candidate, not native PASS.
 After approval revalidate83 baseline, CLI migration/application, explicit new85
 structure/metadata/ACL source review, owner/creator/denial/adversarial/K15 rehearsals,
