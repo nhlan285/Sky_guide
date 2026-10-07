@@ -252,3 +252,14 @@ are covered by14 focused/410 full tests/lint/typecheck/build/scaffold PASS. Prot
 models do not prove SQL/locks/RLS/durability/SDK/crash/session/restore acceptance.
 Actual installed schema remains79; no new migration, roles, grants or provider
 operation. Next: refreshed83-owner ACL package/native transcript/concrete review.
+
+The [v2 native review package](../docs/plan/JOURNAL_NATIVE_REVIEW.md) is now ready:
+83 explicit owners/37 predicted functions/155 triggers, physical journal columns,
+10 helper EXECUTE/201 policies; grant/guarded rollback/ACL inspection/8 denial cases
+and actual v2 lowered SQL transcript with reader/writer variant. Old79-owner output
+hashes unchanged. Qualified3 receipt revision predicates in the UNAPPLIED proposal.
+New schema/function/trigger fingerprints are predicted until native preflight, not
+auto-approved metadata.31 focused + final6 focused/416 full tests/lint/typecheck/
+build/scaffold PASS. Native parsing/roles/rollback/durability/crash/SDK NOT RUN.
+Do not apply old grant after expansion; refreshed dev-only authorization precedes
+CLI migration creation/application. No hosted/schema/role/credential operation here.

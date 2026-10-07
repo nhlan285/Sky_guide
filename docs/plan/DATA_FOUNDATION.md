@@ -136,8 +136,9 @@ Read [CURRENT_STATE](../CURRENT_STATE.md) for latest commit/checks and gates.
 Branch `codex/master-plan-execution`; checkpointdd7fb11 verified pushed before the
 release metadata slice. Supabase Free dev in Dyland's Org is provisioned;44 private
 tables at that milestone; now79 private tables with no platform grants. Domain
-implementations remain unmounted from production consumers. Latest410 full tests/
-14 focused v2 journal/Store/fence/lint/typecheck/build PASS; local protocol model is not native
+implementations remain unmounted from production consumers. Latest416 full tests/
+31 focused v2 review + final6 focused/lint/typecheck/build PASS; [83-owner native review](JOURNAL_NATIVE_REVIEW.md)
+is PREPARED/NOT APPLIED/NOT RUN. Local protocol model is not native
 parse/execution/durability acceptance.7 read composition tests/11 native negatives plus5 graph history tests/141 native
 negatives/actual two-frame parity PASS; prior lifecycle metadata/source isolation/
 projection byte checks retained. Intentional revision0 control baseline, other tables empty. Existing

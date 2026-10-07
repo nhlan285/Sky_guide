@@ -1343,3 +1343,67 @@ native SQL parse/execution/down NOT RUN; installed schema remains79 owners.
 Exact next: refresh83-owner scoped ACL/helper/trigger fingerprints and native
 transcript from actual v2 execution including lowered reads. Then present concrete
 schema/ACL application package; old unanswered79-owner approval is not coverage.
+
+### Active v2 review package — 2026-10-07
+Goal: prepare an explicit83-owner ACL/RLS and actual adapter-SQL rehearsal package
+for review; no hosted DDL/roles/credentials/membership/SDK/consumer operation.
+Dependencies: pushedcd873c2 v2 adapter, unchanged19236-byte journal proposal and
+existing79-owner native baseline. Do not rewrite the old installed-schema package.
+
+Expected: shared pure privilege generator with unchanged old wrapper, separate
+proposed journal baseline/manifest, scoped grant/rollback/preflight builder and
+tests; separate actual v2 kernel query transcript/verifier. New writer privileges:
+intent INSERT excluding generated target; applied/receipt INSERT via invoker
+helpers; control active_intent_id UPDATE only/no control INSERT or DELETE; existing
+canonical column rights. Invoker transitive lock helper needs EXECUTE. Reader gets
+SELECT only. All new owners immutable except guarded active control. Future83-owner
+body/trigger fingerprints are predicted from pinned proposal, NOT native-verified.
+
+Acceptance: old79-owner generator/fixtures stay unchanged; explicit83 tables,
+10 helper closure, 201 scoped policies, no blanket/future/platform grants; native
+preflight rejects drift instead of adopting it. Generate actual v2 claim/execute/
+resolve/read-lowering SQL without substituting old CAS. Retain bounded preparation
+and independent expected full state; distinguish outer-ROLLBACK rehearsal from
+separate durable commits/concurrent-session/crash evidence. Tests/full suite/lint/
+typecheck/build/scaffold/diff as appropriate. Exact next is concrete additive
+application review once this package is ready, not implicit approval from a goal
+continuation. Native expected trigger metadata/SQL parsing/role execution NOT RUN.
+
+PREPARED review package: [JOURNAL_NATIVE_REVIEW](JOURNAL_NATIVE_REVIEW.md) records
+concrete dev scope, rollback, pinned outputs and acceptance boundaries. Shared
+renderer refactor preserves old79-owner grant84451/rollback34115 bytes and exact
+prior SHA256. Separate83-owner privileges/37 expected invoker functions/155 triggers,
+generated/type/null physical columns and10-helper closure/201 policies; column-only
+INSERT excludes generated target, no control INSERT or journal DELETE/immutable
+UPDATE. Metadata guard never adopts fetched catalog automatically. New expected
+trigger/get-expression fingerprints are predicted, not native-verified.
+
+Rollback checks schema/body/trigger/physical columns, exact policies and effective
+column/helper rights/role attributes/no unexpected owner or nonowner grant-option
+before removing package; still requires stopped consumers/no unexpected memberships.
+Prepared grant96557 bytes SHA256db17bf3bc8a802edb9b554d4be967b882010ad08da9e4b262e4d1eee1ed6909f;
+rollback147350 SHA2568a62fb14815176b9d10267bcd425679a76045e464153613f2ffd0fda7aed4b0d.
+Role-check is read-only introspection, distinct from prepared8-operation actual
+deny fixture and actual reader/writer adapter transcript. No role applied or run.
+
+Static review found local revision variable colliding with3 unqualified receipt
+audit/acceptance predicates; qualified column aliases per [PG variable substitution](https://www.postgresql.org/docs/17/plpgsql-implementation.html).
+Repinned up19248 bytes SHA256b9644820e9746e8333e53f19d426b5515636e6f24367f24c9d97b4342e62e200;
+down unchanged. No global variable-conflict settings or evidence weakening.
+Actual v2 kernel SQL transcript, without legacy CAS substitution:5 phases/39
+callbacks/978 query assertions/6 token negatives. Owner1727377 bytes SHA256
+193edbd597d1663d5318c9ebb93ffa8aac1d32f3632a85537061e545118bd41c;
+reader5/writer34 callback variant1728871 bytes SHA256
+d0d88920b9ec2b71424af975cd83212eedcb508abfa0fe4c23876da9d34d56c7.
+Existing26-negative prepared control fixture remains distinct. Outer ROLLBACK does
+not reproduce original physical COMMIT boundaries or separate sessions. Full-row
+native-result verifier ready; its synthetic mutation checks are not native receipts.
+
+PASS31 focused + final6 focused/416 full tests/lint/typecheck/build/catalog1808/
+scaffold76 Markdown/14 profiles/173 tasks/diff; existing Router/chunk warnings
+unchanged. New lint missing URL/structuredClone declarations fixed; final lint PASS.
+Evidence on E: runtime-journal-* and sync-commit-adapter{,-role}-fixture.sql;
+runtime-journal-package-tests.log. No new migration/provider/role/policy/SDK/Auth/
+credential/principal/consumer/public data operation. Native parse/execution/ACL/
+down/durable/crash/concurrent/restore NOT RUN. Exact next is refreshed package
+authorization and native baseline verification before CLI migration creation.

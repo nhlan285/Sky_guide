@@ -3,8 +3,8 @@
 ## Task / branch / checkpoint
 Autonomous Sky Guide master run remains ACTIVE; roadmap OPEN.
 Branch: codex/master-plan-execution. Last verified pushed base before this slice:
-19b11baf86adce221cde7ea066538778b54add95. This handoff accompanies local v2 journal
-integration; resolve latest checkpoint with git log -1 and verify remote SHA.
+cd873c2e8dcab77d81d1eaf9efd2d249adfa4fba. This handoff accompanies the v2 native
+review package; resolve latest checkpoint with git log -1 and verify remote SHA.
 Master: [IMPLEMENTATION_PLAN](plan/IMPLEMENTATION_PLAN.md); active detailed phase:
 [POSTGRES_PROVIDER_SELECTION](plan/POSTGRES_PROVIDER_SELECTION.md), latest section.
 
@@ -65,13 +65,13 @@ no migration file/history/provider/role/grant/Auth/SDK/dependency/public-data ch
 Prepared E:/SkyGuideAssets/research/postgres-rehearsal-2026-10-07/
 sync-commit-proposal-fixture.sql:5 phases/526 query assertions/26 negatives,
 877746 bytes, SHA256e76e2f77bc2d616862fa6374bc723741e40819df639df1392f2fb5863587246d.
-Up SHA256672ea42a654a10fa81af857712cdcc6d5d2741f3f51860a97de62f46da16e0c2;
+Up now19248 bytes SHA256b9644820e9746e8333e53f19d426b5515636e6f24367f24c9d97b4342e62e200;
 down SHA2560483b6c4c16ae2075c54d7df55d9f766aa5e2ff297e358637079cb2ea4c0a9c7.
 Validation:6 focused/396 full tests/lint/typecheck/build/catalog1808/scaffold/diff
 PASS. Existing Router/chunk warnings unchanged; E: sync-commit-proposal-tests.log.
 These check preparation/expected-row verification, NOT SQL parsing/execution.
 
-## Current slice — LOCAL v2 INTEGRATION, UNMOUNTED
+## Completed local v2 integration — UNMOUNTED
 createPostgresIntentSyncStore exposes read/claim/execute only, no unfenced CAS.
 Separate claim transaction locks head→control, replays business transition and
 pins GLOBAL TTL; false activation rolls back intent. Executor shares existing
@@ -94,12 +94,37 @@ they do NOT prove PostgreSQL execution, server locks/triggers/RLS, SDK cancellat
 actual durability, concurrent sessions, crash or restore. New schema NOT APPLIED;
 no provider/role/SDK/Auth/credentials/public data or consumer mount changed.
 
+## Current slice — PREPARED v2 NATIVE REVIEW, NOT APPLIED/NOT RUN
+[Concrete scope/rollback/artifact hashes](plan/JOURNAL_NATIVE_REVIEW.md) is ready.
+Shared pure renderer preserves old79-owner grant/rollback byte-for-byte. Separate
+proposed83-owner/37-function/155-trigger baseline includes physical journal column
+types/nullability/generated target. Writer additions: intent25-column INSERT,
+applied/receipt INSERT, active control UPDATE only,10 transitive helper EXECUTE;
+201 scoped policies. New fingerprints are predicted; native preflight must verify.
+Grant/rollback/preflight/role metadata check and8 actual-denial fixture prepared
+on E:. Rollback now refuses schema/column/function/trigger/ACL/policy/role drift
+before removing only its package. No platform/login/principal membership grants.
+Source review found3 ambiguous receipt revision predicates; qualified columns,
+repinned up19248-byte SHA. This is static review/fix, not native execution proof.
+Actual v2 adapter/kernel transcript:39 callbacks/978 query assertions/6 token
+negatives; owner1727377 bytes and reader/writer variant1728871 bytes. No legacy CAS
+substitution; outer ROLLBACK cannot prove separate durable commits or races.
+Verifier checks full intent/control/applied/receipt; synthetic tests not receipts.
+31 focused + final6 focused/416 full tests/lint/typecheck/build/catalog1808/scaffold
+76 Markdown/14 profiles/173 tasks/diff PASS. Existing warnings unchanged. Evidence:
+E:/SkyGuideAssets/research/postgres-rehearsal-2026-10-07/runtime-journal-package-tests.log.
+Modified: shared renderer/new journal baseline/ACL module, up proposal qualification,
+builders/verifier/tests and existing handoff/phase/master/foundation/README plus
+concrete review document. No hosted operation/new migration/dependency/credential/
+SDK/Auth/consumer/public data change. Native parse/schema/roles/rollback NOT RUN.
+
 ## Exact next / gates
-Refresh proposed83-owner full columns/helpers/triggers/scoped ACL package using
-unchanged journal proposal plus v2 emitted SQL. Update native transcript to use
-actual v2 claim/execution/settlement statements and read lowering, then prepare
-concrete additive schema/ACL review before authorized native5-phase/down/durable
-commit/crash/race acceptance. Never apply old79-owner grant SQL unchanged
+Obtain refreshed dev-only [83-owner package authorization](plan/JOURNAL_NATIVE_REVIEW.md)
+before application; old unanswered79-owner question cannot cover it. Revalidate
+native79-owner/no-role/empty baseline, then create CLI additive migration and apply
+via migration tool; verify83-owner metadata before grants/native fixtures/empty
+rollback. No durable forensic commits/SDK/credential/Auth/principal memberships/
+consumer mount by implication. Never apply old79-owner grant SQL unchanged
 AFTER schema expansion. Actual SDK/credential/Auth/membership remain distinct gates.
 No foundation/P9-I02/D04/V01/R2–R6/master DONE from ports or prepared fixtures.
 K04 OneDrive403; K10/K11 market/SKU; K12 bulk reuse prohibited; Q02/Q09/Q10/Q11;

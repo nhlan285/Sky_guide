@@ -5,7 +5,12 @@ import { runtimePrivilegeBaseline } from './runtimePrivilegeBaseline.ts'
 
 type Table=keyof typeof privateSyncColumns
 export interface RuntimeTablePrivilege {
-  table:Table;insert:readonly string[];update:readonly string[];delete:boolean;lockOnly:boolean
+  table:string;insert:readonly string[];update:readonly string[];delete:boolean;lockOnly:boolean
+}
+export interface RuntimePrivilegeFingerprint {
+ tables:readonly {name:string;columns:readonly string[];rls:boolean}[]
+ functions:readonly {name:string;args:string;result:string;bodyMd5:string}[]
+ triggers:readonly {table:string;name:string;function:string;definitionMd5:string}[]
 }
 export interface RuntimePrivilegeCatalog {
   tables:{name:string;columns:string[];rls:boolean}[]
@@ -44,10 +49,13 @@ export function runtimeTablePrivileges():RuntimeTablePrivilege[] {
 }
 
 export function assertRuntimePrivilegeCatalog(catalog:RuntimePrivilegeCatalog):void {
-  const tables=runtimeTablePrivileges(),fingerprints=runtimePrivilegeBaseline.functions
+  assertPrivilegeCatalog(catalog,runtimeTablePrivileges(),runtimePrivilegeBaseline)
+}
+export function assertPrivilegeCatalog(catalog:RuntimePrivilegeCatalog,tables:readonly RuntimeTablePrivilege[],baseline:RuntimePrivilegeFingerprint):void {
+  const fingerprints=baseline.functions
   if(!catalog||catalog.tables.length!==tables.length||catalog.policies.length||catalog.functions.length!==fingerprints.length) return fail()
   for(const p of tables) {
-    const found=catalog.tables.filter(t=>t.name===p.table),expected=runtimePrivilegeBaseline.tables.find(t=>t.name===p.table)?.columns
+    const found=catalog.tables.filter(t=>t.name===p.table),expected=baseline.tables.find(t=>t.name===p.table)?.columns
     if(found.length!==1||found[0].rls!==true||JSON.stringify(found[0].columns)!==JSON.stringify(expected)) return fail()
   }
   for(const expected of fingerprints) {
@@ -56,14 +64,25 @@ export function assertRuntimePrivilegeCatalog(catalog:RuntimePrivilegeCatalog):v
       ||md5(found[0].body)!==expected.bodyMd5) return fail()
   }
   const sorted=catalog.triggers.map(t=>({table:t.table,name:t.name,function:t.function,definitionMd5:md5(t.definition)})).sort((a,b)=>order(`${a.table}/${a.name}`,`${b.table}/${b.name}`))
-  if(JSON.stringify(sorted)!==JSON.stringify([...runtimePrivilegeBaseline.triggers].sort((a,b)=>order(`${a.table}/${a.name}`,`${b.table}/${b.name}`)))) return fail()
+  if(JSON.stringify(sorted)!==JSON.stringify([...baseline.triggers].sort((a,b)=>order(`${a.table}/${a.name}`,`${b.table}/${b.name}`)))) return fail()
 }
 
 // Pure proposal generator uses pinned reviewed fingerprints, never a freshly
 // auto-approved catalog. Output is never executed by this module.
 export function prepareRuntimePrivilegeProposal() {
-  const tables=runtimeTablePrivileges(),fingerprints=runtimePrivilegeBaseline.functions,reader=runtimeRoles.reader,writer=runtimeRoles.writer,roles=`${reader},${writer}`
-  const expectedTables=[...runtimePrivilegeBaseline.tables].sort((a,b)=>order(a.name,b.name))
+  // Keep the installed-schema wrapper and its output stable.
+  if(Object.keys(rootKeys).some(t=>!Object.hasOwn(catalogColumns,t))) return fail()
+  return preparePrivilegeProposal(runtimeTablePrivileges(),runtimePrivilegeBaseline,runtimeFunctions)
+}
+// Shared pure renderer. Callers supply an explicit pinned universe, never a live
+// catalog, prefixes or future-object grants. Native preflight is still mandatory.
+export function preparePrivilegeProposal(inputTables:readonly RuntimeTablePrivilege[],baseline:RuntimePrivilegeFingerprint,inputHelpers:readonly string[]) {
+  const tables=inputTables.map(t=>({...t,insert:[...t.insert],update:[...t.update]})),fingerprints=baseline.functions,helpers=[...inputHelpers]
+  const reader=runtimeRoles.reader,writer=runtimeRoles.writer,roles=`${reader},${writer}`
+  if(tables.length!==baseline.tables.length||new Set(tables.map(t=>t.table)).size!==tables.length||new Set(helpers).size!==helpers.length
+   ||tables.some(t=>!baseline.tables.some(b=>b.name===t.table)||!/^\w+$/.test(t.table)||[...t.insert,...t.update].some(c=>!/^\w+$/.test(c)||!baseline.tables.find(b=>b.name===t.table)?.columns.includes(c)))
+   ||helpers.some(h=>!/^\w+\((?:\w+(?:,\w+)*)?\)$/.test(h)||!fingerprints.some(f=>f.name===h.split('(')[0]&&f.result!=='trigger')))return fail()
+  const expectedTables=[...baseline.tables].sort((a,b)=>order(a.name,b.name))
   const preflight=`do $runtime_preflight$ begin
 if exists(select 1 from pg_roles where rolname in(${quote(reader)},${quote(writer)})) then raise exception 'Runtime role baseline is not empty';end if;
 if exists(select 1 from pg_policies where schemaname='sky_private') then raise exception 'Private RLS policy baseline changed';end if;
@@ -78,7 +97,7 @@ from pg_proc p join pg_namespace n on n.oid=p.pronamespace where n.nspname='sky_
 or exists(select 1 from pg_proc p join pg_namespace n on n.oid=p.pronamespace where n.nspname='sky_private' and p.prosecdef) then raise exception 'Private helper definitions changed';end if;
 if (select jsonb_agg(jsonb_build_object('table',c.relname,'name',t.tgname,'function',p.proname,'definitionMd5',md5(pg_get_triggerdef(t.oid))) order by c.relname collate pg_catalog."C",t.tgname collate pg_catalog."C")
 from pg_trigger t join pg_class c on c.oid=t.tgrelid join pg_namespace n on n.oid=c.relnamespace join pg_proc p on p.oid=t.tgfoid where n.nspname='sky_private' and not t.tgisinternal)
-is distinct from ${quote(JSON.stringify([...runtimePrivilegeBaseline.triggers].sort((a,b)=>order(`${a.table}/${a.name}`,`${b.table}/${b.name}`))))}::jsonb then raise exception 'Private trigger definitions changed';end if;
+is distinct from ${quote(JSON.stringify([...baseline.triggers].sort((a,b)=>order(`${a.table}/${a.name}`,`${b.table}/${b.name}`))))}::jsonb then raise exception 'Private trigger definitions changed';end if;
 end $runtime_preflight$;`
   const grant=[`-- REVIEW PROPOSAL ONLY: requires scoped dev runtime-role authorization. No credentials.
 begin;`,preflight,`create role ${reader} nologin noinherit nosuperuser nocreatedb nocreaterole noreplication nobypassrls;`,
@@ -106,7 +125,7 @@ begin;`,
     }
     rollback.push(`revoke all on ${table} from ${roles};`)
   }
-  for(const helper of runtimeFunctions) {
+  for(const helper of helpers) {
     grant.push(`grant execute on function sky_private.${helper} to ${writer};`)
     rollback.push(`revoke execute on function sky_private.${helper} from ${writer};`)
   }
@@ -114,7 +133,5 @@ begin;`,
   rollback.push(`revoke usage on schema sky_private from ${roles};`,
     `do $database$ begin execute format('revoke connect on database %I from ${roles}',current_database());end $database$;`,
     `drop role ${reader};`,`drop role ${writer};`,'commit;')
-  // Fail closed when this module's static universe diverges from canonical roots.
-  if(Object.keys(rootKeys).some(t=>!Object.hasOwn(catalogColumns,t))) return fail()
-  return {tables,helpers:[...runtimeFunctions],preflight,grant:grant.join('\n')+'\n',rollback:rollback.join('\n')+'\n'}
+  return {tables,helpers,preflight,grant:grant.join('\n')+'\n',rollback:rollback.join('\n')+'\n'}
 }

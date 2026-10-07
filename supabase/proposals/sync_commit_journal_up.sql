@@ -165,10 +165,10 @@ begin
    raise exception 'Committed receipt lacks exact applied witness' using errcode='23514';end if;
  elsif new.resolution='not_committed' then
   if revision<>i.expected_revision or exists(select 1 from sky_private.sync_commit_applied where intent_id=i.id)
-   or exists(select 1 from sky_private.sync_audit where revision=i.target_revision) or exists(select 1 from sky_private.sync_acceptance where revision=i.target_revision) then
+   or exists(select 1 from sky_private.sync_audit a where a.revision=i.target_revision) or exists(select 1 from sky_private.sync_acceptance a where a.revision=i.target_revision) then
    raise exception 'Absence settlement lacks head barrier' using errcode='23514';end if;
  elsif new.resolution='conflict' then
-  if revision<i.target_revision or not exists(select 1 from sky_private.sync_audit where revision=i.target_revision)
+  if revision<i.target_revision or not exists(select 1 from sky_private.sync_audit a where a.revision=i.target_revision)
    or exists(select 1 from sky_private.sync_commit_applied where intent_id=i.id) then
    raise exception 'Conflict receipt lacks occupied target' using errcode='23514';end if;
  else raise exception 'Unknown receipt resolution' using errcode='23514';end if;
