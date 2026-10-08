@@ -22,6 +22,8 @@
     "verificationStatus": "verified"
   },
   "sourcePublicationDate": "2026-10-02",
+  "sourceHeadline": "This Month in Sky: October 2026 Edition",
+  "headlineEvidence": "Exact h1.title in the same SHA-256 pinned E: HTML snapshot; metadata only, no article body or media",
   "publicationInstant": null,
   "sourceType": "official",
   "records": [

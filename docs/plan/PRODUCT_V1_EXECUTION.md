@@ -217,3 +217,7 @@ source metadata and evidence/projection tests; names stay source English.
 Files: bounded projection/evidence/source metadata, Hub and current plans.
 Validate focused source identity, lint/build, exact Preview/source link and
 keyboard navigation. Full P3-H07 news feed/search and360px acceptance remain OPEN.
+Implemented exact cached h1 headline projection/source metadata, source-linked
+Hub card, publisher/date/manual review freshness, Events entry and truthful
+About/source copy. No body/media/new fetch/feed/schema. Three focused tests and
+lint/typecheck/catalog/build PASS. Browser NOT RUN; exact Preview next.

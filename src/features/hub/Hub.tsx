@@ -5,6 +5,7 @@ import { useLocale } from '../../shared/i18n/useLocale'
 import { catalogueSummary } from '../../data/itemLookup/summary.ts'
 import { itemCopy } from '../items/copy.ts'
 import { SourceCredits } from '../items/SourceCredits.tsx'
+import { reviewedAnnouncement } from '../../data/events/manualSchedule'
 
 export function Hub() {
   const { t, locale } = useLocale()
@@ -54,7 +55,12 @@ export function Hub() {
         </SectionCard>
 
         <SectionCard id="official-news" title={t('hub.news')} className="hub-grid__wide section-card--news">
-          <ContentState kind="unavailable" message={t('hub.news.reason')} />
+          <StatusBadge tone="info">{locale === 'vi' ? 'Nguồn chính thức · đối chiếu thủ công' : 'Official source · manually reviewed'}</StatusBadge>
+          <h3><a className="text-link" href={reviewedAnnouncement.source.sourceUrl!} target="_blank" rel="noopener noreferrer">{reviewedAnnouncement.title} ↗</a></h3>
+          <p>{reviewedAnnouncement.source.attribution} · <time dateTime={reviewedAnnouncement.publicationDate}>{reviewedAnnouncement.publicationDate}</time></p>
+          <p>{locale === 'vi' ? 'Một thông báo đã đối chiếu, kèm các mốc trong lịch có nguồn. Chưa có luồng tin đồng bộ tự động.' : 'One reviewed announcement, with entries in the sourced schedule. An automatically synced news feed is unavailable.'}</p>
+          <Link className="text-link" to="/events">{locale === 'vi' ? 'Xem các mốc đã đối chiếu' : 'View reviewed entries'}</Link>
+          <p className="section-note">{locale === 'vi' ? 'Đối chiếu lần cuối' : 'Last reviewed'}: {new Intl.DateTimeFormat(locale, { timeZone: 'UTC', dateStyle: 'medium', timeStyle: 'short' }).format(new Date(reviewedAnnouncement.source.retrievedAt))} · UTC. {locale === 'vi' ? 'Bản đã lưu có thể chưa phản ánh sửa đổi mới của nguồn.' : 'This stored review may miss newer source edits.'}</p>
         </SectionCard>
 
         <SectionCard id="wardrobe" title={t('hub.wardrobe')} className="section-card--wardrobe" badge={<StatusBadge>{t('status.demo')}</StatusBadge>}>

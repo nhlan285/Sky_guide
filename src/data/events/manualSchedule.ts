@@ -17,6 +17,7 @@ if (!parsed.valid || parsed.value.some(record => record.fixture || record.record
 // Separate source-scoped manual projection. This does not approve canonical
 // import, define recurrence, assert current activity or fabricate precise ends.
 export const manualSchedule = { version: snapshot.version, source: source.value, records: parsed.value, publicationDate: snapshot.sourcePublicationDate }
+export const reviewedAnnouncement = { title: snapshot.sourceHeadline, publicationDate: manualSchedule.publicationDate, source: manualSchedule.source }
 export const eventDisplayZones = ['America/Los_Angeles', 'Asia/Ho_Chi_Minh', 'UTC'] as const
 export type EventDisplayZone = typeof eventDisplayZones[number]
 export function formatScheduleTime(time: PartialTime | null, zone: EventDisplayZone, locale: string): string | null {

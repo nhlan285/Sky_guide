@@ -2,8 +2,8 @@
 
 ## Scope / branch / authority
 Master run OPEN. Branch codex/master-plan-execution, current checkpoint parent
-a822000d8e382ec76cc1d6dc4cff0aad1738ea46 verified on origin; resolve current HEAD
-with git log -1 and compare remote before resuming. Develop5368e77 verified;
+8e60468288efbb728007ce4bd33b4500e357c9b1 verified on origin and develop; resolve current HEAD
+with git log -1 and compare remote before resuming. Develop8e60468 verified;
 main unchanged8b371de6a2b852e3175a55b5f8de2b9cc11d8b54.
 Master: docs/plan/IMPLEMENTATION_PLAN.md.
 Active product: docs/plan/PRODUCT_V1_EXECUTION.md.
@@ -110,9 +110,14 @@ overflow. Requested360px override was ignored by browser capability (actual DOM
 remained541px; fresh tab1265px); reset/closed temporary tab. Exact360px acceptance
 OPEN, not claimed PASS. Screenshot events-preview.jpg and full-tests.log on E:.
 Events bounded source manual UI VISIBLE; full live/canonical gate remains OPEN.
-Exact next: verified checkpoint/develop integration, then expose this same verified
-official announcement in Hub news (headline/date/source/manual freshness only,
-no article body/media/feed/DB); do not invent a second fetch or close full news.
+Events verification checkpoint8e60468 integrated normally into develop; main exact.
+Next bounded news slice implemented: exact cached h1.title in evidence/projection,
+Hub source-linked official headline/date/publisher/manual freshness and Events
+link. About/source copy reflects this one manual announcement, not a live feed.
+No second fetch, article body/media/feed/DB. Three focused tests/lint/typecheck/
+catalog/build PASS; full486 predates this small metadata/Hub change. Browser NOT
+RUN. Exact next: commit/push, exact READY Preview, headline/source/date/Events
+navigation/keyboard/locale QA; integrate develop after verified milestone.
 
 ## Native R1 evidence / blocker
 Hosted sky-guide-dev/tpbydviuknovimroeodm, Dyland's Org, Supabase Free:85 private
@@ -134,7 +139,8 @@ Extra release probe wrongly validated archived revision7 pins against current8;
 contract intentionally fail-closed. Failed probe rolled back full85/203 exact.
 Corrected probe current acceptance/archived rejection under ROLLBACK NOT RUN
 successfully: Docker engine pipe absent; startup attempted once/inspect timeout.
-No wider repair/restart loop. R1 leased wire/ACK-loss/SDK/Auth/full hosted backup/
+Read-only2026-10-09 engine readiness again confirms LinuxEngine pipe absent;
+no new repair/restart attempt or SQL. R1 leased wire/ACK-loss/SDK/Auth/full hosted backup/
 schema down gates OPEN; local proof does not close R1. Continue independent V1.
 
 ## Validation / artifacts / continuity

@@ -2,7 +2,7 @@ import assert from 'node:assert/strict'
 import test from 'node:test'
 import { readFileSync } from 'node:fs'
 import { URL } from 'node:url'
-import { manualSchedule, formatScheduleTime, eventDisplayZones } from '../../src/data/events/manualSchedule.ts'
+import { manualSchedule, reviewedAnnouncement, formatScheduleTime, eventDisplayZones } from '../../src/data/events/manualSchedule.ts'
 
 const evidence=JSON.parse(readFileSync(new URL('../../knowledge/evidence/k06-monthly-schedule-2026-10-09.json',import.meta.url),'utf8'))
 test('manual schedule projection exactly matches reviewed official facts with unresolved canonical relations',()=>{
@@ -16,6 +16,8 @@ test('manual schedule projection exactly matches reviewed official facts with un
     assert.deepEqual(record.spiritIds,[]);assert.deepEqual(record.itemIds,[]);assert.deepEqual(record.officialArticleIds,[])
   }
   assert.equal(manualSchedule.publicationDate,'2026-10-02');assert.equal(evidence.publicationInstant,null)
+  assert.deepEqual(reviewedAnnouncement,{title:evidence.sourceHeadline,publicationDate:evidence.sourcePublicationDate,source:evidence.source})
+  assert.equal(reviewedAnnouncement.title,'This Month in Sky: October 2026 Edition')
 })
 test('date-only ranges never become instants or shift calendar date across display zones',()=>{
   for(const record of manualSchedule.records.filter(r=>r.startsAt.precision==='date')) {
