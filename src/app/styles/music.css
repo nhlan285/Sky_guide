@@ -1,0 +1,9 @@
+.music-controls { display: flex; flex-wrap: wrap; align-items: center; gap: var(--space-3); margin-bottom: var(--space-5); }
+.music-controls .input-field { flex: 1 1 10rem; min-width: 0; max-width: 20rem; }
+.music-controls input { width: 100%; accent-color: var(--accent); }
+.music-grid { display: grid; grid-template-columns: repeat(5, minmax(0, 1fr)); gap: var(--space-3); border: 0; padding: 0; margin: 0; max-width: 42rem; }
+.music-grid legend { margin-bottom: var(--space-3); }
+.music-note { display: flex; flex-direction: column; align-items: center; justify-content: center; gap: var(--space-2); min-height: 5rem; border: 1px solid var(--control-border); border-radius: var(--radius-small); background: var(--surface-soft); color: var(--text); cursor: pointer; touch-action: manipulation; font: inherit; }
+.music-note:hover, .music-note.is-playing { background: var(--surface); border-color: var(--accent); }
+.music-note kbd { color: var(--muted); font-size: var(--font-small); }
+@media (max-width: 40rem) { .music-grid { gap: var(--space-2); } .music-note { min-height: 4rem; } }

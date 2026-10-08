@@ -12,6 +12,7 @@ import { SourceCredits } from '../features/items/SourceCredits.tsx'
 const WardrobeEditor = lazy(() => import('../features/wardrobe/WardrobeEditor').then(module => ({ default: module.WardrobeEditor })))
 const Items = lazy(() => import('../features/items/Items').then(module => ({ default: module.Items })))
 const SpiritSamples = lazy(() => import('../features/spirits/SpiritSamples').then(module => ({ default: module.SpiritSamples })))
+const MusicPlayground = lazy(() => import('../features/music/MusicPlayground').then(module => ({ default: module.MusicPlayground })))
 const MemoizedSkyAtmosphere = memo(SkyAtmosphere)
 
 function focusLookup() {
@@ -121,12 +122,12 @@ function Footer() {
 function AppContent() {
   const { pathname, hash } = useLocation()
   const previousLocation = useRef({ pathname, hash })
-  const { t } = useLocale()
+  const { t, locale } = useLocale()
   const { visual } = useTheme()
   const isLanding = pathname === '/'
 
   useEffect(() => {
-    document.title = pathname === '/' ? t('landing.title') : `${pathname === '/hub' ? t('nav.hub') : pathname.startsWith('/items') ? t('nav.itemLookup') : pathname === '/wardrobe' ? t('nav.wardrobe') : pathname === '/spirits' ? 'Spirit tree' : pathname === '/traveling-spirits' ? t('hub.ts') : pathname === '/about' ? t('nav.about') : t('notFound.title')} | Sky Guide`
+    document.title = pathname === '/' ? t('landing.title') : `${pathname === '/hub' ? t('nav.hub') : pathname.startsWith('/items') ? t('nav.itemLookup') : pathname === '/wardrobe' ? t('nav.wardrobe') : pathname === '/music' ? (locale === 'vi' ? 'Chơi nhạc' : 'Music playground') : pathname === '/spirits' ? 'Spirit tree' : pathname === '/traveling-spirits' ? t('hub.ts') : pathname === '/about' ? t('nav.about') : t('notFound.title')} | Sky Guide`
     const changed = previousLocation.current.pathname !== pathname || previousLocation.current.hash !== hash
     previousLocation.current = { pathname, hash }
     if (!hash && !changed) return
@@ -135,7 +136,7 @@ function AppContent() {
     else window.scrollTo({ top: 0 })
     if (hash === '#item-lookup' && pathname === '/hub') focusLookup()
     else target?.focus({ preventScroll: true })
-  }, [pathname, hash, t])
+  }, [pathname, hash, t, locale])
 
   return (
     <div className={`app-shell ${isLanding ? 'app-shell--landing' : 'app-shell--hub'} ${visual.daylightWeight > 0.6 ? 'sky-ui--light' : 'sky-ui--dark'}${visual.sunsetWeight > 0.4 ? ' sky-ui--sunset' : ''}`}>
@@ -151,6 +152,7 @@ function AppContent() {
           <Route path="/wardrobe" element={<Suspense fallback={<p role="status">{t('state.loading')}</p>}><WardrobeEditor /></Suspense>} />
           <Route path="/spirits" element={<Suspense fallback={<p role="status">{t('state.loading')}</p>}><SpiritSamples key="tree" mode="tree" /></Suspense>} />
           <Route path="/traveling-spirits" element={<Suspense fallback={<p role="status">{t('state.loading')}</p>}><SpiritSamples key="visits" mode="visits" /></Suspense>} />
+          <Route path="/music" element={<Suspense fallback={<p role="status">{t('state.loading')}</p>}><MusicPlayground /></Suspense>} />
           <Route path="/about" element={<About />} />
           <Route path="*" element={<NotFound />} />
         </Routes>

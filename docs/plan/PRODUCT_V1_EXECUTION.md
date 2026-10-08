@@ -128,3 +128,9 @@ focused domain/audio lifecycle tests. Validate mapping/frequency/polyphony and
 silence/cleanup; lint/build and actual Preview interaction/mobile/navigation.
 Original waveform is illustrative, not a mapped catalogue instrument. Known item
 deep links remain unsupported until verified music metadata/rights crosswalk.
+Implemented original sine pluck with lazy AudioContext,8 bounded voices, mute/
+volume/stop, generation cancellation of pending playback and blur/hidden/unmount
+cleanup. Scoped keyboard shortcuts on grid only;15 standard buttons support
+mouse/touch/Enter/Space. Four lifecycle/model tests, lint/typecheck/catalog/build
+PASS. Preview/browser NOT RUN. Next push/verify exact deployment, keyboard/pointer/
+mute/mobile/navigation acceptance, full tests then poster-first original media.

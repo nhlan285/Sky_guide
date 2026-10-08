@@ -66,6 +66,11 @@ export function Hub() {
           <p>{t('hub.maps.reason')}</p>
         </SectionCard>
 
+        <SectionCard id="music" title={locale === 'vi' ? 'Chơi nhạc' : 'Music playground'}>
+          <p>{locale === 'vi' ? 'Thử giai điệu trên 15 nốt với âm thanh tự tạo. Chạm hoặc dùng bàn phím.' : 'Try a melody on 15 original tones. Tap or use the keyboard.'}</p>
+          <Link className="button" to="/music">{locale === 'vi' ? 'Mở nhạc cụ' : 'Open instrument'}</Link>
+        </SectionCard>
+
         <details className="community-panel hub-grid__wide">
           <summary>
             <span className="community-panel__title">{t('hub.community')} <span>{t('hub.community.label')}</span></span>
