@@ -1,8 +1,8 @@
 import assert from 'node:assert/strict'
 import { execFile } from 'node:child_process'
 import { promisify } from 'node:util'
-import { mkdirSync,existsSync,readFileSync,writeFileSync,realpathSync } from 'node:fs'
-import { join,resolve } from 'node:path'
+import { mkdirSync,existsSync,readFileSync,writeFileSync,realpathSync,readdirSync,lstatSync } from 'node:fs'
+import { join,resolve,dirname } from 'node:path'
 import { fileURLToPath } from 'node:url'
 import process from 'node:process'
 
@@ -12,6 +12,7 @@ export const localEnvironment=Object.freeze({
  image:'postgres@sha256:3645570cccdfa447589da9f57dd740faa29b30938e861289a5574b6ca6b03826',
  task:'sky-guide-r1-local-6ff3fa7',names:['sg-r1-source-6ff3fa7','sg-r1-restore-6ff3fa7'],
  maxDataBytes:2*1024**3,memory:768*1024**2,nanoCpus:1_000_000_000,
+ endpoint:'npipe:////./pipe/dockerDesktopLinuxEngine',
 })
 export function normalizeLocalMount(value){
  return value.replace(/^\/run\/desktop\/mnt\/host\/e\//i,'E:/').replaceAll('\\','/').replace(/\/$/,'').toLowerCase()
@@ -38,8 +39,9 @@ export function verifyLocalContainer(actual,name,id){
 }
 
 export async function localDocker(args,{timeout=30000,log}={}){
+ assert.equal(process.platform,'win32')
  try{
-  const result=await execute('docker',args,{windowsHide:true,timeout,maxBuffer:8*1024**2})
+  const result=await execute('docker',['--host',localEnvironment.endpoint,...args],{windowsHide:true,timeout,maxBuffer:8*1024**2})
   if(log)writeFileSync(join(localEnvironment.root,log),result.stdout+result.stderr)
   return result.stdout
  }catch(error){
@@ -48,6 +50,21 @@ export async function localDocker(args,{timeout=30000,log}={}){
  }
 }
 export function readLocalManifest(){return JSON.parse(readFileSync(join(localEnvironment.root,'environment.json'),'utf8'))}
+export function assertLocalDataBudget(){
+ let bytes=0
+ const visit=directory=>{
+  const actual=normalizeLocalMount(realpathSync(directory)),base=normalizeLocalMount(localEnvironment.root)
+  assert.ok(actual===base||actual.startsWith(base+'/'),'Task path escaped approved root')
+  for(const name of readdirSync(directory)){
+   const path=join(directory,name),stat=lstatSync(path)
+   assert.ok(!stat.isSymbolicLink(),'Unexpected task data link: STOP')
+   if(stat.isDirectory())visit(path);else bytes+=stat.size
+   assert.ok(bytes<=localEnvironment.maxDataBytes,'Task data exceeds approved2 GiB: STOP')
+  }
+ }
+ visit(localEnvironment.root)
+ return bytes
+}
 export async function assertLocalTarget(name){
  const manifest=readLocalManifest()
  const recorded=manifest.containers.find(c=>c.name===name)
@@ -59,19 +76,23 @@ export async function assertLocalTarget(name){
 export async function localSql(name,sql,{user='postgres',log='sql-result.log'}={}){
  assert.ok(['postgres','supabase_admin'].includes(user))
  await assertLocalTarget(name)
+ assertLocalDataBudget()
  // No shell interpolation or SQL/credential arguments: send SQL on stdin.
  const { spawn }=await import('node:child_process')
- const child=spawn('docker',['exec','-i',name,'psql','-X','-U',user,'-d','postgres','-v','ON_ERROR_STOP=1','-A','-t'],{windowsHide:true,stdio:['pipe','pipe','pipe']})
+ const child=spawn('docker',['--host',localEnvironment.endpoint,'exec','-i',name,'psql','-X','-U',user,'-d','postgres','-v','ON_ERROR_STOP=1','-A','-t'],{windowsHide:true,stdio:['pipe','pipe','pipe']})
  let stdout='',stderr=''
  child.stdout.on('data',b=>{stdout+=b});child.stderr.on('data',b=>{stderr+=b})
  const done=new Promise((resolve,reject)=>{child.once('error',()=>reject(new Error('Local psql launch failed')));child.once('close',code=>{writeFileSync(join(localEnvironment.root,log),stdout+stderr);if(code!==0)reject(new Error(`Local SQL failed; inspect ${log}`));else resolve(stdout)})})
  child.stdin.on('error',()=>{});child.stdin.end(sql)
- return await done
+ const result=await done
+ assertLocalDataBudget()
+ return result
 }
 export async function setupLocalEnvironment(){
  assert.equal(process.platform,'win32')
  assert.ok(normalizeLocalMount(resolve(localEnvironment.root)).startsWith('e:/skyguideassets/research/postgres-durable-restore-'))
  assert.ok(!existsSync(localEnvironment.root),'Fresh setup only; inspect existing manifest instead of recreating')
+ assert.equal(normalizeLocalMount(realpathSync(dirname(localEnvironment.root))),normalizeLocalMount(dirname(localEnvironment.root)),'Parent is not the approved E directory')
  mkdirSync(localEnvironment.root)
  assert.equal(normalizeLocalMount(realpathSync(localEnvironment.root)),normalizeLocalMount(localEnvironment.root))
  const server=JSON.parse(await localDocker(['info','--format','{{json .}}'],{log:'docker-info.json'}))

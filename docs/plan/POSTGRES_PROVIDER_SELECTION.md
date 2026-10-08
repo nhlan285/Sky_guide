@@ -2394,3 +2394,46 @@ arguments, SQL through stdin. One actual corruption test rejects wrong ID/task/
 mount/ports/resources/network/password env; PASS. Lint PASS; typecheck pending
 completion. Native setup NOT RUN; prepare bootstrap/migration/durable builders while
 new runtime repair question is pending, preserve all hosted/R1 gates.
+
+#### First runtime repair executed; new Secrets Engine socket gate
+User directly approved a6a83ec guarded directory rename/restart. Fresh guard PASS;
+original Docker/run preserved as run.skyguide-preserved-20261008-6ff3fa7. Both
+original endpoints metadata unchanged, independently compared with reviewed audit;
+E docker-runtime-repair-applied.json. Restart proceeded past Inference but failed
+09:46:54 UTC at Secrets Engine removing separate
+C:/Users/HP/AppData/Local/docker-secrets-engine/engine.sock, ERROR_CANT_ACCESS_FILE
+and invalid listener endpoint. Screenshot supplied by user matches backend log.
+Honored explicit STOP on different error: no further repair, reset, delete, settings/
+credential/VHD/WSL/workload change. Desktop/backend exited; no engine/container/image
+pull/local principal/schema/data work. First runtime repair is completed authority,
+not pending approval; original local proposal also remains approved.
+
+NEW Rule22 concrete proposal: repair-docker-secrets-runtime-proposal.ps1 default
+Audit. Exact source directory contains ONLY one zero-byte Archive/ReparsePoint
+engine.sock, lastwrite2026-08-10T01:01:09.8861919Z. No secret/socket contents read.
+Native READ-ONLY guard PASS; E docker-secrets-runtime-repair-before.json contains
+only metadata. Proposed same-parent rename to
+docker-secrets-engine.skyguide-preserved-20261008-a6a83ec, preserve socket, restart
+Desktop. Require no Desktop/backend process, ordinary parent/source, exact one
+object/metadata, fixed paths/destination absent; STOP on drift. Never delete/change
+settings/credentials/other files/containers/VHD/WSL. If a different error appears,
+STOP with evidence rather than extend recovery. Rollback only with Desktop stopped
+and original path absent; if new runtime directory was created preserve both and
+STOP, no overwrite/delete. Source LF script SHA256
+ee849155cea284f1c9f35e0661067bca42834090b2d0643bb065764d19925160.
+This touches another pre-existing directory and is outside first repair's explicit
+scope; separate direct approval needed. No repeat approval for approved local tasks.
+
+Independent safe preparation completed while engine unavailable: source-pinned
+build-local-postgres-replay.mjs and localPostgresReplay corruption/retention test.
+Fresh cluster actor supabase_admin/OID10/170011, no existing custom roles/task
+schemas; only named local postgres/platform placeholders bootstrap, runtime2 groups
+created by original migration. All16 SQL bytes/history retained in bounded30s/local
+COMMIT wrappers, nonsuper postgres executor. E local-bootstrap-proposal.sql and
+local-replay-manifest.json; preparation only, not a native schema/replay PASS.
+Local environment transport fixes Desktop named-pipe explicitly (ignores remote
+context), guards real E parent/root/IDs/image/network/ports/CPU/memory/log mounts and
+checks2 GiB task data before/after SQL. Two focused tests, lint/typecheck PASS;
+previous448 full suite retained, expanded full suite NOT RUN. Native setup/durable/
+CAS/crash/pg_dump/restore NOT RUN, R1 unchanged. Exact next after new repair approval:
+fresh guard/one rename/restart, healthy engine before any approved setup/migrations.

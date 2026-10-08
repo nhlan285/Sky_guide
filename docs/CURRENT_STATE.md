@@ -5,7 +5,7 @@ Master objective OPEN. Direct8514bec/101f788 approval executed: CLI-role cleanup
 full rollback-local A/B/observer concurrency PASS. Continued safe R1 work: native
 empty-dev recovery snapshot/manifest PASS. R1 and dependent R2–R6 not accepted.
 Branch codex/master-plan-execution; checkpoint parent
-6fa8536bd10cab440224d0064ed5cf0bae5d2e2b verified on origin.
+a6a83ecef27e200463e9c99f2790b03f27b39b1e verified on origin.
 Resolve latest checkpoint with git log -1 and verify remote SHA.
 Master: [IMPLEMENTATION_PLAN](plan/IMPLEMENTATION_PLAN.md).
 Active: [POSTGRES_PROVIDER_SELECTION](plan/POSTGRES_PROVIDER_SELECTION.md), latest
@@ -100,26 +100,32 @@ DIRECT user approval received for the isolated local proposal at6ff3fa7. No pend
 approval for Docker startup/two bounded local containers/specified local principals/
 local synthetic COMMIT/CAS/crash/restore. Exact next: bounded setup/target manifests,
 then source-pinned migrations and independently checked durable transcripts.
-Docker Desktop startup attempted under approval but FAILED before engine: existing
-dockerInference AF_UNIX/reparse socket cannot be removed, Windows error1920 then
-invalid endpoint. Desktop/backend now absent; no image pull/container/principal/DB
-work attempted. Read-only repair guard PASS: Docker/run contains ONLY two zero-byte
-reparse endpoints dockerInference and userAnalyticsOtlpHttp.sock, no live Docker
-process. New separate proposal tests/sql/repair-docker-runtime-proposal.ps1 default
-Audit; preserve old directory via exact same-parent rename, no deletion/settings/
-workload/WSL change. Runtime repair touches pre-existing Docker files outside the
-approved task-owned containers, so separate Rule22 approval required before Apply.
-E docker-runtime-repair-before.json contains reviewed metadata; STOP on drift.
-Bounded local-container guard/code prepared; one corruption test/lint PASS,
-typecheck running at this checkpoint preparation. Setup NOT RUN.
-host psql/pg_dump/initdb absent. Proposal pins official17.11 image and bounds two
-local containers/data on E/specified LOCAL principals/synthetic fixture COMMIT/
-CAS/crash/pg_dump/restore. These exceed current no-new-infra/principal/ROLLBACK scope;
-Rule22 separate approval now granted. No repeat permission for completed8514bec.
-Refine current setup/transcripts/verifiers before running;
-preserve target-specific source contracts and every mandatory R1 gate.
-Exact next: resolve new guarded runtime-repair permission; meanwhile prepare
-local bootstrap/migration and durable transcript builders without executing DB.
+User separately approved a6a83ec runtime repair. Immediate guard PASS; renamed
+Docker/run to run.skyguide-preserved-20261008-6ff3fa7. Both original zero-byte
+reparse endpoints preserved with EXACT metadata; E docker-runtime-repair-applied.json.
+Restart advanced past Inference but FAILED09:46:54 UTC at separate existing
+docker-secrets-engine/engine.sock (same1920/invalid endpoint). User screenshot and
+backend log agree. Per approval STOP on different error: no second repair applied.
+Desktop/backend now absent; no image pull/container/new principal/schema/data job.
+New reviewable proposal tests/sql/repair-docker-secrets-runtime-proposal.ps1:
+default Audit; native read-only guard PASS, exact directory contains ONLY engine.sock
+zero-byte Archive/ReparsePoint. Metadata only, no socket/secret contents read.
+Would preserve directory by same-parent rename to
+docker-secrets-engine.skyguide-preserved-20261008-a6a83ec, then restart; no deletion/
+settings/credential/VHD/workload/WSL change. Requires NEW Rule22 direct approval;
+first repair approval explicitly stopped on different error. E
+docker-secrets-runtime-repair-before.json; guard drift/active process STOP.
+While blocked, local bootstrap/replay prepared: all16 source SQL bytes/history
+retained, explicit fresh-local/version/actor guard, only approved local role names.
+E local-bootstrap-proposal.sql/local-replay-manifest.json; NOT EXECUTED. Two focused
+local environment/replay tests/lint/typecheck PASS. Local environment uses fixed
+Desktop named-pipe host, task labels/IDs, no ports/network, exact E mounts/resource/
+log guards and2 GiB data check. Source paths reject junction/outside-root fallback.
+Exact next: resolve NEW Secrets Engine runtime-repair permission. On approval run
+fresh metadata/zero-process guard, preserve directory once, restart; STOP for any
+different error. Only once engine healthy execute already-approved bounded setup,
+source-pinned bootstrap/migrations and independently prepared durable cases.
+No repeat approval for local proposal or prior8514bec/a6a83ec actions.
 Do not repeat cleanup/K15/passing adapter cases or create targets/roles/COMMIT by implication.
 Other gates: K04 OneDrive403/K10-K11 SKU-market/K12 bulk reuse prohibited/Q02-Q09-Q10-
 Q11-Q12/TGC-media rights/Vercel403/native device OPEN. No fabricated compaction/
