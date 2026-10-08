@@ -2206,3 +2206,28 @@ question; prior CLI login approval/automatic continuation is not that answer.
 No further connector/credential/DELETE/concurrent run or dependent phase opened.
 On authorization resume exact fresh guards/global snapshots and scoped actions
 above; original master objective and all acceptance gates remain unchanged.
+
+#### Direct8514bec/101f788 approval and narrow transport implementation
+User directly approved recovery/API package including the global audit, resuming
+from pushed9b55862; this is explicit human authority, not an automated continuation.
+The prior approval gate is resolved. No repeat permission request for approved
+cleanup, existing credential in memory, fixed Management API or rehearsal.
+Added management-api-worker.ps1: native Windows CredReadW/CredFree on only existing
+Supabase CLI:supabase/access-token targets, existing CLI fallback file read if needed,
+no credential/principal write. Token stays inside the HTTP worker; no token in
+arguments, pipe receipts, logs, Git or new files. Fixed API host/project and only
+GET project metadata, POST database/query, approved DELETE cli/login-role; redirects
+disabled, reflected token rejected, sensitive exceptions omitted. Project response
+is restricted to identity/org/region/status. Independent workers permit real HTTP
+overlap without invoking CLI DB configuration. SQL retains30s, HTTP65s does not
+relax SQL cap. Raw prepared transcripts and safe receipts remain on E outside Git.
+Recovery runner rebuilds source85 guard from original audit and compares stored SQL,
+compares fresh global roles with incident snapshot, checks exact guard immediately
+before DELETE, never retries/recreates, and verifies whole85/global after. Concurrent
+runner compares every prepared A/B/observer byte, uses3 independent workers and
+checks whole85/global after EACH case including SQL failure; existing independent
+receipt verifier decides PASS. No durable/CAS/crash/SDK gate is removed.
+Four focused recovery/transport tests PASS using fake credential only; lint PASS.
+Native credential read, cleanup and concurrency NOT RUN at this preparation point.
+Exact next: execute approved cleanup, verify post-state, checkpoint result, execute
+prepared concurrency immediately, then assess remaining dependency-ready work.

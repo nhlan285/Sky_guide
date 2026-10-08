@@ -1,11 +1,11 @@
 # Current handoff — 2026-10-08
 
 ## Task / branch / checkpoint
-Sky Guide goal BLOCKED pending direct8514bec recovery/transport approval; objective
-OPEN, not complete. CLI login completed; STOP after
-linked-query preflight minted/refreshed a managed DB login role outside approval.
+Sky Guide goal resumed under DIRECT user approval of8514bec including101f788;
+objective OPEN, not complete. Approved recovery/API transport is being executed.
+CLI login completed; linked-query role mint/refresh path remains forbidden.
 Branch codex/master-plan-execution; checkpoint parent
-101f788123813e5ae47d8651e50267a3f13b381f verified on origin.
+9b55862d75157580bca3f180c0e72285cf19f429 verified on origin.
 Resolve latest checkpoint with git log -1 and verify remote SHA.
 Master: [IMPLEMENTATION_PLAN](plan/IMPLEMENTATION_PLAN.md).
 Active phase: [POSTGRES_PROVIDER_SELECTION](plan/POSTGRES_PROVIDER_SELECTION.md),
@@ -26,9 +26,11 @@ Prepared down allowed on actual failed trial ONLY if empty85/source/history guar
 matches; retain migration history. No new approval needed for that scoped down.
 Additional direct authority2026-10-08: initiate normal Supabase CLI login with
 existing account solely for prepared development concurrency proof. User completes
-browser/CLI prompts directly; CLI manages its standard credential storage. Never
-read/export token, record input/output of login, put token in chat/log/Git or pass
-it as a command argument. No new DB account/password, DB rights or infrastructure.
+browser/CLI prompts directly; CLI manages its standard credential storage.
+Latest DIRECT approval supersedes the prior credential-read restriction only for
+8514bec/101f788: read existing CLI credential into worker process memory for fixed
+project Management API cleanup and independent queries. No token in chat/log/Git,
+arguments/new files, credential writes, new DB account/password/rights/infra.
 
 ## Completed / current hosted state
 K02/P1-D02 bounded sample DONE at2e6d110:10 nodes/9 edges; root price unknown,
@@ -132,11 +134,16 @@ concurrent-{a,b,observer}-evidence.json, parallel-transport-probe.json;
 release-bracket-final-tests.log. Active phase has exact names/hashes/full evidence.
 
 ## Exact next / remaining gates
-Review explicit recovery proposal before further DB CLI/credential/mutation work.
-Same recovery/transport authority gate persisted across three consecutive goal
-turns. Complete authorized preparation is checkpointed; no live job or independent
-authorized next implementation. Approval question for8514bec remains pending.
-Do not interpret automated goal continuations or prior CLI login approval as consent.
+DIRECT user approval of8514bec including101f788 received after9b55862. No pending
+approval for cleanup, in-memory credential read, direct API or prepared rehearsal.
+Current slice: narrow transport implemented and fake-credential/route tests PASS;
+four focused recovery/transport tests and lint PASS, typecheck running at checkpoint
+preparation. Native credential read/DELETE/new concurrency NOT RUN yet.
+Modified areas: tests/sql/management-api-{worker.ps1,transport.mjs},
+run-approved-management-api-rehearsal.mjs, tests/data/managementApiTransport.test.mjs,
+this handoff and active phase plan. Existing proposal/source guard hashes unchanged.
+Exact next: run approved recovery runner cleanup; fresh source85/all-role audit,
+exact guard immediately before DELETE, then strict whole85/global comparison.
 Builder tests/sql/build-cli-role-recovery-proposal.mjs; E cli-role-recovery-request.json
 and guard.sql/guard-receipt.json. Proposed DELETE fixed project's /cli/login-role
 ONLY after whole85 + exact expired one-role/membership/no sessions/settings/shared
@@ -144,11 +151,11 @@ dependencies guard. Provider endpoint may remove read-only counterparts, therefo
 guard forbids any other cli_login role. postgres lacks ADMIN on this provider role;
 do not try DROP/REVOKE/privilege escalation. Removal is irreversible; no automatic
 remint/recreation. On failure STOP/preserve evidence; schema down not applicable.
-Separate approval requested for same existing CLI account token used solely in
+Direct approval includes same existing CLI account token used solely in
 process memory for fixed Management API project/host cleanup + direct POST query
 transport (no CLI DB-config mint). No token in chat/log/Git/arguments/new files,
-no new credential/DB password/role/privilege. Proposed direct transport NOT RUN or
-approved yet. After cleanup require all cli_login roles absent, all other global
+no new credential/DB password/role/privilege. Direct transport approved; native
+run still NOT RUN. After cleanup require all cli_login roles absent, all other global
 roles/memberships/settings unchanged, source85 baseline exact. Then prepared full
 adapter A/B/observer unchanged30s/outer ROLLBACK +full baseline after each; actual
 backend blocking and complete receipts required. No repeat serial probes or gates.
@@ -160,8 +167,8 @@ DELETE/after-removal proof NOT RUN. E cli-role-recovery-global-{audit.sql,
 hashed-incident-audit.json}; capture fresh immediately before/after authorized
 cleanup. Not an initial pre-CLI principal baseline or app catalog adoption.
 Latest two focused recovery tests, lint/typecheck PASS; expanded full suite NOT RUN.
-Original8514bec recovery/transport approval question pending, scope/guard/request
-hashes unchanged. No credential read/new permission/cleanup/concurrent fixture.
+Original8514bec recovery/transport approval question resolved by direct user
+approval; scope/guard/request hashes unchanged. No new permission or credential.
 Full R1/P9-I02/D04/V01 OPEN: concurrent/durable/CAS/crash/backup restore/schema down/
 SDK/auth remain unaccepted. No real import/consumer/R2–R6 before foundation acceptance.
 K04 OneDrive403, K10/K11 SKU/market, K12 bulk reuse prohibited, Q02/Q09/Q10/Q11/Q12,
