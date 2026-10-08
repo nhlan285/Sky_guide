@@ -61,7 +61,7 @@ authentication page or deployment metadata a rendered PASS. Latest checkpoints
 and exact continuation live in ../CURRENT_STATE.md. Subsequent slices refine this
 phase when their source/dependency evidence is ready; no future implementation log.
 
-## Next slice: verified source tree and repeat visits
+## Current slice: verified source tree and repeat visits
 Use saved K02/K03 bounded evidence and existing FriendshipPath calculator. UI
 exposes10 reviewed nodes/9 prerequisite edges, multi-node selection, deduplicated
 closure, separate currencies, explicit partial subtotal/root unknown. Repeated
@@ -75,3 +75,10 @@ styles/primitives, focused source/calculation tests. Validate graph corruption,
 overlapping selection/unknown subtotal, repeated visits/date precision, lint/build,
 browser node selection/filter/navigation and360px layout. Then checkpoint and
 continue event slice when its reviewed-source intake contract is ready.
+Implementation: source-scoped draft graph validated at module entry; no K15
+crosswalk/public release mutation. Existing calculator used directly by checkbox
+selection; known subtotal and unknown root remain separate. Two repeated visits
+retain source visit IDs/date precision. App titles/route keys preserve navigation
+and separate search states. Three focused model tests, lint/typecheck/build PASS.
+Browser acceptance NOT RUN; exact next is pushed Preview selection/filter/mobile
+verification, then milestone integration and event intake planning.

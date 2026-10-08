@@ -46,7 +46,9 @@ export function Hub() {
 
         <SectionCard id="traveling-spirit" title={t('hub.ts')}>
           <p className="section-description">{t('hub.ts.desc')}</p>
-          <ContentState kind="unavailable" message={t('hub.ts.reason')} />
+          <p>{locale === 'vi' ? 'Xem hai lần ghé đã đối chiếu nguồn của Leaping Dancer; lịch hiện tại chưa được xác minh.' : 'Explore two source-reviewed Leaping Dancer visits; the current schedule is unverified.'}</p>
+          <Link to="/traveling-spirits" className="button">{locale === 'vi' ? 'Xem lịch sử mẫu' : 'View history sample'}</Link>
+          <Link to="/spirits" className="text-link">{locale === 'vi' ? 'Tính đường mở khóa cây spirit' : 'Estimate a spirit unlock path'}</Link>
           <p className="section-note">{t('hub.ts.note')}</p>
         </SectionCard>
 

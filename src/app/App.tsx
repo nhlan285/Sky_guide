@@ -11,6 +11,7 @@ import { SourceCredits } from '../features/items/SourceCredits.tsx'
 
 const WardrobeEditor = lazy(() => import('../features/wardrobe/WardrobeEditor').then(module => ({ default: module.WardrobeEditor })))
 const Items = lazy(() => import('../features/items/Items').then(module => ({ default: module.Items })))
+const SpiritSamples = lazy(() => import('../features/spirits/SpiritSamples').then(module => ({ default: module.SpiritSamples })))
 const MemoizedSkyAtmosphere = memo(SkyAtmosphere)
 
 function focusLookup() {
@@ -125,7 +126,7 @@ function AppContent() {
   const isLanding = pathname === '/'
 
   useEffect(() => {
-    document.title = pathname === '/' ? t('landing.title') : `${pathname === '/hub' ? t('nav.hub') : pathname.startsWith('/items') ? t('nav.itemLookup') : pathname === '/wardrobe' ? t('nav.wardrobe') : pathname === '/about' ? t('nav.about') : t('notFound.title')} | Sky Guide`
+    document.title = pathname === '/' ? t('landing.title') : `${pathname === '/hub' ? t('nav.hub') : pathname.startsWith('/items') ? t('nav.itemLookup') : pathname === '/wardrobe' ? t('nav.wardrobe') : pathname === '/spirits' ? 'Spirit tree' : pathname === '/traveling-spirits' ? t('hub.ts') : pathname === '/about' ? t('nav.about') : t('notFound.title')} | Sky Guide`
     const changed = previousLocation.current.pathname !== pathname || previousLocation.current.hash !== hash
     previousLocation.current = { pathname, hash }
     if (!hash && !changed) return
@@ -148,6 +149,8 @@ function AppContent() {
           <Route path="/items" element={<Suspense fallback={<p role="status">{t('state.loading')}</p>}><Items /></Suspense>} />
           <Route path="/items/:id" element={<Suspense fallback={<p role="status">{t('state.loading')}</p>}><Items /></Suspense>} />
           <Route path="/wardrobe" element={<Suspense fallback={<p role="status">{t('state.loading')}</p>}><WardrobeEditor /></Suspense>} />
+          <Route path="/spirits" element={<Suspense fallback={<p role="status">{t('state.loading')}</p>}><SpiritSamples key="tree" mode="tree" /></Suspense>} />
+          <Route path="/traveling-spirits" element={<Suspense fallback={<p role="status">{t('state.loading')}</p>}><SpiritSamples key="visits" mode="visits" /></Suspense>} />
           <Route path="/about" element={<About />} />
           <Route path="*" element={<NotFound />} />
         </Routes>

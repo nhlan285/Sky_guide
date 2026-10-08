@@ -2,10 +2,11 @@
 
 ## Task / authority / branch
 Master run OPEN. Branch codex/master-plan-execution, checkpoint parent
-14933c1cbc5cb5ae5a311c7585ef35b880af1def verified on origin; resolve current HEAD
+59f4b56d97358faf0203610ac668108c0df03448 verified on origin and develop; resolve current HEAD
 with git log -1 and verify remote before resuming.
 Master: [IMPLEMENTATION_PLAN](plan/IMPLEMENTATION_PLAN.md).
-Active: [POSTGRES_PROVIDER_SELECTION](plan/POSTGRES_PROVIDER_SELECTION.md).
+Active product: [PRODUCT_V1_EXECUTION](plan/PRODUCT_V1_EXECUTION.md).
+Backend gate: [POSTGRES_PROVIDER_SELECTION](plan/POSTGRES_PROVIDER_SELECTION.md).
 Direct execution takeover overrides old R1 dependency paralysis: close bounded
 native evidence, then continue independent visible V1 features. Priority:
 Analytics now → real Item Lookup/Wardrobe → spirits/TS → events → music →
@@ -61,7 +62,7 @@ CLI existing credential verifies project prj_3sHO9ZlRQaxuKsST5RNLxu7jK5y6/
 sky-guide, team_fMOtyuq5IlZZHMfoBw0W9oiU/Dyland/dyland1, GitHub
 nhlan285/Sky_guide, productionBranch main. Actual billing Hobby/active/trialnull.
 webAnalytics.enabledAt1790988221254 already set: no activation/paid change needed.
-Connector team403; in-app dashboard needs login. Use existing CLI credentials,
+Connector team403; in-app dashboard login confirmed. Use existing CLI credentials,
 never expose them. Speed Insights is separate.
 Analytics now wired once at root, public pathname-only SPA pageviews,
 query/hash/privacy sanitization/no custom events/no local collection. Three
@@ -94,8 +95,21 @@ origin, original empty library; no other user library was changed.
 Bounded six-item illustrative pilot VISIBLE/accepted; full game wardrobe/assets
 and other mappings remain OPEN. Next spirit/TS source sample UI with scoped IDs,
 unknown canonical crosswalk retained, original graph calculator and repeat visits.
-Develop history has two extra merge-only commits; source diff against merge base
-is empty. Integrate with normal merge then push develop, no squash/rebase/main.
+Develop integration complete: normal history-preserving merge59f4b56; execution
+and develop remotes equal. Main unchanged8b371de6a2b852e3175a55b5f8de2b9cc11d8b54.
+
+## Current Spirit/TS slice / exact next
+Implemented source-scoped K02 tree10 nodes/9 edges and K03 two historical visits.
+Routes /spirits and /traveling-spirits, Hub links, existing calculator for unique
+prerequisite closure and partial currency subtotal. Canonical crosswalk/item FK,
+root price/end instants remain unknown; no published catalogue mutation or media.
+3 focused source tests, lint/typecheck/build PASS; final App title/key edit lint
+PASS. Browser acceptance NOT RUN. Modified App/Hub/styles and features/spirits,
+tests/data/spiritSourceSamples.test.mjs plus active plan/handoff.
+Next: push checkpoint, verify exact Preview revision, exercise R4+L4 subtotal
+5C/4H/1AC with unknown C1, filter recovery, distinct TS#12/#115 date-only visits,
+navigation and360px overflow. Then checkpoint/integrate develop and continue
+reviewed manual event intake as authorized; do not stop at this checkpoint.
 
 ## Validation / modified areas / raw artifacts
 Recovered tests/sql/build-local-cas-rehearsal.mjs, run-local-cas-rehearsal.mjs,

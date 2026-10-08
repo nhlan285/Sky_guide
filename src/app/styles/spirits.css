@@ -1,0 +1,12 @@
+.spirit-sample-nav { display: flex; flex-wrap: wrap; gap: var(--space-3); }
+.spirit-samples .input-field { max-width: 32rem; }
+.spirit-node-list { border: 0; margin: 0 0 var(--space-4); padding: 0; display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); gap: var(--space-3); }
+.spirit-node-list legend { margin-bottom: var(--space-3); }
+.spirit-node { display: flex; align-items: flex-start; gap: var(--space-3); border: 1px solid var(--border); border-radius: var(--radius-small); padding: var(--space-3); cursor: pointer; overflow-wrap: anywhere; }
+.spirit-node input { flex: 0 0 auto; margin-top: .35rem; accent-color: var(--accent); }
+.spirit-node.is-required { background: var(--surface-soft); border-color: var(--control-border); }
+.spirit-node-detail { display: block; color: var(--muted); font-size: var(--font-small); }
+.spirit-subtotal { font-size: var(--font-section); font-weight: 600; }
+.spirit-visit-list { list-style: none; padding: 0; display: grid; gap: var(--space-4); }
+.spirit-visit-list li { border-left: 2px solid var(--control-border); padding-left: var(--space-4); }
+@media (max-width: 40rem) { .spirit-node-list { grid-template-columns: minmax(0, 1fr); } }
