@@ -5,7 +5,7 @@ Master objective OPEN. Direct8514bec/101f788 approval executed: CLI-role cleanup
 full rollback-local A/B/observer concurrency PASS. Continued safe R1 work: native
 empty-dev recovery snapshot/manifest PASS. R1 and dependent R2–R6 not accepted.
 Branch codex/master-plan-execution; checkpoint parent
-3884bd24c28db4b4ac45b9a19bed1e41a3bacb64 verified on origin.
+8a4b4626fbbbf9aa56319597ebd24edccf1c60f1 verified on origin.
 Resolve latest checkpoint with git log -1 and verify remote SHA.
 Master: [IMPLEMENTATION_PLAN](plan/IMPLEMENTATION_PLAN.md).
 Active: [POSTGRES_PROVIDER_SELECTION](plan/POSTGRES_PROVIDER_SELECTION.md), latest
@@ -154,8 +154,16 @@ prior copies exact. Single restart SUCCESS: Docker engine29.0.1 responds on fixe
 Desktop Linux named pipe. E docker-coordinated-runtime-repair-applied.json retained.
 Runtime approval blocker resolved; no further permission needed for approved local
 slice. No reset/settings/VHD/WSL/pre-existing workload changes.
-Exact next: approved environment setup; runner initialize;
-only after native source85/source-history PASS, runner durable. On any failure
+Approved setup executed: exactly two recorded/guarded isolated containers, fixed
+image/network-none/no ports/1CPU/768MiB and E mounts. Native PG17.11 preflight PASS
+on both. Initial early preflight found init still in progress, no bootstrap SQL
+submitted; preserved failed receipt. Verified PID1 postgres/readiness before retry;
+runner now checks both before schema work. Source bootstrap/all16 migrations COMMIT,
+every history source byte/order exact, unchanged source85 guard PASS under ROLLBACK.
+E task root postgres-durable-restore-2026-10-08-6ff3fa7 contains environment.json,
+all native logs/migration receipts/local-initialization-PASS.json. Restore target
+still fresh; no hosted changes. Three focused runner/environment checks PASS.
+Exact next: runner durable on initialized source. On any failure
 preserve E transcripts and inspect partial state, no blind repeat/recreation.
 Historical blocked audit: coordinated repair approval gate remained across three consecutive
 goal turns. Last turn made concrete progress (guarded runner/tests/checkpoint);

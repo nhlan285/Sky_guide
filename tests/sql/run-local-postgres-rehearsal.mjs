@@ -4,7 +4,7 @@ import { join,resolve } from 'node:path'
 import { fileURLToPath,URL } from 'node:url'
 import { createHash } from 'node:crypto'
 import process from 'node:process'
-import { localEnvironment,assertLocalTarget,localSql,assertLocalDataBudget } from './local-postgres-environment.mjs'
+import { localEnvironment,assertLocalTarget,localSql,localDocker,assertLocalDataBudget } from './local-postgres-environment.mjs'
 import { buildLocalPostgresReplay } from './build-local-postgres-replay.mjs'
 import { buildReleaseValidationBracketBaseline,verifyReleaseValidationBracketBaseline } from './build-release-validation-bracket-baseline.mjs'
 import { buildLocalDurableAdapter,verifyLocalDurableBoundary } from './build-local-durable-adapter.mjs'
@@ -42,7 +42,9 @@ function baselineSql(){
  return `begin isolation level read committed read write;\nset local statement_timeout='30s';\n${query}\nrollback;\n`
 }
 async function preflight(name){
- await assertLocalTarget(name);assertLocalDataBudget()
+ const target=await assertLocalTarget(name);assertLocalDataBudget()
+ assert.equal((await localDocker(['exec',target.Id,'cat','/proc/1/comm'])).trim(),'postgres','Initialization entrypoint still active; observe readiness before retry')
+ await localDocker(['exec',target.Id,'pg_isready','-U','supabase_admin','-d','postgres'])
  assert.equal(readFileSync(join(localEnvironment.root,name,'PG_VERSION'),'utf8').trim(),'17','Native E data mount/version missing')
  const raw=await localSql(name,`begin read only;set local statement_timeout='30s';
 select jsonb_build_object('actor',current_user,'version',current_setting('server_version_num'),'dataDirectory',current_setting('data_directory'),'superuser',(select rolsuper from pg_roles where rolname=current_user));commit;`,{user:'supabase_admin',log:`${name}-preflight.log`})

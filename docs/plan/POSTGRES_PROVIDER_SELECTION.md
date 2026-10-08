@@ -2505,3 +2505,13 @@ both older inventories exact. Single approved restart SUCCESS: engine29.0.1 answ
 on fixed Desktop Linux named pipe. E coordinated-applied receipt retained. Runtime
 permission blocker resolved; proceed with already-approved two local targets and
 native source85/history/durable acceptance. No global settings/reset/VHD/WSL changes.
+
+Approved two-container setup executed with exact recorded IDs/image/network/resource/
+E mount guards. Both native PG17.11 preflights PASS. Early source preflight arrived
+during image initialization and failed before bootstrap; failed receipt preserved.
+Confirmed PID1 postgres and pg_isready before retry, now explicit runner prechecks.
+Source bootstrap and16 original migrations COMMIT; every history byte/order exact.
+Unchanged compiled/reviewed source85 guard PASS under ROLLBACK (no adopted schema
+hash or relaxed role check). E local-initialization-PASS.json and all per-migration
+logs/receipts retained. Restore remains fresh; hosted untouched. Next durable39
+separate callbacks; CAS/crash/restore/leased-wire/SDK gates still OPEN.
