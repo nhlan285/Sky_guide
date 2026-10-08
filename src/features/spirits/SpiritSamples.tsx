@@ -2,7 +2,7 @@ import { useId, useState } from 'react'
 import { Link } from 'react-router-dom'
 import { useLocale } from '../../shared/i18n/useLocale'
 import { Button, SectionCard, StatusBadge, TextInput } from '../../shared/ui/primitives'
-import { estimateSourcePath, sampleAttribution, sourceNodeKey, sourceTree, sourceVisits, treeSample, treeSourceUrl, visitSourceUrl } from './sourceSamples'
+import { estimateSourcePath, sampleAttribution, sampleLicenseNote, sourceNodeKey, sourceTree, sourceVisits, treeSample, treeSourceUrl, visitSourceUrl } from './sourceSamples'
 
 const vi = {
   tree: 'Cây spirit', visits: 'Traveling Spirit', back: 'Về Khám phá', scope: 'Mẫu đã đối chiếu nguồn · 05/10/2026',
@@ -73,6 +73,7 @@ export function SpiritSamples({ mode }: { mode: 'tree' | 'visits' }) {
     </SectionCard>}
     <SectionCard id="spirit-sample-source" title={copy.source}>
       <p>{sampleAttribution}</p><a className="text-link" href={mode === 'tree' ? treeSourceUrl : visitSourceUrl} target="_blank" rel="noopener noreferrer">{copy.sourceLink} ↗</a>
+      <p className="section-note">{sampleLicenseNote}</p>
     </SectionCard>
   </div>
 }

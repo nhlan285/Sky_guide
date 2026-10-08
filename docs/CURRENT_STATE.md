@@ -2,7 +2,7 @@
 
 ## Scope / branch / authority
 Master run OPEN. Branch codex/master-plan-execution, current checkpoint parent
-634bc84ab90157f5ca742d7a0e49dbf2cbd0a871 verified on origin; resolve current HEAD
+94744019ad84dd0ef7db41fb8097a25f8f20b73f verified on origin; resolve current HEAD
 with git log -1 and compare remote before resuming. Develop db48582 verified;
 main unchanged8b371de6a2b852e3175a55b5f8de2b9cc11d8b54.
 Master: docs/plan/IMPLEMENTATION_PLAN.md.
@@ -69,12 +69,23 @@ WebM<=300kB and2s mono WAV88,244B created only after explicit action, local Blob
 memory only. One active selected sample; native controls/preload none; pause/abort/
 track/timer/URL cleanup on blur/switch/unmount. Rights-withheld sample unavailable.
 No new dependency/service/upload/game media/catalogue relation. Six focused tests
-PASS; lint/build PASS after test-only TextDecoder import fix. Browser NOT RUN.
+PASS; lint/build PASS after test-only TextDecoder import fix. Preview9474401 READY,
+immutable sky-guide-o07w7gxpn-dyland1.vercel.app browser PASS: poster/zero players
+on entry; generated WebM75.2kB/480x480 played to2.953s/end; WAV88.2kB duration2s
+played, initially paused; selector switch clears player, withheld rights creates
+no player/button;360px no overflow; route leave aborts preparation. Current-host
+console clean (old alias import error retained separately). Physical audio capture
+and raw media network traces unavailable, not claimed. Bounded original pilot
+VISIBLE; actual game relations/R2 publishing/full R4 rights/storage gates OPEN.
 App/Hub/style, features/media, shared route boundary/analytics (public /media and
 valid item0 path; queries/hashes still excluded), tests and plans modified.
-Exact next: push checkpoint; verify immutable READY Preview revision, prepare/play
-original video/audio, switch/rights-withheld/retry/mobile/route cleanup, full tests.
-Then staging integration/source gate audit; master/V1/R1 remain OPEN.
+QA fixes: truthful unavailable heading, source license uncertainty visible, error
+boundary focuses recovery heading. Latest focused lint/build PASS; full483 PASS
+before these text/focus changes. Exact next: push, use held old-alias recoveryTab
+to trigger changed Spirit lazy chunk and verify recovery/reload, then normal smoke
+on exact new immutable Preview. Dashboard Preview observed36 pageviews/1visitor,
+10 public paths including /music and /media; no query/hash paths. Integrate develop
+after verification, then refine event source intake; master/V1/R1 remain OPEN.
 
 ## Native R1 evidence / blocker
 Hosted sky-guide-dev/tpbydviuknovimroeodm, Dyland's Org, Supabase Free:85 private
@@ -100,8 +111,8 @@ No wider repair/restart loop. R1 leased wire/ACK-loss/SDK/Auth/full hosted backu
 schema down gates OPEN; local proof does not close R1. Continue independent V1.
 
 ## Validation / artifacts / continuity
-Full476 tests PASS/0failed/0skipped at8641a35, then1 music mapping and6 media tests
-PASS. Latest full suite pending; do not invent aggregate results. Build/catalog
+Full483 tests PASS/0failed/0skipped at9474401; focused text/focus lint/build PASS.
+Do not invent broader gate acceptance. Build/catalog
 1808/typecheck/lint PASS at music checkpoint; usual use-client/chunk warnings.
 Raw logs/dumps/snapshots on E:, never Git:
 E:/SkyGuideAssets/research/postgres-rehearsal-2026-10-07/

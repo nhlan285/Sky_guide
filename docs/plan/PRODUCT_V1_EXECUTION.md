@@ -166,3 +166,11 @@ and SPA fallback applies. Minimal route error boundary keeps shell/navigation,
 explains interruption and offers user-triggered reload; no automatic reload loop
 or storage deletion. Use immutable per-commit Preview URL for reliable QA.
 Boundary error injection NOT RUN; lint/build and normal-route navigation required.
+Full483 tests PASS. Immutable Preview9474401 browser: initial poster/zero players,
+WebM75.2kB480x480 plays to2.953s/end; WAV88.2kB2s plays; switch/unavailable rights/
+abort-on-route-leave/360px no overflow PASS. No current-host console errors. One
+selector-unavailable title mismatch fixed; license uncertainty now visible and
+error boundary focuses heading. Latest lint/build PASS; held old-alias tab3 on
+9474401 Hub will test genuine changed lazy chunk after next update. Physical
+audio capture/raw network trace unavailable. Dashboard Preview observed36 views/
+1visitor across10 pathname-only pages incl music/media; no custom events.
