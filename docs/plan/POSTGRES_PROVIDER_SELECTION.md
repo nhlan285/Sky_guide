@@ -1993,3 +1993,27 @@ Next: checkpoint proofs, run bounded concurrent rollback case, then EXACT packed
 K15/original30s cap. Original fixture/up/down source hashes
 unchanged except the qualified owner fixture hash above. STOP on drift; approved
 empty guarded down on failed trial, retaining migration history.
+
+#### Native concurrency transport audit — NOT ACHIEVED
+Dispatched A/B/observer connector calls together. A zero-row bracket completed
+epoch2/depth0/no owner and rolled back; B/observer failed explicit absence assertions
+because active A / blocked B were not observed. Full source85 guard + exact empty
+baseline passed after EACH call. No lock/concurrency PASS. Session probe confirms
+current_user/session_user both postgres and SET LOCAL application_name appears in
+pg_stat_activity; the actor/label filter was correct.
+One bounded timeline probe dispatched15s A hold and readonly B together: A backend
+163749/xid2151 started05:07:10.871747 UTC, ended05:07:25.877181; B backend163764
+executed05:07:27.137556 with seen_a=[]. Thus these attempted connector sessions ran
+without overlap despite concurrent client dispatch. Whole85 baseline afterward
+matched exactly. This does not prove database serialization under concurrent load;
+it proves the required overlap was absent on this execution path.
+CLI2.120.0 db query supports Management API --linked --project-ref; read-only
+preflight failed because no access token exists in that CLI environment. No login,
+token, DB principal/credentials or infrastructure created; no permission expansion.
+E: release-bracket-concurrent-{a,b,observer}-evidence.json,
+release-bracket-parallel-transport-probe.json,
+release-bracket-post-parallel-probe-baseline.json.
+Do not repeat this connector probe or call the model a concurrency proof. Separate
+authorized concurrent execution transport is needed; durable/SDK/actual races remain
+OPEN. Next perform exact packed K15/original30s then evaluate approved guarded down
+on failed trial. R1 acceptance/dependent work remain gated regardless of K15 result.

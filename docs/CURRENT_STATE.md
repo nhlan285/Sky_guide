@@ -6,7 +6,7 @@ User2026-10-08 approved exact package5d9058eb5026a74fa25caeedcb308566d8774fd5
 for dev application, full rollback rehearsals/K15 and guarded empty-state down.
 R1 acceptance and dependent work remain gated, including actual concurrency proof.
 Branch codex/master-plan-execution; checkpoint parent
-2b37b6975f21ae8c08a7cc88c3946ecaa8d25af2 verified on origin.
+a7f4d98e18d0dc7a0bed9355f833d928b72f124e verified on origin.
 Resolve latest checkpoint with git log -1 and verify remote SHA.
 Master: [IMPLEMENTATION_PLAN](plan/IMPLEMENTATION_PLAN.md).
 Active phase: [POSTGRES_PROVIDER_SELECTION](plan/POSTGRES_PROVIDER_SELECTION.md),
@@ -173,12 +173,21 @@ zero-row writes, distinct backend PIDs and observed A→blocked B lock required;
 3 outer ROLLBACK and exact baseline after each. Prepared/not native run, limited
 serialization proof; does not satisfy full durable/SDK races. No source rights or
 consumer scope expansion. Packed K15 hash unchanged9b149207...5eaed7.
+Native concurrency attempt NOT ACHIEVED: A completed/rolled back, B/observer could
+not observe active A or blocking edge; full85 baseline after EACH call exact. Actor
+and local labels verified correct. Bounded15s timeline probe showed actual A end
+05:07:25.877181 UTC and B start05:07:27.137556, seen_a=[]; concurrent client dispatch
+did not produce overlapping DB sessions here. No concurrency PASS. CLI Management
+API read-only preflight found no access token; no login/token/principal/credentials
+created. E: release-bracket-concurrent-* evidence, parallel-transport-probe and
+post-parallel-probe-baseline. Need separately authorized concurrent transport;
+do not repeat existing connector calls or bypass this gate with model/serial proof.
 
 ## Exact next / remaining gates
 Review packet5d9058e is pushed/SHA-verified and directly approved by the user.
 Before-only clock remains rejected; new entry/
 exit bracket with no cache during writes is installed; acceptance remains OPEN.
-Next checkpoint rollback proofs, then concurrent SQL rollback case and original packed K15/30s,
+Next exact original packed K15/30s, then approved guarded down if trial fails;
 full baseline after EACH ROLLBACK and empty-state down proof. Original30s cost gate
 and full schema/SDK/durable/concurrent/crash/restore remain. No one-function approval
 inferred for new helpers/owners. No real import/consumer before foundation acceptance.
