@@ -105,3 +105,26 @@ matching, date-only/instant distinction, invalid ranges/FKs, duplicate IDs, priv
 field projection, atomic failure and last-known-good preservation. Real schedules,
 IANA recurrence/override resolution, live API/time and countdown remain OPEN.
 Next after staging checks: original 15-note instrument as independent visible V1.
+Completed bounded staging:6 focused tests PASS; lint and initial typecheck PASS.
+Review binds complete declared fields (including fixture status) and source
+ID/URL/revision/retrieval pins; source drift requires new review. Invalid batch
+returns no candidates and retainEventDraft preserves previous identity. Synthetic
+spring/fall LA-offset instants retained, not a recurrence/DST resolver proof.
+INVISIBLE domain capability; no real schedule/source review, editor or public
+live API delivered. Workflow: maintainer verifies source/field facts and registers
+review + stable IDs outside input; stage JSON; inspect quarantined sanitized
+reports or draft diff; canonical promotion/public export remain separate gates.
+
+## Current visible slice: original music instrument
+Goal: /music playable15-note3x5 grid using original generated Web Audio tones.
+No game audio/rights claims, account, microphone, autoplay or new service/package.
+Dependencies: existing SPA shell/primitives and authorized original sample path;
+independent of unaccepted R1/event feeds. Support mouse/touch/keyboard, volume,
+mute/stop and an explicit activate gesture. Lazily create only active instrument;
+bounded voices and cleanup on blur/hidden/route leave. Keep errors/retry and
+keyboard focus visible; no page scrolling from key shortcuts outside the grid.
+Files: features/music note model/audio adapter/component, style/App/Hub links,
+focused domain/audio lifecycle tests. Validate mapping/frequency/polyphony and
+silence/cleanup; lint/build and actual Preview interaction/mobile/navigation.
+Original waveform is illustrative, not a mapped catalogue instrument. Known item
+deep links remain unsupported until verified music metadata/rights crosswalk.

@@ -117,6 +117,12 @@ Next: checkpoint/integrate develop, finish bounded manual event draft staging
 already in progress (catalog/manualEventInput.ts and active plan); verify source
 reviews/date precision/atomic rejection/LKG with focused tests, then original
 15-note instrument. No real event schedule verified; live API/countdown OPEN.
+Manual event staging now6 focused tests/lint PASS; initial typecheck PASS. Uses
+trusted out-of-file reviews, source pins and complete declared fields; rejects
+self-approval/fixture promotion/source drift and retains accepted draft on error.
+INVISIBLE capability only, no real event schedule/editor/runtime or recurrence
+proof. Exact next: final typecheck/checkpoint, implement planned /music original
+15-note grid, focused audio lifecycle checks and Preview/browser verification.
 
 ## Validation / modified areas / raw artifacts
 Recovered tests/sql/build-local-cas-rehearsal.mjs, run-local-cas-rehearsal.mjs,
