@@ -2063,3 +2063,35 @@ Final local suite442/442 PASS (including concurrency receipt corruption checks),
 lint/typecheck/focused/scaffold PASS; app build unchanged/not rerun. No live SQL/test
 job remains. Native benchmark checkpoint is the resume source; don't repeat passed
 rehearsals or unavailable connector probes before authentication/transport changes.
+
+#### Full adapter concurrency preparation — native NOT RUN
+While CLI authentication remains pending, prepared two complete owner adapter
+transcripts plus the independent read-only observer. Builder:
+tests/sql/build-release-validation-bracket-adapter-concurrency.mjs; verifier exported
+there compares original full intent/control/applied/receipt rows using the existing
+independent adapter verifier. Original callback SQL unchanged,39 callbacks/978 query
+checks/6 token negatives EACH. Only test barrier/local receipt metadata added.
+A locks existing head/control before8s sleep; B must observe live A, physically wait,
+then see clock0/witness empty after A ROLLBACK before running its full adapter.
+Both final receipts require balanced positive epochs, exact expected release-version
+witnesses bound to their own distinct xid, three distinct live PIDs and observer's
+actual A→B blocking edge. Older witness epochs within a transaction are permitted;
+they are never interpreted as a current-epoch cache hit. Full baseline after each
+transaction remains mandatory. No new role/SET grant/DDL/credential/SDK/resource,
+all fixture writes in outer ROLLBACK; unchanged30s statement limit.
+E: release-bracket-adapter-concurrency-a.sql1728233 bytes SHA256
+cd063bbb110d09e81fbae2934c16a6281c2211f59ddb88941ff89f6c5ee997af;
+b.sql1729668 bytes SHA256
+7e882b64c8247ec878808f222d9be1d17985f70e9ceab034438291f113866c46;
+observer.sql1290 bytes SHA256
+108c3d92a3ddf9406a316f589fa322c7c1ac1452b93012c04a94666945b7643b.
+Two focused preparation/receipt-corruption tests PASS; lint/typecheck PASS. Prior
+full442 suite remains checkpoint evidence; expanded full suite NOT RUN (unchanged
+app/native inputs). Native concurrent case NOT RUN; credentials question still
+pending, no new authentication probe or passed-native rerun. Exact next after
+authorized/user-ready CLI: read-only project/postgres/PG17.11/full85 preflight,
+inspect actual output format, run this full adapter case with independent processes
+and verify actual rows/blocking/rollback baselines. If transport cannot overlap,
+stop instead of accepting synthetic or serial evidence. R1 remains OPEN: even this
+case would establish rollback-local competing adapter serialization, not durable
+commit/CAS-winner/crash/restore/SDK acceptance. Keep K15 PASS and original gates.

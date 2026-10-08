@@ -3,7 +3,7 @@
 ## Task / branch / checkpoint
 Sky Guide autonomous master run ACTIVE; full roadmap OPEN, not complete.
 Branch codex/master-plan-execution; checkpoint parent
-e58d54329ed32dfd94d00759e3985c119bdb0ced verified on origin.
+38bea5b997a2d26428e8740813d67fd2e8089884 verified on origin.
 Resolve latest checkpoint with git log -1 and verify remote SHA.
 Master: [IMPLEMENTATION_PLAN](plan/IMPLEMENTATION_PLAN.md).
 Active phase: [POSTGRES_PROVIDER_SELECTION](plan/POSTGRES_PROVIDER_SELECTION.md),
@@ -82,6 +82,13 @@ CLI2.120.0 supports Management API --linked --project-ref; read-only preflight f
 no access token. No login/token or credential operation performed. Authentication
 outside exact5d9058e scope needs user rule22 authorization or user-supplied ready CLI.
 Even limited zero-row lock proof would not close all durable adapter/CAS/SDK races.
+Prepared full adapter A/B/observer case now preserves both complete39-callback/
+978-query/6-negative transcripts. A holds existing head/control while sleeping;
+B must actually wait, then observe clock0/witness empty after A ROLLBACK before
+running its full transcript. Verifier compares complete journal rows and requires
+three distinct backends, two xids, observed lock edge and transaction-bound witness
+versions. Synthetic corruption checks PASS; native case NOT RUN. This still does
+not establish durable commits, CAS winners, crash recovery or SDK races.
 
 ## Files / validation
 Intentional areas: one approved migration, proposal/baseline/adversarial/concurrency
@@ -90,6 +97,8 @@ master/handoff. Historical tests explicitly stop at restored83 migration20261007
 all unknown-object/definer/body rejection assertions retained. New85 applied migration
 compared byte-for-byte with approved source. Full442 tests, lint/typecheck,
 focused tests and scaffold76 Markdown/14 profiles/173 tasks PASS; diff checked.
+Latest addition: two adapter-concurrency preparation/corruption tests, lint and
+typecheck PASS. Full442 suite is the prior checkpoint result; expanded suite NOT RUN.
 App build previously PASS at2925996; app build inputs unchanged, NOT RERUN.
 No live SQL/test/tool job remains. Node24/pnpm10.30.3 via E:/Code/corepack.cmd;
 CLI2.120.0/npm cache E:/SkyGuideAssets/tools/npm-cache. No owned Docker/browser/server.
@@ -107,8 +116,9 @@ User may authenticate CLI using existing account or separately authorize login
 initiation; do not create/read/export a credential, put a token in chat/log/Git, or
 open a sensitive browser session by implication. After auth: read-only preflight must
 verify target project/current+session user postgres/PG17.11 and complete85 baseline;
-inspect actual CLI result format. Run prepared A/B/observer via separate CLI processes,
-check distinct live backends/blocking/clock receipts and full baseline after each
+inspect actual CLI result format. Run prepared full adapter A/B/observer via separate
+CLI processes (release-bracket-adapter-concurrency-{a,b,observer}.sql on E:), verify
+complete journal rows/distinct live backends/blocking/clock/witness receipts and full baseline after each
 ROLLBACK. If API also serializes, stop and review an independently authorized path.
 Full R1/P9-I02/D04/V01 OPEN: concurrent/durable/CAS/crash/backup restore/schema down/
 SDK/auth remain unaccepted. No real import/consumer/R2–R6 before foundation acceptance.
