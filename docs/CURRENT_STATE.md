@@ -96,14 +96,30 @@ release-bracket-adapter-concurrency-{a,b,observer}.sql. Full suite approved-api-
 Snapshot prefix approved-api-2026-10-08T07-14-06-357Z: empty-snapshot.sql/json/manifest.json,
 snapshot-before/after-baseline/roles.json. Image metadata local-restore-image-metadata.json.
 
-Exact next: NEW isolated local durable/restore proposal at end of active plan.
-Docker CLI installed/daemon unavailable; no startup/pull/container/install attempted,
+DIRECT user approval received for the isolated local proposal at6ff3fa7. No pending
+approval for Docker startup/two bounded local containers/specified local principals/
+local synthetic COMMIT/CAS/crash/restore. Exact next: bounded setup/target manifests,
+then source-pinned migrations and independently checked durable transcripts.
+Docker Desktop startup attempted under approval but FAILED before engine: existing
+dockerInference AF_UNIX/reparse socket cannot be removed, Windows error1920 then
+invalid endpoint. Desktop/backend now absent; no image pull/container/principal/DB
+work attempted. Read-only repair guard PASS: Docker/run contains ONLY two zero-byte
+reparse endpoints dockerInference and userAnalyticsOtlpHttp.sock, no live Docker
+process. New separate proposal tests/sql/repair-docker-runtime-proposal.ps1 default
+Audit; preserve old directory via exact same-parent rename, no deletion/settings/
+workload/WSL change. Runtime repair touches pre-existing Docker files outside the
+approved task-owned containers, so separate Rule22 approval required before Apply.
+E docker-runtime-repair-before.json contains reviewed metadata; STOP on drift.
+Bounded local-container guard/code prepared; one corruption test/lint PASS,
+typecheck running at this checkpoint preparation. Setup NOT RUN.
 host psql/pg_dump/initdb absent. Proposal pins official17.11 image and bounds two
 local containers/data on E/specified LOCAL principals/synthetic fixture COMMIT/
 CAS/crash/pg_dump/restore. These exceed current no-new-infra/principal/ROLLBACK scope;
-Rule22 needs separate direct approval. No repeat permission for completed8514bec.
-After new approval refine current setup/transcripts/verifiers before running;
+Rule22 separate approval now granted. No repeat permission for completed8514bec.
+Refine current setup/transcripts/verifiers before running;
 preserve target-specific source contracts and every mandatory R1 gate.
+Exact next: resolve new guarded runtime-repair permission; meanwhile prepare
+local bootstrap/migration and durable transcript builders without executing DB.
 Do not repeat cleanup/K15/passing adapter cases or create targets/roles/COMMIT by implication.
 Other gates: K04 OneDrive403/K10-K11 SKU-market/K12 bulk reuse prohibited/Q02-Q09-Q10-
 Q11-Q12/TGC-media rights/Vercel403/native device OPEN. No fabricated compaction/

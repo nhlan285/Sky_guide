@@ -2353,3 +2353,44 @@ After approval refine this current slice, verify setup before durable cases and
 checkpoint meaningful proofs; every unproved R1 gate remains OPEN.
 Primary restore requirements: [PostgreSQL17 SQL dumps](https://www.postgresql.org/docs/17/backup-dump.html)
 requires owners/grantees before restore; database dumps omit global roles.
+
+Direct user reply `duyệt` received for proposal checkpoint6ff3fa7. Local scope
+approved exactly as above; startup/setup/roles/local fixture COMMIT/crash/restore
+require no repeat question. Hosted no-new-principal/fixture ROLLBACK remains intact.
+Current work: bounded setup scripts/manifests, Docker startup and local target
+preflight; image/schema/data/native durable cases not yet run.
+
+#### Approved Docker startup failed; scoped runtime repair proposal
+Startup attempted once with installed Docker Desktop hidden. Backend09:32:51 UTC
+fails before engine: initializing Inference manager cannot remove existing
+Docker/run/dockerInference, Windows ERROR_CANT_ACCESS_FILE1920 / invalid endpoint.
+Desktop/backend subsequently quit; no current process, daemon pipe absent. No image
+pull/container/new local principal/schema/data work. Read-only WSL status confirms
+WSL2; no WSL shutdown/termination, update/reinstall/global settings action.
+Existing runtime directory contains precisely two zero-byte Archive/ReparsePoint
+objects: dockerInference (lastwrite2026-08-10T01:01:09Z) and userAnalyticsOtlpHttp.sock.
+fsutil reparse query returns1920 too. Exact failure is also reported in Docker's
+own [desktop-feedback issue625](https://github.com/docker/desktop-feedback/issues/625);
+that corroborates symptom, not proof that any workaround will succeed here.
+
+NEW Rule22 review package: tests/sql/repair-docker-runtime-proposal.ps1, Audit by
+default. Native read-only Audit PASS; E docker-runtime-repair-before.json captures
+exact source/destination/two-object metadata with no file contents. Apply would
+rename only C:/Users/HP/AppData/Local/Docker/run to its same-parent
+run.skyguide-preserved-20261008-6ff3fa7, preserving both original endpoints; then
+restart approved Docker Desktop. Before Apply require zero Desktop/backend process,
+ordinary parent/source directories, exact two zero-byte reparse objects/metadata,
+destination absent and exact paths; STOP on drift. No delete/settings/data VHD/
+container/image/credential/WSL/global config change. No broader automatic recovery.
+Rollback: with Desktop/backend stopped and original run path absent, rename preserved
+directory back. If restart created a new runtime directory, retain BOTH and stop;
+never overwrite/delete either automatically. Existing runtime files predate this
+task, so their movement is outside approved task-container startup/cleanup scope
+and needs separate direct authority, not repeated local-environment approval.
+
+Local environment code prepared: fixed E root/image/task label/two names, exact ID/
+image/mount/network/port/memory/CPU/log guard before DB work, no password or credential
+arguments, SQL through stdin. One actual corruption test rejects wrong ID/task/
+mount/ports/resources/network/password env; PASS. Lint PASS; typecheck pending
+completion. Native setup NOT RUN; prepare bootstrap/migration/durable builders while
+new runtime repair question is pending, preserve all hosted/R1 gates.
