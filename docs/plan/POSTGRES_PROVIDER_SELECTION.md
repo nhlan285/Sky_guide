@@ -2472,3 +2472,29 @@ local engine preparation, NOT leased-wire/ACK-loss/CAS race/restore acceptance.
 All3 focused local preparation tests/lint/typecheck/PowerShell parse/diff PASS;
 expanded full suite/build NOT RERUN. Native durable execution NOT RUN. Continue local slice
 only once healthy engine and guarded targets exist. R1/dependent gates remain OPEN.
+
+#### Guarded local runner prepared while coordinated repair approval is pending
+Fresh continuation inventory: Desktop/backend now absent; no force-stop or extra
+runtime repair/startup performed. Previous goal turn made progress (second approved
+rename and new preparation), not native durability acceptance. Newad9845b repair
+question remains pending; do not infer authorization from automatic continuation.
+
+run-local-postgres-rehearsal.mjs has separate initialize/durable operations, no
+implicit setup/repair. Before schema change verify both fixed task IDs/mounts and
+native PG17.11/superuser actor/E PG_VERSION17. Execute approved local bootstrap and
+16 original migration bodies under nonsuper postgres; source history statements
+must match every original byte/order. Execute unchanged compiled/reviewed source85
+guard under ROLLBACK; do not adopt native metadata or weaken provider guards if it
+fails. Saved initialization receipt does not prove hosted/SDK/Auth parity.
+
+Durable run requires initialization receipt plus fresh exact source85/history;
+STARTED marker prohibits blind rerun after any partial COMMIT. Seed then39 separate
+native callbacks, validate terminal acknowledgements and distinct backend IDs,
+retain all transcripts; final original complete journal verifier and history check.
+SQL transport now executes inspected immutable container ID, avoiding replacement
+of a same-name container between guard and execution. No fixture on hosted project.
+Five focused tests PASS including corrupt native boundaries/history; lint/typecheck
+PASS. E local-durable-adapter-proposal-ad9845b.json pins prepared callback SQL. Native
+bootstrap/replay/durable/CAS/crash/restore NOT RUN; no dependent roadmap gate opened.
+Next after coordinated approval/healthy engine: approved environment setup, runner
+initialize, source85/history acceptance, runner durable; STOP/retain on any failure.

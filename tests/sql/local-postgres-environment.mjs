@@ -75,11 +75,11 @@ export async function assertLocalTarget(name){
 }
 export async function localSql(name,sql,{user='postgres',log='sql-result.log'}={}){
  assert.ok(['postgres','supabase_admin'].includes(user))
- await assertLocalTarget(name)
+ const target=await assertLocalTarget(name)
  assertLocalDataBudget()
  // No shell interpolation or SQL/credential arguments: send SQL on stdin.
  const { spawn }=await import('node:child_process')
- const child=spawn('docker',['--host',localEnvironment.endpoint,'exec','-i',name,'psql','-X','-U',user,'-d','postgres','-v','ON_ERROR_STOP=1','-A','-t'],{windowsHide:true,stdio:['pipe','pipe','pipe']})
+ const child=spawn('docker',['--host',localEnvironment.endpoint,'exec','-i',target.Id,'psql','-X','-U',user,'-d','postgres','-v','ON_ERROR_STOP=1','-A','-t'],{windowsHide:true,stdio:['pipe','pipe','pipe']})
  let stdout='',stderr=''
  child.stdout.on('data',b=>{stdout+=b});child.stderr.on('data',b=>{stderr+=b})
  const done=new Promise((resolve,reject)=>{child.once('error',()=>reject(new Error('Local psql launch failed')));child.once('close',code=>{writeFileSync(join(localEnvironment.root,log),stdout+stderr);if(code!==0)reject(new Error(`Local SQL failed; inspect ${log}`));else resolve(stdout)})})

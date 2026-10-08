@@ -5,7 +5,7 @@ Master objective OPEN. Direct8514bec/101f788 approval executed: CLI-role cleanup
 full rollback-local A/B/observer concurrency PASS. Continued safe R1 work: native
 empty-dev recovery snapshot/manifest PASS. R1 and dependent R2–R6 not accepted.
 Branch codex/master-plan-execution; checkpoint parent
-72db3d922340a72896727e5e99b739d90b9b15f8 verified on origin.
+ad9845b10b1f7db33fdf725b9f595245fe24daef verified on origin.
 Resolve latest checkpoint with git log -1 and verify remote SHA.
 Master: [IMPLEMENTATION_PLAN](plan/IMPLEMENTATION_PLAN.md).
 Active: [POSTGRES_PROVIDER_SELECTION](plan/POSTGRES_PROVIDER_SELECTION.md), latest
@@ -81,8 +81,8 @@ Expanded full448 tests PASS, zero failures/skips at concurrency milestone. New
 snapshot corruption test separately PASS; full449 suite NOT RUN. Lint/typecheck
 PASS after snapshot additions; scaffold76 Markdown/14 profiles/173 tasks/diff PASS.
 App build previously PASS2925996, inputs unchanged NOT RERUN. No live owned SQL/
-login/test job. Docker error UI/backend from approved startup remain running;
-official graceful stop failed, no force-stop. Node24/pnpm10.30.3 via E:/Code/corepack.cmd.
+login/test job. Fresh continuation process inventory: Docker Desktop/backend now
+absent; graceful stop previously failed, no force-stop used. Node24/pnpm10.30.3 via E:/Code/corepack.cmd.
 
 ## Evidence / exact resume
 All raw SQL/receipts/baselines outside Git:
@@ -115,7 +115,7 @@ Current Docker/run has only this zero-byte reparse endpoint; active Secrets Engi
 path absent; BOTH prior preserved directories metadata independently EXACT.
 Honored STOP on further error; no repeated rename/start or broader repair. Official
 docker desktop stop --timeout20 failed: processes still running, deadline exceeded.
-Owned CLI attempt ended; error UI/backend still live. No image/container/principal/
+Owned CLI attempt ended; current fresh inventory Desktop/backend ABSENT. No image/container/principal/
 schema/data job. No force-stop/settings/credentials/VHD/WSL/workload changes.
 NEW Rule22 proposal tests/sql/repair-docker-coordinated-runtime-proposal.ps1:
 metadata-only Audit PASS even with error UI open; fresh Apply requires no Desktop/
@@ -138,9 +138,20 @@ COMMIT positives/ROLLBACK negatives. Corruption test rejects wrong terminal rece
 backend PID. Preparation only; no native durability/CAS/crash/restore proof.
 All3 local preparation tests/lint/typecheck/new PowerShell parse/diff check PASS.
 Expanded full suite/app build NOT RERUN; no application input changed.
-Exact next: user Quit Docker error UI (graceful stop failed), then NEW coordinated
-repair approval/fresh guard/one rename/restart. Only once engine healthy execute
-already-approved bounded setup/source-pinned migrations/separate durable callbacks.
+Prepared guarded runner run-local-postgres-rehearsal.mjs: initialize/durable ONLY on
+existing exact task targets; version170011/native E PG_VERSION17 and both mounts
+before bootstrap. All16 source/history bytes exact; unchanged reviewed source85
+guard under ROLLBACK before fixture seed. Durable STARTED marker blocks blind retry;
+39 independent backend IDs/terminal boundaries, final full journal verifier and
+unchanged migration history. SQL executes inspected ID rather than reusable name.
+LocalPostgresRunner tests reject bad/missing/duplicate native receipts and missing/
+reordered/altered migration bytes. All5 focused tests/lint/typecheck PASS. Native
+initialize/durable NOT RUN; no acceptance gate changed. E preparation artifact
+local-durable-adapter-proposal-ad9845b.json retains complete hashed SQL callbacks.
+Exact next: pending NEW coordinated repair approval atad9845b (Desktop now absent),
+fresh guard/one rename/restart. Then approved environment setup; runner initialize;
+only after native source85/source-history PASS, runner durable. On any failure
+preserve E transcripts and inspect partial state, no blind repeat/recreation.
 No repeat approval for local proposal or prior8514bec/a6a83ec/72db3d9 actions.
 Do not repeat cleanup/K15/passing adapter cases or create targets/roles/COMMIT by implication.
 Other gates: K04 OneDrive403/K10-K11 SKU-market/K12 bulk reuse prohibited/Q02-Q09-Q10-
