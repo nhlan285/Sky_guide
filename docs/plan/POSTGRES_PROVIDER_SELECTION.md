@@ -2231,3 +2231,23 @@ Four focused recovery/transport tests PASS using fake credential only; lint PASS
 Native credential read, cleanup and concurrency NOT RUN at this preparation point.
 Exact next: execute approved cleanup, verify post-state, checkpoint result, execute
 prepared concurrency immediately, then assess remaining dependency-ready work.
+
+#### Approved native CLI-role cleanup PASS
+Narrow transport preparation pushed0fd1074. Existing CLI credential read only
+inside worker memory; fixed Management API target identity/org/region/status PASS.
+First baseline preflight returned23514 because new wrapper was read-only while
+original guard calls lock_sync_commit_control requiring READ COMMITTED/read-write.
+Stopped before DELETE, preserved receipt; corrected wrapper only to read/write
+with30s/ROLLBACK, source guard unchanged. No drift detected or guard relaxed.
+Fresh source85 and complete33-role/27-membership/10-setting audit exactly matched
+installation/incident snapshots; exact expiry/no-active-session/no-settings/no-deps/
+single-role guard PASS immediately before DELETE. Approved Management API DELETE
+returned200. Native post source85 exact PASS; global comparator permits exactly
+one removed cli_login_postgres and its one postgres SET edge. Remaining32 roles,
+26 memberships and10 settings exactly unchanged; all cli_login roles absent. No
+credential/principal/password/privilege creation, retry, remint or schema down.
+Receipts E approved-api-2026-10-08T07-05-52-751Z-{project,immediate-before-baseline,
+immediate-before-roles,immediate-guard,delete,immediate-after-baseline,
+immediate-after-roles,cleanup-PASS}.json. Failed first preflight prefix07-05-18-095Z.
+Exact next: unchanged A/B/observer independent direct requests, per-case full85 and
+global comparisons. R1/all other mandatory acceptance gates remain OPEN.

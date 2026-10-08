@@ -16,7 +16,10 @@ const save=(name,value)=>writeFileSync(join(root,name),JSON.stringify(value,null
 const expected=read('release-bracket-applied-baseline.json').baseline
 const baseline=buildReleaseValidationBracketBaseline(read('release-bracket-approved-before-baseline.json').query).query
 assert.equal(baseline,readFileSync(join(root,'release-bracket-baseline-check.sql'),'utf8'))
-const baselineSql=`begin isolation level read committed read only;\nset local statement_timeout='30s';\n${baseline}\nrollback;`
+// The source guard invokes lock_sync_commit_control, whose contract requires
+// read/write even for this empty-state audit. Preserve the original guard and
+// put all guard locks/work in ROLLBACK; read-only role audit remains separate.
+const baselineSql=`begin isolation level read committed read write;\nset local statement_timeout='30s';\n${baseline}\nrollback;`
 const stamp=new Date().toISOString().replace(/[:.]/g,'-')
 const prefix=`approved-api-${stamp}`
 let phase='initialization'

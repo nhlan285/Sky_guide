@@ -2,10 +2,10 @@
 
 ## Task / branch / checkpoint
 Sky Guide goal resumed under DIRECT user approval of8514bec including101f788;
-objective OPEN, not complete. Approved recovery/API transport is being executed.
+objective OPEN, not complete. Approved recovery cleanup PASS; direct concurrency next.
 CLI login completed; linked-query role mint/refresh path remains forbidden.
 Branch codex/master-plan-execution; checkpoint parent
-9b55862d75157580bca3f180c0e72285cf19f429 verified on origin.
+0fd1074a649fe446a4668d588e3486078d880a30 verified on origin.
 Resolve latest checkpoint with git log -1 and verify remote SHA.
 Master: [IMPLEMENTATION_PLAN](plan/IMPLEMENTATION_PLAN.md).
 Active phase: [POSTGRES_PROVIDER_SELECTION](plan/POSTGRES_PROVIDER_SELECTION.md),
@@ -46,7 +46,8 @@ Exception detected2026-10-08: CLI2.120.0 linked-query setup minted/refreshed
 cli_login_postgres LOGIN/NOINHERIT/non-super/no-create/no-bypass and postgres→CLI
 membership ADMIN FALSE/INHERIT FALSE/SET TRUE, grantor supabase_admin. This managed
 role/membership is OUTSIDE fixture ROLLBACK and approved two runtime groups. Its
-password validity expired05:55:41.50054 UTC; role/membership still exist. No CLI
+password validity expired05:55:41.50054 UTC; role/membership now removed by approved
+Management API cleanup. No CLI
 backend/shared dependencies/role settings observed. Do not treat expiry as removal.
 Legacy whole85 snapshot does not cover this other provider principal; no pre-CLI
 all-role snapshot exists, so do not claim proven creation vs refresh or global
@@ -136,14 +137,18 @@ release-bracket-final-tests.log. Active phase has exact names/hashes/full eviden
 ## Exact next / remaining gates
 DIRECT user approval of8514bec including101f788 received after9b55862. No pending
 approval for cleanup, in-memory credential read, direct API or prepared rehearsal.
-Current slice: narrow transport implemented and fake-credential/route tests PASS;
-four focused recovery/transport tests and lint PASS, typecheck running at checkpoint
-preparation. Native credential read/DELETE/new concurrency NOT RUN yet.
+Current slice: four focused recovery/transport tests and lint/typecheck PASS.
+Native cleanup PASS: exact fresh85/global audit/guard, DELETE200, CLI role and one
+membership gone; other32 roles/26 memberships/10 settings and source85 unchanged.
+E approved-api-2026-10-08T07-05-52-751Z-* receipts. First preflight STOP before DELETE:
+read-only wrapper contradicted original lock helper; corrected to original READ
+COMMITTED/read-write under ROLLBACK. Guard unchanged; no drift or DELETE retry.
 Modified areas: tests/sql/management-api-{worker.ps1,transport.mjs},
 run-approved-management-api-rehearsal.mjs, tests/data/managementApiTransport.test.mjs,
 this handoff and active phase plan. Existing proposal/source guard hashes unchanged.
-Exact next: run approved recovery runner cleanup; fresh source85/all-role audit,
-exact guard immediately before DELETE, then strict whole85/global comparison.
+Exact next: prepared concurrency via independent API workers with post-cleanup
+approved-api-2026-10-08T07-05-52-751Z-immediate-after-roles.json global baseline.
+Do not repeat cleanup or recreate role. Require distinct backends/actual blocking.
 Builder tests/sql/build-cli-role-recovery-proposal.mjs; E cli-role-recovery-request.json
 and guard.sql/guard-receipt.json. Proposed DELETE fixed project's /cli/login-role
 ONLY after whole85 + exact expired one-role/membership/no sessions/settings/shared
@@ -155,7 +160,7 @@ Direct approval includes same existing CLI account token used solely in
 process memory for fixed Management API project/host cleanup + direct POST query
 transport (no CLI DB-config mint). No token in chat/log/Git/arguments/new files,
 no new credential/DB password/role/privilege. Direct transport approved; native
-run still NOT RUN. After cleanup require all cli_login roles absent, all other global
+cleanup PASS, concurrency NOT RUN. After cleanup require all cli_login roles absent, all other global
 roles/memberships/settings unchanged, source85 baseline exact. Then prepared full
 adapter A/B/observer unchanged30s/outer ROLLBACK +full baseline after each; actual
 backend blocking and complete receipts required. No repeat serial probes or gates.
@@ -163,7 +168,7 @@ Global comparison ready: tests/sql/verify-cli-role-recovery-audit.mjs; audit SQL
 explicitly casts OIDs to bigint, returns33 roles/27 memberships/10 settings in
 current native incident snapshot. Config values stay in DB; SHA256 +key names only.
 Shape verified; simulated after-removal comparison/corruption tests PASS, native
-DELETE/after-removal proof NOT RUN. E cli-role-recovery-global-{audit.sql,
+DELETE/after-removal proof now PASS. E cli-role-recovery-global-{audit.sql,
 hashed-incident-audit.json}; capture fresh immediately before/after authorized
 cleanup. Not an initial pre-CLI principal baseline or app catalog adoption.
 Latest two focused recovery tests, lint/typecheck PASS; expanded full suite NOT RUN.
