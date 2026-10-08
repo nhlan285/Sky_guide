@@ -1,12 +1,12 @@
 # Current handoff — 2026-10-08
 
 ## Task / branch / checkpoint
-Sky Guide autonomous master run BLOCKED pending scoped write-bracket approval;
-roadmap OPEN, not complete. The same approval gate has persisted across at least
-three consecutive goal turns. Local review/fixture preparation is complete; no live
-job is pending and no dependency-ready roadmap action remains within current authority.
+Sky Guide autonomous master run ACTIVE; roadmap OPEN, not complete.
+User2026-10-08 approved exact package5d9058eb5026a74fa25caeedcb308566d8774fd5
+for dev application, full rollback rehearsals/K15 and guarded empty-state down.
+R1 acceptance and dependent work remain gated, including actual concurrency proof.
 Branch codex/master-plan-execution; checkpoint parent
-5d9058eb5026a74fa25caeedcb308566d8774fd5 verified on origin.
+0c212806e7f16dba95961594f424530582204891 verified on origin.
 Resolve latest checkpoint with git log -1 and verify remote SHA.
 Master: [IMPLEMENTATION_PLAN](plan/IMPLEMENTATION_PLAN.md).
 Active phase: [POSTGRES_PROVIDER_SELECTION](plan/POSTGRES_PROVIDER_SELECTION.md),
@@ -22,8 +22,12 @@ retained temporary membership. Two bootstrap creator edges remain ADMIN TRUE /
 INHERIT FALSE / SET FALSE; do not confuse them with temporary SET grants.
 User subsequently approved cb95d3a one-function scan migration, guarded body restore,
 and automatic continuation. That trial and its restore are now executed.
-New architecture/migration scope still requires a concrete reviewed proposal under
-user rule22. R1/provider/org/existing creator authority need not be requested again.
+User approved exactly2 private tables,3 existing-postgres SECURITY DEFINER helpers
+and168 triggers from5d9058e, with pinned up/down hashes; runtime internal-owner
+access denied, writer helper EXECUTE only. Baseline before/after, STOP on drift,
+fixture and temporary SET in same outer ROLLBACK. Prepared down permitted on failure
+ONLY with empty baseline/guard match and retained migration history. No authority
+for broader infrastructure/permissions. R1/provider/org/creator approval persists.
 Schema and exact full-K15 benchmark gates mandatory. SDK/Auth/credentials, durable
 commits/independent sessions/crash/restore/consumers/scheduler/rights separate.
 
@@ -131,12 +135,10 @@ Master dependencies confirm R2–R6 and live sync consumers require R1 acceptanc
 they cannot be opened while native foundation/benchmark approval remains pending.
 
 ## Exact next / remaining gates
-Review packet5d9058e is pushed and SHA-verified; obtain the pending scoped85-owner/
-3-definer/168-hook up/down approval under user rule22. No repeated migration request
-or new architecture inferred from automatic goal continuation. Before-only clock
-remains rejected; new entry/
+Review packet5d9058e is pushed/SHA-verified and directly approved by the user.
+Before-only clock remains rejected; new entry/
 exit bracket with no cache during writes is a prepared candidate, not native PASS.
-After approval revalidate83 baseline, CLI migration/application, explicit new85
+Next revalidate83 baseline, CLI migration/application, explicit new85
 structure/metadata/ACL source review, owner/creator/denial/adversarial/K15 rehearsals,
 full baseline after EACH ROLLBACK and empty-state down proof. Original30s cost gate
 and full schema/SDK/durable/concurrent/crash/restore remain. No one-function approval
