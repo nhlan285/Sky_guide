@@ -16,6 +16,10 @@ lives in CURRENT_STATE and the active phase plan, not this master roadmap.
 Bounded Spirit/TS source sample VISIBLE/accepted (10 nodes/9 edges, partial
 path costs, two distinct historical visits). Manual event draft staging validated;
 real event source/rule/live API/countdown gates remain OPEN.
+Original Music15-note pilot with two sourced item identities and poster-first
+original video/call pilot VISIBLE and tested. These do not close R4/R5 game
+sample/media rights/storage gates. Manual official schedule verification next;
+live API/recurrence/time/countdown remain OPEN.
 Visible V1 bounded Wardrobe pilot now accepted:6 source-verified public item IDs
 with explicit original illustrative geometry, slot replacement/save/reload/share
 and mobile Preview proof. This adds real identity continuity without claiming

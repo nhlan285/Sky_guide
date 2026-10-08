@@ -2,7 +2,7 @@
 
 ## Scope / branch / authority
 Master run OPEN. Branch codex/master-plan-execution, current checkpoint parent
-94744019ad84dd0ef7db41fb8097a25f8f20b73f verified on origin; resolve current HEAD
+b2887e063bf478d7e12683077d5e01843332f473 verified on origin; resolve current HEAD
 with git log -1 and compare remote before resuming. Develop db48582 verified;
 main unchanged8b371de6a2b852e3175a55b5f8de2b9cc11d8b54.
 Master: docs/plan/IMPLEMENTATION_PLAN.md.
@@ -81,11 +81,18 @@ App/Hub/style, features/media, shared route boundary/analytics (public /media an
 valid item0 path; queries/hashes still excluded), tests and plans modified.
 QA fixes: truthful unavailable heading, source license uncertainty visible, error
 boundary focuses recovery heading. Latest focused lint/build PASS; full483 PASS
-before these text/focus changes. Exact next: push, use held old-alias recoveryTab
-to trigger changed Spirit lazy chunk and verify recovery/reload, then normal smoke
-on exact new immutable Preview. Dashboard Preview observed36 pageviews/1visitor,
+before these text/focus changes. Genuine old-tab recovery PASS: tab3 held9474401
+Hub, alias upgradedb2887e0; old Spirit import failed, fallback/reload button shown,
+explicit reload restored current tree/source notice. No forced failure injection
+or auto reload loop. New focus behavior still not independently observed.
+Dashboard Preview observed36 pageviews/1visitor,
 10 public paths including /music and /media; no query/hash paths. Integrate develop
 after verification, then refine event source intake; master/V1/R1 remain OPEN.
+Exact next: integrate verified bounded music/media milestone; source verification
+found official TGC October monthly article (published2026-10-02) with date-only
+season/event ranges and explicit Pacific interview times spanning DST. Prepare
+small manual evidence on E:, keep unspecified hours/end instants unknown, then
+refine /events manual snapshot UI without claiming live API/clock/recurrence.
 
 ## Native R1 evidence / blocker
 Hosted sky-guide-dev/tpbydviuknovimroeodm, Dyland's Org, Supabase Free:85 private

@@ -174,3 +174,25 @@ error boundary focuses heading. Latest lint/build PASS; held old-alias tab3 on
 9474401 Hub will test genuine changed lazy chunk after next update. Physical
 audio capture/raw network trace unavailable. Dashboard Preview observed36 views/
 1visitor across10 pathname-only pages incl music/media; no custom events.
+Actual recovery PASS afterb2887e0 update: held9474401 Hub tab's old Spirit lazy
+chunk failed; fallback offered reload/back, explicit reload restored current tree.
+No artificial error injection or reload loop. New focus behavior NOT independently
+observed. Bounded original music/media paths VISIBLE; full R4/R5 game samples and
+storage/crosswalk remain gated. Next manual official schedule/source slice below.
+
+## Next current slice: official manual schedule projection
+Verified official TGC monthly October article; reuse K06 official editorial source
+family with a separately documented manual monthly-page capability. Helpshift-only
+news staging contract unchanged; no new source enum/database/provider/migration.
+Goal: /events bounded reviewed date ranges plus two explicit interview starts,
+timezone display America/Los_Angeles/Asia/Ho_Chi_Minh/UTC. Date-only values stay
+calendar dates, no midnight/active/countdown inference. Instant normalization
+cross-checked with IANA spring/fall semantics; missing event end remains null.
+Source-scoped IDs/empty FKs stay distinct from canonical import, no raw article or
+media bundled. Source version/hash/retrieval, publisher/type/unknowns and manual
+snapshot label visible. No live API, polling, validity invented, countdown or
+recurrence. Source facts summarized only, no full text/media copy.
+Files: K06 profile/evidence/decision, features/events projection/model/UI/style,
+App/Hub entries and focused source/date/timezone tests. Validate source match,
+date-only semantics/null ends, LA offset before/after Nov1, filter/empty/mobile/
+browser navigation and provenance. Then checkpoint and revisit remaining gates.
