@@ -2,7 +2,7 @@
 
 ## Scope / branch / authority
 Master run OPEN. Branch codex/master-plan-execution, current checkpoint parent
-5368e77dbe03a57777eeb863b8ac31519855187c verified on origin and develop; resolve current HEAD
+a822000d8e382ec76cc1d6dc4cff0aad1738ea46 verified on origin; resolve current HEAD
 with git log -1 and compare remote before resuming. Develop5368e77 verified;
 main unchanged8b371de6a2b852e3175a55b5f8de2b9cc11d8b54.
 Master: docs/plan/IMPLEMENTATION_PLAN.md.
@@ -84,7 +84,8 @@ boundary focuses recovery heading. Latest focused lint/build PASS; full483 PASS
 before these text/focus changes. Genuine old-tab recovery PASS: tab3 held9474401
 Hub, alias upgradedb2887e0; old Spirit import failed, fallback/reload button shown,
 explicit reload restored current tree/source notice. No forced failure injection
-or auto reload loop. New focus behavior still not independently observed.
+or auto reload loop. Follow-up heldb2887e0 tab aftera822000: genuine old Media
+chunk failure focused page-title recovery heading; explicit reload restored Media.
 Dashboard Preview observed36 pageviews/1visitor,
 10 public paths including /music and /media; no query/hash paths. Integrate develop
 after verification, then refine event source intake; master/V1/R1 remain OPEN.
@@ -100,11 +101,18 @@ starts; LA/HCM/UTC display. Dates never shift timezone/turn midnight; unknown en
 duration preserved. Source-scoped draft IDs/empty FKs; no canonical import/live
 API/clock/recurrence/countdown/validity claim. No article text or media bundled.
 3 focused source/date/IANA fall-offset tests, lint/typecheck/catalog/build PASS;
-browser NOT RUN. Modified events data/model/UI/style, App/Hub, K06/evidence/test
-and plans. Exact next: push checkpoint, exact READY Preview, Hub/filter/empty/
-timezone/360px browser QA; held old-alias tab3 can test Media lazy error recovery
-and new focus after update. Full regression after checkpoint; integrate develop
-when validated, then audit remaining independently executable roadmap work.
+full486 tests PASS/0failed/0skipped (102136.6711ms). Exacta822000 immutable Preview
+sky-guide-i0wgv5ek4-dyland1.vercel.app READY/browser PASS: Hub entry, five entries,
+season filter, no-match/clear recovery, LA17:30 both dates → HCM07:30Oct28/08:30Nov4
+and UTC00:30/01:30; date-only ranges unchanged, unknown ends visible, source credit/
+freshness visible; current-host errors/warnings none. Actual541px and1265px no
+overflow. Requested360px override was ignored by browser capability (actual DOM
+remained541px; fresh tab1265px); reset/closed temporary tab. Exact360px acceptance
+OPEN, not claimed PASS. Screenshot events-preview.jpg and full-tests.log on E:.
+Events bounded source manual UI VISIBLE; full live/canonical gate remains OPEN.
+Exact next: verified checkpoint/develop integration, then expose this same verified
+official announcement in Hub news (headline/date/source/manual freshness only,
+no article body/media/feed/DB); do not invent a second fetch or close full news.
 
 ## Native R1 evidence / blocker
 Hosted sky-guide-dev/tpbydviuknovimroeodm, Dyland's Org, Supabase Free:85 private
@@ -130,7 +138,7 @@ No wider repair/restart loop. R1 leased wire/ACK-loss/SDK/Auth/full hosted backu
 schema down gates OPEN; local proof does not close R1. Continue independent V1.
 
 ## Validation / artifacts / continuity
-Full483 tests PASS/0failed/0skipped at9474401; focused text/focus lint/build PASS.
+Full486 tests PASS/0failed/0skipped ata822000; focused lint/build PASS.
 Do not invent broader gate acceptance. Build/catalog
 1808/typecheck/lint PASS at music checkpoint; usual use-client/chunk warnings.
 Raw logs/dumps/snapshots on E:, never Git:

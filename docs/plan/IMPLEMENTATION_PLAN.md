@@ -18,8 +18,10 @@ path costs, two distinct historical visits). Manual event draft staging validate
 real event source/rule/live API/countdown gates remain OPEN.
 Original Music15-note pilot with two sourced item identities and poster-first
 original video/call pilot VISIBLE and tested. These do not close R4/R5 game
-sample/media rights/storage gates. Manual official schedule verification next;
-live API/recurrence/time/countdown remain OPEN.
+sample/media rights/storage gates. Official manual five-entry Events UI VISIBLE,
+source/timezone/filter Preview and486 regression checks PASS. Exact360px QA is
+OPEN because the browser ignored its viewport override; live API/recurrence/time/
+countdown/canonical schedule remain OPEN. Source-linked official Hub headline next.
 Visible V1 bounded Wardrobe pilot now accepted:6 source-verified public item IDs
 with explicit original illustrative geometry, slot replacement/save/reload/share
 and mobile Preview proof. This adds real identity continuity without claiming

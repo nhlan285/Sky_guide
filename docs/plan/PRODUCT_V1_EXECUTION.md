@@ -201,4 +201,19 @@ and no canonical FKs. Module validates existing SeasonEvent/provenance shapes;
 UI filters/name/type/empty recovery/three display zones and source freshness.
 Three focused source-match/date-preservation/IANA offset tests PASS, lint/build
 PASS. Raw HTML124094B on E: only, response/hash/retrieval evidence in KB; no full
-text/media bundled. Browser NOT RUN; push and exact Preview verification next.
+text/media bundled. Exacta822000 Preview READY/browser PASS: five entries, Hub,
+filters/no-match/clear, LA/HCM/UTC conversion across Nov1 and unshifted date-only
+ranges/null ends/source freshness. Full486 tests PASS. Layout541px/1265px no
+overflow; browser viewport override ignored360px, so exact360px gate remains OPEN.
+Held oldb2887e0 Media chunk genuinely failed after update; recovery heading focus
+and explicit reload PASS. No artificial injection or automatic reload loop.
+
+## Next bounded slice: source-linked official announcement
+Outcome: Hub official-news card shows the same reviewed monthly TGC headline,
+date/publisher/source and manual snapshot limit. Reuse existing K06 receipt and
+reviewed schedule source; no new fetch/provider/database, article body, media,
+live feed/filter or automatic freshness claim. Exact headline must match cached
+source metadata and evidence/projection tests; names stay source English.
+Files: bounded projection/evidence/source metadata, Hub and current plans.
+Validate focused source identity, lint/build, exact Preview/source link and
+keyboard navigation. Full P3-H07 news feed/search and360px acceptance remain OPEN.
