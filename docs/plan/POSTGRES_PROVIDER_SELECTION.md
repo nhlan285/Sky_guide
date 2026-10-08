@@ -2498,3 +2498,10 @@ PASS. E local-durable-adapter-proposal-ad9845b.json pins prepared callback SQL. 
 bootstrap/replay/durable/CAS/crash/restore NOT RUN; no dependent roadmap gate opened.
 Next after coordinated approval/healthy engine: approved environment setup, runner
 initialize, source85/history acceptance, runner durable; STOP/retain on any failure.
+
+Direct user instruction to repair Docker and continue received. Coordinatedad9845b
+Apply fresh guard PASS, current run directory preserved at its fixed new destination,
+both older inventories exact. Single approved restart SUCCESS: engine29.0.1 answers
+on fixed Desktop Linux named pipe. E coordinated-applied receipt retained. Runtime
+permission blocker resolved; proceed with already-approved two local targets and
+native source85/history/durable acceptance. No global settings/reset/VHD/WSL changes.
