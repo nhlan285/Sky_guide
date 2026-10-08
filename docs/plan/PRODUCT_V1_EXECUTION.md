@@ -53,7 +53,25 @@ adding hair5 then replacing cape with1012 preserves hair; saved QA pilot appears
 Reload exposed old URL intent re-equipping1011 over saved1012. Fix marks consumed
 intent in navigation history, preserving source return link and fresh-link actions;
 5 navigation tests/lint/build PASS. Updated Preview reload/share/mobile acceptance
-still pending. Preserve exact failures, do not call
+PASS on14933c1 branch Preview: saved1012+hair5 survive reload; share restores same
+IDs after reset; unsupported Sit0 preserves outfit;360px viewport no horizontal
+overflow (345px content/client); no console errors. Six-item illustrative pilot
+VISIBLE/accepted. No full game wardrobe/media/calibration claim. Preserve exact failures, do not call
 authentication page or deployment metadata a rendered PASS. Latest checkpoints
 and exact continuation live in ../CURRENT_STATE.md. Subsequent slices refine this
 phase when their source/dependency evidence is ready; no future implementation log.
+
+## Next slice: verified source tree and repeat visits
+Use saved K02/K03 bounded evidence and existing FriendshipPath calculator. UI
+exposes10 reviewed nodes/9 prerequisite edges, multi-node selection, deduplicated
+closure, separate currencies, explicit partial subtotal/root unknown. Repeated
+Leaping Dancer TS#12/#115 remain separate date-only records; ends/timezone unknown,
+no current countdown/prediction or fabricated current schedule. Source-scoped
+stable IDs are distinct from unreviewed K15 canonical crosswalk; do not infer item
+FK or change the published catalogue. Render bounded source sample with attribution,
+revision/date and unknown labels, not full catalogue coverage. No image fetch.
+Files: features/spirits source-sample model/UI, App routes, Hub entry links, existing
+styles/primitives, focused source/calculation tests. Validate graph corruption,
+overlapping selection/unknown subtotal, repeated visits/date precision, lint/build,
+browser node selection/filter/navigation and360px layout. Then checkpoint and
+continue event slice when its reviewed-source intake contract is ready.

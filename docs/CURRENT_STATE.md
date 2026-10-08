@@ -2,7 +2,7 @@
 
 ## Task / authority / branch
 Master run OPEN. Branch codex/master-plan-execution, checkpoint parent
-a47a15f299c35cb6e0f0770fc38a42b4ada52b8c verified on origin; resolve current HEAD
+14933c1cbc5cb5ae5a311c7585ef35b880af1def verified on origin; resolve current HEAD
 with git log -1 and verify remote before resuming.
 Master: [IMPLEMENTATION_PLAN](plan/IMPLEMENTATION_PLAN.md).
 Active: [POSTGRES_PROVIDER_SELECTION](plan/POSTGRES_PROVIDER_SELECTION.md).
@@ -84,8 +84,18 @@ Actual Previewa47a15f lookup→Blue Cape rendered real1011 SVG bindings; adding
 hair5 then replacing cape1012 preserved hair. QA pilot saved on this Preview
 origin (initial empty local library). Reload exposed source intent1011 overriding
 saved1012. Fixed consumed intent via navigation history, retaining contextual
-link/new explicit action;5 navigation tests/lint/build PASS. Next updated Preview
-reload/share/mobile, then spirit/TS. Do not claim acceptance before those checks.
+link/new explicit action;5 navigation tests/lint/build PASS. Preview14933c1 READY
+and branch alias verified. Actual browser now PASS: lookup→equip, separate slot
+replacement/hair preservation, save/reload retains Red Cape1012+hair5, share
+applies same IDs after reset, unsupported Sit0 keeps outfit, no console errors.
+360px viewport: content345px equals client345px (scrollbar), no horizontal overflow;
+responsive panels remain usable. One synthetic QA pilot saved on branch Preview
+origin, original empty library; no other user library was changed.
+Bounded six-item illustrative pilot VISIBLE/accepted; full game wardrobe/assets
+and other mappings remain OPEN. Next spirit/TS source sample UI with scoped IDs,
+unknown canonical crosswalk retained, original graph calculator and repeat visits.
+Develop history has two extra merge-only commits; source diff against merge base
+is empty. Integrate with normal merge then push develop, no squash/rebase/main.
 
 ## Validation / modified areas / raw artifacts
 Recovered tests/sql/build-local-cas-rehearsal.mjs, run-local-cas-rehearsal.mjs,

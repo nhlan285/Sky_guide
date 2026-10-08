@@ -13,6 +13,12 @@ emote/honk and responsive Preview QA. Non-destructive Free/$0 development and
 history-preserving develop integration after verified milestones are authorized;
 main/production/paid/rights boundaries remain closed. Current execution detail
 lives in CURRENT_STATE and the active phase plan, not this master roadmap.
+Visible V1 bounded Wardrobe pilot now accepted:6 source-verified public item IDs
+with explicit original illustrative geometry, slot replacement/save/reload/share
+and mobile Preview proof. This adds real identity continuity without claiming
+full game artwork/calibration or all-catalogue mappings. Analytics is wired on
+existing Hobby project with real Preview ingestion; raw POST capture remains OPEN.
+Continue bounded spirit/TS consumer in [PRODUCT_V1_EXECUTION](PRODUCT_V1_EXECUTION.md).
 
 Scoped infrastructure repair (2026-10-04): [R2 runtime debugging](R2_RUNTIME_DEBUG.md).
 This task preserves the asset corpus, catalog, UI and storage architecture; it does
