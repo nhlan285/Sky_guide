@@ -1,4 +1,5 @@
-import { validateOutfitSnapshot, validateSelection } from '../../data/wardrobe/index.ts'
+import { validateSelection } from '../../data/wardrobe/index.ts'
+import { acceptsOutfitRevision, validateCompatibleOutfitSnapshot } from './compatibility.ts'
 import type { OutfitSnapshot, WardrobePackage } from '../../data/wardrobe/index.ts'
 import { resolveRules } from './engine.ts'
 
@@ -56,8 +57,8 @@ export async function decodeOutfitShare(fragment: string, pkg: WardrobePackage):
     if (!raw) return fail('too_large')
     const input: unknown = JSON.parse(new TextDecoder('utf-8', { fatal: true }).decode(raw))
     if (!input || typeof input !== 'object' || Array.isArray(input)) return fail('invalid')
-    if (!('schemaVersion' in input) || input.schemaVersion !== 1 || !('catalogVersion' in input) || input.catalogVersion !== pkg.revision) return fail('version')
-    const parsed = validateOutfitSnapshot({ ...input, id: null, name: null, savedAt: null }, pkg)
+    if (!('schemaVersion' in input) || input.schemaVersion !== 1 || !('catalogVersion' in input) || !acceptsOutfitRevision(input.catalogVersion, pkg)) return fail('version')
+    const parsed = validateCompatibleOutfitSnapshot({ ...input, id: null, name: null, savedAt: null }, pkg)
     if (!parsed.valid || resolveRules(parsed.value, pkg).issue) return fail('invalid')
     return { ok: true, value: parsed.value }
   } catch { return fail('invalid') }

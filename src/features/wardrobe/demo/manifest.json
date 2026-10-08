@@ -1,7 +1,7 @@
 {
   "packageKind": "self_created_demo",
   "id": "demo-wardrobe-v1",
-  "revision": "demo-wardrobe-v1-r1",
+  "revision": "demo-wardrobe-v1-r2",
   "disclosure": "Original self-created placeholders. Not Sky assets; not calibrated against the game.",
   "model": {
     "id": "demo-model-wayfarer",
@@ -2003,7 +2003,18 @@
       "provenanceIds": []
     }
   ],
-  "rules": [],
+  "rules": [
+    {
+      "id": "demo-rule-tile-small",
+      "triggerItemIds": ["demo-item-mask-tile"],
+      "effect": "set_effective_size",
+      "targetSizeCode": "fixture-demo-size-0",
+      "priority": 10,
+      "reason": "Self-created demo: the tile mask uses the small preset while equipped; removing it restores the chosen base scale. Not a Sky game rule.",
+      "fixture": true,
+      "provenanceIds": []
+    }
+  ],
   "geometry": [
     {
       "assetId": "demo-asset-body",

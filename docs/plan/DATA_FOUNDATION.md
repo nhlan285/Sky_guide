@@ -2,6 +2,18 @@
 
 ## Goal / scope
 
+Historical maintainer verdict2026-10-06: **REQUEST CHANGES — architecture direction accepted,
+contract not yet approved for P9-I02**. Active work is
+[R1 contract remediation](R1_CONTRACT_REMEDIATION.md), preserving completed slices.
+Remediation2026-10-06: **LOCAL CONTRACT REVIEW READY**. All requested local findings
+addressed;46 domain/296 full tests, pnpm lint/typecheck/build PASS.
+User approval2026-10-06: `phê duyệt, tự tiếp tục`. **R1 LOCAL CONTRACT APPROVED**;
+re-review gate closed by human approval, not self-approval. Active next slice is
+[provider selection](POSTGRES_PROVIDER_SELECTION.md). Exact provider/account/
+region and resource/task quota preflight were subsequently completed: Supabase
+Free/Dyland's Org/isolated Singapore `sky-guide-dev`; private identity SQL subset
+applied/fixture-tested. Full payload/adapter/restore acceptance remains OPEN.
+
 LARGE/ARCHITECTURAL master run; current slice P9-D01–D03 + P9-I01.
 Turn Q20 into reviewable relational mapping, executable identity/relationship
 validation, provider-neutral read API and media delivery contracts. Preserve K15
@@ -37,14 +49,17 @@ No binary files or credentials in domain data. Public export is allowlisted.
 - [x] D03 contract slice: AssetRegistry metadata/delivery interface, hash/key/rights/relations,
   public evidence allowlist and revocation overlay; preserve existing R2 paths.
 - [x] I01: backup/restore/migration/rollback/quota runbook and review checklist.
-- [ ] Focused tests, lint/typecheck/catalog/build and docs checks; inspect diff.
+- [x] Focused tests, lint/typecheck/catalog/build and docs checks; inspect diff.
+  Remediated contracts passed; latest master-run full296 PASS atc5804c6. This is
+  local validation, not provider/schema review or live migration acceptance.
 - [x] Checkpoint drill commit/push/remote verification; continue next safe slice.
 - [x] D04/V01 local contract subset: synthetic staging/quarantine/review digest,
   atomic compare-and-swap promotion, bounded retry/health/LKG and snapshot restore.
   This follows the master-run instruction to implement provider-independent
   contracts/tests while provisioning is gated. It does not satisfy I02 dependencies
   for real integration, nor mark D04/V01 DONE; no scheduler or source fetch.
-- [ ] Record provider/review gates and audit remaining independent work.
+- [x] Record provider/review gates and audit remaining independent work.
+  Maintainer REQUEST CHANGES addressed locally; user subsequently approved R1.
 
 ## Risks / UX / security
 
@@ -59,21 +74,82 @@ Event response shape is reserved; schedule generation belongs to R3.
 
 `node --test tests/data/domain*.test.mjs`; `pnpm lint`; `pnpm typecheck`;
 `pnpm test`; `pnpm build`; `.commands/Check-Scaffold.ps1`; `git diff --check`.
-DB up/down/restore against real PostgreSQL is NOT RUN until provider/environment
-approval. Contract tests cannot establish live DB completion.
+Approved dev SQL up and rollback-only native fixtures PASS. Actual down/backup/
+isolated restore remain OPEN; contract tests cannot establish full live completion.
 
 ## Blockers / decisions / exact next step
 
-P9-I02 requires maintainer schema/API review, provider selection and quota/task
-approval. No provider chosen. P9-D04/P9-V01 real integration depends on I02;
-R2–R6 retain their foundation/checkpoint dependencies. Build the above local
-contract slice first, then present concrete review artifacts. Exact next action:
-checkpoint the validated D01 slice, then implement D02/D03 contracts.
+P9-I02 contract review/provider selection/preflight now approved/completed.
+Supabase Free dev project created; first private identity/provenance/crosswalk
+migration and hosted fixture validation PASS; details in POSTGRES_PROVIDER_SELECTION.
+P9-D04/P9-V01 real integration depends on remaining I02 payload/adapter/restore;
+R2–R6 retain their foundation/checkpoint dependencies. D01–D03/I01 local contracts
+and the bounded synthetic D04/V01 subset above are already implemented and
+checkpointed and locally remediated; do not restart them or ask for R1 approval
+again. Public quota comparison and proposal now in POSTGRES_PROVIDER_SELECTION;
+Typed release/source metadata and ordered membership now PASS locally on full K15
+canonical bytes and hosted rollback-only fixtures. Immutable derived byte projection
+now retains historical public release after current payload mutation and seals child
+metadata. SQL metadata CAS/private acceptance-audit/global pointer and source health
+now pass native fixtures; this is not complete reviewed canonical promotion/SyncStore.
+Immutable full identity graph/ordered candidate evidence metadata now PASS:27 typed
+history owners/all20 relations, full K15 content/review hash parity and141 native
+negative cases. Historical graph metadata does not imply full module/provenance
+payload history. Full SyncState row read composition now PASS with explicit
+historical manifest dataset key order; existing content/review hash unchanged.
+Typed payload evidence prerequisite PASS: canonical identity evidence and exact public record subset/order have distinct typed owners;13 native negatives/actual review byte parity. Canonical payload preparation/static parameterized SQL now PASS; retention/own revisions/private evidence plus two native injected rollbacks/idempotence/history parity. Portable full SyncStore atomic orchestration now PASS; exact SourceSync transitions/current alignment/whole publication SQL and866 query results/two rollbacks. Exact next: connected driver/runtime least-privilege/review-auth contract,
+then real races/provider parity/backup restore.
+Bounded private read transport now PASS: static79-owner SELECT lowering/server
+UTF8/DataRow guard/strict OID-text decode;90 native assertions include Unicode,
+1.2 MB single-field overflow and original locked head. No actual SDK mount; lost
+COMMIT acknowledgement/reconciliation/runtime privileges/verified reviewer are
+concrete contracts, still OPEN implementation. Exact next: explicit runtime
+privilege/helper allowlist and transaction lifecycle/uncertain-commit tests before
+scoped SDK/credential/role/Auth authorization; see active phase/current handoff.
+Explicit role/column/helper/RLS proposal now implemented and read-only native
+preflight PASS; actual role/grant/policy application/allow-deny tests remain pending
+specific dev authorization. Invoker trigger row locks require4 lock-only UPDATE
+columns with proposed false WITH CHECK; no weakening/removal of serialization locks.
+Portable transaction kernel/static statement gate now implemented over an exclusive
+text protocol lease: explicit isolation/timeouts, tainted-query and deadline
+checks, cleanup and confirmed-vs-indeterminate COMMIT classification. Synthetic
+5-phase Store/control/error tests do not execute DML or prove real cancellation/
+pool/concurrency/roles. Outward fence/bounded intent/fresh immutable witness now
+implemented over durable-journal port; exact publication tuple confirms despite
+successors, uncertain swallowed errors remain quarantined. No actual journal backend.
+Restart/generic absence cannot fence a pre-BEGIN worker; failure audit cannot prove
+full count/backoff state. Next: concrete journal/execution token checked inside
+original transaction/full failure witness schema and rollback/ACL proposal before
+scoped hosted application. That local4-owner/10-helper SQL proposal is now prepared,
+not applied;5-phase native transcript/result verifier ready, SQL native NOT RUN.
+Next: v2 local journal/Store/controller/transport integration and refreshed privilege
+package before authorized schema/native/crash/race acceptance. Global TTL and own
+freshness remain separate; no source/data/public contract or new service change.
+Role/RLS application still needs the pending specific development authorization.
+No complete live foundation
+acceptance. Independent W12 sequence and focus QA completed; full W12 remains
+PARTIAL until W11 dependencies.
 
 ## Handoff / compact
 
-Read CURRENT_STATE for latest commit/checks. Baseline scaffold: PASS, 173 unique
-tasks; lockfile install with pnpm 10.30.3 completed. No runtime source changes yet.
+Read [CURRENT_STATE](../CURRENT_STATE.md) for latest commit/checks and gates.
+Branch `codex/master-plan-execution`; checkpointdd7fb11 verified pushed before the
+release metadata slice. Supabase Free dev in Dyland's Org is provisioned;44 private
+tables at that milestone; now83 private tables with scoped NOLOGIN roles and no
+platform grants. Domain implementations remain unmounted from production consumers.
+[83-owner native review](JOURNAL_NATIVE_REVIEW.md) schema/ACL/owner/approved creator/
+denial checks PASS; full authoritative baseline matched after each data+membership
+ROLLBACK. Full-K15 native deferred validation hit30s cap (57014); benchmark OPEN.
+Next is a reviewed additive optimization preserving integrity, not a longer timeout
+or skipped enforcement. Actual SDK/consumer/concurrent/durable/restore remain OPEN.
+Local protocol model is not native
+parse/execution/durability acceptance.7 read composition tests/11 native negatives plus5 graph history tests/141 native
+negatives/actual two-frame parity PASS; prior lifecycle metadata/source isolation/
+projection byte checks retained. Intentional revision0 control baseline, other tables empty. Existing
+Router/chunk warnings unchanged. See handoff for exact
+latest checkpoint, migration hashes and open live adapter/restore gates.
 Checkpoint drill: PASS — `199bdd58c37b848b6b550b1adfdb7e7e70a5f791` committed,
-pushed and verified with ls-remote; work continued with D02/D03. Their focused
-tests bring the total to 18 PASS. Compaction continuity test: NOT TRIGGERED.
+pushed and verified with ls-remote; work continued with D02/D03 and later slices.
+Native compaction has since resumed from verified checkpoints; no agent-invokable
+manual compaction or quota restoration is claimed. Q12/K04/rights remain separate
+gates; the roadmap is OPEN.

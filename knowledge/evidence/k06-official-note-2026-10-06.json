@@ -1,0 +1,23 @@
+{
+  "schemaVersion":1,
+  "purpose":"research-only metadata and original short summary; no full article copy/feed/import",
+  "observedAt":"2026-10-05T17:06:08Z",
+  "sectionUrl":"https://thatgamecompany.helpshift.com/hc/en/17-sky-children-of-the-light/section/110-patch-notes/",
+  "articleUrl":"https://thatgamecompany.helpshift.com/hc/en/17-sky-children-of-the-light/faq/1467-hotfix-34-4---august-10-2026---playstation-ios/",
+  "access":"section and linked article rendered through web extraction",
+  "publisher":"thatgamecompany Support",
+  "sample": {
+    "title":"Hotfix 34.4 - August 10, 2026 - (PlayStation, iOS)",
+    "versionRaw":"34.4", "versionNormalized":"34.4", "buildNumber":null,
+    "releaseDate":{"value":"2026-08-10","precision":"date","timezone":null,"rawLabel":"August 10, 2026"},
+    "platforms":["PlayStation","iOS"],
+    "summaryOwnWords":"Addresses startup crashes affecting these platforms after34.3; edited availability text says both platforms now have the update.",
+    "lastUpdatedRaw":"51d", "lastUpdatedInstant":null,
+    "revision":null, "revisionStatus":"no stable revision exposed in sampled rendered article",
+    "changeObservation":"original rollout-delay notice is struck through; active replacement text states availability on both platforms"
+  },
+  "mapping": {"title":"article heading","date":"heading release date only, not modification timestamp","version":"keep34.4 spelling; do not add0. prefix/build","link":"section-observed article URL","publisher":"official Help Center","summary":"original concise paraphrase with source","confirmation":"only statements within article support confirmation; absence of another claim is not refutation"},
+  "automation":{"api":null,"rss":null,"updateDiscovery":"manual section/article review; do not invent feed","revisionDetection":"future explicit content comparison/observed time, not relative51d converted to exact timestamp"},
+  "rights":"Link/metadata/original summary only; no full article or image redistribution approval",
+  "limitations":["One article sample, not full news adapter","No exact updatedAt/immutable revision recovered","No claim this is newest release on current client date","No community leak content confirmed wholesale"]
+}

@@ -1,8 +1,12 @@
 # R1 data foundation — contract review package
 
-Status: implementation contract candidate for P9-D01–D03/P9-I01. Q20 approves
-the direction; maintainer review is still required before P9-I02. This document
-does not select a provider, provision PostgreSQL, or certify a migration.
+Status2026-10-07: **LOCAL CONTRACT APPROVED** by user2026-10-06 after maintainer
+REQUEST CHANGES remediation.46 domain/296 full tests and lint/typecheck/build PASS
+locally. Re-review gate closed. Supabase Free development project is created;
+current SQL scope/status lives in [provider phase](../plan/POSTGRES_PROVIDER_SELECTION.md).
+K15 typed payload SQL/row-codec local full-field parity and hosted synthetic
+rehearsal PASS; release metadata/transactional adapter/restore still OPEN. Resource
+creation or fixture SQL alone does not certify complete foundation acceptance.
 
 ## Relational mapping
 
@@ -19,16 +23,16 @@ relations, never the canonical payload or a substitute for entity validation.
 | field_provenance (kind, id, field, provenance_id) | Field allowlist from entity schema; source evidence may differ per field | Existing FieldProvenance validators |
 | source_crosswalk (source_id, kind, source_key) | Unique scoped external key → identity FK; immutable mapping; source numeric IDs never joined across providers | Crosswalk |
 | item (id) | Preserve tsa-cosmetic-N; source_keys mapped into crosswalk; typed name/slot/raw_slot/dye state | Item |
-| acquisition_option (id) / acquisition_cost (option_id, position) | item FK; nullable integer amount, explicit known/unknown/free, currency label; never collapse missing to zero | AcquisitionOption/CurrencyAmount |
-| spirit (id), season (id), location (id) | Spirit optional location FK; unknown date uses precision/timezone fields without fabricated instant | Spirit/Season/Map/Realm |
+| acquisition_option (item_id, option_id) / acquisition_cost (item_id, option_id, position) | Item-scoped identity, item FK; preserve optional node/product references, nullable amount, known/unknown/free and raw currency | AcquisitionOption/CurrencyAmount |
+| spirit (id), season (id), location (id), realm (id FK location) | Realm is typed Location subtype with unchanged ID; spirit.realm_id targets Realm, graph spiritLocation targets same Location ID | Spirit/Season/Realm; GuideMap separately owned |
 | item_season, item_spirit, spirit_season | Composite join PKs, active FK targets in published projection | Existing arrays |
 | cosmetic (id) | Unique item_id FK, metadata only; wardrobe bindings remain separately revisioned | Item cosmetic metadata |
 | event (id) | Typed event metadata and confidence; future R3 payload validation | Q23 |
 | event_rule (id) | Required event_id FK; revisioned IANA timezone/anchor/offset/interval/effective bounds, calculated method/input versions | R3; not implemented in R1 |
 | event_override (id) | Required event_id; optional rule_id must belong to same event; private reviewer/evidence separate; effective bounds/priority | R3 |
-| event_occurrence (id) | event/rule/override must agree; pinned revisions, absolute instants and schedule version | R3 |
-| source_snapshot (id), source_health (source_id) | Hash, normalized version, private raw reference; separate last_attempt/last_success/validity/LKG; never public raw data | R1 sync / R3 pending |
-| media (id) | storage key/hash/bytes/MIME, revision, role/provenance/rights; no binary/blob/base64 | AssetRegistry |
+| event_occurrence (id) | event/rule/override must agree; if both rule and override selected, override's optional rule must match selected rule; pinned revisions/time/version | R3 |
+| source_snapshot (id), canonical_generation, source_health (source_id) | Content/candidate audit hashes and fetched/staged/reviewed/promoted times; global revision/LKG/lastPromotedAt; separate source attempt/success/health/retry/validity; private reviewer/raw refs | R1 local sync / live adapter pending |
+| media (id) | storage key/hash/bytes/MIME, revision/source/provenance/rights; no owner/semantic role or binary/blob/base64 | MediaRecord |
 | item_media, emote_media, call_media, sample_media | Explicit typed joins; role part of binding, partial unique primary item image; role evidence before publication | R2/R4/R5 |
 | sample_set (id), instrument (id) | Instrument unique item_id; sample_set_id required; variants share set | R5; no second Item catalogue |
 | emote (id), call (id) | Unique item_id; preview relation points to media with poster/video/audio metadata | R4 |
@@ -38,12 +42,301 @@ All FK updates/deletes use RESTRICT. Retire through a reviewed transaction; do n
 cascade-delete history. Use composite kind FKs/check constraints for subtype
 identity, unique constraints for one-to-one extensions and join keys. SQL adapter
 must enforce these constraints plus transaction revision checks. Graph validation
-tests the provider-neutral rules; PostgreSQL constraints/up/down are not yet run.
+tests the provider-neutral rules. Private identity/provenance/crosswalk,
+alias/tombstone and K15 typed payload SQL up/rollback-only fixtures PASS; full
+typed schema/up/down/backup restore and production-sized graph validation OPEN.
 Record content changes must increment revision, including changed relations and
 field provenance. The graph checks identity metadata changes; payload checks and
 transaction CAS belong to the repository adapter and must be tested in P9-I02.
 
+Alias SQL preserves unknown alias-source IDs without fabricated identity metadata.
+Targets have exactly one explicit same-kind identity or alias FK; generated to_id
+retains the original alias target. Deferred graph validation checks chains/cycles,
+active final identities and matching tombstones. Current full-scan advisory-lock
+validation is rehearsed at READ COMMITTED only. Two-session races and stronger
+isolation levels are NOT RUN; the adapter must establish/validate its isolation
+contract and measured cost before live acceptance. RLS/private schema remain
+closed to browser/platform roles; no least-privilege runtime role provisioned yet.
+
+**Runtime transport/commit decision —2026-10-07:** the portable Store remains
+unchanged; a connected driver must lower static private reads through
+postgresSyncTransport before buffering results. Materialized CTEs retain the
+original limited/locked SELECT once; aggregate UTF-8 text/DataRow budget checks
+return only a fixed all-NULL guard row on overflow. Supported typed text/OID decode
+preserves exact safe integers and text timestamps; bool ::text accounting is
+conservative, not an exact wire byte estimate. Database work/protocol metadata/
+packets/SDK cancellation are separate bounded-runtime acceptance work. No SDK,
+credentials, privileges or consumer mounts were introduced by this slice.
+
+A connection failure after sending COMMIT can leave an unknown durable outcome;
+attempting ROLLBACK cannot prove that COMMIT did not happen. This corrects the
+earlier blanket rollback-on-commit-error wording, not SQL atomicity or public
+SourceSync result contracts. The runtime controller must reconcile immutable
+generation audit/review witnesses through a fresh connection before declaring
+publication failed/succeeded; absent confirmation, quarantine and stop retries.
+Never convert uncertainty into a source failure/retry or rerun the transaction
+callback. Actual connected reconciliation/cancellation/races are OPEN. Concrete
+role/reviewer/credential and cleanup contract is in the active
+[provider phase](../plan/POSTGRES_PROVIDER_SELECTION.md#connected-runtime-contract--prepared-not-mounted).
+
+**Least-privilege refinement —2026-10-07:** prepareRuntimePrivilegeProposal emits
+review-only scoped grants/RLS/revokes against pinned79-owner/27-function/143-trigger
+metadata; invoker body hashes match latest local migrations.79 SELECT/78 column
+INSERT/9 mutable column UPDATE/23 child DELETE owners and5 helper EXECUTE only.
+Existing invoker triggers also lock public_release/sync_acceptance/acquisition_option/
+field_provenance_field; PostgreSQL row locks need UPDATE privilege. Preserve those
+serialization locks and propose minimum key-column UPDATE plus UPDATE USING(true)
+WITH CHECK(false) on these4 owners. This permits locking while disallowing actual
+updates according to the policy contract; actual role/RLS acceptance is still
+NOT RUN. Reader has no helper EXECUTE; obsolete instant_order_key/trigger entrypoints
+receive no direct grants. Role groups are NOLOGIN/NOBYPASSRLS and own no objects.
+No new grant/policy/role/credential has been applied; native preflight is read-only.
+Rollback must revoke column as well as table privileges; unknown dependencies make
+DROP ROLE fail, without CASCADE/data deletion. Inspect unchanged proposal baseline
+and memberships first; this is not an automatic rollback over later role changes.
+
+**Portable transaction kernel —2026-10-07:** postgresTransactionKernel implements
+SqlDatabase over an exclusive raw-text protocol lease. It owns explicit BEGIN
+isolation, three local PostgreSQL timeouts, bounded callback work, COMMIT and
+ROLLBACK. postgresStatementGate admits only existing static bound Store grammar
+against the privilege manifest; lowered reads retain server budget/OID checks.
+Absorbed query errors or pending/overlapping queries taint the transaction; no
+callback retry or COMMIT follows. Late acquisition is discarded; escaped callback
+connections close. Monotonic checks catch CPU overruns but cannot preempt CPU work.
+Confirmed COMMIT survives release failure; lost/malformed COMMIT acknowledgement
+is indeterminate. Confirmed ErrorResponse/ReadyForQuery rejection or ROLLBACK tag
+is not successful COMMIT. Discarded physical identities cannot be reused by the
+kernel; actual pool exclusivity/abort/eviction still requires adapter proof.
+
+This is portable lifecycle behavior tested with a synthetic protocol port, not
+an installed SDK or connected cancellation/concurrency/role acceptance. The port
+fixture installs independently prepared table frames at CAS; it does not execute
+DML. Existing native Store SQL/read-guard proof remains separate. Before mounting,
+add an outward uncertainty fence and durable intent/quarantine/exact immutable
+witness reconciliation. Existing SourceSync catches Store errors as rejected;
+kernel exceptions alone cannot enforce the required outward policy or survive
+restart. No public result contract/provider/Auth/credential/grant change here.
+
+**Outward fence/witness —2026-10-07:** syncCommitFence wraps unchanged SourceSync
+and exposes quarantined rather than swallowed rejected on unknown CAS/journal
+outcomes. syncCommitIntent records bounded private expected audit/full acceptance
+tuple/state digest before CAS. Journal port requires a global atomic durable claim,
+linearizable load barrier, ID-scoped settlement and retained terminal receipts.
+No concrete durable backend or crash/multiworker acceptance exists yet.
+postgresCommitWitness uses a fresh safe READ COMMITTED/read-write transaction and
+locks global head FIRST, then reads original target audit/acceptance. Exact tuple
+can confirm publication even after successors; a valid different target confirms
+conflict. Absence clears only inline kernel indeterminate outcomes with old client
+disposal/COMMIT-dispatch guarantee. After restart/generic errors, a worker may still
+be pre-BEGIN and write later; absence remains quarantined until an execution token
+is validated inside original Store transaction after global lock. Failure audit
+lacks immutable failure-count/backoff state; unknown failure remains quarantined.
+No automatic retry/source-failure recording. Existing metadata SQL/native receipts
+and synthetic protocol/controller tests are separate from actual driver/role/
+durability/independent-session proof. This is not a live foundation mount.
+
+**Durable journal proposal —2026-10-07:** reuse the private PostgreSQL provider;
+proposed4 owners: immutable typed v2 intent, active singleton, immutable applied
+witness and terminal receipt. Own health/count/retry/success/validity and global
+acceptance tuple/validity are separate; failure preparation needs pinned global
+metadata because SyncState own freshness cannot supply global TTL. No JSON candidate
+document/raw corpus. Helpers serialize READ COMMITTED through head then control;
+execution token is checked after head lock, applied marker compares full actual
+own/global state, generation requires marker, recovery receipt invalidates old
+token. This closes the design gap for pre-BEGIN workers/unknown failure outcomes;
+actual v2 adapter/SDK/native/concurrent/durable acceptance is still OPEN.
+Review SQL lives outside migration discovery in supabase/proposals, NOT APPLIED.
+Empty-only down holds writer barrier and refuses pending/forensic history rather
+than erasing it; quiesce consumers/inspect unchanged definitions before rollback.
+Old79-owner privilege baseline must be refreshed for proposed83-owner schema.
+Primary lock behavior/order basis: [PostgreSQL17 explicit locking](https://www.postgresql.org/docs/17/explicit-locking.html).
+
+## Ownership decisions and field preservation inventory
+
+**Acquisition identity: Option B.** `(item_id, option_id)` is the relational key;
+option IDs may repeat across items, never within one item. Costs, evidence, offer
+metadata and future joins carry both key columns. Keep the current public option
+ID verbatim; `validateAcquisitionOptionKeys` checks this choice during staging.
+The current K15 naming convention is not evidence of a global uniqueness rule.
+
+`friendshipNodeId` and `iapProductId` remain exact nullable domain-ID columns with
+deferred FK enforcement until their canonical typed modules exist. Do not drop,
+guess, rename or null a supplied value because no table is provisioned. Keep
+target-kind semantics explicit; future backfill resolves reviewed IDs before
+activating FKs/public module support. Existing validators still require supplied
+node/product registries; an unresolved candidate stays private/quarantined rather
+than being published with a fabricated reference. Local tests preserve nonnull
+IDs with synthetic supplied registries; no module or live DB is implied.
+
+**Geography:** Realm is a Location subtype, not a renamed map or arbitrary area.
+`location.location_type=realm`, with `realm.id` PK/FK to the same unchanged
+Location ID. Spirit keeps public `realmId` and canonical `realm_id` targeting the
+typed Realm; `realmLocationRef` maps only registered Realm IDs to the identity
+graph's `spiritLocation`. Null remains null. An area Location cannot be substituted
+silently. GuideMap has its own ID/table/realm FK; TypeScript shape inheritance is
+not domain identity inheritance. Realm/map modules absent in current K15 retain
+exact deferred references and remain gated until actual typed entities are reviewed.
+
+[Executable ownership inventory](../../src/data/domain/migration.ts) covers every
+actual K15 field, nested cost/time/offer/source fields and envelope/manifest metadata.
+This inventory originally defined future typed owners, not EAV persistence. K15
+payload owners now have SQL tables and row codec, with full local K15 field/byte
+parity and hosted synthetic DB-row reconstruction. Private release metadata and
+ordered membership now preserve full canonical K15 files/manifest; live
+transactional exporter remains pending. Immutable derived public byte projection
+now preserves stored history after current payload mutation.
+Field-coverage tests fail when a real payload adds an unmapped field;
+canonical projection tests compare all current public values, including nulls.
+
+| Public fields | Status / typed owner / preservation rule |
+| --- | --- |
+| Every item/spirit/season `id, updatedAt, fixture` | Columns: unchanged typed entity ID + domain_identity update/fixture |
+| `recordStatus` | Column on typed entity; retain status, public only published |
+| `provenanceIds, fieldProvenance` | Identity/field provenance joins with original ordered arrays, per-field evidence and absent-vs-present semantics |
+| Every `name.default, name.translations` | Entity name_default + typed translation(locale,text) table; retain language keys, empty strings/maps |
+| Item `sourceKeys` | item_source_key(label,value); registered Kxx keys also source-scoped crosswalk; tsaIdentifier is a retained label, not a new SourceId |
+| Item `slot, rawSlot, accessoryAnchor, dyeStatus` | Typed item columns; null/unknown/unsupported distinct |
+| Item `seasonIds, spiritIds` | Ordered item_season/item_spirit joins; do not conflate independent upstream arrays |
+| Item `acquisitionOptions` and each option `id, kind, costStatus` | Composite option key, typed columns + original position |
+| Option `costs`; each `currency, sourceCurrencyLabel, amount` | Composite-key cost rows/position; nullable integer amount, raw label, unknown != free != explicit zero |
+| Option `friendshipNodeId, iapProductId` | Preserved deferred typed domain refs as above |
+| Option `validFrom, validTo`; time `value, precision, timezone, rawLabel` | Typed nullable time columns; absent time distinguished from a present PartialTime with unknown precision/null members |
+| Option `provenanceIds` | acquisition_provenance with both option key columns and position |
+| Item `assetIds, dyeRegions, ruleIds, compatibility` | Future typed module fields, retained exactly; currently empty/null. Nonempty unsupported payload requires its reviewed validator/owner, never silently dropped or serialized as generic EAV |
+| Lookup `id, upstreamId, identifier, category, categoryEvidence` | Item FK + typed item_k15 columns; metadata category independent of wearable slot |
+| Lookup `offers`; offer `id, acquisition, seasonPass, bundle, money, sourceUrl` | acquisition_source_offer by composite option key; retain order/flags/link/raw money; unknown currency/market not invented or converted to CurrencyAmount |
+| Lookup optional `image, images` | Future typed item_media/public compatibility projection; preserve optional/null distinction; no current K15 images claimed |
+| Spirit `category, realmId` | spirit.category column; exact nullable/deferred Realm subtype ref |
+| Spirit `seasonIds, treeIds` | Ordered spirit_season joins; future typed spirit_tree references retained |
+| Season `kind, startsAt, endsAt, timeStatus, summary` | Typed season columns/time precision; kind retained, no inferred instant/schedule |
+| Season `spiritIds, itemIds` | Ordered season_spirit/season_item joins; preserve source arrays independently of reverse item/spirit arrays |
+| Season `realmIds, mapIds, officialArticleIds` | Future typed realm/map/article joins; exact ordered IDs retained, module support gated |
+| Provenance `id, sourceId, sourceUrl, sourceRecordKey, sourceRevision` | Typed provenance/source-registry columns/FK; nullable public key/revision kept, no private evidence |
+| Provenance `retrievedAt, observedAt, attribution, licenseNote, transformNote, verificationStatus` | Typed provenance columns; actual observation distinct from retrieval, original credit/risk notes preserved |
+| Envelope `schemaVersion, dataVersion, generatedAt, sourceIds, fixture` | release_dataset columns + release_source by dataset/position; fixture false for public; each generatedAt retained independently |
+| Envelope `records` | Derived typed projection in preserved source order; no generic canonical document store |
+| Manifest `schemaVersion, catalogVersion, generatedAt, datasets, provenance` | public_release + release_dataset(path,dataVersion,exact-byte sha256); regenerated checksums after canonical serialization |
+| Manifest `aliases, tombstones, assetManifestVersion` | Future reviewed release projection/media pin; current null kept, migration-bearing manifests still rejected by compatibility adapter |
+| Manifest `source`; `repository, revision, normalizationVersion, sourcePaths, transport, status` | release_source_snapshot + ordered release_source_path(path,gitBlobSha), explicit public source schema |
+| Manifest `importReport`; `accepted, rejected, excluded, unknownCategory, unknownCost` | Typed public import counters; current rejected=[] retained. Nonempty raw rejection report is private and needs a separate reviewed public schema |
+
+Nothing in the current legitimate K15 payload is intentionally excluded. Unknown
+operational/private fields are outside that schema and stripped. Join positions,
+explicit nulls, optional field presence and PartialTime precision are round-trip
+requirements for full DB export acceptance. K15 payload typed rows preserve these;
+release metadata byte parity now PASS; live projection/provider-swap acceptance
+remains OPEN.
+
+Release metadata decision (2026-10-07): the existing envelope validator permits
+dataset timestamps to differ from manifest.generatedAt, so putting every timestamp
+on public_release would lose valid source information. Explicit release_dataset
+columns own envelope metadata; public_release retains manifest fields and optional
+source/import-report presence. This refines field ownership without changing the
+public contract. Five subtype membership tables preserve independent record orders
+and item/spirit/season revision pins. SQL metadata is a private candidate; root
+version reservations cannot be rewritten/deleted, but child metadata is not yet
+sealed until a projection header is inserted (implementation below). No public
+pointer or immutable canonical entity payload history exists.
+The release codec binds metadata to supplied typed payloads using original canonical hashes
+and revision checks. It fails closed on drift rather than reading the latest rows
+as an old release. Nonnull aliases/tombstones remain reviewed-adapter gated; nullable
+assetManifestVersion is preserved verbatim without implying a usable media module.
+
+Immutable projection implementation (2026-10-07): release_projection stores the
+canonical public manifest text/hash/materializedAt; release_projection_file stores
+the exact five canonical dataset texts/path/hash. These are derived caches, not
+canonical JSON payload owners. PostgreSQL17 built-in
+[sha256/UTF8 conversion](https://www.postgresql.org/docs/17/functions-binarystring.html)
+checks exact bytes without an extension. Files precede header in one transaction
+using a deferred header FK; completion verifies all five hashes/paths against typed
+dataset metadata. Header insertion seals child metadata; insert/update/delete and
+TRUNCATE guards preserve materialized history. Canonical payload owners may advance.
+Version-pinned projectionRows decoding uses only stored public bytes, validates the
+existing publication/canonical boundary and rejects edited/noncanonical/private
+fields even after rehashing. Detached repository reads do not reconstruct the
+current relational graph. Root lock coordinates materialization/metadata writes;
+two-session isolation acceptance remains with the actual transactional adapter.
+Materialization is not reviewed publication: global pointer/CAS/audit/source-health
+and latest revocation overlay are follow-up owners. No production consumer mounted.
+
+## Canonical graph history
+
+Canonical graph history (2026-10-07): each acceptance may carry an immutable typed
+frame in acceptance_graph plus six ordered identity/evidence/crosswalk/alias/
+tombstone owners and20 explicit relation tables. Historical identity revisions,
+nonpublic/fixture/retired nodes and unknown alias-source IDs remain independent of
+mutable current rows/public membership. Global relation position preserves mixed
+array ordering required by SourceSync hashes. Generated declared endpoint kinds and
+typed historical FKs enforce owner boundaries. Children precede sealing header;
+count/order/evidence/required/cardinality/retirement/alias/event-parent checks apply.
+Immutable parent acceptance lock coordinates inserts/header; global generation lock
+must precede this in the full writer. Orphan child frames cannot commit. Registered
+provenance references preserve IDs, not a claim of historical provenance payloads.
+graphHistoryRows revalidates the domain graph and exact ordered byte digest; SQL
+checks structure and hash spelling rather than recreating JS JSON.stringify bytes.
+Previous-frame monotonic identity/alias/crosswalk/tombstone continuity remains the
+normalizer/transaction validator's responsibility. Metadata-only acceptances remain
+supported; future full SyncStore must require graph, canonical payload, projection,
+acceptance/source state/audit together. No generic JSON/EAV canonical owners, full
+future module payloads, authenticated reviewer or mounted provider driver inferred.
+
 ## Migration sequence and preservation
+
+Portable full SyncStore boundary (2026-10-07): createPostgresSyncStore implements
+atomic orchestration over SqlDatabase/SqlConnection interfaces. Read uses one
+repeatable-read readonly snapshot; CAS locks global generation as FIRST SQL in
+read-committed transaction and returns stale false before writes. Current typed
+facts/evidence/reservations must align with archived reviewed graph/public snapshot.
+Next state is replayed through existing SourceSync transitions, including exact
+file bytes/manifest Record order/nullability. Canonical fragment + new or exact
+reused release/projection + graph/order/acceptance/source/audit/CAS are one callback;
+late false/error throws rollback, force deferred checks/post-read parity before
+commit. Failure does not mutate canonical/LKG/review. Driver must enforce transport
+budgets while decoding, exact safe integer conversion, commit/rollback/cleanup and
+no implicit callback retry. Native emitted SQL/read assertions prove synthetic
+whole publication semantics; connected transport, separate commits/parallel-session
+races, runtime grants/review authentication/restore remain acceptance gates.
+
+Canonical prepared-write boundary (2026-10-07): canonicalPayloadPlan revalidates
+candidate/public/hash and current typed payload + complete prior graph, retains
+unpublished typed roots/lookup/proofs for historical FK ownership, and requires
+higher same-owner revisions for changed entity/lookup facts. Explicit public scoped
+rows derive from reviewed bytes; they cannot replace full private canonical rows.
+canonicalPayloadWrite emits only static parameterized scalar statements, bounded
+by caller row/byte limits/100-row batches. It preserves full graph reservations,
+crosswalk/alias/tombstone history and uses positive disjoint position relocation
+before root upserts, with immediate UNIQUE constraints unchanged. Child evidence
+replacement follows FK dependency order. This is a prepared fragment, not an
+atomic transaction/publication API. Future SyncStore must lock global generation,
+load/validate bounded consistent current and archived frames, reproduce existing
+SourceSync transition, execute canonical fragment + all release/projection/graph/
+order/acceptance/source/audit changes atomically, then force constraints; any CAS
+false or error after mutations requires whole transaction rollback. A stale
+generation returns false before writes. Native statement replay proves DML/rollback
+semantics, not connected provider concurrency/authenticated reviewer/restore.
+
+Payload evidence ownership decision (2026-10-07): SourceSync allows public record
+evidence to be an ordered subset of identity graph evidence. The initial typed
+catalog codec's equality assumption cannot encode that valid boundary. Introduce
+typed payload_provenance for Item/Spirit/Season record metadata; identity_provenance
+keeps full canonical graph evidence, including private evidence. A composite FK
+enforces payload evidence belongs to that identity; each ordered list remains
+independent. Codec must preserve both exactly and reject missing/non-subset rows,
+never fall back to copying/filtering canonical evidence into public records.
+Existing DB baseline has no payload data; migration must explicitly preserve any
+existing owner evidence rather than change publication/hash definitions. Future
+writer replaces payload evidence before canonical identity evidence under global
+lock and restores both before deferred validation; old public bytes stay immutable.
+
+Review ordering decision (2026-10-07): immutable public projection uses sorted-key
+canonical JSON, whereas existing SourceSync contentHash includes the validator's
+ordered manifest.datasets Record. A real composition test exposed this distinction.
+Preserve both contracts; add typed acceptance_manifest_dataset rows with exactly
+four declared dataset names/positions per acceptance, reconstruct that Record order
+before checking reviewed candidate hash. This is additive historical review metadata,
+not a projection byte/hash change. Existing accepted hashes/public bytes remain valid;
+metadata-only acceptances without order cannot be decoded as full SyncState. Future
+transaction writer must persist dataset order along with graph/projection/audit.
 
 1. Inventory immutable catalog manifest/version/hash and existing K15 validators.
    Export every source dataset plus aliases, tombstones and current revocation
@@ -94,11 +387,29 @@ Sky Guide PostgreSQL server; preserve repository/API contracts and export format
 ### Read API and snapshot adapter
 
 `DomainRepository.readCatalog()` returns one validated public snapshot or null.
+The current ~1.8k-item K15 snapshot supports in-memory filtering/pagination.
+A future PostgreSQL adapter should serve a materialized/versioned public read
+model or cached equivalent, not rebuild/query the entire relational graph for
+every HTTP request. Cache by committed catalog version, atomically replace the
+read-model pointer after reviewed promotion, retain LKG/rollback and enforce
+pagination version pins. Preserve the interface/API until measured query needs
+justify another adapter contract; no speculative SQL pagination or new cache
+service is introduced. Production invalidation/quota measurements remain gated.
 `createSnapshotRepository` verifies the supplied manifest's dataset bytes before
 using existing K15 parsers. It rejects draft/fixture/unverified provenance and
 returns detached copies. This compatibility adapter supports the existing K15
 release only; migration-bearing manifests require a reviewed canonical adapter.
 It performs no filesystem/network reads. Callers supply approved manifest files.
+
+Remediation: only items/lookup/spirits/seasons plus provenance are accepted; unknown
+datasets, unreferenced files and colliding dataset paths fail closed.
+`canonicalizeSnapshotFiles` serializes explicit envelopes and validator-returned
+records with stable object keys, retaining original record order and legitimate
+K15 fields. Hashes are regenerated from those exact bytes. Staging stores this
+canonical projection; promotion revalidates and rejects a noncanonical/edited
+projection even if parsing would strip the extra fields. Original caller JSON is
+never promoted. Source/record verification still cannot prove arbitrary strings
+inside declared public fields are safe; reviewed public provenance remains required.
 
 `createDomainApi` is an unmounted Web Request/Response handler:
 
@@ -127,14 +438,27 @@ R1 does not fabricate occurrences. Frontend migration/routes remain gated.
 
 ### Media metadata and delivery
 
-`validateMediaRecord` validates hash/key/MIME/role/revision/source/provenance and
-typed relation IDs. New immutable keys use media/<sha256>.<extension>; legacy keys
+Remediation decision: binary MediaRecord has no owner or semantic role.
+MediaBinding uses `(ownerKind, ownerId, mediaId, role)` and nonempty role evidence
+`provenanceIds`. Valid owners: itemImage/referenceImage→item, emoteVideo→emote,
+callVideo/callAudio→call, musicSample→sampleSet. Poster explicitly permits only
+item/emote/call; instrument artwork binds through its item, not an unrestricted
+domain relation. The collection rejects duplicate bindings, two item primaries,
+duplicate reference hashes, and one item's primary hash appearing as a reference.
+One binary can serve different valid roles/owners. Binary rights remain separate.
+This refines the already accepted typed joins; no live schema migration occurs.
+
+`validateMediaRecord` validates hash/key/MIME/revision/source/provenance/rights;
+`validateMediaBindings` validates role evidence, active owner/media references and
+collection cardinality. Graph media edges represent deduplicated owner/media
+topology; role/evidence live in the binding joins. New immutable keys use
+media/<sha256>.<extension>; legacy keys
 items/{thumbnails,cards,detail}/<sha256>.webp retain current /assets/items delivery
 paths. Identity never uses a signed URL. Real binaries remain in object storage.
 
 Verified publication requires approval of the current revision, public evidence
 URL, public credit/provenance and fixture=false. Private evidence is excluded.
-Caller supplies validated active relation IDs and reviewed public evidence URLs;
+Caller supplies validated active owner IDs and reviewed public evidence URLs;
 the validator cannot establish legal permission from the URL itself.
 `publicMedia` applies the current revoked ID/hash overlay even on older snapshots.
 `ObjectStorage.resolveDelivery` hides signing/provider SDKs and credentials;
@@ -148,19 +472,80 @@ R1 no-store applies to its response contract; actual provider caches and old
 clients require deployment acceptance in P9-I02/P9-V01. Audio identity is retained
 for Call; media playback/transcoding belongs to R4, not this contract slice.
 
+Compatibility: no deployed R2 consumer uses the unmounted R1 MediaRecord shape.
+Existing item object keys and `/assets/items/...` routes remain unchanged. If a
+future old role/relations reader is migrated, project one owner-specific binding
+into `{role, relations:[{kind:ownerKind,id:ownerId}]}` at its compatibility boundary;
+never persist one global binary role or reinterpret a signed URL as identity.
+Binary IDs/hashes/keys are unchanged by binding migration. Legacy path and
+revocation/signing-race tests pass; this is local compatibility, not live rollout.
+
 ### Review checklist
 
 ### Local sync contract subset (P9-D04/P9-V01)
 
+Audit remediation decision: fetchedAt is successful source retrieval completion
+supplied by the trusted backend; stagedAt is normalization/validation completion
+from the server clock. Approval reviewedAt must follow stagedAt. Promotion time
+comes from the server clock and must follow review. Public Freshness.lastSuccessAt
+retains its API name but means the latest successful reviewed snapshot acceptance
+(including same-content reconfirmation), not fetch time. lastAttemptAt is the
+latest completed source-attempt event: fetchedAt on success, failure completion
+time on error. Source health/retry state is independent of the global generation.
+Global lastPromotedAt records the latest reviewed acceptance across all sources;
+source failures retain it. It prevents a different source/clock from regressing
+canonical audit time. Source Freshness.lastSuccessAt remains independently scoped.
+Ordering: fetchedAt <= stagedAt <= reviewedAt <= promotion time. Stale attempts
+or a clock behind previously accepted success cannot regress state.
+
+ReviewApproval binds contentHash/baseRevision plus candidateHash over content,
+base and fetched/staged timestamps; changing audit instants also invalidates
+review. An exact already-accepted retry is read-only/idempotent. New same-content
+reconfirmation needs a valid new review and CAS; it updates health/audit without
+changing public bytes. ReviewerRef/approval remain private. Future admin adapters
+must obtain authenticated reviewer identity and event times server-side; these
+library contracts do not authorize client-supplied review/clock values. Injected
+clocks are for deterministic tests, not an HTTP timestamp override.
+
 `stageSourceSnapshot` enforces an explicit byte budget, hashes source and normalized
 content, validates graph/projection consistency and quarantines invalid output.
+Local acceptance budgets are required configuration: maxSnapshotBytes (raw UTF-8),
+maxNormalizedBytes (entire accepted candidate JSON with file Map encoded as entries,
+including graph/manifest/file contents and stage metadata), maxRecords (graph identities/crosswalks/
+aliases/tombstones/provenance IDs plus public-envelope records), maxRelations
+(graph edges). Check cheap counts and public bytes before parsing, then full size
+before and after canonicalization; promotion rechecks the same bounds. These are
+local safeguards, not measured production capacity or provider quota. Fixture
+values are test-only. They cannot prevent allocation/CPU inside a normalizer;
+future live workers require separately bounded execution/task approval.
 It does not fetch, schedule, persist raw data or publish. `ReviewApproval` binds
 the exact content digest and base generation; edits invalidate approval.
 `promoteReviewedSnapshot` validates again and uses an injected atomic CAS store.
-Generation/LKG must be global across sources, with separate source health; a
+Generation/LKG/lastPromotedAt/last canonical approval must be global across sources,
+with separate source health/attempt/success/retry; a
 per-source CAS cannot safely protect shared canonical data. The DB adapter must
 persist canonical payload, projection pointer and audit metadata in one transaction.
 That adapter is still gated; only an in-memory test double has run.
+SQL metadata subset now has native rehearsal (2026-10-07), but the complete
+SyncStore/canonical payload transaction driver is still OPEN. sync_generation is
+one shared revision/current acceptance/lastPromotedAt; sync_acceptance binds private
+source/content/candidate hashes, exact fetch/stage/review/promotion instants and
+reviewer reference to sealed public projection. sync_source_state retains separate
+attempt/failure/retry/last success; sync_audit is immutable per global generation.
+apply_sync_metadata_cas locks the singleton, rejects stale generation before writes
+and atomically updates metadata/audit; failed source attempts keep LKG. The deferred
+acceptance-audit FK prevents an orphan staged acceptance from committing after a
+lost CAS. Multi-table writes require initially-deferred consistency constraints;
+validate them before transaction commit, not between internal mutations. Driver must
+lock generation before ANY canonical writes and rollback the whole transaction on
+CAS false; metadata CAS alone cannot establish atomic canonical persistence.
+Metadata row decoding uses one head/current audit, selected source and exactly its
+referenced immutable acceptance frames, preserving global vs source clocks. These
+are private metadata, not a complete SyncState: canonical historical identity graph
+and typed payload writer remain required. Exact review tuple hash supplements the
+existing normalizer/content review, not authenticated reviewer proof or rights.
+Sequential two-source native conflicts are not a real parallel-session race proof.
+Initial fixed singleton revision0 is control configuration, not imported data.
 
 Failure records leave LKG untouched, record offline health and use only explicitly
 supplied retry delays; exhausted policy disables retry. Identical reviewed data
@@ -168,6 +553,14 @@ recovers health without re-promoting content. Source freshness and review metada
 remain separate. Local export/restore revalidates checksums and preserves API
 payloads; this is not a SQL migration or DB backup-restore rehearsal. Current
 revocation overlay remains mandatory at delivery after any restore.
+
+Synthetic two-source tests cover independent retry budgets/health, global CAS
+conflicts, loser restaging, one source's recovery leaving another offline, and
+global promotion-clock regression. K01 is a synthetic trigger over the supported
+K15 compatibility projection; this does not implement a Wiki adapter, scheduler
+or actual multi-source PostgreSQL sync. Future DB transactions must retain an
+append-only private audit history, not merely the latest pointer/approval tested
+by the in-memory store.
 
 No full generic canonical payload/storage adapter or live upstream integration is
 claimed. K15 snapshot compatibility remains scoped; unsupported migration manifests

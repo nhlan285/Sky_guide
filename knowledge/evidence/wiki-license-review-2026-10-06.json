@@ -1,0 +1,35 @@
+{
+  "schemaVersion": 1,
+  "purpose": "license-source review metadata only; no legal approval or content redistribution",
+  "reviewDate": "2026-10-06",
+  "sources": [
+    {
+      "url": "https://www.fandom.com/licensing",
+      "access": "web extraction failed with HTTP402",
+      "exactVersionRecovered": null
+    },
+    {
+      "url": "https://community.fandom.com/wiki/Help%3ALicensing",
+      "access": "indexed primary help-page extraction; direct domain access robots-blocked",
+      "indexedCrawlAge": "3 months ago, reported by retrieval tool",
+      "reportedDefaultTextLicense": "CC-BY-SA 3.0 Unported unless specifically noted otherwise",
+      "creditSummary": "Identifies source/article or authors, links applicable license, and indicates changes; adaptations retain applicable share-alike terms.",
+      "nonTextScope": "Help page explicitly separates image/video licensing from automatic text licensing.",
+      "communityExceptionStatus": "not verified for the pinned Sky Wiki content"
+    }
+  ],
+  "cachedSkySiteinfo": {
+    "sourceId": "K01",
+    "rightsText": "CC-BY-SA",
+    "rightsUrl": "https://www.fandom.com/licensing",
+    "explicitVersion": null,
+    "storage": "existing private E-drive research cache; no raw response copied to Git"
+  },
+  "conclusion": "Fandom help provides a default-version lead, not confirmed per-content Sky Wiki license/version or asset permission. Q12 remains open pending applicable source exceptions and maintainer credit review.",
+  "constraints": [
+    "No fresh live-policy claim from an indexed three-month-old extraction",
+    "No claim every Sky Wiki page/module has the same applicable license",
+    "No TGC or community image rights granted by text-license metadata",
+    "No repeated robots-blocked requests or browser login/protection bypass"
+  ]
+}

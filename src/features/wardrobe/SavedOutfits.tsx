@@ -7,6 +7,7 @@ import { demoPackage } from './demo/demo'
 import { createOutfitStorage, deleteOutfit, renameOutfit, saveOutfit, selectOutfit } from './persistence'
 import type { OutfitLibrary } from './persistence'
 import { wardrobeCopy } from './copy'
+import { OutfitBackup } from './OutfitBackup'
 
 type Copy = typeof wardrobeCopy.vi
 function SavedOutfitRow({ outfit, copy, onLoad, onRename, onDelete }: {
@@ -16,6 +17,7 @@ function SavedOutfitRow({ outfit, copy, onLoad, onRename, onDelete }: {
   const [deleting, setDeleting] = useState(false)
   const [name, setName] = useState(outfit.name ?? '')
   const renameButton = useRef<HTMLButtonElement>(null)
+  const deleteButton = useRef<HTMLButtonElement>(null)
   const renameInput = useRef<HTMLInputElement>(null)
   const wasEditing = useRef(false)
   useEffect(() => {
@@ -32,9 +34,9 @@ function SavedOutfitRow({ outfit, copy, onLoad, onRename, onDelete }: {
     </form> : <div className="wardrobe-saved__actions">
       <Button onClick={onLoad} aria-label={`${copy.loadOutfit}: ${outfit.name}`}>{copy.loadOutfit}</Button>
       <button ref={renameButton} type="button" className="button button--quiet" onClick={() => { setName(outfit.name ?? ''); setEditing(true); setDeleting(false) }}>{copy.renameOutfit}</button>
-      <Button className="button--quiet" onClick={() => setDeleting(true)} aria-label={`${copy.deleteOutfit}: ${outfit.name}`}>{copy.deleteOutfit}</Button>
+      <button ref={deleteButton} type="button" className="button button--quiet" onClick={() => setDeleting(true)} aria-label={`${copy.deleteOutfit}: ${outfit.name}`}>{copy.deleteOutfit}</button>
     </div>}
-    {deleting ? <div><p className="wardrobe-small">{copy.confirmDelete}</p><div className="wardrobe-saved__actions"><Button onClick={onDelete}>{copy.deleteOutfit}</Button><Button className="button--quiet" onClick={() => setDeleting(false)}>{copy.cancel}</Button></div></div> : null}
+    {deleting ? <div><p className="wardrobe-small">{copy.confirmDelete}</p><div className="wardrobe-saved__actions"><Button onClick={onDelete}>{copy.deleteOutfit}</Button><Button className="button--quiet" onClick={() => { setDeleting(false); deleteButton.current?.focus() }}>{copy.cancel}</Button></div></div> : null}
   </li>
 }
 
@@ -45,7 +47,7 @@ export function SavedOutfits({ storage, selection, onLoad }: {
   const copy = wardrobeCopy[locale]
   const [saved, setSaved] = useState(() => storage.read())
   const [name, setName] = useState('')
-  const [message, setMessage] = useState<'saved' | 'loaded' | 'renamed' | 'deleted' | 'error' | null>(null)
+  const [message, setMessage] = useState<keyof typeof copy.libraryMessages | null>(null)
   const nameInput = useRef<HTMLInputElement>(null)
   const id = useId()
   const apply = (mutation: (library: OutfitLibrary) => ValidationResult<OutfitLibrary>, success: typeof message) => {
@@ -60,7 +62,7 @@ export function SavedOutfits({ storage, selection, onLoad }: {
     <form onSubmit={event => {
       event.preventDefault()
       const next = apply(library => saveOutfit(library, demoPackage, selection, `outfit-${crypto.randomUUID()}`, name, new Date().toISOString()), 'saved')
-      if (next) setName('')
+      if (next) { setName(''); nameInput.current?.focus() }
     }}>
       <label className="input-field" htmlFor={`${id}-name`}>{copy.outfitName}<input ref={nameInput} id={`${id}-name`} className="text-input" value={name} maxLength={80} required onChange={event => setName(event.target.value)} /></label>
       <Button type="submit" disabled={!name.trim() || saved.value.outfits.length >= 50}>{copy.saveNewOutfit}</Button>
@@ -77,5 +79,7 @@ export function SavedOutfits({ storage, selection, onLoad }: {
         onRename={nextName => Boolean(apply(library => renameOutfit(library, demoPackage, outfit.id!, nextName), 'renamed'))}
         onDelete={() => { if (apply(library => deleteOutfit(library, demoPackage, outfit.id!), 'deleted')) nameInput.current?.focus() }} />)}
     </ul>}
+    <OutfitBackup library={saved.value} onReplace={library => { setSaved(storage.write(library)); setMessage('imported') }}
+      onReset={() => { setSaved(storage.reset()); setMessage('reset') }} />
   </section>
 }

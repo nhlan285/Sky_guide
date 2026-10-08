@@ -9,3 +9,12 @@
 - **Thiếu:** URL bài, ngày cập nhật, phạm vi realm/season, mức độ còn đúng của walkthrough.
 - **Đầu ra chấp nhận:** route có nguồn từng phần, bước viết lại và ghi nội dung chưa đối chiếu phiên bản; tránh khẳng định hướng dẫn còn đúng nếu chưa kiểm tra.
 - **Tham chiếu:** [K09](09-wiki-video-playlists.md), [Schema](../docs/DATA_SCHEMA.md).
+
+## P1-D08 source review — 2026-10-06
+[Eden guide](https://www.appunwrapper.com/2019/08/19/sky-children-of-the-light-eye-of-eden-guide/)
+published2019-08-19; version/updatedAt không rõ. [Evidence](evidence/k08-k09-walkthrough-sources-2026-10-06.json)
+ghi scope/tóm tắt riêng/giới hạn. Bài tự sửa glitch là không còn hoạt động và không
+biết tác giả map: loại khỏi usable instructions, không dùng ảnh. Credit publisher
+AppUnwrapper; dòng By thatgamecompany là tác giả game, không phải bài.
+K09 Wiki ghi thay đổi2022 và map cũ; current mechanics chưa QA. Reset dạng PST-only
+không thành rule canonical. DONE về source review, chưa route/publish/asset rights.

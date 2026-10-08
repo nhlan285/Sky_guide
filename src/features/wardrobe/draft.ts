@@ -1,4 +1,5 @@
-import { validateOutfitSnapshot, validateSelection } from '../../data/wardrobe/index.ts'
+import { validateSelection } from '../../data/wardrobe/index.ts'
+import { validateCompatibleOutfitSnapshot } from './compatibility.ts'
 import type { OutfitSnapshot, WardrobePackage } from '../../data/wardrobe/index.ts'
 import { resolveRules } from './engine.ts'
 
@@ -8,7 +9,7 @@ export function createWardrobeDraft() {
   return {
     read(pkg: WardrobePackage): OutfitSnapshot | null {
       if (!draft || draft.packageId !== pkg.id) return null
-      const parsed = validateOutfitSnapshot(draft.snapshot, pkg)
+      const parsed = validateCompatibleOutfitSnapshot(draft.snapshot, pkg)
       return parsed.valid && !resolveRules(parsed.value, pkg).issue ? structuredClone(parsed.value) : null
     },
     write(input: unknown, pkg: WardrobePackage): boolean {

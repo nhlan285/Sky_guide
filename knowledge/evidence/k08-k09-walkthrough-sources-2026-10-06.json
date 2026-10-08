@@ -1,0 +1,32 @@
+{
+  "schemaVersion":1,
+  "purpose":"source metadata/editorial review only; no route publish, frame/media download or asset reuse",
+  "K08": {
+    "sourceUrl":"https://www.appunwrapper.com/2019/08/19/sky-children-of-the-light-eye-of-eden-guide/",
+    "title":"Sky: Children of the Light – Eye of Eden Guide",
+    "publisher":"AppUnwrapper", "individualArticleAuthor":null,
+    "publishedDate":{"value":"2019-08-19","precision":"date","timezone":null},
+    "updatedAt":null,"gameVersion":null,
+    "access":"rendered article read2026-10-06 client date",
+    "scope":"Eye of Eden introduction, journey hazards, statue progression and rebirth; contains spoilers",
+    "summaryOwnWords":"Historical orientation to preparing for Eden, moving through hazards and returning after rebirth; use as a reference outline, not a verified current route.",
+    "reviewFindings":[
+      {"topic":"Eden glitch","state":"obsolete per article's own correction","action":"exclude from usable route instructions"},
+      {"topic":"map image creator","state":"article says creator unknown","action":"no image reuse or ownership inference"},
+      {"topic":"current Eden mechanics/prices/reset","state":"not tested in current game","action":"needs contemporary source comparison; no fixed PST-only rule"},
+      {"topic":"game attribution","state":"By thatgamecompany refers to game publisher","action":"do not assign thatgamecompany as walkthrough author"}
+    ],
+    "crosscheck":"Eye of Eden@109730 describes June2022 changes and outdated maps;2019 guidance is not wholly current",
+    "automation":"manual short paraphrase with per-part source; no full article scraper"
+  },
+  "K09": {
+    "directory":{"sourceUrl":"https://sky-children-of-the-light.fandom.com/wiki/Spirit_Visits?oldid=111650","revision":111650,"creatorCredit":"Tara's Sky Journey (@Ilivetowrite)","playlistScope":"Spirit video guides up to Season of Assembly as Wiki caption states"},
+    "playlist":{"sourceUrl":"https://www.youtube.com/playlist?list=PLKh97ggSLvdy2pb2aa5HIA5u9k6lEqilq","titleObserved":"Traveling Spirits (Spirits from Prior Seasons)","creatorVerification":"Wiki caption, not full playlist API metadata","membershipVerified":false,"publicationDate":null},
+    "edenReference":{"sourceUrl":"https://sky-children-of-the-light.fandom.com/wiki/Eye_of_Eden?oldid=109730","pageId":360,"revision":109730,"retrievedAt":"2026-10-05T17:09:52.216Z","sha256":"6581954c0a29c2f7537b43f494d965327dcb8b3f0b3600bd443ed7c58a09b4ea","bytes":28546,"caption":"Eye of Eden Guide by Tara"},
+    "video":{"sourceUrl":"https://www.youtube.com/watch?v=eAEK63eWmVY","videoId":"eAEK63eWmVY","title":"Sky: Children of the Light Eye of Eden Guide and Walkthrough (New)","creator":"Tara's Sky Journey","creatorUrl":"https://www.youtube.com/@TarasSkyJourney","metadataMethod":"YouTube oEmbed GET format=json, verified response only","metadataRetrievedAt":"2026-10-05T17:11:01.050Z","metadataStatus":200,"metadataSha256":"8225050bab85605860441008333101880c33dcd002106d8dcea4eb89692482e2","metadataBytes":879,"publicationDate":null,"timestampsReferenced":null,"contentWatched":false,"currentGameAccuracy":"unverified"},
+    "editorialScope":"Metadata/source discovery; reference Eden introduction/traversal only pending actual content and timestamp review. No paraphrased video steps invented.",
+    "rightsStatus":"unknown for rehosting/frames; observed oEmbed HTML is not project redistribution permission; external links only"
+  },
+  "mapping":{"source":"publisher/channel credit and original link kept separate from Wiki directory","date":"published date-only, unknown video/update date remains null","RouteStep":"no coordinates/timestamps/ordering from unseen footage","rights":"text-source permission never grants media/map permission"},
+  "limitations":["No playable route or current gameplay QA","No embed implementation, video/media/thumbnail download","Playlist membership/full coverage not verified","K08 and K09 cannot resolve all version disagreements without current content review"]
+}

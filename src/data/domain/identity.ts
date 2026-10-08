@@ -1,4 +1,4 @@
-import { enumeration, failure, nullable, object, success, validateDateTime, validateId } from '../core/index.ts'
+import { enumeration, failure, nullable, object, success, compareInstants, validateDateTime, validateId } from '../core/index.ts'
 import type { ValidationResult } from '../core/index.ts'
 import { array, boolean, nonBlank } from '../catalog/shared.ts'
 
@@ -62,7 +62,7 @@ export function validateIdentityGraph(input: unknown, provenanceIds: ReadonlySet
   if (nodes.size !== graph.identities.length) return failure('duplicate_id', 'Duplicate kind/ID identity.')
   for (const node of graph.identities) {
     if ((!node.fixture && !node.provenanceIds.length) || new Set(node.provenanceIds).size !== node.provenanceIds.length || node.provenanceIds.some(id => !provenanceIds.has(id))) return failure('unknown_provenance', 'Identity provenance is missing or invalid.')
-    if (node.retiredAt && Date.parse(node.retiredAt) > Date.parse(node.updatedAt)) return invalid('Retirement cannot be later than record update.')
+    if (node.retiredAt && compareInstants(node.retiredAt, node.updatedAt) > 0) return invalid('Retirement cannot be later than record update.')
   }
   const active = (target: EntityRef) => nodes.has(key(target)) && nodes.get(key(target))?.retiredAt === null
   const crosswalkKeys = new Set<string>()
@@ -101,6 +101,8 @@ export function validateIdentityGraph(input: unknown, provenanceIds: ReadonlySet
     if (ruleId && targetOf('ruleEvent', ruleId) !== eventId) return invalid('Rule belongs to another event.')
     const overrideId = node.kind === 'eventOccurrence' ? targetOf('occurrenceOverride', node.id) : undefined
     if (overrideId && targetOf('overrideEvent', overrideId) !== eventId) return invalid('Override belongs to another event.')
+    const overrideRuleId = overrideId ? targetOf('overrideRule', overrideId) : undefined
+    if (ruleId && overrideRuleId && ruleId !== overrideRuleId) return invalid('Occurrence and override select different rules.')
   }
   const tombstones = new Map(graph.tombstones.map(entry => [key(entry.target), entry]))
   if (tombstones.size !== graph.tombstones.length) return failure('duplicate_id', 'Duplicate tombstone.')
@@ -129,7 +131,7 @@ export function validateIdentityGraph(input: unknown, provenanceIds: ReadonlySet
     for (const old of previous.identities) {
       const current = nodes.get(key(old))
       if (!current || current.revision < old.revision || (old.retiredAt !== null && current.retiredAt !== old.retiredAt)) return invalid('Identity history cannot disappear, regress or resurrect.')
-      if (Date.parse(current.updatedAt) < Date.parse(old.updatedAt)) return invalid('Update timestamp cannot regress.')
+      if (compareInstants(current.updatedAt, old.updatedAt) < 0) return invalid('Update timestamp cannot regress.')
       if (identityContent(current) !== identityContent(old) && current.revision <= old.revision) return invalid('Changed identity requires a new revision.')
       if (outgoing(graph, current) !== outgoing(previous, old) && current.revision <= old.revision) return invalid('Changed relationships require a new owner revision.')
     }

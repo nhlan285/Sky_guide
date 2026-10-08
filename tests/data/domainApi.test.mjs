@@ -16,6 +16,15 @@ const repository = createSnapshotRepository({ manifest, files }, freshness)
 const api = createDomainApi(repository, now)
 const get = path => api(new globalThis.Request(`https://fixture.invalid${path}`))
 
+test('freshness expiry compares comma and sub-millisecond instants exactly',async()=>{
+ for(const [validUntil,expected] of [['2026-10-04T01:00:00,000Z','stale'],['2026-10-04T01:00:00.0001Z','healthy']]) {
+  const handler=createDomainApi(createSnapshotRepository({manifest,files},{...freshness,validUntil}),now)
+  const response=await handler(new globalThis.Request('https://fixture.invalid/api/items?limit=1'))
+  assert.equal(response.status,200)
+  assert.equal((await response.json()).freshness.health,expected)
+ }
+})
+
 test('read facade paginates stable identities and pins every following page', async () => {
   const response = await get('/api/items?limit=2')
   assert.equal(response.status, 200)

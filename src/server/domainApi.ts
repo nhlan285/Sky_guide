@@ -1,5 +1,6 @@
 import type { DomainRepository } from '../data/domain/repository.ts'
 import type { Item, Spirit } from '../data/catalog/types.ts'
+import { compareInstants } from '../data/core/index.ts'
 
 function itemProjection(item: Item) {
   return { id: item.id, name: item.name, slot: item.slot, rawSlot: item.rawSlot,
@@ -47,7 +48,7 @@ export function createDomainApi(repository: DomainRepository, now: () => number 
       // validation is a required repository boundary, tested by adapter parity.
       if ([...catalog.entries.map(entry => entry.item), ...catalog.spirits].some(record => record.fixture || record.recordStatus !== 'published')) return error('source_unavailable', 503)
       const serverTime = new Date(now()).toISOString()
-      const health = freshness.health === 'offline' ? 'offline' : freshness.validUntil === null || Date.parse(freshness.validUntil) <= Date.parse(serverTime) ? 'stale' : freshness.health
+      const health = freshness.health === 'offline' ? 'offline' : freshness.validUntil === null || compareInstants(freshness.validUntil, serverTime) <= 0 ? 'stale' : freshness.health
       const meta = { schemaVersion: 1, catalogVersion: version, generatedAt: catalog.manifest.generatedAt, serverTime,
         freshness: { health, lastSuccessAt: freshness.lastSuccessAt, validUntil: freshness.validUntil },
         provenance: catalog.provenance.map(source => ({ id: source.id, sourceId: source.sourceId, sourceUrl: source.sourceUrl,

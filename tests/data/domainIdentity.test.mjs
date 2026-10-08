@@ -10,6 +10,16 @@ const graph = () => ({ identities: [identity('item', 'tsa-cosmetic-1'), identity
 ], crosswalks: [{ sourceId: 'K15', sourceKey: '1', target: { kind: 'item', id: 'tsa-cosmetic-1' } }], aliases: [], tombstones: [] })
 const validate = (value, previous) => validateIdentityGraph(value, new Set(['fixture-provenance']), new Set(['K15', 'K01']), previous)
 
+test('identity update regression and future retirement retain exact instant precision', () => {
+  const old=graph(); old.identities[0].updatedAt='2026-10-04T00:00:00,0001Z'
+  const current=globalThis.structuredClone(old); current.identities[0].revision++
+  current.identities[0].updatedAt='2026-10-04T00:00:00Z'
+  assert.equal(validate(current,old).valid,false)
+  const retired=graph(); retired.identities[0].retiredAt='2099-10-04T00:00:00,1Z'
+  retired.tombstones=[{target:{kind:'item',id:retired.identities[0].id},retiredAt:retired.identities[0].retiredAt,replacement:null}]
+  assert.equal(validate(retired).valid,false)
+})
+
 test('portable identities retain stable K15 IDs and deduplicate shared sample sets', () => {
   const value = graph()
   value.identities.push(identity('item', 'fixture-variant'), identity('instrument', 'fixture-variant-instrument'))
@@ -89,4 +99,20 @@ test('identity parser strips operational fields and rejects malformed input', ()
   value.identities[0].privateEvidence = 'not-public'
   assert.equal('privateEvidence' in validate(value).value.identities[0], false)
   for (const bad of [null, {}, [], { ...value, identities: [null] }]) assert.equal(validate(bad).valid, false)
+})
+
+test('occurrence selected rule agrees with its override rule even within the same event', () => {
+  const value = graph()
+  for (const [kind, id] of [['event', 'event-a'], ['eventRule', 'rule-1'], ['eventRule', 'rule-2'], ['eventOverride', 'override-x'], ['eventOccurrence', 'occurrence-a']]) value.identities.push(identity(kind, id))
+  value.relations.push(
+    { type: 'ruleEvent', fromId: 'rule-1', toId: 'event-a' }, { type: 'ruleEvent', fromId: 'rule-2', toId: 'event-a' },
+    { type: 'overrideEvent', fromId: 'override-x', toId: 'event-a' }, { type: 'overrideRule', fromId: 'override-x', toId: 'rule-2' },
+    { type: 'occurrenceEvent', fromId: 'occurrence-a', toId: 'event-a' }, { type: 'occurrenceRule', fromId: 'occurrence-a', toId: 'rule-1' },
+    { type: 'occurrenceOverride', fromId: 'occurrence-a', toId: 'override-x' },
+  )
+  assert.equal(validate(value).valid, false)
+  value.relations.find(edge => edge.type === 'overrideRule').toId = 'rule-1'
+  assert.equal(validate(value).valid, true)
+  value.relations = value.relations.filter(edge => edge.type !== 'overrideRule')
+  assert.equal(validate(value).valid, true)
 })

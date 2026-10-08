@@ -3,7 +3,7 @@
 .wardrobe-intro h1 { font-weight: 350; font-size: clamp(2.5rem, 4vw, 3.5rem); }
 .wardrobe-intro > div > p { color: var(--muted); margin-top: .3rem; }
 .wardrobe-disclosure { max-width: 26rem; }
-.wardrobe-disclosure p { font-size: .8rem; line-height: 1.6; margin-top: .65rem; }
+.wardrobe-intro .wardrobe-disclosure p { color: var(--text); font-size: .8rem; line-height: 1.6; margin-top: .65rem; }
 .wardrobe-workspace { display: grid; grid-template-columns: minmax(13rem, 1fr) minmax(0, 1.9fr) minmax(13rem, 1fr); gap: 1rem; align-items: start; }
 .wardrobe-panel { min-width: 0; background: var(--surface); border: 1px solid var(--border); padding: 1.15rem; border-radius: var(--radius-card); }
 .wardrobe-panel h2, .preview-caption h2 { font-size: 1.05rem; }
@@ -53,6 +53,8 @@
 .wardrobe-equipped button { background: var(--surface-soft); color: var(--text); border: 1px solid var(--control-border); border-radius: .5rem; padding: .4rem .65rem; min-height: 44px; cursor: pointer; font-size: .75rem; }
 .wardrobe-actions { display: grid; gap: .65rem; margin-bottom: .8rem; }
 .wardrobe-saved { margin-top: 1.5rem; padding-top: 1rem; border-top: 1px solid var(--border); }
+.wardrobe-backup { display: grid; gap: .65rem; min-width: 0; }
+.wardrobe-backup input[type="file"] { width: 100%; min-width: 0; max-width: 100%; }
 .wardrobe-saved form { display: grid; gap: .65rem; }
 .wardrobe-saved__list { list-style: none; padding: 0; display: grid; gap: 1rem; }
 .wardrobe-saved__list li { display: grid; gap: .65rem; padding-block: .75rem; border-top: 1px solid var(--border); min-width: 0; }

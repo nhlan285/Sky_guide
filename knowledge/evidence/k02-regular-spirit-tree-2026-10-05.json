@@ -1,0 +1,494 @@
+{
+  "schemaVersion": 1,
+  "purpose": "research-only manually reviewed sample; no import, catalog publication or asset permission",
+  "endpoint": "https://sky-children-of-the-light.fandom.com/api.php",
+  "requestContract": {
+    "action": "query",
+    "format": "json",
+    "formatversion": 2,
+    "prop": "revisions",
+    "rvprop": "ids|timestamp|content",
+    "rvslots": "main"
+  },
+  "responses": [
+    {
+      "file": "pages.json",
+      "retrievedAt": "2026-10-05T00:14:11.687Z",
+      "sha256": "d4c31016d91f81e0c08a78c29709132e1cb851a092167c824473e8a53f7b502a",
+      "bytes": 30462,
+      "pages": [
+        {
+          "title": "Pointing Candlemaker",
+          "pageId": 11280,
+          "revision": 110293,
+          "editedAt": "2026-08-24T08:53:36Z",
+          "sourceUrl": "https://sky-children-of-the-light.fandom.com/wiki/Pointing_Candlemaker?oldid=110293",
+          "contentModel": "wikitext"
+        },
+        {
+          "title": "Regular Spirits",
+          "pageId": 11739,
+          "revision": 101182,
+          "editedAt": "2026-01-09T05:49:36Z",
+          "sourceUrl": "https://sky-children-of-the-light.fandom.com/wiki/Regular_Spirits?oldid=101182",
+          "contentModel": "wikitext"
+        }
+      ]
+    },
+    {
+      "file": "templates.json",
+      "retrievedAt": "2026-10-05T00:14:29.473Z",
+      "sha256": "2a45852d06feec397370b6b62b57919c2f7313320d3f5fb8c694fc2b66737607",
+      "bytes": 716,
+      "pages": [
+        {
+          "title": "Template:Friendship Tree",
+          "pageId": 10877,
+          "revision": 71718,
+          "editedAt": "2024-04-09T05:41:30Z",
+          "sourceUrl": "https://sky-children-of-the-light.fandom.com/wiki/Template%3AFriendship_Tree?oldid=71718",
+          "contentModel": "wikitext"
+        },
+        {
+          "title": "Template:Cost",
+          "pageId": 11106,
+          "revision": 88945,
+          "editedAt": "2025-02-04T00:33:54Z",
+          "sourceUrl": "https://sky-children-of-the-light.fandom.com/wiki/Template%3ACost?oldid=88945",
+          "contentModel": "wikitext"
+        }
+      ]
+    },
+    {
+      "file": "renderers.json",
+      "retrievedAt": "2026-10-05T00:14:51.476Z",
+      "sha256": "f760b8bd582bd7a80f239b9c2faadad2aedf67945917a09c850c8774c26fc236",
+      "bytes": 30653,
+      "pages": [
+        {
+          "title": "Module:Cost",
+          "pageId": 12254,
+          "revision": 89344,
+          "editedAt": "2025-02-10T02:00:00Z",
+          "sourceUrl": "https://sky-children-of-the-light.fandom.com/wiki/Module%3ACost?oldid=89344",
+          "contentModel": "Scribunto"
+        },
+        {
+          "title": "Module:Friendship Tree",
+          "pageId": 12257,
+          "revision": 106368,
+          "editedAt": "2026-05-14T00:06:50Z",
+          "sourceUrl": "https://sky-children-of-the-light.fandom.com/wiki/Module%3AFriendship_Tree?oldid=106368",
+          "contentModel": "Scribunto"
+        }
+      ]
+    },
+    {
+      "file": "cost-data.json",
+      "retrievedAt": "2026-10-05T16:46:56.8981315Z",
+      "sha256": "787b4197bc6002941c83dba05505075dfe1f5bcc6c5fcf823af50fb6993d1d66",
+      "bytes": 2808,
+      "pages": [
+        {
+          "title": "Module:Cost/data",
+          "pageId": 12253,
+          "revision": 89343,
+          "editedAt": "2025-02-10T01:58:22Z",
+          "sourceUrl": "https://sky-children-of-the-light.fandom.com/wiki/Module%3ACost%2Fdata?oldid=89343",
+          "contentModel": "Scribunto"
+        }
+      ]
+    }
+  ],
+  "attribution": {
+    "textSource": "Sky: Children of the Light Wiki contributors",
+    "revisionLinks": "per response page above",
+    "licenseNote": "K01 observed CC-BY-SA label, version not verified; does not grant image/media rights",
+    "transformNote": "Summarized wikitext/template/module contracts, no Lua execution or image downloads"
+  },
+  "sample": {
+    "spiritName": "Pointing Candlemaker",
+    "formerName": "Pointing Pilgrim",
+    "category": "regular",
+    "realmName": "Isle of Dawn",
+    "canonicalSpiritId": null,
+    "treeVariant": "regular",
+    "externalUnlockConditions": [
+      "Relive spirit memory",
+      "Return spirit at realm temple"
+    ],
+    "nodes": [
+      {
+        "sourceNodeKey": "C1",
+        "rawValue": "emote",
+        "parentSourceNodeKeys": [],
+        "edgeStatus": "manually_reviewed",
+        "costRaw": null,
+        "costOrigin": "not-stated",
+        "costStatus": "unknown",
+        "costs": [],
+        "optional": null,
+        "itemId": null,
+        "itemIdStatus": "canonical crosswalk not verified",
+        "provenanceRefs": [
+          "Pointing Candlemaker@110293",
+          "Module:Cost/data@89343"
+        ]
+      },
+      {
+        "sourceNodeKey": "L1",
+        "rawValue": "emote2 1 C",
+        "parentSourceNodeKeys": [
+          "C1"
+        ],
+        "edgeStatus": "manually_reviewed",
+        "costRaw": "1 C",
+        "costOrigin": "page-explicit",
+        "costStatus": "known",
+        "costs": [
+          {
+            "currency": "candle",
+            "sourceCurrencyLabel": "C",
+            "amount": 1
+          }
+        ],
+        "optional": null,
+        "itemId": null,
+        "itemIdStatus": "canonical crosswalk not verified",
+        "provenanceRefs": [
+          "Pointing Candlemaker@110293",
+          "Module:Cost/data@89343"
+        ]
+      },
+      {
+        "sourceNodeKey": "R1",
+        "rawValue": "hair free",
+        "parentSourceNodeKeys": [
+          "C1"
+        ],
+        "edgeStatus": "manually_reviewed",
+        "costRaw": "free",
+        "costOrigin": "page-explicit",
+        "costStatus": "free",
+        "costs": [],
+        "optional": null,
+        "itemId": null,
+        "itemIdStatus": "canonical crosswalk not verified",
+        "provenanceRefs": [
+          "Pointing Candlemaker@110293",
+          "Module:Cost/data@89343"
+        ]
+      },
+      {
+        "sourceNodeKey": "C2",
+        "rawValue": "spell1",
+        "parentSourceNodeKeys": [
+          "C1"
+        ],
+        "edgeStatus": "manually_reviewed",
+        "costRaw": "1 C",
+        "costOrigin": "renderer-default-pinned",
+        "costStatus": "known",
+        "costs": [
+          {
+            "currency": "candle",
+            "sourceCurrencyLabel": "C",
+            "amount": 1
+          }
+        ],
+        "optional": null,
+        "itemId": null,
+        "itemIdStatus": "canonical crosswalk not verified",
+        "provenanceRefs": [
+          "Pointing Candlemaker@110293",
+          "Regular Spirits@101182",
+          "Module:Friendship Tree@106368",
+          "Module:Spirit Item/data@98798",
+          "Module:Cost/data@89343"
+        ]
+      },
+      {
+        "sourceNodeKey": "L2",
+        "rawValue": "heart",
+        "parentSourceNodeKeys": [
+          "C2"
+        ],
+        "edgeStatus": "manually_reviewed",
+        "costRaw": "3 C",
+        "costOrigin": "renderer-default-pinned",
+        "costStatus": "known",
+        "costs": [
+          {
+            "currency": "candle",
+            "sourceCurrencyLabel": "C",
+            "amount": 3
+          }
+        ],
+        "optional": null,
+        "itemId": null,
+        "itemIdStatus": "canonical crosswalk not verified",
+        "provenanceRefs": [
+          "Pointing Candlemaker@110293",
+          "Regular Spirits@101182",
+          "Module:Friendship Tree@106368",
+          "Module:Spirit Item/data@98798",
+          "Module:Cost/data@89343"
+        ]
+      },
+      {
+        "sourceNodeKey": "C3",
+        "rawValue": "wing 1 AC",
+        "parentSourceNodeKeys": [
+          "C2"
+        ],
+        "edgeStatus": "manually_reviewed",
+        "costRaw": "1 AC",
+        "costOrigin": "page-explicit",
+        "costStatus": "known",
+        "costs": [
+          {
+            "currency": "other",
+            "sourceCurrencyLabel": "AC",
+            "amount": 1
+          }
+        ],
+        "optional": null,
+        "itemId": null,
+        "itemIdStatus": "canonical crosswalk not verified",
+        "provenanceRefs": [
+          "Pointing Candlemaker@110293",
+          "Module:Cost/data@89343"
+        ]
+      },
+      {
+        "sourceNodeKey": "C4",
+        "rawValue": "emote3 2 C",
+        "parentSourceNodeKeys": [
+          "C3"
+        ],
+        "edgeStatus": "manually_reviewed",
+        "costRaw": "2 C",
+        "costOrigin": "page-explicit",
+        "costStatus": "known",
+        "costs": [
+          {
+            "currency": "candle",
+            "sourceCurrencyLabel": "C",
+            "amount": 2
+          }
+        ],
+        "optional": null,
+        "itemId": null,
+        "itemIdStatus": "canonical crosswalk not verified",
+        "provenanceRefs": [
+          "Pointing Candlemaker@110293",
+          "Module:Cost/data@89343"
+        ]
+      },
+      {
+        "sourceNodeKey": "L4",
+        "rawValue": "emote4 2 C",
+        "parentSourceNodeKeys": [
+          "C4"
+        ],
+        "edgeStatus": "manually_reviewed",
+        "costRaw": "2 C",
+        "costOrigin": "page-explicit",
+        "costStatus": "known",
+        "costs": [
+          {
+            "currency": "candle",
+            "sourceCurrencyLabel": "C",
+            "amount": 2
+          }
+        ],
+        "optional": null,
+        "itemId": null,
+        "itemIdStatus": "canonical crosswalk not verified",
+        "provenanceRefs": [
+          "Pointing Candlemaker@110293",
+          "Module:Cost/data@89343"
+        ]
+      },
+      {
+        "sourceNodeKey": "R4",
+        "rawValue": "Outfit 4 H",
+        "parentSourceNodeKeys": [
+          "C4"
+        ],
+        "edgeStatus": "manually_reviewed",
+        "costRaw": "4 H",
+        "costOrigin": "page-explicit",
+        "costStatus": "known",
+        "costs": [
+          {
+            "currency": "heart",
+            "sourceCurrencyLabel": "H",
+            "amount": 4
+          }
+        ],
+        "optional": null,
+        "itemId": null,
+        "itemIdStatus": "canonical crosswalk not verified",
+        "provenanceRefs": [
+          "Pointing Candlemaker@110293",
+          "Module:Cost/data@89343"
+        ]
+      },
+      {
+        "sourceNodeKey": "C5",
+        "rawValue": "spell5",
+        "parentSourceNodeKeys": [
+          "C4"
+        ],
+        "edgeStatus": "manually_reviewed",
+        "costRaw": "5 C",
+        "costOrigin": "renderer-default-pinned",
+        "costStatus": "known",
+        "costs": [
+          {
+            "currency": "candle",
+            "sourceCurrencyLabel": "C",
+            "amount": 5
+          }
+        ],
+        "optional": null,
+        "itemId": null,
+        "itemIdStatus": "canonical crosswalk not verified",
+        "provenanceRefs": [
+          "Pointing Candlemaker@110293",
+          "Regular Spirits@101182",
+          "Module:Friendship Tree@106368",
+          "Module:Spirit Item/data@98798",
+          "Module:Cost/data@89343"
+        ]
+      }
+    ],
+    "edgeEvidence": {
+      "index": "Regular Spirits@101182: bottom prerequisites, connected items, progressive central trunk",
+      "renderer": "Module:Friendship Tree@106368 doTree: original-format vertical center above row1, same-row left/right connectors; no friendship_update/vert overrides in sample",
+      "page": "Pointing Candlemaker@110293: hair after first node; outfit after Wing Buff and fourth node; emote levels3/4 after Wing Buff",
+      "limitation": "Manually reviewed ten-node sample using prose plus renderer; layout alone is not a generic graph parser"
+    },
+    "defaultEvidence": {
+      "revision": 98798,
+      "sourceUrl": "https://sky-children-of-the-light.fandom.com/wiki/Module%3ASpirit_Item%2Fdata?oldid=98798",
+      "raw": {
+        "spell1": "1 C",
+        "spell5": "5 C",
+        "heart": "3 C"
+      },
+      "note": "Renderer explicitly falls back to module costs when page value absent. Regular Spirits prose independently corroborates these three prices. Root emote has no cost default: preserved unknown, not free."
+    },
+    "treeSubtotal": {
+      "selectedSourceNodeKeys": [
+        "C1",
+        "L1",
+        "R1",
+        "C2",
+        "L2",
+        "C3",
+        "C4",
+        "L4",
+        "R4",
+        "C5"
+      ],
+      "uniquePathNodeKeys": [
+        "C1",
+        "L1",
+        "R1",
+        "C2",
+        "L2",
+        "C3",
+        "C4",
+        "L4",
+        "R4",
+        "C5"
+      ],
+      "knownSubtotal": {
+        "C": 14,
+        "H": 4,
+        "AC": 1
+      },
+      "complete": false,
+      "missingCostNodeKeys": [
+        "C1"
+      ],
+      "scope": "revision-pinned reviewed sample; incomplete is not a full unlock price"
+    },
+    "pathSamples": [
+      {
+        "selectedSourceNodeKeys": [
+          "R4"
+        ],
+        "uniquePathNodeKeys": [
+          "R4",
+          "C4",
+          "C3",
+          "C2",
+          "C1"
+        ],
+        "knownSubtotal": {
+          "C": 3,
+          "H": 4,
+          "AC": 1
+        },
+        "complete": false,
+        "missingCostNodeKeys": [
+          "C1"
+        ],
+        "scope": "revision-pinned reviewed sample; incomplete is not a full unlock price"
+      },
+      {
+        "selectedSourceNodeKeys": [
+          "R4",
+          "L4"
+        ],
+        "uniquePathNodeKeys": [
+          "R4",
+          "C4",
+          "C3",
+          "C2",
+          "C1",
+          "L4"
+        ],
+        "knownSubtotal": {
+          "C": 5,
+          "H": 4,
+          "AC": 1
+        },
+        "complete": false,
+        "missingCostNodeKeys": [
+          "C1"
+        ],
+        "scope": "revision-pinned reviewed sample; incomplete is not a full unlock price"
+      }
+    ],
+    "indexComparison": {
+      "source": "Regular Spirits@101182 Pointing Candlemaker row",
+      "reportedTotals": {
+        "C": 14,
+        "H": 4,
+        "AC": 1
+      },
+      "knownSubtotalMatches": true,
+      "note": "Index aggregate match does not fill missing root cost or make complete=true"
+    }
+  },
+  "fieldMapping": {
+    "spirit": "name/category verified; canonical ID/realm FK crosswalk unresolved",
+    "node": "coordinate key scoped by tree/variant/revision, not canonical ID",
+    "parents": "reviewed prerequisites, not arbitrary DOM order",
+    "cost": "page overrides/defaults have separate provenance, absent stays unknown; AC maps other with original label",
+    "item": "Outfit/hair item FK unresolved; outfit not forced into top/bottom",
+    "optional": "null without per-node evidence",
+    "totals": "unique prerequisite closure; complete=false if any missing cost/edge"
+  },
+  "limitations": [
+    "No all-spirit coverage, automated parser, runtime adapter or current game-price verification",
+    "friendship_update format, vert overrides, sparse/custom branches and Tier2 need separate review",
+    "English raw defaults pinned; language overrides not executed",
+    "No currency conversion/real-money estimate; no rights approval",
+    "K02 CORS/rate/browser acceptance not retested; K01 observation retained"
+  ]
+}

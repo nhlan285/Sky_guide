@@ -1,0 +1,174 @@
+{
+  "schemaVersion": 1,
+  "purpose": "dated source coverage research, no price import/automatic scraping/checkout/FX conversion",
+  "reviewClientDate": "2026-10-06",
+  "K10": {
+    "evidenceRef": "image-price-sources-2026-10-04.json#/sources/appleUS",
+    "observedDate": "2026-10-04",
+    "reviewMode": "reused existing verified historical evidence, no fresh price request",
+    "sourceId": "K10",
+    "sourceUrl": "https://apps.apple.com/us/app/sky-children-of-the-light/id1462117269",
+    "verificationMethod": "web reader",
+    "status": "readable",
+    "appId": "1462117269",
+    "platform": "ios",
+    "market": "US",
+    "currencyCode": "USD",
+    "publicPriceSamples": [
+      {
+        "label": "Starter Pack",
+        "amountDecimal": "4.99"
+      },
+      {
+        "label": "Season Pass Regular",
+        "amountDecimal": "9.99"
+      },
+      {
+        "label": "Season Pass Pack",
+        "amountDecimal": "19.99"
+      }
+    ],
+    "storeProductIds": null,
+    "coverage": "partial public list; no full SKU feed",
+    "skuStatus": "storeProductId unknown, product label not SKU",
+    "contentsStatus": "unknown",
+    "vnResult": {
+      "name": "apple-vn.html",
+      "requestedUrl": "https://apps.apple.com/vn/app/sky-children-of-the-light/id1462117269",
+      "status": 404,
+      "finalUrl": "https://apps.apple.com/vn/app/sky-children-of-the-light/id1462117269",
+      "contentType": "text/html",
+      "bytes": 1146
+    },
+    "vnCoverage": "unknown;404 is observed retrieval result, not game availability conclusion"
+  },
+  "K11": {
+    "observedDate": "2026-10-04",
+    "reviewMode": "reused historical direct HTML request evidence",
+    "platform": "android",
+    "appPackage": "com.tgc.sky.android",
+    "requests": [
+      {
+        "name": "play-us.html",
+        "requestedUrl": "https://play.google.com/store/apps/details?id=com.tgc.sky.android&hl=en&gl=US",
+        "status": 200,
+        "finalUrl": "https://play.google.com/store/apps/details?id=com.tgc.sky.android&hl=en&gl=US",
+        "contentType": "text/html; charset=utf-8",
+        "bytes": 1334499
+      },
+      {
+        "name": "play-vn.html",
+        "requestedUrl": "https://play.google.com/store/apps/details?id=com.tgc.sky.android&hl=vi&gl=VN",
+        "status": 200,
+        "finalUrl": "https://play.google.com/store/apps/details?id=com.tgc.sky.android&hl=vi&gl=VN",
+        "contentType": "text/html; charset=utf-8",
+        "bytes": 1315277
+      }
+    ],
+    "iapSkuPrices": null,
+    "skuStatus": "unknown",
+    "marketStatus": "gl request region US/VN; actual account checkout not verified",
+    "languageNote": "hl locale not purchase market",
+    "mappingLimit": "app free/range not a per-SKU IAP price; never copy iOS prices"
+  },
+  "K12": {
+    "sourceUrl": "https://apppricinglab.com",
+    "responses": [
+      {
+        "url": "https://apppricinglab.com/search?q=Sky%3A+Children+of+the+Light",
+        "retrievedAt": "2026-10-05T17:14:56.725Z",
+        "status": 200,
+        "bytes": 15456,
+        "sha256": "289568f53b0e46bbd4cfc345da2068dfa5e97b6eb2cf882c311a3f8f6280ece7"
+      },
+      {
+        "url": "https://apppricinglab.com/app/apple/1462117269",
+        "retrievedAt": "2026-10-05T17:15:30.341Z",
+        "status": 200,
+        "bytes": 32015,
+        "sha256": "bb81013118cae347f96b68f10e1b812c7065ed46ec330623e13ea677880f37d9"
+      },
+      {
+        "url": "https://apppricinglab.com/app/google_play/com.tgc.sky.android",
+        "retrievedAt": "2026-10-05T17:15:30.568Z",
+        "status": 200,
+        "bytes": 29017,
+        "sha256": "2d946bf513afd5968f5d8bdb449913d8f5c6bc3168f4f065c91b93dcaa1c20fa"
+      },
+      {
+        "url": "https://apppricinglab.com/iap/apple/1462117269",
+        "retrievedAt": "2026-10-05T17:15:55.673Z",
+        "status": 200,
+        "bytes": 21615,
+        "sha256": "b9329390c1ec87ded8418736475661bc295be65ce98af487edc7bed54473d730"
+      }
+    ],
+    "searchContract": "observed form GET /search input q, actual returned app links used",
+    "appleUrl": "https://apppricinglab.com/app/apple/1462117269",
+    "androidUrl": "https://apppricinglab.com/app/google_play/com.tgc.sky.android",
+    "iapUrl": "https://apppricinglab.com/iap/apple/1462117269",
+    "apple": {
+      "listedIapCount": 10,
+      "latestIapDataDate": "2026-03-29",
+      "appListingUpdateDate": "2026-02-26",
+      "samples": [
+        {
+          "label": "Starter Pack",
+          "displayAmount": "4.99",
+          "displayCurrencyLabel": "$",
+          "storeProductId": null,
+          "market": null,
+          "currencyCode": null,
+          "contents": null
+        },
+        {
+          "label": "Season Pass Regular",
+          "displayAmount": "9.99",
+          "displayCurrencyLabel": "$",
+          "storeProductId": null,
+          "market": null,
+          "currencyCode": null,
+          "contents": null
+        }
+      ],
+      "history": {
+        "snapshotCount": 1,
+        "rawSnapshotLabel": "2026-03-29 06:36",
+        "precision": "unknown",
+        "timezone": null,
+        "instant": null
+      }
+    },
+    "android": {
+      "iapSkuPrices": null,
+      "appListingUpdateDate": "2026-03-10",
+      "appFreeIsNotIapFree": true
+    },
+    "capability": {
+      "manualReference": "available, partial/stale Sky-specific sample",
+      "publicSkuApi": "not found/verified in sampled pages",
+      "csvExport": "not found/verified",
+      "badgeApi": "homepage stats badge only, not SKU feed",
+      "automaticImporter": "not authorized by sampled terms, no implementation"
+    },
+    "terms": {
+      "sourceUrl": "https://apppricinglab.com/terms",
+      "updatedDate": "2026-03-25",
+      "summary": "Research/reference/linking permitted with visible backlink to specific originating page; systematic scraping/bulk download and competing redistribution prohibited; completeness/timeliness not warranted"
+    },
+    "mapping": {
+      "labels": "display name only, duplicated Regular Candles labels do not define SKU",
+      "price": "raw dollar label retained until currency/market verified, no forced PriceObservation",
+      "timestamps": "provider checked date is separate from retrieval; unknown timezone not instant",
+      "contents": "absent stays unknown, no candle amount from label or price",
+      "comparison": "K10 nominal labels/prices similar but no exact SKU/market match verified"
+    },
+    "conclusion": "P1-D12 capability review DONE; manual partial research source, not full history/API/export integration"
+  },
+  "limitations": [
+    "No current-price claim for2026-10-04 samples",
+    "No checkout market, SKU or complete contents",
+    "No importer or conversion calculator",
+    "K04 access remains blocked"
+  ]
+}
