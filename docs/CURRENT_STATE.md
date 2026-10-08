@@ -1,10 +1,10 @@
 # Current handoff — 2026-10-08
 
 ## Task / branch / checkpoint
-Sky Guide master objective OPEN, not complete. User approved existing-account CLI
-login on2026-10-08; interactive login initiated, awaiting actual authentication.
+Sky Guide master objective OPEN, not complete. CLI login completed; STOP after
+linked-query preflight minted/refreshed a managed DB login role outside approval.
 Branch codex/master-plan-execution; checkpoint parent
-e10d74f340397d64c320383c5e9c303bf0b412d0 verified on origin.
+ae19575b238275aa9492ea7dcf0fc732e357a5ef verified on origin.
 Resolve latest checkpoint with git log -1 and verify remote SHA.
 Master: [IMPLEMENTATION_PLAN](plan/IMPLEMENTATION_PLAN.md).
 Active phase: [POSTGRES_PROVIDER_SELECTION](plan/POSTGRES_PROVIDER_SELECTION.md),
@@ -39,6 +39,15 @@ RLS/no policies and closed client ACL. All tables empty except generation revisi
 inactive sync_commit_control and release_validation_clock(1,epoch0,depth0,writerNULL);
 witness0. No fixture/tempSET retained. Security advisor only intentional2 INFO
 rls_enabled_no_policy for internal owners; do not add policies to silence them.
+Exception detected2026-10-08: CLI2.120.0 linked-query setup minted/refreshed
+cli_login_postgres LOGIN/NOINHERIT/non-super/no-create/no-bypass and postgres→CLI
+membership ADMIN FALSE/INHERIT FALSE/SET TRUE, grantor supabase_admin. This managed
+role/membership is OUTSIDE fixture ROLLBACK and approved two runtime groups. Its
+password validity expired05:55:41.50054 UTC; role/membership still exist. No CLI
+backend/shared dependencies/role settings observed. Do not treat expiry as removal.
+Legacy whole85 snapshot does not cover this other provider principal; no pre-CLI
+all-role snapshot exists, so do not claim proven creation vs refresh or global
+principal baseline preserved. Source85 schema/data/runtime baseline remains exact.
 
 Original15 migrations preserved. Approved up applied via migration tool as
 20261008044236_private_release_validation_brackets, CLI-created file aligned to
@@ -84,9 +93,12 @@ Actor/current session both postgres and local application labels verified correc
 Bounded15s timeline probe: A163749/xid2151 ended05:07:25.877181 UTC; B163764 ran
 05:07:27.137556, seen_a=[]. This does not prove concurrency or database serialization.
 Do not repeat this connector probe or substitute model/serial evidence.
-CLI2.120.0 supports Management API --linked --project-ref; read-only preflight found
-no access token. No login/token or credential operation performed. Authentication
-outside exact5d9058e scope needs user rule22 authorization or user-supplied ready CLI.
+CLI login success(exit0)05:49:12.0605343 UTC. Target/account metadata and native
+postgres/PG17.11/whole85 baseline checks PASS. However2.120.0 query.handler.ts
+resolves DB config and mints a temporary login role before Management API query;
+role side effect is not covered by the approved CLI-login scope. Stop db query,
+link and passwordless DB CLI commands; original no-new-role transport assumption
+withdrawn. A/B/observer NOT RUN via CLI. Token not read/exported by this run.
 Even limited zero-row lock proof would not close all durable adapter/CAS/SDK races.
 Prepared full adapter A/B/observer case now preserves both complete39-callback/
 978-query/6-negative transcripts. A holds existing head/control while sleeping;
@@ -106,8 +118,9 @@ focused tests and scaffold76 Markdown/14 profiles/173 tasks PASS; diff checked.
 Latest addition: two adapter-concurrency preparation/corruption tests, lint and
 typecheck PASS. Full442 suite is the prior checkpoint result; expanded suite NOT RUN.
 App build previously PASS at2925996; app build inputs unchanged, NOT RERUN.
-No live SQL/test job remains. Approved interactive CLI login PID26700 verified live;
-recheck E status/process before waiting or resuming. Node24/pnpm10.30.3 via E:/Code/corepack.cmd;
+New recovery proposal/guard corruption test PASS; native READ-ONLY recovery guard
+PASS(expired/zero sessions/dependencies), lint/typecheck PASS. Expanded full suite
+NOT RUN. No live SQL/login/test job remains. Node24/pnpm10.30.3 via E:/Code/corepack.cmd;
 CLI2.120.0/npm cache E:/SkyGuideAssets/tools/npm-cache. No owned Docker/browser/server.
 
 All raw SQL/logs/native receipts/baselines outside Git at:
@@ -118,18 +131,22 @@ concurrent-{a,b,observer}-evidence.json, parallel-transport-probe.json;
 release-bracket-final-tests.log. Active phase has exact names/hashes/full evidence.
 
 ## Exact next / remaining gates
-Approved interactive CLI login started in separate visible PowerShell window.
-E: start-approved-cli-login.ps1 and approved-cli-login-status.json contain no secrets;
-status records phase/processId/timestamps/exit code ONLY. Latest verified live PID26700;
-recheck actual status AND process before waiting; no terminal output/input captured.
-If failed/cancelled, stop and inspect direct user report, do not restart automatically.
-Do not repeat unchanged connector probes, passed tests or expand dependent scope.
-After completed login: read-only preflight must
-verify target project/current+session user postgres/PG17.11 and complete85 baseline;
-inspect actual CLI result format. Run prepared full adapter A/B/observer via separate
-CLI processes (release-bracket-adapter-concurrency-{a,b,observer}.sql on E:), verify
-complete journal rows/distinct live backends/blocking/clock/witness receipts and full baseline after each
-ROLLBACK. If API also serializes, stop and review an independently authorized path.
+Review explicit recovery proposal before further DB CLI/credential/mutation work.
+Builder tests/sql/build-cli-role-recovery-proposal.mjs; E cli-role-recovery-request.json
+and guard.sql/guard-receipt.json. Proposed DELETE fixed project's /cli/login-role
+ONLY after whole85 + exact expired one-role/membership/no sessions/settings/shared
+dependencies guard. Provider endpoint may remove read-only counterparts, therefore
+guard forbids any other cli_login role. postgres lacks ADMIN on this provider role;
+do not try DROP/REVOKE/privilege escalation. Removal is irreversible; no automatic
+remint/recreation. On failure STOP/preserve evidence; schema down not applicable.
+Separate approval requested for same existing CLI account token used solely in
+process memory for fixed Management API project/host cleanup + direct POST query
+transport (no CLI DB-config mint). No token in chat/log/Git/arguments/new files,
+no new credential/DB password/role/privilege. Proposed direct transport NOT RUN or
+approved yet. After cleanup require all cli_login roles absent, all other global
+roles/memberships/settings unchanged, source85 baseline exact. Then prepared full
+adapter A/B/observer unchanged30s/outer ROLLBACK +full baseline after each; actual
+backend blocking and complete receipts required. No repeat serial probes or gates.
 Full R1/P9-I02/D04/V01 OPEN: concurrent/durable/CAS/crash/backup restore/schema down/
 SDK/auth remain unaccepted. No real import/consumer/R2–R6 before foundation acceptance.
 K04 OneDrive403, K10/K11 SKU/market, K12 bulk reuse prohibited, Q02/Q09/Q10/Q11/Q12,

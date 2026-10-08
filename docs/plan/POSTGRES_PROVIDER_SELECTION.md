@@ -2118,3 +2118,57 @@ read-only target/account/project/85-source baseline check and actual output-shap
 inspection precede independent A/B/observer processes. All fixtures remain outer
 ROLLBACK with full baseline after each; missing overlap keeps gate OPEN. If login
 fails/cancels, no blind restart. Mandatory durable/restore/CAS/SDK gates unchanged.
+
+#### CLI linked-query role side effect — STOP / recovery REVIEW ONLY
+User signalled CLI ready. Login completed exit0 at05:49:12.0605343 UTC. CLI projects
+metadata matched sky-guide-dev/tpbydviuknovimroeodm/Dyland's Org/ap-southeast-1/
+ACTIVE_HEALTHY. Native identity guard confirmed current/session postgres,PG17.11,
+85 owners. Whole source85 baseline matched installation exactly. Actual --output
+json has {boundary,rows,warning}; guarded one-row result shape inspected.
+Two linked preflight queries emitted 'Initialising login role...'. Examined exact
+CLI2.120.0 primary source: query.handler.ts lines244–252 resolves linked DB config,
+including temporary login-role mint, although it discards that connection and
+executes SQL via Management API. Previous no-new-principal CLI transport assumption
+was incorrect and is withdrawn. Stopped passwordless DB CLI commands BEFORE any
+prepared A/B/observer fixture. No concurrency result exists from this route.
+Read-only independent MCP audit found cli_login_postgres LOGIN/NOINHERIT/non-super/
+no-CREATEROLE/no-CREATEDB/no-BYPASSRLS, validuntil2026-10-08T05:55:41.50054+00:00;
+one postgres→CLI membership, grantor supabase_admin,ADMIN FALSE/INHERIT FALSE/SET
+TRUE. This role/membership is outside fixture ROLLBACK and explicit user authority.
+No global role snapshot existed before CLI; do not claim proven creation vs refresh.
+Existing85 snapshot pins app runtime groups, not every provider principal, so its
+PASS does not prove no external CLI role change. No baseline/profile auto-adoption.
+MCP source85 post-incident guard +whole metadata/data/runtime snapshot still EXACT,
+clock0/witness0. No live CLI sessions/settings/shared dependencies; postgres has no
+ADMIN on managed CLI role. Password expiry does not remove role or SET membership.
+Official recovery documented at
+https://supabase.com/docs/guides/troubleshooting/permission-denied-when-deleting-the-cli_login_postgres-role-808bae
+requires DELETE fixed project's /cli/login-role; ordinary postgres DROP cannot do
+this. No cleanup/revoke/NOLOGIN/schema-down/privilege expansion attempted.
+Review builder tests/sql/build-cli-role-recovery-proposal.mjs generates fixed
+Management API request and READ-ONLY guard requiring exact one expired observed
+role/membership, no other cli_login roles, no backend/settings/shared dependencies.
+Native guard PASS; strict returned guard receipt independently verified. One local
+preparation/corruption test PASS; lint/typecheck PASS; full suite NOT RUN.
+E guard1928 bytes SHA25670c98c6943b7c8f4686ff60e56290bd9b9d4fd53dc3669e90b7859c9251899d0;
+request1538 bytes SHA256244db0fd5a8d69eda689816a5b3b777c442038b0264efc945d0ec0d688869221.
+E approved-cli-{target-project,identity-result,before-concurrent-baseline-result,
+before-concurrent-baseline,role-audit,role-dependencies,post-incident-baseline}.json;
+cli-role-recovery-{guard.sql,request.json,guard-receipt.json}. No credential captured.
+Proposal NOT APPROVED/NOT RUN: use existing CLI account token only in process memory
+for fixed project/host DELETE, guard immediately before; require all cli_login roles
+absent afterward and all other global role attributes/memberships/settings plus
+whole85 baseline unchanged. Endpoint may remove read-only counterparts: one-role
+guard forbids any others. Deletion is irreversible; never remint role/credential as
+automatic rollback. Failed DELETE/post-guard STOP and review, not schema down.
+Also request explicit authority for direct Management API POST database/query with
+the same in-memory credential to avoid CLI DB-config mint. No new credential/DB
+password/principal/privilege/infrastructure, no secret in chat/log/Git/arguments/
+new files. This transport implementation/native proof NOT RUN; no credential read
+before approval. After cleanup +target/source85 checks, run unchanged prepared
+adapter A/B/observer with independent requests and exact baselines after each
+ROLLBACK. If no true overlap, report evidence and keep all R1 gates OPEN.
+Exact next: obtain direct recovery/transport authority, implement narrow token
+handling with local fake-credential tests before any credential access, reread
+current guards, then scoped cleanup and concurrent proof. Stop all DB CLI commands
+until role-mint behavior avoided; do not reopen dependent phases or change K15.
