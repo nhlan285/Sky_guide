@@ -2,7 +2,7 @@ import { useEffect, useId, useRef, useState } from 'react'
 import { Button } from '../../shared/ui/primitives'
 import { useLocale } from '../../shared/i18n/useLocale'
 import { wardrobeCopy } from './copy'
-import { demoPackage } from './demo/demo'
+import { editorPackage as demoPackage } from './editorPackage'
 import { encodeOutfitBackup, MAX_BACKUP_BYTES, parseOutfitBackup } from './backup'
 import type { OutfitLibrary } from './persistence'
 

@@ -3,7 +3,7 @@ import type { OutfitSnapshot, WardrobeSelection } from '../../data/wardrobe/inde
 import type { ValidationResult } from '../../data/core/index.ts'
 import { Button } from '../../shared/ui/primitives'
 import { useLocale } from '../../shared/i18n/useLocale'
-import { demoPackage } from './demo/demo'
+import { editorPackage as demoPackage } from './editorPackage'
 import { createOutfitStorage, deleteOutfit, renameOutfit, saveOutfit, selectOutfit } from './persistence'
 import type { OutfitLibrary } from './persistence'
 import { wardrobeCopy } from './copy'

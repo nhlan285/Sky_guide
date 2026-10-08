@@ -1,0 +1,345 @@
+{
+  "sourceCatalogVersion": "tsa-v1-74007cf878ef",
+  "sourceDatasetSha256": "dd9a7873badab6abdf41731b6a98f7fa96d250bb7dc38a3182261d0c76e0a406",
+  "records": [
+    {
+      "provenanceIds": [
+        "tsa-source-52627debf2825da3",
+        "tsa-source-832cfda1ff42215a"
+      ],
+      "updatedAt": "2026-10-02T17:53:41Z",
+      "recordStatus": "published",
+      "fixture": false,
+      "id": "tsa-cosmetic-6",
+      "sourceKeys": {
+        "K15": "6",
+        "tsaIdentifier": "BaseCape"
+      },
+      "name": {
+        "default": "Base cape",
+        "translations": {}
+      },
+      "slot": "cape",
+      "rawSlot": "cape",
+      "accessoryAnchor": null,
+      "seasonIds": [],
+      "spiritIds": [],
+      "acquisitionOptions": [
+        {
+          "id": "tsa-cosmetic-6-default",
+          "kind": "other",
+          "costs": [],
+          "costStatus": "free",
+          "friendshipNodeId": null,
+          "iapProductId": null,
+          "validFrom": null,
+          "validTo": null,
+          "provenanceIds": [
+            "tsa-source-52627debf2825da3"
+          ]
+        }
+      ],
+      "assetIds": [],
+      "dyeRegions": [],
+      "dyeStatus": "unknown",
+      "ruleIds": [],
+      "compatibility": null,
+      "fieldProvenance": {
+        "name": [
+          "tsa-source-832cfda1ff42215a"
+        ],
+        "slot": [
+          "tsa-source-52627debf2825da3",
+          "tsa-source-832cfda1ff42215a"
+        ],
+        "acquisitionOptions": [
+          "tsa-source-52627debf2825da3"
+        ]
+      }
+    },
+    {
+      "provenanceIds": [
+        "tsa-source-52627debf2825da3",
+        "tsa-source-832cfda1ff42215a",
+        "tsa-source-9b34a9ebd80b079f"
+      ],
+      "updatedAt": "2026-10-02T17:53:41Z",
+      "recordStatus": "published",
+      "fixture": false,
+      "id": "tsa-cosmetic-1011",
+      "sourceKeys": {
+        "K15": "1011",
+        "tsaIdentifier": "SwitchBlueCape"
+      },
+      "name": {
+        "default": "Blue Cape",
+        "translations": {}
+      },
+      "slot": "cape",
+      "rawSlot": "cape",
+      "accessoryAnchor": null,
+      "seasonIds": [],
+      "spiritIds": [],
+      "acquisitionOptions": [
+        {
+          "id": "tsa-cosmetic-1011-offer-efd70a1fc50f232e",
+          "kind": "iap",
+          "costs": [],
+          "costStatus": "unknown",
+          "friendshipNodeId": null,
+          "iapProductId": null,
+          "validFrom": null,
+          "validTo": null,
+          "provenanceIds": [
+            "tsa-source-9b34a9ebd80b079f"
+          ]
+        }
+      ],
+      "assetIds": [],
+      "dyeRegions": [],
+      "dyeStatus": "unknown",
+      "ruleIds": [],
+      "compatibility": null,
+      "fieldProvenance": {
+        "name": [
+          "tsa-source-832cfda1ff42215a"
+        ],
+        "slot": [
+          "tsa-source-52627debf2825da3",
+          "tsa-source-832cfda1ff42215a",
+          "tsa-source-9b34a9ebd80b079f"
+        ],
+        "acquisitionOptions": [
+          "tsa-source-9b34a9ebd80b079f"
+        ]
+      }
+    },
+    {
+      "provenanceIds": [
+        "tsa-source-52627debf2825da3",
+        "tsa-source-832cfda1ff42215a",
+        "tsa-source-9b34a9ebd80b079f"
+      ],
+      "updatedAt": "2026-10-02T17:53:41Z",
+      "recordStatus": "published",
+      "fixture": false,
+      "id": "tsa-cosmetic-1012",
+      "sourceKeys": {
+        "K15": "1012",
+        "tsaIdentifier": "SwitchRedCape"
+      },
+      "name": {
+        "default": "Red Cape",
+        "translations": {}
+      },
+      "slot": "cape",
+      "rawSlot": "cape",
+      "accessoryAnchor": null,
+      "seasonIds": [],
+      "spiritIds": [],
+      "acquisitionOptions": [
+        {
+          "id": "tsa-cosmetic-1012-offer-efd70a1fc50f232e",
+          "kind": "iap",
+          "costs": [],
+          "costStatus": "unknown",
+          "friendshipNodeId": null,
+          "iapProductId": null,
+          "validFrom": null,
+          "validTo": null,
+          "provenanceIds": [
+            "tsa-source-9b34a9ebd80b079f"
+          ]
+        }
+      ],
+      "assetIds": [],
+      "dyeRegions": [],
+      "dyeStatus": "unknown",
+      "ruleIds": [],
+      "compatibility": null,
+      "fieldProvenance": {
+        "name": [
+          "tsa-source-832cfda1ff42215a"
+        ],
+        "slot": [
+          "tsa-source-52627debf2825da3",
+          "tsa-source-832cfda1ff42215a",
+          "tsa-source-9b34a9ebd80b079f"
+        ],
+        "acquisitionOptions": [
+          "tsa-source-9b34a9ebd80b079f"
+        ]
+      }
+    },
+    {
+      "provenanceIds": [
+        "tsa-source-52627debf2825da3",
+        "tsa-source-832cfda1ff42215a"
+      ],
+      "updatedAt": "2026-10-02T17:53:41Z",
+      "recordStatus": "published",
+      "fixture": false,
+      "id": "tsa-cosmetic-4",
+      "sourceKeys": {
+        "K15": "4",
+        "tsaIdentifier": "BaseMask"
+      },
+      "name": {
+        "default": "Base mask",
+        "translations": {}
+      },
+      "slot": "mask",
+      "rawSlot": "mask",
+      "accessoryAnchor": null,
+      "seasonIds": [],
+      "spiritIds": [],
+      "acquisitionOptions": [
+        {
+          "id": "tsa-cosmetic-4-default",
+          "kind": "other",
+          "costs": [],
+          "costStatus": "free",
+          "friendshipNodeId": null,
+          "iapProductId": null,
+          "validFrom": null,
+          "validTo": null,
+          "provenanceIds": [
+            "tsa-source-52627debf2825da3"
+          ]
+        }
+      ],
+      "assetIds": [],
+      "dyeRegions": [],
+      "dyeStatus": "unknown",
+      "ruleIds": [],
+      "compatibility": null,
+      "fieldProvenance": {
+        "name": [
+          "tsa-source-832cfda1ff42215a"
+        ],
+        "slot": [
+          "tsa-source-52627debf2825da3",
+          "tsa-source-832cfda1ff42215a"
+        ],
+        "acquisitionOptions": [
+          "tsa-source-52627debf2825da3"
+        ]
+      }
+    },
+    {
+      "provenanceIds": [
+        "tsa-source-52627debf2825da3",
+        "tsa-source-832cfda1ff42215a"
+      ],
+      "updatedAt": "2026-10-02T17:53:41Z",
+      "recordStatus": "published",
+      "fixture": false,
+      "id": "tsa-cosmetic-5",
+      "sourceKeys": {
+        "K15": "5",
+        "tsaIdentifier": "BaseHair1"
+      },
+      "name": {
+        "default": "Base hair 1",
+        "translations": {}
+      },
+      "slot": "hair",
+      "rawSlot": "hair",
+      "accessoryAnchor": null,
+      "seasonIds": [],
+      "spiritIds": [],
+      "acquisitionOptions": [
+        {
+          "id": "tsa-cosmetic-5-default",
+          "kind": "other",
+          "costs": [],
+          "costStatus": "free",
+          "friendshipNodeId": null,
+          "iapProductId": null,
+          "validFrom": null,
+          "validTo": null,
+          "provenanceIds": [
+            "tsa-source-52627debf2825da3"
+          ]
+        }
+      ],
+      "assetIds": [],
+      "dyeRegions": [],
+      "dyeStatus": "unknown",
+      "ruleIds": [],
+      "compatibility": null,
+      "fieldProvenance": {
+        "name": [
+          "tsa-source-832cfda1ff42215a"
+        ],
+        "slot": [
+          "tsa-source-52627debf2825da3",
+          "tsa-source-832cfda1ff42215a"
+        ],
+        "acquisitionOptions": [
+          "tsa-source-52627debf2825da3"
+        ]
+      }
+    },
+    {
+      "provenanceIds": [
+        "tsa-source-52627debf2825da3",
+        "tsa-source-832cfda1ff42215a",
+        "tsa-source-fe030cda7a6ec4a1"
+      ],
+      "updatedAt": "2026-10-02T17:53:41Z",
+      "recordStatus": "published",
+      "fixture": false,
+      "id": "tsa-cosmetic-10",
+      "sourceKeys": {
+        "K15": "10",
+        "tsaIdentifier": "PointingCandlemakerHair"
+      },
+      "name": {
+        "default": "Pointing Candlemaker · Hair",
+        "translations": {}
+      },
+      "slot": "hair",
+      "rawSlot": "hair",
+      "accessoryAnchor": null,
+      "seasonIds": [],
+      "spiritIds": [
+        "tsa-spirit-0"
+      ],
+      "acquisitionOptions": [
+        {
+          "id": "tsa-cosmetic-10-offer-372e23b2b31281b6",
+          "kind": "spirit_tree",
+          "costs": [],
+          "costStatus": "unknown",
+          "friendshipNodeId": null,
+          "iapProductId": null,
+          "validFrom": null,
+          "validTo": null,
+          "provenanceIds": [
+            "tsa-source-fe030cda7a6ec4a1"
+          ]
+        }
+      ],
+      "assetIds": [],
+      "dyeRegions": [],
+      "dyeStatus": "unknown",
+      "ruleIds": [],
+      "compatibility": null,
+      "fieldProvenance": {
+        "name": [
+          "tsa-source-832cfda1ff42215a",
+          "tsa-source-fe030cda7a6ec4a1"
+        ],
+        "slot": [
+          "tsa-source-52627debf2825da3",
+          "tsa-source-832cfda1ff42215a",
+          "tsa-source-fe030cda7a6ec4a1"
+        ],
+        "acquisitionOptions": [
+          "tsa-source-fe030cda7a6ec4a1"
+        ]
+      }
+    }
+  ]
+}

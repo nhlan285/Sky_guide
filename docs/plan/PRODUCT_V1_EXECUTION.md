@@ -35,8 +35,19 @@ Relevant modules: features/wardrobe package/intent/editor/render/save/share,
 features/items detail action, focused domain tests, shared analytics/root/privacy.
 
 ## Validation / handoff
-Analytics3 privacy tests/lint/typecheck/build PASS locally; Preview network and
-ingestion pending first integration push. Preserve exact failures, do not call
+Analytics3 privacy tests/lint/typecheck/build PASS locally. Preview7a1d17a READY,
+rendered root→hub→items→item detail in authenticated in-app browser; one SDK2.0.1
+script with disableAutoTrack1/no-referrer meta verified. Dashboard received real
+pageviews (first2 root/hub,1 visitor); Preview filter selected. Raw collection POST
+body/status capture is not available through this browser API and remains OPEN;
+DOM/runtime checks and ingestion are separate evidence. Query churn exercised;
+exact aggregate duplicate check pending dashboard refresh. No Production release.
+Pilot implementation now6 exact source records (cape6/1011/1012, mask4, hair5/10).
+Own cloned geometry/anchors carry explicit self-created status; real IDs remain
+in outfit, game dye/compatibility never inferred. r3 is an additive package;
+only exact r1/r2 backwards compatibility and unchanged library key accepted.
+4 focused pilot tests PASS; full461 tests/0fail/0skip and build PASS. Browser
+equipment/save/share/mobile acceptance pending new Preview. Preserve exact failures, do not call
 authentication page or deployment metadata a rendered PASS. Latest checkpoints
 and exact continuation live in ../CURRENT_STATE.md. Subsequent slices refine this
 phase when their source/dependency evidence is ready; no future implementation log.

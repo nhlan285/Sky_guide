@@ -1,6 +1,6 @@
 import { memo, useId } from 'react'
 import type { WardrobeSelection } from '../../data/wardrobe/index.ts'
-import { demoGeometry, demoPackage } from './demo/demo'
+import { editorGeometry as demoGeometry, editorPackage as demoPackage } from './editorPackage'
 import { characterTransform, layerTransform, resolveShapeDye } from './model'
 import type { deriveRenderModel } from './model'
 

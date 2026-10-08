@@ -6,7 +6,10 @@ import { SLOTS } from '../../data/wardrobe/index'
 import type { Slot } from '../../data/wardrobe/index'
 import { useLocale } from '../../shared/i18n/useLocale'
 import { Button, StatusBadge } from '../../shared/ui/primitives'
-import { demoDefaultSize, demoGeometry, demoPackage, demoPalette } from './demo/demo'
+import { demoDefaultSize, demoPalette } from './demo/demo'
+import { editorGeometry as demoGeometry, editorPackage as demoPackage } from './editorPackage'
+import { equipCatalogPilot } from './catalogPilot'
+import { wardrobeItemIntent } from './navigation'
 import { createWardrobeState, wardrobeReducer } from './engine'
 import { deriveRenderModel } from './model'
 import { ItemThumbnail, PaperDoll } from './PaperDoll'
@@ -17,7 +20,7 @@ import { OutfitShare } from './OutfitShare'
 import { wardrobeDraft } from './draft'
 import { WardrobeItemIntent } from './WardrobeItemIntent'
 
-const reduce = (state: ReturnType<typeof createWardrobeState>, action: Parameters<typeof wardrobeReducer>[1]) => wardrobeReducer(state, action, demoPackage)
+const reduce = (state: ReturnType<typeof createWardrobeState>, action: Parameters<typeof wardrobeReducer>[1] | { type: 'catalog_item'; itemId: string }) => action.type === 'catalog_item' ? equipCatalogPilot(state, action.itemId, demoPackage) : wardrobeReducer(state, action, demoPackage)
 
 export function WardrobeEditor() {
   const { search } = useLocation()
@@ -25,16 +28,28 @@ export function WardrobeEditor() {
   const title = useRef<HTMLHeadingElement>(null)
   useEffect(() => { title.current?.focus({ preventScroll: true }) }, [])
   const copy = wardrobeCopy[locale]
+  const requestedId = wardrobeItemIntent(search).id
+  const previousRequest = useRef(requestedId)
   const [outfitStorage] = useState(() => createOutfitStorage(demoPackage, () => window.localStorage))
   const [state, dispatch] = useReducer(reduce, null, () => {
     const initial = createWardrobeState(demoPackage, demoDefaultSize)
     const draft = wardrobeDraft.read(demoPackage)
-    if (draft) return wardrobeReducer(initial, { type: 'restore_outfit', snapshot: draft }, demoPackage)
     const library = outfitStorage.read().value
     const last = library.outfits.find(outfit => outfit.id === library.lastOutfitId)
-    return last ? wardrobeReducer(initial, { type: 'restore_outfit', snapshot: last }, demoPackage) : initial
+    const restored = draft ? wardrobeReducer(initial, { type: 'restore_outfit', snapshot: draft }, demoPackage)
+      : last ? wardrobeReducer(initial, { type: 'restore_outfit', snapshot: last }, demoPackage) : initial
+    return requestedId ? equipCatalogPilot(restored, requestedId, demoPackage) : restored
   })
-  const [slot, setSlot] = useState<Slot>('cape')
+  const [slot, setSlot] = useState<Slot>(() => demoPackage.items.find(item => item.id === requestedId)?.slot ?? 'cape')
+  useEffect(() => {
+    if (previousRequest.current === requestedId) return
+    previousRequest.current = requestedId
+    if (requestedId) {
+      dispatch({ type: 'catalog_item', itemId: requestedId })
+      const item = demoPackage.items.find(item => item.id === requestedId)
+      if (item) setSlot(item.slot)
+    }
+  }, [requestedId])
   const [panel, setPanel] = useState<'picker' | 'outfit'>('picker')
   const { selection } = state
   useEffect(() => { wardrobeDraft.write(selection, demoPackage) }, [selection])
@@ -53,7 +68,7 @@ export function WardrobeEditor() {
       <div><h1 ref={title} id="page-title" tabIndex={-1}>{copy.title}</h1><p>{copy.subtitle}</p></div>
       <div className="wardrobe-disclosure"><StatusBadge tone="info">{copy.demo}</StatusBadge><p>{copy.disclosure}</p></div>
     </div>
-    <WardrobeItemIntent search={search} />
+    <WardrobeItemIntent search={search} selectedIds={Object.values(selection.equippedBySlot).flat()} onEquip={id => dispatch({ type: 'catalog_item', itemId: id })} />
     <OutfitShare selection={selection} onLoad={snapshot => dispatch({ type: 'restore_outfit', snapshot })} />
     <div className="wardrobe-workspace" data-panel={panel}>
       <section className="wardrobe-preview" aria-labelledby="preview-title">

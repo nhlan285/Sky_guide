@@ -2,7 +2,7 @@
 
 ## Task / authority / branch
 Master run OPEN. Branch codex/master-plan-execution, checkpoint parent
-46fc590fc66a508ee1c4624d6753b1e1601011ca verified on origin; resolve current HEAD
+7a1d17a30143cc46612b8a39a3b31a201189c69d verified on origin; resolve current HEAD
 with git log -1 and verify remote before resuming.
 Master: [IMPLEMENTATION_PLAN](plan/IMPLEMENTATION_PLAN.md).
 Active: [POSTGRES_PROVIDER_SELECTION](plan/POSTGRES_PROVIDER_SELECTION.md).
@@ -67,17 +67,28 @@ Analytics now wired once at root, public pathname-only SPA pageviews,
 query/hash/privacy sanitization/no custom events/no local collection. Three
 privacy tests/lint/typecheck/build PASS; no-referrer meta added to avoid leaking
 URL queries through collection HTTP headers. Owner dashboard login now confirmed;
-Production currently0. Next push, verify Preview SPA network and Preview ingestion.
+Production currently0 at initial inspection. Preview7a1d17a READY/rendered,
+SDK2.0.1 exactlyone script/disableAutoTrack1/no-referrer policy verified. Actual
+dashboard received pageviews (first2 root/hub,1 visitor), Preview filter selected.
+Raw collection POST capture unavailable in browser API, remains OPEN; query churn
+was exercised, exact aggregate duplicate check pending dashboard refresh.
 Active application slice: [PRODUCT_V1_EXECUTION](plan/PRODUCT_V1_EXECUTION.md).
-Then implement real item equipment with explicit self-created supported pilot,
-stable public IDs, preserve unrelated slots/save/share. Current item intent only
-displays explanation. No inferred asset rights or game-accurate art.
+Real item pilot implemented for6 source-exact records: cape6/1011/1012,mask4,
+hair5/10. Source IDs stored in outfit; generic geometry stays self-created and
+explicitly illustrative. Only supported slots replaced, other selections kept.
+Save/reload/share/backup and exact old r1/r2 compatibility proven in focused tests;
+original demo-only validator remains strict. Next push and verify real equipment,
+slot replacement/save/share/deep link/mobile in new Preview, then spirit/TS slice.
+Do not report UI acceptance before actual browser interactions.
 
 ## Validation / modified areas / raw artifacts
 Recovered tests/sql/build-local-cas-rehearsal.mjs, run-local-cas-rehearsal.mjs,
 run-local-restored-validation.mjs; docs handoff/active/master updates.
-Full454 tests PASS/0failed/0skipped before corrected probe/app changes.
-Previous lint/typecheck PASS; historical build2925996, rerun after app changes.
+Full461 tests PASS/0failed/0skipped after pilot; build/typecheck PASS. Focused
+pilot lint found test-only unrecognized structuredClone global; replaced with
+JSON clone for JSON fixture and rerun focused validation before checkpoint.
+Application areas: analytics/root/privacy, Wardrobe pilot/package/intent/render/
+save/share compatibility and item detail supported/unsupported action wording.
 Logs/dumps/snapshots never Git:
 E:/SkyGuideAssets/research/postgres-rehearsal-2026-10-07/
 E:/SkyGuideAssets/research/postgres-durable-restore-2026-10-08-6ff3fa7/

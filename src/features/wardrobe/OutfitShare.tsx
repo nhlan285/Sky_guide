@@ -3,7 +3,7 @@ import type { OutfitSnapshot, WardrobeSelection } from '../../data/wardrobe/inde
 import { Button } from '../../shared/ui/primitives'
 import { useLocale } from '../../shared/i18n/useLocale'
 import { wardrobeCopy } from './copy'
-import { demoPackage } from './demo/demo'
+import { editorPackage as demoPackage } from './editorPackage'
 import { decodeOutfitShare, encodeOutfitShare, outfitShareUrl } from './share'
 import type { ShareIssue, ShareResult } from './share'
 
