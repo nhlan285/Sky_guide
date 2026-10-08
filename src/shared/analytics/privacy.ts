@@ -1,6 +1,6 @@
 import type { BeforeSendEvent } from '@vercel/analytics'
 
-const publicPages = new Set(['/', '/hub', '/items', '/wardrobe', '/about', '/spirits', '/traveling-spirits', '/events', '/music', '/media'])
+const publicPages = new Set(['/', '/hub', '/items', '/wardrobe', '/about', '/spirits', '/traveling-spirits', '/events', '/news', '/music', '/media'])
 
 export function analyticsRoute(pathname: string): string | null {
   if (publicPages.has(pathname)) return pathname

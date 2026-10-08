@@ -16,6 +16,7 @@ const SpiritSamples = lazy(() => import('../features/spirits/SpiritSamples').the
 const MusicPlayground = lazy(() => import('../features/music/MusicPlayground').then(module => ({ default: module.MusicPlayground })))
 const MediaSamples = lazy(() => import('../features/media/MediaSamples').then(module => ({ default: module.MediaSamples })))
 const Events = lazy(() => import('../features/events/Events').then(module => ({ default: module.Events })))
+const News = lazy(() => import('../features/news/News').then(module => ({ default: module.News })))
 const MemoizedSkyAtmosphere = memo(SkyAtmosphere)
 
 function focusLookup() {
@@ -130,7 +131,7 @@ function AppContent() {
   const isLanding = pathname === '/'
 
   useEffect(() => {
-    document.title = pathname === '/' ? t('landing.title') : `${pathname === '/hub' ? t('nav.hub') : pathname.startsWith('/items') ? t('nav.itemLookup') : pathname === '/wardrobe' ? t('nav.wardrobe') : pathname === '/events' ? (locale === 'vi' ? 'Mùa và sự kiện' : 'Seasons and events') : pathname === '/media' ? (locale === 'vi' ? 'Chuyển động và tiếng gọi' : 'Motion and calls') : pathname === '/music' ? (locale === 'vi' ? 'Chơi nhạc' : 'Music playground') : pathname === '/spirits' ? 'Spirit tree' : pathname === '/traveling-spirits' ? t('hub.ts') : pathname === '/about' ? t('nav.about') : t('notFound.title')} | Sky Guide`
+    document.title = pathname === '/' ? t('landing.title') : `${pathname === '/hub' ? t('nav.hub') : pathname.startsWith('/items') ? t('nav.itemLookup') : pathname === '/wardrobe' ? t('nav.wardrobe') : pathname === '/news' ? t('hub.news') : pathname === '/events' ? (locale === 'vi' ? 'Mùa và sự kiện' : 'Seasons and events') : pathname === '/media' ? (locale === 'vi' ? 'Chuyển động và tiếng gọi' : 'Motion and calls') : pathname === '/music' ? (locale === 'vi' ? 'Chơi nhạc' : 'Music playground') : pathname === '/spirits' ? 'Spirit tree' : pathname === '/traveling-spirits' ? t('hub.ts') : pathname === '/about' ? t('nav.about') : t('notFound.title')} | Sky Guide`
     const changed = previousLocation.current.pathname !== pathname || previousLocation.current.hash !== hash
     previousLocation.current = { pathname, hash }
     if (!hash && !changed) return
@@ -158,6 +159,7 @@ function AppContent() {
           <Route path="/music" element={<Suspense fallback={<p role="status">{t('state.loading')}</p>}><MusicPlayground /></Suspense>} />
           <Route path="/media" element={<Suspense fallback={<p role="status">{t('state.loading')}</p>}><MediaSamples /></Suspense>} />
           <Route path="/events" element={<Suspense fallback={<p role="status">{t('state.loading')}</p>}><Events /></Suspense>} />
+          <Route path="/news" element={<Suspense fallback={<p role="status">{t('state.loading')}</p>}><News /></Suspense>} />
           <Route path="/about" element={<About />} />
           <Route path="*" element={<NotFound />} />
         </Routes></RouteLoadBoundary>

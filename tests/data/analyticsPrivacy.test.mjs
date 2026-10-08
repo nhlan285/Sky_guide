@@ -4,12 +4,12 @@ import { analyticsRoute, isLocalAnalyticsHost, sanitizePageview } from '../../sr
 
 const origin = 'https://sky-guide-six.vercel.app'
 test('pageviews retain useful public pages but remove search, credentials and outfit fragments', () => {
-  for (const path of ['/', '/hub', '/items', '/items/tsa-cosmetic-0', '/items/tsa-cosmetic-101', '/wardrobe', '/spirits', '/events', '/music', '/media']) {
+  for (const path of ['/', '/hub', '/items', '/items/tsa-cosmetic-0', '/items/tsa-cosmetic-101', '/wardrobe', '/spirits', '/events', '/news', '/music', '/media']) {
     const result = sanitizePageview({ type: 'pageview', url: origin + path + '?token=private&q=name#outfit=v1.secret' }, origin)
     assert.deepEqual(result, { type: 'pageview', url: origin + path })
   }
   assert.equal(analyticsRoute('/items/tsa-cosmetic-101'), '/items/:id')
-  for (const path of ['/account/private-id', '/items/private-token', '/items/tsa-cosmetic-1/secret', '/wardrobe/private']) {
+  for (const path of ['/account/private-id', '/items/private-token', '/items/tsa-cosmetic-1/secret', '/wardrobe/private', '/news/private-review']) {
     assert.equal(sanitizePageview({ type: 'pageview', url: origin + path }, origin), null)
   }
   assert.equal(sanitizePageview({ type: 'event', url: origin + '/wardrobe' }, origin), null)

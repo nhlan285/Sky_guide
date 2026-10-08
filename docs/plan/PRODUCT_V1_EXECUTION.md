@@ -221,3 +221,23 @@ Implemented exact cached h1 headline projection/source metadata, source-linked
 Hub card, publisher/date/manual review freshness, Events entry and truthful
 About/source copy. No body/media/new fetch/feed/schema. Three focused tests and
 lint/typecheck/catalog/build PASS. Browser NOT RUN; exact Preview next.
+Exactcb26b7a Preview READY/browser PASS: headline/source/date/freshness, keyboard
+Tab/Enter to Events, vi/en Hub/About source copy. Locale restoredvi;541px no
+overflow/current-host console clean. news-preview.jpg on E:.
+
+## Current refinement: bounded manual news feed
+Dependencies: P1-D06/K06 verified Hotfix34.4 metadata and reviewed monthly source;
+manual draft contract remains unchanged. Independent visible source projection,
+not canonical publication or live ingestion. /news shows two pinned reviewed
+metadata samples with name/type filters, empty recovery, source links/credit,
+review freshness and original short summary. Hotfix heading release date remains
+distinct from unknown publication/update instant;34.4/PlayStation/iOS are exact
+sample facts, never latest-release/current-availability claims. No leak/media/body,
+new fetch/provider/schema, private IDs in URLs or automatic freshness.
+Files: bounded news model/projection/UI, Hub entry/App route/analytics public path,
+focused source/precision tests and plans. Validate cached evidence equality,
+publication precision/unknowns, lint/build, exact Preview/filter/keyboard/source
+links/vi-en/actual available viewport. Full live/canonical P3-H07 remains OPEN.
+Implemented two source metadata samples;9 focused source/time/filter/privacy
+checks and lint/typecheck/catalog/build PASS. No canonical IDs/publication instants
+invented. Browser/full regression NOT RUN. Next push exact Preview and validate.

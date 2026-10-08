@@ -2,7 +2,7 @@
 
 ## Scope / branch / authority
 Master run OPEN. Branch codex/master-plan-execution, current checkpoint parent
-8e60468288efbb728007ce4bd33b4500e357c9b1 verified on origin and develop; resolve current HEAD
+cb26b7a80698fb72288f50ad570ba4b2a0704f20 verified on origin; resolve current HEAD
 with git log -1 and compare remote before resuming. Develop8e60468 verified;
 main unchanged8b371de6a2b852e3175a55b5f8de2b9cc11d8b54.
 Master: docs/plan/IMPLEMENTATION_PLAN.md.
@@ -115,9 +115,24 @@ Next bounded news slice implemented: exact cached h1.title in evidence/projectio
 Hub source-linked official headline/date/publisher/manual freshness and Events
 link. About/source copy reflects this one manual announcement, not a live feed.
 No second fetch, article body/media/feed/DB. Three focused tests/lint/typecheck/
-catalog/build PASS; full486 predates this small metadata/Hub change. Browser NOT
-RUN. Exact next: commit/push, exact READY Preview, headline/source/date/Events
-navigation/keyboard/locale QA; integrate develop after verified milestone.
+catalog/build PASS; full486 predates this small metadata/Hub change. Exactcb26b7a
+Preview sky-guide-cedjyp9ou-dyland1.vercel.app READY/browser PASS: exact source
+headline/URL/date/publisher/freshness, keyboard Tab to Events then Enter navigation,
+vi/en Hub/About truthful source limits; locale restoredvi. Actual541px no overflow,
+current-host errors/warnings none. news-preview.jpg on E:.
+
+## Current bounded news feed / exact next
+Implemented /news with two source-reviewed metadata samples: same monthly TGC
+announcement and cached historical Hotfix34.4 (PlayStation/iOS). Separate labelled
+article date vs heading release date, publication/update instants/revision/canonical
+ID remain null. Original English short summary explicitly historical, not latest
+release/current availability. Search title/version/platform + type/empty recovery,
+source/publisher/manual freshness, Hub entry, pathname-only analytics /news;
+arbitrary /news/private-review rejected. No copied body/media/live fetch/DB/provider.
+Modified news data/model/UI, App/Hub/analytics and3 source/filter tests plus plans.
+Nine focused checks/lint/typecheck/catalog/build PASS. Browser/new full suite NOT
+RUN. Exact next: push milestone, exact READY Preview Hub→News/search/type/empty/
+source/date/keyboard QA; run full regression; checkpoint/develop after verification.
 
 ## Native R1 evidence / blocker
 Hosted sky-guide-dev/tpbydviuknovimroeodm, Dyland's Org, Supabase Free:85 private
