@@ -2102,3 +2102,19 @@ complete authorized preparation checkpointed, no live job/independent authorized
 next implementation. Goal BLOCKED pending direct auth authorization or user-ready
 CLI signal; original objective unchanged/incomplete. No new auth probe, credential,
 SQL run or dependent phase opened. Resume exact preflight/concurrent steps above.
+
+#### Direct CLI login authority2026-10-08 — authentication in progress
+User approved initiating normal CLI login with their existing account solely for
+prepared sky-guide-dev concurrent proof, and instructed direct CLI authentication
+with no token in chat/log/Git. No new DB account/password/privilege/infrastructure/
+production authority. Pinned2.120.0 login help checked; normal automatic browser
+flow started in separate visible interactive PowerShell window, PID26700 verified
+live. No login output/input redirected, captured or recorded. CLI itself owns
+standard credential storage; this run does not read/export the credential.
+E: start-approved-cli-login.ps1 / approved-cli-login-status.json store only launcher
+code and phase/PID/timestamps/exit code. Status initially running. No auth completion
+or native preflight claimed yet. Recheck actual live process/status; after success,
+read-only target/account/project/85-source baseline check and actual output-shape
+inspection precede independent A/B/observer processes. All fixtures remain outer
+ROLLBACK with full baseline after each; missing overlap keeps gate OPEN. If login
+fails/cancels, no blind restart. Mandatory durable/restore/CAS/SDK gates unchanged.

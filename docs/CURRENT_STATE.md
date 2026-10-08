@@ -1,10 +1,10 @@
 # Current handoff — 2026-10-08
 
 ## Task / branch / checkpoint
-Sky Guide autonomous master run BLOCKED on pending CLI authentication/independent
-transport authority; full objective and roadmap OPEN, not complete.
+Sky Guide master objective OPEN, not complete. User approved existing-account CLI
+login on2026-10-08; interactive login initiated, awaiting actual authentication.
 Branch codex/master-plan-execution; checkpoint parent
-6d65b7e8da2a7fe7f1534c0839381db09b7d809c verified on origin.
+e10d74f340397d64c320383c5e9c303bf0b412d0 verified on origin.
 Resolve latest checkpoint with git log -1 and verify remote SHA.
 Master: [IMPLEMENTATION_PLAN](plan/IMPLEMENTATION_PLAN.md).
 Active phase: [POSTGRES_PROVIDER_SELECTION](plan/POSTGRES_PROVIDER_SELECTION.md),
@@ -14,7 +14,7 @@ latest sections. R1 acceptance/dependent R2–R6 remain gated.
 User directly approved exact5d9058eb5026a74fa25caeedcb308566d8774fd5 package:
 2 private internal tables,3 existing-postgres SECURITY DEFINER helpers,168 triggers.
 Supabase Free/$0 development only: sky-guide-dev tpbydviuknovimroeodm / Dyland's Org.
-No production merge/deploy, paid resource, new DB principal/password/credentials,
+No production merge/deploy, paid resource, new DB principal/password/other credentials,
 SDK/Auth/consumer/scheduler/rights or permission/infrastructure expansion.
 Runtime cannot access internal tables/columns; writer EXECUTE on full-check helper
 only. Existing creator postgres temporary SET TRUE/INHERIT FALSE/ADMIN FALSE approved.
@@ -23,6 +23,11 @@ after; STOP on drift. Two bootstrap creator edges retain ADMIN TRUE / INHERIT FA
 SET FALSE, grantor supabase_admin/OID10; temporary SET is not that baseline.
 Prepared down allowed on actual failed trial ONLY if empty85/source/history guard
 matches; retain migration history. No new approval needed for that scoped down.
+Additional direct authority2026-10-08: initiate normal Supabase CLI login with
+existing account solely for prepared development concurrency proof. User completes
+browser/CLI prompts directly; CLI manages its standard credential storage. Never
+read/export token, record input/output of login, put token in chat/log/Git or pass
+it as a command argument. No new DB account/password, DB rights or infrastructure.
 
 ## Completed / current hosted state
 K02/P1-D02 bounded sample DONE at2e6d110:10 nodes/9 edges; root price unknown,
@@ -101,7 +106,8 @@ focused tests and scaffold76 Markdown/14 profiles/173 tasks PASS; diff checked.
 Latest addition: two adapter-concurrency preparation/corruption tests, lint and
 typecheck PASS. Full442 suite is the prior checkpoint result; expanded suite NOT RUN.
 App build previously PASS at2925996; app build inputs unchanged, NOT RERUN.
-No live SQL/test/tool job remains. Node24/pnpm10.30.3 via E:/Code/corepack.cmd;
+No live SQL/test job remains. Approved interactive CLI login PID26700 verified live;
+recheck E status/process before waiting or resuming. Node24/pnpm10.30.3 via E:/Code/corepack.cmd;
 CLI2.120.0/npm cache E:/SkyGuideAssets/tools/npm-cache. No owned Docker/browser/server.
 
 All raw SQL/logs/native receipts/baselines outside Git at:
@@ -112,14 +118,13 @@ concurrent-{a,b,observer}-evidence.json, parallel-transport-probe.json;
 release-bracket-final-tests.log. Active phase has exact names/hashes/full evidence.
 
 ## Exact next / remaining gates
-Obtain CLI authentication/independent transport access. Gate persisted across three
-consecutive goal turns; approved native proofs and full adapter preparation are
-checkpointed, no independent authorized next implementation or live wait remains.
-Authentication question remains pending; no user approval/ready signal received.
+Approved interactive CLI login started in separate visible PowerShell window.
+E: start-approved-cli-login.ps1 and approved-cli-login-status.json contain no secrets;
+status records phase/processId/timestamps/exit code ONLY. Latest verified live PID26700;
+recheck actual status AND process before waiting; no terminal output/input captured.
+If failed/cancelled, stop and inspect direct user report, do not restart automatically.
 Do not repeat unchanged connector probes, passed tests or expand dependent scope.
-User may authenticate CLI using existing account or separately authorize login
-initiation; do not create/read/export a credential, put a token in chat/log/Git, or
-open a sensitive browser session by implication. After auth: read-only preflight must
+After completed login: read-only preflight must
 verify target project/current+session user postgres/PG17.11 and complete85 baseline;
 inspect actual CLI result format. Run prepared full adapter A/B/observer via separate
 CLI processes (release-bracket-adapter-concurrency-{a,b,observer}.sql on E:), verify
