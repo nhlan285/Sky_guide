@@ -62,7 +62,7 @@ function Header() {
 }
 
 function About() {
-  const { t } = useLocale()
+  const { t, locale } = useLocale()
   return (
     <div className="information-page">
       <div className="page-intro">
@@ -81,6 +81,9 @@ function About() {
       <SectionCard id="about-device" title={t('about.device')}>
         <p>{t('about.device.text')}</p>
         <p>{t('about.device.note')}</p>
+      </SectionCard>
+      <SectionCard id="about-analytics" title={locale === 'vi' ? 'Thống kê truy cập' : 'Visit statistics'}>
+        <p>{locale === 'vi' ? 'Sky Guide dùng Vercel Web Analytics để xem số lượt truy cập các trang công khai. Nội dung outfit, tên outfit đã lưu và dữ liệu trong liên kết chia sẻ không được gửi vào thống kê.' : 'Sky Guide uses Vercel Web Analytics to count visits to public pages. Outfit contents, saved outfit names and share-link data are excluded from analytics.'}</p>
       </SectionCard>
       <Link className="text-link" to="/hub">{t('nav.hub')}</Link>
     </div>

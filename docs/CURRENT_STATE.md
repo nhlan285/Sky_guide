@@ -63,9 +63,12 @@ nhlan285/Sky_guide, productionBranch main. Actual billing Hobby/active/trialnull
 webAnalytics.enabledAt1790988221254 already set: no activation/paid change needed.
 Connector team403; in-app dashboard needs login. Use existing CLI credentials,
 never expose them. Speed Insights is separate.
-Next wire Analytics once at root, public pathname-only SPA pageviews,
-query/hash/privacy sanitization/no custom events/no local collection; verify
-tests/build and Preview network after push, dashboard ingestion separately OPEN.
+Analytics now wired once at root, public pathname-only SPA pageviews,
+query/hash/privacy sanitization/no custom events/no local collection. Three
+privacy tests/lint/typecheck/build PASS; no-referrer meta added to avoid leaking
+URL queries through collection HTTP headers. Owner dashboard login now confirmed;
+Production currently0. Next push, verify Preview SPA network and Preview ingestion.
+Active application slice: [PRODUCT_V1_EXECUTION](plan/PRODUCT_V1_EXECUTION.md).
 Then implement real item equipment with explicit self-created supported pilot,
 stable public IDs, preserve unrelated slots/save/share. Current item intent only
 displays explanation. No inferred asset rights or game-accurate art.
