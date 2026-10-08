@@ -1823,7 +1823,7 @@ versions/names must match and all history is retained. Down requires empty85-own
 state, clock epoch0/depth0/no writer and no witness/fixture data; it restores the exact
 original validator, drops only new hooks/helpers/internal owners, then verifies83.
 Do not use this down against populated/live state. User2026-10-08 approved exact
-5d9058eb5026a74fa25caeedcb308566d8774fd5 up/down hashes below; DDL not yet applied.
+5d9058eb5026a74fa25caeedcb308566d8774fd5 up/down hashes below; DDL now applied.
 
 Concrete delta:83→85 tables;37→40 functions (3 allowlisted SECURITY DEFINER only);
 155→323 custom triggers (166 statement hooks on the exact83 owners +2 new truncate
@@ -1920,3 +1920,33 @@ migration tool, review new structure against source, deliberately introduce a se
 85-owner executable baseline (preserve historical79/83), then run prepared native
 fixtures/adapter/denials/K15 and authoritative rollback checks. Stop on drift; keep
 full schema/down, benchmark, SDK/durable/concurrent/crash/restore/roadmap gates.
+
+#### Approved bracket native application — 2026-10-08
+Before DDL: full83 source guard including empty15-history state PASS; whole native
+preflight matched restored83 receipt exactly (actor/roles/memberships/ACL/columns/
+functions/triggers/physical definitions/settings/policies/control/data/history).
+Exact approved up341425 bytes/d518e0e751b6c8ab0321f3b66b17a6dfa22f176e02294fc0b70e87124325d8bf
+applied via migration tool20261008044236_private_release_validation_brackets.
+CLI2.120.0 migration new generated local script first, aligned afterward to actual
+recorded version. Existing15 migrations unchanged;16 versions retained.
+Full source-pinned after guard + empty85/history guard PASS, not auto-adopted hashes:
+85 tables/40 functions/323 triggers/201 policies; exact3 allowlisted definers with
+empty search_path/owner/body/settings; runtime table/column access to internals
+denied and writer full-check helper EXECUTE only.168 source hooks include function
+namespace. Clock singleton epoch0/depth0/no writer, no witness; all old owners empty
+except unchanged generation/control. Source columns/constraints/indexes/triggers/
+policies/settings/ACL checked by approved guards. Separate85 executable baseline
+builder added; historical79/83 app profiles unchanged. Full source guard precedes
+snapshot; after EACH rehearsal ROLLBACK both full guard and exact whole85 snapshot
+must pass. E: release-bracket-approved-before-baseline.json,
+release-bracket-applied-baseline.json, release-bracket-baseline-check.sql.
+Next: application checkpoint,7/5 adversarial and25 denials, owner/creator adapter
+39/978/6 and8 old denials, original packed K15/30s; all outer ROLLBACK with exact
+baseline. On failure prepared down only with empty85 guard; STOP on drift. Native
+function execution/adversarial/cost/down/concurrency still NOT RUN at application.
+5 focused proposal/baseline tests PASS, including actual168-hook receipt verifier
+and empty clock/witness/count assertions. Security advisor returned only INFO
+Application lint/typecheck PASS; app build unchanged/not rerun.
+rls_enabled_no_policy for the two internal owners: intentionally RLS/no-policy and
+no client privileges, matching approved closed-owner design. Do not add policies to
+silence it. [Advisor explanation](https://supabase.com/docs/guides/database/database-linter?lint=0008_rls_enabled_no_policy).

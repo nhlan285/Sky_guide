@@ -6,6 +6,7 @@ import { buildReleaseValidationBracketProposal,verifyReleaseValidationBracketHoo
 import { prepareRuntimeJournalPrivilegeProposal } from '../../src/server/runtimeJournalPrivilegePlan.ts'
 import { runtimeJournalPrivilegeBaseline } from '../../src/server/runtimeJournalPrivilegeBaseline.ts'
 import { buildReleaseValidationBracketRehearsal,verifyReleaseValidationBracketReceipt } from '../sql/build-release-validation-bracket-rehearsal.mjs'
+import { buildReleaseValidationBracketBaseline,verifyReleaseValidationBracketBaseline } from '../sql/build-release-validation-bracket-baseline.mjs'
 
 test('bracket review keeps exact original global checks; cannot claim/reuse success inside a write or across transactions',()=>{
  const p=buildReleaseValidationBracketProposal(),fn=new Map(p.functions.map(f=>[f.name,f]))
@@ -65,6 +66,22 @@ test('foreign helper triggers cannot disappear from source-pinned bracket metada
  const checker=p.files['release-validation-bracket-after-check.sql']
  assert.ok(checker.includes("'functionSchema',fn.nspname"))
  assert.doesNotMatch(checker,/and fn\.nspname='sky_private'/)
+})
+
+test('separate85 baseline preserves source guards and rejects whole rollback drift',()=>{
+ const p=buildReleaseValidationBracketProposal()
+ const prepared=buildReleaseValidationBracketBaseline('select null as preflight from (select 1) s;')
+ assert.ok(prepared.query.startsWith(p.files['release-validation-bracket-after-check.sql']+p.emptyAfterGuard))
+ assert.ok(prepared.query.includes('sky_private.release_validation_clock'))
+ assert.ok(prepared.query.includes('sky_private.release_validation_witness'))
+ assert.equal((prepared.query.match(/'privateCounts',jsonb_build_object/g)||[]).length,1)
+ const expected={preflight:{memberships:[],baseline:{function_nonowner_acl:11}},privateCounts:Object.fromEntries(p.tables.concat(['release_validation_clock','release_validation_witness']).map(t=>[t,['sync_generation','sync_commit_control','release_validation_clock'].includes(t)?1:0])),clock:{singleton:1,epoch:0,write_depth:0,writer_xid:null},witness:[],hooks:p.hooks}
+ assert.deepEqual(verifyReleaseValidationBracketBaseline(expected,expected),{tables:85,hooks:168,empty:true,exactRollback:true})
+ for(const mutate of [r=>r.clock.epoch++,r=>r.privateCounts.release_lookup++,r=>r.witness.push({catalog_version:'forged'}),r=>r.hooks.pop(),r=>r.preflight.baseline.function_nonowner_acl++,r=>r.preflight.memberships.push({set:true})]){
+  const changed=globalThis.structuredClone(expected);mutate(changed)
+  assert.throws(()=>verifyReleaseValidationBracketBaseline(changed,expected))
+ }
+ // Synthetic corruption checks do not replace execution of the native SQL guard.
 })
 
 test('complete review guards old83 metadata plus exact2 owners/3 definers/168 hooks; grants one helper only',()=>{

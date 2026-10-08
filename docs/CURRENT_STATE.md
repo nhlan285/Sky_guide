@@ -6,7 +6,7 @@ User2026-10-08 approved exact package5d9058eb5026a74fa25caeedcb308566d8774fd5
 for dev application, full rollback rehearsals/K15 and guarded empty-state down.
 R1 acceptance and dependent work remain gated, including actual concurrency proof.
 Branch codex/master-plan-execution; checkpoint parent
-0c212806e7f16dba95961594f424530582204891 verified on origin.
+55954af590946bb46d7be1042e102289cdf0c7b9 verified on origin.
 Resolve latest checkpoint with git log -1 and verify remote SHA.
 Master: [IMPLEMENTATION_PLAN](plan/IMPLEMENTATION_PLAN.md).
 Active phase: [POSTGRES_PROVIDER_SELECTION](plan/POSTGRES_PROVIDER_SELECTION.md),
@@ -35,7 +35,7 @@ commits/independent sessions/crash/restore/consumers/scheduler/rights separate.
 K02/P1-D02 sample DONE at2e6d110:10 nodes/9 edges; root price unknown, totals partial.
 Earlier provider-neutral domain/API/storage/sync contracts and unmounted v2
 journal/Store/kernel retain evidence boundaries. Full R1/P9-I02/D04/V01 OPEN.
-Hosted PG17.11:83 private tables,37 functions,155 custom triggers,201 policies,
+Before bracket: PG17.11:83 private tables,37 functions,155 custom triggers,201 policies,
 2 NOLOGIN/NOINHERIT/NOBYPASSRLS runtime groups. All owners empty except revision0
 sync_generation and inactive singleton sync_commit_control. Full metadata/ACL/
 structure/column/policy/setting/membership baseline PASS; no public/platform grants.
@@ -95,7 +95,7 @@ clock caching: a helper can claim midway through a write, before a later invalid
 13 focused tests/lint/scaffold/diff PASS; full suite including new5 models NOT RUN.
 No proposed clock/cache SQL, owners, helpers or privileges applied.
 
-## New review packet — PREPARED / NOT APPLIED
+## Approved bracket packet — APPLIED / native rehearsal pending
 Active phase “Concrete bracket package” has exact source/hash/ACL/rollback details.
 Prepared source-derived up/down outside migration discovery:
 supabase/proposals/release_validation_bracket_{up,down}.sql.
@@ -105,7 +105,7 @@ checks copied byte-for-byte into helper; wrapper remains invoker. Narrow NEW sco
 2 private internal owners,3 allowlisted postgres-owned SECURITY DEFINER helpers,
 166 statement hooks +2 truncate guards;85 tables/40 functions/323 custom triggers.
 Clients get no internal-owner access; writer EXECUTE on full-check helper only.
-No new principal/credentials/SDK/consumer/production. New scoped approval required.
+No new principal/credentials/SDK/consumer/production. Exact5d9058e approval granted.
 Full before schema/ACL + original15-history/empty guard executed natively without
 DDL; complete baseline matched restored83 state. E:
 release-bracket-preparation-baseline.json. New85 helpers/guards/cost/down NOT RUN.
@@ -134,12 +134,28 @@ Current guard slice:4 focused tests/lint/typecheck PASS; no app build rerun.
 Master dependencies confirm R2–R6 and live sync consumers require R1 acceptance;
 they cannot be opened while native foundation/benchmark approval remains pending.
 
+Approved application2026-10-08: full83 metadata/ACL/empty/history guard PASS; complete
+baseline exactly matched restored83 receipt before DDL. Applied exact up SHA256
+d518e0e751b6c8ab0321f3b66b17a6dfa22f176e02294fc0b70e87124325d8bf via migration
+tool as20261008044236_private_release_validation_brackets; CLI-created file aligned
+to actual recorded version, existing15 files/history unchanged. Full source-pinned85
+after guard + empty/history guard PASS. Current85 tables/40 functions/323 triggers/
+201 policies, clock1/epoch0/depth0/writerNULL and witness0; roles/memberships intact.
+Separate executable85 baseline builder added in tests/sql; original79/83 profiles
+unchanged. Source guards precede whole metadata/control/count/clock/witness/hook
+snapshot; later ROLLBACK receipts must compare exactly. E:
+release-bracket-approved-before-baseline.json, release-bracket-applied-baseline.json,
+release-bracket-baseline-check.sql. No fixture/adversarial/denial/K15/concurrency or
+down result yet. New functions installed/metadata guarded; execution proof pending.
+Application slice5 focused tests/lint/typecheck PASS; original app build not rerun.
+Security advisor only INFO for intentional no-policy internal owners; closed ACL
+matches approval. No policy/permission expansion made to silence this notice.
+
 ## Exact next / remaining gates
 Review packet5d9058e is pushed/SHA-verified and directly approved by the user.
 Before-only clock remains rejected; new entry/
-exit bracket with no cache during writes is a prepared candidate, not native PASS.
-Next revalidate83 baseline, CLI migration/application, explicit new85
-structure/metadata/ACL source review, owner/creator/denial/adversarial/K15 rehearsals,
+exit bracket with no cache during writes is installed; acceptance remains OPEN.
+Next verify/push application checkpoint, then owner/creator/denial/adversarial/K15 rehearsals,
 full baseline after EACH ROLLBACK and empty-state down proof. Original30s cost gate
 and full schema/SDK/durable/concurrent/crash/restore remain. No one-function approval
 inferred for new helpers/owners. No real import/consumer before foundation acceptance.
