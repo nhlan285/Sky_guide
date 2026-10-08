@@ -4,7 +4,7 @@
 Sky Guide master objective OPEN, not complete. CLI login completed; STOP after
 linked-query preflight minted/refreshed a managed DB login role outside approval.
 Branch codex/master-plan-execution; checkpoint parent
-ae19575b238275aa9492ea7dcf0fc732e357a5ef verified on origin.
+8514bec1ede2265744b53f9caab1cf34c1be531c verified on origin.
 Resolve latest checkpoint with git log -1 and verify remote SHA.
 Master: [IMPLEMENTATION_PLAN](plan/IMPLEMENTATION_PLAN.md).
 Active phase: [POSTGRES_PROVIDER_SELECTION](plan/POSTGRES_PROVIDER_SELECTION.md),
@@ -147,6 +147,16 @@ approved yet. After cleanup require all cli_login roles absent, all other global
 roles/memberships/settings unchanged, source85 baseline exact. Then prepared full
 adapter A/B/observer unchanged30s/outer ROLLBACK +full baseline after each; actual
 backend blocking and complete receipts required. No repeat serial probes or gates.
+Global comparison ready: tests/sql/verify-cli-role-recovery-audit.mjs; audit SQL
+explicitly casts OIDs to bigint, returns33 roles/27 memberships/10 settings in
+current native incident snapshot. Config values stay in DB; SHA256 +key names only.
+Shape verified; simulated after-removal comparison/corruption tests PASS, native
+DELETE/after-removal proof NOT RUN. E cli-role-recovery-global-{audit.sql,
+hashed-incident-audit.json}; capture fresh immediately before/after authorized
+cleanup. Not an initial pre-CLI principal baseline or app catalog adoption.
+Latest two focused recovery tests, lint/typecheck PASS; expanded full suite NOT RUN.
+Original8514bec recovery/transport approval question pending, scope/guard/request
+hashes unchanged. No credential read/new permission/cleanup/concurrent fixture.
 Full R1/P9-I02/D04/V01 OPEN: concurrent/durable/CAS/crash/backup restore/schema down/
 SDK/auth remain unaccepted. No real import/consumer/R2–R6 before foundation acceptance.
 K04 OneDrive403, K10/K11 SKU/market, K12 bulk reuse prohibited, Q02/Q09/Q10/Q11/Q12,

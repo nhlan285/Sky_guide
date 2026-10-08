@@ -2172,3 +2172,28 @@ Exact next: obtain direct recovery/transport authority, implement narrow token
 handling with local fake-credential tests before any credential access, reread
 current guards, then scoped cleanup and concurrent proof. Stop all DB CLI commands
 until role-mint behavior avoided; do not reopen dependent phases or change K15.
+
+#### Recovery comparison preparation while approval pending
+Added tests/sql/verify-cli-role-recovery-audit.mjs: read-only source audit of all
+role attributes/OIDs, exact memberships including grantors/options, per-role/per-DB
+settings, CLI shared dependencies and active sessions. No password/credential
+column. Configuration values are hashed with server-side SHA256; only digest and
+key names returned, never raw values. OID output initially came back as JSON text,
+causing a strict numeric-shape rejection; explicit ::bigint in audit SQL fixed
+transport typing without coercing/dropping fields. First incident snapshot retained
+on E as diagnostic, inspected configuration KEY NAMES only (no secret keys present).
+Native final read-only snapshot33 roles/27 memberships/10 settings shape PASS;
+cli dependencies/sessions0. Complete after-removal comparator permits ONLY the
+pinned cli_login_postgres role and its one postgres SET membership to disappear;
+all other attributes/memberships/settings exactly equal, CLI roles absent. Also
+rejects extra/duplicate/malformed rows and unexpected fields. No snapshot auto-
+adoption as app/schema baseline; whole85/source/expiry/ownership guards still needed.
+Local simulated removal on the real incident snapshot fits strict comparator;
+this is explicitly NOT an actual DELETE/post-removal receipt. Two focused recovery
+tests PASS; lint/typecheck PASS; expanded full suite NOT RUN. Native cleanup,
+credential read, new transport/concurrent fixture NOT RUN. Current8514bec direct
+recovery/transport approval question remains pending; request/guard hashes and
+authority unchanged. E cli-role-recovery-global-audit.sql and
+cli-role-recovery-global-hashed-incident-audit.json. After approval reread current
+guards and capture fresh global before/after around cleanup; do not reuse this
+incident snapshot as immediate-before evidence. R1/master objective remain OPEN.
