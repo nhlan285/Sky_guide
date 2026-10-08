@@ -2017,3 +2017,49 @@ Do not repeat this connector probe or call the model a concurrency proof. Separa
 authorized concurrent execution transport is needed; durable/SDK/actual races remain
 OPEN. Next perform exact packed K15/original30s then evaluate approved guarded down
 on failed trial. R1 acceptance/dependent work remain gated regardless of K15 result.
+
+#### Exact full-K15 bracket benchmark — PASS / 2026-10-08
+Ran unchanged packed fixture1397651 bytes SHA256
+9b1492072ce09e0dd9b2cb323c159495384a21a7d8aeabbc51c030c9f95eaed7. Native hash
+guard reconstructed the original DO body before execution. Original data, ordering,
+batching, constraints, internal timing boundaries and statement_timeout30s unchanged.
+Receipt: canonical3918.485ms + release1309.237ms + deferred11251.532ms =
+total16479.254ms. Complete expected/actual1808 items,213 spirits,30 seasons,
+244 provenance,2051 identities,4103 memberships;46341 canonical/4367 release rows.
+Independent verifyFullK15ValidationReceipt rebuilt expected source locally and PASS,
+including complete phase durations/sum/30s bound and exact item/membership counts.
+Full85 source/empty guard and whole metadata/data/ACL/membership/clock/witness
+baseline matched installation before and after outer ROLLBACK. No fixture retained.
+E: release-bracket-k15-{outcome,receipt}.json,
+release-bracket-post-k15-baseline.json. API transport/unpack/wall time is not an
+internal phase measurement or separate concurrency/durable/production-capacity proof.
+New schema/ACL/runtime/adversarial/denial/benchmark checks PASS. Concurrency evidence
+absent because available connector requests ran sequentially; this is a transport
+gate, not a demonstrated validator failure. Keep approved85 development installation
+for continued proof; prepared guarded down remains available on actual failed trial,
+NOT RUN. Full schema/down/durable/concurrent/crash/restore/SDK gates stay OPEN.
+
+#### Concurrent transport next action — authentication outside current package
+CLI2.120.0 commands/help verified. Independent process transport candidate reuses
+Management API with --linked --project-ref tpbydviuknovimroeodm --file <E SQL>
+--output json; does not create a DB principal/password, grant, SDK, resource or public
+API. CLI presently has no access token. No credentials were read/exported/generated
+or stored by this run. User must authenticate that CLI using their existing account,
+or separately authorize its login initiation; credentials operation is outside exact
+5d9058e package and requires user rule22 approval. Never put tokens in chat/logs/Git.
+CLI auth help offers automatic login or --no-browser; do not initiate either before
+authorization. After authentication: read-only preflight must verify current_user/
+session_user postgres, target project/PG17.11, complete85 source baseline and $0
+development boundaries. Inspect actual CLI result format before extracting receipts.
+Then use separate CLI processes for prepared A/B/observer SQL; require distinct live
+backends, observed blocking edge, rollback-isolated clocks and exact full baseline
+after each ROLLBACK. If that API also serializes, stop and review another independently
+authorized transport; do not create a credential/principal or pretend serial evidence
+proves concurrency. Existing creator rehearsal scope remains approved.
+Even limited zero-row lock proof would not satisfy all durable adapter/CAS races;
+those remaining acceptance gates must be specified/verified before R1 closure or
+opening consumers/R2–R6. Original master objective remains ACTIVE/incomplete.
+Final local suite442/442 PASS (including concurrency receipt corruption checks),
+lint/typecheck/focused/scaffold PASS; app build unchanged/not rerun. No live SQL/test
+job remains. Native benchmark checkpoint is the resume source; don't repeat passed
+rehearsals or unavailable connector probes before authentication/transport changes.
