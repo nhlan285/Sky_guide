@@ -1,4 +1,5 @@
 .music-controls { display: flex; flex-wrap: wrap; align-items: center; gap: var(--space-3); margin-bottom: var(--space-5); }
+.music-selector { max-width: 24rem; margin-bottom: var(--space-3); }
 .music-controls .input-field { flex: 1 1 10rem; min-width: 0; max-width: 20rem; }
 .music-controls input { width: 100%; accent-color: var(--accent); }
 .music-grid { display: grid; grid-template-columns: repeat(5, minmax(0, 1fr)); gap: var(--space-3); border: 0; padding: 0; margin: 0; max-width: 42rem; }

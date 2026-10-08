@@ -128,9 +128,30 @@ focused domain/audio lifecycle tests. Validate mapping/frequency/polyphony and
 silence/cleanup; lint/build and actual Preview interaction/mobile/navigation.
 Original waveform is illustrative, not a mapped catalogue instrument. Known item
 deep links remain unsupported until verified music metadata/rights crosswalk.
+Refined pilot: exact K15 Harp81 and Piano227 identities now explicitly map to the
+same original tone set, not game timbre. Source slots/categories stay unknown;
+no name-based global classification. Selector, item detail CTA, instrument query
+and unsupported deep-link warning added; one active original set, no sample fetch.
+Full476 tests PASS before this mapping,5 focused music tests PASS after mapping;
+latest lint/typecheck/build PASS. New Preview acceptance pending.
 Implemented original sine pluck with lazy AudioContext,8 bounded voices, mute/
 volume/stop, generation cancellation of pending playback and blur/hidden/unmount
 cleanup. Scoped keyboard shortcuts on grid only;15 standard buttons support
 mouse/touch/Enter/Space. Four lifecycle/model tests, lint/typecheck/catalog/build
 PASS. Preview/browser NOT RUN. Next push/verify exact deployment, keyboard/pointer/
 mute/mobile/navigation acceptance, full tests then poster-first original media.
+
+## Next slice: original poster-first media pilot
+Shared preview supports an original wave video and original call audio; no game
+catalogue relation, remote footage, sample rights inference, upload or new service.
+Use browser-native Canvas/MediaRecorder only after explicit preparation action,
+480x480/24fps/3s WebM <=300kB; original2s mono WAV <=100kB generated on demand.
+Poster rendered first, no fetch/prepare on gallery entry. Only active selected
+sample exists; Blob URLs/tracks/frame callbacks/recorders disposed on switch/leave.
+Explicit playback, native accessible controls, reduced-motion poster default,
+prepare/error/retry/unsupported/rights-withheld states. Original assets stay local
+in memory and cannot be promoted to game media/R2 without separate reviewed
+metadata/provenance/rights gates. No encoder install needed; unsupported recorder
+leaves poster and explains limitation. Validate sizes/waveform/cancellation,
+browser preparation/playback/switch/mobile and lifecycle cleanup. R4 actual game
+coverage/storage/integration remains OPEN; this is an authorized original pilot.

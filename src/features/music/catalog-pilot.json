@@ -1,0 +1,136 @@
+{
+  "sourceCatalogVersion": "tsa-v1-74007cf878ef",
+  "sourceDatasetSha256": "dd9a7873badab6abdf41731b6a98f7fa96d250bb7dc38a3182261d0c76e0a406",
+  "records": [
+    {
+      "provenanceIds": [
+        "tsa-source-52627debf2825da3",
+        "tsa-source-832cfda1ff42215a",
+        "tsa-source-b95a0c68ab9c27d7"
+      ],
+      "updatedAt": "2026-10-02T17:53:41Z",
+      "recordStatus": "published",
+      "fixture": false,
+      "id": "tsa-cosmetic-81",
+      "sourceKeys": {
+        "K15": "81",
+        "tsaIdentifier": "LaughingLightCollectorHarp"
+      },
+      "name": {
+        "default": "Harp",
+        "translations": {}
+      },
+      "slot": "unknown",
+      "rawSlot": null,
+      "accessoryAnchor": null,
+      "seasonIds": [],
+      "spiritIds": [
+        "tsa-spirit-8"
+      ],
+      "acquisitionOptions": [
+        {
+          "id": "tsa-cosmetic-81-offer-5df17047ef9ea248",
+          "kind": "spirit_tree",
+          "costs": [
+            {
+              "currency": "heart",
+              "sourceCurrencyLabel": "hearts",
+              "amount": 5
+            }
+          ],
+          "costStatus": "known",
+          "friendshipNodeId": null,
+          "iapProductId": null,
+          "validFrom": null,
+          "validTo": null,
+          "provenanceIds": [
+            "tsa-source-b95a0c68ab9c27d7"
+          ]
+        }
+      ],
+      "assetIds": [],
+      "dyeRegions": [],
+      "dyeStatus": "unknown",
+      "ruleIds": [],
+      "compatibility": null,
+      "fieldProvenance": {
+        "name": [
+          "tsa-source-832cfda1ff42215a"
+        ],
+        "slot": [
+          "tsa-source-52627debf2825da3",
+          "tsa-source-832cfda1ff42215a",
+          "tsa-source-b95a0c68ab9c27d7"
+        ],
+        "acquisitionOptions": [
+          "tsa-source-b95a0c68ab9c27d7"
+        ]
+      }
+    },
+    {
+      "provenanceIds": [
+        "tsa-source-52627debf2825da3",
+        "tsa-source-832cfda1ff42215a",
+        "tsa-source-bf3cc9fff066199a"
+      ],
+      "updatedAt": "2026-10-02T17:53:41Z",
+      "recordStatus": "published",
+      "fixture": false,
+      "id": "tsa-cosmetic-227",
+      "sourceKeys": {
+        "K15": "227",
+        "tsaIdentifier": "CheerfulSpectatorPiano"
+      },
+      "name": {
+        "default": "Piano",
+        "translations": {}
+      },
+      "slot": "unknown",
+      "rawSlot": null,
+      "accessoryAnchor": null,
+      "seasonIds": [],
+      "spiritIds": [
+        "tsa-spirit-26"
+      ],
+      "acquisitionOptions": [
+        {
+          "id": "tsa-cosmetic-227-offer-dd4d31a39bd67128",
+          "kind": "spirit_tree",
+          "costs": [
+            {
+              "currency": "heart",
+              "sourceCurrencyLabel": "hearts",
+              "amount": 10
+            }
+          ],
+          "costStatus": "known",
+          "friendshipNodeId": null,
+          "iapProductId": null,
+          "validFrom": null,
+          "validTo": null,
+          "provenanceIds": [
+            "tsa-source-bf3cc9fff066199a"
+          ]
+        }
+      ],
+      "assetIds": [],
+      "dyeRegions": [],
+      "dyeStatus": "unknown",
+      "ruleIds": [],
+      "compatibility": null,
+      "fieldProvenance": {
+        "name": [
+          "tsa-source-832cfda1ff42215a"
+        ],
+        "slot": [
+          "tsa-source-52627debf2825da3",
+          "tsa-source-832cfda1ff42215a",
+          "tsa-source-bf3cc9fff066199a"
+        ],
+        "acquisitionOptions": [
+          "tsa-source-bf3cc9fff066199a"
+        ]
+      }
+    }
+  ]
+}

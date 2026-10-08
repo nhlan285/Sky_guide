@@ -1,16 +1,21 @@
 import { useEffect, useRef, useState } from 'react'
-import { Link } from 'react-router-dom'
+import { Link, useSearchParams } from 'react-router-dom'
 import { useLocale } from '../../shared/i18n/useLocale'
 import { Button, SectionCard, StatusBadge } from '../../shared/ui/primitives'
 import { noteForKey, originalNotes } from './notes'
 import { createOriginalInstrument } from './originalInstrument'
+import { musicInstrumentForItem, musicInstruments } from './catalogPilot'
 
 export function MusicPlayground() {
   const vi = useLocale().locale === 'vi'
+  const [params, setParams] = useSearchParams()
+  const requestedItem = params.get('instrument')
+  const selectedInstrument = musicInstrumentForItem(requestedItem)
   const instrument = useRef<ReturnType<typeof createOriginalInstrument> | null>(null)
   const [active, setActive] = useState<string[]>([]), [volume, setVolume] = useState(45), [muted, setMuted] = useState(false)
   const [status, setStatus] = useState<'idle' | 'ready' | 'error'>('idle'), [lastNote, setLastNote] = useState('')
   const mounted = useRef(false)
+  useEffect(() => { instrument.current?.stop() }, [selectedInstrument?.itemId])
   useEffect(() => {
     mounted.current = true
     const pause = () => instrument.current?.suspend()
@@ -42,6 +47,10 @@ export function MusicPlayground() {
     </div>
     <SectionCard id="music-instrument" title={vi ? '15 nốt · âm tự tạo' : '15 notes · original tones'}>
       <p className="section-note">{vi ? 'Âm tổng hợp tự tạo, không phải mẫu nhạc cụ Sky. Không tự phát, thu âm hay truy cập micro.' : 'Original synthesized tones, not Sky instrument samples. No autoplay, recording or microphone access.'}</p>
+      <div className="input-field music-selector"><label htmlFor="music-selector">{vi ? 'Nhạc cụ' : 'Instrument'}</label><select id="music-selector" value={selectedInstrument?.itemId ?? ''} onChange={event => {
+        instrument.current?.stop(); const next = new URLSearchParams(); if (event.target.value) next.set('instrument', event.target.value); setParams(next)
+      }}><option value="">{vi ? 'Âm tự tạo' : 'Original tones'}</option>{musicInstruments.map(value => <option key={value.itemId} value={value.itemId}>{value.name} · {vi ? 'âm tự tạo' : 'original tones'}</option>)}</select></div>
+      {selectedInstrument ? <p>{selectedInstrument.name} · <Link className="text-link" to={`/items/${selectedInstrument.itemId}`}>{vi ? 'Xem item có nguồn' : 'View sourced item'}</Link>. {vi ? 'Bản thử dùng chung bộ âm tự tạo; chưa mô phỏng âm trong game.' : 'This pilot shares our original tone set; game timbre is not reproduced.'}</p> : requestedItem ? <p role="status">{vi ? 'Item trong liên kết chưa được hỗ trợ. Bạn vẫn có thể chơi bộ âm tự tạo hoặc chọn mẫu đã hỗ trợ.' : 'The linked item is unsupported. You can still play original tones or choose a supported pilot.'}</p> : null}
       <div className="music-controls"><Button onClick={() => void activate()}>{status === 'error' ? (vi ? 'Thử bật lại âm thanh' : 'Retry audio') : (vi ? 'Bật âm thanh' : 'Enable audio')}</Button>
         <Button aria-pressed={muted} className="button--quiet" onClick={() => { const next = !muted; setMuted(next); instrument.current?.setMuted(next) }}>{muted ? (vi ? 'Bỏ tắt tiếng' : 'Unmute') : (vi ? 'Tắt tiếng' : 'Mute')}</Button>
         <Button className="button--quiet" onClick={() => instrument.current?.stop()}>{vi ? 'Dừng các nốt' : 'Stop notes'}</Button>

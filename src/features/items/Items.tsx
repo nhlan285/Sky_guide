@@ -17,6 +17,7 @@ import { imageSources } from '../../data/itemLookup/media.ts'
 import { wardrobeItemUrl } from '../wardrobe/navigation'
 import { wardrobeCopy } from '../wardrobe/copy'
 import { catalogPilotMappings } from '../wardrobe/catalogPilot'
+import { musicInstrumentForItem } from '../music/catalogPilot'
 import { createLookupPreferenceStorage, effectiveLookupParams, initialLookupParams, lookupPreferencesFromParams } from './preferences'
 
 const catalog = catalogResult.valid ? catalogResult.value : null
@@ -62,6 +63,7 @@ function ItemDetail({ entry, search }: { entry: LookupEntry; search: string }) {
   const copy = itemCopy[locale]
   const item = entry.item
   const supportsPreview = catalogPilotMappings.some(mapping => mapping.id === entry.id)
+  const musicInstrument = musicInstrumentForItem(entry.id)
   const wiki = useWikiDetail(entry.id)
   const assets = useItemAssets(entry.id)
   const primary = assets.value?.primary ?? entry.asset
@@ -78,6 +80,7 @@ function ItemDetail({ entry, search }: { entry: LookupEntry; search: string }) {
     </div><div><p className="eyebrow">{copy.categories[entry.category]}</p><h1 id="page-title" tabIndex={-1}>{item.name.default}</h1><div className="item-detail__context">{relation(item.seasonIds, seasonNames, 'season')}{item.spiritIds.length ? relation(item.spiritIds, spiritNames, 'spirit') : null}</div></div></div>
     <p><Link className="button" to={wardrobeItemUrl(entry.id, search)}>{supportsPreview ? wardrobeCopy[locale].itemIntent.tryItem : wardrobeCopy[locale].itemIntent.unsupportedAction}</Link></p>
     <p className="section-note">{supportsPreview ? wardrobeCopy[locale].itemIntent.pilotNote : wardrobeCopy[locale].itemIntent.note}</p>
+    {musicInstrument ? <p><Link className="button" to={`/music?instrument=${entry.id}`}>{locale === 'vi' ? 'Thử nhạc cụ · âm tự tạo' : 'Try instrument · original tones'}</Link></p> : null}
     {wiki.failed ? <p role="status">{copy.mediaUnavailable} <button type="button" className="button button--quiet" onClick={wiki.retry}>{copy.retry}</button></p> : null}
     {assets.failed ? <p role="status">{copy.mediaUnavailable} <button type="button" className="button button--quiet" onClick={assets.retry}>{copy.retry}</button></p> : null}
     {previews.length ? <section className="item-preview"><h2>{copy.wornPreview}</h2><div className="item-gallery">{previews.map(media => <figure key={media.mediaId}><ItemThumbnail entry={entry} asset={media} description={`${item.name.default} — ${media.kind === 'alternate' ? copy.alternateView : copy.wornPreview}`} /><figcaption>{media.kind === 'alternate' ? copy.alternateView : copy.wornPreview}</figcaption></figure>)}</div></section> : null}
