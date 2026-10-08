@@ -5,7 +5,7 @@ Master objective OPEN. Direct8514bec/101f788 approval executed: CLI-role cleanup
 full rollback-local A/B/observer concurrency PASS. Continued safe R1 work: native
 empty-dev recovery snapshot/manifest PASS. R1 and dependent R2–R6 not accepted.
 Branch codex/master-plan-execution; checkpoint parent
-8a4b4626fbbbf9aa56319597ebd24edccf1c60f1 verified on origin.
+d760d7756383757fc8b654af575b0ae43ffc534d verified on origin.
 Resolve latest checkpoint with git log -1 and verify remote SHA.
 Master: [IMPLEMENTATION_PLAN](plan/IMPLEMENTATION_PLAN.md).
 Active: [POSTGRES_PROVIDER_SELECTION](plan/POSTGRES_PROVIDER_SELECTION.md), latest
@@ -163,7 +163,16 @@ every history source byte/order exact, unchanged source85 guard PASS under ROLLB
 E task root postgres-durable-restore-2026-10-08-6ff3fa7 contains environment.json,
 all native logs/migration receipts/local-initialization-PASS.json. Restore target
 still fresh; no hosted changes. Three focused runner/environment checks PASS.
-Exact next: runner durable on initialized source. On any failure
+Native separate-transaction durable adapter PASS:39 distinct backend callback IDs,
+978 query assertions/6 negative boundaries, final complete journal receipt and16
+migration history exact. E local-durable-PASS.json/all39 logs retained; revision5,
+five committed intents and one not_committed recovery receipt. No hosted mutation.
+Source-pinned schema guard plus complete85-table/199-row snapshot captured before
+approved crash/restart; full source history included. New local-durable-snapshot.mjs
+compares every row/field/order/history; source catalog guard executes each capture.
+Exact next: approved source-only crash/restart, compare snapshot, then matching
+pg_dump/pg_restore into fresh second target. CAS/leased-wire/SDK gates still OPEN.
+On any failure
 preserve E transcripts and inspect partial state, no blind repeat/recreation.
 Historical blocked audit: coordinated repair approval gate remained across three consecutive
 goal turns. Last turn made concrete progress (guarded runner/tests/checkpoint);

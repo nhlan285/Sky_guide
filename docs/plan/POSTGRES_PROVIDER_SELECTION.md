@@ -2515,3 +2515,13 @@ Unchanged compiled/reviewed source85 guard PASS under ROLLBACK (no adopted schem
 hash or relaxed role check). E local-initialization-PASS.json and all per-migration
 logs/receipts retained. Restore remains fresh; hosted untouched. Next durable39
 separate callbacks; CAS/crash/restore/leased-wire/SDK gates still OPEN.
+
+Native local durable adapter PASS:39 distinct backends/978 assertions/6 negatives,
+each original isolation and terminal boundary checked; final complete journal and
+source history exact. Source revision5/five applied intents/one not_committed
+recovery receipt retained. Source-pinned catalog guard plus full85-table/199-row
+snapshot captured for crash/restore comparison. Every row/field/order and all16
+history source statements included; no empty-baseline assertion on durable fixtures.
+E local-durable-PASS.json/before-crash-snapshot.json and all transcripts retained.
+Next approved crash/restart of exact task source ID and fresh restore proof; no
+inference about CAS winner, real leased wire/ACK-loss, SDK/Auth or hosted recovery.
