@@ -83,5 +83,25 @@ and separate search states. Four focused model tests, lint/typecheck/build PASS.
 First Preview83da713 failed because knowledge is excluded from deployments.
 Added minimal reviewed-sample projection, tested against both original files;
 retained .vercelignore boundary and excluded raw response/request corpus.
-Browser acceptance NOT RUN; exact next is pushed Preview selection/filter/mobile
-verification, then milestone integration and event intake planning.
+Preview73f09b5 READY/browser PASS: Hub navigation, R4+L4 unique subtotal5C/4H/1AC
+and unknown C1, filter empty/recovery/clear, TS#12/#115 distinct date-only history,
+360px no overflow on both routes and no console errors/warnings. Bounded sample
+VISIBLE/accepted; crosswalk/full coverage/live schedule remain OPEN. Next milestone
+integration and bounded event intake staging below.
+
+## Event manual intake — bounded current work
+Goal: reusable manual schedule draft staging while event source verification/live
+service remains OPEN. Reuse SeasonEvent/PartialTime/provenance/FK validators; no
+new provider, API, recurrence inference, public schedule or database changes.
+Trusted maintainer context supplies registered event IDs, verified sources and
+per-field reviewed evidence. Input cannot mint verification or approve itself.
+All records must be draft; quarantine entire batch on bad relationship, conflicting
+date precision, source drift or unknown ID. Preserve date-only/null bounds; never
+turn dates into midnight instants. Source type stays explicit, no promotion of
+community/calculated to official. Retain previous accepted input on failure.
+Files: catalog/manualEventInput.ts, focused tests, catalog export/docs. Max50
+records/100k bytes; sanitized error code/path only. Acceptance: trusted review
+matching, date-only/instant distinction, invalid ranges/FKs, duplicate IDs, private
+field projection, atomic failure and last-known-good preservation. Real schedules,
+IANA recurrence/override resolution, live API/time and countdown remain OPEN.
+Next after staging checks: original 15-note instrument as independent visible V1.

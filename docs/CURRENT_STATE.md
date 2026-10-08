@@ -2,7 +2,7 @@
 
 ## Task / authority / branch
 Master run OPEN. Branch codex/master-plan-execution, checkpoint parent
-59f4b56d97358faf0203610ac668108c0df03448 verified on origin and develop; resolve current HEAD
+73f09b5659eddf6a83fe56f0184709c907fa9274 verified on origin; develop59f4b56; resolve current HEAD
 with git log -1 and verify remote before resuming.
 Master: [IMPLEMENTATION_PLAN](plan/IMPLEMENTATION_PLAN.md).
 Active product: [PRODUCT_V1_EXECUTION](plan/PRODUCT_V1_EXECUTION.md).
@@ -106,12 +106,17 @@ root price/end instants remain unknown; no published catalogue mutation or media
 4 focused source tests, lint/typecheck/build PASS. First Preview83da713 failed:
 .vercelignore excludes knowledge/evidence imported directly. Fixed using a small
 deployment projection matched to both evidence files; exclusion retained and raw
-request/response corpus never shipped. Browser acceptance NOT RUN. Modified App/Hub/styles and features/spirits,
+request/response corpus never shipped. Preview73f09b5 READY; actual browser PASS:
+Hub→tree, R4+L4 subtotal5C/4H/1AC, unknown C1 and six unique prerequisites;
+empty search/recovery/clear selection; TS#1152024-06-06 and TS#122020-06-25
+separate/date-only; no console warnings/errors;360px content/client345px on both.
+Bounded Spirit/TS sample VISIBLE/accepted, full crosswalk/coverage still OPEN.
+Modified App/Hub/styles and features/spirits,
 tests/data/spiritSourceSamples.test.mjs plus active plan/handoff.
-Next: push checkpoint, verify exact Preview revision, exercise R4+L4 subtotal
-5C/4H/1AC with unknown C1, filter recovery, distinct TS#12/#115 date-only visits,
-navigation and360px overflow. Then checkpoint/integrate develop and continue
-reviewed manual event intake as authorized; do not stop at this checkpoint.
+Next: checkpoint/integrate develop, finish bounded manual event draft staging
+already in progress (catalog/manualEventInput.ts and active plan); verify source
+reviews/date precision/atomic rejection/LKG with focused tests, then original
+15-note instrument. No real event schedule verified; live API/countdown OPEN.
 
 ## Validation / modified areas / raw artifacts
 Recovered tests/sql/build-local-cas-rehearsal.mjs, run-local-cas-rehearsal.mjs,
