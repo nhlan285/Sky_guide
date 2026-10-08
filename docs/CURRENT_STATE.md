@@ -2,7 +2,7 @@
 
 ## Task / authority / branch
 Master run OPEN. Branch codex/master-plan-execution, checkpoint parent
-7a1d17a30143cc46612b8a39a3b31a201189c69d verified on origin; resolve current HEAD
+a47a15f299c35cb6e0f0770fc38a42b4ada52b8c verified on origin; resolve current HEAD
 with git log -1 and verify remote before resuming.
 Master: [IMPLEMENTATION_PLAN](plan/IMPLEMENTATION_PLAN.md).
 Active: [POSTGRES_PROVIDER_SELECTION](plan/POSTGRES_PROVIDER_SELECTION.md).
@@ -70,8 +70,9 @@ URL queries through collection HTTP headers. Owner dashboard login now confirmed
 Production currently0 at initial inspection. Preview7a1d17a READY/rendered,
 SDK2.0.1 exactlyone script/disableAutoTrack1/no-referrer policy verified. Actual
 dashboard received pageviews (first2 root/hub,1 visitor), Preview filter selected.
-Raw collection POST capture unavailable in browser API, remains OPEN; query churn
-was exercised, exact aggregate duplicate check pending dashboard refresh.
+Raw collection POST capture unavailable in browser API, remains OPEN. Dashboard
+Preview later showed exactly4 pageviews for4 routes root/hub/items/item1011 after
+Blue→Red→Blue query churn, no queries in Pages. Browser render/data ingestion PASS.
 Active application slice: [PRODUCT_V1_EXECUTION](plan/PRODUCT_V1_EXECUTION.md).
 Real item pilot implemented for6 source-exact records: cape6/1011/1012,mask4,
 hair5/10. Source IDs stored in outfit; generic geometry stays self-created and
@@ -79,7 +80,12 @@ explicitly illustrative. Only supported slots replaced, other selections kept.
 Save/reload/share/backup and exact old r1/r2 compatibility proven in focused tests;
 original demo-only validator remains strict. Next push and verify real equipment,
 slot replacement/save/share/deep link/mobile in new Preview, then spirit/TS slice.
-Do not report UI acceptance before actual browser interactions.
+Actual Previewa47a15f lookup→Blue Cape rendered real1011 SVG bindings; adding
+hair5 then replacing cape1012 preserved hair. QA pilot saved on this Preview
+origin (initial empty local library). Reload exposed source intent1011 overriding
+saved1012. Fixed consumed intent via navigation history, retaining contextual
+link/new explicit action;5 navigation tests/lint/build PASS. Next updated Preview
+reload/share/mobile, then spirit/TS. Do not claim acceptance before those checks.
 
 ## Validation / modified areas / raw artifacts
 Recovered tests/sql/build-local-cas-rehearsal.mjs, run-local-cas-rehearsal.mjs,

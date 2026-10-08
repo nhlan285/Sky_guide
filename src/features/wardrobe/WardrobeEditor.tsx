@@ -1,6 +1,6 @@
 import { useEffect, useMemo, useReducer, useRef, useState } from 'react'
 import type { CSSProperties } from 'react'
-import { useLocation } from 'react-router-dom'
+import { useLocation, useNavigate } from 'react-router-dom'
 import type { LocalizedText } from '../../data/catalog/types'
 import { SLOTS } from '../../data/wardrobe/index'
 import type { Slot } from '../../data/wardrobe/index'
@@ -9,7 +9,7 @@ import { Button, StatusBadge } from '../../shared/ui/primitives'
 import { demoDefaultSize, demoPalette } from './demo/demo'
 import { editorGeometry as demoGeometry, editorPackage as demoPackage } from './editorPackage'
 import { equipCatalogPilot } from './catalogPilot'
-import { wardrobeItemIntent } from './navigation'
+import { wardrobeItemIntent, wasWardrobeIntentApplied } from './navigation'
 import { createWardrobeState, wardrobeReducer } from './engine'
 import { deriveRenderModel } from './model'
 import { ItemThumbnail, PaperDoll } from './PaperDoll'
@@ -23,12 +23,16 @@ import { WardrobeItemIntent } from './WardrobeItemIntent'
 const reduce = (state: ReturnType<typeof createWardrobeState>, action: Parameters<typeof wardrobeReducer>[1] | { type: 'catalog_item'; itemId: string }) => action.type === 'catalog_item' ? equipCatalogPilot(state, action.itemId, demoPackage) : wardrobeReducer(state, action, demoPackage)
 
 export function WardrobeEditor() {
-  const { search } = useLocation()
+  const location = useLocation()
+  const { search } = location
+  const navigate = useNavigate()
   const { locale } = useLocale()
   const title = useRef<HTMLHeadingElement>(null)
   useEffect(() => { title.current?.focus({ preventScroll: true }) }, [])
   const copy = wardrobeCopy[locale]
   const requestedId = wardrobeItemIntent(search).id
+  const navigationState: unknown = location.state
+  const requestWasApplied = wasWardrobeIntentApplied(navigationState, requestedId)
   const previousRequest = useRef(requestedId)
   const [outfitStorage] = useState(() => createOutfitStorage(demoPackage, () => window.localStorage))
   const [state, dispatch] = useReducer(reduce, null, () => {
@@ -38,7 +42,7 @@ export function WardrobeEditor() {
     const last = library.outfits.find(outfit => outfit.id === library.lastOutfitId)
     const restored = draft ? wardrobeReducer(initial, { type: 'restore_outfit', snapshot: draft }, demoPackage)
       : last ? wardrobeReducer(initial, { type: 'restore_outfit', snapshot: last }, demoPackage) : initial
-    return requestedId ? equipCatalogPilot(restored, requestedId, demoPackage) : restored
+    return requestedId && !requestWasApplied ? equipCatalogPilot(restored, requestedId, demoPackage) : restored
   })
   const [slot, setSlot] = useState<Slot>(() => demoPackage.items.find(item => item.id === requestedId)?.slot ?? 'cape')
   useEffect(() => {
@@ -50,6 +54,15 @@ export function WardrobeEditor() {
       if (item) setSlot(item.slot)
     }
   }, [requestedId])
+  useEffect(() => {
+    if (requestWasApplied || !demoPackage.items.some(item => item.id === requestedId && !item.fixture)) return
+    // Consume this navigation's action, while keeping its contextual return link.
+    // History state survives reload; a fresh lookup Link gets a new empty state.
+    const prior = navigationState !== null && typeof navigationState === 'object' ? navigationState : {}
+    navigate({ pathname: location.pathname, search, hash: location.hash }, {
+      replace: true, state: { ...prior, wardrobeAppliedItem: requestedId },
+    })
+  }, [requestWasApplied, requestedId, navigate, navigationState, location.pathname, search, location.hash])
   const [panel, setPanel] = useState<'picker' | 'outfit'>('picker')
   const { selection } = state
   useEffect(() => { wardrobeDraft.write(selection, demoPackage) }, [selection])

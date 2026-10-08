@@ -41,13 +41,19 @@ script with disableAutoTrack1/no-referrer meta verified. Dashboard received real
 pageviews (first2 root/hub,1 visitor); Preview filter selected. Raw collection POST
 body/status capture is not available through this browser API and remains OPEN;
 DOM/runtime checks and ingestion are separate evidence. Query churn exercised;
-exact aggregate duplicate check pending dashboard refresh. No Production release.
+Dashboard Preview later showed exactly4 pageviews for4 routes (root/hub/items/
+item1011) after Blue→Red→Blue query churn; pages omit queries. No Production release.
 Pilot implementation now6 exact source records (cape6/1011/1012, mask4, hair5/10).
 Own cloned geometry/anchors carry explicit self-created status; real IDs remain
 in outfit, game dye/compatibility never inferred. r3 is an additive package;
 only exact r1/r2 backwards compatibility and unchanged library key accepted.
 4 focused pilot tests PASS; full461 tests/0fail/0skip and build PASS. Browser
-equipment/save/share/mobile acceptance pending new Preview. Preserve exact failures, do not call
+Previewa47a15f verified lookup→Blue Cape actual SVG bindings with real1011 ID;
+adding hair5 then replacing cape with1012 preserves hair; saved QA pilot appears.
+Reload exposed old URL intent re-equipping1011 over saved1012. Fix marks consumed
+intent in navigation history, preserving source return link and fresh-link actions;
+5 navigation tests/lint/build PASS. Updated Preview reload/share/mobile acceptance
+still pending. Preserve exact failures, do not call
 authentication page or deployment metadata a rendered PASS. Latest checkpoints
 and exact continuation live in ../CURRENT_STATE.md. Subsequent slices refine this
 phase when their source/dependency evidence is ready; no future implementation log.

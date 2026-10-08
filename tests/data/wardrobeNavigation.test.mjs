@@ -5,7 +5,7 @@ import { URL, URLSearchParams } from 'node:url'
 import { validateDemoManifest } from '../../src/features/wardrobe/demo/validation.ts'
 import { createWardrobeState, wardrobeReducer } from '../../src/features/wardrobe/engine.ts'
 import { createWardrobeDraft } from '../../src/features/wardrobe/draft.ts'
-import { wardrobeItemIntent, wardrobeItemUrl } from '../../src/features/wardrobe/navigation.ts'
+import { wardrobeItemIntent, wardrobeItemUrl, wasWardrobeIntentApplied } from '../../src/features/wardrobe/navigation.ts'
 
 const pkg = validateDemoManifest(JSON.parse(readFileSync(new URL('../../src/features/wardrobe/demo/manifest.json', import.meta.url), 'utf8'))).value
 const initial = () => createWardrobeState(pkg, pkg.sizes[0].code)
@@ -59,4 +59,13 @@ test('missing and excessive item intents recover to the contextual item list', (
     assert.equal(intent.id, null)
     assert.equal(intent.returnUrl, '/items?q=cape')
   }
+})
+
+test('consumed lookup navigation survives reload without consuming fresh or different item actions', () => {
+  const id = 'tsa-cosmetic-1011'
+  assert.equal(wasWardrobeIntentApplied({ wardrobeAppliedItem: id }, id), true)
+  for (const state of [null, {}, [], { wardrobeAppliedItem: 'tsa-cosmetic-1012' }, { item: id }]) {
+    assert.equal(wasWardrobeIntentApplied(state, id), false)
+  }
+  assert.equal(wasWardrobeIntentApplied({ wardrobeAppliedItem: null }, null), false)
 })

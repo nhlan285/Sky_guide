@@ -20,3 +20,8 @@ export function wardrobeItemIntent(search: string) {
   const suffix = context ? `?${context}` : ''
   return { requested: params.has('item'), id, returnUrl: id ? `/items/${encodeURIComponent(id)}${suffix}` : `/items${suffix}` }
 }
+
+export function wasWardrobeIntentApplied(state: unknown, id: string | null): boolean {
+  return id !== null && state !== null && typeof state === 'object' && !Array.isArray(state)
+    && 'wardrobeAppliedItem' in state && state.wardrobeAppliedItem === id
+}
