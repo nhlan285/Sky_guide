@@ -2525,3 +2525,14 @@ history source statements included; no empty-baseline assertion on durable fixtu
 E local-durable-PASS.json/before-crash-snapshot.json and all transcripts retained.
 Next approved crash/restart of exact task source ID and fresh restore proof; no
 inference about CAS winner, real leased wire/ACK-loss, SDK/Auth or hosted recovery.
+
+Approved task-source SIGKILL/restart executed: fixed ID stopped exit137/not OOM,
+new postmaster startup, unchanged85 owners/199 rows/field order/16 history sources
+and full catalog guard after recovery. Native snapshot corruption checks reject
+owner omission, changed revision and source-history byte drift. E crash receipts
+retained. Prepared restore runner uses same pinned-image pg_dump/pg_restore, two
+task schemas only (no globals/passwords), source snapshot/dump SHA256, fresh target
+owners/grantees from approved bootstrap and original two role declarations. Restore
+single transaction/exit-on-error/30s process bound, then full catalog/data/history
+comparison. Lint/bootstrap scope checks PASS. Next native restore; no inferred CAS,
+in-flight ACK-loss, hosted backup or SDK/Auth acceptance.

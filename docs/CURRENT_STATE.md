@@ -5,7 +5,7 @@ Master objective OPEN. Direct8514bec/101f788 approval executed: CLI-role cleanup
 full rollback-local A/B/observer concurrency PASS. Continued safe R1 work: native
 empty-dev recovery snapshot/manifest PASS. R1 and dependent R2–R6 not accepted.
 Branch codex/master-plan-execution; checkpoint parent
-d760d7756383757fc8b654af575b0ae43ffc534d verified on origin.
+e9f467b5f5edadd80bb9ceec21fb17abef5c7b74 verified on origin.
 Resolve latest checkpoint with git log -1 and verify remote SHA.
 Master: [IMPLEMENTATION_PLAN](plan/IMPLEMENTATION_PLAN.md).
 Active: [POSTGRES_PROVIDER_SELECTION](plan/POSTGRES_PROVIDER_SELECTION.md), latest
@@ -170,8 +170,16 @@ five committed intents and one not_committed recovery receipt. No hosted mutatio
 Source-pinned schema guard plus complete85-table/199-row snapshot captured before
 approved crash/restart; full source history included. New local-durable-snapshot.mjs
 compares every row/field/order/history; source catalog guard executes each capture.
-Exact next: approved source-only crash/restart, compare snapshot, then matching
-pg_dump/pg_restore into fresh second target. CAS/leased-wire/SDK gates still OPEN.
+Native source-only SIGKILL/restart PASS: exact task ID stopped exit137 (not OOM),
+postmaster start changed; all85 tables/199 rows/field order/history exactly matched
+after restart. E local-crash-STARTED/stopped/PASS and after-crash snapshot retained.
+Snapshot corruption checks reject removed owner/changed revision/history byte.
+Prepared matching-image pg_dump/pg_restore runner: task schemas/history only, no
+globals/password export; source before/after comparison, digest-pinned custom dump,
+fresh restore owner/grantee bootstrap, single transaction/error-stop/30s process
+limit, full source schema guard/data/history comparison. Lint/scope guard PASS.
+Exact next: run-local-restore-rehearsal.mjs into fresh second target.
+CAS/leased-wire/SDK gates still OPEN.
 On any failure
 preserve E transcripts and inspect partial state, no blind repeat/recreation.
 Historical blocked audit: coordinated repair approval gate remained across three consecutive
