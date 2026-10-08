@@ -21,7 +21,10 @@ original video/call pilot VISIBLE and tested. These do not close R4/R5 game
 sample/media rights/storage gates. Official manual five-entry Events UI VISIBLE,
 source/timezone/filter Preview and486 regression checks PASS. Exact360px QA is
 OPEN because the browser ignored its viewport override; live API/recurrence/time/
-countdown/canonical schedule remain OPEN. Source-linked official Hub headline next.
+countdown/canonical schedule remain OPEN. Bounded official /news two reviewed
+metadata samples/filter/empty/provenance/vi-en Preview VISIBLE; full live/canonical
+news remains OPEN. Full489 PASS with4 test workers; original default timeout-test
+failure retained separately, no assertions or kernel limits changed.
 Visible V1 bounded Wardrobe pilot now accepted:6 source-verified public item IDs
 with explicit original illustrative geometry, slot replacement/save/reload/share
 and mobile Preview proof. This adds real identity continuity without claiming
@@ -230,7 +233,7 @@ Phụ thuộc phase là điều kiện nền; cột phụ thuộc bổ sung quan
 | P3-H04 | Xây TS history table/timeline và filter | Nhiều lần ghé cùng spirit được giữ; disputed được gắn nhãn | P2-D07, P3-U02 | Trung bình | DATA K03/K04 |
 | P3-H05 | Tạo prediction view với methodology và empty state | Không có method/input đáng tin thì không có dự đoán giả; chưa xác nhận không hiện như lịch chắc chắn | P0-H03, P3-H04 | Trung bình | Q09 |
 | P3-H06 | **OPEN — evolved Q23:** season/event card/detail liên kết item/spirit | Qua live schedule P9-H01 và UI P9-U01; official/community/calculated có nhãn, missing/stale/unavailable rõ | P1-H01, P3-U02, P9-H01; P2-D08 cho nội dung biên tập | Trung bình | DATA source schedule đã verify |
-| P3-H07 | Xây official news feed/detail | Có link nguồn, ngày/version khi biết, tóm tắt riêng; không trộn leak | P1-D06, P2-D08 | Trung bình | DATA K06 |
+| P3-H07 | **PARTIAL2026-10-09 — bounded manual news UI VISIBLE:** two reviewed K06 samples on /news | Source/date meaning/version/platforms/own summary, query/type/empty/keyboard/vi-en Preview PASS; no latest/live/canonical claim; full feed/detail remains OPEN | P1-D06, P2-D08 | Trung bình | DATA K06/canonical live integration |
 | P3-H08 | Ghép widget trang chủ theo thứ tự UX | Season, TS, official feed, quick links và lookup có đường đến detail; không card trống lớn | P3-H01, P3-H04, P3-H06, P3-H07 | Trung bình | — |
 
 ### Data pipeline / Infra / Wardrobe
