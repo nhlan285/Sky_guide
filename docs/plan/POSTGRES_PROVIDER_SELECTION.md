@@ -2095,3 +2095,10 @@ and verify actual rows/blocking/rollback baselines. If transport cannot overlap,
 stop instead of accepting synthetic or serial evidence. R1 remains OPEN: even this
 case would establish rollback-local competing adapter serialization, not durable
 commit/CAS-winner/crash/restore/SDK acceptance. Keep K15 PASS and original gates.
+
+Blocked audit2026-10-08: CLI authentication/independent transport authority remains
+pending across three consecutive goal turns. Local+remote6d65b7e verified clean;
+complete authorized preparation checkpointed, no live job/independent authorized
+next implementation. Goal BLOCKED pending direct auth authorization or user-ready
+CLI signal; original objective unchanged/incomplete. No new auth probe, credential,
+SQL run or dependent phase opened. Resume exact preflight/concurrent steps above.

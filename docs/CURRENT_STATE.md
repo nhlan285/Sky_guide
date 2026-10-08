@@ -1,9 +1,10 @@
 # Current handoff — 2026-10-08
 
 ## Task / branch / checkpoint
-Sky Guide autonomous master run ACTIVE; full roadmap OPEN, not complete.
+Sky Guide autonomous master run BLOCKED on pending CLI authentication/independent
+transport authority; full objective and roadmap OPEN, not complete.
 Branch codex/master-plan-execution; checkpoint parent
-38bea5b997a2d26428e8740813d67fd2e8089884 verified on origin.
+6d65b7e8da2a7fe7f1534c0839381db09b7d809c verified on origin.
 Resolve latest checkpoint with git log -1 and verify remote SHA.
 Master: [IMPLEMENTATION_PLAN](plan/IMPLEMENTATION_PLAN.md).
 Active phase: [POSTGRES_PROVIDER_SELECTION](plan/POSTGRES_PROVIDER_SELECTION.md),
@@ -111,7 +112,11 @@ concurrent-{a,b,observer}-evidence.json, parallel-transport-probe.json;
 release-bracket-final-tests.log. Active phase has exact names/hashes/full evidence.
 
 ## Exact next / remaining gates
-Checkpoint native benchmark; obtain CLI authentication/independent transport access.
+Obtain CLI authentication/independent transport access. Gate persisted across three
+consecutive goal turns; approved native proofs and full adapter preparation are
+checkpointed, no independent authorized next implementation or live wait remains.
+Authentication question remains pending; no user approval/ready signal received.
+Do not repeat unchanged connector probes, passed tests or expand dependent scope.
 User may authenticate CLI using existing account or separately authorize login
 initiation; do not create/read/export a credential, put a token in chat/log/Git, or
 open a sensitive browser session by implication. After auth: read-only preflight must
