@@ -6,6 +6,14 @@ Real Hub Feature V1 (2026-10-03): user duyệt riêng [K15 ThatSkyApplication](.
 
 ## Cách dùng task list
 
+Direct execution takeover 2026-10-08: continue independently executable visible
+V1 slices while remaining R1 acceptance gates stay OPEN. Prioritize mandatory
+Web Analytics, real Item Lookup → Wardrobe, verified spirit/TS UI, events, music,
+emote/honk and responsive Preview QA. Non-destructive Free/$0 development and
+history-preserving develop integration after verified milestones are authorized;
+main/production/paid/rights boundaries remain closed. Current execution detail
+lives in CURRENT_STATE and the active phase plan, not this master roadmap.
+
 Scoped infrastructure repair (2026-10-04): [R2 runtime debugging](R2_RUNTIME_DEBUG.md).
 This task preserves the asset corpus, catalog, UI and storage architecture; it does
 not change completion status of unrelated product phases. See [current handoff](../CURRENT_STATE.md).

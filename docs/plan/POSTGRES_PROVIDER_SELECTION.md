@@ -1,5 +1,19 @@
 # P9-I02 — provider selection and development rehearsal
 
+## Latest bounded native checkpoint — 2026-10-08
+Local durable COMMIT/crash recovery/dump→restore equivalence now PASS (85 tables,
+199 rows/history/body/ACL). Native CAS actual adapter SQL PASS: revision5→6,
+one winner/loser no orphan, distinct231/245/238 backends and observed blocking.
+Raw receipts retained on E; all454 tests passed before later probe/app edits.
+Extra full-release probe failed because archived membership pins revision7 while
+current canonical is revision8/retired; original contract deliberately rejects
+this comparison. Full baseline after failure unchanged. Corrected current-release
+predicate plus archived immutable SHA256 verification is prepared; execution
+currently OPEN due Docker pipe/inspect availability, not a schema defect proven.
+No validator/migration relaxation. Leased wire/ACK-loss/SDK/Auth/full hosted backup/
+schema down remain OPEN. Direct takeover authorizes independent V1 development
+while those distinct gates remain open. See CURRENT_STATE for exact continuation.
+
 ## Goal / approval / dependencies
 LARGE infrastructure slice. On2026-10-06 the user approved R1 with
 `phê duyệt, tự tiếp tục`. R1 contract re-review gate is CLOSED for the locally
