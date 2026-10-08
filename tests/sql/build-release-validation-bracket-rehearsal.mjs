@@ -21,7 +21,7 @@ export async function buildReleaseValidationBracketRehearsal(){
  const proposal=buildReleaseValidationBracketProposal(),{f}=await payloadWriteFixture(),release=encodeReleaseRows(f.snapshot,f.publicCatalog),version=f.snapshot.manifest.catalogVersion
  const id=release.release_lookup[0].id,privateProof=f.catalog.provenance.find(p=>p.source_id!=='K15')
  assert.ok(privateProof);assert.equal(release.release_item.length,2);assert.equal(release.release_lookup.length,2)
- const flush='set constraints release_metadata_state immediate;'
+ const flush='set constraints sky_private.release_metadata_state immediate;'
  const helper=`sky_private.validate_release_epoch(${lit(version)})`
  const mutations=[
   `update sky_private.release_lookup set owner_revision=owner_revision+1+coalesce(length(${helper}::text),0) where catalog_version=${lit(version)} and id=${lit(id)};`,
@@ -55,7 +55,7 @@ do $bracket_positive$ declare before_frame jsonb;after_frame jsonb;before_epoch 
  update sky_private.release_lookup set owner_revision=owner_revision+coalesce(length(${helper}::text),0) where catalog_version=${lit(version)};
  if (select jsonb_agg(to_jsonb(w) order by w.catalog_version) from sky_private.release_validation_witness w) is distinct from before_frame->'witness' then raise exception 'Mid-statement helper recorded a premature witness';end if;
  if (select write_depth from sky_private.release_validation_clock where singleton=1)<>0 then raise exception 'Write bracket did not close';end if;
- ${flush}set constraints release_metadata_state deferred;
+ ${flush}set constraints sky_private.release_metadata_state deferred;
  select epoch into before_epoch from sky_private.release_validation_clock where singleton=1;
  update sky_private.release_lookup set position=position where false;
  if (select epoch from sky_private.release_validation_clock where singleton=1)<>before_epoch+2 then raise exception 'Zero-row statement did not invalidate twice';end if;
@@ -64,7 +64,7 @@ do $bracket_positive$ declare before_frame jsonb;after_frame jsonb;before_epoch 
  select catalog_version,id,position,owner_revision from sky_private.release_lookup where catalog_version=${lit(version)}
  on conflict(catalog_version,id) do update set position=excluded.position,owner_revision=excluded.owner_revision;
  if (select write_depth from sky_private.release_validation_clock where singleton=1)<>0 then raise exception 'UPSERT bracket did not balance';end if;
- ${flush}set constraints release_metadata_state deferred;
+ ${flush}set constraints sky_private.release_metadata_state deferred;
  select ${frame()} into before_frame;
  begin
   update sky_private.release_lookup set position=position where false;perform ${helper};
@@ -109,7 +109,11 @@ select ${denials.length} as denied_checks;
 rollback;\n`
  const files={'release-validation-bracket-owner-fixture.sql':owner,'release-validation-bracket-creator-denial-fixture.sql':denial}
  if(Object.values(files).some(sql=>Buffer.byteLength(sql)>800000))throw new Error('Bracket rehearsal exceeds bounded request')
- return {files,release,negativeChecks:mutations.length,positiveChecks:5,deniedChecks:denials.length,version}
+ // Whole-row native receipts include schema-generated subtype discriminators.
+ // Keep insertion columns unchanged and verify these stored values as well.
+ const generatedDatasets={release_item:'items',release_lookup:'lookup',release_spirit:'spirits',release_season:'seasons',release_provenance:'provenance'}
+ const nativeRelease=Object.fromEntries(Object.entries(release).map(([table,rows])=>[table,rows.map(r=>({...r,...(generatedDatasets[table]?{dataset:generatedDatasets[table]}:{})}))]))
+ return {files,release:nativeRelease,negativeChecks:mutations.length,positiveChecks:5,deniedChecks:denials.length,version}
 }
 export function verifyReleaseValidationBracketReceipt(receipt,prepared){
  assert.equal(receipt.negative_checks,prepared.negativeChecks);assert.equal(receipt.positive_checks,prepared.positiveChecks)

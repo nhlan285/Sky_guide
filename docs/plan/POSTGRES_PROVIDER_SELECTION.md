@@ -1861,8 +1861,8 @@ source, not fetched/adopted metadata. Any native formatting/compilation mismatch
 must fail atomically and be investigated; never repin to silence drift.
 
 Prepared native adversarial fixtures on E: (NOT RUN):
-- release-validation-bracket-owner-fixture.sql254695 bytes SHA256
-  70713d4303d09147e6e8bbf52b6d88e476f9d4e898af307f6fafd1bd938432ff:
+- release-validation-bracket-owner-fixture.sql254827 bytes SHA256
+  398e2bb7e1f6a12e5fc2dc911bdce2c5a86f31f66fa7345efcdbccfaa3f3ad82:
   7 target-validator rejections,5 positive cases (direct mid-write calls, zero-row
   invalidation, UPSERT balancing, failed subtransaction and explicit savepoint).
   Whole touched canonical/release/clock/witness frames must survive negative rollback;
@@ -1945,8 +1945,51 @@ Next: application checkpoint,7/5 adversarial and25 denials, owner/creator adapte
 baseline. On failure prepared down only with empty85 guard; STOP on drift. Native
 function execution/adversarial/cost/down/concurrency still NOT RUN at application.
 5 focused proposal/baseline tests PASS, including actual168-hook receipt verifier
-and empty clock/witness/count assertions. Security advisor returned only INFO
-Application lint/typecheck PASS; app build unchanged/not rerun.
+and empty clock/witness/count assertions. Application lint/typecheck PASS; app build
+unchanged/not rerun. Security advisor returned only INFO
 rls_enabled_no_policy for the two internal owners: intentionally RLS/no-policy and
 no client privileges, matching approved closed-owner design. Do not add policies to
 silence it. [Advisor explanation](https://supabase.com/docs/guides/database/database-linter?lint=0008_rls_enabled_no_policy).
+
+#### Bracket native rollback proofs — 2026-10-08
+First owner fixture failed42704 because SET CONSTRAINTS release_metadata_state was
+unqualified; full source85 guard/whole baseline after connector error exactly matched
+installation. Qualified sky_private.release_metadata_state at the same flush points;
+no DDL/function/permission/data/batching/timeout change. [PG17 name resolution](https://www.postgresql.org/docs/17/sql-set-constraints.html).
+Corrected native owner fixture completed7 target-helper check_violation rejections
+and5 positives (mid-write no premature witness, zero-row invalidation, UPSERT bracket
+balance, failed subtransaction and explicit savepoint rollback). Independent full
+receipt verifier initially exposed missing generated dataset fields in expected rows;
+expected values now include exact stored items/lookup/spirits/seasons/provenance
+discriminators from the original schema. No output field is discarded; corrupt or
+missing discriminators reject. Actual7/5 receipt then independently PASS, clock
+epoch52/depth0/writerNULL and witness same transaction/epoch/release.
+Creator fixture25 actual permission denials PASS; old8 creator denials also PASS.
+Owner AND authorized creator adapter5 phases/39 callbacks/978 query comparisons/
+6 negative tokens each PASS, with independently verified complete intent/control/
+applied/receipt rows. ALL fixtures/tempSET shared each outer ROLLBACK; after EACH
+success/error full source85 guard and complete metadata/data/ACL/membership/clock/
+witness baseline matched installed empty85 state exactly. No fixture/tempSET retained.
+E: release-bracket-{qualified-owner,creator-denial,old-denial}-native-result.json,
+release-bracket-owner-receipt.json, release-bracket-adapter-{owner,creator}-receipt.json,
+release-bracket-post-{qualified-owner,creator-denial,old-denial,adapter-owner,adapter-creator}-baseline.json.
+These remain single-connection SQL proofs, not independent sessions/durable/crash/
+SDK acceptance. Full suite initially439/441 PASS: two historical83 tests read the
+new85 migration, incorrectly comparing different profile versions. Historical test
+reconstruction now explicitly stops at restored83 checkpoint20261007161625; every
+unknown-object/definer/body rejection assertion remains. New85 test also verifies
+applied migration byte-for-byte against approved source.11 focused and rerun441 full
+tests PASS; lint/typecheck PASS. One subsequently added concurrency verifier test
+and5 bracket tests PASS; full suite including this new sixth test not rerun yet.
+Prepared bounded3-session concurrency SQL (existing postgres, zero-row canonical
+writes only). Independent observer must see B physically blocked by A; all3 actual
+backend PIDs distinct, A/B xids distinct, B waits and sees clock0 after A ROLLBACK,
+each writer produces epoch2/depth0/no owner and each outer transaction ROLLBACKs.
+Local application_name/GUCs label test receipts only, no production decision uses
+them. No role grants/new actors/DDL/SDK/credential/infrastructure. This establishes
+limited lock serialization only, not complete durable adapter races or production
+capacity. Script: tests/sql/build-release-validation-bracket-concurrency.mjs.
+Next: checkpoint proofs, run bounded concurrent rollback case, then EXACT packed
+K15/original30s cap. Original fixture/up/down source hashes
+unchanged except the qualified owner fixture hash above. STOP on drift; approved
+empty guarded down on failed trial, retaining migration history.

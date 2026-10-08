@@ -17,9 +17,12 @@ import { runtimeRoleExecutor } from '../sql/runtime-role-executor.mjs'
 
 const clone=globalThis.structuredClone,hash=(s,algorithm='sha256')=>createHash(algorithm).update(s).digest('hex')
 const up=readFileSync(new URL('../../supabase/proposals/sync_commit_journal_up.sql',import.meta.url),'utf8')
+// Reconstruct the explicitly historical83 profile, before the approved85 bracket.
+// Its unknown-object/definer rejection assertions below remain unchanged.
+const historical83Migrations=readdirSync(new URL('../../supabase/migrations/',import.meta.url)).filter(n=>/^\d{14}_.*\.sql$/.test(n)&&n.slice(0,14)<='20261007161625').sort()
 function bodies() {
  const m=new Map()
- for(const n of readdirSync(new URL('../../supabase/migrations/',import.meta.url)).sort()) {
+ for(const n of historical83Migrations) {
   const sql=readFileSync(new URL('../../supabase/migrations/'+n,import.meta.url),'utf8')
   for(const f of sql.matchAll(/create(?: or replace)? function sky_private\.([a-z_0-9]+)\([\s\S]*?\bas \$\$([\s\S]*?)\$\$;/gi))m.set(f[1],f[2])
  }
@@ -53,7 +56,7 @@ test('pinned proposed37 functions/155 trigger fingerprints cover complete invoke
  assert.equal(funcs.size,37);assert.equal(baseline.functions.length,37);assert.equal(baseline.triggers.length,155)
  for(const f of baseline.functions)assert.equal(hash(funcs.get(f.name),'md5'),f.bodyMd5,f.name)
  const declarations=new Map()
- for(const text of [...readdirSync(new URL('../../supabase/migrations/',import.meta.url)).sort().map(n=>readFileSync(new URL('../../supabase/migrations/'+n,import.meta.url),'utf8')),up])
+ for(const text of [...historical83Migrations.map(n=>readFileSync(new URL('../../supabase/migrations/'+n,import.meta.url),'utf8')),up])
   for(const match of text.matchAll(/create(?: or replace)? function sky_private\.([a-z_0-9]+)\([\s\S]*?\bas \$\$/gi))declarations.set(match[1],match[0].toLowerCase())
  for(const setting of expectedFunctionSettings(baseline.functions.map(f=>f.name))) {
   const declaration=declarations.get(setting.name)

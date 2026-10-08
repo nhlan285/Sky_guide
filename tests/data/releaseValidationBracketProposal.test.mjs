@@ -7,6 +7,7 @@ import { prepareRuntimeJournalPrivilegeProposal } from '../../src/server/runtime
 import { runtimeJournalPrivilegeBaseline } from '../../src/server/runtimeJournalPrivilegeBaseline.ts'
 import { buildReleaseValidationBracketRehearsal,verifyReleaseValidationBracketReceipt } from '../sql/build-release-validation-bracket-rehearsal.mjs'
 import { buildReleaseValidationBracketBaseline,verifyReleaseValidationBracketBaseline } from '../sql/build-release-validation-bracket-baseline.mjs'
+import { buildReleaseValidationBracketConcurrency,verifyReleaseValidationBracketConcurrency } from '../sql/build-release-validation-bracket-concurrency.mjs'
 
 test('bracket review keeps exact original global checks; cannot claim/reuse success inside a write or across transactions',()=>{
  const p=buildReleaseValidationBracketProposal(),fn=new Map(p.functions.map(f=>[f.name,f]))
@@ -39,6 +40,8 @@ test('native fixture preparation covers mid-write calls,canonical later changes,
  for(const sql of [owner,denial]){assert.ok(sql.includes('begin isolation level read committed read write;'));assert.ok(sql.endsWith('rollback;\n'));assert.doesNotMatch(sql,/\bcreate (?:table|function|trigger|role)\b|commit;/i)}
  assert.ok(owner.includes('owner_revision=owner_revision+1+coalesce(length(sky_private.validate_release_epoch('))
  assert.ok(owner.includes('Wrong rejection owner'));assert.ok(owner.includes('Failed subtransaction leaked clock/witness'))
+ assert.ok(owner.includes('set constraints sky_private.release_metadata_state immediate;'))
+ assert.doesNotMatch(owner,/set constraints release_metadata_state /)
  assert.ok(owner.includes('Explicit savepoint leaked clock/witness/data'))
  assert.ok(owner.indexOf("select set_config('sky_guide.bracket_before_frame'")<owner.indexOf('savepoint bracket_boundary;'))
  assert.ok(owner.includes('on conflict(catalog_version,id) do update'))
@@ -48,7 +51,7 @@ test('native fixture preparation covers mid-write calls,canonical later changes,
  assert.doesNotMatch(denial,/password|create role|grant .*to (?:anon|authenticated|service_role)/i)
  const receipt={negative_checks:7,positive_checks:5,release:globalThis.structuredClone(p.release),clock:{singleton:1,epoch:100,write_depth:0,writer_xid:null},witness:{catalog_version:p.version,transaction_id:'1000',epoch:100},transaction_id:'1000'}
  assert.deepEqual(verifyReleaseValidationBracketReceipt(receipt,p),{negativeChecks:7,positiveChecks:5})
- for(const change of [r=>r.negative_checks--,r=>r.release.release_lookup.pop(),r=>r.clock.write_depth=1,r=>r.clock.writer_xid='1000',r=>r.witness.transaction_id='999',r=>r.witness.epoch--]){
+ for(const change of [r=>r.negative_checks--,r=>r.release.release_lookup.pop(),r=>r.release.release_item[0].dataset='lookup',r=>delete r.release.release_item[0].dataset,r=>r.clock.write_depth=1,r=>r.clock.writer_xid='1000',r=>r.witness.transaction_id='999',r=>r.witness.epoch--]){
   const bad=globalThis.structuredClone(receipt);change(bad);assert.throws(()=>verifyReleaseValidationBracketReceipt(bad,p))
  }
  // Synthetic verifier corruption checks never become actual native receipts.
@@ -84,6 +87,23 @@ test('separate85 baseline preserves source guards and rejects whole rollback dri
  // Synthetic corruption checks do not replace execution of the native SQL guard.
 })
 
+test('concurrent SQL receipts require three distinct backends, an observed lock edge and rollback-isolated clocks',()=>{
+ for(const sql of Object.values(buildReleaseValidationBracketConcurrency())){
+  assert.ok(sql.startsWith('begin isolation level read committed'))
+  assert.ok(sql.endsWith('rollback;\n'))
+  assert.ok(sql.includes("statement_timeout='30s'"))
+  assert.doesNotMatch(sql,/\bcreate |\bgrant |\bcommit;|\bset role /i)
+ }
+ const empty={singleton:1,epoch:0,write_depth:0,writer_xid:null},written={...empty,epoch:2}
+ const a={pid:100,tx:'1',clock:written},b={pid:101,a_pid:100,tx:'2',wait_ms:1000,before_clock:empty,clock:written},observer={a_pid:100,b_pid:101,observer_pid:102,blocking_pids:[100],wait_type:'Lock',clock:empty}
+ assert.equal(verifyReleaseValidationBracketConcurrency(a,b,observer).sessions,3)
+ for(const mutate of [r=>r.b.pid=100,r=>r.observer.observer_pid=101,r=>r.b.tx='1',r=>r.b.wait_ms=0,r=>r.observer.blocking_pids=[],r=>r.observer.wait_type='Timeout',r=>r.b.clock.epoch=4,r=>r.b.before_clock.epoch=2]){
+  const r=globalThis.structuredClone({a,b,observer});mutate(r)
+  assert.throws(()=>verifyReleaseValidationBracketConcurrency(r.a,r.b,r.observer))
+ }
+ // Synthetic corruption checks are not native concurrency evidence.
+})
+
 test('complete review guards old83 metadata plus exact2 owners/3 definers/168 hooks; grants one helper only',()=>{
  const p=buildReleaseValidationBracketProposal(),{files}=p
  assert.equal(files['release-validation-bracket-before-check.sql'],prepareRuntimeJournalPrivilegeProposal().roleCheck+'\n')
@@ -110,5 +130,6 @@ test('complete review guards old83 metadata plus exact2 owners/3 definers/168 ho
  assert.ok(down.includes(p.originalChecks))
  assert.equal(runtimeJournalPrivilegeBaseline.functions.find(f=>f.name==='validate_release_metadata').bodyMd5,p.oldBodyMd5)
  assert.equal(readFileSync(new URL('../../supabase/proposals/release_validation_bracket_up.sql',import.meta.url),'utf8'),up)
+ assert.equal(readFileSync(new URL('../../supabase/migrations/20261008044236_private_release_validation_brackets.sql',import.meta.url),'utf8'),up)
  assert.equal(readFileSync(new URL('../../supabase/proposals/release_validation_bracket_down.sql',import.meta.url),'utf8'),down)
 })

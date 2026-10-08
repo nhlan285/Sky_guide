@@ -6,7 +6,7 @@ User2026-10-08 approved exact package5d9058eb5026a74fa25caeedcb308566d8774fd5
 for dev application, full rollback rehearsals/K15 and guarded empty-state down.
 R1 acceptance and dependent work remain gated, including actual concurrency proof.
 Branch codex/master-plan-execution; checkpoint parent
-55954af590946bb46d7be1042e102289cdf0c7b9 verified on origin.
+2b37b6975f21ae8c08a7cc88c3946ecaa8d25af2 verified on origin.
 Resolve latest checkpoint with git log -1 and verify remote SHA.
 Master: [IMPLEMENTATION_PLAN](plan/IMPLEMENTATION_PLAN.md).
 Active phase: [POSTGRES_PROVIDER_SELECTION](plan/POSTGRES_PROVIDER_SELECTION.md),
@@ -95,7 +95,7 @@ clock caching: a helper can claim midway through a write, before a later invalid
 13 focused tests/lint/scaffold/diff PASS; full suite including new5 models NOT RUN.
 No proposed clock/cache SQL, owners, helpers or privileges applied.
 
-## Approved bracket packet — APPLIED / native rehearsal pending
+## Approved bracket packet — APPLIED / native rollback proofs PASS
 Active phase “Concrete bracket package” has exact source/hash/ACL/rollback details.
 Prepared source-derived up/down outside migration discovery:
 supabase/proposals/release_validation_bracket_{up,down}.sql.
@@ -151,11 +151,34 @@ Application slice5 focused tests/lint/typecheck PASS; original app build not rer
 Security advisor only INFO for intentional no-policy internal owners; closed ACL
 matches approval. No policy/permission expansion made to silence this notice.
 
+Native owner7 negatives/5 positives PASS with independent whole-row receipt check.
+Initial fixture42704 at unqualified constraint flush corrected by sky_private name;
+error baseline unchanged. Expected native rows now include schema-generated dataset
+discriminators; initial verifier mismatch fixed without discarding fields or changing
+SQL data/DDL. Corrupt/missing discriminator tests reject. Owner fixture254827 bytes/
+SHA256398e2bb7e1f6a12e5fc2dc911bdce2c5a86f31f66fa7345efcdbccfaa3f3ad82.
+Creator25 new permission denials and8 existing denials PASS. Owner+creator adapter
+each5 phases/39 callbacks/978 query comparisons/6 token negatives PASS; complete
+returned journal rows independently checked. After EACH error/success ROLLBACK,
+full85 source guard and complete baseline metadata/data/memberships/clock/witness
+matched installed baseline exactly. No fixture/tempSET retained. E: release-bracket-
+owner/adapter-owner/adapter-creator receipts and post-* baseline evidence.
+K15/concurrent SQL/durable/crash/SDK/down still pending. No R1 acceptance claim.
+Full441 tests PASS after fixing historical83 test reconstruction to stop at its
+restored checkpoint; unknown-object/definer rejection assertions unchanged. New
+applied85 migration byte comparison added.11 focused/lint/typecheck PASS. Added
+bounded3-session concurrency fixture/verifier,6 focused bracket tests PASS; new
+concurrency test not included in the preceding full441 run. Existing postgres only,
+zero-row writes, distinct backend PIDs and observed A→blocked B lock required; all
+3 outer ROLLBACK and exact baseline after each. Prepared/not native run, limited
+serialization proof; does not satisfy full durable/SDK races. No source rights or
+consumer scope expansion. Packed K15 hash unchanged9b149207...5eaed7.
+
 ## Exact next / remaining gates
 Review packet5d9058e is pushed/SHA-verified and directly approved by the user.
 Before-only clock remains rejected; new entry/
 exit bracket with no cache during writes is installed; acceptance remains OPEN.
-Next verify/push application checkpoint, then owner/creator/denial/adversarial/K15 rehearsals,
+Next checkpoint rollback proofs, then concurrent SQL rollback case and original packed K15/30s,
 full baseline after EACH ROLLBACK and empty-state down proof. Original30s cost gate
 and full schema/SDK/durable/concurrent/crash/restore remain. No one-function approval
 inferred for new helpers/owners. No real import/consumer before foundation acceptance.
