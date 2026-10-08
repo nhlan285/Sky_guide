@@ -2251,3 +2251,29 @@ immediate-before-roles,immediate-guard,delete,immediate-after-baseline,
 immediate-after-roles,cleanup-PASS}.json. Failed first preflight prefix07-05-18-095Z.
 Exact next: unchanged A/B/observer independent direct requests, per-case full85 and
 global comparisons. R1/all other mandatory acceptance gates remain OPEN.
+
+#### Full native A/B/observer rollback-local concurrency PASS
+Cleanup result pushed933b49d; immediate followup uses independent fixed-project
+HTTP workers, existing token remains worker memory only, no CLI DB-config path.
+Prepared full A/B/observer SQL bytes unchanged; native complete transcripts/receipts
+preserved E approved-api-2026-10-08T07-07-24-571Z-*. Distinct backend PIDs
+A172177/B172176/observer172175, xids2190/2191. Observer sees B Lock blocked by
+A via pg_blocking_pids=[172177]; B waits9096.341ms while A holds actual control lock.
+Both original five-phase adapters pass39 callbacks/978 query assertions/6 negative
+cases and exact final journal receipts. Witnesses scoped to own xid/version/epoch;
+B observes empty clock/witness before and after A ROLLBACK. Every case and final
+source85/global metadata comparison PASS; all fixtures outer ROLLBACK, no temporary
+SET membership retained. Original SQL30s limit and all acceptance criteria retained.
+Independent full receipt verifier PASS. Connector serialization diagnosed as the
+old bridge path; direct independent HTTP produces real overlap without new roles.
+Expanded full448 tests PASS (42573.7034ms), no failures/skips; lint/typecheck PASS.
+Full suite log E approved-api-expanded-tests.log. Add Windows-only annotation to
+native fake-credential integration test for Linux CI portability; static credential
+policy test remains cross-platform. No unchanged app build/K15 rerun necessary.
+Scope: competing complete adapter transactions under ROLLBACK ONLY. Persistent
+COMMIT/CAS winner/uncertain ACK/process crash/restart/backup restore/schema down/
+actual SDK/Auth still OPEN; Management API JSON is not the kernel's leased wire
+protocol port. R1 acceptance/dependent consumer phases are not unlocked.
+Next safe slice: prepare read-only empty85 development recovery snapshot and source
+manifest on approved E storage; keep physical/logical backup/isolated restore gates
+OPEN. No persistent fixture COMMIT or new restore environment is approved yet.

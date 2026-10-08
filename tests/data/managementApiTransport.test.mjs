@@ -2,9 +2,10 @@ import test from 'node:test'
 import assert from 'node:assert/strict'
 import { readFileSync } from 'node:fs'
 import { URL } from 'node:url'
+import process from 'node:process'
 import { createManagementApiTransport } from '../sql/management-api-transport.mjs'
 
-test('fake credential never appears in receipts; routes are fixed and workers independent', async()=>{
+test('fake credential never appears in receipts; routes are fixed and workers independent', {skip:process.platform!=='win32'?'Native Windows credential worker; run on Windows':false},async()=>{
  const workers=await Promise.all([1,2,3].map(()=>createManagementApiTransport({fakeCredential:true})))
  try {
   const receipts=await Promise.all(workers.map(w=>w.request('query','select 1')))

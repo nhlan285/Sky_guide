@@ -2,10 +2,11 @@
 
 ## Task / branch / checkpoint
 Sky Guide goal resumed under DIRECT user approval of8514bec including101f788;
-objective OPEN, not complete. Approved recovery cleanup PASS; direct concurrency next.
+objective OPEN, not complete. Approved recovery cleanup and full rollback-local
+adapter concurrency PASS; prepare scoped empty-dev recovery snapshot next.
 CLI login completed; linked-query role mint/refresh path remains forbidden.
 Branch codex/master-plan-execution; checkpoint parent
-0fd1074a649fe446a4668d588e3486078d880a30 verified on origin.
+933b49de9837ecf98ccb913c9d2841c9ecb3eef8 verified on origin.
 Resolve latest checkpoint with git log -1 and verify remote SHA.
 Master: [IMPLEMENTATION_PLAN](plan/IMPLEMENTATION_PLAN.md).
 Active phase: [POSTGRES_PROVIDER_SELECTION](plan/POSTGRES_PROVIDER_SELECTION.md),
@@ -146,9 +147,16 @@ COMMITTED/read-write under ROLLBACK. Guard unchanged; no drift or DELETE retry.
 Modified areas: tests/sql/management-api-{worker.ps1,transport.mjs},
 run-approved-management-api-rehearsal.mjs, tests/data/managementApiTransport.test.mjs,
 this handoff and active phase plan. Existing proposal/source guard hashes unchanged.
-Exact next: prepared concurrency via independent API workers with post-cleanup
-approved-api-2026-10-08T07-05-52-751Z-immediate-after-roles.json global baseline.
-Do not repeat cleanup or recreate role. Require distinct backends/actual blocking.
+Concurrency PASS E approved-api-2026-10-08T07-07-24-571Z-*;3 distinct backends
+172177/172176/172175, A/B transactions2190/2191, observer sees B blocked by A,
+Bwait9096.341ms. Both complete39 callbacks/978 query checks/6 negatives; exact85
+and all32 roles/26 memberships/10 settings after EACH and final. SQL30s/ROLLBACK
+unchanged. Expanded full448 tests PASS, lint/typecheck PASS (before platform-specific
+test portability annotation; focused rerun next). Native Windows fake test runs on
+Windows and skips only on non-Windows where this native worker is unavailable.
+Exact next: safe read-only preparation of empty-dev recovery snapshot + manifest
+on E using source85/global guards; not durable backup/restore acceptance. Do not
+repeat passing concurrency/K15, cleanup or recreate role. No approved restore target.
 Builder tests/sql/build-cli-role-recovery-proposal.mjs; E cli-role-recovery-request.json
 and guard.sql/guard-receipt.json. Proposed DELETE fixed project's /cli/login-role
 ONLY after whole85 + exact expired one-role/membership/no sessions/settings/shared
@@ -160,7 +168,7 @@ Direct approval includes same existing CLI account token used solely in
 process memory for fixed Management API project/host cleanup + direct POST query
 transport (no CLI DB-config mint). No token in chat/log/Git/arguments/new files,
 no new credential/DB password/role/privilege. Direct transport approved; native
-cleanup PASS, concurrency NOT RUN. After cleanup require all cli_login roles absent, all other global
+cleanup/concurrency PASS. After cleanup require all cli_login roles absent, all other global
 roles/memberships/settings unchanged, source85 baseline exact. Then prepared full
 adapter A/B/observer unchanged30s/outer ROLLBACK +full baseline after each; actual
 backend blocking and complete receipts required. No repeat serial probes or gates.
@@ -174,8 +182,9 @@ cleanup. Not an initial pre-CLI principal baseline or app catalog adoption.
 Latest two focused recovery tests, lint/typecheck PASS; expanded full suite NOT RUN.
 Original8514bec recovery/transport approval question resolved by direct user
 approval; scope/guard/request hashes unchanged. No new permission or credential.
-Full R1/P9-I02/D04/V01 OPEN: concurrent/durable/CAS/crash/backup restore/schema down/
-SDK/auth remain unaccepted. No real import/consumer/R2–R6 before foundation acceptance.
+Full R1/P9-I02/D04/V01 OPEN: rollback-local adapter concurrency accepted only;
+durable COMMIT/CAS-winner/crash/backup restore/schema down/SDK/auth still unaccepted.
+No real import/consumer/R2–R6 before foundation acceptance.
 K04 OneDrive403, K10/K11 SKU/market, K12 bulk reuse prohibited, Q02/Q09/Q10/Q11/Q12,
 TGC/media rights, Vercel403/native-device gates remain OPEN.
 No /compact shell command, fabricated compaction, quota percentage or completion.
