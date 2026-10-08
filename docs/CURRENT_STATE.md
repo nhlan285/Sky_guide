@@ -103,8 +103,10 @@ Implemented source-scoped K02 tree10 nodes/9 edges and K03 two historical visits
 Routes /spirits and /traveling-spirits, Hub links, existing calculator for unique
 prerequisite closure and partial currency subtotal. Canonical crosswalk/item FK,
 root price/end instants remain unknown; no published catalogue mutation or media.
-3 focused source tests, lint/typecheck/build PASS; final App title/key edit lint
-PASS. Browser acceptance NOT RUN. Modified App/Hub/styles and features/spirits,
+4 focused source tests, lint/typecheck/build PASS. First Preview83da713 failed:
+.vercelignore excludes knowledge/evidence imported directly. Fixed using a small
+deployment projection matched to both evidence files; exclusion retained and raw
+request/response corpus never shipped. Browser acceptance NOT RUN. Modified App/Hub/styles and features/spirits,
 tests/data/spiritSourceSamples.test.mjs plus active plan/handoff.
 Next: push checkpoint, verify exact Preview revision, exercise R4+L4 subtotal
 5C/4H/1AC with unknown C1, filter recovery, distinct TS#12/#115 date-only visits,

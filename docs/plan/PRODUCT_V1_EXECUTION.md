@@ -79,6 +79,9 @@ Implementation: source-scoped draft graph validated at module entry; no K15
 crosswalk/public release mutation. Existing calculator used directly by checkbox
 selection; known subtotal and unknown root remain separate. Two repeated visits
 retain source visit IDs/date precision. App titles/route keys preserve navigation
-and separate search states. Three focused model tests, lint/typecheck/build PASS.
+and separate search states. Four focused model tests, lint/typecheck/build PASS.
+First Preview83da713 failed because knowledge is excluded from deployments.
+Added minimal reviewed-sample projection, tested against both original files;
+retained .vercelignore boundary and excluded raw response/request corpus.
 Browser acceptance NOT RUN; exact next is pushed Preview selection/filter/mobile
 verification, then milestone integration and event intake planning.

@@ -6,6 +6,15 @@ import { sourceTree, sourceTreeContext, estimateSourcePath, sourceNodeKey, sourc
 import { validateFriendshipGraph } from '../../src/data/catalog/friendship.ts'
 
 const evidence = JSON.parse(readFileSync(new URL('../../knowledge/evidence/k02-regular-spirit-tree-2026-10-05.json', import.meta.url), 'utf8'))
+test('deployment projection matches reviewed source without request/response corpus', () => {
+  const projection = JSON.parse(readFileSync(new URL('../../src/features/spirits/reviewed-samples.json', import.meta.url), 'utf8'))
+  const visits = JSON.parse(readFileSync(new URL('../../knowledge/evidence/k03-traveling-visits-2026-10-05.json', import.meta.url), 'utf8'))
+  assert.deepEqual(projection.sample, evidence.sample)
+  assert.deepEqual(projection.visits, visits.samples)
+  assert.equal(projection.treeSourceUrl, evidence.responses[0].pages[0].sourceUrl)
+  assert.equal(projection.visitSourceUrl, visits.responses[1].sourceUrl)
+  assert.deepEqual(Object.keys(projection).sort(), ['sample', 'visits', 'treeSourceUrl', 'visitSourceUrl', 'attribution'].sort())
+})
 test('runtime research graph retains all reviewed edges/costs and unresolved canonical identities', () => {
   assert.equal(sourceTree.nodes.length, 10)
   assert.equal(sourceTree.nodes.reduce((n, node) => n + node.parentNodeIds.length, 0), 9)
