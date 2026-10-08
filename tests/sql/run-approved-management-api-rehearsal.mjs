@@ -9,6 +9,7 @@ import { buildCliRoleRecoveryProposal,verifyCliRoleRecoveryGuard } from './build
 import { buildCliRoleRecoveryAudit,verifyCliRoleAuditShape,verifyCliRoleRecoveryDifference } from './verify-cli-role-recovery-audit.mjs'
 import { buildReleaseValidationBracketBaseline,verifyReleaseValidationBracketBaseline } from './build-release-validation-bracket-baseline.mjs'
 import { buildReleaseValidationBracketAdapterConcurrency,verifyReleaseValidationBracketAdapterConcurrency } from './build-release-validation-bracket-adapter-concurrency.mjs'
+import { buildEmptyDevRecoverySnapshot,buildEmptyDevRecoveryManifest } from './build-empty-dev-recovery-snapshot.mjs'
 
 const root='E:/SkyGuideAssets/research/postgres-rehearsal-2026-10-07'
 const read=name=>JSON.parse(readFileSync(join(root,name),'utf8'))
@@ -94,13 +95,29 @@ export async function runApprovedConcurrency(after){
  process.stdout.write(JSON.stringify({concurrency:'PASS',prefix,...summary})+'\n')
 }
 
+export async function runEmptyRecoverySnapshot(after){
+ phase='empty-snapshot-baseline-before'
+ const w=await start()
+ await check(w,'snapshot-before',after)
+ phase='read-only-empty85-snapshot'
+ const sql=buildEmptyDevRecoverySnapshot()
+ writeFileSync(join(root,`${prefix}-empty-snapshot.sql`),sql,{flag:'wx'})
+ const snapshot=field(await receipt(w,'empty-snapshot','query',sql),'empty_recovery_snapshot')
+ const manifest=buildEmptyDevRecoveryManifest(snapshot,baseline,after)
+ phase='empty-snapshot-baseline-after'
+ await check(w,'snapshot-after',after)
+ save(`${prefix}-empty-snapshot-manifest.json`,manifest)
+ process.stdout.write(JSON.stringify({snapshot:'PASS',prefix,tables:manifest.tables,rows:manifest.rows,restore:manifest.restoreStatus,scope:manifest.scope})+'\n')
+}
+
 if(process.argv[1]&&resolve(process.argv[1])===fileURLToPath(import.meta.url)){
  try{
   if(process.argv[2]==='cleanup')await runApprovedRecovery()
-  else if(process.argv[2]==='concurrency'&&process.argv[3]){
+  else if(['concurrency','snapshot'].includes(process.argv[2])&&process.argv[3]){
    const approvedAfter=field(read(process.argv[3]).body?JSON.parse(read(process.argv[3]).body):[], 'recovery_role_audit')
    assert.ok(approvedAfter.roles.every(r=>!r.name.startsWith('cli_login')))
-   await runApprovedConcurrency(approvedAfter)
+   if(process.argv[2]==='concurrency')await runApprovedConcurrency(approvedAfter)
+   else await runEmptyRecoverySnapshot(approvedAfter)
   }else throw new Error('Use cleanup or concurrency with successful post-cleanup audit filename')
  }catch{
   save(`${prefix}-STOP.json`,{phase,status:'STOP',reason:'Guard, transport or receipt failed. Inspect safe E-drive receipts; no automatic retry or recreation.'})

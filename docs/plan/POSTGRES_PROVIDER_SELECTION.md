@@ -2277,3 +2277,79 @@ protocol port. R1 acceptance/dependent consumer phases are not unlocked.
 Next safe slice: prepare read-only empty85 development recovery snapshot and source
 manifest on approved E storage; keep physical/logical backup/isolated restore gates
 OPEN. No persistent fixture COMMIT or new restore environment is approved yet.
+
+#### Safe continuation — empty development recovery snapshot PASS
+Added build-empty-dev-recovery-snapshot.mjs and one corruption test. Read-only
+SQL exports only85 private owners; exact3 baseline singleton rows required, every
+other table empty, unknown fields/owners/fixture rows rejected. No platform/Auth/
+credential catalogs exported. Native snapshot PASS; source85/all32 roles/26
+memberships/10 settings before/after EXACT. E prefix
+approved-api-2026-10-08T07-14-06-357Z: snapshot-before/after-baseline/roles.json,
+empty-snapshot.sql/json and empty-snapshot-manifest.json. Manifest pins all16
+migration names/bytes/SHA256, source guard/snapshot/global-audit hashes and each
+owner's rows. Approved bracket migration SHA retained. Explicitly NOT pg_dump/full
+backup/off-site replication/restore proof; provider/extension objects and migration
+statement-array backup excluded. Focused corruption test/lint/typecheck PASS;
+previous expanded448 full suite retained, no claim full449 suite ran.
+
+#### NEW reviewable scope proposal — isolated local durable/restore environment
+LARGE infrastructure extension, NOT APPROVED / NOT RUN. Prior8514bec/101f788 gate
+resolved and work completed. This proposal needs NEW authority under Rule22:
+current hosted approval requires fixture ROLLBACK/no new principal/infra. Persistent
+COMMIT/CAS winner/crash/restart/restore cannot be accepted under that restriction.
+Keep sky-guide-dev exact empty85/global baseline; no further hosted writes.
+
+Proposed resources and boundaries:
+- Start already installed Docker Desktop only after explicit approval. Read-only
+  docker info confirms daemon unavailable; no startup/pull/container/install tried.
+  Host psql/pg_dump/initdb unavailable. No Docker upgrade/global-config change.
+- Two task-owned PostgreSQL17.11 containers, durable source and fresh restore target.
+  Network disabled/no published ports; independent docker exec clients via local
+  Unix sockets, local trust auth, no password/cloud credential or hosted project.
+- Official postgres:17.11-bookworm pinned manifest
+  sha256:3645570cccdfa447589da9f57dd740faa29b30938e861289a5574b6ca6b03826;
+  Linux/amd64 sha256:66aafa11cf15800a3c94763f7e11d1e7b2e37e5e84bc4ce027cb6e1e4bfaf4df.
+  Public registry metadata saved E local-restore-image-metadata.json; compressed
+  image158479270 bytes. Require running server_version_num170011; retrieved
+  metadata is not an image pull/server proof. No paid resource/license purchase.
+- Max1 CPU/768 MiB per container. Data/export/logs in resolved task directory under
+  E:/SkyGuideAssets/research/postgres-durable-restore-*; E has~46.1 GB free now.
+  Task data2 GiB/logs10 MiB per container cap, stop on excess. Validate E bind mount
+  before DB work; no silent C data fallback/global storage change/volume substitution.
+  Image cache stays in existing Docker storage. No account/subscription creation.
+- NEW LOCAL bootstrap principals only: supabase_admin initialization superuser,
+  postgres non-super migrator CREATEROLE/BYPASSRLS, anon/authenticated/service_role
+  NOLOGIN platform-name test placeholders, two SQL-defined NOLOGIN runtime groups.
+  No hosted role/rights/password change. Placeholder roles do not prove real
+  Supabase Auth/SDK parity. Additional principal requires separate review.
+
+Implementation/acceptance after approval:
+1. Prepare bounded setup scripts/manifests with fixed paths/labels/images and role
+   attributes; inspect existing Docker inventory, never reuse unrelated resources.
+2. Reuse16 pinned migrations in order and preserve recorded history, exact85/helper/
+   runtime boundary. Explicit local migration-history setup; STOP on an unprepared
+   provider prerequisite. Keep hosted guard unchanged; local engine contract must
+   distinguish local bootstrap metadata from provider-global roles/OIDs. No schema
+   hash adoption from fetched local metadata to bypass source checks.
+3. Prepare and independently verify separate-transaction native adapter/CAS/crash
+   transcripts before execution. Permit bounded synthetic fixture COMMIT ONLY in
+   these local targets. Exactly one durable CAS winner, loser leaves no orphan,
+   fresh client sees exact immutable witness/journal state. Crash/restart ONLY task
+   source container/process, never hosted or pre-existing workload.
+4. Image-bundled matching pg_dump/pg_restore exports task schemas/history to private
+   E artifact; restore into fresh second target with required owners/grantees and
+   stop on any SQL error. Verify every row/field/order/checksum/body/ACL/constraint/
+   history/public projection; preserve existing revocation/API acceptance criteria.
+   No password-bearing pg_dumpall globals or hosted credential export. Local proof
+   does not close real leased driver ACK-loss/SDK/Auth or hosted full-backup gates.
+
+Rollback/cleanup: hosted state untouched. On failure stop and retain E transcripts/
+dumps. Stop/remove ONLY exact task-labelled IDs recorded at creation after matching
+name/image/mount guards; never touch existing Docker workloads/global config or
+recursively delete E artifacts. No production merge/deploy or paid resource. Docker
+startup/two local containers/specified LOCAL principals/local fixture COMMIT are
+the new actions needing direct approval. No repeat approval for recovery/API.
+After approval refine this current slice, verify setup before durable cases and
+checkpoint meaningful proofs; every unproved R1 gate remains OPEN.
+Primary restore requirements: [PostgreSQL17 SQL dumps](https://www.postgresql.org/docs/17/backup-dump.html)
+requires owners/grantees before restore; database dumps omit global roles.
