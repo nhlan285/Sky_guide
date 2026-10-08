@@ -71,6 +71,11 @@ export function Hub() {
           <Link className="button" to="/music">{locale === 'vi' ? 'Mở nhạc cụ' : 'Open instrument'}</Link>
         </SectionCard>
 
+        <SectionCard id="media" title={locale === 'vi' ? 'Chuyển động và tiếng gọi' : 'Motion and calls'}>
+          <p>{locale === 'vi' ? 'Xem thử mẫu minh họa tự tạo. Chưa cung cấp video hoặc âm thanh Sky thiếu quyền sử dụng.' : 'Preview original illustrative samples. Sky footage and audio remain withheld without reuse rights.'}</p>
+          <Link className="button" to="/media">{locale === 'vi' ? 'Mở bản xem thử' : 'Open previews'}</Link>
+        </SectionCard>
+
         <details className="community-panel hub-grid__wide">
           <summary>
             <span className="community-panel__title">{t('hub.community')} <span>{t('hub.community.label')}</span></span>

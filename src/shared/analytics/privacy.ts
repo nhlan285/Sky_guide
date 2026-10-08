@@ -1,12 +1,12 @@
 import type { BeforeSendEvent } from '@vercel/analytics'
 
-const publicPages = new Set(['/', '/hub', '/items', '/wardrobe', '/about', '/spirits', '/traveling-spirits', '/events', '/music'])
+const publicPages = new Set(['/', '/hub', '/items', '/wardrobe', '/about', '/spirits', '/traveling-spirits', '/events', '/music', '/media'])
 
 export function analyticsRoute(pathname: string): string | null {
   if (publicPages.has(pathname)) return pathname
   // Only the public K15 catalogue ID shape is permitted; arbitrary private paths
   // and unknown routes never reach the provider.
-  return /^\/items\/tsa-cosmetic-[1-9]\d*$/.test(pathname) ? '/items/:id' : null
+  return /^\/items\/tsa-cosmetic-(?:0|[1-9]\d*)$/.test(pathname) ? '/items/:id' : null
 }
 
 export function isLocalAnalyticsHost(hostname: string): boolean {

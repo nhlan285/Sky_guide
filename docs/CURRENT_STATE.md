@@ -1,8 +1,8 @@
-# Current handoff — 2026-10-08
+# Current handoff — 2026-10-09
 
 ## Scope / branch / authority
 Master run OPEN. Branch codex/master-plan-execution, current checkpoint parent
-30cca4f0ff707bdfa868c46a60c2f55510cb0a9b verified on origin; resolve current HEAD
+634bc84ab90157f5ca742d7a0e49dbf2cbd0a871 verified on origin; resolve current HEAD
 with git log -1 and compare remote before resuming. Develop db48582 verified;
 main unchanged8b371de6a2b852e3175a55b5f8de2b9cc11d8b54.
 Master: docs/plan/IMPLEMENTATION_PLAN.md.
@@ -51,12 +51,30 @@ Implemented /music original15-note3x5 sine pluck, scoped keyboard/mouse/touch,
 volume/mute/stop, lazy user-gesture AudioContext,8 bounded voices and pending-play
 cancellation; blur/hidden/route unmount silence/cleanup. No game audio, microphone,
 autoplay or catalogue instrument mapping. Four focused model/lifecycle tests plus
-lint/typecheck/catalog/build PASS. Preview/browser NOT RUN. Modified App/Hub/style,
-features/music, tests/data/musicInstrument.test.mjs and active/master/handoff docs.
-Exact next: push checkpoint, verify exact READY Preview revision, test pointer/
-keyboard/mute/mobile/navigation; run full tests after checkpoint, record actual
-results. Then poster-first original emote/honk samples; source/rights-gated game
-media remain unavailable. Do not declare V1/master/R1 complete.
+lint/typecheck/catalog/build PASS. Full476 tests PASS before mapping refinement.
+Harp81/Piano227 source-exact IDs now explicitly share original set; source slot/
+category remains untouched. Selector/deep-link/item CTA/unsupported fallback,
+5 focused music tests/lint/build PASS. Preview634bc84 READY/browser PASS: item
+Harp→music, selector Piano stops voices, mute/volume0/Enter/letter shortcuts,
+360px15 buttons/five columns/no overflow; no autoplay. Browser observed running
+audio pipeline/active voice; physical speaker audibility not captured by tools.
+One old-tab dynamic import error after alias update; missing old Spirit chunk
+returnsHTTP200 text/html (SPA fallback). RouteLoadBoundary added with explicit
+reload/back action, no auto loop/storage change; lint/build PASS, injected boundary
+failure NOT RUN. Use immutable commit Preview URL for next QA.
+
+## Current original-media slice / exact next
+Implemented /media shared preview: still SVG poster first; original3s480x480/24fps
+WebM<=300kB and2s mono WAV88,244B created only after explicit action, local Blob
+memory only. One active selected sample; native controls/preload none; pause/abort/
+track/timer/URL cleanup on blur/switch/unmount. Rights-withheld sample unavailable.
+No new dependency/service/upload/game media/catalogue relation. Six focused tests
+PASS; lint/build PASS after test-only TextDecoder import fix. Browser NOT RUN.
+App/Hub/style, features/media, shared route boundary/analytics (public /media and
+valid item0 path; queries/hashes still excluded), tests and plans modified.
+Exact next: push checkpoint; verify immutable READY Preview revision, prepare/play
+original video/audio, switch/rights-withheld/retry/mobile/route cleanup, full tests.
+Then staging integration/source gate audit; master/V1/R1 remain OPEN.
 
 ## Native R1 evidence / blocker
 Hosted sky-guide-dev/tpbydviuknovimroeodm, Dyland's Org, Supabase Free:85 private
@@ -82,7 +100,7 @@ No wider repair/restart loop. R1 leased wire/ACK-loss/SDK/Auth/full hosted backu
 schema down gates OPEN; local proof does not close R1. Continue independent V1.
 
 ## Validation / artifacts / continuity
-Prior full461 tests PASS; later5 navigation,4 spirit,6 event,4 music focused tests
+Full476 tests PASS/0failed/0skipped at8641a35, then1 music mapping and6 media tests
 PASS. Latest full suite pending; do not invent aggregate results. Build/catalog
 1808/typecheck/lint PASS at music checkpoint; usual use-client/chunk warnings.
 Raw logs/dumps/snapshots on E:, never Git:

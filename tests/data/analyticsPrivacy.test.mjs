@@ -4,7 +4,7 @@ import { analyticsRoute, isLocalAnalyticsHost, sanitizePageview } from '../../sr
 
 const origin = 'https://sky-guide-six.vercel.app'
 test('pageviews retain useful public pages but remove search, credentials and outfit fragments', () => {
-  for (const path of ['/', '/hub', '/items', '/items/tsa-cosmetic-101', '/wardrobe', '/spirits', '/events', '/music']) {
+  for (const path of ['/', '/hub', '/items', '/items/tsa-cosmetic-0', '/items/tsa-cosmetic-101', '/wardrobe', '/spirits', '/events', '/music', '/media']) {
     const result = sanitizePageview({ type: 'pageview', url: origin + path + '?token=private&q=name#outfit=v1.secret' }, origin)
     assert.deepEqual(result, { type: 'pageview', url: origin + path })
   }

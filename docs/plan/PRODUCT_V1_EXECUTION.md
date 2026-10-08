@@ -155,3 +155,14 @@ metadata/provenance/rights gates. No encoder install needed; unsupported recorde
 leaves poster and explains limitation. Validate sizes/waveform/cancellation,
 browser preparation/playback/switch/mobile and lifecycle cleanup. R4 actual game
 coverage/storage/integration remains OPEN; this is an authorized original pilot.
+Implemented bounded native recording and WAV generation;6 focused media tests
+PASS (header/duration/non-silence/abort/overflow/track cleanup). Lint/build PASS
+after test-only TextDecoder import correction. Browser acceptance pending.
+
+## Integration defect: old Preview chunks
+Actual console reported missing SpiritSamples-smIbltQ-.js on branch alias after
+deployment updated. Probe:HTTP200 text/html, not JS, because old hash is absent
+and SPA fallback applies. Minimal route error boundary keeps shell/navigation,
+explains interruption and offers user-triggered reload; no automatic reload loop
+or storage deletion. Use immutable per-commit Preview URL for reliable QA.
+Boundary error injection NOT RUN; lint/build and normal-route navigation required.
