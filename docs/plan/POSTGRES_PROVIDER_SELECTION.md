@@ -2197,3 +2197,12 @@ authority unchanged. E cli-role-recovery-global-audit.sql and
 cli-role-recovery-global-hashed-incident-audit.json. After approval reread current
 guards and capture fresh global before/after around cleanup; do not reuse this
 incident snapshot as immediate-before evidence. R1/master objective remain OPEN.
+
+Blocked audit2026-10-08: same direct8514bec recovery/transport authority gate persists
+across three consecutive goal turns.101f788 verified local+remote, working tree
+clean; all authorized preparation complete, no live job or independent authorized
+next implementation. Goal BLOCKED awaiting explicit answer to existing approval
+question; prior CLI login approval/automatic continuation is not that answer.
+No further connector/credential/DELETE/concurrent run or dependent phase opened.
+On authorization resume exact fresh guards/global snapshots and scoped actions
+above; original master objective and all acceptance gates remain unchanged.

@@ -1,10 +1,11 @@
 # Current handoff — 2026-10-08
 
 ## Task / branch / checkpoint
-Sky Guide master objective OPEN, not complete. CLI login completed; STOP after
+Sky Guide goal BLOCKED pending direct8514bec recovery/transport approval; objective
+OPEN, not complete. CLI login completed; STOP after
 linked-query preflight minted/refreshed a managed DB login role outside approval.
 Branch codex/master-plan-execution; checkpoint parent
-8514bec1ede2265744b53f9caab1cf34c1be531c verified on origin.
+101f788123813e5ae47d8651e50267a3f13b381f verified on origin.
 Resolve latest checkpoint with git log -1 and verify remote SHA.
 Master: [IMPLEMENTATION_PLAN](plan/IMPLEMENTATION_PLAN.md).
 Active phase: [POSTGRES_PROVIDER_SELECTION](plan/POSTGRES_PROVIDER_SELECTION.md),
@@ -132,6 +133,10 @@ release-bracket-final-tests.log. Active phase has exact names/hashes/full eviden
 
 ## Exact next / remaining gates
 Review explicit recovery proposal before further DB CLI/credential/mutation work.
+Same recovery/transport authority gate persisted across three consecutive goal
+turns. Complete authorized preparation is checkpointed; no live job or independent
+authorized next implementation. Approval question for8514bec remains pending.
+Do not interpret automated goal continuations or prior CLI login approval as consent.
 Builder tests/sql/build-cli-role-recovery-proposal.mjs; E cli-role-recovery-request.json
 and guard.sql/guard-receipt.json. Proposed DELETE fixed project's /cli/login-role
 ONLY after whole85 + exact expired one-role/membership/no sessions/settings/shared
