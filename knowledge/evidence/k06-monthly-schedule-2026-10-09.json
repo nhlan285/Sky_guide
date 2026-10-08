@@ -1,0 +1,259 @@
+{
+  "purpose": "Bounded manual source review; not canonical import/live API/recurrence/clock/media approval",
+  "transport": {
+    "sourceUrl": "https://www.thatskygame.com/news/this-month-in-sky-october-2026-edition/",
+    "retrievedAt": "2026-10-08T17:21:31.826Z",
+    "sha256": "d3b2cbf1ac01fc0d4a41a72d7abeb9c67882a7f7f3b12a6419aae197a0b9fa73",
+    "bytes": 124094,
+    "contentType": "text/html; charset=UTF-8",
+    "status": 200
+  },
+  "source": {
+    "id": "tgc-monthly-oct2026-source",
+    "sourceId": "K06",
+    "sourceUrl": "https://www.thatskygame.com/news/this-month-in-sky-october-2026-edition/",
+    "sourceRecordKey": "this-month-in-sky-october-2026-edition",
+    "sourceRevision": null,
+    "retrievedAt": "2026-10-08T17:21:31.826Z",
+    "observedAt": null,
+    "attribution": "thatgamecompany, Inc.",
+    "licenseNote": "Official page All Rights Reserved; only factual dates/names and own summary, no article/media reproduction",
+    "transformNote": "Manual bounded schedule facts; date-only precision retained, explicit Pacific starts normalized to UTC; canonical relations unknown",
+    "verificationStatus": "verified"
+  },
+  "sourcePublicationDate": "2026-10-02",
+  "publicationInstant": null,
+  "sourceType": "official",
+  "records": [
+    {
+      "id": "tgc-oct2026-season-pearl",
+      "kind": "season",
+      "name": {
+        "translations": {},
+        "default": "Season of Pearl"
+      },
+      "startsAt": {
+        "value": "2026-10-16",
+        "precision": "date",
+        "timezone": "America/Los_Angeles",
+        "rawLabel": null
+      },
+      "endsAt": {
+        "value": "2026-12-31",
+        "precision": "date",
+        "timezone": "America/Los_Angeles",
+        "rawLabel": null
+      },
+      "timeStatus": "confirmed",
+      "summary": null,
+      "spiritIds": [],
+      "itemIds": [],
+      "realmIds": [],
+      "mapIds": [],
+      "officialArticleIds": [],
+      "provenanceIds": [
+        "tgc-monthly-oct2026-source"
+      ],
+      "fieldProvenance": {
+        "name": [
+          "tgc-monthly-oct2026-source"
+        ],
+        "endsAt": [
+          "tgc-monthly-oct2026-source"
+        ],
+        "startsAt": [
+          "tgc-monthly-oct2026-source"
+        ]
+      },
+      "updatedAt": "2026-10-08T17:21:31.826Z",
+      "recordStatus": "draft",
+      "fixture": false
+    },
+    {
+      "id": "tgc-oct2026-days-mischief",
+      "kind": "event",
+      "name": {
+        "translations": {},
+        "default": "Days of Mischief"
+      },
+      "startsAt": {
+        "value": "2026-10-23",
+        "precision": "date",
+        "timezone": "America/Los_Angeles",
+        "rawLabel": null
+      },
+      "endsAt": {
+        "value": "2026-11-12",
+        "precision": "date",
+        "timezone": "America/Los_Angeles",
+        "rawLabel": null
+      },
+      "timeStatus": "confirmed",
+      "summary": null,
+      "spiritIds": [],
+      "itemIds": [],
+      "realmIds": [],
+      "mapIds": [],
+      "officialArticleIds": [],
+      "provenanceIds": [
+        "tgc-monthly-oct2026-source"
+      ],
+      "fieldProvenance": {
+        "name": [
+          "tgc-monthly-oct2026-source"
+        ],
+        "endsAt": [
+          "tgc-monthly-oct2026-source"
+        ],
+        "startsAt": [
+          "tgc-monthly-oct2026-source"
+        ]
+      },
+      "updatedAt": "2026-10-08T17:21:31.826Z",
+      "recordStatus": "draft",
+      "fixture": false
+    },
+    {
+      "id": "tgc-oct2026-radiance",
+      "kind": "event",
+      "name": {
+        "translations": {},
+        "default": "Radiance Event"
+      },
+      "startsAt": {
+        "value": "2026-10-02",
+        "precision": "date",
+        "timezone": "America/Los_Angeles",
+        "rawLabel": null
+      },
+      "endsAt": {
+        "value": "2026-10-15",
+        "precision": "date",
+        "timezone": "America/Los_Angeles",
+        "rawLabel": null
+      },
+      "timeStatus": "confirmed",
+      "summary": null,
+      "spiritIds": [],
+      "itemIds": [],
+      "realmIds": [],
+      "mapIds": [],
+      "officialArticleIds": [],
+      "provenanceIds": [
+        "tgc-monthly-oct2026-source"
+      ],
+      "fieldProvenance": {
+        "name": [
+          "tgc-monthly-oct2026-source"
+        ],
+        "endsAt": [
+          "tgc-monthly-oct2026-source"
+        ],
+        "startsAt": [
+          "tgc-monthly-oct2026-source"
+        ]
+      },
+      "updatedAt": "2026-10-08T17:21:31.826Z",
+      "recordStatus": "draft",
+      "fixture": false
+    },
+    {
+      "id": "tgc-oct2026-interview-20261027",
+      "kind": "event",
+      "name": {
+        "translations": {},
+        "default": "Aviary Interview Stage"
+      },
+      "startsAt": {
+        "value": "2026-10-28T00:30:00Z",
+        "precision": "instant",
+        "timezone": "America/Los_Angeles",
+        "rawLabel": null
+      },
+      "endsAt": null,
+      "timeStatus": "confirmed",
+      "summary": null,
+      "spiritIds": [],
+      "itemIds": [],
+      "realmIds": [],
+      "mapIds": [],
+      "officialArticleIds": [],
+      "provenanceIds": [
+        "tgc-monthly-oct2026-source"
+      ],
+      "fieldProvenance": {
+        "name": [
+          "tgc-monthly-oct2026-source"
+        ],
+        "endsAt": [
+          "tgc-monthly-oct2026-source"
+        ],
+        "startsAt": [
+          "tgc-monthly-oct2026-source"
+        ]
+      },
+      "updatedAt": "2026-10-08T17:21:31.826Z",
+      "recordStatus": "draft",
+      "fixture": false
+    },
+    {
+      "id": "tgc-oct2026-interview-20261103",
+      "kind": "event",
+      "name": {
+        "translations": {},
+        "default": "Aviary Interview Stage"
+      },
+      "startsAt": {
+        "value": "2026-11-04T01:30:00Z",
+        "precision": "instant",
+        "timezone": "America/Los_Angeles",
+        "rawLabel": null
+      },
+      "endsAt": null,
+      "timeStatus": "confirmed",
+      "summary": null,
+      "spiritIds": [],
+      "itemIds": [],
+      "realmIds": [],
+      "mapIds": [],
+      "officialArticleIds": [],
+      "provenanceIds": [
+        "tgc-monthly-oct2026-source"
+      ],
+      "fieldProvenance": {
+        "name": [
+          "tgc-monthly-oct2026-source"
+        ],
+        "endsAt": [
+          "tgc-monthly-oct2026-source"
+        ],
+        "startsAt": [
+          "tgc-monthly-oct2026-source"
+        ]
+      },
+      "updatedAt": "2026-10-08T17:21:31.826Z",
+      "recordStatus": "draft",
+      "fixture": false
+    }
+  ],
+  "explicitInstantChecks": [
+    {
+      "sourceOffsetMinutes": -420,
+      "sourceWallTime": "2026-10-27T17:30",
+      "id": "tgc-oct2026-interview-20261027"
+    },
+    {
+      "sourceOffsetMinutes": -480,
+      "sourceWallTime": "2026-11-03T17:30",
+      "id": "tgc-oct2026-interview-20261103"
+    }
+  ],
+  "unknowns": [
+    "Exact start/end times for date-only ranges",
+    "End/duration of interview events",
+    "Canonical event/item/spirit crosswalk",
+    "Upstream revision/API/quota/refresh/validity",
+    "TS identity not specified in monthly article"
+  ],
+  "rawRoot": "E:/SkyGuideAssets/research/event-manual-2026-10-09"
+}

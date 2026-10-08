@@ -196,3 +196,9 @@ Files: K06 profile/evidence/decision, features/events projection/model/UI/style,
 App/Hub entries and focused source/date/timezone tests. Validate source match,
 date-only semantics/null ends, LA offset before/after Nov1, filter/empty/mobile/
 browser navigation and provenance. Then checkpoint and revisit remaining gates.
+Implemented3 date ranges/two explicit interview starts, source-scoped draft IDs
+and no canonical FKs. Module validates existing SeasonEvent/provenance shapes;
+UI filters/name/type/empty recovery/three display zones and source freshness.
+Three focused source-match/date-preservation/IANA offset tests PASS, lint/build
+PASS. Raw HTML124094B on E: only, response/hash/retrieval evidence in KB; no full
+text/media bundled. Browser NOT RUN; push and exact Preview verification next.

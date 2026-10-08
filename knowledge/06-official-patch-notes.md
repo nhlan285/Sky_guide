@@ -21,3 +21,18 @@ delay cũ bị gạch; nội dung hiện hành nói cả PlayStation/iOS đã c�
 Phạm vi: lỗi startup sau34.3; không gọi article này newest hiện tại hoặc chứng
 minh mọi leak. RSS/API/revision ổn định chưa thấy; manual link/article review là
 fallback, không tạo scraper/full article copy. Source verification DONE, feed OPEN.
+
+## Manual monthly schedule capability — 2026-10-09
+Official thatskygame.com October monthly news page verified; bounded evidence in
+[monthly schedule review](evidence/k06-monthly-schedule-2026-10-09.json), raw124094B
+HTTP200 HTML/checksum on E:/SkyGuideAssets/research/event-manual-2026-10-09.
+K06 now includes this official editorial child URL, distinguished by provenance
+record key/URL; no source enum/DB migration. Existing Helpshift-only article input
+contract remains restricted. This extension follows the approved Event Service
+official-source hierarchy; it does not reclassify community sources as official.
+Manual factual projection only: three date ranges/two explicitly timed starts.
+Pacific dates retained, no invented midnight/end duration. IANA LA offset checks;
+no recurring rule/clock/API/quota/validity inferred. Site All Rights Reserved:
+own factual summary/names/dates only; no full article/images/audio/video mirrored.
+Canonical crosswalk/import and live service still OPEN. The monthly article does
+not identify the voted TS; old K03 upcoming identity is not official confirmation.

@@ -41,7 +41,8 @@ export function Hub() {
         </SectionCard>
         <SectionCard id="season-event" title={t('hub.season')} className="section-card--featured">
           <p className="section-description">{t('hub.season.desc')}</p>
-          <ContentState kind="unavailable" message={t('hub.season.reason')} />
+          <p>{locale === 'vi' ? 'Xem các mốc từ thông báo tháng 10 của TGC đã đối chiếu thủ công. Chưa có đồng bộ trực tiếp.' : 'View manually reviewed entries from TGC’s October announcement. Live sync is not connected.'}</p>
+          <Link className="button" to="/events">{locale === 'vi' ? 'Xem lịch có nguồn' : 'View sourced schedule'}</Link>
         </SectionCard>
 
         <SectionCard id="traveling-spirit" title={t('hub.ts')}>

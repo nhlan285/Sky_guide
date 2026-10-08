@@ -2,8 +2,8 @@
 
 ## Scope / branch / authority
 Master run OPEN. Branch codex/master-plan-execution, current checkpoint parent
-b2887e063bf478d7e12683077d5e01843332f473 verified on origin; resolve current HEAD
-with git log -1 and compare remote before resuming. Develop db48582 verified;
+5368e77dbe03a57777eeb863b8ac31519855187c verified on origin and develop; resolve current HEAD
+with git log -1 and compare remote before resuming. Develop5368e77 verified;
 main unchanged8b371de6a2b852e3175a55b5f8de2b9cc11d8b54.
 Master: docs/plan/IMPLEMENTATION_PLAN.md.
 Active product: docs/plan/PRODUCT_V1_EXECUTION.md.
@@ -88,11 +88,23 @@ or auto reload loop. New focus behavior still not independently observed.
 Dashboard Preview observed36 pageviews/1visitor,
 10 public paths including /music and /media; no query/hash paths. Integrate develop
 after verification, then refine event source intake; master/V1/R1 remain OPEN.
-Exact next: integrate verified bounded music/media milestone; source verification
-found official TGC October monthly article (published2026-10-02) with date-only
-season/event ranges and explicit Pacific interview times spanning DST. Prepare
-small manual evidence on E:, keep unspecified hours/end instants unknown, then
-refine /events manual snapshot UI without claiming live API/clock/recurrence.
+Verified bounded music/media milestone integrated into develop5368e77; main exact.
+
+## Current Events manual slice / exact next
+Official TGC October monthly article verified, published2026-10-02; one HTTP200
+124094B HTML snapshot SHA256d3b2cbf1ac01fc0d4a41a72d7abeb9c67882a7f7f3b12a6419aae197a0b9fa73
+on E:/SkyGuideAssets/research/event-manual-2026-10-09/. K06 monthly editorial child
+capability documented; Helpshift-only news input unchanged, no new source enum/DB.
+Implemented /events manual projection:3 date-only ranges/two explicit interview
+starts; LA/HCM/UTC display. Dates never shift timezone/turn midnight; unknown end
+duration preserved. Source-scoped draft IDs/empty FKs; no canonical import/live
+API/clock/recurrence/countdown/validity claim. No article text or media bundled.
+3 focused source/date/IANA fall-offset tests, lint/typecheck/catalog/build PASS;
+browser NOT RUN. Modified events data/model/UI/style, App/Hub, K06/evidence/test
+and plans. Exact next: push checkpoint, exact READY Preview, Hub/filter/empty/
+timezone/360px browser QA; held old-alias tab3 can test Media lazy error recovery
+and new focus after update. Full regression after checkpoint; integrate develop
+when validated, then audit remaining independently executable roadmap work.
 
 ## Native R1 evidence / blocker
 Hosted sky-guide-dev/tpbydviuknovimroeodm, Dyland's Org, Supabase Free:85 private
