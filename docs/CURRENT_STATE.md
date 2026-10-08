@@ -5,7 +5,7 @@ Master objective OPEN. Direct8514bec/101f788 approval executed: CLI-role cleanup
 full rollback-local A/B/observer concurrency PASS. Continued safe R1 work: native
 empty-dev recovery snapshot/manifest PASS. R1 and dependent R2–R6 not accepted.
 Branch codex/master-plan-execution; checkpoint parent
-a6a83ecef27e200463e9c99f2790b03f27b39b1e verified on origin.
+72db3d922340a72896727e5e99b739d90b9b15f8 verified on origin.
 Resolve latest checkpoint with git log -1 and verify remote SHA.
 Master: [IMPLEMENTATION_PLAN](plan/IMPLEMENTATION_PLAN.md).
 Active: [POSTGRES_PROVIDER_SELECTION](plan/POSTGRES_PROVIDER_SELECTION.md), latest
@@ -81,7 +81,8 @@ Expanded full448 tests PASS, zero failures/skips at concurrency milestone. New
 snapshot corruption test separately PASS; full449 suite NOT RUN. Lint/typecheck
 PASS after snapshot additions; scaffold76 Markdown/14 profiles/173 tasks/diff PASS.
 App build previously PASS2925996, inputs unchanged NOT RERUN. No live owned SQL/
-login/test/Docker job. Node24/pnpm10.30.3 via E:/Code/corepack.cmd.
+login/test job. Docker error UI/backend from approved startup remain running;
+official graceful stop failed, no force-stop. Node24/pnpm10.30.3 via E:/Code/corepack.cmd.
 
 ## Evidence / exact resume
 All raw SQL/receipts/baselines outside Git:
@@ -105,27 +106,42 @@ Docker/run to run.skyguide-preserved-20261008-6ff3fa7. Both original zero-byte
 reparse endpoints preserved with EXACT metadata; E docker-runtime-repair-applied.json.
 Restart advanced past Inference but FAILED09:46:54 UTC at separate existing
 docker-secrets-engine/engine.sock (same1920/invalid endpoint). User screenshot and
-backend log agree. Per approval STOP on different error: no second repair applied.
-Desktop/backend now absent; no image pull/container/new principal/schema/data job.
-New reviewable proposal tests/sql/repair-docker-secrets-runtime-proposal.ps1:
-default Audit; native read-only guard PASS, exact directory contains ONLY engine.sock
-zero-byte Archive/ReparsePoint. Metadata only, no socket/secret contents read.
-Would preserve directory by same-parent rename to
-docker-secrets-engine.skyguide-preserved-20261008-a6a83ec, then restart; no deletion/
-settings/credential/VHD/workload/WSL change. Requires NEW Rule22 direct approval;
-first repair approval explicitly stopped on different error. E
-docker-secrets-runtime-repair-before.json; guard drift/active process STOP.
+backend log agree. Separate DIRECT user approval72db3d9 received and executed:
+fresh zero-process/metadata guard PASS; Secrets Engine directory renamed to
+docker-secrets-engine.skyguide-preserved-20261008-a6a83ec, original engine.sock
+metadata EXACT. Approval completed, not pending. Second restart FAILED09:55:23 UTC
+at dockerInference regenerated09:46:50.3037690 UTC by preceding failed restart.
+Current Docker/run has only this zero-byte reparse endpoint; active Secrets Engine
+path absent; BOTH prior preserved directories metadata independently EXACT.
+Honored STOP on further error; no repeated rename/start or broader repair. Official
+docker desktop stop --timeout20 failed: processes still running, deadline exceeded.
+Owned CLI attempt ended; error UI/backend still live. No image/container/principal/
+schema/data job. No force-stop/settings/credentials/VHD/WSL/workload changes.
+NEW Rule22 proposal tests/sql/repair-docker-coordinated-runtime-proposal.ps1:
+metadata-only Audit PASS even with error UI open; fresh Apply requires no Desktop/
+backend process, exact regenerated endpoint/timestamp, active Secrets path absent,
+both original preservations EXACT, ordinary parents and fresh fixed destination.
+Would rename ONLY current Docker/run to same-parent
+run.skyguide-preserved-20261008-coordinated-72db3d9, then restart ONCE with both
+active paths absent. Further error/drift STOP; no overwrite/delete/automatic reverse
+rename if a path reappears. E docker-coordinated-runtime-repair-before.json pins
+metadata. NOT APPLIED: new move/destination outside completed pinned packages.
 While blocked, local bootstrap/replay prepared: all16 source SQL bytes/history
 retained, explicit fresh-local/version/actor guard, only approved local role names.
 E local-bootstrap-proposal.sql/local-replay-manifest.json; NOT EXECUTED. Two focused
 local environment/replay tests/lint/typecheck PASS. Local environment uses fixed
 Desktop named-pipe host, task labels/IDs, no ports/network, exact E mounts/resource/
 log guards and2 GiB data check. Source paths reject junction/outside-root fallback.
-Exact next: resolve NEW Secrets Engine runtime-repair permission. On approval run
-fresh metadata/zero-process guard, preserve directory once, restart; STOP for any
-different error. Only once engine healthy execute already-approved bounded setup,
-source-pinned bootstrap/migrations and independently prepared durable cases.
-No repeat approval for local proposal or prior8514bec/a6a83ec actions.
+Complete local durable adapter preparation: build-local-durable-adapter.mjs retains
+39 callbacks/978 query assertions/6 negatives, original isolation, separate native
+COMMIT positives/ROLLBACK negatives. Corruption test rejects wrong terminal receipt/
+backend PID. Preparation only; no native durability/CAS/crash/restore proof.
+All3 local preparation tests/lint/typecheck/new PowerShell parse/diff check PASS.
+Expanded full suite/app build NOT RERUN; no application input changed.
+Exact next: user Quit Docker error UI (graceful stop failed), then NEW coordinated
+repair approval/fresh guard/one rename/restart. Only once engine healthy execute
+already-approved bounded setup/source-pinned migrations/separate durable callbacks.
+No repeat approval for local proposal or prior8514bec/a6a83ec/72db3d9 actions.
 Do not repeat cleanup/K15/passing adapter cases or create targets/roles/COMMIT by implication.
 Other gates: K04 OneDrive403/K10-K11 SKU-market/K12 bulk reuse prohibited/Q02-Q09-Q10-
 Q11-Q12/TGC-media rights/Vercel403/native device OPEN. No fabricated compaction/

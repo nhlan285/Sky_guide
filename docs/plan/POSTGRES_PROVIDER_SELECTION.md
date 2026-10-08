@@ -2437,3 +2437,38 @@ checks2 GiB task data before/after SQL. Two focused tests, lint/typecheck PASS;
 previous448 full suite retained, expanded full suite NOT RUN. Native setup/durable/
 CAS/crash/pg_dump/restore NOT RUN, R1 unchanged. Exact next after new repair approval:
 fresh guard/one rename/restart, healthy engine before any approved setup/migrations.
+
+#### Secrets Engine repair completed; coordinated restart proposal
+Direct72db3d9 approval received. Fresh zero-process/exact metadata guard PASS;
+Secrets Engine directory preserved at its proposed destination. Second restart
+FAILED09:55:23 UTC at dockerInference regenerated09:46:50.3037690 UTC during the
+previous startup. Current Docker/run contains only this zero-byte reparse endpoint,
+Secrets active path ABSENT; both original preserved inventories/metadatas EXACT.
+This is a sequential startup cycle, not failure to preserve the original endpoints.
+No guarantee that another startup will succeed. Explicit further-error STOP honored.
+Official graceful Desktop stop --timeout20 failed with remaining processes/deadline;
+CLI exited, error UI/backend still running. No force-kill/global shutdown/WSL/config
+change. No image pull/local container/role/schema/data mutation has occurred.
+
+NEW concrete Rule22 package repair-docker-coordinated-runtime-proposal.ps1:
+Audit reads endpoint metadata only and verifies both previous preserved inventories,
+active Secrets path absent, one regenerated Inference endpoint/timestamp, ordinary
+parents and absent fixed destination. Audit PASS; E coordinated-before receipt.
+Apply additionally requires zero Desktop/backend processes and exact reviewed JSON.
+Move only current Docker/run to run.skyguide-preserved-20261008-coordinated-72db3d9;
+verify preserved metadata/both active paths absent, then one approved restart.
+User must Quit error UI because graceful CLI stop failed. New move/destination
+requires direct approval; completed72db3d9/a6a83ec/local proposal do not need renewal.
+No delete/overwrite/settings/secrets contents/VHD/WSL/workload change. Rollback only
+after Desktop stopped and original path absent; if recreated retain all copies/STOP.
+Any further error/drift STOP without broader repair. Apply NOT RUN.
+
+Independent local durability builder prepared: complete original39 adapter callback
+bodies/978 assertions/6 negatives retained; seed and each positive callback use real
+separate native COMMIT, negatives ROLLBACK, original read committed/read-write or
+repeatable read/read-only preserved. Each callback emits backend/isolation/boundary
+receipt and verifier rejects malformed/wrong terminal acknowledgement/PID. This is
+local engine preparation, NOT leased-wire/ACK-loss/CAS race/restore acceptance.
+All3 focused local preparation tests/lint/typecheck/PowerShell parse/diff PASS;
+expanded full suite/build NOT RERUN. Native durable execution NOT RUN. Continue local slice
+only once healthy engine and guarded targets exist. R1/dependent gates remain OPEN.
